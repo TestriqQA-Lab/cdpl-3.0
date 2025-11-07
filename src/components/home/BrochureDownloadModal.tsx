@@ -1,0 +1,392 @@
+'use client';
+
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, User, Mail, Phone as PhoneIcon, Download, CheckCircle2, Loader2 } from 'lucide-react';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
+import { isValidPhoneNumber } from 'libphonenumber-js';
+
+interface BrochureDownloadModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const BrochureDownloadModal: React.FC<BrochureDownloadModalProps> = ({ isOpen, onClose }) => {
+  // Form state
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    phone: ''
+  });
+
+  // Error states
+  const [fullNameError, setFullNameError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [phoneError, setPhoneError] = useState<string | null>(null);
+
+  // Loading and submission states
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Validation functions
+  const validateFullName = (name: string) => {
+    if (!name) {
+      setFullNameError('Full Name is required.');
+      return false;
+    }
+    if (name.trim().length < 3) {
+      setFullNameError('Full Name must be at least 3 characters.');
+      return false;
+    }
+    setFullNameError(null);
+    return true;
+  };
+
+  const validateEmail = (email: string) => {
+    if (!email) {
+      setEmailError('Email Address is required.');
+      return false;
+    }
+    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+      setEmailError('Invalid email format.');
+      return false;
+    }
+    setEmailError(null);
+    return true;
+  };
+
+  const validatePhoneNumber = (phone: string | undefined) => {
+    // Phone is optional for brochure download
+    if (!phone || phone.trim() === '') {
+      setPhoneError(null);
+      return true;
+    }
+
+    if (!isValidPhoneNumber(phone)) {
+      setPhoneError('Invalid phone number format.');
+      return false;
+    }
+
+    const digits = phone.replace(/\D/g, '');
+
+    // Check for repeating digits
+    if (/^(\d)\1+$/.test(digits)) {
+      setPhoneError('Phone number cannot consist of repeating digits.');
+      return false;
+    }
+
+    // Check for sequential digits
+    const isSequential = (num: string) => {
+      for (let i = 0; i < num.length - 2; i++) {
+        const n1 = parseInt(num[i]);
+        const n2 = parseInt(num[i + 1]);
+        const n3 = parseInt(num[i + 2]);
+        if (
+          (n2 === n1 + 1 && n3 === n2 + 1) ||
+          (n2 === n1 - 1 && n3 === n2 - 1)
+        ) {
+          return true;
+        }
+      }
+      return false;
+    };
+    if (isSequential(digits)) {
+      setPhoneError('Phone number cannot consist of sequential digits.');
+      return false;
+    }
+
+    // Check for all zeros
+    if (/^0+$/.test(digits)) {
+      setPhoneError('Phone number cannot be all zeros.');
+      return false;
+    }
+
+    setPhoneError(null);
+    return true;
+  };
+
+  // Handle input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+
+    // Real-time validation
+    if (name === 'fullName') validateFullName(value);
+    if (name === 'email') validateEmail(value);
+  };
+
+  // Handle phone change
+  const handlePhoneChange = (phone: string | undefined) => {
+    setFormData(prev => ({
+      ...prev,
+      phone: phone || ''
+    }));
+    if (phone) validatePhoneNumber(phone);
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const isFullNameValid = validateFullName(formData.fullName);
+    const isEmailValid = validateEmail(formData.email);
+    const isPhoneValid = validatePhoneNumber(formData.phone);
+
+    if (isFullNameValid && isEmailValid && isPhoneValid) {
+      setIsSubmitting(true);
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...formData,
+            phone: formData.phone || 'Not provided', // Handle optional phone
+            type: 'brochure' // Specify this is a brochure request
+          }),
+        });
+
+        if (response.ok) {
+          console.log('Brochure request submitted successfully');
+          setIsSubmitted(true);
+          
+          // Reset form after 3 seconds and close modal
+          setTimeout(() => {
+            setIsSubmitted(false);
+            setFormData({
+              fullName: '',
+              email: '',
+              phone: ''
+            });
+            onClose();
+          }, 3000);
+        } else {
+          alert('Form submission failed. Please try again.');
+        }
+      } catch (error) {
+        console.error('Network error:', error);
+        alert('Network error. Please check your connection and try again.');
+      } finally {
+        setIsSubmitting(false);
+      }
+    }
+  };
+
+  // Handle modal close
+  const handleClose = () => {
+    if (!isSubmitting) {
+      setFormData({
+        fullName: '',
+        email: '',
+        phone: ''
+      });
+      setFullNameError(null);
+      setEmailError(null);
+      setPhoneError(null);
+      setIsSubmitted(false);
+      onClose();
+    }
+  };
+
+  // Handle escape key
+  React.useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && !isSubmitting) {
+        handleClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, isSubmitting]);
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-4"
+          onClick={handleClose}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1.0] as const }}
+            className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] px-6 py-5 relative">
+              <button
+                onClick={handleClose}
+                disabled={isSubmitting}
+                className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors disabled:opacity-50"
+                aria-label="Close modal"
+              >
+                <X className="w-6 h-6" />
+              </button>
+              <div className="flex items-center gap-3">
+                <div className="bg-white/20 p-2 rounded-lg">
+                  <Download className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-bold text-white">Download Brochure</h2>
+                  <p className="text-sm text-white/90 mt-0.5">Get instant access to our course details</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-6">
+              {isSubmitted ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-8"
+                >
+                  <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                    <CheckCircle2 className="w-8 h-8 text-green-600" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Success!</h3>
+                  <p className="text-gray-600 mb-1">
+                    Check your email for the brochure download link.
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    Closing in a moment...
+                  </p>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  {/* Full Name Field */}
+                  <div>
+                    <label htmlFor="brochure-fullName" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Full Name <span className="text-red-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <User className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
+                      <input
+                        type="text"
+                        id="brochure-fullName"
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleInputChange}
+                        placeholder="Enter your full name"
+                        className={`w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${
+                          fullNameError
+                            ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                            : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
+                        }`}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    {fullNameError && (
+                      <p className="mt-1.5 text-sm text-red-600">{fullNameError}</p>
+                    )}
+                  </div>
+
+                  {/* Email Field */}
+                  <div>
+                    <label htmlFor="brochure-email" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Email Address <span className="text-red-500">*</span>
+                    </label>
+                    <div className="relative">
+                      <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
+                      <input
+                        type="email"
+                        id="brochure-email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="Enter your email address"
+                        className={`w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${
+                          emailError
+                            ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                            : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
+                        }`}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    {emailError && (
+                      <p className="mt-1.5 text-sm text-red-600">{emailError}</p>
+                    )}
+                  </div>
+
+                  {/* Phone Field (Optional) */}
+                  <div>
+                    <label htmlFor="brochure-phone" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Mobile Number <span className="text-gray-400 text-xs">(Optional)</span>
+                    </label>
+                    <div className="relative">
+                      <PhoneIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none z-10" />
+                      <PhoneInput
+                        id="brochure-phone"
+                        international
+                        defaultCountry="IN"
+                        value={formData.phone}
+                        onChange={handlePhoneChange}
+                        placeholder="Enter your mobile number"
+                        className={`w-full [&>input]:pl-11 [&>input]:pr-4 [&>input]:py-3 [&>input]:border-2 [&>input]:rounded-lg [&>input]:text-gray-900 [&>input]:placeholder:text-gray-400 [&>input]:focus:outline-none [&>input]:focus:ring-2 [&>input]:transition-all ${
+                          phoneError
+                            ? '[&>input]:border-red-300 [&>input]:focus:border-red-500 [&>input]:focus:ring-red-200'
+                            : '[&>input]:border-gray-200 [&>input]:focus:border-[#ff8c00] [&>input]:focus:ring-orange-100'
+                        }`}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    {phoneError && (
+                      <p className="mt-1.5 text-sm text-red-600">{phoneError}</p>
+                    )}
+                  </div>
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white font-semibold py-3.5 px-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Download className="w-5 h-5" />
+                        Get Brochure Now
+                      </>
+                    )}
+                  </button>
+
+                  {/* Privacy Note */}
+                  <p className="text-xs text-center text-gray-500 mt-3">
+                    By submitting, you agree to receive course information via email.
+                    <br />
+                    We respect your privacy and won&apos;t spam you.
+                  </p>
+                </form>
+              )}
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+export default BrochureDownloadModal;

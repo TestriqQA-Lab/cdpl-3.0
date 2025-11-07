@@ -10,7 +10,7 @@ const SMTP_FROM_EMAIL = process.env.SMTP_FROM_EMAIL || 'noreply@example.com';
 
 // Placeholder for the brochure download link
 // NOTE: User must replace this with the actual public URL to the brochure file.
-const BROCHURE_DOWNLOAD_LINK = 'https://yourdomain.com/downloads/cdpl-brochure.pdf';
+const BROCHURE_DOWNLOAD_LINK = 'https://www.cinutedigital.com/downloads/cdpl-brochure.pdf';
 
 // --- Nodemailer Transporter ---
 const transporter = nodemailer.createTransport({
@@ -38,7 +38,7 @@ async function sendEmail(mailOptions: nodemailer.SendMailOptions) {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { fullName, email, phone, type } = body; // 'type' is new: 'contact' or 'brochure'
+    const { fullName, email, phone, type, source } = body; // 'type': 'contact' or 'brochure', 'source': form location
 
     // 1. Basic Validation
     if (!fullName || !email || !phone) {
@@ -47,7 +47,8 @@ export async function POST(request: Request) {
 
     // 2. Determine Email Content based on 'type'
     const isBrochureRequest = type === 'brochure';
-    const subjectPrefix = isBrochureRequest ? '[BROCHURE DOWNLOAD]' : '[NEW LEAD]';
+    const formSource = source || (isBrochureRequest ? 'Home Page - Brochure Download Modal' : 'Contact Form');
+    const subjectPrefix = isBrochureRequest ? '[BROCHURE DOWNLOAD - HOME PAGE]' : '[NEW LEAD]';
     const adminTemplate = isBrochureRequest ? 'admin-notification.html' : 'admin-notification.html'; // Reusing admin template for simplicity
 
     // 3. Prepare Admin Notification Email
@@ -56,6 +57,7 @@ export async function POST(request: Request) {
       email,
       phone,
       type: isBrochureRequest ? 'Brochure Download' : 'General Inquiry',
+      source: formSource,
       downloadLink: isBrochureRequest ? BROCHURE_DOWNLOAD_LINK : 'N/A',
     };
     const adminHtml = await getTemplatedEmail(adminTemplate, adminData);
@@ -65,7 +67,7 @@ export async function POST(request: Request) {
       to: ADMIN_EMAIL,
       cc: CC_EMAIL,
       bcc: BCC_EMAIL,
-      subject: `${subjectPrefix} New Lead from ${fullName}`,
+      subject: `${subjectPrefix} New Lead from ${fullName} - ${formSource}`,
       html: adminHtml,
     };
 

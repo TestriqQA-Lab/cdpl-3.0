@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion} from 'framer-motion';
 import {
   Award,
   TrendingUp,
@@ -23,8 +23,15 @@ import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { isValidPhoneNumber } from 'libphonenumber-js';
 
+// Import BrochureDownloadModal
+import BrochureDownloadModal from './BrochureDownloadModal';
+
 // Component for the list of features/stats (for mobile)
-const MobileFeatureList: React.FC = () => (
+interface MobileFeatureListProps {
+  onOpenBrochure: () => void;
+}
+
+const MobileFeatureList: React.FC<MobileFeatureListProps> = ({ onOpenBrochure }) => (
   <div className="mt-7 space-y-4">
     {/* List of features/stats */}
     <div className="grid grid-cols-2 gap-3 text-sm text-slate-700">
@@ -69,13 +76,13 @@ const MobileFeatureList: React.FC = () => (
 
     {/* CTA Buttons */}
     <div className="flex flex-col sm:flex-row gap-4">
-      <Link
-        href="/brochure"
+      <button
+        onClick={onOpenBrochure}
         className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 w-full sm:w-auto"
       >
         <Download className="h-5 w-5" />
         Download Brochure
-      </Link>
+      </button>
       <Link
         href="/jobs/placements"
         className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 w-full sm:w-auto"
@@ -110,6 +117,9 @@ const HomeHeroSection: React.FC = () => {
   // Loading and submission states
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Brochure modal state
+  const [isBrochureModalOpen, setIsBrochureModalOpen] = useState(false);
 
   // Validation functions
   const validateFullName = (name: string) => {
@@ -272,7 +282,7 @@ const HomeHeroSection: React.FC = () => {
   );
 
   // The original Hero Content block (Left side of the grid)
-  const DesktopHeroContent = (
+  const DesktopHeroContent = ({ onOpenBrochure }: { onOpenBrochure: () => void }) => (
     <>
       {/* Top Badge */}
       <motion.div
@@ -375,13 +385,13 @@ const HomeHeroSection: React.FC = () => {
         className="mt-7 flex flex-col sm:flex-row gap-4"
       >
         {/* Primary CTA - Download Brochure */}
-        <Link
-          href="/brochure"
+        <button
+          onClick={onOpenBrochure}
           className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
         >
           <Download className="h-5 w-5" />
           Download Brochure
-        </Link>
+        </button>
 
         {/* Secondary CTA - View Placement Success Stories */}
         <Link
@@ -685,7 +695,7 @@ const HomeHeroSection: React.FC = () => {
             {LeadForm}
 
             {/* 5. Mobile Feature List (The long list of stats/CTAs) */}
-            <MobileFeatureList />
+            <MobileFeatureList onOpenBrochure={() => setIsBrochureModalOpen(true)} />
           </div>
 
           {/* --- Desktop/Laptop Layout (hidden lg:block) --- */}
@@ -698,7 +708,7 @@ const HomeHeroSection: React.FC = () => {
               
               {/* Left Content - 8 columns (66.67% width) */}
               <div className="order-1 lg:order-1 lg:col-span-7">
-                {DesktopHeroContent}
+                <DesktopHeroContent onOpenBrochure={() => setIsBrochureModalOpen(true)} />
               </div>
 
               {/* Right Form - 4 columns (33.33% width) */}
@@ -707,6 +717,12 @@ const HomeHeroSection: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Brochure Download Modal */}
+      <BrochureDownloadModal
+        isOpen={isBrochureModalOpen}
+        onClose={() => setIsBrochureModalOpen(false)}
+      />
     </>
   );
 };
