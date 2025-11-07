@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your CDPL Brochure is Ready!</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        .header {
+            background-color: #4f46e5; /* Indigo-600 */
+            color: #ffffff;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .content {
+            padding: 30px;
+            color: #333333;
+            line-height: 1.6;
+        }
+        .content p {
+            margin-bottom: 20px;
+        }
+        .cta-button {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .cta-button a {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #f97316; /* Orange-600 */
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .cta-button a:hover {
+            background-color: #ea580c; /* Orange-700 */
+        }
+        .footer {
+            background-color: #f9fafb;
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 12px;
+            color: #6b7280;
+            border-top: 1px solid #eeeeee;
+        }
+        .footer a {
+            color: #4f46e5;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Your CDPL Brochure is Ready!</h1>
+        </div>
+        <div class="content">
+            <p>Dear {{fullName}},</p>
+            <p>Thank you for your interest in CDPL's career-transforming programs. We are excited to share our comprehensive brochure with you.</p>
+            
+            <p>You can download the brochure instantly by clicking the button below:</p>
+
+            <div class="cta-button">
+                <a href="{{downloadLink}}" target="_blank">
+                    Download Your Brochure Now
+                </a>
+            </div>
+
+            <p>The brochure contains detailed information on:</p>
+            <ul>
+                <li>Course Curriculums (Software Testing, Data Science, AI/ML)</li>
+                <li>Live Interactive Class Schedules</li>
+                <li>100% Placement Support & Interview Guarantee</li>
+                <li>Fee Structure and Flexible Payment Options</li>
+            </ul>
+
+            <p>A dedicated career advisor will also be in touch with you shortly to answer any questions you may have.</p>
+
+            <p>Best regards,<br>The CDPL Team</p>
+        </div>
+        <div class="footer">
+            <p>&copy; {{currentYear}} CDPL. All rights reserved.</p>
+            <p>If you have any questions, please contact us at <a href="mailto:contact@cinutedigital.com">contact@cinutedigital.com</a></p>
+        </div>
+    </div>
+</body>
+</html>

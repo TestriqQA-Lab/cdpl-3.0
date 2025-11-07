@@ -1,0 +1,124 @@
+// components/sections/FaqSection.tsx
+export default function FaqSection() {
+  const faqs = [
+    {
+      q: "Is prior experience required?",
+      a: "Basic Python is helpful but not mandatory. We start with foundations and ramp up to ML, DL, and deployment with guided, hands-on projects.",
+    },
+    {
+      q: "What is the total duration?",
+      a: "The masterclass runs for ~200 hours, including live sessions, labs, capstone projects, and interview preparation.",
+    },
+    {
+      q: "Do you provide 100% job assistance?",
+      a: "Yes. You’ll get resume revamps, ATS keyword mapping, mock interviews, portfolio reviews, and targeted referrals through our network.",
+    },
+    {
+      q: "What tools & technologies are covered?",
+      a: "Python, pandas/Polars, scikit-learn, TensorFlow/Keras, MLflow/DVC, FastAPI, Docker, and cloud patterns on AWS/GCP/Azure.",
+    },
+    {
+      q: "Will I build a job-ready portfolio?",
+      a: "Absolutely. Each module ends with a deployable artifact—APIs, dashboards, notebooks, and experiment reports—to showcase in interviews.",
+    },
+    {
+      q: "Are classes flexible for working professionals?",
+      a: "Yes. We offer flexible schedules, mentor support, and recorded sessions so you can learn at your pace without missing milestones.",
+    },
+  ];
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+
+  return (
+    <section
+      id="faq"
+      aria-labelledby="faq-heading"
+      className="relative py-14 md:py-24 bg-white"
+    >
+      {/* Sleek top accent (thin line; no heavy gradient fill) */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-indigo-500 via-cyan-500 to-emerald-500 opacity-80" />
+
+      {/* Subtle futuristic backdrop */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(2,6,23,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(2,6,23,0.035)_1px,transparent_1px)] bg-[size:28px_28px]" />
+        <div className="absolute inset-x-0 top-0 h-[120px] bg-[radial-gradient(700px_140px_at_50%_0%,rgba(124,58,237,0.08),transparent_60%)]" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <header className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
+          <h2
+            id="faq-heading"
+            className="text-3xl md:text-4xl font-bold tracking-tight text-DS"
+          >
+            Frequently Asked Questions
+          </h2>
+          <p className="mt-3 text-sm sm:text-base md:text-lg text-gray-700">
+            Everything you need to know about our{" "}
+            <strong>Advanced Data Science & Machine Learning Masterclass</strong>—admissions,
+            curriculum, schedule, portfolio, and placement support.
+          </p>
+        </header>
+
+        {/* Accordions (native, accessible, responsive) */}
+        <div className="mx-auto max-w-3xl space-y-3">
+          {faqs.map((f, i) => {
+            // Distinct accent per item (no repetition)
+            const accents = [
+              { ring: "focus:ring-indigo-300", border: "border-indigo-200" },
+              { ring: "focus:ring-emerald-300", border: "border-emerald-200" },
+              { ring: "focus:ring-amber-300", border: "border-amber-200" },
+              { ring: "focus:ring-sky-300", border: "border-sky-200" },
+              { ring: "focus:ring-rose-300", border: "border-rose-200" },
+              { ring: "focus:ring-violet-300", border: "border-violet-200" },
+            ][i % 6];
+
+            return (
+              <details
+                key={f.q}
+                className={[
+                  "group rounded-xl border bg-white p-4 sm:p-5 shadow-[0_1px_0_0_rgba(15,23,42,0.04)] open:shadow-md transition",
+                  accents.border,
+                ].join(" ")}
+              >
+                <summary
+                  className={[
+                    "flex cursor-pointer list-none items-center justify-between gap-3 text-left select-none",
+                    "font-semibold text-gray-900 focus:outline-none rounded-lg",
+                    accents.ring,
+                  ].join(" ")}
+                >
+                  <span className="text-base sm:text-lg">{f.q}</span>
+                  <span className="shrink-0 text-gray-500 transition-transform group-open:rotate-180">
+                    ▾
+                  </span>
+                </summary>
+                <p className="mt-3 text-sm sm:text-base text-gray-700">{f.a}</p>
+              </details>
+            );
+          })}
+        </div>
+
+        {/* SEO helper for screen readers */}
+        <p className="sr-only">
+          Find answers about prerequisites, duration, job assistance, tools covered, portfolio
+          outcomes, and flexible schedules for the Data Science & Machine Learning program.
+        </p>
+      </div>
+
+      {/* JSON-LD for rich results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+    </section>
+  );
+}

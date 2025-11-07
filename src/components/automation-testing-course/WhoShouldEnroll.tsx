@@ -1,0 +1,124 @@
+'use client';
+import { Users, GraduationCap, Briefcase, Target } from 'lucide-react';
+import IconCard from '../ui/IconCard';
+import { motion } from 'framer-motion';
+import type { JSX } from 'react';
+
+type Audience = {
+  icon: JSX.Element;
+  title: string;
+  description: string;
+  bg: string;
+  iconColor: string;
+  border: string;
+};
+
+const audience: Audience[] = [
+  { icon: <Users className="w-6 h-6" />,         title: 'Manual Testers',  description: 'Upgrade to SDET (UI • API • Mobile)',   bg: 'bg-sky-50',     iconColor: 'text-sky-700',     border: 'border-sky-200' },
+  { icon: <GraduationCap className="w-6 h-6" />, title: 'Freshers',        description: 'BTech • MCA • BCA — job-ready skills',  bg: 'bg-emerald-50', iconColor: 'text-emerald-700', border: 'border-emerald-200' },
+  { icon: <Briefcase className="w-6 h-6" />,     title: 'Developers',      description: 'Add automation & CI/CD to your stack',  bg: 'bg-amber-50',   iconColor: 'text-amber-700',   border: 'border-amber-200' },
+  { icon: <Target className="w-6 h-6" />,        title: 'QA Leads',        description: 'Level-up teams with SDET practices',     bg: 'bg-violet-50',  iconColor: 'text-violet-700',  border: 'border-violet-200' },
+];
+
+export default function WhoShouldEnroll() {
+  // SEO: structured data for audience targeting
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Who Should Enroll — Advanced SDET & Automation Testing Program',
+    description:
+      'Ideal learners include manual testers, freshers, developers, and QA leads seeking elite SDET & automation testing skills.',
+    itemListElement: audience.map((a, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: a.title,
+      description: a.description,
+    })),
+  };
+
+  return (
+    <section
+      id="who-should-enroll"
+      aria-labelledby="who-should-enroll-heading"
+      className="relative py-8 md:py-10 bg-white"
+    >
+      {/* Subtle rails for a clean, slightly futuristic frame */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-x-0 top-0 mx-auto h-px max-w-7xl bg-slate-100" />
+        <div className="absolute inset-x-0 bottom-0 mx-auto h-px max-w-7xl bg-slate-100" />
+      </div>
+
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Heading */}
+        <motion.header
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="text-center"
+        >
+          <h2
+            id="who-should-enroll-heading"
+            className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
+          >
+            Who Should <span className="text-ST">Join</span>?
+          </h2>
+          <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
+            Perfect for <strong>manual testers</strong>, <strong>freshers</strong>,{' '}
+            <strong>developers</strong>, and <strong>QA leads</strong> who want
+            industry-ready <em>Automation Testing</em> & <em>SDET</em> skills—framework design,
+            CI/CD integration, API automation, and real projects.
+          </p>
+
+          {/* Micro badges (distinct colors, no heavy gradients) */}
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-[11px] font-semibold">
+            <span className="rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-sky-800">
+              Beginner Friendly
+            </span>
+            <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-emerald-800">
+              Mentor-Led Cohort
+            </span>
+            <span className="rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-amber-800">
+              Portfolio Projects
+            </span>
+            <span className="rounded-full border border-violet-200 bg-violet-50 px-3 py-1 text-violet-800">
+              Job Assistance
+            </span>
+          </div>
+        </motion.header>
+
+        {/* Cards Grid */}
+        <div className="mt-10 grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {audience.map((a, i) => (
+            <motion.div
+              key={a.title}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-15% 0px -10% 0px' }}
+              transition={{ duration: 0.45, delay: i * 0.08, ease: 'easeOut' }}
+            >
+              <IconCard
+                {...a}
+                className="h-full hover:shadow-md focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-slate-300 transition"
+              />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* SEO-supportive copy */}
+        <p className="mx-auto mt-8 max-w-4xl text-center text-sm sm:text-base text-slate-600">
+          Get hands-on with <strong>Selenium/Appium</strong>, <strong>REST Assured</strong>,{' '}
+          <strong>Playwright/Cypress</strong>, version control, and <strong>CI/CD</strong> to stand out
+          as an industry-ready <strong>SDET</strong>. Learn test design, data-driven automation,
+          contract testing, and best practices used by top tech teams.
+        </p>
+      </div>
+
+      {/* JSON-LD for search engines */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+    </section>
+  );
+}

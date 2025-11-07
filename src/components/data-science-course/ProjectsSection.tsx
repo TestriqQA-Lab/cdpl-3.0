@@ -1,0 +1,222 @@
+// components/sections/ProjectsSection.tsx
+// Server component — clean, modern, responsive projects with subtle futuristic accents (DS & ML edition).
+
+type Project = {
+  title: string;
+  desc: string;
+  outcomes: string[];
+  tools: string[];
+  accent: {
+    bar: string;     // top bar color
+    border: string;  // border color
+    text: string;    // accent text color
+    chip: string;    // chip bg
+    ring: string;    // focus ring
+  };
+};
+
+const PROJECTS: Project[] = [
+  {
+    title: "Predictive Maintenance System",
+    desc:
+      "Forecast equipment failures from sensor streams to reduce downtime and maintenance cost.",
+    outcomes: ["Feature engineering on telemetry", "Classification vs. survival modeling", "Thresholds & alerting"],
+    tools: ["Python", "scikit-learn", "XGBoost", "Airflow"],
+    accent: { bar: "bg-purple-500", border: "border-purple-200", text: "text-purple-700", chip: "bg-purple-50", ring: "focus:ring-purple-300" },
+  },
+  {
+    title: "NLP Sentiment Analyzer",
+    desc:
+      "Mine customer feedback to quantify sentiment and surface actionable themes at scale.",
+    outcomes: ["Preprocessing & tokenization", "Fine-tuned transformer", "Explainability & bias checks"],
+    tools: ["Transformers", "PyTorch", "spaCy", "Weights & Biases"],
+    accent: { bar: "bg-emerald-500", border: "border-emerald-200", text: "text-emerald-700", chip: "bg-emerald-50", ring: "focus:ring-emerald-300" },
+  },
+  {
+    title: "Stock Price Forecaster",
+    desc:
+      "Build robust time-series forecasts for equities with backtesting and risk-aware metrics.",
+    outcomes: ["Cross-validation on rolling windows", "Feature lags & regimes", "Forecast accuracy vs. utility"],
+    tools: ["pandas", "Prophet", "statsmodels", "Plotly"],
+    accent: { bar: "bg-amber-500", border: "border-amber-200", text: "text-amber-700", chip: "bg-amber-50", ring: "focus:ring-amber-300" },
+  },
+  {
+    title: "Churn Prediction & Uplift",
+    desc:
+      "Predict churn and prioritize campaigns using uplift models for incremental impact.",
+    outcomes: ["Imbalance handling", "SHAP for insights", "Uplift vs. propensity targeting"],
+    tools: ["scikit-learn", "LightGBM", "SHAP", "Great Expectations"],
+    accent: { bar: "bg-sky-500", border: "border-sky-200", text: "text-sky-700", chip: "bg-sky-50", ring: "focus:ring-sky-300" },
+  },
+  {
+    title: "Image Quality Classifier",
+    desc:
+      "Detect low-quality or defective product images to automate content standards.",
+    outcomes: ["Data augmentation", "Transfer learning", "Threshold tuning & drift watch"],
+    tools: ["TensorFlow/Keras", "OpenCV", "FastAPI"],
+    accent: { bar: "bg-rose-500", border: "border-rose-200", text: "text-rose-700", chip: "bg-rose-50", ring: "focus:ring-rose-300" },
+  },
+  {
+    title: "Recommendation Mini-Engine",
+    desc:
+      "Deliver personalized recommendations with evaluation beyond accuracy (coverage, novelty).",
+    outcomes: ["Matrix factorization", "Implicit feedback", "Offline & online metrics"],
+    tools: ["Implicit", "Surprise", "Faiss", "SQL"],
+    accent: { bar: "bg-indigo-500", border: "border-indigo-200", text: "text-indigo-700", chip: "bg-indigo-50", ring: "focus:ring-indigo-300" },
+  },
+];
+
+export default function ProjectsSection() {
+  const seoKeywords =
+    "data science projects, machine learning portfolio, predictive maintenance, nlp sentiment analysis, stock price forecasting, churn prediction uplift, image classification transfer learning, recommendation system tutorial";
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Data Science & Machine Learning — Projects You’ll Build",
+    itemListElement: PROJECTS.map((p, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "CreativeWork",
+        name: p.title,
+        description: p.desc,
+        keywords:
+          "data science, machine learning, nlp, forecasting, computer vision, recommender systems",
+      },
+    })),
+  };
+
+  return (
+    <section
+      id="projects"
+      aria-labelledby="projects-heading"
+      className="relative py-12 md:py-20 bg-white"
+    >
+      {/* Subtle futuristic backdrop (fine grid + soft violet glow; no heavy gradients) */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(2,6,23,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(2,6,23,0.035)_1px,transparent_1px)] bg-[size:28px_28px]" />
+        <div className="absolute inset-x-0 top-0 h-[120px] bg-[radial-gradient(700px_140px_at_50%_0%,rgba(168,85,247,0.10),transparent_60%)]" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <header className="mx-auto max-w-3xl text-center">
+          <h2
+            id="projects-heading"
+            className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
+          >
+            Real-World{" "}
+            <span className="text-DS">
+              DS & ML Projects
+            </span>
+          </h2>
+          <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-700">
+            Apply <strong>advanced techniques</strong> to solve real business challenges. Build a{" "}
+            <strong>recruiter-ready portfolio</strong> with clean code, clear storytelling, and measurable impact.
+          </p>
+          {/* SEO helper (visually hidden) */}
+          <p className="sr-only">{seoKeywords}</p>
+        </header>
+
+        {/* Cards */}
+        <div
+          role="list"
+          aria-label="Project list"
+          className="mt-12 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8"
+        >
+          {PROJECTS.map((p) => {
+            const id = p.title.replace(/\s+/g, "-").toLowerCase();
+            return (
+              <article
+                key={p.title}
+                role="listitem"
+                tabIndex={0}
+                aria-labelledby={id}
+                className={[
+                  "group relative rounded-2xl border bg-white p-6 shadow-sm transition-all duration-200",
+                  "hover:-translate-y-0.5 hover:shadow-md focus-visible:-translate-y-0.5",
+                  p.accent.border,
+                  p.accent.ring,
+                  "focus:outline-none focus:ring-2",
+                ].join(" ")}
+              >
+                {/* top accent bar */}
+                <div
+                  className={["absolute left-0 right-0 top-0 h-1 rounded-t-2xl", p.accent.bar].join(" ")}
+                  aria-hidden
+                />
+
+                <h3 id={id} className="text-lg md:text-xl font-bold text-slate-900">
+                  <span className={p.accent.text}># </span>
+                  {p.title}
+                </h3>
+
+                <p className="mt-3 text-sm md:text-base text-slate-700">{p.desc}</p>
+
+                {/* outcomes */}
+                <ul className="mt-4 space-y-2 text-sm text-slate-700">
+                  {p.outcomes.map((o, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <span
+                        className={["mt-1 inline-block h-1.5 w-1.5 rounded-full", p.accent.bar].join(" ")}
+                        aria-hidden
+                      />
+                      <span>{o}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* tools */}
+                <div className="mt-5 flex flex-wrap gap-2" aria-label="Tools and technologies">
+                  {p.tools.map((t) => (
+                    <span
+                      key={t}
+                      className={[
+                        "inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium text-slate-800 border",
+                        p.accent.chip,
+                        p.accent.border,
+                      ].join(" ")}
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                {/* micro interaction footer */}
+                <div className="mt-6 flex items-center justify-between">
+                  <span className={["text-xs font-semibold uppercase tracking-wide", p.accent.text].join(" ")}>
+                    Portfolio-Ready • Production-Minded
+                  </span>
+                  <span
+                    className={[
+                      "text-sm opacity-0 translate-x-1 transition-all duration-200",
+                      "group-hover:opacity-100 group-hover:translate-x-0 group-focus-visible:opacity-100 group-focus-visible:translate-x-0",
+                      p.accent.text,
+                    ].join(" ")}
+                  >
+                    View details →
+                  </span>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        {/* Trust strip */}
+        <div className="mx-auto mt-10 max-w-4xl rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
+          <p className="text-sm text-slate-700">
+            These <strong>industry-aligned projects</strong> emphasize reproducible pipelines, evaluation, and clear communication—ideal for{" "}
+            <strong>Data Scientist</strong>, <strong>ML Engineer</strong>, and <strong>Analytics</strong> roles.
+          </p>
+          <p className="mt-2 text-[11px] text-slate-500">*Scope may vary by dataset, domain, and pace.</p>
+        </div>
+      </div>
+
+      {/* JSON-LD structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+    </section>
+  );
+}

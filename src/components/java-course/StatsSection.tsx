@@ -1,0 +1,252 @@
+// components/sections/StatsSection.tsx
+// Sleek, responsive, SEO-friendly stats section (no repeated colors, minimal gradients).
+// Drop the old <StatCard/> import—this file is now self-contained.
+
+"use client";
+
+import {
+  ShieldCheck,
+  Cpu,
+  Rocket,
+  Server,
+  Globe,
+  Banknote,
+} from "lucide-react";
+import Link from "next/link";
+
+type Stat = {
+  value: string;
+  label: string;
+  caption?: string;
+  icon: React.ComponentType<{ className?: string }>;
+  cardClass: string; // unique color per card (no repeats)
+  textClass: string;
+  ringClass: string;
+};
+
+const STATS: Stat[] = [
+  {
+    value: "95%",
+    label: "Enterprise Adoption",
+    caption: "Preferred for mission-critical systems",
+    icon: ShieldCheck,
+    cardClass: "bg-sky-50",
+    textClass: "text-sky-800",
+    ringClass: "ring-sky-200",
+  },
+  {
+    value: "3B+",
+    label: "Devices Run Java",
+    caption: "Ubiquity across platforms & IoT",
+    icon: Globe,
+    cardClass: "bg-amber-50",
+    textClass: "text-amber-800",
+    ringClass: "ring-amber-200",
+  },
+  {
+    value: "₹12 LPA",
+    label: "Avg Salary (India)",
+    caption: "Competitive pay for Java engineers",
+    icon: Banknote,
+    cardClass: "bg-emerald-50",
+    textClass: "text-emerald-800",
+    ringClass: "ring-emerald-200",
+  },
+  {
+    value: "99.99%",
+    label: "Uptime Targets",
+    caption: "Proven reliability with JVM tooling",
+    icon: Server,
+    cardClass: "bg-rose-50",
+    textClass: "text-rose-800",
+    ringClass: "ring-rose-200",
+  },
+  {
+    value: "30%+",
+    label: "Faster Time-to-Market",
+    caption: "Spring Boot & microservices",
+    icon: Rocket,
+    cardClass: "bg-violet-50",
+    textClass: "text-violet-800",
+    ringClass: "ring-violet-200",
+  },
+  {
+    value: "10x",
+    label: "Scalability Gain",
+    caption: "Modern JVM, GC & containers",
+    icon: Cpu,
+    cardClass: "bg-cyan-50",
+    textClass: "text-cyan-800",
+    ringClass: "ring-cyan-200",
+  },
+];
+
+export default function StatsSection() {
+  const title =
+    "Why Java Leads Enterprise Development in 2025: Performance, Security & Scalability";
+  const description =
+    "Java remains the #1 enterprise language for building secure, cloud-native, high-performance applications at scale. With Spring Boot, Microservices, Kubernetes, and the JVM, teams ship resilient software faster—backed by a vast talent pool and Fortune 500 adoption.";
+
+  return (
+    <section
+      id="java-enterprise-stats"
+      aria-labelledby="java-stats-heading"
+      className="relative py-8 md:py-14"
+    >
+      {/* subtle futuristic accent (sleek, no heavy gradients) */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 [mask-image:radial-gradient(50%_50%_at_50%_50%,#000_40%,transparent_70%)]"
+      >
+        <div className="mx-auto h-full w-full max-w-6xl opacity-60">
+          <div className="h-px w-full bg-[repeating-linear-gradient(90deg,#e5e7eb_0_8px,transparent_8px_16px)]" />
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4">
+        {/* Header */}
+        <header className="mx-auto mb-10 max-w-5xl text-center md:mb-14">
+          <h2
+            id="java-stats-heading"
+            className="text-3xl font-bold tracking-tight text-gray-900 md:text-4xl"
+          >
+            Why <span className="text-FS">Java</span>{" "}
+            is the <span className="text-FS">#1</span> Enterprise Language
+          </h2>
+          <p className="mx-auto mt-6 max-w-5xl text-base leading-relaxed text-gray-700 md:text-lg">
+            {description}
+          </p>
+
+          {/* SEO-friendly keywords line (human-readable, non-spammy) */}
+          <p className="mx-auto mt-5 max-w-3xl text-sm text-gray-600">
+            Keywords: Java Enterprise Development, Spring Boot, Microservices, Cloud-Native, Kubernetes, High Performance, Security, Scalability, JVM, Fortune 500.
+          </p>
+        </header>
+
+        {/* Stats Grid */}
+        <div
+          className="mx-auto grid max-w-6xl grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3"
+          role="list"
+          aria-label="Key Java enterprise statistics"
+        >
+          {STATS.map(({ value, label, caption, icon: Icon, cardClass, textClass, ringClass }, i) => (
+            <article
+              key={i}
+              role="listitem"
+              className={[
+                "group rounded-2xl p-5 md:p-6 shadow-sm transition-all duration-200",
+                "hover:shadow-md hover:-translate-y-0.5",
+                "border border-white/60 backdrop-blur-sm",
+                ringClass,
+                "ring-1",
+                cardClass,
+              ].join(" ")}
+            >
+              <div className="flex items-start gap-4">
+                <div
+                  className={[
+                    "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/70",
+                    "shadow-sm ring-1 ring-inset ring-black/5",
+                  ].join(" ")}
+                  aria-hidden="true"
+                >
+                  <Icon className="h-6 w-6 text-gray-900" />
+                </div>
+
+                <div className="flex-1">
+                  <div className="flex items-baseline justify-between">
+                    <p className={["text-3xl font-extrabold tracking-tight", textClass].join(" ")}>{value}</p>
+                  </div>
+                  <h3 className="mt-1 text-base font-semibold text-gray-900">{label}</h3>
+                  {caption && <p className="mt-1 text-sm text-gray-600">{caption}</p>}
+                </div>
+              </div>
+
+              {/* subtle progress accent bar (sleek, non-gradient) */}
+              <div className="mt-4 h-1 w-full rounded-full bg-white/70">
+                <div
+                  className={["h-1 rounded-full", textClass.replace("text-", "bg-")].join(" ")}
+                  style={{ width: ["88%", "72%", "64%", "80%", "76%", "68%"][i] }}
+                  aria-hidden="true"
+                />
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {/* Benefit bullets (SEO-rich, scannable) */}
+        <div className="mx-auto mt-10 max-w-5xl rounded-2xl border border-gray-200 bg-white p-6 shadow-sm md:mt-12">
+          <h3 className="text-lg font-bold text-gray-900">
+            Built for Cloud-Native Enterprise at Scale
+          </h3>
+          <ul className="mt-3 grid list-disc grid-cols-1 gap-2 pl-5 text-sm text-gray-700 sm:grid-cols-2 md:text-base">
+            <li>Robust security model, mature JVM, and enterprise-grade tooling</li>
+            <li>Spring Boot, Quarkus, and Micronaut accelerate microservices</li>
+            <li>Seamless DevOps with Docker, Kubernetes, and CI/CD pipelines</li>
+            <li>Excellent performance tuning (GC, JIT, Virtual Threads)</li>
+            <li>Huge ecosystem, libraries, and community support</li>
+            <li>Backed by Fortune 500 adoption and long-term stability</li>
+          </ul>
+        </div>
+
+        {/* CTA (optional, lightweight) */}
+        <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 text-center sm:flex-row sm:gap-4">
+          <Link
+            href="#java-curriculum"
+            className="inline-flex items-center justify-center rounded-xl border border-gray-200 bg-gray-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
+          >
+            Explore Java Curriculum
+          </Link>
+          <Link
+            href="contact-us"
+            className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-50"
+          >
+            Talk to a Mentor
+          </Link>
+        </div>
+      </div>
+
+      {/* JSON-LD for SEO (FAQ) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Is Java still the best choice for enterprise applications in 2025?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text:
+                    "Yes. Java remains the top enterprise language due to its security, performance, cloud-native ecosystem (Spring Boot, Kubernetes), and a massive talent pool.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Why do Fortune 500 companies prefer Java?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text:
+                    "Java offers strong stability, long-term support releases, mature tooling, and high scalability—ideal for mission-critical workloads and microservice architectures.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "What modern Java features improve performance?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text:
+                    "Modern JVM improvements include advanced garbage collectors, JIT optimizations, and Virtual Threads, helping teams build high-throughput, low-latency services.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+      {/* Meta-like enhancement for crawlers that read visible content */}
+      <h1 className="sr-only">{title}</h1>
+    </section>
+  );
+}

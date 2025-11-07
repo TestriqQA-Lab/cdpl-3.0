@@ -1,0 +1,197 @@
+// components/sections/CtaSection.tsx
+// Server component — clean, modern CTA with subtle futuristic accents + SEO.
+
+import type React from "react";
+import { Phone, Mail, FileText, MessageCircle } from "lucide-react";
+import Link from "next/link";
+
+type IconType = React.ComponentType<React.SVGProps<SVGSVGElement>>;
+
+function ActionButton({
+  href,
+  label,
+  sublabel,
+  icon: Icon,
+  className,
+  ring,
+  aria,
+}: {
+  href: string;
+  label: string;
+  sublabel?: string;
+  icon: IconType;
+  className: string;
+  ring: string;
+  aria: string;
+}) {
+  return (
+    <Link
+      href={href}
+      aria-label={aria}
+      className={[
+        "group inline-flex items-center justify-center gap-3 rounded-xl px-5 py-3 md:px-6 md:py-4 font-semibold shadow-sm transition-all",
+        "hover:-translate-y-0.5 hover:shadow-md focus-visible:-translate-y-0.5 focus:outline-none focus:ring-2",
+        className,
+        ring,
+      ].join(" ")}
+    >
+      <span className="rounded-lg border border-white/20 bg-white/10 p-1.5">
+        <Icon className="h-5 w-5" aria-hidden />
+      </span>
+      <span className="text-sm md:text-base">
+        {label}
+        {sublabel ? (
+          <span className="block text-xs font-normal opacity-90">{sublabel}</span>
+        ) : null}
+      </span>
+      {/* chevron micro-cue */}
+      <span
+        className="ml-1 inline-block translate-x-0 opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100"
+        aria-hidden
+      >
+        →
+      </span>
+    </Link>
+  );
+}
+
+export default function CtaSection() {
+  const seoKeywords =
+    "enroll data science machine learning course india, ds ml certification, job assistance placement support, contact training institute, download syllabus brochure";
+
+  // JSON-LD: Organization contact points for rich results (phone + email)
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Cinute Digital Pvt. Ltd.",
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        telephone: "+91-788-83-83-788",
+        contactType: "sales",
+        areaServed: "IN",
+        availableLanguage: ["en", "hi"],
+      },
+      {
+        "@type": "ContactPoint",
+        email: "contact@cinutedigital.com",
+        contactType: "customer support",
+        areaServed: "IN",
+        availableLanguage: ["en", "hi"],
+      },
+    ],
+    sameAs: [],
+  };
+
+  return (
+    <section
+      id="cta"
+      aria-labelledby="cta-heading"
+      className="relative py-6 md:py-8 lg:py-2 bg-white"
+    >
+      {/* Subtle futuristic backdrop (fine grid + soft violet glow; no heavy gradient) */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(2,6,23,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(2,6,23,0.05)_1px,transparent_1px)] bg-[size:28px_28px]" />
+        <div className="absolute inset-x-0 top-0 h-[130px] bg-[radial-gradient(700px_150px_at_50%_0%,rgba(124,58,237,0.10),transparent_60%)]" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-3xl text-center">
+          <h2
+            id="cta-heading"
+            className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
+          >
+            Ready to Master{" "}
+            <span className="text-DS">
+              Data Science & ML
+            </span>
+            ?
+          </h2>
+          <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-700">
+            Enroll today and get <strong>100% job assistance</strong>,{" "}
+            <strong>mentor-led projects</strong>, and a <strong>verifiable global certificate</strong>.
+          </p>
+          {/* SEO helper (visually hidden) */}
+          <p className="sr-only">{seoKeywords}</p>
+        </div>
+
+        {/* CTA panel */}
+        <div className="mx-auto mt-8 max-w-4xl rounded-2xl border border-slate-200 bg-white p-5 md:p-6 shadow-sm">
+          {/* Quick value bullets */}
+          <ul className="mx-auto mb-5 grid max-w-3xl grid-cols-1 gap-2 text-sm text-slate-700 sm:grid-cols-3">
+            <li className="flex items-center justify-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" aria-hidden />
+              Job Assistance
+            </li>
+            <li className="flex items-center justify-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-amber-500" aria-hidden />
+              Mentor-Led Projects
+            </li>
+            <li className="flex items-center justify-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-sky-500" aria-hidden />
+              Global Certification
+            </li>
+          </ul>
+
+          {/* Buttons: unique accent colors per action (no repeats) */}
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
+            <ActionButton
+              href="tel:+917888383788"
+              label="Call Admissions"
+              sublabel="+91 788-83-83-788"
+              icon={Phone}
+              className="bg-slate-900 text-white"
+              ring="focus:ring-slate-300"
+              aria="Call admissions at +91 788-83-83-788"
+            />
+            <ActionButton
+              href="mailto:contact@cinutedigital.com"
+              label="Email Us"
+              sublabel="contact@cinutedigital.com"
+              icon={Mail}
+              className="bg-white text-slate-900 border border-slate-200"
+              ring="focus:ring-purple-300"
+              aria="Email contact at cinutedigital dot com"
+            />
+            <ActionButton
+              href="#syllabus"
+              label="Get Syllabus"
+              sublabel="PDF • Curriculum Overview"
+              icon={FileText}
+              className="bg-indigo-600 text-white"
+              ring="focus:ring-indigo-300"
+              aria="View or download the course syllabus"
+            />
+            <ActionButton
+              href="https://wa.me/917888383788"
+              label="Chat on WhatsApp"
+              sublabel="Quick questions answered"
+              icon={MessageCircle}
+              className="bg-emerald-600 text-white"
+              ring="focus:ring-emerald-300"
+              aria="Open WhatsApp chat with admissions"
+            />
+          </div>
+
+          {/* Compliance & reassurance */}
+          <p className="mt-5 text-center text-xs text-slate-500">
+            *By contacting us, you agree to receive course updates. No spam—unsubscribe anytime.
+          </p>
+        </div>
+
+        {/* Tiny trust row */}
+        <div className="mx-auto mt-6 flex max-w-4xl flex-wrap items-center justify-center gap-4 text-[11px] text-slate-600">
+          <span className="rounded-lg border border-slate-200 bg-white px-3 py-1.5">Live Doubt Solving</span>
+          <span className="rounded-lg border border-slate-200 bg-white px-3 py-1.5">Portfolio-Ready Projects</span>
+          <span className="rounded-lg border border-slate-200 bg-white px-3 py-1.5">Placement Support</span>
+        </div>
+      </div>
+
+      {/* JSON-LD for search engines (contact points) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+    </section>
+  );
+}

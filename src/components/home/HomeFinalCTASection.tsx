@@ -1,0 +1,366 @@
+'use client';
+
+import React, { useState, useCallback } from 'react';
+import PhoneInput from 'react-phone-number-input';
+import { motion } from 'framer-motion';
+import { ArrowRight, CheckCircle2, Phone, Mail, MapPin, User } from 'lucide-react';
+
+/**
+ * HomeFinalCTASection - Strong Call to Action
+ * 
+ * Final conversion section with lead form
+ * Enhanced with a light, modern, and visually appealing UI/UX.
+ */
+export default function HomeFinalCTASection() {
+  const [formData, setFormData] = useState({
+    fullName: '', // Changed from 'name' to 'fullName' for API consistency
+    email: '',
+    phone: '',
+  });
+
+  const [errors, setErrors] = useState({
+    fullName: '', // Changed from 'name' to 'fullName' for API consistency
+    email: '',
+    phone: '',
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Validation functions from HomeHeroSection
+  const validateFullName = useCallback((fullName: string) => {
+    if (!fullName.trim()) {
+      setErrors(prev => ({ ...prev, fullName: 'Full Name is required' }));
+      return false;
+    }
+    setErrors(prev => ({ ...prev, fullName: '' }));
+    return true;
+  }, []);
+
+  const validateEmail = useCallback((email: string) => {
+    if (!email.trim()) {
+      setErrors(prev => ({ ...prev, email: 'Email is required' }));
+      return false;
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      setErrors(prev => ({ ...prev, email: 'Email address is invalid' }));
+      return false;
+    }
+    setErrors(prev => ({ ...prev, email: '' }));
+    return true;
+  }, []);
+
+  const validatePhoneNumber = useCallback((phone: string) => {
+    if (!phone) {
+      setErrors(prev => ({ ...prev, phone: 'Mobile Number is required' }));
+      return false;
+    } else if (phone.length < 10 || phone.length > 15) {
+      setErrors(prev => ({ ...prev, phone: 'Mobile Number is invalid' }));
+      return false;
+    } else if (/(.)\1{3}/.test(phone) || /(123|234|345|456|567|678|789|890|098|987|876|765|654|543|432|321|210)/.test(phone)) {
+      setErrors(prev => ({ ...prev, phone: 'Mobile Number cannot contain repeating or sequential digits' }));
+      return false;
+    }
+    setErrors(prev => ({ ...prev, phone: '' }));
+    return true;
+  }, []);
+
+  const validateForm = useCallback(() => {
+    const isNameValid = validateFullName(formData.fullName);
+    const isEmailValid = validateEmail(formData.email);
+    const isPhoneValid = validatePhoneNumber(formData.phone);
+    return isNameValid && isEmailValid && isPhoneValid;
+  }, [formData, validateFullName, validateEmail, validatePhoneNumber]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        console.log('Form submitted successfully, emails sent.');
+        alert('Thank you! Your inquiry has been sent. We will contact you shortly.');
+        // Reset form after successful submission
+        setFormData({
+          fullName: '',
+          email: '',
+          phone: ''
+        });
+      } else {
+        const errorData = await response.json();
+        console.error('Form submission failed:', errorData.message);
+        alert(`Submission failed: ${errorData.message || 'An unknown error occurred.'}`);
+      }
+    } catch (error) {
+      console.error('Network error during form submission:', error);
+      alert('Network error. Please check your connection and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+    // Re-validate on change to clear error messages
+    if (e.target.name === 'fullName') validateFullName(e.target.value);
+    if (e.target.name === 'email') validateEmail(e.target.value);
+  };
+
+  const handlePhoneChange = (value: string | undefined) => {
+    setFormData(prev => ({
+      ...prev,
+      phone: value || '',
+    }));
+  };
+
+  return (
+    <section className="relative py-12 lg:py-20 bg-white overflow-hidden">
+      {/* Decorative Background - Light and Subtle */}
+      <div className="absolute inset-0 opacity-50" style={{ zIndex: 0 }}>
+        <div className="absolute top-0 left-0 w-96 h-96 bg-indigo-100 rounded-full filter blur-3xl animate-blob"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-100 rounded-full filter blur-3xl animate-blob animation-delay-4000"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Column - Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="text-gray-900"
+          >
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-gray-900">
+              Ready to <span className="text-indigo-600">Transform</span> Your Career?
+            </h2>
+            <p className="text-lg sm:text-xl mb-8 text-gray-600">
+              Join 5000+ students who have successfully launched their careers in Software Testing, Data Science, and AI/ML with CDPL&apos;s industry-ready training.
+            </p>
+
+            {/* Benefits - Enhanced UI */}
+            <div className="space-y-4 mb-8">
+              {[
+                'Start learning within 48 hours',
+                'Live interactive classes with experts',
+                '100% placement support guaranteed',
+                'Flexible payment options available',
+              ].map((benefit, index) => (
+                <motion.div 
+                  key={index} 
+                  className="flex items-center gap-3"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                >
+                  <div className="w-6 h-6 bg-green-100 border border-green-200 rounded-full flex items-center justify-center flex-shrink-0 shadow-sm">
+                    <CheckCircle2 className="w-4 h-4 text-green-600" />
+                  </div>
+                  <span className="text-lg text-gray-700 font-medium">{benefit}</span>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Contact Info - Enhanced UI */}
+            <motion.div 
+              className="space-y-3 pt-8 border-t border-gray-200"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
+              <div className="flex items-center gap-3 text-gray-700 font-medium hover:text-indigo-600 transition-colors">
+                <Phone className="w-5 h-5 text-indigo-500" />
+                <span>+91 788-833-838-788</span>
+              </div>
+              <div className="flex items-center gap-3 text-gray-700 font-medium hover:text-indigo-600 transition-colors">
+                <Mail className="w-5 h-5 text-indigo-500" />
+                <span>contact@cinutedigital.com</span>
+              </div>
+              <div className="flex items-start gap-3 text-gray-700 font-medium hover:text-indigo-600 transition-colors">
+                <MapPin className="w-5 h-5 text-indigo-500 mt-1" />
+                <span className="flex flex-col">
+                  <span>Head Office (CDPL)</span>
+                  <span className="text-sm text-gray-500">Mira Road East, Mira Bhayandar, Maharashtra</span>
+                </span>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Right Column - Lead Form - Enhanced UI */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="relative"
+          >
+            <div className="bg-white/80 backdrop-blur-md rounded-3xl shadow-2xl border border-gray-100 p-8 md:p-10 transform hover:shadow-3xl transition-shadow duration-300">
+              {/* Form Header */}
+              <div className="text-center mb-8">
+                <h3 className="text-3xl font-bold text-gray-900 mb-2">
+                  Get Started Today
+                </h3>
+                <p className="text-gray-600">
+                  Fill the form below and our team will contact you within 24 hours.
+                </p>
+              </div>
+
+              {/* Form */}
+              <form onSubmit={handleSubmit} className="space-y-5">
+                {/* Full Name Input - TestRiq Style */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Full Name *
+                  </label>
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                    <input
+                      type="text"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      onBlur={() => validateFullName(formData.fullName)}
+                      required
+                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none transition-all duration-300 ${
+                        errors.fullName ? 'border-red-500' : 'border-gray-300'
+                      }`}
+                      placeholder="Enter your full name"
+                      style={{ color: '#1e293b' }}
+                    />
+                  </div>
+                  {errors.fullName && (
+                    <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>
+                  )}
+                </div>
+
+                {/* Email Input - TestRiq Style */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Email Address *
+                  </label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      onBlur={() => validateEmail(formData.email)}
+                      required
+                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none transition-all duration-300 ${
+                        errors.email ? 'border-red-500' : 'border-gray-300'
+                      }`}
+                      placeholder="Enter your email address"
+                      style={{ color: '#1e293b' }}
+                    />
+                  </div>
+                  {errors.email && (
+                    <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+                  )}
+                </div>
+
+                {/* Phone Input - TestRiq Style with react-phone-number-input */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Mobile Number *
+                  </label>
+                  <div className="relative">
+                    <PhoneInput
+                      international
+                      defaultCountry="IN"
+                      value={formData.phone}
+                      onChange={handlePhoneChange}
+                      onBlur={() => validatePhoneNumber(formData.phone)}
+                      className={`phone-input-container ${
+                        errors.phone ? 'border-red-500' : ''
+                      }`}
+                      placeholder="Enter phone number"
+                    />
+                  </div>
+                  {errors.phone && (
+                    <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
+                  )}
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full py-4 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <span>Submitting...</span>
+                    </>
+                  ) : (
+                    <>
+                  <span>Get Started Now</span>
+                  <ArrowRight className="w-5 h-5" />
+                    </>
+                  )}
+                </button>
+
+              </form>
+
+              {/* Trust Indicators - Enhanced UI */}
+              <div className="mt-6 pt-6 border-t border-gray-200">
+                <div className="flex items-center justify-center gap-6 text-sm text-gray-600">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-green-600" />
+                    <span>100% Privacy</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-green-600" />
+                    <span>No Spam</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-green-600" />
+                    <span>Quick Response</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+<style jsx global>{`
+  @keyframes blob {
+    0% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+  }
+  .animate-blob {
+    animation: blob 7s infinite;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+`}</style>
