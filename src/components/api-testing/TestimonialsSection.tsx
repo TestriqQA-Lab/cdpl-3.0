@@ -1,6 +1,7 @@
 'use client';
 import { Star, Quote } from 'lucide-react';
 import { motion } from 'framer-motion';
+import ReviewsMarquee from '../sections/ReviewMarque';
 
 type Testimonial = {
     name: string;
@@ -90,7 +91,7 @@ export default function TestimonialsSection() {
     };
 
     return (
-        <section id="testimonials" aria-labelledby="testimonials-heading" className="relative py-8 sm:py-10 bg-white">
+        <section id="testimonials" aria-labelledby="testimonials-heading" className="relative py-8 sm:py-10 bg-slate-50">
             {/* subtle top/bottom separators for a clean, futuristic frame */}
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
                 <div className="absolute inset-x-0 top-0 mx-auto h-px max-w-7xl bg-slate-100" />
@@ -108,80 +109,7 @@ export default function TestimonialsSection() {
                     <strong>JSON Schema validation</strong>, <strong>CI/CD</strong>, and <strong>OWASP API security</strong>.
                 </p>
 
-                <div className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    {testimonials.map((t, i) => (
-                        <motion.figure
-                            key={t.name}
-                            initial={{ opacity: 0, y: 14 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: '-15% 0px -10% 0px' }}
-                            transition={{ duration: 0.45, delay: i * 0.06, ease: 'easeOut' }}
-                            className={[
-                                'relative overflow-hidden rounded-2xl border p-6 shadow-[0_1px_0_0_rgba(15,23,42,0.05)] hover:translate-y-1.5 transition-all ease-in-out duration-300',
-                                t.accent.cardBg,
-                                t.accent.cardBorder,
-                            ].join(' ')}
-                        >
-                            {/* decorative quote & avatar */}
-                            <div className="mb-5 flex items-start justify-between">
-                                <div className="flex items-center gap-3">
-                                    <div
-                                        className={[
-                                            'grid h-10 w-10 place-items-center rounded-full text-sm font-semibold text-slate-800',
-                                            t.avatarBg,
-                                        ].join(' ')}
-                                        aria-hidden="true"
-                                        title={t.name}
-                                    >
-                                        {t.name
-                                            .split(' ')
-                                            .map((n) => n[0])
-                                            .slice(0, 2)
-                                            .join('')
-                                            .toUpperCase()}
-                                    </div>
-                                    <figcaption>
-                                        <div className={['text-sm font-semibold', t.accent.ink].join(' ')}>{t.name}</div>
-                                        <div className="text-xs text-slate-600">{t.role}</div>
-                                    </figcaption>
-                                </div>
-                                <Quote className="h-6 w-6 text-slate-300" aria-hidden="true" />
-                            </div>
-
-                            {/* rating */}
-                            <div className="mb-3 flex items-center" aria-label={`Rating: ${t.rating} out of 5`}>
-                                {Array.from({ length: t.rating }).map((_, idx) => (
-                                    <Star key={idx} className="h-5 w-5 fill-yellow-400 text-yellow-400" aria-hidden="true" />
-                                ))}
-                                <span className="ml-2 text-xs font-medium text-slate-600">5.0</span>
-                            </div>
-
-                            {/* text */}
-                            <blockquote className="text-slate-800">
-                                <p className="text-sm leading-relaxed">
-                                    “{t.text}”
-                                </p>
-                            </blockquote>
-
-                            {/* chips */}
-                            <div className="mt-5 flex flex-wrap gap-2">
-                                {['Postman', 'REST', 'GraphQL', 'CI/CD'].map((chip) => (
-                                    <span
-                                        key={chip}
-                                        className={[
-                                            'inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium',
-                                            t.accent.chipBg,
-                                            t.accent.chipText,
-                                            t.accent.cardBorder,
-                                        ].join(' ')}
-                                    >
-                                        {chip}
-                                    </span>
-                                ))}
-                            </div>
-                        </motion.figure>
-                    ))}
-                </div>
+                <ReviewsMarquee />
 
                 {/* supportive SEO line */}
                 <div className="mx-auto mt-10 max-w-4xl text-center">

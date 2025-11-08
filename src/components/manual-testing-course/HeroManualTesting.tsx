@@ -16,7 +16,8 @@ import {
     Sparkles,
     Home,
 } from "lucide-react";
-import React, { type ReactNode, type ReactElement, useState } from "react";
+
+import React, { type ReactNode, type ReactElement, useEffect, useMemo, useRef, useState } from "react";
 import Script from "next/script";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,27 +26,173 @@ import Modal from "@/components/Modal";
 import BrochureDownloadForm from "@/components/BrochureDownloadForm";
 
 
+/* ----------------------- NEW: Count-up + Stats ----------------------- */
+type StatItem = {
+    label: string;
+    value: number;
+    prefix?: string;
+    suffix?: string;
+    emphasize?: boolean;
+};
+
+const PDF_STATS: StatItem[] = [
+    { label: "Training Hours", value: 50, suffix: " hrs", emphasize: true },
+    { label: "Job Vacancies (India)", value: 101000, suffix: "+", emphasize: true },
+    { label: "Market Growth (2020–2030)", value: 25, suffix: "%" },
+    { label: "Job Satisfaction", value: 75, suffix: "%" },
+    { label: "India’s Global Share", value: 32, suffix: "%" },
+    { label: "Fresher Avg. Salary", value: 4, suffix: " LPA" },
+    { label: "Job Assistance", value: 100, suffix: "%" },
+    { label: "Years of Expertise", value: 14, suffix: "+" },
+];
+
+/* --- after PDF_STATS --- */
+type StatColor = {
+    bg: string;       // background for primary card
+    border: string;   // border color for primary/secondary
+    text: string;     // value color
+    chip: string;     // small heading color in primary card
+};
+
+/** 8 unique color schemes — no repeats */
+const STAT_COLORS: StatColor[] = [
+    { bg: "bg-indigo-50", border: "border-indigo-200", text: "text-indigo-800", chip: "text-indigo-700/80" },
+    { bg: "bg-emerald-50", border: "border-emerald-200", text: "text-emerald-800", chip: "text-emerald-700/80" },
+    { bg: "bg-amber-50", border: "border-amber-200", text: "text-amber-800", chip: "text-amber-700/80" },
+    { bg: "bg-sky-50", border: "border-sky-200", text: "text-sky-800", chip: "text-sky-700/80" },
+    { bg: "bg-rose-50", border: "border-rose-200", text: "text-rose-800", chip: "text-rose-700/80" },
+    { bg: "bg-violet-50", border: "border-violet-200", text: "text-violet-800", chip: "text-violet-700/80" },
+    { bg: "bg-lime-50", border: "border-lime-200", text: "text-lime-800", chip: "text-lime-700/80" },
+    { bg: "bg-fuchsia-50", border: "border-fuchsia-200", text: "text-fuchsia-800", chip: "text-fuchsia-700/80" },
+];
+
+/** Attach a unique color to each stat (index-aligned) */
+type ColoredStat = StatItem & { color: StatColor };
+const COLORED_STATS: ColoredStat[] = PDF_STATS.map((s, i) => ({
+    ...s,
+    color: STAT_COLORS[i], // Assumes same length; we have 8 & 8
+}));
+
+type RefLike<T extends Element> = { current: T | null };
+
+function useInView<T extends Element>(ref: RefLike<T>, rootMargin = "0px") {
+    const [inView, setInView] = React.useState(false);
+
+    React.useEffect(() => {
+        const node = ref.current;
+        if (!node) return;
+
+        const obs = new IntersectionObserver(
+            (entries) => {
+                for (const e of entries) {
+                    if (e.isIntersecting) {
+                        setInView(true);
+                        obs.disconnect();
+                        break;
+                    }
+                }
+            },
+            { root: null, rootMargin, threshold: 0.25 }
+        );
+
+        obs.observe(node);
+        return () => obs.disconnect();
+    }, [ref, rootMargin]);
+
+    return inView;
+}
+
+const CountUp: React.FC<{ value: number; duration?: number; formatter?: (n: number) => string }> = ({
+    value,
+    duration = 1400,
+    formatter,
+}) => {
+    const [val, setVal] = useState(0);
+    const startRef = useRef<number | null>(null);
+
+    useEffect(() => {
+        let raf = 0;
+        const step = (ts: number) => {
+            if (startRef.current === null) startRef.current = ts;
+            const p = Math.min((ts - startRef.current) / duration, 1);
+            const eased = 1 - Math.pow(1 - p, 3);
+            setVal(Math.round(value * eased));
+            if (p < 1) raf = requestAnimationFrame(step);
+        };
+        raf = requestAnimationFrame(step);
+        return () => cancelAnimationFrame(raf);
+    }, [value, duration]);
+
+    const display = formatter ? formatter(val) : val.toLocaleString();
+    return <span>{display}</span>;
+};
+
+const StatsBar: React.FC = () => {
+    const wrapRef = React.useRef<HTMLDivElement>(null);
+    const visible = useInView(wrapRef, "80px");
+
+    // Use the colored stats
+    const primary = useMemo(() => COLORED_STATS.filter((s) => s.emphasize), []);
+    const secondary = useMemo(() => COLORED_STATS.filter((s) => !s.emphasize), []);
+
+    return (
+        <div ref={wrapRef} className="mt-8">
+            {/* Primary big cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {primary.map((s) => (
+                    <div
+                        key={s.label}
+                        className={`rounded-2xl border ${s.color.border} ${s.color.bg} p-4 shadow-sm hover:shadow-md transition`}
+                    >
+                        <div className={`text-xs font-semibold uppercase tracking-wide ${s.color.chip}`}>{s.label}</div>
+                        <div className={`mt-1 text-3xl font-extrabold ${s.color.text}`}>
+                            {s.prefix ?? ""}
+                            {visible ? <CountUp value={s.value} /> : 0}
+                            {s.suffix ?? ""}
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            {/* Secondary compact pills */}
+            <div className="mt-3 grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {secondary.map((s) => (
+                    <div
+                        key={s.label}
+                        className={`flex items-center justify-between rounded-2xl border ${s.color.border} bg-white px-4 py-3 shadow-sm`}
+                        title={s.label}
+                    >
+                        <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{s.label}</span>
+                        <span className={`text-lg font-bold ${s.color.text}`}>
+                            {s.prefix ?? ""}
+                            {visible ? <CountUp value={s.value} /> : 0}
+                            {s.suffix ?? ""}
+                        </span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+
+
+/* ------------------------------------------------------------------- */
 
 const breadcrumbs = [
     { label: "Home", href: "/" },
     { label: "software-testing", href: "#" },
     { label: "Manual Testing", href: "/about-us" },
-]
-
+];
 
 export default function HeroManualTesting() {
-
     const [isDownloadOpen, setIsDownloadOpen] = React.useState(false);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-
     const handleEnrollSubmit = (enroll: EnrollFormData) => {
-        alert(
-            `Enroll Now Submitted:\nName: ${enroll.name}\nEmail: ${enroll.email}\nPhone: ${enroll.phone}`
-        );
+        alert(`Enroll Now Submitted:\nName: ${enroll.name}\nEmail: ${enroll.email}\nPhone: ${enroll.phone}`);
         setIsPopupOpen(false);
     };
-
 
     return (
         <section className="relative py-10 md:py-12 bg-white" aria-labelledby="manual-testing-hero">
@@ -56,34 +203,41 @@ export default function HeroManualTesting() {
                 <div className="absolute bottom-12 right-6 h-28 w-28 rounded-2xl bg-emerald-50 border border-emerald-100 shadow-sm" />
             </div>
 
-            <div className="relative overflow-hidden mx-auto max-w-full xl:max-w-7xl px-4  sm:px-6 lg:px-8">
-
+            <div className="relative overflow-hidden mx-auto max-w-full xl:max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* Breadcrumbs for SEO & UX */}
-                <nav aria-label="Breadcrumb" className="mb-4">
-                    <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
-                        {breadcrumbs.map((c, i) => (
-                            <li key={i} className="flex items-center gap-2">
-                                {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-                                <Link
-                                    href={c.href}
-                                    className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
-                                >
-                                    {c.label}
-                                </Link>
-                            </li>
-                        ))}
+                <nav aria-label="Breadcrumb" className="mb-4 -mx-4 px-4 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                    <ol className="flex items-center gap-3 text-sm text-slate-600 whitespace-nowrap">
+                        {breadcrumbs.map((c, i) => {
+                            const isLast = i === breadcrumbs.length - 1;
+                            return (
+                                <li key={i} className="flex items-center gap-2 min-w-0">
+                                    {i === 0 ? <Home className="h-4 w-4 shrink-0" /> : <ChevronRight className="h-4 w-4 shrink-0" />}
+                                    <Link
+                                        href={c.href}
+                                        className={`hover:text-indigo-700 ${isLast ? "font-semibold text-slate-900" : ""} block truncate max-w-[70vw] sm:max-w-none`}
+                                        aria-current={isLast ? "page" : undefined}
+                                        title={c.label}
+                                    >
+                                        {c.label}
+                                    </Link>
+                                </li>
+                            );
+                        })}
                     </ol>
                 </nav>
 
-                <div className="grid items-center gap-10 lg:gap-16 lg:grid-cols-12 grid-cols-1">
+                <div className="grid items-start gap-10 lg:gap-16 lg:grid-cols-12 grid-cols-1">
                     {/* LEFT */}
-                    <div className="lg:-mt-80 xl:-mt-72 lg:col-span-7">
+                    <div className="lg:col-span-7">
                         <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-0.5 md:py-1.5 text-xs font-semibold text-slate-700 shadow-sm">
                             <Sparkles className="h-4 w-4 text-amber-500" />
                             <span>ISTQB Foundation Aligned • Job-Oriented</span>
                         </div>
 
-                        <h1 id="manual-testing-hero" className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900">
+                        <h1
+                            id="manual-testing-hero"
+                            className="mt-3 md:mt-0 max-w-3xl text-3xl md:text-4xl xl:text-5xl font-extrabold leading-snug md:leading-tight tracking-tight text-slate-900 break-words"
+                        >
                             Best <span className="text-blue-700">Manual Testing Course</span>{" "}
                             with 100% Placement <br className="md:hidden" /> Support
                         </h1>
@@ -94,9 +248,10 @@ export default function HeroManualTesting() {
                         </p>
 
                         {/* Lead Form For Mobile Screens and Tab Screens */}
-
                         <div className="lg:hidden border mt-10 border-slate-300 p-5 shadow-md shadow-purple-300 rounded-2xl">
-                            <h2 className="text-slate-800 text-2xl font-bold">Start Your <span className="text-brand">QA</span> Journey</h2>
+                            <h2 className="text-slate-800 text-2xl font-bold">
+                                Start Your <span className="text-brand">QA</span> Journey
+                            </h2>
 
                             {/* Lead Form */}
                             <form id="apply" className="mt-6 space-y-3" aria-label="Apply for Manual Testing course">
@@ -145,11 +300,11 @@ export default function HeroManualTesting() {
                                     and{" "}
                                     <Link href="/privacy-policy" className="underline underline-offset-2 text-slate-700">
                                         Privacy Policy
-                                    </Link>.
+                                    </Link>
+                                    .
                                 </p>
                             </form>
                         </div>
-
 
                         {/* Trust Bar */}
                         <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm">
@@ -213,7 +368,7 @@ export default function HeroManualTesting() {
                             ))}
                         </ul>
 
-                        {/* Company logos */}
+                        {/* Company logos + Stats */}
                         <div className="mt-10">
                             <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Alumni work at</p>
                             <div className="mt-4 flex flex-wrap items-center gap-x-8 gap-y-3 opacity-90">
@@ -222,6 +377,9 @@ export default function HeroManualTesting() {
                                 <Image src="/company_images/credility.webp" alt="Groundwork Systems" width={120} height={24} />
                                 <Image src="/company_images/marqetrix.webp" alt="Nitrosoft" width={120} height={24} />
                             </div>
+
+                            {/* NEW: PDF Stats with animated counters */}
+                            <StatsBar />
                         </div>
                     </div>
 
@@ -235,42 +393,12 @@ export default function HeroManualTesting() {
                                 </div>
 
                                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                                    <SnapshotItem
-                                        color="bg-sky-50 text-sky-700"
-                                        icon={<Users className="h-6 w-6 text-sky-700" />}
-                                        label="Students Placed"
-                                        value="500+"
-                                    />
-                                    <SnapshotItem
-                                        color="bg-indigo-50 text-indigo-700"
-                                        icon={<Clock className="h-6 w-6 text-indigo-700" />}
-                                        label="Training Hours"
-                                        value="Refer Branches"
-                                    />
-                                    <SnapshotItem
-                                        color="bg-emerald-50 text-emerald-700"
-                                        icon={<BriefcaseBusiness className="h-6 w-6 text-emerald-700" />}
-                                        label="Real Projects"
-                                        value="5"
-                                    />
-                                    <SnapshotItem
-                                        color="bg-amber-50 text-amber-700"
-                                        icon={<GraduationCap className="h-6 w-6 text-amber-700" />}
-                                        label="ISTQB Included"
-                                        value="Yes (with additonial fees)"
-                                    />
-                                    <SnapshotItem
-                                        color="bg-rose-50 text-rose-700"
-                                        icon={<Globe2 className="h-6 w-6 text-rose-700" />}
-                                        label="Learning Access"
-                                        value="Lifetime"
-                                    />
-                                    <SnapshotItem
-                                        color="bg-violet-50 text-violet-700"
-                                        icon={<ShieldCheck className="h-6 w-6 text-violet-700" />}
-                                        label="Placement Support"
-                                        value="100%"
-                                    />
+                                    <SnapshotItem color="bg-sky-50 text-sky-700" icon={<Users className="h-6 w-6 text-sky-700" />} label="Students Placed" value="500+" />
+                                    <SnapshotItem color="bg-indigo-50 text-indigo-700" icon={<Clock className="h-6 w-6 text-indigo-700" />} label="Training Hours" value="Refer Branches" />
+                                    <SnapshotItem color="bg-emerald-50 text-emerald-700" icon={<BriefcaseBusiness className="h-6 w-6 text-emerald-700" />} label="Real Projects" value="5" />
+                                    <SnapshotItem color="bg-amber-50 text-amber-700" icon={<GraduationCap className="h-6 w-6 text-amber-700" />} label="ISTQB Included" value="Yes (with additonial fees)" />
+                                    <SnapshotItem color="bg-rose-50 text-rose-700" icon={<Globe2 className="h-6 w-6 text-rose-700" />} label="Learning Access" value="Lifetime" />
+                                    <SnapshotItem color="bg-violet-50 text-violet-700" icon={<ShieldCheck className="h-6 w-6 text-violet-700" />} label="Placement Support" value="100%" />
                                 </div>
 
                                 {/* Next Batch */}
@@ -289,7 +417,9 @@ export default function HeroManualTesting() {
                             </div>
 
                             <div className="hidden lg:block border border-slate-300 p-5 shadow-md shadow-purple-300 rounded-2xl">
-                                <h2 className="text-slate-800 text-2xl font-bold">Start Your <span className="text-brand">QA</span> Journey</h2>
+                                <h2 className="text-slate-800 text-2xl font-bold">
+                                    Start Your <span className="text-brand">QA</span> Journey
+                                </h2>
 
                                 {/* Lead Form */}
                                 <form id="apply" className="mt-6 space-y-3" aria-label="Apply for Manual Testing course">
@@ -338,7 +468,8 @@ export default function HeroManualTesting() {
                                         and{" "}
                                         <Link href="/privacy-policy" className="underline underline-offset-2 text-slate-700">
                                             Privacy Policy
-                                        </Link>.
+                                        </Link>
+                                        .
                                     </p>
                                 </form>
                             </div>
@@ -347,20 +478,11 @@ export default function HeroManualTesting() {
                 </div>
 
                 {/* Popup now uses reusable EnrollPopup */}
-                <EnrollPopup
-                    isOpen={isPopupOpen}
-                    onClose={() => setIsPopupOpen(false)}
-                    onSubmit={handleEnrollSubmit}
-                />
+                <EnrollPopup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} onSubmit={handleEnrollSubmit} />
 
-                <Modal
-                    isOpen={isDownloadOpen}
-                    onClose={() => setIsDownloadOpen(false)}
-                    title="Download Manual Testing Syllabus"
-                >
+                <Modal isOpen={isDownloadOpen} onClose={() => setIsDownloadOpen(false)} title="Download Manual Testing Syllabus">
                     <BrochureDownloadForm onClose={() => setIsDownloadOpen(false)} />
                 </Modal>
-
 
                 {/* SEO helper text */}
                 <div className="mx-auto mt-10 max-w-4xl text-center">
@@ -405,8 +527,6 @@ export default function HeroManualTesting() {
     );
 }
 
-
-
 /* ---------- Reusable components in the same file ---------- */
 function Field({ label, children }: { label: string; children: ReactNode }) {
     return (
@@ -426,7 +546,6 @@ function SnapshotItem({
     icon: ReactElement | ReactNode;
     label: string;
     value: string;
-    /** Tailwind classes for the icon chip background/text, e.g. "bg-sky-50 text-sky-700" */
     color?: string;
 }) {
     const colorClasses = color ?? "bg-slate-100 text-slate-700";

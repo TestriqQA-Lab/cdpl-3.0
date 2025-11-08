@@ -4,12 +4,82 @@ import Link from 'next/link';
 
 type Module = { title: string; topics: string[] };
 
+/** Extracted from “API Testing using POSTMAN & RestAPIs” course brochure */
 const curriculum: Module[] = [
-  { title: 'API Testing Fundamentals', topics: ['API vs UI Testing', 'POSTMAN Setup', 'HTTP Methods', 'Request/Response Structure'] },
-  { title: 'Advanced POSTMAN Mastery', topics: ['Collections & Environments', 'Variables & Scripts', 'API Chaining', 'Data-Driven Testing'] },
-  { title: 'Validation & Automation', topics: ['JSON Schema', 'Status Codes', 'Response Time', 'Test Scripts (Pre/Post)'] },
-  { title: 'Security & Performance', topics: ['OAuth, JWT, API Keys', 'Rate Limiting', 'SQL Injection Testing', 'Load Testing Basics'] },
-  { title: 'Live Projects & Capstone', topics: ['E-Commerce API Testing', 'Banking API Security', 'Healthcare API Compliance', 'Final Portfolio'] },
+  {
+    title: 'Basics of API Testing',
+    topics: [
+      'What is API Testing',
+      'POSTMAN Introduction',
+      'POSTMAN Installation',
+      'JavaScript Object Notation (JSON)',
+      'Creating Dummy APIs for API Testing',
+      'How to Create Own APIs',
+    ],
+  },
+  {
+    title: 'Postman Workspace & Collections',
+    topics: [
+      'Creating Workspace',
+      'Creating a Collection',
+      'Saving & Editing Requests',
+      'Exporting & Importing Collections',
+      'Operations on Collections',
+    ],
+  },
+  {
+    title: 'HTTP Requests in Postman',
+    topics: [
+      'Creating Requests – GET, POST, PUT, PATCH & DELETE',
+      'HTTP Request Validation in POSTMAN',
+      'Request/Response Structure',
+    ],
+  },
+  {
+    title: 'Validation & Test Scripts',
+    topics: [
+      'Validating Response with Test Scripts in Postman',
+      'Testing Status Codes',
+      'Testing Headers & Cookies',
+      'Testing Response Time',
+      'Testing Response Body',
+      'Testing JSON Schema',
+    ],
+  },
+  {
+    title: 'Environments & Variables',
+    topics: [
+      'Creating Environments in POSTMAN',
+      'Benefits of Environment Variables',
+      'How to Use Environment Variables',
+    ],
+  },
+  {
+    title: 'Hands-On Project: Employee.json API',
+    topics: [
+      'Create Server and .json File',
+      'Execute Test Cases for HTTP Requests',
+      'Create Variables & Environments',
+      'Add Validation Scripts',
+    ],
+  },
+  {
+    title: 'Hands-On Project: Contact List (Live)',
+    topics: [
+      'Create User via API Link using Postman',
+      'Create Collections for Different Modules',
+      'Write & Execute Test Cases',
+      'Use Authorization ID (Token)',
+    ],
+  },
+  {
+    title: 'Security Practice: OWASP Juice Shop',
+    topics: [
+      'Overview of OWASP Juice Shop',
+      'Security Training & Awareness Use-cases',
+      'Practice for Pen-Testing/CTFs',
+    ],
+  },
 ];
 
 // Distinct accents
@@ -26,7 +96,8 @@ export default function CurriculumSection() {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: 'API Testing Course Curriculum',
-    description: 'Industry-ready API Testing curriculum: Postman, REST, JSON Schema validation, automation, security testing, performance, and capstone projects.',
+    description:
+      'Industry-ready API Testing curriculum: Postman, REST, JSON Schema validation, automation, security testing, performance, and capstone projects.',
     itemListElement: curriculum.map((m, idx) => ({
       '@type': 'ListItem',
       position: idx + 1,
@@ -62,18 +133,16 @@ export default function CurriculumSection() {
                 key={mod.title}
                 className={[
                   'group relative overflow-hidden rounded-2xl border p-6 md:p-7',
-                  // EXTRA TOP PADDING on mobile so title never hides beneath the badge
                   'md:pt-12',
                   a.cardBg,
                   a.cardBorder,
                   'shadow-[0_1px_0_0_rgba(15,23,42,0.04)] transition hover:shadow-md focus-within:ring-2 focus-within:ring-slate-300',
                 ].join(' ')}
               >
-                {/* index badge — slightly smaller on mobile */}
+                {/* index badge */}
                 <div
                   className={[
                     'absolute right-4 top-4 grid place-items-center rounded-xl font-bold shadow-sm',
-                    // size tweaks for mobile vs larger screens
                     'h-8 w-8 text-[13px] sm:h-9 sm:w-9 sm:text-sm',
                     a.badgeBg,
                     a.badgeText,
@@ -121,10 +190,7 @@ export default function CurriculumSection() {
       </div>
 
       {/* JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

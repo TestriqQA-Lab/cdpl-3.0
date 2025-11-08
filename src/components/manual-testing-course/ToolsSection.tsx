@@ -2,25 +2,6 @@
 
 import type { FC } from "react";
 import { useMemo, useState } from "react";
-import type { LucideIcon } from "lucide-react";
-import {
-    Wrench,
-    Bug,
-    Database,
-    Network,
-    Laptop,
-    Boxes,
-    Globe,
-    Workflow,
-    ClipboardCheck,
-    Gauge,
-    Rocket,
-    GitBranch,
-    ServerCog,
-    Kanban,
-    FlaskConical,
-    FileSpreadsheet,
-} from "lucide-react";
 
 /* ============================== Types ============================== */
 interface Category {
@@ -51,13 +32,16 @@ interface FilterChipProps {
 const ACCENTS = ["indigo", "cyan", "emerald", "amber", "rose", "violet", "sky", "lime", "pink", "teal"] as const;
 type Accent = typeof ACCENTS[number];
 
-const COLOR_MAP: Record<Accent, { 
-    iconBg: string; 
-    cardBg: string; 
-    border: string; 
-    accentBorder: string;
-    ring: string;
-}> = {
+const COLOR_MAP: Record<
+    Accent,
+    {
+        iconBg: string;
+        cardBg: string;
+        border: string;
+        accentBorder: string;
+        ring: string;
+    }
+> = {
     indigo: { iconBg: "bg-indigo-600", cardBg: "bg-indigo-50", border: "border-indigo-200", accentBorder: "border-indigo-600", ring: "ring-indigo-200" },
     cyan: { iconBg: "bg-cyan-600", cardBg: "bg-cyan-50", border: "border-cyan-200", accentBorder: "border-cyan-600", ring: "ring-cyan-200" },
     emerald: { iconBg: "bg-emerald-600", cardBg: "bg-emerald-50", border: "border-emerald-200", accentBorder: "border-emerald-600", ring: "ring-emerald-200" },
@@ -78,198 +62,85 @@ const assignColors = (tools: Tool[]): Tool[] => {
     }));
 };
 
-/** Icon mapping */
-const iconFor = (tool: string): LucideIcon => {
-    const map: Record<string, LucideIcon> = {
-        Jira: Kanban,
-        Zephyr: ClipboardCheck,
-        TestRail: ClipboardCheck,
-        Postman: Network,
-        "REST Assured": FlaskConical,
-        "Selenium WebDriver": Rocket,
-        Cypress: Rocket,
-        JMeter: Gauge,
-        BrowserStack: Globe,
-        Playwright: Rocket,
-        "Chrome DevTools": Laptop,
-        "MS Excel": FileSpreadsheet,
-        Excel: FileSpreadsheet,
-        MySQL: Database,
-        MongoDB: Database,
-        Git: GitBranch,
-        GitHub: GitBranch,
-        Jenkins: ServerCog,
-        Confluence: Workflow,
-        "Apache Kafka": Boxes,
-        Fiddler: Bug,
-        "Charles Proxy": Bug,
-        Docker: Boxes,
-        K6: Gauge,
-    };
-    return map[tool] || Wrench;
+/* ============================== Emoji Icons ============================== */
+/** WhatsApp-style = emoji glyphs. These render as the platform emoji, like in chat. */
+const EMOJI_MAP: Record<string, string> = {
+    "Jira": "📋",
+    "Zephyr": "✅",
+    "TestRail": "🗂️",
+    "Postman": "📮",
+    "REST Assured": "🧪",
+    "Selenium WebDriver": "🕸️",
+    "Cypress": "🌲",
+    "Playwright": "🎭",
+    "JMeter": "📈",
+    "K6": "⚡",
+    "BrowserStack": "🌐",
+    "Chrome DevTools": "🧰",
+    "MySQL": "🐬",
+    "MongoDB": "🍃",
+    "Git": "🌿",
+    "GitHub": "🐙",
+    "Jenkins": "🤖",
+    "Confluence": "📚",
+    "Excel": "📊",
+    "Fiddler": "🪄",
+    "Charles Proxy": "🛰️",
 };
 
+const emojiFor = (name: string) => EMOJI_MAP[name] ?? "🧰";
+
+const EmojiIcon: FC<{ name: string; color: Accent }> = ({ name, color }) => {
+    const colors = COLOR_MAP[color];
+    return (
+        <div
+            className={`${colors.iconBg} rounded-xl w-10 h-10 flex items-center justify-center`}
+            role="img"
+            aria-label={`${name} icon`}
+            title={name}
+        >
+            <span className="text-white text-lg leading-none">{emojiFor(name)}</span>
+        </div>
+    );
+};
+
+/* ============================== Data ============================== */
 const CATEGORIES: Category[] = [
     { id: "plan", label: "Plan & Track" },
     { id: "test-mgmt", label: "Test Management" },
     { id: "api-auto", label: "API & Automation" },
     { id: "perf", label: "Performance & Monitoring" },
-    { id: "cross", label: "Cross‑Browser & Mobile" },
+    { id: "cross", label: "Cross-Browser & Mobile" },
     { id: "data", label: "Databases & Analytics" },
     { id: "devops", label: "Version Control & CI/CD" },
     { id: "utils", label: "Utilities & Debugging" },
 ];
 
 const TOOL_DATA: Tool[] = assignColors([
-    {
-        name: "Jira",
-        tagline: "Agile Issue Tracking",
-        desc: "Plan sprints, manage user stories, and track defects with enterprise‑grade workflows.",
-        category: "plan",
-        tags: ["agile", "kanban", "scrum"],
-    },
-    {
-        name: "Zephyr",
-        tagline: "Native Test Management",
-        desc: "Create test cases, map requirements, and view real‑time coverage inside Jira.",
-        category: "test-mgmt",
-        tags: ["test-cases", "coverage"],
-    },
-    {
-        name: "TestRail",
-        tagline: "Scalable Test Suites",
-        desc: "Organize suites, track runs, and generate audit‑ready QA reports at scale.",
-        category: "test-mgmt",
-        tags: ["suites", "runs", "reports"],
-    },
-    {
-        name: "Postman",
-        tagline: "API Testing & Mocking",
-        desc: "Design REST calls, validate responses, automate collections, and monitor APIs.",
-        category: "api-auto",
-        tags: ["api", "rest", "automation"],
-    },
-    {
-        name: "REST Assured",
-        tagline: "Java API Automation",
-        desc: "Write robust API assertions in code for CI‑ready test pipelines.",
-        category: "api-auto",
-        tags: ["java", "assertions", "ci"],
-    },
-    {
-        name: "Selenium WebDriver",
-        tagline: "UI Automation at Scale",
-        desc: "Automate browsers, build maintainable page objects, and run cross‑browser suites.",
-        category: "api-auto",
-        tags: ["ui", "e2e", "page-object"],
-    },
-    {
-        name: "Cypress",
-        tagline: "Fast Front‑End E2E",
-        desc: "Flaky‑resistant web tests with time‑travel debugging and rich dashboards.",
-        category: "api-auto",
-        tags: ["front-end", "e2e"],
-    },
-    {
-        name: "Playwright",
-        tagline: "Reliable Cross‑Browser E2E",
-        desc: "Auto‑waits, trace viewer, and parallel workers for stable end‑to‑end testing.",
-        category: "api-auto",
-        tags: ["cross-browser", "parallel"],
-    },
-    {
-        name: "JMeter",
-        tagline: "Performance & Load",
-        desc: "Model realistic traffic, analyze throughput, and expose bottlenecks early.",
-        category: "perf",
-        tags: ["load", "stress", "latency"],
-    },
-    {
-        name: "K6",
-        tagline: "Developer‑centric Load Tests",
-        desc: "Script performance scenarios in code and integrate with CI pipelines.",
-        category: "perf",
-        tags: ["scripting", "metrics"],
-    },
-    {
-        name: "BrowserStack",
-        tagline: "Real Devices & Browsers",
-        desc: "Execute manual and automated tests on 3000+ real browsers and devices.",
-        category: "cross",
-        tags: ["devices", "cloud"],
-    },
-    {
-        name: "Chrome DevTools",
-        tagline: "Debugging & Audits",
-        desc: "Trace network calls, measure performance, and inspect accessibility issues.",
-        category: "utils",
-        tags: ["debug", "a11y"],
-    },
-    {
-        name: "MySQL",
-        tagline: "Relational Database",
-        desc: "Write SQL for data validation, joins, and analytics to ensure integrity.",
-        category: "data",
-        tags: ["sql", "joins"],
-    },
-    {
-        name: "MongoDB",
-        tagline: "NoSQL for QA",
-        desc: "Query JSON‑like documents to verify event streams and microservices.",
-        category: "data",
-        tags: ["nosql", "json"],
-    },
-    {
-        name: "Git",
-        tagline: "Version Control",
-        desc: "Branch, review, and manage test code with modern Git workflows.",
-        category: "devops",
-        tags: ["vcs", "review"],
-    },
-    {
-        name: "GitHub",
-        tagline: "Collaboration & PRs",
-        desc: "Pull requests, code reviews, and actions to automate quality gates.",
-        category: "devops",
-        tags: ["pr", "actions"],
-    },
-    {
-        name: "Jenkins",
-        tagline: "Continuous Integration",
-        desc: "Trigger pipelines, run suites in parallel, and publish reports on merge.",
-        category: "devops",
-        tags: ["ci", "pipeline"],
-    },
-    {
-        name: "Confluence",
-        tagline: "QA Knowledge Base",
-        desc: "Document test strategies, runbooks, and RCA with reusable templates.",
-        category: "plan",
-        tags: ["docs", "rca"],
-    },
-    {
-        name: "Excel",
-        tagline: "Test Data & Analysis",
-        desc: "Quickly model test data, pivot results, and share quality dashboards.",
-        category: "utils",
-        tags: ["data", "reporting"],
-    },
-    {
-        name: "Fiddler",
-        tagline: "Network Sniffing",
-        desc: "Capture HTTP/S traffic to diagnose API errors and performance issues.",
-        category: "utils",
-        tags: ["proxy", "http"],
-    },
-    {
-        name: "Charles Proxy",
-        tagline: "Mobile & API Debugging",
-        desc: "Rewrite rules, throttle bandwidth, and validate edge‑case behaviors.",
-        category: "utils",
-        tags: ["throttle", "rewrite"],
-    },
+    { name: "Jira", tagline: "Agile Issue Tracking", desc: "Plan sprints, manage user stories, and track defects with enterprise-grade workflows.", category: "plan", tags: ["agile", "kanban", "scrum"] },
+    { name: "Zephyr", tagline: "Native Test Management", desc: "Create test cases, map requirements, and view real-time coverage inside Jira.", category: "test-mgmt", tags: ["test-cases", "coverage"] },
+    { name: "TestRail", tagline: "Scalable Test Suites", desc: "Organize suites, track runs, and generate audit-ready QA reports at scale.", category: "test-mgmt", tags: ["suites", "runs", "reports"] },
+    { name: "Postman", tagline: "API Testing & Mocking", desc: "Design REST calls, validate responses, automate collections, and monitor APIs.", category: "api-auto", tags: ["api", "rest", "automation"] },
+    { name: "REST Assured", tagline: "Java API Automation", desc: "Write robust API assertions in code for CI-ready test pipelines.", category: "api-auto", tags: ["java", "assertions", "ci"] },
+    { name: "Selenium WebDriver", tagline: "UI Automation at Scale", desc: "Automate browsers, build maintainable page objects, and run cross-browser suites.", category: "api-auto", tags: ["ui", "e2e", "page-object"] },
+    { name: "Cypress", tagline: "Fast Front-End E2E", desc: "Flaky-resistant web tests with time-travel debugging and rich dashboards.", category: "api-auto", tags: ["front-end", "e2e"] },
+    { name: "Playwright", tagline: "Reliable Cross-Browser E2E", desc: "Auto-waits, trace viewer, and parallel workers for stable end-to-end testing.", category: "api-auto", tags: ["cross-browser", "parallel"] },
+    { name: "JMeter", tagline: "Performance & Load", desc: "Model realistic traffic, analyze throughput, and expose bottlenecks early.", category: "perf", tags: ["load", "stress", "latency"] },
+    { name: "K6", tagline: "Developer-centric Load Tests", desc: "Script performance scenarios in code and integrate with CI pipelines.", category: "perf", tags: ["scripting", "metrics"] },
+    { name: "BrowserStack", tagline: "Real Devices & Browsers", desc: "Execute manual and automated tests on 3000+ real browsers and devices.", category: "cross", tags: ["devices", "cloud"] },
+    { name: "Chrome DevTools", tagline: "Debugging & Audits", desc: "Trace network calls, measure performance, and inspect accessibility issues.", category: "utils", tags: ["debug", "a11y"] },
+    { name: "MySQL", tagline: "Relational Database", desc: "Write SQL for data validation, joins, and analytics to ensure integrity.", category: "data", tags: ["sql", "joins"] },
+    { name: "MongoDB", tagline: "NoSQL for QA", desc: "Query JSON-like documents to verify event streams and microservices.", category: "data", tags: ["nosql", "json"] },
+    { name: "Git", tagline: "Version Control", desc: "Branch, review, and manage test code with modern Git workflows.", category: "devops", tags: ["vcs", "review"] },
+    { name: "GitHub", tagline: "Collaboration & PRs", desc: "Pull requests, code reviews, and actions to automate quality gates.", category: "devops", tags: ["pr", "actions"] },
+    { name: "Jenkins", tagline: "Continuous Integration", desc: "Trigger pipelines, run suites in parallel, and publish reports on merge.", category: "devops", tags: ["ci", "pipeline"] },
+    { name: "Confluence", tagline: "QA Knowledge Base", desc: "Document test strategies, runbooks, and RCA with reusable templates.", category: "plan", tags: ["docs", "rca"] },
+    { name: "Excel", tagline: "Test Data & Analysis", desc: "Quickly model test data, pivot results, and share quality dashboards.", category: "utils", tags: ["data", "reporting"] },
+    { name: "Fiddler", tagline: "Network Sniffing", desc: "Capture HTTP/S traffic to diagnose API errors and performance issues.", category: "utils", tags: ["proxy", "http"] },
+    { name: "Charles Proxy", tagline: "Mobile & API Debugging", desc: "Rewrite rules, throttle bandwidth, and validate edge-case behaviors.", category: "utils", tags: ["throttle", "rewrite"] },
 ]);
 
+/* ============================== Section ============================== */
 const ToolsSection: FC = () => {
     const [active, setActive] = useState<string | "all">("all");
 
@@ -304,7 +175,7 @@ const ToolsSection: FC = () => {
                         Tools You’ll Master in Our <span className="text-blue-700">QA Certification Course</span>
                     </h2>
                     <p className="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-                        Learn industry‑standard <strong>software testing tools</strong> used by top product teams — from
+                        Learn industry-standard <strong>software testing tools</strong> used by top product teams — from
                         <strong> agile test management</strong> and <strong>API testing</strong> to <strong>UI automation</strong>,
                         <strong> performance testing</strong>, and <strong>continuous integration</strong>.
                     </p>
@@ -326,10 +197,7 @@ const ToolsSection: FC = () => {
                 </div>
 
                 {/* SEO JSON-LD */}
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-                />
+                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             </div>
         </section>
     );
@@ -339,7 +207,6 @@ export default ToolsSection;
 
 /* --------------------------------- Cards --------------------------------- */
 const ToolCard: FC<ToolCardProps> = ({ tool }) => {
-    const Icon = iconFor(tool.name);
     const color = tool.color!;
     const colors = COLOR_MAP[color];
 
@@ -349,9 +216,7 @@ const ToolCard: FC<ToolCardProps> = ({ tool }) => {
             aria-label={`${tool.name} — ${tool.tagline}`}
         >
             <div className="flex items-start gap-3">
-                <div className={`${colors.iconBg} rounded-xl p-2.5`}>
-                    <Icon className="h-6 w-6 text-white" aria-hidden="true" />
-                </div>
+                <EmojiIcon name={tool.name} color={color} />
                 <div>
                     <h3 className="text-lg font-semibold text-gray-900 leading-tight">{tool.name}</h3>
                     <p className="text-sm font-medium text-gray-700 mt-0.5">{tool.tagline}</p>
@@ -363,10 +228,7 @@ const ToolCard: FC<ToolCardProps> = ({ tool }) => {
             {tool.tags && (
                 <div className="mt-4 flex flex-wrap gap-1.5">
                     {tool.tags.map((t) => (
-                        <span
-                            key={t}
-                            className="inline-flex items-center rounded-full border border-gray-200 bg-white px-2.5 py-1 text-xs font-medium text-gray-700"
-                        >
+                        <span key={t} className="inline-flex items-center rounded-full border border-gray-200 bg-white px-2.5 py-1 text-xs font-medium text-gray-700">
                             #{t}
                         </span>
                     ))}
@@ -384,11 +246,8 @@ const FilterChip: FC<FilterChipProps> = ({ label, active, onClick }) => {
         <button
             type="button"
             onClick={onClick}
-            className={`inline-flex items-center rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${
-                active
-                    ? "border-indigo-600 bg-indigo-600 text-white shadow-sm"
-                    : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-            }`}
+            className={`inline-flex items-center rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${active ? "border-indigo-600 bg-indigo-600 text-white shadow-sm" : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+                }`}
             aria-pressed={active}
             aria-label={`Filter: ${label}`}
         >

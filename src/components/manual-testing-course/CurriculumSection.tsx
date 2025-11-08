@@ -1,4 +1,4 @@
-/* ==================== CURRICULUM (Light Theme) ==================== */
+/* ==================== CURRICULUM (Light Theme) — from PDF ==================== */
 "use client";
 
 import { useMemo, useState } from "react";
@@ -13,99 +13,142 @@ void ACCENTS;
 
 type Module = {
     id: string;
-    weeks: string;
+    weeks: string; // used as a simple section label (Module 1, Module 2, …)
     title: string;
     accent: Accent;
-    outcomes: string[];
+    outcomes: string[]; // kept for UI consistency; populated strictly with PDF items when applicable
     topics: string[];
     projects: string[];
     tools?: string[];
 };
 
+/* ====== Extracted curriculum only (PDF pages 16–17) ====== */
 const MODULES: Module[] = [
     {
-        id: "fundamentals",
-        weeks: "Weeks 1–2",
-        title: "Software Testing Fundamentals",
+        id: "sdlc-models",
+        weeks: "Module 1",
+        title: "Software Development Life Cycle (SDLC): Types of SDLC",
         accent: "indigo",
-        outcomes: [
-            "Understand QA role across SDLC & STLC",
-            "Apply core testing principles & quality gates",
-            "Map V-Model & Agile ceremonies to QA deliverables"
+        outcomes: [],
+        topics: [
+            "Waterfall Model",
+            "Spiral Model",
+            "V-Model (V & V Model)",
+            "Prototype Model (Dynamic Model)",
+            "Hybrid Model"
         ],
-        topics: ["SDLC/STLC", "Testing Principles", "QA Roles", "Agile & Scrum Basics", "V-Model Overview"],
-        projects: ["Mini Project: Requirement Review & Test Strategy Snapshot"],
-        tools: ["Confluence", "Miro", "Google Docs"]
+        projects: []
     },
     {
-        id: "design",
-        weeks: "Weeks 3–4",
-        title: "Test Design Techniques",
+        id: "overview-stlc",
+        weeks: "Module 2",
+        title: "Software Testing Overview & STLC",
         accent: "cyan",
-        outcomes: [
-            "Design robust test suites using black-box techniques",
-            "Increase coverage with systematic partitioning",
-            "Document reusable test scenarios with clear oracles"
+        outcomes: [],
+        topics: [
+            "Software Testing Overview",
+            "Software Testing Life Cycle (STLC)",
+            "Types of Software Testing & Usage in Corporate",
+            "White Box Testing",
+            "Black Box Testing",
+            "Gray Box"
         ],
-        topics: ["Equivalence Partitioning", "Boundary Value Analysis", "Decision Tables", "State Transition", "Exploratory Charters"],
-        projects: ["Workshop: Design a Coverage-First Test Suite for a Login & Checkout Flow"],
-        tools: ["XMind", "Notion", "Excel/Sheets"]
+        projects: []
     },
     {
-        id: "cases",
-        weeks: "Weeks 5–6",
-        title: "Test Cases, RTM & Documentation",
+        id: "black-box-types",
+        weeks: "Module 3",
+        title: "Black Box Testing Overview: Types of Black Box Testing",
         accent: "emerald",
-        outcomes: [
-            "Write atomic, traceable test cases linked to requirements",
-            "Build a living Requirements Traceability Matrix (RTM)",
-            "Prepare production-like test data safely"
+        outcomes: [],
+        topics: [
+            "Functionality Testing",
+            "Integration Testing",
+            "System Testing",
+            "Acceptance Testing",
+            "Usability / GUI Testing",
+            "Performance Testing",
+            "Security Testing",
+            "Compatibility Testing",
+            "Responsive Testing",
+            "Configuration Testing",
+            "Reliability Testing",
+            "Globalization / Localization Testing",
+            "Recovery Testing",
+            "Adhoc Testing",
+            "Requirement Testing",
+            "Documentation Testing",
+            "Exploratory Testing",
+            "Smoke Testing",
+            "Regression Testing",
+            "Sanity Testing",
+            "Re-Testing"
         ],
-        topics: ["Test Case Writing", "RTM Mapping", "Test Data Strategies", "Peer Review Process", "Versioning Basics"],
-        projects: ["Capstone 1: RTM + 40 High-Quality Test Cases for a Feature Module"],
-        tools: ["TestRail / Zephyr", "Google Sheets", "Git Basics"]
+        projects: []
     },
     {
-        id: "defects",
-        weeks: "Weeks 7–8",
-        title: "Defect Lifecycle & Collaboration",
+        id: "defect-tracking",
+        weeks: "Module 4",
+        title: "Defect Tracking & Reporting",
         accent: "amber",
-        outcomes: [
-            "Report actionable defects with repro steps & logs",
-            "Use severity/priority effectively in triage",
-            "Collaborate with devs using data, not opinions"
+        outcomes: [],
+        topics: [
+            "Identification of defect",
+            "Defect tracking process",
+            "Defect reporting process",
+            "Various types of defects",
+            "Severity & Priority levels for defects",
+            "Defect Tracking Life Cycle (DTLC)"
         ],
-        topics: ["Bug Life Cycle", "Jira Reporting", "Severity vs Priority", "Root Cause Hints", "Dev Handoffs"],
-        projects: ["Live Lab: Create 10 Production-Grade Bug Reports from a Staging App"],
-        tools: ["Jira", "Loom", "Lightshot"]
+        projects: []
     },
     {
-        id: "types",
-        weeks: "Weeks 9–10",
-        title: "Testing Types & Environments",
+        id: "agile",
+        weeks: "Module 5",
+        title: "Agile Methodology (Agile Model)",
         accent: "rose",
-        outcomes: [
-            "Plan layered testing: Smoke → Functional → Regression → UAT",
-            "Execute cross-browser & responsive checks",
-            "Differentiate non-functional checks (basic performance & usability)"
+        outcomes: [],
+        topics: [
+            "Overview of Agile process",
+            "Importance of Agile process",
+            "Agile meetings and their importance",
+            "Members Involved in Agile Model",
+            "Working agile model"
         ],
-        topics: ["Smoke/Regression/UAT", "Functional vs Non-Functional", "Web & Mobile Basics", "Cross-Browser/Viewport", "Accessibility Intro"],
-        projects: ["Playbook: Regression Suite + Execution Report for Web App"],
-        tools: ["Chrome DevTools", "Lighthouse", "BrowserStack"]
+        projects: []
     },
     {
-        id: "projects",
-        weeks: "Weeks 11–12",
-        title: "Projects, ISTQB & Placement Prep",
+        id: "stlc-detailed",
+        weeks: "Module 6",
+        title: "Software Test Life Cycle (STLC) — In Detail",
         accent: "violet",
-        outcomes: [
-            "Author end-to-end test plans with risk-based prioritization",
-            "Attempt ISTQB mock tests confidently",
-            "Present capstone projects with ROI-focused storytelling"
+        outcomes: [],
+        topics: [
+            "System Study",
+            "Preparation of Test Plan",
+            "Test Cases Writing",
+            "Preparation of Traceability Matrix",
+            "Test Execution",
+            "Defect Tracking Life Cycle (DTLC)",
+            "Preparation of Test Execution Report",
+            "Retrospect Meeting"
         ],
-        topics: ["Test Planning", "ISTQB Foundation Mocks", "5 Capstone Projects", "Interview Preparation", "Portfolio & Git"],
-        projects: ["Capstone 2–5: E-commerce, FinTech, Healthcare, SaaS QA Projects"],
-        tools: ["GitHub", "Google Slides", "Canva"]
+        projects: []
+    },
+    {
+        id: "tools",
+        weeks: "Module 7",
+        title: "Test Management Tools",
+        accent: "indigo",
+        outcomes: [],
+        topics: [
+            "Excel — Test case writing & bug reporting",
+            "TestRail — Test case management",
+            "Jira — Bug tracking, release scheduling & sprint management",
+            "Mantis BT — Bug tracking"
+        ],
+        projects: [],
+        tools: ["Excel", "TestRail", "Jira", "Mantis BT"]
     }
 ];
 
@@ -178,12 +221,12 @@ function AccentBar({ accent }: { accent: Accent }) {
 
 function IconFor(title: string, accent: Accent) {
     const IconComponent =
-        /fundamentals/i.test(title) ? BookOpen :
-            /design/i.test(title) ? Layers :
-                /cases/i.test(title) ? NotebookPen :
-                    /defect/i.test(title) ? Bug :
-                        /types|environments/i.test(title) ? FlaskConical :
-                            /projects|ISTQB/i.test(title) ? Trophy :
+        /SDLC/i.test(title) ? Layers :
+            /Black Box/i.test(title) ? FlaskConical :
+                /Defect|DTLC/i.test(title) ? Bug :
+                    /Agile/i.test(title) ? Target :
+                        /Tools/i.test(title) ? NotebookPen :
+                            /STLC/i.test(title) ? BookOpen :
                                 Sparkles;
 
     return (
@@ -213,30 +256,33 @@ function CurriculumCard({ mod }: { mod: Module }) {
                 </div>
 
                 <div className="mb-4 flex flex-wrap gap-2">
-                    {mod.topics.slice(0, 5).map((t) => (
+                    {mod.topics.slice(0, 6).map((t) => (
                         <TopicPill key={t} label={t} />
                     ))}
                 </div>
 
-                <ul className="space-y-2 text-sm leading-6 text-gray-700">
-                    {mod.outcomes.map((o) => (
-                        <li key={o} className="flex items-start">
-                            <CheckCircle2 className="mt-0.5 mr-2 h-4 w-4 text-emerald-600" aria-hidden />
-                            <span>{o}</span>
-                        </li>
-                    ))}
-                </ul>
+                {/* Only render list if outcomes exist (we keep outcomes empty to stay faithful to PDF) */}
+                {mod.outcomes.length > 0 && (
+                    <ul className="space-y-2 text-sm leading-6 text-gray-700">
+                        {mod.outcomes.map((o) => (
+                            <li key={o} className="flex items-start">
+                                <CheckCircle2 className="mt-0.5 mr-2 h-4 w-4 text-emerald-600" aria-hidden />
+                                <span>{o}</span>
+                            </li>
+                        ))}
+                    </ul>
+                )}
 
                 <details className="mt-4">
                     <summary className="flex cursor-pointer select-none items-center gap-2 text-sm font-semibold text-gray-900 hover:text-gray-700">
                         <ChevronDown className="h-4 w-4" aria-hidden />
-                        View projects & tools
+                        View all topics {mod.tools ? "& tools" : ""}
                     </summary>
                     <div className="mt-3 space-y-3">
                         <div>
-                            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Hands-On Projects</p>
+                            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Topics</p>
                             <ul className="mt-1 list-disc pl-5 text-sm text-gray-700">
-                                {mod.projects.map((p) => (
+                                {mod.topics.map((p) => (
                                     <li key={p}>{p}</li>
                                 ))}
                             </ul>
@@ -261,7 +307,12 @@ function CurriculumCard({ mod }: { mod: Module }) {
 /* ---------- Main Curriculum Section ---------- */
 export default function CurriculumSection() {
     const [query, setQuery] = useState("");
-    const [weekFilter, setWeekFilter] = useState<string>("All");
+    const [sectionFilter, setSectionFilter] = useState<string>("All");
+
+    const sectionOptions = useMemo(
+        () => ["All", ...Array.from(new Set(MODULES.map(m => m.weeks)))],
+        []
+    );
 
     const filtered = useMemo(() => {
         const q = query.toLowerCase();
@@ -270,31 +321,26 @@ export default function CurriculumSection() {
                 m.title.toLowerCase().includes(q) ||
                 m.topics.some((t) => t.toLowerCase().includes(q)) ||
                 m.outcomes.some((o) => o.toLowerCase().includes(q));
-            const weekOk = weekFilter === "All" || m.weeks.includes(weekFilter);
-            return hit && weekOk;
+            const sectionOk = sectionFilter === "All" || m.weeks === sectionFilter;
+            return hit && sectionOk;
         });
-    }, [query, weekFilter]);
+    }, [query, sectionFilter]);
 
     /* ---------- SEO: JSON-LD (Course + Program) ---------- */
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "EducationalOccupationalProgram",
-        "name": "12-Week Manual Software Testing Curriculum",
-        "provider": {
-            "@type": "Organization",
-            "name": "Your Ed-Tech Institute"
-        },
-        "timeToComplete": "P12W",
+        "name": "Manual Software Testing — Curriculum",
+        "timeToComplete": "P0D",
         "hasCourse": MODULES.map((m) => ({
             "@type": "Course",
             "name": `${m.weeks}: ${m.title}`,
-            "description": `Outcomes: ${m.outcomes.join("; ")}. Topics: ${m.topics.join(", ")}.`,
-            "provider": { "@type": "Organization", "name": "Your Ed-Tech Institute" }
+            "description": `Topics: ${m.topics.join(", ")}.`
         }))
     };
 
     return (
-        <section className="py-15 md:py-20 bg-white" id="curriculum" aria-label="Manual Software Testing 12-Week Curriculum">
+        <section className="py-15 md:py-20 bg-white" id="curriculum" aria-label="Manual Software Testing Curriculum">
             {/* JSON-LD */}
             <script
                 type="application/ld+json"
@@ -303,22 +349,13 @@ export default function CurriculumSection() {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
-                <div className="text-center mb-12 md:mb-16">
-                    <h2 className="text-4xl font-bold text-gray-900 mb-4">
-                        12-Week Curriculum: <span className="text-blue-700">Manual Testing & ISTQB Prep</span>
+                <div className="text-center mb-10 md:mb-12">
+                    <h2 className="text-4xl font-bold text-gray-900 mb-3">
+                        Manual Software Testing <span className="text-blue-700">Curriculum</span>
                     </h2>
                     <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-                        Industry-ready, project-based learning—covering QA fundamentals, test design, defect lifecycle,
-                        regression strategy, and placement-focused interview training.
+                        Extracted directly from the provided syllabus PDF — focusing strictly on curriculum items.
                     </p>
-
-                    {/* Trust mini-stats for credibility & SEO */}
-                    <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        <Stat icon={<ShieldCheck className="h-4 w-4 text-blue-800" />} label="ISTQB-Aligned" value="Yes" />
-                        <Stat icon={<Clock className="h-4 w-4 text-red-800" />} label="Duration" value="12 Weeks" />
-                        <Stat icon={<Target className="h-4 w-4 text-purple-800" />} label="Capstone Projects" value="90+" />
-                        <Stat icon={<Brain className="h-4 w-4 text-green-800" />} label="Interview Prep" value="Included" />
-                    </div>
                 </div>
 
                 {/* Controls */}
@@ -327,7 +364,7 @@ export default function CurriculumSection() {
                         <label htmlFor="curriculum-search" className="sr-only">Search curriculum</label>
                         <input
                             id="curriculum-search"
-                            placeholder="Search topics (e.g., 'RTM', 'Boundary Value', 'Jira')"
+                            placeholder="Search topics (e.g., 'DTLC', 'Regression Testing', 'Jira')"
                             className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
@@ -336,29 +373,17 @@ export default function CurriculumSection() {
                     </div>
 
                     <div className="flex items-center gap-2">
-                        <label htmlFor="week-filter" className="sr-only">Filter by week</label>
+                        <label htmlFor="section-filter" className="sr-only">Filter by section</label>
                         <select
-                            id="week-filter"
+                            id="section-filter"
                             className="rounded-xl border border-gray-300 bg-white px-3 py-3 text-sm text-gray-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            value={weekFilter}
-                            onChange={(e) => setWeekFilter(e.target.value)}
+                            value={sectionFilter}
+                            onChange={(e) => setSectionFilter(e.target.value)}
                         >
-                            <option>All</option>
-                            <option>Weeks 1–2</option>
-                            <option>Weeks 3–4</option>
-                            <option>Weeks 5–6</option>
-                            <option>Weeks 7–8</option>
-                            <option>Weeks 9–10</option>
-                            <option>Weeks 11–12</option>
+                            {sectionOptions.map(opt => (
+                                <option key={opt}>{opt}</option>
+                            ))}
                         </select>
-
-                        <button
-                            className="inline-flex items-center gap-2 rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            aria-label="Download detailed syllabus PDF"
-                        >
-                            <Download className="h-4 w-4" />
-                            Download Syllabus
-                        </button>
                     </div>
                 </div>
 
@@ -368,32 +393,12 @@ export default function CurriculumSection() {
                         <CurriculumCard key={m.id} mod={m} />
                     ))}
                 </div>
-
-                {/* Bottom CTA & SEO blurb */}
-                <div className="mt-12 rounded-2xl border border-gray-200 bg-gray-50 p-6 md:p-8">
-                    <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-                        <div>
-                            <h3 className="text-xl font-semibold text-gray-900">Job-Ready Outcomes</h3>
-                            <p className="mt-2 text-gray-700">
-                                Graduate with a portfolio of <strong>capstone QA projects</strong>, a polished <strong>regression suite</strong>,
-                                and <strong>ISTQB-aligned</strong> fundamentals—optimized for roles like <em>Manual QA Engineer</em>, <em>Test Analyst</em>, and <em>QA Associate</em>.
-                            </p>
-                        </div>
-                        <Link
-                            href="contact-us"
-                            className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                        >
-                            <Code2 className="h-4 w-4" />
-                            Apply Now
-                        </Link>
-                    </div>
-                </div>
             </div>
         </section>
     );
 }
 
-/* ---------- Mini Stat ---------- */
+/* ---------- Mini Stat (kept for potential reuse; not used in header now) ---------- */
 function Stat({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
     return (
         <div className="flex items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-3 py-2 shadow-sm">
