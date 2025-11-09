@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, ChevronRight, Globe } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -284,10 +285,29 @@ const courseCategories: Category[] = [
 
 /* ----------------------- Header ----------------------- */
 const Header = () => {
+  const pathname = usePathname();
+
+    // Extract all course slugs for active state check
+  const allCourseSlugs = courseCategories.flatMap(category => 
+    category.courses.map(course => course.slug)
+  ).filter((slug): slug is string => !!slug);
+
+// Check if the current pathname is a course page
+  const isCourseActive = allCourseSlugs.some(slug => pathname.startsWith(`/${slug}`));
+
+  // Check if the current pathname is the main /courses page
+  const isCoursesBaseActive = pathname.startsWith("/courses");
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Mega menu state (layout unchanged)
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
+
+
+    const isCoursesMenuOpen = isMegaMenuOpen || isCourseActive || isCoursesBaseActive;
+
+  const isJobsActive = pathname.startsWith("/jobs");
+  const isAboutActive = pathname.startsWith("/about") || pathname.startsWith("/our-team");
   const [selectedCategory, setSelectedCategory] = useState<string>(courseCategories[0].id);
   const [hoveredCourse, setHoveredCourse] = useState<string | null>(null);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
@@ -435,12 +455,12 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center justify-start">
-            <Link href="/" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base px-4 py-6">Home</Link>
+            <Link href="/" className={`transition-colors text-sm xl:text-base px-4 py-6 ${pathname === "/" ? "text-brand font-semibold" : "text-gray-700 hover:text-brand"}`}>Home</Link>
 
             {/* Mega Menu Trigger */}
             <div className="relative">
               <button
-                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center text-sm xl:text-base px-4 py-6"
+                className={`transition-colors flex items-center text-sm xl:text-base px-4 py-6 ${isCoursesMenuOpen ? "text-brand font-semibold" : "text-gray-700 hover:text-brand"}`}
                 aria-expanded={isMegaMenuOpen}
                 aria-controls="mega-menu"
                 onMouseEnter={openMega}
@@ -462,7 +482,7 @@ const Header = () => {
                   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div
                       ref={panelRef}
-                      className="bg-white rounded-b-2xl shadow-2xl border-t-4 border-blue-600 overflow-hidden"
+                      className="bg-white rounded-b-2xl shadow-2xl border-t-4 border-brand overflow-hidden"
                       style={{ maxHeight: 520 }}
                       onMouseEnter={cancelClose}
                       onMouseLeave={() => scheduleClose()}
@@ -481,19 +501,19 @@ const Header = () => {
                                   setHoveredCourse(null);
                                 }}
                                 onClick={() => setSelectedCategory(category.id)}
-                                className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-between group text-sm ${selectedCategory === category.id ? "bg-blue-50 text-blue-700 font-medium" : "text-gray-700 hover:bg-gray-50"
+                                className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-between group text-sm ${selectedCategory === category.id ? "bg-orange-50 text-brand font-medium" : "text-gray-700 hover:bg-gray-50"
                                   }`}
                                 aria-current={selectedCategory === category.id ? "true" : "false"}
                               >
                                 <span>{category.name}</span>
                                 <ChevronRight
-                                  className={`h-4 w-4 transition-transform ${selectedCategory === category.id ? "text-blue-700" : "text-gray-400"
+                                  className={`h-4 w-4 transition-transform ${selectedCategory === category.id ? "text-brand" : "text-gray-400"
                                     }`}
                                 />
                               </button>
                             ))}
                           </div>
-                          <Link href="/courses" className="mt-4 flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm group">
+                          <Link href="/courses" className="mt-4 flex items-center text-brand hover:text-brand font-medium text-sm group">
                             View All Courses
                             <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                           </Link>
@@ -506,14 +526,14 @@ const Header = () => {
                             {selectedCategoryData?.courses.map((course, index) => {
                               const isHovered = hoveredCourse === course.name;
                               const href = course.slug ? `/${course.slug}` : undefined;
-                              const itemClasses = `flex items-start px-3 py-2 rounded-lg transition-all duration-200 group ${isHovered ? "bg-blue-50 text-blue-700" : "text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                              const itemClasses = `flex items-start px-3 py-2 rounded-lg transition-all duration-200 group ${isHovered ? "bg-orange-50 text-brand" : "text-gray-700 hover:bg-orange-50 hover:text-brand"
                                 }`;
 
                               const inner = (
                                 <>
                                   <div className="flex-shrink-0 mt-1">
                                     <div
-                                      className={`w-2 h-2 rounded-full transition-transform ${isHovered ? "bg-blue-700 scale-125" : "bg-blue-600 group-hover:scale-125"
+                                      className={`w-2 h-2 rounded-full transition-transform ${isHovered ? "bg-brand scale-125" : "bg-brand group-hover:scale-125"
                                         }`}
                                     />
                                   </div>
@@ -548,7 +568,7 @@ const Header = () => {
                         </div>
 
                         {/* Column 3: Two stacked images (distinct slots) */}
-                        <div className="col-span-12 sm:col-span-4 lg:col-span-4 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-4">
+                        <div className="col-span-12 sm:col-span-4 lg:col-span-4 bg-gradient-to-br from-orange-50 to-purple-50 rounded-xl p-4">
                           <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
                             {hoveredCourse || hoveredCategory ? "Certifications" : "Governing Bodies"}
                           </h3>
@@ -592,7 +612,7 @@ const Header = () => {
                           </p>
                           <div className="mt-4 pt-4 border-t border-gray-200">
                             <div className="flex items-center text-xs text-gray-600">
-                              <Globe className="h-4 w-4 mr-2 text-blue-600 flex-shrink-0" />
+                              <Globe className="h-4 w-4 mr-2 text-brand flex-shrink-0" />
                               <span>Globally Recognized Certifications</span>
                             </div>
                           </div>
@@ -604,12 +624,12 @@ const Header = () => {
               )}
             </div>
 
-            <Link href="/services" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base px-4 py-6">Services</Link>
+            <Link href="/services" className={`transition-colors text-sm xl:text-base px-4 py-6 ${pathname.startsWith("/services") ? "text-brand font-semibold" : "text-gray-700 hover:text-brand"}`}>Services</Link>
 
-            <Link href="/events/past-events" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base px-4 py-6">
+            <Link href="/events/past-events" className={`transition-colors text-sm xl:text-base px-4 py-6 ${pathname.startsWith("/events") ? "text-brand font-semibold" : "text-gray-700 hover:text-brand"}`}>
               Event
             </Link>
-            <Link href="/mentors" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base px-4 py-6">
+            <Link href="/mentors" className={`transition-colors text-sm xl:text-base px-4 py-6 ${pathname.startsWith("/mentors") ? "text-brand font-semibold" : "text-gray-700 hover:text-brand"}`}>
               Mentors
             </Link>
 
@@ -628,7 +648,7 @@ const Header = () => {
                     });
                   }
                 }}
-                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center text-sm xl:text-base px-4 py-6"
+                className={`transition-colors flex items-center text-sm xl:text-base px-4 py-6 ${pathname.startsWith("/jobs") ? "text-brand font-semibold" : "text-gray-700 hover:text-brand"}`}
                 aria-haspopup="menu"
                 aria-expanded={isJobsOpen}
                 aria-controls="jobs-menu"
@@ -650,28 +670,28 @@ const Header = () => {
                     <Link
                       href="/jobs/live-jobs"
                       role="menuitem"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 outline-none"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-brand focus:bg-brand-50 focus:text-brand outline-none"
                     >
                       Live Jobs
                     </Link>
                     <Link
                       href="/jobs/placements"
                       role="menuitem"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 outline-none"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-brand focus:bg-orange-50 focus:text-brand outline-none"
                     >
                       Placements
                     </Link>
                     <Link
                       href="/jobs/careers"
                       role="menuitem"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 outline-none"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-brand focus:bg-orange-50 focus:text-brand outline-none"
                     >
                       Careers
                     </Link>
                     <Link
                       href="/jobs/job-openings"
                       role="menuitem"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 outline-none"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-brand focus:bg-orange-50 focus:text-brand outline-none"
                     >
                       Job Openings
                     </Link>
@@ -695,7 +715,7 @@ const Header = () => {
                     });
                   }
                 }}
-                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center text-sm xl:text-base px-4 py-6"
+                className={`transition-colors flex items-center text-sm xl:text-base px-4 py-6 ${pathname.startsWith("/about") || pathname.startsWith("/our-team") ? "text-brand font-semibold" : "text-gray-700 hover:text-brand"}`}
                 aria-haspopup="menu"
                 aria-expanded={isAboutOpen}
                 aria-controls="about-menu"
@@ -716,14 +736,14 @@ const Header = () => {
                     <Link
                       href="/about-us"
                       role="menuitem"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 outline-none"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-brand focus:bg-orange-50 focus:text-brand outline-none"
                     >
                       About CDPL
                     </Link>
                     <Link
                       href="/our-team"
                       role="menuitem"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 outline-none"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-brand focus:bg-orange-50 focus:text-brand outline-none"
                     >
                       Our Team
                     </Link>
@@ -732,10 +752,10 @@ const Header = () => {
               )}
             </div>
 
-            <Link href="/blog" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base px-4 py-6">
+            <Link href="/blog" className={`transition-colors text-sm xl:text-base px-4 py-6 ${pathname.startsWith("/blog") ? "text-brand font-semibold" : "text-gray-700 hover:text-brand"}`}>
               Blog
             </Link>
-            <Link href="/contact-us" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base px-4 py-6">
+            <Link href="/contact-us" className={`transition-colors text-sm xl:text-base px-4 py-6 ${pathname.startsWith("/contact-us") ? "text-brand font-semibold" : "text-gray-700 hover:text-brand"}`}>
               Contact
             </Link>
           </nav>
@@ -754,7 +774,7 @@ const Header = () => {
           <div className="lg:hidden">
             <button
               onClick={toggleMenu}
-              className="text-gray-700 hover:text-blue-600 transition-colors p-2"
+              className="text-gray-700 hover:text-brand transition-colors p-2"
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -768,7 +788,7 @@ const Header = () => {
             <div className="space-y-2">
               <Link
                 href="/"
-                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
+                className={`block px-4 py-3 rounded-lg transition-colors text-sm sm:text-base ${pathname === "/" ? "text-brand font-semibold bg-white" : "text-gray-700 hover:text-brand hover:bg-white"}`}
                 onClick={toggleMenu}
               >
                 Home
@@ -778,7 +798,7 @@ const Header = () => {
               <div className="space-y-2">
                 <button
                   onClick={() => toggleMobileSection("courses")}
-                  className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
+                  className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:text-brand hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
                   aria-expanded={mobileSections.courses}
                   aria-controls="mobile-courses"
                 >
@@ -796,7 +816,7 @@ const Header = () => {
                         <div key={category.id} className="space-y-2">
                           <button
                             onClick={() => toggleMobileCategory(category.id)}
-                            className="w-full flex items-center justify-between px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                            className="w-full flex items-center justify-between px-4 py-2 text-sm text-gray-600 hover:text-brand hover:bg-white rounded-lg transition-colors"
                             aria-expanded={isOpen}
                             aria-controls={`mobile-category-${category.id}`}
                           >
@@ -814,7 +834,7 @@ const Header = () => {
                                   <Link
                                     key={idx}
                                     href={href}
-                                    className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                                    className="block px-4 py-2 text-sm text-gray-600 hover:text-brand hover:bg-white rounded-lg transition-colors"
                                     onClick={toggleMenu}
                                   >
                                     • {course.name}
@@ -835,7 +855,7 @@ const Header = () => {
                     })}
                     <Link
                       href="/courses"
-                      className="block px-4 py-2 text-sm text-blue-600 hover:text-blue-700 font-medium"
+                      className="block px-4 py-2 text-sm text-brand hover:text-brand font-medium"
                       onClick={toggleMenu}
                     >
                       View All Courses →
@@ -847,7 +867,7 @@ const Header = () => {
               {/* Mobile Services Link */}
               <Link
                 href="/services"
-                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
+                className={`block px-4 py-3 rounded-lg transition-colors text-sm sm:text-base ${pathname.startsWith("/services") ? "text-brand font-semibold bg-white" : "text-gray-700 hover:text-brand hover:bg-white"}`}
                 onClick={toggleMenu}
               >
                 Services
@@ -857,7 +877,7 @@ const Header = () => {
               <div className="space-y-2">
                 <button
                   onClick={() => toggleMobileSection("jobs")}
-                  className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
+                  className={`w-full flex items-center justify-between px-4 py-3 rounded-lg transition-colors text-sm sm:text-base ${pathname.startsWith("/jobs") ? "text-brand font-semibold bg-white" : "text-gray-700 hover:text-brand hover:bg-white"}`}
                   aria-expanded={mobileSections.jobs}
                   aria-controls="mobile-jobs"
                 >
@@ -870,28 +890,28 @@ const Header = () => {
                   <div id="mobile-jobs" className="pl-4 space-y-1">
                     <Link
                       href="/jobs/live-jobs"
-                      className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                      className="block px-4 py-2 text-sm text-gray-600 hover:text-brand hover:bg-white rounded-lg transition-colors"
                       onClick={toggleMenu}
                     >
                       • Live Jobs
                     </Link>
                     <Link
                       href="/jobs/placements"
-                      className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                      className="block px-4 py-2 text-sm text-gray-600 hover:text-brand hover:bg-white rounded-lg transition-colors"
                       onClick={toggleMenu}
                     >
                       • Placements
                     </Link>
                     <Link
                       href="/jobs/careers"
-                      className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                      className="block px-4 py-2 text-sm text-gray-600 hover:text-brand hover:bg-white rounded-lg transition-colors"
                       onClick={toggleMenu}
                     >
                       • Careers
                     </Link>
                     <Link
                       href="/jobs/job-openings"
-                      className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                      className="block px-4 py-2 text-sm text-gray-600 hover:text-brand hover:bg-white rounded-lg transition-colors"
                       onClick={toggleMenu}
                     >
                       • Job Openings
@@ -904,7 +924,7 @@ const Header = () => {
               <div className="space-y-2">
                 <button
                   onClick={() => toggleMobileSection("about")}
-                  className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
+                  className={`w-full flex items-center justify-between px-4 py-3 rounded-lg transition-colors text-sm sm:text-base ${pathname.startsWith("/about") || pathname.startsWith("/our-team") ? "text-brand font-semibold bg-white" : "text-gray-700 hover:text-brand hover:bg-white"}`}
                   aria-expanded={mobileSections.about}
                   aria-controls="mobile-about"
                 >
@@ -917,14 +937,14 @@ const Header = () => {
                   <div id="mobile-about" className="pl-4 space-y-1">
                     <Link
                       href="/about-us"
-                      className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                      className="block px-4 py-2 text-sm text-gray-600 hover:text-brand hover:bg-white rounded-lg transition-colors"
                       onClick={toggleMenu}
                     >
                       • About CDPL
                     </Link>
                     <Link
                       href="/our-team"
-                      className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                      className="block px-4 py-2 text-sm text-gray-600 hover:text-brand hover:bg-white rounded-lg transition-colors"
                       onClick={toggleMenu}
                     >
                       • Our Team
@@ -935,28 +955,28 @@ const Header = () => {
 
               <Link
                 href="/events/past-events"
-                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
+                className={`block px-4 py-3 rounded-lg transition-colors text-sm sm:text-base ${pathname.startsWith("/events") ? "text-brand font-semibold bg-white" : "text-gray-700 hover:text-brand hover:bg-white"}`}
                 onClick={toggleMenu}
               >
                 Event
               </Link>
               <Link
                 href="/mentors"
-                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
+                className={`block px-4 py-3 rounded-lg transition-colors text-sm sm:text-base ${pathname.startsWith("/mentors") ? "text-brand font-semibold bg-white" : "text-gray-700 hover:text-brand hover:bg-white"}`}
                 onClick={toggleMenu}
               >
                 Mentors
               </Link>
               <Link
                 href="/blog"
-                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
+                className={`block px-4 py-3 rounded-lg transition-colors text-sm sm:text-base ${pathname.startsWith("/blog") ? "text-brand font-semibold bg-white" : "text-gray-700 hover:text-brand hover:bg-white"}`}
                 onClick={toggleMenu}
               >
                 Blog
               </Link>
               <Link
                 href="/contact-us"
-                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
+                className={`block px-4 py-3 rounded-lg transition-colors text-sm sm:text-base ${pathname.startsWith("/contact-us") ? "text-brand font-semibold bg-white" : "text-gray-700 hover:text-brand hover:bg-white"}`}
                 onClick={toggleMenu}
               >
                 Contact
