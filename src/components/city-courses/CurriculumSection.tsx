@@ -3,7 +3,7 @@
 import React, { useMemo, useState } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import type { CourseData } from "@/types/courseData";
-import { CheckCircle2, BookOpen } from "lucide-react";
+import { BookOpen, Zap, CheckCircle2 } from "lucide-react";
 
 interface Track {
   id?: number | string;
@@ -35,29 +35,21 @@ const panelVariants: Variants = {
   exit: { opacity: 0, y: 12, transition: { duration: 0.2 } },
 };
 
-/** ---- Match tab colors to CourseOverview VARIANTS order ---- */
+/** ---- Palette for tabs ---- */
 type Variant = {
-  header: string;      // ACTIVE background class (gradient)
-  button: string;      // (kept for your future buttons)
-  hoverBorder: string; // subtle hover border tint for INACTIVE tabs
+  activeBg: string;
+  activeText: string;
+  hoverBorder: string;
+  accentColor: string;
 };
 
 const VARIANTS: Variant[] = [
-  {
-    header: "bg-gradient-to-br from-indigo-600 via-purple-600 to-fuchsia-600 text-white",
-    button: "bg-gradient-to-r from-indigo-600 to-fuchsia-600",
-    hoverBorder: "hover:border-indigo-300",
-  },
-  {
-    header: "bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-600 text-white",
-    button: "bg-gradient-to-r from-emerald-600 to-cyan-600",
-    hoverBorder: "hover:border-emerald-300",
-  },
-  {
-    header: "bg-gradient-to-br from-rose-600 via-pink-600 to-orange-500 text-white",
-    button: "bg-gradient-to-r from-rose-600 to-orange-500",
-    hoverBorder: "hover:border-rose-300",
-  },
+  { activeBg: "bg-cyan-500", activeText: "text-white", hoverBorder: "hover:border-cyan-300", accentColor: "text-cyan-500" },
+  { activeBg: "bg-fuchsia-500", activeText: "text-white", hoverBorder: "hover:border-fuchsia-300", accentColor: "text-fuchsia-500" },
+  { activeBg: "bg-lime-500", activeText: "text-slate-900", hoverBorder: "hover:border-lime-300", accentColor: "text-lime-500" },
+  { activeBg: "bg-orange-500", activeText: "text-white", hoverBorder: "hover:border-orange-300", accentColor: "text-orange-500" },
+  { activeBg: "bg-indigo-500", activeText: "text-white", hoverBorder: "hover:border-indigo-300", accentColor: "text-indigo-500" },
+  { activeBg: "bg-red-500", activeText: "text-white", hoverBorder: "hover:border-red-300", accentColor: "text-red-500" },
 ];
 
 function pickVariant(i: number): Variant {
@@ -71,48 +63,39 @@ interface CurriculumSectionProps {
 const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
   const { curriculumContent } = data;
 
-  // tracks-based data model
   const tracks = useMemo(() => curriculumContent?.tracks ?? [], [curriculumContent?.tracks]) as Track[];
   const [activeTrack, setActiveTrack] = useState<number>(0);
   const current = tracks[activeTrack];
+  const currentVariant = pickVariant(activeTrack);
 
   const totalWeeks = current?.weeks?.length ?? 0;
 
   return (
-    <section id="curriculum-section" className="relative py-16 sm:py-20 bg-white">
-      {/* Soft background */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -top-24 -left-16 h-72 w-72 rounded-full bg-violet-100 blur-3xl opacity-30" />
-        <div className="absolute -bottom-24 -right-16 h-72 w-72 rounded-full bg-blue-100 blur-3xl opacity-30" />
+    <section id="curriculum-section" className="relative py-16 sm:py-24 bg-white text-slate-900 overflow-hidden">
+      {/* background glow */}
+      <div className="pointer-events-none absolute inset-0 opacity-20">
+        <div className="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-cyan-100 blur-[150px]" />
+        <div className="absolute -bottom-40 -right-40 h-96 w-96 rounded-full bg-fuchsia-100 blur-[150px]" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
-          className="text-center mb-8 sm:mb-12"
+          className="text-center mb-12 sm:mb-16"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <motion.p
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-wider text-violet-700 uppercase"
-            variants={itemVariants}
-          >
-            <BookOpen className="h-4 w-4" />
-            Curriculum Tracks
+          <motion.p className="inline-flex items-center gap-2 text-[13px] font-semibold tracking-widest text-cyan-600 uppercase" variants={itemVariants}>
+            <Zap className="h-4 w-4" />
+            Curriculum Matrix
           </motion.p>
-          <motion.h2
-            className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900"
-            variants={itemVariants}
-          >
+          <motion.h2 className="mt-4 text-3xl md:text-5xl font-bold tracking-tight text-slate-900" variants={itemVariants}>
             {curriculumContent.title}
           </motion.h2>
           {curriculumContent.subtitle && (
-            <motion.p
-              className="mx-auto mt-4 max-w-2xl text-base sm:text-lg text-slate-600"
-              variants={itemVariants}
-            >
+            <motion.p className="mx-auto mt-6 max-w-3xl text-lg text-slate-600" variants={itemVariants}>
               {curriculumContent.subtitle}
             </motion.p>
           )}
@@ -130,7 +113,7 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
             <div
               role="tablist"
               aria-label="Curriculum tracks"
-              className="flex flex-wrap justify-center gap-2 sm:gap-3 w-full"
+              className="flex flex-wrap justify-center gap-3 gap-y-3 sm:gap-4 w-full"
             >
               {tracks.map((t: Track, i: number) => {
                 const active = i === activeTrack;
@@ -146,23 +129,17 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
                     onClick={() => setActiveTrack(i)}
                     title={t.title}
                     className={[
-                      // sizing & layout
-                      "flex items-center text-center justify-center",
-                      "sm:flex-none flex-1 min-w-[100px] sm:min-w-[140px] max-w-[150px] sm:max-w-none",
-                      "px-2 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-300",
-                      // ACTIVE: keep your gradient; INACTIVE: simple pill
+                      // layout — allow content-based width and wrapping
+                      "flex items-center justify-center text-center",
+                      "flex-none max-w-full px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 rounded-lg",
+                      "text-sm font-bold leading-tight whitespace-normal break-words hyphens-auto text-pretty",
+                      "transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white",
                       active
-                        ? [
-                          variant.header,
-                          "border border-transparent shadow-sm opacity-100 ring-2 ring-white/40 [text-shadow:0_1px_0_rgba(0,0,0,0.25)]",
-                        ].join(" ")
-                        : [
-                          "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:shadow-sm",
-                          variant.hoverBorder,
-                        ].join(" "),
+                        ? [variant.activeBg, variant.activeText, "shadow-lg shadow-current/30 transform scale-105"].join(" ")
+                        : ["bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200/70", variant.hoverBorder].join(" "),
                     ].join(" ")}
                   >
-                    <span className="sm:whitespace-normal truncate">{t.title}</span>
+                    <span className="block">{t.title}</span>
                   </button>
                 );
               })}
@@ -171,8 +148,9 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
 
           {/* Quick meta */}
           {current && (
-            <motion.div variants={itemVariants} className="mt-4 text-center text-sm text-slate-600">
-              <span className="rounded-full bg-slate-50 border border-slate-200 px-3 py-1">
+            <motion.div variants={itemVariants} className="mt-6 text-center text-base text-slate-600">
+              <span className="rounded-full bg-slate-100 border border-slate-200 px-4 py-1.5 font-medium">
+                <BookOpen className="inline h-4 w-4 mr-2 mb-0.5 text-slate-500" />
                 {totalWeeks} {totalWeeks === 1 ? "Module" : "Modules"}
               </span>
             </motion.div>
@@ -180,7 +158,7 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
         </motion.div>
 
         {/* Tab Panel */}
-        <div className="mt-8 lg:mt-10">
+        <div className="mt-12 lg:mt-16">
           <AnimatePresence mode="wait">
             {current ? (
               <motion.div
@@ -192,72 +170,52 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
                 id={`track-panel-${current.id ?? activeTrack}`}
                 role="tabpanel"
                 aria-labelledby={`track-tab-${current.id ?? activeTrack}`}
-                className="rounded-2xl border border-violet-200 bg-gradient-to-br from-violet-50 to-blue-50 p-4 sm:p-6 lg:p-7 shadow-sm"
+                className="rounded-xl border border-slate-200 bg-slate-50 p-4 sm:p-6 lg:p-8 shadow-xl shadow-slate-200/50"
               >
-                {/* Table-like card */}
-                <div className="rounded-xl border border-slate-200 bg-white">
-                  {/* Header row */}
-                  <div className="hidden sm:grid sm:grid-cols-12 gap-0 border-b border-slate-200 bg-slate-50 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-slate-600">
-                    <div className="col-span-2">Week</div>
-                    <div className="col-span-3">Module</div>
-                    <div className="col-span-5">What you&apos;ll learn</div>
-                    <div className="col-span-2">Deliverables</div>
-                  </div>
-
-                  {/* Rows */}
-                  <ul className="divide-y divide-slate-200">
-                    {current.weeks.map((w: Week, idx: number) => (
-                      <li key={idx} className="sm:grid sm:grid-cols-12 gap-0 px-4 py-4">
-                        {/* Mobile labels */}
-                        <div className="sm:hidden mb-2">
-                          <div className="text-xs font-semibold uppercase text-slate-500">Week</div>
-                          <div className="mt-0.5 inline-flex items-center rounded-md bg-violet-600/10 text-violet-700 px-2 py-1 text-xs font-semibold">
-                            {w.number || String(idx + 1)}
-                          </div>
-                        </div>
-
-                        {/* Week */}
-                        <div className="hidden sm:block col-span-2">
-                          <span className="inline-flex items-center rounded-md bg-violet-600/10 text-violet-700 px-2 py-1 text-xs font-semibold">
+                {/* Curriculum List/Table */}
+                <div className="space-y-6">
+                  {current.weeks.map((w: Week, idx: number) => (
+                    <div
+                      key={idx}
+                      className="p-4 sm:p-6 rounded-xl bg-white border border-slate-100 hover:border-slate-300 transition-all duration-300 shadow-md"
+                    >
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
+                        {/* Week/Module Number */}
+                        <div className="flex-shrink-0">
+                          <span
+                            className={`inline-flex items-center justify-center h-10 w-10 rounded-full text-base font-bold ${currentVariant.activeBg} ${currentVariant.activeText}`}
+                          >
                             {w.number || String(idx + 1)}
                           </span>
                         </div>
 
-                        {/* Module title */}
-                        <div className="sm:col-span-3">
-                          <div className="sm:hidden text-xs font-semibold uppercase text-slate-500">Module</div>
-                          <div className="text-base font-semibold text-slate-900 truncate">{w.title}</div>
-                        </div>
-
-                        {/* Description */}
-                        <div className="mt-2 sm:mt-0 sm:col-span-5">
-                          <div className="sm:hidden text-xs font-semibold uppercase text-slate-500 mb-1">
-                            What you&apos;ll learn
-                          </div>
-                          <p className="text-sm text-slate-700 line-clamp-3">{w.description}</p>
+                        {/* Module Title and Description */}
+                        <div className="flex-grow min-w-0 sm:w-1/2">
+                          <h3 className="text-xl font-semibold text-slate-900">{w.title}</h3>
+                          <p className="mt-2 text-base text-slate-700">{w.description}</p>
                         </div>
 
                         {/* Deliverables */}
-                        <div className="mt-3 sm:mt-0 sm:col-span-2">
-                          <div className="sm:hidden text-xs font-semibold uppercase text-slate-500 mb-1">
-                            Deliverables
+                        <div className="flex-shrink-0 sm:w-1/3">
+                          <div className="text-sm font-semibold uppercase text-slate-500 mb-2 border-b border-slate-100 pb-1">
+                            Key Deliverables
                           </div>
                           {Array.isArray(w.deliverables) && w.deliverables.length > 0 ? (
-                            <ul className="space-y-1">
+                            <ul className="space-y-2">
                               {w.deliverables.map((d: string, i: number) => (
                                 <li key={i} className="flex items-start gap-2 text-sm text-slate-800">
-                                  <CheckCircle2 className="mt-0.5 h-4 w-4 text-green-600 flex-shrink-0" />
-                                  <span className="line-clamp-2">{d}</span>
+                                  <CheckCircle2 className={`mt-0.5 h-4 w-4 flex-shrink-0 ${currentVariant.accentColor}`} />
+                                  <span>{d}</span>
                                 </li>
                               ))}
                             </ul>
                           ) : (
-                            <span className="text-sm text-slate-500">—</span>
+                            <span className="text-sm text-slate-500">— No deliverables listed —</span>
                           )}
                         </div>
-                      </li>
-                    ))}
-                  </ul>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </motion.div>
             ) : (
@@ -267,9 +225,10 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className="rounded-2xl border border-slate-200 bg-white p-6 text-center text-slate-600"
+                className="rounded-xl border border-slate-200 bg-slate-50 p-8 text-center text-slate-600"
               >
-                Select a track to view its curriculum.
+                <Zap className="mx-auto h-10 w-10 text-cyan-600 mb-4" />
+                <p className="text-lg font-medium">Select a track to view its detailed curriculum.</p>
               </motion.div>
             )}
           </AnimatePresence>
