@@ -14,69 +14,110 @@ type Module = {
 const MODULES: Module[] = [
   {
     num: "01",
-    title: "Python Fundamentals",
+    title: "Python Programming Fundamentals",
     outcome:
-      "Master Python syntax, data types, control flow, functions, and best practices that set the foundation for data science.",
-    accent: {
-      bg: "bg-sky-50",
-      text: "text-sky-900",
-      border: "border-sky-200",
-      ring: "focus:ring-sky-300",
-    },
+      "History & setup (Jupyter), syntax, variables, data types, operators, input/print, strings, and clean coding foundations.",
+    accent: { bg: "bg-sky-50", text: "text-sky-900", border: "border-sky-200", ring: "focus:ring-sky-300" },
   },
   {
     num: "02",
-    title: "Data Visualization Techniques",
+    title: "Control Flow & Core Data Structures",
     outcome:
-      "Design insightful charts and dashboards using Matplotlib & Plotly; tell clear, compelling data stories.",
-    accent: {
-      bg: "bg-emerald-50",
-      text: "text-emerald-900",
-      border: "border-emerald-200",
-      ring: "focus:ring-emerald-300",
-    },
+      "If/elif/else, logical ops, loops; lists, tuples, sets, dictionaries with indexing/slicing, CRUD, and common methods.",
+    accent: { bg: "bg-emerald-50", text: "text-emerald-900", border: "border-emerald-200", ring: "focus:ring-emerald-300" },
   },
   {
     num: "03",
-    title: "Foundations of Statistics & Probability",
+    title: "Functions, Recursion, File I/O & Modules",
     outcome:
-      "Apply descriptive stats, probability, hypothesis testing, and confidence intervals to drive decisions.",
-    accent: {
-      bg: "bg-amber-50",
-      text: "text-amber-900",
-      border: "border-amber-200",
-      ring: "focus:ring-amber-300",
-    },
+      "Defining/calling functions (args, scope), recursion, exception handling, open/read/write files, stdlib & custom modules.",
+    accent: { bg: "bg-amber-50", text: "text-amber-900", border: "border-amber-200", ring: "focus:ring-amber-300" },
   },
   {
     num: "04",
-    title: "Machine Learning Implementation",
+    title: "Object-Oriented Programming in Python",
     outcome:
-      "Build and evaluate supervised & unsupervised models with scikit-learn; metrics, tuning, and validation.",
-    accent: {
-      bg: "bg-rose-50",
-      text: "text-rose-900",
-      border: "border-rose-200",
-      ring: "focus:ring-rose-300",
-    },
+      "Classes/objects, instance/class vars & methods, inheritance (single/multiple), polymorphism, encapsulation, properties.",
+    accent: { bg: "bg-rose-50", text: "text-rose-900", border: "border-rose-200", ring: "focus:ring-rose-300" },
   },
   {
     num: "05",
-    title: "Integrated Project Development",
+    title: "NumPy for Scientific Computing",
     outcome:
-      "Ship an end-to-end portfolio project: data prep → EDA → model → API/demo → lightweight cloud deploy.",
-    accent: {
-      bg: "bg-indigo-50",
-      text: "text-indigo-900",
-      border: "border-indigo-200",
-      ring: "focus:ring-indigo-300",
-    },
+      "Arrays vs lists, creation (1D/2D/nD), indexing/slicing, reshaping/broadcasting, random, math/linear algebra utilities.",
+    accent: { bg: "bg-indigo-50", text: "text-indigo-900", border: "border-indigo-200", ring: "focus:ring-indigo-300" },
   },
+  {
+    num: "06",
+    title: "Data Analysis with pandas & EDA",
+    outcome:
+      "Series/DataFrame, import/export (CSV/Excel/JSON), cleaning (missing/dupes), filter/sort, groupby/merge/pivot, EDA.",
+    accent: { bg: "bg-violet-50", text: "text-violet-900", border: "border-violet-200", ring: "focus:ring-violet-300" },
+  },
+  {
+    num: "07",
+    title: "Data Visualization with Matplotlib",
+    outcome:
+      "Figure/Axes, line/bar/pie, hist/box/heatmap/3D, labels/legends/annotations, simple animations & interactive widgets.",
+    accent: { bg: "bg-teal-50", text: "text-teal-900", border: "border-teal-200", ring: "focus:ring-teal-300" },
+  },
+  {
+    num: "08",
+    title: "Advanced Visualization with Seaborn",
+    outcome:
+      "Themes/palettes, dist/KDE/rug, pair/joint plots, categorical (strip/box/violin/swarm), heatmaps/clustermaps, FacetGrid.",
+    accent: { bg: "bg-fuchsia-50", text: "text-fuchsia-900", border: "border-fuchsia-200", ring: "focus:ring-fuchsia-300" },
+  },
+  {
+    num: "09",
+    title: "Statistics & Probability Essentials",
+    outcome:
+      "Descriptive stats, hist/box plots, probability rules & Bayes, discrete/continuous distributions (binomial, normal, etc.).",
+    accent: { bg: "bg-lime-50", text: "text-lime-900", border: "border-lime-200", ring: "focus:ring-lime-300" },
+  },
+  {
+    num: "10",
+    title: "Sampling, Hypothesis Tests & Regression",
+    outcome:
+      "Sampling & CLT, confidence intervals, z/t/chi-square/ANOVA, correlation (Pearson/Spearman), simple linear regression.",
+    accent: { bg: "bg-orange-50", text: "text-orange-900", border: "border-orange-200", ring: "focus:ring-orange-300" },
+  },
+  {
+    num: "11",
+    title: "ML Foundations & Data Preprocessing",
+    outcome:
+      "Supervised vs unsupervised, ML workflow; missing handling, scaling, encoding, train/val/test split; quick model demo.",
+    accent: { bg: "bg-cyan-50", text: "text-cyan-900", border: "border-cyan-200", ring: "focus:ring-cyan-300" },
+  },
+  {
+    num: "12",
+    title: "Core ML Algorithms & Model Validation",
+    outcome:
+      "Regression (linear/poly, ridge/lasso); classification (logistic, KNN, trees, RF, SVM); CV, metrics (MSE, R², AUC, F1).",
+    accent: { bg: "bg-stone-50", text: "text-stone-900", border: "border-stone-200", ring: "focus:ring-stone-300" },
+  },
+  // (Optional) Uncomment to expose unsupervised & capstone as separate blocks:
+  // {
+  //   num: "13",
+  //   title: "Unsupervised Learning",
+  //   outcome:
+  //     "K-Means & hierarchical clustering, PCA for dimensionality reduction, density-based clustering; EDA integration.",
+  //   accent: { bg: "bg-yellow-50", text: "text-yellow-900", border: "border-yellow-200", ring: "focus:ring-yellow-300" },
+  // },
+  // {
+  //   num: "14",
+  //   title: "Capstone: End-to-End ML Project",
+  //   outcome:
+  //     "Problem framing → data prep → EDA → modeling → tuning → dashboards/visuals → evaluation → lightweight deploy.",
+  //   accent: { bg: "bg-purple-50", text: "text-purple-900", border: "border-purple-200", ring: "focus:ring-purple-300" },
+  // },
 ];
 
 export default function CurriculumSection() {
-  const subtitle = "An industry-aligned syllabus that blends Python, statistics, visualization, and machine learning into a job-ready portfolio.";
-  const keywords = "data science curriculum, machine learning syllabus, Python for data science, statistics and probability, scikit-learn course, data visualization training, portfolio projects";
+  const subtitle =
+    "Industry-aligned syllabus spanning Python, NumPy/pandas, Matplotlib/Seaborn, Statistics, and Machine Learning with rigorous EDA and validation.";
+  const keywords =
+    "data science curriculum, Python programming syllabus, pandas course, NumPy training, Matplotlib Seaborn visualization, statistics and probability, sampling and hypothesis testing, linear regression, logistic regression, SVM, KNN, decision trees, random forest, cross-validation, ROC AUC, end-to-end ML project";
 
   // JSON-LD (ItemList) for modules
   const jsonLd = {
@@ -115,7 +156,7 @@ export default function CurriculumSection() {
             id="curriculum-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            5-Core <span className="text-DS">Curriculum Modules</span>
+            {MODULES.length}-Core <span className="text-DS">Curriculum Modules</span>
           </h2>
           <p className="mt-3 text-base md:text-lg text-slate-700">{subtitle}</p>
           {/* SEO keywords for crawlers (hidden) */}
@@ -175,7 +216,7 @@ export default function CurriculumSection() {
                   </div>
                 </div>
 
-                {/* Footer chips (context) */}
+                {/* Footer chips */}
                 <div className="mt-4 flex flex-wrap gap-2">
                   <span className="rounded-md bg-white px-2.5 py-1 text-[11px] font-semibold text-slate-700 ring-1 ring-black/5">
                     Hands-On Lab

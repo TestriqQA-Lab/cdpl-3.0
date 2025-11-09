@@ -2,7 +2,8 @@
 "use client";
 
 import { useMemo } from "react";
-import { Star, Quote, ShieldCheck, Sparkles, Trophy } from "lucide-react";
+import { ShieldCheck, Sparkles, Trophy } from "lucide-react";
+import ReviewsMarquee from "../sections/ReviewMarque";
 
 type Testimonial = {
   quote: string;
@@ -161,30 +162,7 @@ export default function TestimonialsSection() {
           </div>
         </header>
 
-        {/* Cards — mobile: horizontal snap; sm+: grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 [--card-min:280px]">
-          {/* Mobile scroller for xs screens */}
-          <div className="lg:hidden -mx-4 px-4 overflow-x-auto snap-x snap-mandatory flex gap-4 sm:hidden">
-            {testimonials.map((t, i) => (
-              <figure
-                key={`m-${i}`}
-                className={`min-w-[var(--card-min)] snap-start rounded-2xl ${t.bg} border ${t.border} p-6 shadow-sm`}
-              >
-                <CardInner t={t} />
-              </figure>
-            ))}
-          </div>
-
-          {/* Grid for sm and up */}
-          {testimonials.map((t, i) => (
-            <figure
-              key={i}
-              className={`hidden sm:block rounded-2xl ${t.bg} border ${t.border} p-6 shadow-sm hover:shadow-md transition-shadow`}
-            >
-              <CardInner t={t} />
-            </figure>
-          ))}
-        </div>
+        <ReviewsMarquee />
 
         {/* Screen-reader SEO hint */}
         <p className="sr-only">
@@ -199,40 +177,3 @@ export default function TestimonialsSection() {
   );
 }
 
-/* ---------- Subcomponent ---------- */
-
-function CardInner({ t }: { t: Testimonial }) {
-  return (
-    <>
-      <div className="flex items-start justify-between">
-        <Quote className="w-5 h-5 text-gray-500" aria-hidden="true" />
-        <div className="flex gap-0.5" aria-label={`${t.rating} out of 5 stars`}>
-          {Array.from({ length: 5 }).map((_, s) => (
-            <Star
-              key={s}
-              className={`w-4 h-4 ${
-                s < t.rating ? "text-yellow-500 fill-yellow-400" : "text-gray-300"
-              }`}
-            />
-          ))}
-        </div>
-      </div>
-
-      {t.highlight && (
-        <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white/70 px-2.5 py-1 text-[11px] font-semibold text-slate-700">
-          <Trophy className="w-3.5 h-3.5 text-amber-600" />
-          {t.highlight}
-        </div>
-      )}
-
-      <blockquote className="mt-3 text-gray-800 leading-relaxed">“{t.quote}”</blockquote>
-      <figcaption className="mt-4">
-        <div className={`font-semibold ${t.nameColor}`}>{t.name}</div>
-        <div className="text-sm text-gray-600">
-          {t.role}
-          {t.company ? ` • ${t.company}` : ""}
-        </div>
-      </figcaption>
-    </>
-  );
-}

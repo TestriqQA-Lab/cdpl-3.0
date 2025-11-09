@@ -161,15 +161,7 @@ const courseCategories: Category[] = [
           { name: "Advanced Automation Testing", logo: "/aaa.png" },
         ],
       },
-      {
-        name: "Prompt Engineering with Generative AI",
-        slug: "prompt-engineering-course",
-        description: "Master coding challenges and technical questions.",
-        rightColumnImages: [
-          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
-          { name: "Advanced Automation Testing", logo: "/aaa.png" },
-        ],
-      },
+
       {
         name: "Advanced Data Science and Machine Learning Masterclass",
         slug: "data-science-course",
@@ -215,7 +207,17 @@ const courseCategories: Category[] = [
     rightColumnImages: [
       { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
       { name: "Advanced Automation Testing", logo: "/aaa.png" },
-    ], courses: [],
+    ], courses: [
+      {
+        name: "Prompt Engineering with Generative AI",
+        slug: "prompt-engineering-course",
+        description: "Master coding challenges and technical questions.",
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
+      },
+    ],
   },
   {
     id: "digital-marketing",

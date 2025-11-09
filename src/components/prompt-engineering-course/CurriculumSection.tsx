@@ -14,52 +14,87 @@ type Module = {
 const MODULES: Module[] = [
   {
     num: "01",
-    title: "Introduction to Generative AI",
+    title: "Introduction to AI",
     outcome:
-      "Understand GenAI fundamentals: LLMs, tokens, embeddings, context windows, and real-world applications across domains.",
+      "What is AI, its evolution, and importance • Real-world applications • AI vs. Machine Learning vs. Deep Learning • Limitations and ethical considerations.",
     accent: { bg: "bg-green-50", text: "text-green-900", border: "border-green-200", ring: "focus:ring-green-300", bar: "bg-green-600" },
   },
   {
     num: "02",
-    title: "Prompt Engineering Basics",
+    title: "AI Ecosystem & ML Foundations",
     outcome:
-      "Craft effective prompts: clarity, constraints, format instructions, few-shot patterns, and evaluation for consistency.",
+      "Subfields of AI (NLP, Computer Vision, Robotics, ML) • Intro to Machine Learning • Learning types (Supervised, Unsupervised) • Basics of Neural Networks • Everyday AI-powered tech.",
     accent: { bg: "bg-sky-50", text: "text-sky-900", border: "border-sky-200", ring: "focus:ring-sky-300", bar: "bg-sky-600" },
   },
   {
     num: "03",
-    title: "Advanced Prompt Techniques",
+    title: "Introduction to Generative AI",
     outcome:
-      "Master chain-of-thought and role prompting, self-critique/repair loops, tool/function calling, and multi-step workflows.",
+      "What Generative AI is and how it creates new content • How it differs from traditional AI • Cross-domain use cases (marketing, healthcare, finance, gaming, etc.).",
     accent: { bg: "bg-amber-50", text: "text-amber-900", border: "border-amber-200", ring: "focus:ring-amber-300", bar: "bg-amber-600" },
   },
   {
     num: "04",
-    title: "AI Tools & Applications",
+    title: "Generative Learning & Technical Concepts",
     outcome:
-      "Apply prompts for content, code, and analytics; build RAG with embeddings & vector DBs; ship simple agents & automations.",
+      "Foundational model families (LLMs, LIMs, LAMs) • Fine-tuning and transfer learning • Transformer architecture fundamentals.",
     accent: { bg: "bg-violet-50", text: "text-violet-900", border: "border-violet-200", ring: "focus:ring-violet-300", bar: "bg-violet-600" },
   },
   {
     num: "05",
-    title: "Ethical AI & Capstone",
+    title: "Evolution & Power of Large Language Models",
     outcome:
-      "Design safe, ethical GenAI apps: bias, privacy, guardrails, evals & monitoring. Build a capstone with docs and demo.",
+      "LLM basics (NLP, prompting, zero-shot & few-shot) • Evolution of LLMs (GPT, Claude, Llama, Gemini/Bard, Pi) • Tokenization, embeddings, context windows • Real-world use cases (chat & voice assistants).",
     accent: { bg: "bg-emerald-50", text: "text-emerald-900", border: "border-emerald-200", ring: "focus:ring-emerald-300", bar: "bg-emerald-600" },
+  },
+  {
+    num: "06",
+    title: "Computer Vision & LIMs — Teaching AI to See",
+    outcome:
+      "Intro to Computer Vision • Image processing and feature extraction • Large Image Models (Stable Diffusion, Leonardo.ai, DALL-E) • LIM applications.",
+    accent: { bg: "bg-rose-50", text: "text-rose-900", border: "border-rose-200", ring: "focus:ring-rose-300", bar: "bg-rose-600" },
+  },
+  {
+    num: "07",
+    title: "Video, Speech & Generative AI Tools",
+    outcome:
+      "Video & speech AI tooling (e.g., VEED, PlayHT, Suno.ai) • Text-to-Speech & Speech-to-Text applications • AI-powered video & audio generation.",
+    accent: { bg: "bg-indigo-50", text: "text-indigo-900", border: "border-indigo-200", ring: "focus:ring-indigo-300", bar: "bg-indigo-600" },
+  },
+  {
+    num: "08",
+    title: "Prompt Engineering & Practical Applications",
+    outcome:
+      "Prompting foundations • Zero-shot, one-shot, few-shot techniques • Case studies (e.g., brand campaigns) • Hands-on: designing prompts across different AI models.",
+    accent: { bg: "bg-teal-50", text: "text-teal-900", border: "border-teal-200", ring: "focus:ring-teal-300", bar: "bg-teal-600" },
+  },
+  {
+    num: "09",
+    title: "Responsible AI & Governance",
+    outcome:
+      "Ethics and bias in AI models • Governance for responsible deployment • Regulations & compliance • Best practices: Human-in-the-loop, monitoring, AI collaboration.",
+    accent: { bg: "bg-fuchsia-50", text: "text-fuchsia-900", border: "border-fuchsia-200", ring: "focus:ring-fuchsia-300", bar: "bg-fuchsia-600" },
+  },
+  {
+    num: "10",
+    title: "Capstone Project & Certification",
+    outcome:
+      "Real-world AI implementation project • Assessment and certification pathway.",
+    accent: { bg: "bg-cyan-50", text: "text-cyan-900", border: "border-cyan-200", ring: "focus:ring-cyan-300", bar: "bg-cyan-600" },
   },
 ];
 
 export default function CurriculumSection() {
   const subtitle =
-    "An industry-aligned Generative AI pathway from LLM fundamentals and prompt patterns to tooling, RAG, ethics, and a portfolio-grade capstone.";
+    "A 10-module, industry-aligned pathway from AI/ML foundations to Generative AI, LLMs, Vision & Speech, Prompt Engineering, Responsible AI, and a hands-on capstone.";
   const keywords =
-    "generative ai curriculum, prompt engineering course syllabus, chain-of-thought prompting, RAG vector database, AI ethics guardrails, LLM tools and agents";
+    "prompt engineering syllabus, generative ai course curriculum, LLM evolution, transformer architecture, embeddings and context window, computer vision LIMs, TTS STT tools, responsible AI governance, capstone certification";
 
   // JSON-LD (ItemList) for modules
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Prompt Engineering & Generative AI Curriculum",
+    name: "Prompt Engineering with Gen AI — Course Curriculum",
     itemListElement: MODULES.map((m, idx) => ({
       "@type": "ListItem",
       position: idx + 1,
@@ -81,7 +116,7 @@ export default function CurriculumSection() {
         {/* Header */}
         <header className="mx-auto max-w-3xl text-center">
           <h2 id="curriculum-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-            5-Module <span className="text-DS">Curriculum</span>
+            10-Module <span className="text-DS">Curriculum</span>
           </h2>
           <p className="mt-3 text-base md:text-lg text-slate-700">{subtitle}</p>
           {/* Hidden SEO keywords */}
@@ -89,10 +124,10 @@ export default function CurriculumSection() {
 
           {/* Micro badges (distinct accents, no repeats) */}
           <div className="mt-5 grid grid-cols-2 gap-2 text-[11px] font-semibold text-slate-700 sm:grid-cols-4">
-            <span className="rounded-full border border-green-200 bg-green-50 px-3 py-1 text-green-900">LLM Fundamentals</span>
-            <span className="rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-sky-900">Prompt Patterns</span>
-            <span className="rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-amber-900">Tool Calling</span>
-            <span className="rounded-full border border-violet-200 bg-violet-50 px-3 py-1 text-violet-900">RAG & Ethics</span>
+            <span className="rounded-full border border-green-200 bg-green-50 px-3 py-1 text-green-900">AI & ML Core</span>
+            <span className="rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-amber-900">LLMs & Transformers</span>
+            <span className="rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-indigo-900">Vision, Video & Speech</span>
+            <span className="rounded-full border border-fuchsia-200 bg-fuchsia-50 px-3 py-1 text-fuchsia-900">Prompting & Responsible AI</span>
           </div>
         </header>
 
@@ -181,7 +216,7 @@ export default function CurriculumSection() {
 
         {/* Footnote */}
         <p className="mx-auto mt-3 max-w-3xl text-center text-[11px] text-slate-500">
-          *Module order may vary slightly based on cohort needs and instructor discretion.
+          *Module order may vary based on cohort needs and instructor discretion.
         </p>
       </div>
 

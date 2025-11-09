@@ -1,22 +1,116 @@
 'use client';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
+/** ---------- Types ---------- */
 type Stat = {
-  value: string;
   label: string;
-  delay?: number;
-  color: string;   // card background
-  border: string;  // card border
-  text: string;    // primary text color
-  dot: string;     // tiny accent dot color
+  value: number;     // numeric target for animation
+  prefix?: string;   // e.g., "₹"
+  suffix?: string;   // e.g., "%", " LPA", "+"
+  color: string;     // card background
+  border: string;    // card border
+  text: string;      // primary text color
+  dot: string;       // tiny accent dot color
+  delay?: number;    // stagger
 };
 
+/** ---------- Source: PDF ---------- 
+ * Page 7 stats:
+ *  - 25% Market growth from 2020 to 2030
+ *  - 101,000+ Job Vacancies in India
+ *  - 6 LPA Automation Tester freshers’ average salary
+ *  - 75% Job Satisfaction
+ *  - 32% India’s share in the global market
+ * Page 1:
+ *  - Duration 85 Hours
+ */
 const stats: Stat[] = [
-  { value: '3,00,000+', label: 'Automation Jobs in India', delay: 0.1, color: 'bg-sky-50',    border: 'border-sky-200',    text: 'text-sky-800',    dot: 'bg-sky-400' },
-  { value: '₹8–20 LPA', label: 'SDET Salary Range',        delay: 0.2, color: 'bg-amber-50',  border: 'border-amber-200',  text: 'text-amber-800',  dot: 'bg-amber-400' },
-  { value: '35% CAGR',  label: 'Automation Growth',        delay: 0.3, color: 'bg-emerald-50',border: 'border-emerald-200',text: 'text-emerald-800',dot: 'bg-emerald-400' },
-  { value: '30 Hours',  label: 'Pro Training',             delay: 0.4, color: 'bg-violet-50', border: 'border-violet-200', text: 'text-violet-800', dot: 'bg-violet-400' },
+  { label: 'Market Growth (2020–2030)', value: 25, suffix: '%', color: 'bg-sky-50', border: 'border-sky-200', text: 'text-sky-800', dot: 'bg-sky-400', delay: 0.08 },
+  { label: 'Job Vacancies in India', value: 101000, suffix: '+', color: 'bg-amber-50', border: 'border-amber-200', text: 'text-amber-800', dot: 'bg-amber-400', delay: 0.12 },
+  { label: 'Fresher Avg Salary', value: 6, suffix: ' LPA', color: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-800', dot: 'bg-emerald-400', delay: 0.16 },
+  { label: 'Job Satisfaction', value: 75, suffix: '%', color: 'bg-violet-50', border: 'border-violet-200', text: 'text-violet-800', dot: 'bg-violet-400', delay: 0.20 },
+  { label: 'India’s Share of Global Market', value: 32, suffix: '%', color: 'bg-rose-50', border: 'border-rose-200', text: 'text-rose-800', dot: 'bg-rose-400', delay: 0.24 },
+  { label: 'Program Duration', value: 85, suffix: ' Hours', color: 'bg-indigo-50', border: 'border-indigo-200', text: 'text-indigo-800', dot: 'bg-indigo-400', delay: 0.28 },
 ];
+
+/** ---------- Helpers ---------- */
+function formatNumber(n: number) {
+  // Regular international grouping (e.g., 101,000). 
+  // If you prefer Indian grouping (1,01,000), swap to 'en-IN'.
+  return new Intl.NumberFormat('en-US').format(n);
+}
+
+/** Count-up hook that starts when container enters viewport */
+function useCountUp(target: number, start: boolean, durationMs = 1600) {
+  const [val, setVal] = useState(0);
+  const rafRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (!start) return;
+    const startTs = performance.now();
+
+    const tick = (now: number) => {
+      const p = Math.min(1, (now - startTs) / durationMs);
+      // easeOutCubic for a nicer finish
+      const eased = 1 - Math.pow(1 - p, 3);
+      setVal(Math.round(target * eased));
+      if (p < 1) {
+        rafRef.current = requestAnimationFrame(tick);
+      }
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [target, start, durationMs]);
+
+  return val;
+}
+
+/** ---------- Stat Card ---------- */
+function StatCard({ s }: { s: Stat }) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const inView = useInView(ref, { once: true, margin: '-20% 0px -10% 0px' });
+  const animatedVal = useCountUp(s.value, inView);
+  const display = useMemo(() => {
+    const base = formatNumber(animatedVal);
+    return `${s.prefix ?? ''}${base}${s.suffix ?? ''}`;
+  }, [animatedVal, s.prefix, s.suffix]);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-20% 0px -10% 0px' }}
+      transition={{ duration: 0.45, delay: s.delay ?? 0.1, ease: 'easeOut' }}
+      className={[
+        'group relative overflow-hidden rounded-2xl border p-4 sm:p-5',
+        s.color,
+        s.border,
+        'shadow-[0_1px_0_0_rgba(15,23,42,0.04)]',
+        'focus-within:outline-none focus-within:ring-4 focus-within:ring-slate-200',
+      ].join(' ')}
+      aria-label={`${display} — ${s.label}`}
+    >
+      {/* Tiny accent dot */}
+      <span className={`pointer-events-none absolute right-4 top-4 h-1.5 w-1.5 rounded-full ${s.dot} transition-transform group-hover:scale-125`} />
+
+      <div className={`text-xl lg:text-3xl font-extrabold ${s.text}`}>
+        {display}
+      </div>
+      <div className="mt-1 text-[11px] font-medium text-slate-500 sm:text-sm">
+        {s.label}
+      </div>
+
+      <div className="mt-3 text-[11px] leading-5 text-slate-500">
+        Benchmarks for <em>Automation Testing</em> / <em>SDET</em> opportunities and training.
+      </div>
+    </motion.div>
+  );
+}
 
 export default function StatsSection() {
   // SEO: structured data for search engines
@@ -28,21 +122,13 @@ export default function StatsSection() {
       '@type': 'ListItem',
       position: i + 1,
       name: s.label,
-      additionalProperty: {
-        '@type': 'PropertyValue',
-        name: s.label,
-        value: s.value,
-      },
+      additionalProperty: { '@type': 'PropertyValue', name: s.label, value: `${s.value}${s.suffix ?? ''}` },
     })),
   };
 
   return (
-    <section
-      id="automation-stats"
-      aria-labelledby="automation-stats-heading"
-      className="relative py-8 md:py-10"
-    >
-      {/* Subtle frame lines for a clean, futuristic vibe */}
+    <section id="automation-stats" aria-labelledby="automation-stats-heading" className="relative py-8 md:py-10">
+      {/* Subtle frame lines */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-white" />
         <div className="absolute inset-x-0 top-0 mx-auto h-px max-w-7xl bg-slate-100" />
@@ -52,53 +138,17 @@ export default function StatsSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading + supporting copy */}
         <header className="mx-auto mb-8 max-w-3xl text-center">
-          <h2
-            id="automation-stats-heading"
-            className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl"
-          >
+          <h2 id="automation-stats-heading" className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
             Outcomes that Matter for <span className="text-ST">SDET</span> Careers
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
-            See the demand, pay range, market growth, and training effort for
-            <strong> Automation Testing</strong> roles across India. These facts help learners plan a
-            <strong> job-ready</strong> upskilling path.
+            The figures below come from the program brochure: market growth, open roles, fresher pay, job satisfaction, India’s global share, and program duration.
           </p>
         </header>
 
         {/* Stats grid */}
-        <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4">
-          {stats.map((s, i) => (
-            <motion.div
-              key={s.label}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-20% 0px -10% 0px' }}
-              transition={{ duration: 0.45, delay: s.delay ?? i * 0.06, ease: 'easeOut' }}
-              className={[
-                'group relative overflow-hidden rounded-2xl border p-4 sm:p-5',
-                s.color,
-                s.border,
-                'shadow-[0_1px_0_0_rgba(15,23,42,0.04)]',
-                'focus-within:outline-none focus-within:ring-4 focus-within:ring-slate-200',
-              ].join(' ')}
-              aria-label={`${s.value} — ${s.label}`}
-            >
-              {/* Tiny accent dot (micro detail) */}
-              <span className={`pointer-events-none absolute right-4 top-4 h-1.5 w-1.5 rounded-full ${s.dot} transition-transform group-hover:scale-125`} />
-
-              <div className={`text-xl lg:text-3xl font-extrabold ${s.text}`}>
-                {s.value}
-              </div>
-              <div className="mt-1 text-[11px] font-medium text-slate-500 sm:text-sm">
-                {s.label}
-              </div>
-
-              {/* Micro caption for SEO + clarity */}
-              <div className="mt-3 text-[11px] leading-5 text-slate-500">
-                Benchmarks for <em>Automation Testing</em> / <em>SDET</em> roles — demand, salary, growth, and training time.
-              </div>
-            </motion.div>
-          ))}
+        <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-6">
+          {stats.map((s) => <StatCard key={s.label} s={s} />)}
         </div>
 
         {/* SEO-supportive copy */}
@@ -114,10 +164,7 @@ export default function StatsSection() {
       </div>
 
       {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

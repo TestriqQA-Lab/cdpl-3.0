@@ -1,9 +1,13 @@
 // components/sections/StatsSection.tsx
-// Server component — clearer, larger stats with strong contrast and distinct soft colors.
-// No client JS needed. Accessible + SEO JSON-LD included.
+"use client";
 
+import { useEffect, useMemo, useRef, useState } from "react";
+
+/** ---------- Types ---------- */
 type Stat = {
-  value: string;
+  value: string;     // formatted display (e.g., "101,000+")
+  numeric: number;   // target number for animation (e.g., 101000)
+  suffix?: string;   // optional suffix to append (e.g., "+", " LPA", "%")
   label: string;
   caption: string;
   bg: string;    // soft background
@@ -13,63 +17,174 @@ type Stat = {
   aria?: string; // screen-reader label
 };
 
+/** ---------- Stats from PDF (pg 7) ---------- */
 const STATS: Stat[] = [
   {
-    value: "$1.2M",
-    label: "Top Python Dev Salary (US)",
-    caption: "Upper-end compensation in high-demand markets",
+    value: "25%",
+    numeric: 25,
+    suffix: "%",
+    label: "Market Growth (2020–2030)",
+    caption: "Expanding opportunities over the decade",
     bg: "bg-sky-50",
     text: "text-sky-900",
     ring: "focus:ring-sky-300",
     bar: "bg-sky-300",
-    aria: "Top Python developer salary in the United States is 1.2 million dollars",
+    aria: "Market growth from 2020 to 2030 is 25 percent",
   },
   {
-    value: "1.8M+",
-    label: "Global Python Jobs",
-    caption: "Across startups, FAANG, and enterprises",
+    value: "101,000+",
+    numeric: 101000,
+    suffix: "+",
+    label: "Job Vacancies in India",
+    caption: "Open roles across industries and regions",
     bg: "bg-emerald-50",
     text: "text-emerald-900",
     ring: "focus:ring-emerald-300",
     bar: "bg-emerald-300",
-    aria: "Over 1.8 million Python jobs worldwide",
+    aria: "Over 101,000 Python job vacancies in India",
   },
   {
-    value: "#1",
-    label: "Most-Loved Language (2024)",
-    caption: "Developer surveys & community reports",
+    value: "6 LPA",
+    numeric: 6,
+    suffix: " LPA",
+    label: "Fresher Average Salary",
+    caption: "Typical entry-level compensation",
     bg: "bg-amber-50",
     text: "text-amber-900",
     ring: "focus:ring-amber-300",
     bar: "bg-amber-300",
-    aria: "Python ranked number one most loved language in 2024",
+    aria: "Average fresher salary is six lakhs per annum",
+  },
+  {
+    value: "75%",
+    numeric: 75,
+    suffix: "%",
+    label: "Job Satisfaction",
+    caption: "Strong satisfaction among professionals",
+    bg: "bg-violet-50",
+    text: "text-violet-900",
+    ring: "focus:ring-violet-300",
+    bar: "bg-violet-300",
+    aria: "Job satisfaction is seventy five percent",
+  },
+  {
+    value: "32%",
+    numeric: 32,
+    suffix: "%",
+    label: "India’s Global Share",
+    caption: "Share in the global market",
+    bg: "bg-rose-50",
+    text: "text-rose-900",
+    ring: "focus:ring-rose-300",
+    bar: "bg-rose-300",
+    aria: "India's share in the global market is thirty two percent",
   },
 ];
 
-export default function StatsSection() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Python Popularity & Career Stats",
-    description:
-      "Clear, high-contrast statistics showing Python’s salary potential, job demand, and developer sentiment.",
-    itemListElement: STATS.map((s, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: s.label,
-      additionalProperty: {
-        "@type": "PropertyValue",
-        name: s.label,
-        value: s.value,
-        description: s.caption,
+/** ---------- CountUp (scroll-activated) ---------- */
+function useInViewOnce(ref: React.RefObject<Element | null>, rootMargin = "0px") {
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    if (!ref.current || inView) return;
+
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          obs.disconnect();
+        }
       },
-    })),
-    keywords:
-      "Python jobs, Python salary, learn Python, most loved language, Python career growth",
-  };
+      { root: null, rootMargin, threshold: 0.2 }
+    );
+
+    obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, [ref, inView, rootMargin]); // <-- include ref to satisfy react-hooks/exhaustive-deps
+
+  return inView;
+}
+
+function formatNumber(n: number) {
+  return new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 }).format(n);
+}
+
+function CountUp({
+  to,
+  duration = 1400,
+  suffix = "",
+  prefix = "",
+  startWhenVisibleRef,
+  format = "int", // "int" | "float"
+}: {
+  to: number;
+  duration?: number;
+  suffix?: string;
+  prefix?: string;
+  startWhenVisibleRef: React.RefObject<Element | null>;
+  format?: "int" | "float";
+}) {
+  const [val, setVal] = useState(0);
+  const started = useRef(false);
+  const inView = useInViewOnce(startWhenVisibleRef, "0px");
+
+  useEffect(() => {
+    if (!inView || started.current) return;
+    started.current = true;
+
+    const start = performance.now();
+    const animate = (now: number) => {
+      const t = Math.min(1, (now - start) / duration);
+      // Ease-out cubic
+      const eased = 1 - Math.pow(1 - t, 3);
+      const current = to * eased;
+      setVal(current);
+      if (t < 1) requestAnimationFrame(animate);
+    };
+    const raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
+  }, [inView, to, duration]);
+
+  const display =
+    format === "float"
+      ? `${prefix}${val.toFixed(1)}${suffix}`
+      : `${prefix}${formatNumber(Math.round(val))}${suffix}`;
+
+  return <span aria-hidden="true">{display}</span>;
+}
+
+/** ---------- Component ---------- */
+export default function StatsSection() {
+  // JSON-LD
+  const jsonLd = useMemo(
+    () => ({
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: "Python Career & Market Stats",
+      description:
+        "Statistics from the course brochure summarizing Python job demand, salary, satisfaction, and market growth.",
+      itemListElement: STATS.map((s, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: s.label,
+        additionalProperty: {
+          "@type": "PropertyValue",
+          name: s.label,
+          value: s.value,
+          description: s.caption,
+        },
+      })),
+      keywords:
+        "Python jobs India, Python salary LPA, market growth, job satisfaction, global share",
+    }),
+    []
+  );
+
+  const sectionRef = useRef<HTMLElement | null>(null);
 
   return (
     <section
+      ref={sectionRef}
       id="python-stats"
       aria-labelledby="python-stats-heading"
       className="relative py-4 md:py-10 bg-white"
@@ -87,16 +202,15 @@ export default function StatsSection() {
             id="python-stats-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Python Stats - <span className="text-FS">Clear & Impactful</span>
+            Python Stats – <span className="text-teal-600">Clear & Impactful</span>
           </h2>
           <p className="mt-4 text-sm sm:text-base text-slate-600">
-            See why Python leads in <strong>careers, salaries</strong>, and{" "}
-            <strong>developer satisfaction</strong>.
+            Snapshot of the market and careers pulled from the program brochure.
           </p>
         </header>
 
-        {/* Clear, large stat cards */}
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 max-w-6xl mx-auto">
+        {/* Stat cards */}
+        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 max-w-7xl mx-auto">
           {STATS.map((s) => (
             <article
               key={s.label}
@@ -114,20 +228,25 @@ export default function StatsSection() {
 
               <div className="p-6">
                 <div className={["text-xl md:text-4xl font-extrabold tracking-tight", s.text].join(" ")}>
-                  {s.value}
+                  {/* Animated number */}
+                  <CountUp
+                    to={s.numeric}
+                    suffix={s.suffix}
+                    startWhenVisibleRef={sectionRef as React.RefObject<Element | null>}
+                  />
                 </div>
                 <div className="mt-2 text-base sm:text-lg font-semibold text-slate-800">
                   {s.label}
                 </div>
-                <p className="mt-1 text-xs sm:text-sm text-slate-600">
-                  {s.caption}
-                </p>
+                <p className="mt-1 text-xs sm:text-sm text-slate-600">{s.caption}</p>
+                {/* Visually hidden final value for screen readers */}
+                <span className="sr-only">{s.value}</span>
               </div>
             </article>
           ))}
         </div>
 
-        {/* Supporting line for SEO & clarity */}
+        {/* Supporting line */}
         <p className="mt-8 max-w-4xl mx-auto text-center text-sm sm:text-base text-slate-600">
           From <strong>automation & APIs</strong> to <strong>data science & AI</strong>, Python’s
           ecosystem unlocks multiple high-growth career paths with strong hiring demand.

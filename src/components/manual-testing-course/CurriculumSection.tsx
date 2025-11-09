@@ -2,8 +2,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { CheckCircle2, Clock, BookOpen, Target, Sparkles, ChevronDown, Download, ShieldCheck, Code2, NotebookPen, FlaskConical, Bug, Layers, Trophy, Brain, Pin } from "lucide-react";
-import Link from "next/link";
+import { CheckCircle2, BookOpen, Target, Sparkles, ChevronDown, NotebookPen, FlaskConical, Bug, Layers, Pin } from "lucide-react";
 
 /* ---------- Token: small color map so cards feel lively but not loud ---------- */
 const ACCENTS = ["indigo", "cyan", "emerald", "amber", "rose", "violet"] as const;
@@ -398,15 +397,3 @@ export default function CurriculumSection() {
     );
 }
 
-/* ---------- Mini Stat (kept for potential reuse; not used in header now) ---------- */
-function Stat({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
-    return (
-        <div className="flex items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-3 py-2 shadow-sm">
-            <span className="text-gray-700">{icon}</span>
-            <div className="text-left">
-                <p className="text-[11px] uppercase tracking-wide text-gray-500">{label}</p>
-                <p className="text-sm font-semibold text-gray-900">{value}</p>
-            </div>
-        </div>
-    );
-}

@@ -151,9 +151,9 @@ const REVIEWS: Review[] = [
 ];
 
 const SUMMARY_CARDS = [
-  { label: 'Google Reviews', value: '289', note: 'Public reviews', logo: '/slider_logos/google.svg' },
-  { label: 'Sulekha Reviews', value: '84', note: '5.0 average', logo: '/slider_logos/sulekha-logo.webp' },
-  { label: 'Justdial Ratings', value: '210', note: 'Verified users', logo: '/slider_logos/justdial-logo.png' },
+  { label: 'Google Reviews', value: '289', note: 'Public reviews', logo: '/slider_logos/google.svg', class: "h-8 w-8" },
+  { label: 'Sulekha Reviews', value: '84', note: '5.0 average', logo: '/slider_logos/sulekha-logo.webp', class: "h-8 w-8" },
+  { label: 'Justdial Ratings', value: '210', note: 'Verified users', logo: '/slider_logos/justdial-logo.png', class: "h-10 w-14" },
 ];
 
 /** ---------- Component (no props) ---------- */
@@ -234,7 +234,7 @@ export default function ReviewsMarquee() {
   }, [paused, speed, reduced]);
 
   return (
-    <div className="w-full relative bg-gradient-to-b from-sky-50 via-white to-violet-50 dark:[color-scheme:light]">
+    <div className="w-full rounded-2xl relative bg-gradient-to-b from-sky-50 via-white to-violet-50 dark:[color-scheme:light]">
       {/* ⬇️ Container now matches /apply: max-w-7xl px-4 py-10 sm:px-6 lg:px-8 */}
       <div className="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
         {/* Tabs + stat header */}
@@ -397,8 +397,8 @@ export default function ReviewsMarquee() {
         <div className="mt-10 grid gap-4 sm:grid-cols-3">
           {SUMMARY_CARDS.map((b) => (
             <div key={b.label} className="rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-md">
-              <div className="mx-auto mb-2 flex h-8 w-8 items-center justify-center">
-                <Image src={b.logo} alt={`${b.label} logo`} width={50} height={50} />
+              <div className="mx-auto mb-2 flex items-center justify-center">
+                <Image src={b.logo} alt={`${b.label} logo`} width={50} height={50} className={b.class} />
               </div>
               <div className="text-3xl font-extrabold tracking-tight text-slate-900">{b.value}</div>
               <div className="mt-1 text-sm font-medium text-slate-700">{b.label}</div>

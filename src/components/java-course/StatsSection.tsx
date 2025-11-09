@@ -1,6 +1,6 @@
 // components/sections/StatsSection.tsx
-// Sleek, responsive, SEO-friendly stats section (no repeated colors, minimal gradients).
-// Drop the old <StatCard/> import—this file is now self-contained.
+// Sleek, responsive, SEO-friendly stats section.
+// Now sources stats from the provided PDF and adds on-scroll count-up animations.
 
 "use client";
 
@@ -13,7 +13,88 @@ import {
   Banknote,
 } from "lucide-react";
 import Link from "next/link";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
+/** ---------------- Count-up on scroll ---------------- */
+function useInView<T extends HTMLElement>(options?: IntersectionObserverInit) {
+  const ref = useRef<T | null>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const el = ref.current;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          io.unobserve(el); // fire once
+        }
+      },
+      { root: null, threshold: 0.2, ...options }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [options]);
+
+  return { ref, inView };
+}
+
+function CountUp({
+  value,
+  started,
+  duration = 1200,
+  className,
+}: {
+  value: string; // e.g., "25%", "101,000+", "4 LPA", "30 Hours"
+  started: boolean;
+  duration?: number;
+  className?: string;
+}) {
+  // Parse prefix/number/suffix to animate just the numeric part
+  const { prefix, num, suffix } = useMemo(() => {
+    const trimmed = value.trim();
+    // Capture optional prefix, number (with commas/decimals), and suffix
+    const match =
+      trimmed.match(/^(\D*)\s*([0-9][0-9,\.]*)\s*(.*)$/) || ["", "", "0", ""];
+    const prefix = match[1] ?? "";
+    const numStr = (match[2] ?? "0").replace(/,/g, "");
+    const suffix = match[3] ?? "";
+    const num = parseFloat(numStr) || 0;
+    return { prefix, num, suffix };
+  }, [value]);
+
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    if (!started) return;
+    let raf = 0;
+    const start = performance.now();
+    const animate = (t: number) => {
+      const p = Math.min(1, (t - start) / duration);
+      const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+      setDisplay(num * eased);
+      if (p < 1) raf = requestAnimationFrame(animate);
+    };
+    raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
+  }, [started, duration, num]);
+
+  // Format with commas; keep integers when original looked like an int
+  const isInt = Number.isInteger(num);
+  const formatted = (isInt ? Math.round(display) : display).toLocaleString(undefined, {
+    maximumFractionDigits: isInt ? 0 : 1,
+  });
+
+  return (
+    <span className={className}>
+      {prefix}
+      {formatted}
+      {suffix ? ` ${suffix}` : ""}
+    </span>
+  );
+}
+
+/** ---------------- Types ---------------- */
 type Stat = {
   value: string;
   label: string;
@@ -24,56 +105,66 @@ type Stat = {
   ringClass: string;
 };
 
+/**
+ * Stats extracted from the PDF:
+ * - 25%  Market growth from 2020 to 2030
+ * - 101,000+ Job Vacancies in India
+ * - 4 LPA Java Programmer freshers’ average salary
+ * - 75% Job Satisfaction
+ * - 32% India’s share in the global market
+ * - 30 Hours Duration (from the cover page badge)
+ * Source: “Copy of Course 4J Java Programming.pdf” (page 7 & page 1).  [Cited in chat]
+ */
 const STATS: Stat[] = [
   {
-    value: "95%",
-    label: "Enterprise Adoption",
-    caption: "Preferred for mission-critical systems",
-    icon: ShieldCheck,
+    value: "25%",
+    label: "Market Growth (2020–2030)",
+    caption: "Steady expansion of Java opportunities",
+    icon: Rocket,
     cardClass: "bg-sky-50",
     textClass: "text-sky-800",
     ringClass: "ring-sky-200",
   },
   {
-    value: "3B+",
-    label: "Devices Run Java",
-    caption: "Ubiquity across platforms & IoT",
-    icon: Globe,
+    value: "101,000+",
+    label: "Job Vacancies in India",
+    caption: "Open roles aligned to Java skills",
+    icon: Server,
     cardClass: "bg-amber-50",
     textClass: "text-amber-800",
     ringClass: "ring-amber-200",
   },
   {
-    value: "₹12 LPA",
-    label: "Avg Salary (India)",
-    caption: "Competitive pay for Java engineers",
+    value: "4 LPA",
+    label: "Fresher Avg Salary",
+    caption: "Java Programmer (entry level)",
     icon: Banknote,
     cardClass: "bg-emerald-50",
     textClass: "text-emerald-800",
     ringClass: "ring-emerald-200",
   },
   {
-    value: "99.99%",
-    label: "Uptime Targets",
-    caption: "Proven reliability with JVM tooling",
-    icon: Server,
+    value: "75%",
+    label: "Job Satisfaction",
+    caption: "Healthy satisfaction among pros",
+    icon: ShieldCheck,
     cardClass: "bg-rose-50",
     textClass: "text-rose-800",
     ringClass: "ring-rose-200",
   },
   {
-    value: "30%+",
-    label: "Faster Time-to-Market",
-    caption: "Spring Boot & microservices",
-    icon: Rocket,
+    value: "32%",
+    label: "India’s Global Share",
+    caption: "Share in the worldwide market",
+    icon: Globe,
     cardClass: "bg-violet-50",
     textClass: "text-violet-800",
     ringClass: "ring-violet-200",
   },
   {
-    value: "10x",
-    label: "Scalability Gain",
-    caption: "Modern JVM, GC & containers",
+    value: "30 Hours",
+    label: "Course Duration",
+    caption: "Focused, fast-paced training",
     icon: Cpu,
     cardClass: "bg-cyan-50",
     textClass: "text-cyan-800",
@@ -87,11 +178,14 @@ export default function StatsSection() {
   const description =
     "Java remains the #1 enterprise language for building secure, cloud-native, high-performance applications at scale. With Spring Boot, Microservices, Kubernetes, and the JVM, teams ship resilient software faster—backed by a vast talent pool and Fortune 500 adoption.";
 
+  const { ref: sectionRef, inView } = useInView<HTMLElement>({ threshold: 0.15 });
+
   return (
     <section
       id="java-enterprise-stats"
       aria-labelledby="java-stats-heading"
       className="relative py-8 md:py-14"
+      ref={sectionRef}
     >
       {/* subtle futuristic accent (sleek, no heavy gradients) */}
       <div
@@ -129,49 +223,56 @@ export default function StatsSection() {
           role="list"
           aria-label="Key Java enterprise statistics"
         >
-          {STATS.map(({ value, label, caption, icon: Icon, cardClass, textClass, ringClass }, i) => (
-            <article
-              key={i}
-              role="listitem"
-              className={[
-                "group rounded-2xl p-5 md:p-6 shadow-sm transition-all duration-200",
-                "hover:shadow-md hover:-translate-y-0.5",
-                "border border-white/60 backdrop-blur-sm",
-                ringClass,
-                "ring-1",
-                cardClass,
-              ].join(" ")}
-            >
-              <div className="flex items-start gap-4">
-                <div
-                  className={[
-                    "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/70",
-                    "shadow-sm ring-1 ring-inset ring-black/5",
-                  ].join(" ")}
-                  aria-hidden="true"
-                >
-                  <Icon className="h-6 w-6 text-gray-900" />
-                </div>
-
-                <div className="flex-1">
-                  <div className="flex items-baseline justify-between">
-                    <p className={["text-3xl font-extrabold tracking-tight", textClass].join(" ")}>{value}</p>
+          {STATS.map(
+            ({ value, label, caption, icon: Icon, cardClass, textClass, ringClass }, i) => (
+              <article
+                key={i}
+                role="listitem"
+                className={[
+                  "group rounded-2xl p-5 md:p-6 shadow-sm transition-all duration-200",
+                  "hover:shadow-md hover:-translate-y-0.5",
+                  "border border-white/60 backdrop-blur-sm",
+                  ringClass,
+                  "ring-1",
+                  cardClass,
+                ].join(" ")}
+              >
+                <div className="flex items-start gap-4">
+                  <div
+                    className={[
+                      "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/70",
+                      "shadow-sm ring-1 ring-inset ring-black/5",
+                    ].join(" ")}
+                    aria-hidden="true"
+                  >
+                    <Icon className="h-6 w-6 text-gray-900" />
                   </div>
-                  <h3 className="mt-1 text-base font-semibold text-gray-900">{label}</h3>
-                  {caption && <p className="mt-1 text-sm text-gray-600">{caption}</p>}
-                </div>
-              </div>
 
-              {/* subtle progress accent bar (sleek, non-gradient) */}
-              <div className="mt-4 h-1 w-full rounded-full bg-white/70">
-                <div
-                  className={["h-1 rounded-full", textClass.replace("text-", "bg-")].join(" ")}
-                  style={{ width: ["88%", "72%", "64%", "80%", "76%", "68%"][i] }}
-                  aria-hidden="true"
-                />
-              </div>
-            </article>
-          ))}
+                  <div className="flex-1">
+                    <div className="flex items-baseline justify-between">
+                      {/* CountUp animates from 0 once the section is in view */}
+                      <CountUp
+                        value={value}
+                        started={inView}
+                        className={["text-3xl font-extrabold tracking-tight", textClass].join(" ")}
+                      />
+                    </div>
+                    <h3 className="mt-1 text-base font-semibold text-gray-900">{label}</h3>
+                    {caption && <p className="mt-1 text-sm text-gray-600">{caption}</p>}
+                  </div>
+                </div>
+
+                {/* subtle progress accent bar (pure color, non-gradient) */}
+                <div className="mt-4 h-1 w-full rounded-full bg-white/70">
+                  <div
+                    className={["h-1 rounded-full", textClass.replace("text-", "bg-")].join(" ")}
+                    style={{ width: ["88%", "72%", "64%", "80%", "76%", "68%"][i] }}
+                    aria-hidden="true"
+                  />
+                </div>
+              </article>
+            )
+          )}
         </div>
 
         {/* Benefit bullets (SEO-rich, scannable) */}

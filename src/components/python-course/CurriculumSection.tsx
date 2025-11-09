@@ -1,5 +1,6 @@
 // components/sections/CurriculumSection.tsx
 // Sleek, slightly futuristic curriculum with distinct non-repeating accents, SEO JSON-LD, fully responsive.
+// Source: “Copy of Course 4P Python Programming .pdf” (Modules on pp.16–19; Capstone on p.19)
 
 type Module = {
   num: string;
@@ -8,16 +9,118 @@ type Module = {
 };
 
 const MODULES: Module[] = [
-  { num: "01", title: "Python Fundamentals & Syntax", outcome: "Write clean, efficient Python code from scratch." },
-  { num: "02", title: "Data Structures & Algorithms", outcome: "Master lists, dicts, OOP, and DSA in Python." },
-  { num: "03", title: "Web Development with Django", outcome: "Build full-stack web apps with Django & REST." },
-  { num: "04", title: "Data Science with Pandas & NumPy", outcome: "Analyze real-world datasets and generate insights." },
-  { num: "05", title: "Machine Learning with scikit-learn", outcome: "Train and evaluate ML models end-to-end." },
-  { num: "06", title: "Automation & Scripting", outcome: "Automate repetitive tasks and workflows." },
-  { num: "07", title: "API & Web Scraping", outcome: "Extract, clean, and persist data from APIs & websites." },
-  { num: "08", title: "Database & SQL with Python", outcome: "Integrate Python with MySQL/PostgreSQL securely." },
-  { num: "09", title: "Deployment & DevOps", outcome: "Containerize & deploy apps (Docker, CI/CD)." },
-  { num: "10", title: "Capstone Project & Portfolio", outcome: "Build 3 industry-grade projects employers value." },
+  // p.16 — Module 1
+  {
+    num: "01",
+    title: "Introduction to Python Programming",
+    outcome:
+      "Why Python, key applications (Web, Data Science, Testing, Scripting), interpreted vs. compiled, Python 2 vs 3.",
+  },
+  // p.16 — Module 2
+  {
+    num: "02",
+    title: "Installation & Environment Setup",
+    outcome:
+      "Install Python (Win/Mac/Linux), set up VS Code/PyCharm/Jupyter, configure pip & virtual envs, run your first script.",
+  },
+  // p.16 — Module 3
+  {
+    num: "03",
+    title: "Python Basics",
+    outcome:
+      "Variables, data types, operators, input/output, type casting, comments, and clean coding practices.",
+  },
+  // p.16 — Module 4
+  {
+    num: "04",
+    title: "Ranges, Lists, and Tuples",
+    outcome:
+      "range(), lists & tuples, indexing, slicing, iteration, mutability, and common list/tuple methods.",
+  },
+  // p.17 — Module 5
+  {
+    num: "05",
+    title: "Conditionals and Looping",
+    outcome:
+      "if/elif/else, while & for loops, break/continue/pass, and real-life control-flow scenarios.",
+  },
+  // p.17 — Module 6
+  {
+    num: "06",
+    title: "Unpacking and Swapping Variables",
+    outcome:
+      "Tuple/list unpacking, swap without temp, unpacking with * and nested structures.",
+  },
+  // p.17 — Module 7
+  {
+    num: "07",
+    title: "Comprehensions and Data Conversion",
+    outcome:
+      "List/set/dict comprehensions, type conversions, filters/maps/conditional logic, lambda with comps.",
+  },
+  // p.17 — Module 8
+  {
+    num: "08",
+    title: "Functions in Python",
+    outcome:
+      "Define/call functions, parameters & return values, *args/**kwargs, lambdas, scope basics.",
+  },
+  // p.17 — Module 9
+  {
+    num: "09",
+    title: "Sorting Techniques",
+    outcome:
+      "sorted(), .sort(), key functions; sort lists of tuples/dicts; manual bubble/selection sort.",
+  },
+  // p.18 — Module 10
+  {
+    num: "10",
+    title: "Object-Oriented Programming (OOP)",
+    outcome:
+      "Classes/objects, __init__ and self, inheritance/encapsulation/polymorphism, automation/data app use cases.",
+  },
+  // p.18 — Module 11
+  {
+    num: "11",
+    title: "Decorators and Access Control",
+    outcome:
+      "Function decorators (@staticmethod, @property, custom), private/protected members, usage in Flask/Django.",
+  },
+  // p.18 — Module 12
+  {
+    num: "12",
+    title: "Regular Expressions in Python",
+    outcome:
+      "re module, pattern matching, groups/quantifiers, validations (email, phone), practical exercises.",
+  },
+  // p.18 — Module 13
+  {
+    num: "13",
+    title: "Exception Handling",
+    outcome:
+      "try/except/else/finally, common exceptions, raising & custom exceptions, best-practice error handling.",
+  },
+  // p.18 — Module 14
+  {
+    num: "14",
+    title: "Working with Python Collections",
+    outcome:
+      "dict, set, frozenset; operations/methods; nested collections; performance considerations.",
+  },
+  // p.19 — Module 15
+  {
+    num: "15",
+    title: "Container Objects and Nested Data",
+    outcome:
+      "Lists of dicts/dicts of lists, iterate & parse complex data, JSON/API/file data manipulation.",
+  },
+  // p.19 — Capstone
+  {
+    num: "16",
+    title: "Capstone Project",
+    outcome:
+      "Build a mini app (e.g., inventory/expense tracker) using OOP, comprehensions, regex, exceptions, and file I/O.",
+  },
 ];
 
 // Distinct soft accents (cycled without repeating back-to-back)
@@ -31,13 +134,13 @@ const ACCENTS = [
 ];
 
 export default function CurriculumSection() {
-  // SEO: JSON-LD for syllabus visibility
+  // SEO: JSON-LD for syllabus visibility (updated to 16 items: 15 modules + capstone)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Python Master Program — 10-Module Curriculum",
+    name: "Python Programming — 15-Module Curriculum + Capstone",
     description:
-      "Hands-on Python syllabus covering fundamentals, DSA, Django, Data Science, Machine Learning, Automation, APIs, SQL, and DevOps with capstone projects.",
+      "From Python fundamentals to OOP, decorators, regex, collections, nested data, and a hands-on capstone project. Includes setup, functions, sorting, error handling, and more.",
     itemListElement: MODULES.map((m, i) => ({
       "@type": "ListItem",
       position: i + 1,
@@ -49,7 +152,7 @@ export default function CurriculumSection() {
       },
     })),
     keywords:
-      "python course syllabus, django curriculum, data science with python, machine learning python modules, python projects, job ready python program",
+      "python programming syllabus, python course modules, object oriented python, python regex, python collections, beginner to advanced python, python capstone project",
   };
 
   return (
@@ -64,10 +167,10 @@ export default function CurriculumSection() {
         {/* Heading */}
         <header className="text-center max-w-4xl mx-auto">
           <h2 id="curriculum-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-            10-Module <span className="text-FS">Python Curriculum</span>
+            15-Module <span className="text-FS">Python Curriculum</span> + Capstone
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600">
-            A carefully sequenced, <strong>project-driven</strong> roadmap from basics to deployment — built for
+            Carefully sequenced, <strong>project-driven</strong> roadmap from setup to deployment — built for
             <strong> job-ready outcomes</strong>.
           </p>
         </header>
@@ -140,17 +243,12 @@ export default function CurriculumSection() {
               <path d="M3 4.5A1.5 1.5 0 014.5 3h11A1.5 1.5 0 0117 4.5v11a1.5 1.5 0 01-1.5 1.5h-11A1.5 1.5 0 013 15.5v-11zm5 2a1 1 0 00-1 1v2H5.707a1 1 0 00-.707 1.707l4.293 4.293a1 1 0 001.414 0l4.293-4.293A1 1 0 0014.293 10H13V7.5a1 1 0 00-1-1H8z" />
             </svg>
           </button>
-          <p className="mt-3 text-xs sm:text-sm text-slate-600">
-            Includes topics, outcomes, tools, and project checklist.
-          </p>
+          <p className="mt-3 text-xs sm:text-sm text-slate-600">Includes topics, outcomes, tools, and project checklist.</p>
         </div>
       </div>
 
       {/* JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

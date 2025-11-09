@@ -1,36 +1,111 @@
 // components/sections/StatsSection.tsx
-// Server component — clean, modern, responsive stats with subtle futuristic accents.
+// Client component — clean, modern, responsive stats with scroll-triggered count-up.
 
-type Stat = {
-  value: string;
-  label: string;
-  hint?: string;
-  accent: {
-    bar: string;     // top bar
-    border: string;  // card border
-    text: string;    // value / accent text
-    chip: string;    // small chip bg
-    ring: string;    // focus ring
-  };
+"use client";
+
+import React from "react";
+
+/* -------------------- Helpers -------------------- */
+function useInViewOnce(ref: React.RefObject<HTMLElement>, rootMargin = "0px") {
+  const [inView, setInView] = React.useState(false);
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el || inView) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          obs.disconnect();
+        }
+      },
+      { root: null, rootMargin, threshold: 0.2 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [inView, ref, rootMargin]);
+  return inView;
+}
+
+const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+
+function useCountUp(target: number, start: boolean, durationMs = 1400) {
+  const [val, setVal] = React.useState(0);
+  React.useEffect(() => {
+    if (!start) return;
+    let raf = 0;
+    const t0 = performance.now();
+    const tick = () => {
+      const t = Math.min(1, (performance.now() - t0) / durationMs);
+      setVal(Math.round(target * easeOutCubic(t)));
+      if (t < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [start, target, durationMs]);
+  return val;
+}
+
+function formatNumber(n: number, opts?: { withPlus?: boolean }) {
+  const s = n.toLocaleString();
+  return opts?.withPlus ? `${s}+` : s;
+}
+
+/* -------------------- Types & Data -------------------- */
+type Accent = {
+  bar: string;
+  border: string;
+  text: string;
+  chip: string;
+  ring: string;
 };
 
+type StatBase = {
+  label: string;
+  hint?: string;
+  accent: Accent;
+};
+
+type SingleNumber = StatBase & {
+  kind: "single";
+  target: number;
+  suffix?: string; // "%", " Hours", "+"
+};
+
+type RatioNumber = StatBase & {
+  kind: "ratio";
+  leftTarget: number;
+  rightTarget: number;
+};
+
+type NonNumeric = StatBase & {
+  kind: "text";
+  value: string;
+};
+
+type Stat = SingleNumber | RatioNumber | NonNumeric;
+
+// NOTE: these values are the PDF-extracted stats you requested.
 const STATS: Stat[] = [
   {
-    value: "55 Hours",
-    label: "Intensive Hands-On Training",
-    hint: "Deep Learning • NLP • GenAI",
+    kind: "single",
+    target: 110,
+    suffix: " Hours",
+    label: "Program Duration",
+    hint: "4 Months • Hybrid",
     accent: {
-      bar: "bg-indigo-500",
-      border: "border-indigo-200",
-      text: "text-indigo-700",
-      chip: "bg-indigo-50",
-      ring: "focus:ring-indigo-300",
+      bar: "bg-orange-500",
+      border: "border-orange-200",
+      text: "text-orange-700",
+      chip: "bg-orange-50",
+      ring: "focus:ring-orange-300",
     },
   },
   {
-    value: "80 : 20",
+    kind: "ratio",
+    leftTarget: 80,
+    rightTarget: 20,
     label: "Practical : Theory",
-    hint: "Projects • Labs • Code Reviews",
+    hint: "Industry-Rich Experience",
     accent: {
       bar: "bg-amber-500",
       border: "border-amber-200",
@@ -40,9 +115,11 @@ const STATS: Stat[] = [
     },
   },
   {
-    value: "14+",
-    label: "Years of Expertise",
-    hint: "Mentor-led • Industry-Aligned",
+    kind: "single",
+    target: 14,
+    suffix: "+ Years",
+    label: "Team Expertise",
+    hint: "Mentor-led • Industry Aligned",
     accent: {
       bar: "bg-emerald-500",
       border: "border-emerald-200",
@@ -52,7 +129,9 @@ const STATS: Stat[] = [
     },
   },
   {
-    value: "100%",
+    kind: "single",
+    target: 100,
+    suffix: "%",
     label: "Job Assistance",
     hint: "Resume • Mock Interviews • Referrals",
     accent: {
@@ -64,21 +143,25 @@ const STATS: Stat[] = [
     },
   },
   {
-    value: "1 : 1",
-    label: "Doubt Solving",
-    hint: "Live Support • Code Walkthroughs",
+    kind: "single",
+    target: 101000,
+    suffix: "+",
+    label: "Data Analyst Jobs (India)",
+    hint: "Open Roles Across Sectors",
     accent: {
-      bar: "bg-sky-500",
-      border: "border-sky-200",
-      text: "text-sky-700",
-      chip: "bg-sky-50",
-      ring: "focus:ring-sky-300",
+      bar: "bg-indigo-500",
+      border: "border-indigo-200",
+      text: "text-indigo-700",
+      chip: "bg-indigo-50",
+      ring: "focus:ring-indigo-300",
     },
   },
   {
-    value: "4",
-    label: "Global Certificates",
-    hint: "Verifiable • Resume-Ready",
+    kind: "single",
+    target: 25,
+    suffix: "% CAGR",
+    label: "Market Growth (2020–2030)",
+    hint: "Data/Analytics Industry",
     accent: {
       bar: "bg-violet-500",
       border: "border-violet-200",
@@ -89,56 +172,68 @@ const STATS: Stat[] = [
   },
 ];
 
+/* -------------------- Component -------------------- */
 export default function StatsSection() {
-  const seoKeywords =
-    "deep learning course, nlp training, generative ai certification, hands-on ai program, data science placement assistance, python machine learning projects, ai portfolio";
+  const sectionRef = React.useRef<HTMLElement>(null!); // non-null assertion to match hook signature
+  const inView = useInViewOnce(sectionRef, "120px");
 
-  // JSON-LD (ItemList) for richer snippets
+  const seoKeywords =
+    "advanced data analytics course, business analytics training, python sql bi ml, job assistance data analyst, hands-on analytics program, dashboard reporting, power bi tableau excel";
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "CDPL Deep Learning, NLP & Generative AI — Program Highlights",
-    itemListElement: STATS.map((s, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: {
-        "@type": "Thing",
-        name: s.label,
-        description: `${s.value} — ${s.label}${s.hint ? ` (${s.hint})` : ""}`,
-      },
-    })),
+    name: "Advanced Data Analytics — Program Highlights",
+    itemListElement: STATS.map((s, i) => {
+      let description: string;
+      switch (s.kind) {
+        case "ratio":
+          description = `${s.leftTarget}:${s.rightTarget} — ${s.label}${s.hint ? ` (${s.hint})` : ""}`;
+          break;
+        case "single":
+          description = `${s.target}${s.suffix ? ` ${s.suffix}` : ""} — ${s.label}${s.hint ? ` (${s.hint})` : ""}`;
+          break;
+        case "text":
+          description = `${s.value} — ${s.label}${s.hint ? ` (${s.hint})` : ""}`;
+          break;
+      }
+      return {
+        "@type": "ListItem",
+        position: i + 1,
+        item: {
+          "@type": "Thing",
+          name: s.label,
+          description,
+        },
+      };
+    }),
     keywords:
-      "deep learning stats, nlp course highlights, generative ai training features, ai hands-on program, data science hero program",
+      "advanced data analytics highlights, analytics course benefits, data analyst training features, job ready analytics",
   };
 
   return (
     <section
-      id="ai-stats"
-      aria-labelledby="ai-stats-heading"
-      className="relative py-4 md:py-8 bg-white"
+      ref={sectionRef}
+      id="ada-stats"
+      aria-labelledby="ada-stats-heading"
+      className="relative py-4 md:py-6 bg-white"
     >
-      {/* Subtle futuristic backdrop (fine grid + soft top glow; no heavy gradients) */}
+      {/* Subtle backdrop */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(2,6,23,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(2,6,23,0.035)_1px,transparent_1px)] bg-[size:28px_28px]" />
-        <div className="absolute inset-x-0 top-0 h-[110px] bg-[radial-gradient(700px_140px_at_50%_0%,rgba(99,102,241,0.08),transparent_60%)]" />
+        <div className="absolute inset-x-0 top-0 h-[110px] bg-[radial-gradient(700px_140px_at_50%_0%,rgba(251,146,60,0.10),transparent_60%)]" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="mx-auto max-w-3xl text-center">
-          <h2
-            id="ai-stats-heading"
-            className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
-          >
-            Why <span className="text-DS">Deep Learning</span>, <span className="text-DS">NLP</span> & <span className="text-DS">Generative AI</span>?
+          <h2 id="ada-stats-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
+            Why <span className="text-DS">Advanced Data Analytics</span>?
           </h2>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-700">
-            AI is transforming industries—be at the forefront with CDPL’s{" "}
-            <strong>Hero Program</strong>. Build real projects in{" "}
-            <strong>Computer Vision</strong>, <strong>NLP</strong>, and{" "}
-            <strong>GenAI</strong> using <strong>Python</strong>, <strong>PyTorch</strong>,{" "}
-            <strong>Transformers</strong>, and <strong>LLMs</strong>.
+            Data analytics drives <strong>profitability, forecasting, and decisions</strong> in 2025. Join our mentor-led{" "}
+            <strong>Advanced Data Analytics</strong> program to build <strong>Python, SQL, BI, and ML</strong> skills with
+            <strong> real projects</strong> and placement support.
           </p>
-          {/* SEO helper (visually hidden) */}
           <p className="sr-only">{seoKeywords}</p>
         </header>
 
@@ -162,15 +257,24 @@ export default function StatsSection() {
               ].join(" ")}
             >
               {/* top accent bar */}
-              <div
-                className={["absolute left-0 right-0 top-0 h-1 rounded-t-2xl", s.accent.bar].join(" ")}
-                aria-hidden
-              />
+              <div className={["absolute left-0 right-0 top-0 h-1 rounded-t-2xl", s.accent.bar].join(" ")} aria-hidden />
 
+              {/* capsule behind number */}
               <div className="mx-auto h-1 w-14 rounded-full bg-white/80" aria-hidden />
+
+              {/* value */}
               <div className={["mt-3 text-4xl font-extrabold tracking-tight", s.accent.text].join(" ")}>
-                {s.value}
+                {s.kind === "single" && <AnimatedNumber target={s.target} inView={inView} suffix={s.suffix} />}
+                {s.kind === "ratio" && (
+                  <span className="inline-flex items-baseline gap-1">
+                    <AnimatedNumber target={s.leftTarget} inView={inView} />
+                    <span className="mx-0.5 text-slate-400">:</span>
+                    <AnimatedNumber target={s.rightTarget} inView={inView} />
+                  </span>
+                )}
+                {s.kind === "text" && s.value}
               </div>
+
               <p className="mt-1 text-sm md:text-base font-medium text-slate-800">{s.label}</p>
 
               {s.hint && (
@@ -186,7 +290,6 @@ export default function StatsSection() {
                 </div>
               )}
 
-              {/* subtle underline progress animation for engagement */}
               <div className="mt-5 h-1 w-full rounded-full bg-slate-100" aria-hidden>
                 <div
                   className={[
@@ -203,22 +306,35 @@ export default function StatsSection() {
         {/* Context strip */}
         <div className="mx-auto mt-8 max-w-4xl rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
           <p className="text-sm text-slate-700">
-            Learn with <strong>mentor-led guidance</strong>,{" "}
-            <strong>project-first pedagogy</strong>, and{" "}
-            <strong>career support</strong> that aligns with{" "}
-            <strong>industry hiring</strong> for <strong>AI/ML</strong> roles.
+            Master <strong>dashboards & reporting</strong> (Power BI/Tableau), <strong>SQL for analytics</strong>,{" "}
+            <strong>feature engineering</strong>, and <strong>ML for business</strong> with <strong>career support</strong>.
           </p>
-          <p className="mt-2 text-[11px] text-slate-500">
-            *Outcomes vary by prior experience, pace, and project depth.
-          </p>
+          <p className="mt-2 text-[11px] text-slate-500">*Outcomes vary by prior experience, pace, and project depth.</p>
         </div>
       </div>
 
-      {/* JSON-LD structured data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      {/* JSON-LD */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
+}
+
+/* -------------------- UI bits -------------------- */
+function AnimatedNumber({
+  target,
+  inView,
+  suffix,
+}: {
+  target: number;
+  inView: boolean;
+  suffix?: string;
+}) {
+  const val = useCountUp(target, inView);
+  // Place a space before suffix only when it's a word (not "%" or "+")
+  const needsSpace = !!suffix && !["%", "+"].includes(suffix.trim());
+  const display =
+    (suffix?.trim() === "+"
+      ? formatNumber(val, { withPlus: true })
+      : formatNumber(val)) + (suffix ? (needsSpace ? ` ${suffix}` : suffix) : "");
+  return <>{display}</>;
 }

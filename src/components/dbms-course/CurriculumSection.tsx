@@ -5,30 +5,111 @@ import Link from 'next/link';
 type Module = { title: string; topics: string[] };
 
 const curriculum: Module[] = [
-  { title: 'MySQL Fundamentals',            topics: ['Installation & Setup', 'Database vs Table', 'Data Types', 'CRUD Operations'] },
-  { title: 'Advanced SQL Queries',          topics: ['JOINs (INNER, LEFT, etc.)', 'Subqueries', 'Aggregate Functions', 'Window Functions'] },
-  { title: 'Database Design & Normalization', topics: ['ER Diagrams', '1NF to 3NF', 'Keys & Constraints', 'Indexing Strategy'] },
-  { title: 'Performance Optimization',      topics: ['EXPLAIN PLAN', 'Index Optimization', 'Query Caching', 'Partitioning'] },
-  { title: 'Real-World Projects',           topics: ['E-Commerce DB', 'Inventory System', 'Analytics Dashboard', 'Banking DB'] },
+  {
+    title: 'Module 1: Introduction to DBMS & MySQL',
+    topics: [
+      'Understanding DBMS: definition, importance, types (Relational, NoSQL, Hierarchical)',
+      'Key concepts: data models, schemas, data independence',
+      'Introduction to MySQL: overview, history, features',
+      'Advantages & use cases in modern databases',
+    ],
+  },
+  {
+    title: 'Module 2: Getting Started with MySQL',
+    topics: [
+      'Installation & setup: system requirements, MySQL Server/Workbench',
+      'Basic configuration: user accounts, security settings',
+      'MySQL interfaces: CLI basics',
+      'MySQL Workbench: GUI features for design & queries',
+    ],
+  },
+  {
+    title: 'Module 3: Database Design & Modeling',
+    topics: [
+      'Database design concepts: ER modeling (entities, relationships)',
+      'Relational schema conversion from ER models',
+      'Schema implementation: normalization (1NF–BCNF) & denormalization trade-offs',
+      'Table creation: data types, keys, constraints; indexing basics (single/composite)',
+    ],
+  },
+  {
+    title: 'Module 4: SQL Basics & Essential Clauses',
+    topics: [
+      'Basic SQL queries: SELECT, WHERE; retrieving data from single/multiple tables',
+      'Essential filters: IN, BETWEEN, LIKE, IS NULL; ORDER BY, LIMIT/OFFSET',
+      'MySQL operators: arithmetic, concatenation; logical & comparison operators',
+      'Transactions intro: COMMIT/ROLLBACK for integrity',
+    ],
+  },
+  {
+    title: 'Module 5: Advanced SQL',
+    topics: [
+      'Joins: INNER, LEFT, SELF, CROSS; USING & NATURAL JOIN',
+      'Subqueries: scalar & correlated; UNION/UNION ALL',
+      'Aggregations: GROUP BY, HAVING, aggregate functions; multi-level summaries',
+      'Window functions: ROW_NUMBER, RANK, DENSE_RANK with OVER; running totals & moving averages',
+    ],
+  },
+  {
+    title: 'Module 6: Database Administration',
+    topics: [
+      'User management: create accounts; grant/revoke; security best practices',
+      'DDL/DML: CREATE/ALTER/DROP; INSERT/UPDATE/DELETE',
+      'Backup & recovery: full/incremental with mysqldump; restore',
+      'Query optimization: EXPLAIN, indexing strategies; B-tree, hash, full-text',
+      'Server configuration: tuning parameters; slow query logs',
+      'TCL & DCL: COMMIT/ROLLBACK/SAVEPOINT; GRANT/REVOKE',
+    ],
+  },
+  {
+    title: 'Module 7: SQL Advanced Features',
+    topics: [
+      'As titled in brochure; detailed bullets not listed in the PDF page',
+      'Covered live during class with hands-on exercises',
+    ],
+  },
+  {
+    title: 'Module 8: SQL Objects',
+    topics: [
+      'Views: virtual tables for simplified access',
+      'Stored procedures: reusable code blocks',
+      'Functions & triggers: UDFs and automation',
+      'CTEs & temporary tables: common patterns',
+    ],
+  },
+  {
+    title: 'Module 9: Real-World Applications',
+    topics: [
+      'Case studies: sales/finance database designs; best practices',
+      'Capstone project: design, implement, optimize a business-scenario DB',
+    ],
+  },
+  {
+    title: 'Module 10: Assessment & Certification',
+    topics: [
+      'Final assessment test: practical & theoretical coverage',
+      'Certification',
+    ],
+  },
 ];
 
 // Distinct, non-repeating accents (no heavy gradients)
 const accents = [
-  { cardBg: 'bg-sky-50',     cardBorder: 'border-sky-200',     badgeBg: 'bg-sky-600',     ink: 'text-sky-900',     icon: 'text-sky-700' },
+  { cardBg: 'bg-sky-50', cardBorder: 'border-sky-200', badgeBg: 'bg-sky-600', ink: 'text-sky-900', icon: 'text-sky-700' },
   { cardBg: 'bg-emerald-50', cardBorder: 'border-emerald-200', badgeBg: 'bg-emerald-600', ink: 'text-emerald-900', icon: 'text-emerald-700' },
-  { cardBg: 'bg-amber-50',   cardBorder: 'border-amber-200',   badgeBg: 'bg-amber-600',   ink: 'text-amber-900',   icon: 'text-amber-700' },
-  { cardBg: 'bg-violet-50',  cardBorder: 'border-violet-200',  badgeBg: 'bg-violet-600',  ink: 'text-violet-900',  icon: 'text-violet-700' },
-  { cardBg: 'bg-rose-50',    cardBorder: 'border-rose-200',    badgeBg: 'bg-rose-600',    ink: 'text-rose-900',    icon: 'text-rose-700' },
+  { cardBg: 'bg-amber-50', cardBorder: 'border-amber-200', badgeBg: 'bg-amber-600', ink: 'text-amber-900', icon: 'text-amber-700' },
+  { cardBg: 'bg-violet-50', cardBorder: 'border-violet-200', badgeBg: 'bg-violet-600', ink: 'text-violet-900', icon: 'text-violet-700' },
+  { cardBg: 'bg-rose-50', cardBorder: 'border-rose-200', badgeBg: 'bg-rose-600', ink: 'text-rose-900', icon: 'text-rose-700' },
 ];
 
 export default function CurriculumSection() {
-  // SEO structured data
+  // SEO structured data (auto-generated from modules above)
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: 'MySQL Course Curriculum',
     description:
-      'Industry-ready MySQL curriculum: SQL queries, database design & normalization, indexing, EXPLAIN, caching, partitioning, and real projects.',
+      'DBMS with MySQL curriculum covering DBMS fundamentals, installation, SQL (basic to advanced), admin, SQL objects, real projects, and certification.',
     itemListElement: curriculum.map((m, idx) => ({
       '@type': 'ListItem',
       position: idx + 1,
@@ -51,14 +132,13 @@ export default function CurriculumSection() {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl text-slate-900 text-center font-bold mb-4">
-        Industry-Ready <span className='text-ST'>MySQL Curriculum</span>
-      </h2>
+          Industry-Ready <span className="text-ST">MySQL Curriculum</span>
+        </h2>
 
-        {/* SEO-supportive intro */}
         <p className="mx-auto mb-8 max-w-3xl text-center text-sm leading-relaxed text-slate-600 sm:text-base">
-          Learn <strong>SQL querying</strong>, <strong>schema design</strong>, <strong>normalization</strong>,{' '}
-          <strong>index strategies</strong>, <strong>EXPLAIN plan analysis</strong>, <strong>caching</strong>,{' '}
-          <strong>partitioning</strong>, and build <strong>production-style MySQL databases</strong> for real business use cases.
+          Learn <strong>DBMS foundations</strong>, <strong>SQL (basic to advanced)</strong>,{' '}
+          <strong>database design</strong>, <strong>administration & performance</strong>, and build{' '}
+          <strong>production-style MySQL databases</strong> through case studies and a capstone.
         </p>
 
         {/* Modules grid */}
@@ -70,7 +150,6 @@ export default function CurriculumSection() {
                 key={mod.title}
                 className={[
                   'group relative overflow-hidden rounded-2xl border p-6 md:p-7',
-                  // extra padding-top so badge never overlaps title on small screens
                   'pt-14 md:pt-10',
                   a.cardBg,
                   a.cardBorder,
@@ -81,7 +160,6 @@ export default function CurriculumSection() {
                 <div
                   className={[
                     'absolute right-4 top-4 grid place-items-center rounded-xl font-bold text-white shadow-sm',
-                    // smaller on mobile, upsized on sm+
                     'h-8 w-8 text-[13px] sm:h-9 sm:w-9 sm:text-sm',
                     a.badgeBg,
                   ].join(' ')}
@@ -101,16 +179,15 @@ export default function CurriculumSection() {
                   ))}
                 </ul>
 
-                {/* outcomes microcopy */}
                 <p className="mt-4 text-xs text-slate-500">
-                  Outcomes: hands-on labs, performance drills, and take-home projects to showcase on your portfolio.
+                  Outcomes: hands-on labs, performance drills, and a portfolio-ready capstone.
                 </p>
               </li>
             );
           })}
         </ol>
 
-        {/* Optional inline CTAs (anchor within page) */}
+        {/* Inline CTAs */}
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <Link
             href="contact-us"

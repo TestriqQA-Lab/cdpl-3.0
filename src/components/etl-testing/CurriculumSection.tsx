@@ -2,28 +2,117 @@
 import { CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 
-type Module = { title: string; topics: string[] };
+type Module = {
+  title: string;
+  topics: string[];
+  duration: string;        // e.g., "2 Hours"
+  isoDuration: string;     // e.g., "PT2H" (for JSON-LD)
+};
 
 const curriculum: Module[] = [
   {
-    title: 'ETL Basics & Architecture',
-    topics: ['ETL vs ELT', 'Staging Area', 'Data Flow', 'Source to Target Mapping'],
+    title: 'Introduction to ETL',
+    topics: [
+      'Overview of ETL vs ELT',
+      'Importance in data pipelines',
+      'Roles: ETL testers & developers',
+    ],
+    duration: '2 Hours',
+    isoDuration: 'PT2H',
+  },
+  {
+    title: 'Data Warehousing Concepts',
+    topics: [
+      'DW architecture',
+      'Star vs Snowflake schema',
+      'Relational vs Dimensional models',
+    ],
+    duration: '4 Hours',
+    isoDuration: 'PT4H',
   },
   {
     title: 'SQL for ETL Testing',
-    topics: ['Complex JOINs', 'Data Reconciliation', 'Duplicate Checks', 'NULL Handling'],
+    topics: [
+      'Basic to advanced SQL',
+      'Data validation with SQL',
+      'Debugging SQL-based ETL jobs',
+    ],
+    duration: '16 Hours',
+    isoDuration: 'PT16H',
   },
   {
-    title: 'Data Validation Techniques',
-    topics: ['Count Validation', 'Sum & Aggregate', 'Data Type Checks', 'Reference Integrity'],
+    title: 'Manual ETL Testing',
+    topics: [
+      'Test plans & strategy',
+      'Test case design (completeness & accuracy)',
+      'Defect management',
+    ],
+    duration: '10 Hours',
+    isoDuration: 'PT10H',
   },
   {
-    title: 'Defect Management',
-    topics: ['Root Cause Analysis', 'Bug Life Cycle', 'Test Closure Report', 'SLA Tracking'],
+    title: 'Automation in ETL Testing',
+    topics: [
+      'Python-based automation',
+      'Selenium for ETL validation',
+      'Parameterization & reporting',
+    ],
+    duration: '20 Hours',
+    isoDuration: 'PT20H',
   },
   {
-    title: 'Real-World ETL Projects',
-    topics: ['Banking Data Pipeline', 'E-Commerce DW', 'Healthcare ETL', 'Insurance Claims'],
+    title: 'Talend for ETL Development',
+    topics: [
+      'Talend Studio essentials',
+      'tMap & tJoin',
+      'Dynamic schemas',
+      'Multi-source integration',
+    ],
+    duration: '10 Hours',
+    isoDuration: 'PT10H',
+  },
+  {
+    title: 'Informatica for ETL Development',
+    topics: [
+      'Workflows',
+      'Transformations',
+      'Debugging',
+      'Optimization',
+    ],
+    duration: '10 Hours',
+    isoDuration: 'PT10H',
+  },
+  {
+    title: 'Data Transformation & Validation',
+    topics: [
+      'Null handling',
+      'Deduplication',
+      'Business rules',
+      'Real-time validation',
+    ],
+    duration: '10 Hours',
+    isoDuration: 'PT10H',
+  },
+  {
+    title: 'ETL Tools Overview',
+    topics: [
+      'Snowflake',
+      'SnapLogic',
+      'Power BI in ETL workflows',
+    ],
+    duration: '10 Hours',
+    isoDuration: 'PT10H',
+  },
+  {
+    title: 'Capstone Projects',
+    topics: [
+      'Retail sales data ETL testing',
+      'E-commerce ETL design & validation',
+      'Multi-tool integration (Talend, Informatica, Python, Selenium)',
+      'Insights & reporting with Power BI',
+    ],
+    duration: '8 Hours',
+    isoDuration: 'PT8H',
   },
 ];
 
@@ -41,9 +130,9 @@ export default function CurriculumSection() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'ETL Testing Course Curriculum',
+    name: 'ETL Testing & Development Course Curriculum',
     description:
-      'Industry-ready ETL Testing curriculum: architecture, SQL data quality, validation techniques, defect management, and real projects.',
+      'Comprehensive ETL curriculum: DW concepts, SQL validation, manual & automated testing, Talend, Informatica, Snowflake/SnapLogic/Power BI, and capstones.',
     itemListElement: curriculum.map((m, idx) => ({
       '@type': 'ListItem',
       position: idx + 1,
@@ -52,6 +141,7 @@ export default function CurriculumSection() {
         '@type': 'Course',
         name: m.title,
         description: m.topics.join(', '),
+        timeRequired: m.isoDuration,
       },
     })),
   };
@@ -65,15 +155,15 @@ export default function CurriculumSection() {
       </div>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl md:text-4xl text-slate-900 text-center font-bold mb-4">
-          Industry-Ready <span className='text-ST'>ETL Testing</span> Curriculum
+        <h2 id="curriculum-heading" className="text-3xl md:text-4xl text-slate-900 text-center font-bold mb-4">
+          Industry-Ready <span className="text-ST">ETL Testing</span> Curriculum
         </h2>
 
         {/* SEO supportive line */}
         <p className="mx-auto mt-4 mb-6 max-w-3xl text-center text-sm sm:text-base text-slate-600">
-          Master <strong>ETL/ELT architecture</strong>, <strong>SQL data reconciliation</strong>,{' '}
-          <strong>validation techniques</strong>, and <strong>defect management</strong>. Build a job-ready portfolio
-          with real <strong>banking</strong>, <strong>e-commerce</strong>, and <strong>healthcare</strong> projects.
+          Learn <strong>DW architecture</strong>, <strong>SQL-based ETL validation</strong>, <strong>manual & automated testing</strong>, and
+          development with <strong>Talend</strong> and <strong>Informatica</strong>. Wrap up with <strong>capstone projects</strong> integrating
+          Snowflake, SnapLogic, and Power BI.
         </p>
 
         {/* Responsive grid */}
@@ -90,12 +180,19 @@ export default function CurriculumSection() {
                   'shadow-[0_1px_0_0_rgba(15,23,42,0.04)] transition hover:shadow-md focus-within:ring-2 focus-within:ring-slate-300',
                 ].join(' ')}
               >
-                {/* index pill (not absolute) — avoids covering the title on mobile */}
+                {/* index + duration pill row */}
                 <div className="mb-3 flex items-center gap-2">
                   <span className={['inline-flex h-8 min-w-8 items-center justify-center rounded-lg px-2 text-sm font-bold', a.pill].join(' ')}>
                     {i + 1}
                   </span>
                   <h3 className={['text-lg sm:text-xl font-semibold leading-tight', a.title].join(' ')}>{mod.title}</h3>
+                </div>
+
+                {/* duration */}
+                <div className="mb-3">
+                  <span className="inline-flex items-center rounded-md border border-current px-2 py-0.5 text-[11px] font-semibold text-slate-700">
+                    {mod.duration}
+                  </span>
                 </div>
 
                 {/* topics */}

@@ -1,20 +1,64 @@
 'use client';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+
+// ---- Animated counter that starts when in-view ----
+function Counter({ to, duration = 1.2 }: { to: number; duration?: number }) {
+  const count = useMotionValue(0);
+  const [value, setValue] = useState(0);
+  const ref = useRef<HTMLSpanElement | null>(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  useEffect(() => {
+    const unsub = count.on('change', v => setValue(Math.round(v)));
+    return () => unsub();
+  }, [count]);
+
+  useEffect(() => {
+    // simple IntersectionObserver so we only animate once when visible
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+          const start = performance.now();
+          const startVal = 0;
+          const endVal = to;
+          const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+
+          const step = (now: number) => {
+            const t = Math.min(1, (now - start) / (duration * 1000));
+            count.set(startVal + (endVal - startVal) * easeOut(t));
+            if (t < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        }
+      },
+      { rootMargin: '-20% 0px -10% 0px', threshold: 0.2 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [count, duration, hasAnimated, to]);
+
+  return <span ref={ref}>{value}</span>;
+}
 
 type Stat = {
-  value: string;
   label: string;
   delay?: number;
   color: string;   // bg color
   border: string;  // border color
   text: string;    // text color
+  target: number;  // numeric target for animation
+  suffix?: string; // e.g., " Hours"
 };
 
 const stats: Stat[] = [
-  { value: '85,000+', label: 'ETL Testing Jobs in India', delay: 0.1, color: 'bg-sky-50',     border: 'border-sky-200',     text: 'text-sky-800' },
-  { value: '₹6–12 LPA', label: 'Fresher Salary Range',     delay: 0.2, color: 'bg-amber-50',   border: 'border-amber-200',   text: 'text-amber-800' },
-  { value: '28% CAGR',  label: 'Data Testing Growth',      delay: 0.3, color: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-800' },
-  { value: '18 Hours',  label: 'Intensive Training',       delay: 0.4, color: 'bg-violet-50',  border: 'border-violet-200',  text: 'text-violet-800' },
+  { label: 'Total Training', delay: 0.10, color: 'bg-sky-50', border: 'border-sky-200', text: 'text-sky-800', target: 100, suffix: ' Hours' },
+  { label: 'Structured Curriculum', delay: 0.20, color: 'bg-amber-50', border: 'border-amber-200', text: 'text-amber-800', target: 10, suffix: ' Modules' },
+  { label: 'Hands-on Learning', delay: 0.30, color: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-800', target: 2, suffix: ' Capstone Projects' },
+  { label: 'Career Pathways', delay: 0.40, color: 'bg-violet-50', border: 'border-violet-200', text: 'text-violet-800', target: 5, suffix: ' Job Roles' },
 ];
 
 export default function StatsSection() {
@@ -22,9 +66,9 @@ export default function StatsSection() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'ETL Testing Key Stats',
+    name: 'ETL Testing & Development — Key Stats',
     description:
-      'Important statistics for ETL Testing in India: job openings, fresher salary range, market growth, and training duration.',
+      'Core figures from the ETL Testing & Development program: total duration, modules, capstone projects, and mapped job roles.',
     itemListElement: stats.map((s, i) => ({
       '@type': 'ListItem',
       position: i + 1,
@@ -32,7 +76,7 @@ export default function StatsSection() {
       additionalProperty: {
         '@type': 'PropertyValue',
         name: s.label,
-        value: s.value,
+        value: `${s.target}${s.suffix ?? ''}`,
       },
     })),
   };
@@ -43,26 +87,23 @@ export default function StatsSection() {
       aria-labelledby="etl-stats-heading"
       className="relative py-4 md:py-10 bg-white"
     >
-      {/* Subtle top/bottom separators for a clean, slightly futuristic frame */}
+      {/* Subtle top/bottom separators */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-x-0 top-0 mx-auto h-px max-w-7xl bg-slate-100" />
         <div className="absolute inset-x-0 bottom-0 mx-auto h-px max-w-7xl bg-slate-100" />
       </div>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Heading & subcopy (small on mobile, larger on tablet/desktop) */}
         <header className="mx-auto mb-8 max-w-3xl text-center">
           <h2
             id="etl-stats-heading"
             className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl"
           >
-            Real-World Outcomes: <span className='text-ST'>ETL Testing</span> Careers & Training Impact
-            
+            Real-World Outcomes: <span className="text-ST">ETL Testing</span> Program Snapshot
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
-            Explore key metrics that matter for <strong>ETL Testing</strong> in India—job
-            demand, fresher salaries, market growth, and our focused{' '}
-            <strong>18-hour</strong> training designed to make you <strong>job-ready</strong>.
+            Figures sourced from the official ETL Testing &amp; Development brochure: total training time,
+            curriculum depth, hands-on capstones, and mapped job roles—so you know exactly what you’ll get.
           </p>
         </header>
 
@@ -82,15 +123,16 @@ export default function StatsSection() {
                 'shadow-[0_1px_0_0_rgba(15,23,42,0.04)]',
                 'focus-within:outline-none focus-within:ring-4 focus-within:ring-slate-200',
               ].join(' ')}
-              aria-label={`${s.value} — ${s.label}`}
+              aria-label={`${s.target}${s.suffix ?? ''} — ${s.label}`}
             >
               {/* Decorative corner dot */}
               <span className="pointer-events-none absolute right-4 top-4 h-1.5 w-1.5 rounded-full bg-slate-300/70 transition-transform group-hover:scale-125" />
-              <div className={`text-xl lg:text-4xl font-extrabold ${s.text}`}>{s.value}</div>
+              <div className={`text-xl lg:text-4xl font-extrabold ${s.text}`}>
+                <Counter to={s.target} />{s.suffix}
+              </div>
               <div className="mt-1 text-[11px] sm:text-sm font-medium text-slate-600">{s.label}</div>
-              {/* micro caption for SEO & clarity */}
               <div className="mt-3 text-[11px] leading-5 text-slate-500">
-                Verified industry data for <em>ETL/ELT roles</em>, fresher packages, and demand across Indian tech hubs.
+                Verified from the official program PDF: duration, curriculum items, capstone projects, and job-role mapping.
               </div>
             </motion.div>
           ))}
@@ -99,9 +141,9 @@ export default function StatsSection() {
         {/* SEO supportive copy */}
         <div className="mx-auto mt-8 max-w-4xl text-center">
           <p className="text-sm leading-relaxed text-slate-600 sm:text-base">
-            Employers value <strong>SQL data quality rules</strong>, <strong>reconciliation</strong>,{' '}
-            <strong>partitioning</strong>, and <strong>pipeline validation</strong>. Our hands-on approach covers{' '}
-            <em>test design, schema checks, orchestration basics, CI/CD integration, and audit-ready reporting</em>.
+            The program blends <strong>ETL/ELT fundamentals</strong>, <strong>SQL validation</strong>,{' '}
+            <strong>automation</strong> (Python/Selenium), and modern platforms (Talend, Informatica, Snowflake, Power BI)
+            with <strong>capstone delivery</strong> aligned to real job roles.
           </p>
         </div>
       </div>

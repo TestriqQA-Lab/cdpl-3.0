@@ -3,6 +3,8 @@
 // Unique accent colors per card (no repeats), minimal/non-distracting visuals.
 // Includes accessible snap-scrolling on mobile and structured data for search engines.
 
+import ReviewsMarquee from "../sections/ReviewMarque";
+
 type Testimonial = {
   name: string;
   role: string;
@@ -103,7 +105,7 @@ export default function TestimonialsSection() {
           <p className="mt-3 text-base md:text-lg text-slate-700">{subtitle}</p>
 
           {/* Aggregate rating chip */}
-          <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-[11px] font-semibold text-slate-700 backdrop-blur">
+          <div className="mt-4 mb-5 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-[11px] font-semibold text-slate-700 backdrop-blur">
             <span className="text-yellow-600" aria-hidden>
               ★★★★★
             </span>
@@ -116,103 +118,7 @@ export default function TestimonialsSection() {
           <p className="sr-only">{keywords}</p>
         </header>
 
-        {/* Cards: snap-scroll on mobile, grid on desktop */}
-        <div className="mt-10">
-          <ul
-            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6
-                       overflow-x-auto snap-x snap-mandatory lg:overflow-visible"
-            role="list"
-            aria-label="Student testimonials"
-          >
-            {TESTIMONIALS.map((t) => (
-              <li
-                key={t.name}
-                className="min-w-[85%] snap-center sm:min-w-0"
-                aria-label={`${t.name}, ${t.role} testimonial`}
-              >
-                <article
-                  className={[
-                    "h-full rounded-2xl border p-6 shadow-sm transition-all duration-200 backdrop-blur",
-                    "hover:-translate-y-0.5 hover:shadow-md focus-within:-translate-y-0.5",
-                    t.accent.bg,
-                    t.accent.border,
-                  ].join(" ")}
-                  tabIndex={0}
-                >
-                  {/* Header block: avatar + name/role */}
-                  <div className="flex items-center gap-3">
-                    {t.avatar ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={t.avatar}
-                        alt={`${t.name} avatar`}
-                        className="h-12 w-12 rounded-xl border border-white object-cover shadow-sm"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div className="grid h-12 w-12 place-items-center rounded-xl border border-white bg-white text-slate-900 shadow-sm">
-                        <span className="text-sm font-extrabold">
-                          {t.name
-                            .split(" ")
-                            .map((n) => n[0])
-                            .slice(0, 2)
-                            .join("")
-                            .toUpperCase()}
-                        </span>
-                      </div>
-                    )}
-
-                    <div className="min-w-0">
-                      <p className="truncate text-sm font-bold text-slate-900">
-                        {t.name}
-                      </p>
-                      <p className="truncate text-xs font-medium text-slate-600">
-                        {t.role}
-                        {t.company ? ` · ${t.company}` : ""}
-                      </p>
-                    </div>
-
-                    {/* Rating chip */}
-                    <span
-                      className={[
-                        "ml-auto inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold",
-                        t.accent.chip,
-                      ].join(" ")}
-                      aria-label={`Rating ${t.rating} out of 5`}
-                    >
-                      {"★".repeat(t.rating)}{" "}
-                      <span className="ml-1">({t.rating}.0)</span>
-                    </span>
-                  </div>
-
-                  {/* Quote */}
-                  <blockquote className="mt-4">
-                    <p className="text-sm leading-relaxed text-slate-800">
-                      “{t.quote}”
-                    </p>
-                  </blockquote>
-
-                  {/* Outcome / tag row */}
-                  <div className="mt-5 flex flex-wrap items-center gap-2">
-                    {t.result && (
-                      <span className="rounded-md bg-white px-2.5 py-1 text-[11px] font-semibold text-slate-700 ring-1 ring-black/5">
-                        {t.result}
-                      </span>
-                    )}
-                    <span
-                      className={[
-                        "rounded-md px-2.5 py-1 text-[11px] font-semibold ring-1 ring-black/5",
-                        t.accent.chip,
-                      ].join(" ")}
-                    >
-                      Verified Learner
-                    </span>
-                  </div>
-                </article>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ReviewsMarquee />
 
         {/* Trust strip */}
         <div className="mt-8 text-center">

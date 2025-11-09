@@ -2,33 +2,68 @@
 import { CheckCircle, Clock, Award, Layers } from 'lucide-react';
 import Link from 'next/link';
 
-
 type Module = { title: string; topics: string[] };
 
 const curriculum: Module[] = [
+    // From “Course Curriculum – Manual Software Testing” spread
     {
-        title: 'Selenium WebDriver Mastery',
-        topics: ['Page Object Model', 'TestNG/JUnit', 'Data-Driven', 'Parallel Execution'],
+        title: 'Manual Software Testing',
+        topics: [
+            'SDLC & STLC fundamentals',
+            'Black/White/Grey Box testing',
+            'Functional, Integration, System, Acceptance',
+            'Regression, Smoke & Sanity suites',
+        ],
     },
+    // From Test Management / Agile / Defect Tracking pages
     {
-        title: 'API Testing with REST Assured',
-        topics: ['Request/Response', 'Authentication', 'JSONPath', 'Contract Testing'],
+        title: 'Test Management & Agile',
+        topics: [
+            'Test Plans, Test Cases & RTM',
+            'Agile process & ceremonies',
+            'Jira, TestRail, Mantis BT usage',
+            'DTLC with Severity/Priority & Reporting',
+        ],
     },
+    // From API Testing using POSTMAN & RestAPIs pages
     {
-        title: 'Mobile Testing with Appium',
-        topics: ['Android/iOS Setup', 'Gestures', 'Hybrid Apps', 'Cloud Testing'],
+        title: 'API Testing using POSTMAN & RestAPIs',
+        topics: [
+            'GET/POST/PUT/PATCH/DELETE requests',
+            'Status, headers, cookies, response time',
+            'JSON Schema & response body validation',
+            'Collections, Workspaces, Environments & Auth',
+        ],
     },
+    // From DBMS using MySQL pages
     {
-        title: 'Cypress & Playwright',
-        topics: ['E2E Testing', 'Component Testing', 'Visual Testing', 'CI/CD Integration'],
+        title: 'DBMS using MySQL',
+        topics: [
+            'SELECT/WHERE/GROUP BY/HAVING clauses',
+            'INNER/OUTER/SELF/NATURAL/CROSS joins',
+            'DDL, DML, TCL, DCL',
+            'Views, Procedures, Functions, Triggers',
+        ],
     },
+    // From Real-Time Projects / Domain Knowledge pages
     {
-        title: 'Performance & Security',
-        topics: ['JMeter Basics', 'Load Testing', 'OWASP ZAP', 'SQL Injection Testing'],
+        title: 'Real-Time Projects & Domains',
+        topics: [
+            'E-commerce testing scenarios',
+            'CRM workflows & validations',
+            'Gaming: UX, performance & stability',
+            'Phone Book app: data integrity & security',
+        ],
     },
+    // From Course Highlights + Certification pages
     {
-        title: 'Capstone Project',
-        topics: ['Full-Stack E-Commerce App', 'CI/CD Pipeline', 'Automated Regression', 'Defect Reporting'],
+        title: 'Course Highlights & Certification',
+        topics: [
+            '95 hours • 3.5 months',
+            '6+ assignments • 5 projects',
+            'AAA-validated certification',
+            'Hybrid: Classroom + Online',
+        ],
     },
 ];
 
@@ -49,7 +84,7 @@ export default function CurriculumSection() {
         '@type': 'ItemList',
         name: 'Advanced Software Testing Curriculum',
         description:
-            'SDET curriculum covering Selenium, REST Assured, Appium, Cypress, Playwright, JMeter, OWASP ZAP, CI/CD and an automation capstone.',
+            'Curriculum covering Manual Testing, Test Management & Agile, API Testing with POSTMAN & RestAPIs, DBMS with MySQL, real-time projects, and certification highlights.',
         itemListElement: curriculum.map((m, idx) => ({
             '@type': 'ListItem',
             position: idx + 1,
@@ -72,18 +107,19 @@ export default function CurriculumSection() {
 
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <h2 className="text-3xl md:text-4xl text-slate-900 text-center font-bold mb-4">
-                    Industry-Ready <span className='text-ST'>Advanced Software Testing</span> Curriculum
+                    Industry-Ready <span className="text-ST">Advanced Software Testing</span> Curriculum
                 </h2>
-                {/* SEO-supportive intro row */}
+
+                {/* SEO-supportive intro row (updated to match brochure) */}
                 <div className="mx-auto mt-6 mb-8 grid max-w-4xl grid-cols-1 gap-3 text-sm text-slate-700 sm:grid-cols-3">
                     <p className="flex items-center gap-2">
                         <Layers className="h-4 w-4 text-slate-500" /> Framework design & best practices
                     </p>
                     <p className="flex items-center gap-2">
-                        <Award className="h-4 w-4 text-slate-500" /> Portfolio-ready automation suites
+                        <Award className="h-4 w-4 text-slate-500" /> Portfolio-ready real-time projects
                     </p>
                     <p className="flex items-center gap-2">
-                        <Clock className="h-4 w-4 text-slate-500" /> 25 hours • mentor-led • hands-on
+                        <Clock className="h-4 w-4 text-slate-500" /> 95 hours • 3.5 months • mentor-led
                     </p>
                 </div>
 
@@ -100,7 +136,7 @@ export default function CurriculumSection() {
                                     'shadow-[0_1px_0_0_rgba(15,23,42,0.05)] transition hover:shadow-md focus-within:ring-2 focus-within:ring-slate-300',
                                 ].join(' ')}
                             >
-                                {/* Number badge (kept small & offset so it never overlaps titles on mobile) */}
+                                {/* Number badge */}
                                 <div
                                     className={[
                                         'absolute right-3 top-3 h-8 w-8 rounded-lg text-sm font-bold grid place-items-center shadow-sm',
@@ -124,7 +160,6 @@ export default function CurriculumSection() {
                                     ))}
                                 </ul>
 
-                                {/* Outcomes micro-copy */}
                                 <p className="mt-4 text-xs text-slate-500">
                                     Outcomes: hands-on labs, assessment checklists, CI/CD integration, and evidence-based reporting.
                                 </p>
@@ -133,7 +168,7 @@ export default function CurriculumSection() {
                     })}
                 </ol>
 
-                {/* Inline CTA (optional anchors on the same page) */}
+                {/* Inline CTA */}
                 <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
                     <Link
                         href="contact-us"
@@ -150,10 +185,7 @@ export default function CurriculumSection() {
             </div>
 
             {/* JSON-LD for search engines */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         </section>
     );
 }

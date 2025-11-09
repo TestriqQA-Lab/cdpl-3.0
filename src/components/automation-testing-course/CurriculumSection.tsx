@@ -5,13 +5,75 @@ import Link from 'next/link';
 
 type Module = { title: string; topics: string[] };
 
+/**
+ * Source (PDF):
+ * - Contents overview (Programming, Web Automation Testing, version control, process model)
+ * - Course Curriculum pages (Programming topics + Selenium WebDriver topics + Framework/Hybrid E2E)
+ */
 const curriculum: Module[] = [
-    { title: 'Selenium 4 + WebDriverIO', topics: ['Grid', 'Docker', 'AI Locators', 'Parallel Execution'] },
-    { title: 'Cypress + Playwright', topics: ['E2E + Component', 'API Testing', 'Visual Regression', 'Flaky Test Fix'] },
-    { title: 'AI & ML in Testing', topics: ['Testim', 'Mabl', 'Applitools', 'Self-Healing Scripts'] },
-    { title: 'CI/CD & DevOps', topics: ['Jenkins', 'GitHub Actions', 'Kubernetes', 'Canary Testing'] },
-    { title: 'Performance & Security', topics: ['k6', 'Gatling', 'OWASP ZAP', 'Chaos Engineering'] },
-    { title: 'Capstone: Netflix Clone', topics: ['Full Automation Suite', 'AI Monitoring', '99.9% Coverage', 'Live Dashboard'] },
+    {
+        title: 'Programming Foundations (Java / Python)',
+        topics: [
+            'Installation & Environment Setup',
+            'Language Basics & Syntax',
+            'Ranges, Arrays / ArrayList & Collections',
+            'Conditions & Looping',
+            'Functions / Methods',
+            'Object-Oriented Programming (Classes & Objects)',
+            'Sorting & Data Conversion',
+        ],
+    },
+    {
+        title: 'Selenium WebDriver Essentials',
+        topics: [
+            'Setting up the Environment',
+            'Browser Operations & Navigation',
+            'HTML Basics for Testers',
+            'Locators (By id, name, CSS, XPath)',
+            'Finding Single & Multiple Elements',
+            'Select Class & Dropdowns',
+        ],
+    },
+    {
+        title: 'Synchronization & User Interactions',
+        topics: [
+            'Selenium Synchronization / Waits',
+            'Handling Windows / Tabs',
+            'Action Class (Mouse & Keyboard)',
+            'Screenshots & Evidence',
+            'Common Selenium Exceptions',
+        ],
+    },
+    {
+        title: 'Test Frameworks: TestNG / PyTest',
+        topics: [
+            'Framework Structure & Test Organization',
+            'Annotations / Fixtures',
+            'Parameterization & Data-Driven Tests',
+            'Parallel Execution',
+            'HTML Reports & Test Logs',
+        ],
+    },
+    {
+        title: 'Hybrid Framework Design (End-to-End Project)',
+        topics: [
+            'Page Object Model (POM) Architecture',
+            'Folder Structure & Reusable Utilities',
+            'Data-Driven from Excel',
+            'Generating Reports & Keeping Failed-Task Records',
+            'Hybrid Framework (E2E) Implementation',
+        ],
+    },
+    {
+        title: 'Version Control & Process Model',
+        topics: [
+            'Learn Version Control (Git) Basics',
+            'Branching & Pull Requests',
+            'Code Reviews & Logs',
+            'Web Automation Process Model',
+            'Best Practices & Team Workflow',
+        ],
+    },
 ];
 
 // Distinct, non-repeating accent palette (light theme, sleek; no heavy gradients)
@@ -29,9 +91,9 @@ export default function CurriculumSection() {
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'ItemList',
-        name: 'Elite Automation Testing Curriculum',
+        name: 'Advanced Automation Testing Curriculum',
         description:
-            'Advanced SDET curriculum covering Selenium 4, WebDriverIO, Cypress, Playwright, AI testing, CI/CD, Kubernetes, performance & security, and a production-grade capstone.',
+            'Syllabus covering Java/Python foundations, Selenium WebDriver, synchronization & interactions, TestNG/PyTest, hybrid framework (E2E), and version control & process model.',
         itemListElement: curriculum.map((m, idx) => ({
             '@type': 'ListItem',
             position: idx + 1,
@@ -49,14 +111,14 @@ export default function CurriculumSection() {
 
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <h2 className="text-3xl md:text-4xl text-slate-900 text-center font-bold mb-4">
-                    Elite <span className='text-ST'>Automation Testing</span> Curriculum
+                    Advanced <span className="text-ST">Automation Testing</span> Curriculum
                 </h2>
 
                 {/* Intro copy for SEO */}
                 <p className="mx-auto mt-2 mb-8 max-w-3xl text-center text-sm sm:text-base text-slate-600">
-                    Learn <strong>Selenium 4</strong>, <strong>WebDriverIO</strong>, <strong>Cypress</strong>, <strong>Playwright</strong>,
-                    AI-assisted testing, <strong>CI/CD</strong> with <em>Jenkins & GitHub Actions</em>, and resilient frameworks for
-                    <strong> performance</strong> & <strong>security</strong>—culminating in a <em>Netflix-style capstone</em> you’ll showcase in interviews.
+                    Master <strong>Java/Python</strong>, <strong>Selenium WebDriver</strong>, synchronization & interactions,
+                    <strong> TestNG/PyTest</strong>, and build a production-ready <em>Hybrid Framework (E2E)</em> with reporting,
+                    logging, and data-driven tests—plus <strong>Git</strong> and the web automation process model.
                 </p>
 
                 {/* Responsive grid */}
@@ -77,7 +139,7 @@ export default function CurriculumSection() {
                                     'shadow-[0_1px_0_0_rgba(15,23,42,0.04)] transition hover:shadow-md focus-within:ring-2 focus-within:ring-slate-300',
                                 ].join(' ')}
                             >
-                                {/* Left index badge (kept left so headings never hide on mobile) */}
+                                {/* Left index badge */}
                                 <div
                                     className={[
                                         'absolute left-4 top-4 grid h-9 w-9 place-items-center rounded-xl text-sm font-bold shadow-sm',
@@ -89,7 +151,7 @@ export default function CurriculumSection() {
                                     {i + 1}
                                 </div>
 
-                                {/* Title & topics with left padding to avoid overlap at small widths */}
+                                {/* Title & topics */}
                                 <div className="pl-14">
                                     <h3 className={['mb-3 text-lg sm:text-xl font-semibold leading-tight', a.ink].join(' ')}>
                                         {mod.title}
@@ -104,9 +166,8 @@ export default function CurriculumSection() {
                                         ))}
                                     </ul>
 
-                                    {/* Outcome microcopy */}
                                     <p className="mt-4 text-xs text-slate-500">
-                                        Outcome: hands-on labs, code reviews, and a take-home project to validate real-world skills.
+                                        Outcome: hands-on labs, code reviews, and an end-to-end project to validate real-world skills.
                                     </p>
                                 </div>
                             </motion.li>
@@ -114,7 +175,7 @@ export default function CurriculumSection() {
                     })}
                 </ol>
 
-                {/* Bottom mini-CTAs (non-repeating colors) */}
+                {/* Bottom mini-CTAs */}
                 <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
                     <Link
                         href="contact-us"
@@ -136,10 +197,7 @@ export default function CurriculumSection() {
             </div>
 
             {/* JSON-LD for search engines */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         </section>
     );
 }

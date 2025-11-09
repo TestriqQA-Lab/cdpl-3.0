@@ -1,6 +1,4 @@
 'use client';
-import { Star, Quote } from 'lucide-react';
-import { motion } from 'framer-motion';
 import ReviewsMarquee from '../sections/ReviewMarque';
 
 type Testimonial = {

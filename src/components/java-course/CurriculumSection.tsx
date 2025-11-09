@@ -1,6 +1,6 @@
 // components/sections/CurriculumSection.tsx
 // Sleek, responsive, SEO-friendly curriculum section with subtle futuristic accents.
-// No repeated colors, minimal (non-distracting) visual flourishes, fully self-contained.
+// Updated from the PDF: Modules 1–15 + Capstone (pages 16–19). No repeated colors.
 
 "use client";
 
@@ -25,121 +25,198 @@ type Module = {
   title: string;
   outcome: string;
   icon: React.ComponentType<{ className?: string }>;
-  bg: string; // unique background color per card (no repeats)
-  text: string;
-  ring: string;
+  bg: string;   // unique background color per card (no repeats)
+  text: string; // strong text color
+  ring: string; // ring color
   badge: string;
 };
 
+// NOTE: Unique, non-repeating soft backgrounds & matching text/ring for each card.
 const MODULES: Module[] = [
   {
     num: "01",
-    title: "Core Java & OOP Concepts",
-    outcome: "Master Java syntax, OOP, Collections, Generics, Streams & error handling.",
+    title: "Introduction to Java Programming",
+    outcome:
+      "What is Java, JDK–JRE–JVM, compilation → execution flow, key features & use cases.",
     icon: BookOpenCheck,
     bg: "bg-sky-50",
     text: "text-sky-900",
     ring: "ring-sky-200",
-    badge: "Foundation",
+    badge: "Overview",
   },
   {
     num: "02",
-    title: "Advanced Java & JDBC",
-    outcome: "Build database-driven apps with JDBC, connection pooling & transactions.",
+    title: "Installation & Development Setup",
+    outcome:
+      "Install JDK, set JAVA_HOME/PATH, pick an IDE (Eclipse/IntelliJ/VS Code), run first program.",
     icon: Database,
     bg: "bg-amber-50",
     text: "text-amber-900",
     ring: "ring-amber-200",
-    badge: "Data Access",
+    badge: "Setup",
   },
   {
     num: "03",
-    title: "Spring Framework & Spring Boot",
-    outcome: "Develop REST APIs using DI, AOP, Spring Boot starters & auto-config.",
+    title: "Java Basics",
+    outcome:
+      "Variables, data types, operators, console I/O, casting/conversion, comments & best practices.",
     icon: Atom,
     bg: "bg-emerald-50",
     text: "text-emerald-900",
     ring: "ring-emerald-200",
-    badge: "APIs",
+    badge: "Syntax",
   },
   {
     num: "04",
-    title: "Spring MVC & Thymeleaf",
-    outcome: "Create dynamic MVC web apps with validation, forms & templating.",
+    title: "Arrays and ArrayLists",
+    outcome:
+      "1D/2D arrays, for-each, common operations, ArrayList API & when to use lists vs arrays.",
     icon: LayoutTemplate,
     bg: "bg-rose-50",
     text: "text-rose-900",
     ring: "ring-rose-200",
-    badge: "Web UI",
+    badge: "Data",
   },
   {
     num: "05",
-    title: "Microservices with Spring Cloud",
-    outcome: "Design resilient microservices with config server, discovery & gateways.",
+    title: "Conditional Statements and Loops",
+    outcome:
+      "if/else/switch, while/do-while/for, nested loops, break/continue with practical scenarios.",
     icon: Boxes,
     bg: "bg-violet-50",
     text: "text-violet-900",
     ring: "ring-violet-200",
-    badge: "Architecture",
+    badge: "Control Flow",
   },
   {
     num: "06",
-    title: "Hibernate & JPA",
-    outcome: "Model entities, relationships & queries with JPA, Hibernate & caching.",
+    title: "Unpacking & Destructuring (Java Way)",
+    outcome:
+      "Tuple-like handling via arrays/maps/objects, manual ‘unpacking’ patterns & limitations.",
     icon: Layers3,
     bg: "bg-cyan-50",
     text: "text-cyan-900",
     ring: "ring-cyan-200",
-    badge: "ORM",
+    badge: "Patterns",
   },
   {
     num: "07",
-    title: "REST API & JSON",
-    outcome: "Design RESTful endpoints, pagination, versioning & OpenAPI/Swagger.",
+    title: "Data Conversions & Comprehension Techniques",
+    outcome:
+      "Primitive ↔ wrapper, String ↔ number/date; Java 8 Stream-based ‘comprehension’-style ops.",
     icon: Network,
     bg: "bg-lime-50",
     text: "text-lime-900",
     ring: "ring-lime-200",
-    badge: "Standards",
+    badge: "Transforms",
   },
   {
     num: "08",
-    title: "Docker & Kubernetes",
-    outcome: "Containerize services, write Dockerfiles & deploy to K8s clusters.",
+    title: "Functions in Java",
+    outcome:
+      "Defining/calling methods, overloading, static vs instance methods, parameters & returns.",
     icon: Dock,
     bg: "bg-fuchsia-50",
     text: "text-fuchsia-900",
     ring: "ring-fuchsia-200",
-    badge: "DevOps",
+    badge: "Methods",
   },
   {
     num: "09",
-    title: "AWS Cloud Deployment",
-    outcome: "Deploy Java apps on AWS (EC2/ECS/RDS), logging & monitoring.",
+    title: "Sorting Techniques",
+    outcome:
+      "Arrays.sort/Collections.sort, Comparable vs Comparator, bubble/insertion/selection logic.",
     icon: Cloud,
     bg: "bg-teal-50",
     text: "text-teal-900",
     ring: "ring-teal-200",
-    badge: "Cloud",
+    badge: "Algorithms",
   },
   {
     num: "10",
-    title: "Capstone Project & Portfolio",
-    outcome: "Build 3 enterprise-grade apps with CI/CD, reviews & job-ready docs.",
-    icon: Briefcase,
+    title: "Object-Oriented Programming (OOP)",
+    outcome:
+      "Classes/objects, constructors, encapsulation, inheritance, polymorphism & interfaces.",
+    icon: BookOpenCheck,
     bg: "bg-indigo-50",
     text: "text-indigo-900",
     ring: "ring-indigo-200",
-    badge: "Portfolio",
+    badge: "OOP",
+  },
+  {
+    num: "11",
+    title: "Access Modifiers & Decorator Pattern",
+    outcome:
+      "public/private/protected/default, static/final; overview + use of the Decorator pattern.",
+    icon: Database,
+    bg: "bg-orange-50",
+    text: "text-orange-900",
+    ring: "ring-orange-200",
+    badge: "Access",
+  },
+  {
+    num: "12",
+    title: "Java Collections Framework",
+    outcome:
+      "List/Set/Map families with HashMap/HashSet/LinkedList/TreeMap; iterators & for-each.",
+    icon: Atom,
+    bg: "bg-pink-50",
+    text: "text-pink-900",
+    ring: "ring-pink-200",
+    badge: "Collections",
+  },
+  {
+    num: "13",
+    title: "Regular Expressions in Java",
+    outcome:
+      "java.util.regex, Pattern/Matcher, common validation patterns (email/password/etc.).",
+    icon: LayoutTemplate,
+    bg: "bg-stone-50",
+    text: "text-stone-900",
+    ring: "ring-stone-200",
+    badge: "Regex",
+  },
+  {
+    num: "14",
+    title: "Exception Handling",
+    outcome:
+      "Checked vs unchecked, try/catch/finally, throw/throws, custom exceptions & best practices.",
+    icon: Boxes,
+    bg: "bg-yellow-50",
+    text: "text-yellow-900",
+    ring: "ring-yellow-200",
+    badge: "Errors",
+  },
+  {
+    num: "15",
+    title: "Container Objects in Java",
+    outcome:
+      "Working with collections inside classes; nested structures (Map<List<…>>, List<Map<…>>).",
+    icon: Layers3,
+    bg: "bg-red-50",
+    text: "text-red-900",
+    ring: "ring-red-200",
+    badge: "Structuring",
+  },
+  {
+    num: "16",
+    title: "Capstone Project",
+    outcome:
+      "Build a console app using OOP, collections, sorting & regex with robust error handling.",
+    icon: Briefcase,
+    bg: "bg-green-50",
+    text: "text-green-900",
+    ring: "ring-green-200",
+    badge: "Capstone",
   },
 ];
 
 export default function CurriculumSection() {
-  const title = "10-Module Java Curriculum";
+  const title = "Java Programming Curriculum";
   const subtitle =
-    "A job-ready Java developer path covering Core Java, Spring Boot, Microservices, Cloud, Docker & Kubernetes—designed for enterprise engineering careers.";
+    "A 30-hour, job-ready path: essentials → control flow → data structures → OOP → collections → regex → exceptions, finishing with a hands-on capstone.";
   const keywords =
-    "Java curriculum, Spring Boot syllabus, Microservices course, REST API training, Hibernate JPA, Docker Kubernetes for Java, AWS Java deployment, Java developer portfolio";
+    "Java course curriculum, JDK JRE JVM, Java basics arrays arraylist, control flow, functions methods, OOP, access modifiers, collections framework, regex, exception handling, capstone project";
 
   return (
     <section
@@ -148,10 +225,7 @@ export default function CurriculumSection() {
       className="relative py-8 md:py-14 bg-gray-50"
     >
       {/* subtle futuristic grid accent (sleek, non-intrusive) */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
-      >
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="mx-auto h-full w-full max-w-7xl opacity-50">
           <div className="h-px w-full bg-[repeating-linear-gradient(90deg,#e9e9e9_0_12px,transparent_12px_24px)]" />
         </div>
@@ -164,7 +238,7 @@ export default function CurriculumSection() {
             id="curriculum-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900"
           >
-            10-Module <span className="text-FS">Java Curriculum</span>
+            <span className="text-FS">Java Programming Curriculum</span>
           </h2>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-gray-700">
             {subtitle}
@@ -173,17 +247,21 @@ export default function CurriculumSection() {
           <p className="sr-only">{keywords}</p>
         </header>
 
-        {/* Timeline legend (compact, improves scannability) */}
+        {/* Timeline legend */}
         <div className="mx-auto mt-6 flex flex-wrap max-w-4xl items-center justify-center gap-3 text-xs text-gray-600">
-          <span className="inline-flex items-center gap-1"><span className="h-1 w-1 rounded-full bg-gray-900" /> Core</span>
+          <span className="inline-flex items-center gap-1">
+            <span className="h-1 w-1 rounded-full bg-gray-900" /> Basics
+          </span>
           <span>•</span>
-          <span>APIs</span>
+          <span>Control Flow</span>
           <span>•</span>
-          <span>Architecture</span>
+          <span>Data Structures</span>
           <span>•</span>
-          <span>DevOps & Cloud</span>
+          <span>OOP & Collections</span>
           <span>•</span>
-          <span>Portfolio</span>
+          <span>Regex & Exceptions</span>
+          <span>•</span>
+          <span>Capstone</span>
         </div>
 
         {/* Curriculum Grid */}
@@ -226,10 +304,7 @@ export default function CurriculumSection() {
                   </div>
 
                   {/* slim progress accent (sleek, non-gradient) */}
-                  <div
-                    className="hidden md:block h-8 w-1 rounded-full bg-white/70"
-                    aria-hidden="true"
-                  >
+                  <div className="hidden md:block h-8 w-1 rounded-full bg-white/70" aria-hidden="true">
                     <div
                       className={["h-4 w-1 rounded-full", m.text.replace("text-", "bg-")].join(" ")}
                     />
@@ -272,17 +347,15 @@ export default function CurriculumSection() {
         <div className="mx-auto mt-10 max-w-6xl rounded-2xl border border-gray-200 bg-white p-6 shadow-sm md:p-8">
           <div className="flex items-center gap-2">
             <Atom className="h-5 w-5 text-gray-900" />
-            <h4 className="text-lg md:text-xl font-bold text-gray-900">
-              What You’ll Build & Learn
-            </h4>
+            <h4 className="text-lg md:text-xl font-bold text-gray-900">What You’ll Build & Learn</h4>
           </div>
           <ul className="mt-4 grid grid-cols-1 gap-2 text-sm text-gray-700 sm:grid-cols-2 md:text-base">
-            <li>Clean OOP design with SOLID principles & best practices</li>
-            <li>Production-ready REST APIs with Spring Boot & OpenAPI</li>
-            <li>Resilient microservices using Spring Cloud patterns</li>
-            <li>JPA/Hibernate with real-world relational data modeling</li>
-            <li>Containerization with Docker & orchestration on Kubernetes</li>
-            <li>AWS deployments with logging, monitoring & scaling</li>
+            <li>Run Java from JDK install to first app, with clean code practices</li>
+            <li>Arrays vs ArrayLists, and iterative patterns for real tasks</li>
+            <li>Control flow mastery with nested loops & switch</li>
+            <li>OOP with classes, inheritance, interfaces & constructors</li>
+            <li>Collections (List/Set/Map), sorting & comparisons</li>
+            <li>Regex validation and robust exception handling</li>
           </ul>
         </div>
 
@@ -311,7 +384,7 @@ export default function CurriculumSection() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ItemList",
-            name: "10-Module Java Curriculum",
+            name: "Java Programming Curriculum",
             itemListElement: MODULES.map((m, idx) => ({
               "@type": "ListItem",
               position: idx + 1,
@@ -324,7 +397,7 @@ export default function CurriculumSection() {
             })),
             numberOfItems: MODULES.length,
             keywords:
-              "Java curriculum, Spring Boot syllabus, REST API, Microservices, Hibernate, JPA, Docker, Kubernetes, AWS, Java developer portfolio",
+              "Java curriculum, JDK JRE JVM, arrays vs ArrayList, control flow, functions, OOP, access modifiers, collections framework, regex, exception handling, capstone project",
           }),
         }}
       />

@@ -1,7 +1,6 @@
 'use client';
-import { motion } from 'framer-motion';
-import { Star } from 'lucide-react';
 import { useMemo } from 'react';
+import ReviewsMarquee from '../sections/ReviewMarque';
 
 
 type Testimonial = {
@@ -97,85 +96,9 @@ export default function TestimonialsSection() {
           Student <span className='text-ST'>Success Stories</span>
         </h2>
 
-        <p className='text-slate-600 text-center text-lg'>Join 6000+ QA engineers placed in top firms</p>
+        <p className='text-slate-600 text-center text-lg mb-5'>Join 6000+ QA engineers placed in top firms</p>
 
-        {/* Grid */}
-        <div className="mt-10 grid grid-cols-1 gap-6 sm:gap-7 md:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((t, i) => {
-            const initials = t.name
-              .split(' ')
-              .map((s) => s[0])
-              .slice(0, 2)
-              .join('');
-            return (
-              <motion.div
-                key={t.name}
-                initial={{ opacity: 0, y: 14, scale: 0.98 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, margin: '-15% 0px -10% 0px' }}
-                transition={{ duration: 0.45, delay: i * 0.08, ease: 'easeOut' }}
-                className={[
-                  'relative overflow-hidden rounded-2xl border border-slate-200 bg-white',
-                  'shadow-[0_1px_0_0_rgba(15,23,42,0.04)]',
-                  'hover:shadow-md transition focus-within:ring-2',
-                ].join(' ')}
-              >
-                {/* Accent line */}
-                <span aria-hidden className={`absolute inset-x-0 top-0 h-1.5 ${t.accent}`} />
-
-                {/* Body */}
-                <div className={`p-6 sm:p-7 ring-0 ${t.ring}`}>
-                  {/* Person */}
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={[
-                        'grid h-12 w-12 place-items-center rounded-full font-semibold',
-                        t.avatar,
-                      ].join(' ')}
-                    >
-                      {initials}
-                    </div>
-                    <div className="min-w-0">
-                      <div className="truncate font-semibold text-slate-900">{t.name}</div>
-                      <div className="truncate text-sm text-slate-600">{t.role}</div>
-                    </div>
-                  </div>
-
-                  {/* Stars */}
-                  <div className="mt-3 flex items-center gap-1" aria-label={`${t.rating} out of 5`}>
-                    {Array.from({ length: t.rating }).map((_, s) => (
-                      <Star key={s} className="h-5 w-5 fill-amber-400 text-amber-400" />
-                    ))}
-                  </div>
-
-                  {/* Testimonial */}
-                  <blockquote className="mt-4 text-sm sm:text-[15px] leading-relaxed text-slate-700">
-                    “{t.text}”
-                  </blockquote>
-
-                  {/* Chips */}
-                  <div className="mt-5 flex flex-wrap items-center gap-2">
-                    <span
-                      className={[
-                        'rounded-full border px-2.5 py-1 text-[11px] font-semibold',
-                        t.chip,
-                        'border',
-                      ].join(' ')}
-                    >
-                      Verified Review
-                    </span>
-                    <span className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] font-semibold text-slate-700">
-                      Interview-Ready Skills
-                    </span>
-                    <span className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] font-semibold text-slate-700">
-                      Portfolio Projects
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
+        <ReviewsMarquee />
 
         {/* SEO supportive line */}
         <p className="mx-auto mt-8 max-w-4xl text-center text-sm sm:text-base text-slate-600">
