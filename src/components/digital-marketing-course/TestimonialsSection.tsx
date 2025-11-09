@@ -2,6 +2,7 @@
 // Server component (no client-side JS) – sleek, responsive, slightly futuristic
 
 import Link from "next/link";
+import ReviewsMarquee from "../sections/ReviewMarque";
 
 type Testimonial = {
   name: string;
@@ -16,24 +17,6 @@ const testimonials: Testimonial[] = [
   { name: 'Faiz Khan', role: 'SEO Specialist', rating: 5, text: 'Everything about this course is great! From the comprehensive content to the engaging delivery, it’s been an enlightening journey.' },
   { name: 'Dakshali Merya', role: 'Content Strategist', rating: 5, text: 'The instructor is highly skilled and the concepts are well comprehended.' },
 ];
-
-// Distinct soft accents per card (no repeated colors in a row; no loud gradients)
-const ACCENTS = [
-  { ring: 'ring-sky-300', chip: 'bg-sky-50 text-sky-800 border-sky-200', dot: 'bg-sky-500' },
-  { ring: 'ring-emerald-300', chip: 'bg-emerald-50 text-emerald-800 border-emerald-200', dot: 'bg-emerald-500' },
-  { ring: 'ring-amber-300', chip: 'bg-amber-50 text-amber-900 border-amber-200', dot: 'bg-amber-500' },
-  { ring: 'ring-violet-300', chip: 'bg-violet-50 text-violet-800 border-violet-200', dot: 'bg-violet-500' },
-];
-
-function initials(name: string) {
-  return name
-    .split(' ')
-    .map((n) => n[0])
-    .filter(Boolean)
-    .slice(0, 2)
-    .join('')
-    .toUpperCase();
-}
 
 export default function TestimonialsSection() {
   // JSON-LD (Review + AggregateRating)
@@ -80,40 +63,14 @@ export default function TestimonialsSection() {
             analytics, and <strong>AI-driven execution</strong>.
           </p>
           {/* micro badges */}
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-[11px] font-semibold">
+          <div className="mt-5 mb-5 flex flex-wrap items-center justify-center gap-2 text-[11px] font-semibold">
             <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-slate-700">4.9★ Avg Rating</span>
             <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-slate-700">Placement Support</span>
             <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-slate-700">Project-Based Learning</span>
           </div>
         </header>
 
-        {/* Mobile: horizontal scroll-snap; Desktop: grid */}
-        <div className="mt-8 sm:mt-10">
-          <div className="grid gap-4 sm:gap-5 md:hidden">
-            {/* On very small screens, still a vertical stack (better readability) */}
-            {testimonials.map((t, i) => {
-              const a = ACCENTS[i % ACCENTS.length];
-              return <Card key={i} t={t} a={a} />;
-            })}
-          </div>
-
-          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {testimonials.map((t, i) => {
-              const a = ACCENTS[i % ACCENTS.length];
-              return <Card key={i} t={t} a={a} />;
-            })}
-          </div>
-
-          {/* Horizontal snap for small/medium if desired */}
-          <div className="mt-6 md:hidden overflow-x-auto no-scrollbar">
-            <div className="flex snap-x snap-mandatory gap-4">
-              {testimonials.map((t, i) => {
-                const a = ACCENTS[(i + 1) % ACCENTS.length];
-                return <Card key={`snap-${i}`} t={t} a={a} snap />;
-              })}
-            </div>
-          </div>
-        </div>
+        <ReviewsMarquee />
 
         {/* CTA */}
         <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3">
@@ -140,80 +97,4 @@ export default function TestimonialsSection() {
   );
 }
 
-function Stars({ count = 5 }: { count?: number }) {
-  return (
-    <span className="inline-flex items-center gap-0.5" aria-label={`${count} star rating`}>
-      {Array.from({ length: count }).map((_, i) => (
-        <svg
-          key={i}
-          viewBox="0 0 20 20"
-          className="h-4 w-4 fill-yellow-400 text-yellow-400"
-          aria-hidden="true"
-        >
-          <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" />
-        </svg>
-      ))}
-    </span>
-  );
-}
 
-function Card({
-  t,
-  a,
-  snap = false,
-}: {
-  t: Testimonial;
-  a: { ring: string; chip: string; dot: string };
-  snap?: boolean;
-}) {
-  return (
-    <article
-      className={[
-        'relative isolate rounded-2xl border border-slate-200 bg-white/95 p-5 sm:p-6 backdrop-blur',
-        'ring-1 ring-transparent transition hover:shadow-md',
-        a.ring,
-        snap ? 'min-w-[88%] snap-center' : '',
-      ].join(' ')}
-      aria-label={`Testimonial by ${t.name}`}
-    >
-      {/* Accent bar */}
-      <span aria-hidden className={`absolute left-0 top-0 h-full w-1.5 ${a.dot} rounded-l-2xl`} />
-
-      {/* Header: avatar + name + role + rating */}
-      <div className="flex items-start gap-3">
-        <div
-          className={[
-            'grid h-12 w-12 place-items-center rounded-xl border text-sm font-bold',
-            a.chip,
-          ].join(' ')}
-          aria-hidden
-        >
-          {initials(t.name)}
-        </div>
-        <div className="flex-1">
-          <div className="flex flex-wrap items-center gap-2">
-            <h3 className="text-sm font-semibold text-slate-900">{t.name}</h3>
-            <span className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-semibold ${a.chip}`}>
-              Verified Student
-            </span>
-          </div>
-          {t.role && <p className="mt-0.5 text-xs text-slate-600">{t.role}</p>}
-          <div className="mt-1">
-            <Stars count={t.rating ?? 5} />
-          </div>
-        </div>
-      </div>
-
-      {/* Body */}
-      <p className="mt-4 text-[13px] sm:text-sm leading-relaxed text-slate-700 italic">
-        “{t.text}”
-      </p>
-
-      {/* Footer meta */}
-      <div className="mt-4 flex items-center justify-between text-[11px] font-medium">
-        <span className="text-slate-500">Outcome • Career Growth • Confidence</span>
-        <span className="text-slate-700">★★★★★</span>
-      </div>
-    </article>
-  );
-}

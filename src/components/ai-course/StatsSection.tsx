@@ -1,82 +1,189 @@
 // components/sections/StatsSection.tsx
-// Server component — clean, modern, responsive stats with subtle futuristic accents (Comprehensive DS & AI edition).
+// Client component — clean, modern, responsive stats with subtle futuristic accents
+// (Comprehensive DS & AI edition) + scroll-triggered count-up on first reveal.
 
+"use client";
+
+import React, { useEffect, useMemo, useRef, useState } from "react";
+
+/** ---------- Types ---------- */
 type Stat = {
-  value: string;
+  // Display/UX
   label: string;
   hint?: string;
   accent: {
-    bar: string;     // top bar
+    bar: string;     // top bar color
     border: string;  // card border
     text: string;    // value color
     chip: string;    // hint chip bg
     ring: string;    // focus ring
   };
+  // Count-up number pieces
+  end: number;           // numeric target used for counting
+  prefix?: string;       // optional prefix like "₹"
+  suffix?: string;       // optional suffix like "%" or " LPA" or "+"
+  // Accessibility
+  aria?: string;
 };
 
+/** ---------- Stats extracted from the PDF ---------- */
+/*
+  Page 5:
+    - 25% Market growth (2020–2030)
+    - 101,000+ Job Vacancies in India
+    - 9 LPA Data Scientist freshers’ average salary
+    - 75% Job Satisfaction
+    - 32% India’s share in the global market
+  Page 1 & 9:
+    - 255+ Hours / 9 Months (Program Duration)
+*/
 const STATS: Stat[] = [
   {
-    value: "25%",
     label: "Market Growth (2020–2030)",
     hint: "AI adoption accelerating",
+    end: 25,
+    suffix: "%",
+    aria: "Twenty five percent market growth from 2020 to 2030",
     accent: { bar: "bg-indigo-500", border: "border-indigo-200", text: "text-indigo-700", chip: "bg-indigo-50", ring: "focus:ring-indigo-300" },
   },
   {
-    value: "101,000+",
     label: "Job Vacancies in India",
     hint: "DA • DS • ML roles",
+    end: 101000,
+    suffix: "+",
+    aria: "One hundred one thousand plus job vacancies in India",
     accent: { bar: "bg-amber-500", border: "border-amber-200", text: "text-amber-700", chip: "bg-amber-50", ring: "focus:ring-amber-300" },
   },
   {
-    value: "₹9 LPA",
     label: "Average Fresher Salary",
     hint: "City & role dependent",
+    prefix: "₹",
+    end: 9,
+    suffix: " LPA",
+    aria: "Average fresher salary is nine LPA",
     accent: { bar: "bg-emerald-500", border: "border-emerald-200", text: "text-emerald-700", chip: "bg-emerald-50", ring: "focus:ring-emerald-300" },
   },
   {
-    value: "75%",
     label: "Job Satisfaction",
     hint: "Impactful problem-solving",
+    end: 75,
+    suffix: "%",
+    aria: "Seventy five percent job satisfaction",
     accent: { bar: "bg-rose-500", border: "border-rose-200", text: "text-rose-700", chip: "bg-rose-50", ring: "focus:ring-rose-300" },
   },
   {
-    value: "32%",
     label: "India’s Global Market Share",
     hint: "Services • Product • Startups",
+    end: 32,
+    suffix: "%",
+    aria: "India's share in the global market is thirty two percent",
     accent: { bar: "bg-violet-500", border: "border-violet-200", text: "text-violet-700", chip: "bg-violet-50", ring: "focus:ring-violet-300" },
   },
   {
-    value: "200 Hours",
     label: "Program Duration",
     hint: "Projects + mentorship",
+    end: 255,
+    suffix: "+ Hours",
+    aria: "Program duration is two hundred fifty five plus hours",
     accent: { bar: "bg-sky-500", border: "border-sky-200", text: "text-sky-700", chip: "bg-sky-50", ring: "focus:ring-sky-300" },
   },
 ];
 
-export default function StatsSection() {
-  const seoKeywords =
-    "comprehensive data science and ai course, machine learning training india, data science jobs, fresher salary ds ml, ai market growth, 200 hour data science program, mentor led projects";
+/** ---------- Helpers ---------- */
+const clamp = (n: number, min: number, max: number) => Math.min(Math.max(n, min), max);
 
-  // JSON-LD (ItemList) for richer snippets
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Comprehensive Data Science & AI — Program Highlights",
-    itemListElement: STATS.map((s, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: {
-        "@type": "Thing",
-        name: s.label,
-        description: `${s.value} — ${s.label}${s.hint ? ` (${s.hint})` : ""}`,
+function easeOutCubic(t: number) {
+  return 1 - Math.pow(1 - t, 3);
+}
+
+function formatNumber(n: number): string {
+  return n.toLocaleString("en-IN");
+}
+
+function formatValue(value: number, s: Stat): string {
+  // Special case: keep integers for LPA/hours; whole numbers for percentages.
+  const display = Number.isInteger(s.end) ? Math.round(value) : value;
+  const base = s.end >= 1000 ? formatNumber(display) : String(display);
+  return `${s.prefix ?? ""}${base}${s.suffix ?? ""}`;
+}
+
+/** ---------- Component ---------- */
+export default function StatsSection() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [hasRevealed, setHasRevealed] = useState(false);
+  const [values, setValues] = useState<number[]>(() => STATS.map(() => 0));
+
+  // SEO keywords + JSON-LD
+  const seoKeywords =
+    "comprehensive data science and ai course, machine learning training india, data science jobs, fresher salary ds ml, ai market growth, 255 hour data science program, mentor led projects";
+
+  const jsonLd = useMemo(
+    () => ({
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: "Comprehensive Data Science & AI — Program Highlights",
+      itemListElement: STATS.map((s, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        item: {
+          "@type": "Thing",
+          name: s.label,
+          description: `${s.prefix ?? ""}${s.end}${s.suffix ?? ""} — ${s.label}${s.hint ? ` (${s.hint})` : ""}`,
+        },
+      })),
+      keywords:
+        "data science highlights, ai career stats, ml market growth, data jobs india, fresher salary data science",
+    }),
+    []
+  );
+
+  // Observe section once; animate all stats together on first reveal
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node) return;
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting && !hasRevealed) {
+          setHasRevealed(true);
+        }
       },
-    })),
-    keywords:
-      "data science highlights, ai career stats, ml market growth, data jobs india, fresher salary data science",
-  };
+      { root: null, threshold: 0.25 }
+    );
+
+    obs.observe(node);
+    return () => obs.disconnect();
+  }, [hasRevealed]);
+
+  // Animate values when revealed
+  useEffect(() => {
+    if (!hasRevealed) return;
+
+    const duration = 1200; // ms
+    const start = performance.now();
+
+    const animate = (now: number) => {
+      const t = clamp((now - start) / duration, 0, 1);
+      const eased = easeOutCubic(t);
+
+      setValues(
+        STATS.map((s) => {
+          const next = s.end * eased;
+          return next;
+        })
+      );
+
+      if (t < 1) requestAnimationFrame(animate);
+    };
+
+    const raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
+  }, [hasRevealed]);
 
   return (
     <section
+      ref={sectionRef}
       id="comprehensive-dsai-stats"
       aria-labelledby="dsai-stats-heading"
       className="relative py-4 xl:py-12 bg-white"
@@ -93,11 +200,7 @@ export default function StatsSection() {
             id="dsai-stats-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Why{" "}
-            <span className="text-DS">
-              Comprehensive Data Science & AI
-            </span>
-            ?
+            Why <span className="text-DS">Comprehensive Data Science & AI</span>?
           </h2>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-700">
             Equip yourself for tomorrow’s roles with <strong>Python</strong>, <strong>ML</strong>,{" "}
@@ -114,11 +217,12 @@ export default function StatsSection() {
           aria-label="Program highlights statistics"
           className="mx-auto mt-10 grid max-w-5xl grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {STATS.map((s) => (
+          {STATS.map((s, idx) => (
             <article
               key={s.label}
               role="listitem"
               tabIndex={0}
+              aria-label={s.aria ?? `${s.label} ${s.end}`}
               className={[
                 "group relative rounded-2xl border bg-white p-6 text-center shadow-sm transition-all duration-200",
                 "hover:-translate-y-0.5 hover:shadow-md focus-visible:-translate-y-0.5",
@@ -133,7 +237,7 @@ export default function StatsSection() {
               {/* value + label */}
               <div className="mx-auto h-1 w-14 rounded-full bg-white/80" aria-hidden />
               <div className={["mt-3 text-4xl font-extrabold tracking-tight", s.accent.text].join(" ")}>
-                {s.value}
+                {formatValue(values[idx], s)}
               </div>
               <p className="mt-1 text-sm md:text-base font-medium text-slate-800">{s.label}</p>
 

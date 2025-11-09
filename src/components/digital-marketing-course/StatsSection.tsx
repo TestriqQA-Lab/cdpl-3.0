@@ -1,35 +1,124 @@
 // components/sections/StatsSection.tsx
-// Server component (no client/runtime JS needed)
+// Client component with scroll-triggered count-up animation.
+
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
+type CountUpProps = {
+  end: number;
+  duration?: number; // ms
+  decimals?: number;
+  prefix?: string;
+  suffix?: string;
+  ariaLabel?: string;
+  formatter?: (n: number) => string;
+  startOnVisible?: boolean;
+};
+
+function useVisibleOnce<T extends Element>(rootMargin = "0px 0px -20% 0px") {
+  const ref = useRef<T | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (!ref.current || visible) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { root: null, rootMargin, threshold: 0.3 }
+    );
+    obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, [visible, rootMargin]);
+
+  return { ref, visible };
+}
+
+function CountUp({
+  end,
+  duration = 1500,
+  decimals = 0,
+  prefix = "",
+  suffix = "",
+  ariaLabel,
+  formatter,
+}: CountUpProps) {
+  const [value, setValue] = useState(0);
+  const startTs = useRef<number | null>(null);
+  const { ref, visible } = useVisibleOnce<HTMLSpanElement>();
+
+  useEffect(() => {
+    if (!visible) return;
+    let raf = 0;
+    const animate = (ts: number) => {
+      if (startTs.current === null) startTs.current = ts;
+      const elapsed = ts - startTs.current;
+      const progress = Math.min(1, elapsed / duration);
+      const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+      setValue(end * eased);
+      if (progress < 1) {
+        raf = requestAnimationFrame(animate);
+      }
+    };
+    raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
+  }, [visible, duration, end]);
+
+  const display =
+    formatter?.(value) ??
+    `${prefix}${value.toFixed(decimals)}${suffix}`;
+
+  return (
+    <span ref={ref} aria-label={ariaLabel}>
+      {display}
+    </span>
+  );
+}
 
 export default function StatsSection() {
-  // JSON-LD to help search engines understand the highlights
+  // PDF sources:
+  // - Market size: “$ 671.86 Billion — Global digital marketing market by 2028” (page 4)
+  // - High-income skill rank: “4th Most High Income Skill to learn in 2024 (Forbes)” (page 4)
+  // - In-demand rank: “#3 Most In Demand Skill (Michael Page Salary Guide 2023)” (page 4)
+  // - Global jobs: “141,000+ Digital marketing jobs are available worldwide” (page 6)
+  // :contentReference[oaicite:1]{index=1}
+
   const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Digital Marketing Career Highlights',
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Digital Marketing Career Highlights",
     itemListElement: [
       {
-        '@type': 'ListItem',
+        "@type": "ListItem",
         position: 1,
-        name: 'Global digital marketing market by 2028',
-        item: { '@type': 'Thing', name: '$671.86 Billion (by 2028)' },
+        name: "Global digital marketing market by 2028",
+        item: { "@type": "Thing", name: "$671.86 Billion (by 2028)" },
       },
       {
-        '@type': 'ListItem',
+        "@type": "ListItem",
         position: 2,
-        name: 'High-income skills to learn',
-        item: { '@type': 'Thing', name: '4th Most High-Income Skill (2024)' },
+        name: "High-income skills to learn",
+        item: { "@type": "Thing", name: "4th Most High-Income Skill (2024)" },
       },
       {
-        '@type': 'ListItem',
+        "@type": "ListItem",
         position: 3,
-        name: 'Most in-demand skills',
-        item: { '@type': 'Thing', name: '#3 Most In-Demand Skill (2023 Guide)' },
+        name: "Most in-demand skills",
+        item: { "@type": "Thing", name: "#3 Most In-Demand Skill (2023 Guide)" },
       },
     ],
     keywords:
-      'digital marketing course, AI marketing, marketing analytics, GA4 training, performance marketing career, SEO course Mumbai',
+      "digital marketing course, AI marketing, marketing analytics, GA4 training, performance marketing career, SEO course Mumbai",
   };
+
+  // Helpers for nice formatting
+  const formatBillion = (n: number) =>
+    `$${n.toFixed(2)} B`;
 
   return (
     <section
@@ -64,7 +153,7 @@ export default function StatsSection() {
             max-w-5xl mx-auto
           "
         >
-          {/* Card 1 */}
+          {/* Card 1 — $671.86B by 2028 (PDF p.4) */}
           <div
             role="listitem"
             className="
@@ -75,7 +164,6 @@ export default function StatsSection() {
               focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-orange-300
             "
           >
-            {/* top accent */}
             <span
               aria-hidden
               className="
@@ -87,17 +175,24 @@ export default function StatsSection() {
             />
             <dt className="sr-only">Market Size</dt>
             <div className="text-3xl sm:text-4xl font-extrabold tracking-tight text-orange-600">
-              $671.86&nbsp;B
+              <CountUp
+                end={671.86}
+                decimals={2}
+                prefix="$"
+                suffix=" B"
+                ariaLabel="Six hundred seventy one point eight six billion dollars"
+                formatter={formatBillion}
+              />
             </div>
             <dd className="mt-2 text-slate-700">
               Global digital marketing market by <span className="font-medium">2028</span>
             </dd>
             <p className="mt-3 text-xs text-slate-500">
-              Source trend widely cited by market research reports
+              Source highlighted in the program brochure
             </p>
           </div>
 
-          {/* Card 2 */}
+          {/* Card 2 — 4th Most High-Income Skill (PDF p.4) */}
           <div
             role="listitem"
             className="
@@ -119,7 +214,8 @@ export default function StatsSection() {
             />
             <dt className="sr-only">High-Income Skill Rank</dt>
             <div className="text-2xl sm:text-3xl font-extrabold tracking-tight text-yellow-600">
-              4th Most High-Income Skill
+              {/* animate number then append ordinal text */}
+              <CountUp end={4} ariaLabel="Fourth" />th Most High-Income Skill
             </div>
             <dd className="mt-2 text-slate-700">
               Recommended to learn in <span className="font-medium">2024</span> (Forbes)
@@ -129,7 +225,7 @@ export default function StatsSection() {
             </p>
           </div>
 
-          {/* Card 3 */}
+          {/* Card 3 — #3 Most In-Demand Skill (PDF p.4) */}
           <div
             role="listitem"
             className="
@@ -151,7 +247,7 @@ export default function StatsSection() {
             />
             <dt className="sr-only">Demand Ranking</dt>
             <div className="text-2xl sm:text-3xl font-extrabold tracking-tight text-emerald-600">
-              #3 Most In-Demand Skill
+              #<CountUp end={3} ariaLabel="Three" /> Most In-Demand Skill
             </div>
             <dd className="mt-2 text-slate-700">
               Cited in <span className="font-medium">Michael Page Salary Guide 2023</span>
@@ -162,11 +258,41 @@ export default function StatsSection() {
           </div>
         </dl>
 
+        {/* Optional: add a 4th card row for jobs (PDF p.6) */}
+        <div className="mt-5 sm:mt-6 max-w-5xl mx-auto">
+          <div
+            className="
+              group relative rounded-2xl border p-7 sm:p-8 text-center shadow-sm
+              bg-white border-sky-100
+              transition
+              hover:shadow-md
+              focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-sky-300
+            "
+          >
+            <span
+              aria-hidden
+              className="
+                absolute left-6 right-6 top-0 h-1.5 rounded-b-full
+                bg-sky-200
+                transition-all duration-300
+                group-hover:left-4 group-hover:right-4 group-hover:bg-sky-300
+              "
+            />
+            <div className="text-2xl sm:text-3xl font-extrabold tracking-tight text-sky-700">
+              <CountUp end={141000} ariaLabel="One hundred forty one thousand" />+
+            </div>
+            <p className="mt-2 text-slate-700">
+              Digital marketing jobs available worldwide
+            </p>
+            <p className="mt-3 text-xs text-slate-500">Figure shown in the brochure</p>
+          </div>
+        </div>
+
         {/* SEO-supportive copy */}
         <p className="mt-8 md:mt-10 text-center text-sm sm:text-base text-slate-600 max-w-4xl mx-auto">
-          Build a career in <strong>AI-driven digital marketing, SEO, performance ads, GA4 analytics</strong>, and{' '}
+          Build a career in <strong>AI-driven digital marketing, SEO, performance ads, GA4 analytics</strong>, and{" "}
           <strong>automation</strong>. Our master program is designed to be <em>job-ready, portfolio-first, and
-          placement-focused</em>.
+            placement-focused</em>.
         </p>
       </div>
 
