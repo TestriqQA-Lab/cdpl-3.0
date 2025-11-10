@@ -243,7 +243,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 2. Events Pages (e.g., /events/ai-conference-nagindas-khandwala)
   const eventPages: MetadataRoute.Sitemap = pastEvents.map((event) => ({
     url: `${siteUrl}/events/${event.slug}`,
-    lastModified: event.lastModified || currentDate,
+    lastModified: event.lastModified ? new Date(event.lastModified) : new Date(event.date),
     changeFrequency: 'weekly',
     priority: 0.7,
   }));
@@ -260,7 +260,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // BLOG_POSTS is an array of BlogPost objects
   const blogPostPages: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
     url: `${siteUrl}/blog/${post.slug}`,
-    lastModified: post.lastModified || post.publishDate,
+    lastModified: post.lastModified ? new Date(post.lastModified) : new Date(post.publishDate),
     changeFrequency: 'daily',
     priority: 0.7,
   }));
@@ -278,30 +278,3 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...blogPostPages,
   ];
 }
-
-/**
- * NOTES FOR DYNAMIC CONTENT:
- * 
- * If you have dynamic blog posts, events, or city pages, fetch them here:
- * 
- * // Example: Fetch blog posts
- * const blogPosts = await fetch(`${siteUrl}/api/blog/posts`).then(r => r.json());
- * const blogPages = blogPosts.map(post => ({
- *   url: `${siteUrl}/blog/${post.slug}`,
- *   lastModified: post.updatedAt,
- *   changeFrequency: 'monthly',
- *   priority: 0.7,
- * }));
- * 
- * // Example: Fetch city pages
- * const cities = await fetch(`${siteUrl}/api/cities`).then(r => r.json());
- * const cityPages = cities.map(city => ({
- *   url: `${siteUrl}/${city.slug}`,
- *   lastModified: currentDate,
- *   changeFrequency: 'monthly',
- *   priority: 0.6,
- * }));
- * 
- * Then add them to the return array:
- * return [...staticPages, ...coursePages, ...blogPages, ...cityPages];
- */
