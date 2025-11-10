@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 import dynamic from "next/dynamic";
 import { generateOrganizationSchema, generateWebsiteSchema } from '@/lib/seo-enhanced';
 // import FixedOfferBar from '@/components/FixedOfferBar';
@@ -123,7 +124,7 @@ export const metadata: Metadata = {
   
   // Verification (Add your verification codes here)
   verification: {
-    google: "your-google-verification-code", // Replace with your actual code
+    google: process.env.NEXT_PUBLIC_GSC_VERIFICATION_CODE, // Replace with your actual code
     // yandex: "your-yandex-verification-code",
     // bing: "your-bing-verification-code",
   },
@@ -215,6 +216,7 @@ export default function RootLayout({
         {/* <FixedOfferBar /> */}
         {children}
         <Footer />
+        <GoogleAnalytics />
       </body>
     </html>
   );
