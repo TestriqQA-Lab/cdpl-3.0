@@ -306,8 +306,8 @@ const Header = () => {
 
     const isCoursesMenuOpen = isMegaMenuOpen || isCourseActive || isCoursesBaseActive;
 
-  const isJobsActive = pathname.startsWith("/jobs");
-  const isAboutActive = pathname.startsWith("/about") || pathname.startsWith("/our-team");
+  // const isJobsActive = pathname.startsWith("/jobs");
+  // const isAboutActive = pathname.startsWith("/about") || pathname.startsWith("/our-team");
   const [selectedCategory, setSelectedCategory] = useState<string>(courseCategories[0].id);
   const [hoveredCourse, setHoveredCourse] = useState<string | null>(null);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
