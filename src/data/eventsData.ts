@@ -57,6 +57,7 @@ export interface PastEvent {
   venueFallbackImageUrl?: string;
 
   venueAddress?: string;
+  lastModified?: string;
 
 }
 

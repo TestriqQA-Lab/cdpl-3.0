@@ -1,4 +1,8 @@
 import { MetadataRoute } from 'next';
+import { statesData, getFlatLocations } from '@/data/cities/citiesData';
+import { pastEvents } from '@/data/eventsData';
+import { trainingServices } from '@/data/servicesData';
+import { BLOG_POSTS } from '@/data/BlogPostData';
 
 /**
  * Dynamic XML Sitemap for CDPL
@@ -224,11 +228,54 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // ========================================
+  // DYNAMIC PAGES
+  // ========================================
+
+  // 1. City-Course Pages (e.g., /software-testing-course-in-mumbai)
+  const cityCoursePages: MetadataRoute.Sitemap = getFlatLocations(statesData).map((city) => ({
+    // The 'link' property in city object already contains the full slug path, e.g., /software-testing-course-in-mumbai
+    url: `${siteUrl}${city.link}`,
+    lastModified: currentDate,
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }));
+
+  // 2. Events Pages (e.g., /events/ai-conference-nagindas-khandwala)
+  const eventPages: MetadataRoute.Sitemap = pastEvents.map((event) => ({
+    url: `${siteUrl}/events/${event.slug}`,
+    lastModified: event.lastModified || currentDate,
+    changeFrequency: 'weekly',
+    priority: 0.7,
+  }));
+
+  // 3. Services Pages (e.g., /services/expert-talks)
+  const servicePages: MetadataRoute.Sitemap = trainingServices.map((service) => ({
+    url: `${siteUrl}/services/${service.slug}`,
+    lastModified: currentDate,
+    changeFrequency: 'monthly',
+    priority: 0.8,
+  }));
+
+  // 4. Individual Blog Posts (e.g., /blog/what-is-data-science)
+  // BLOG_POSTS is an array of BlogPost objects
+  const blogPostPages: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
+    url: `${siteUrl}/blog/${post.slug}`,
+    lastModified: post.lastModified || post.publishDate,
+    changeFrequency: 'daily',
+    priority: 0.7,
+  }));
+
+
+  // ========================================
   // COMBINE ALL PAGES
   // ========================================
   return [
     ...staticPages,
     ...coursePages,
+    ...cityCoursePages,
+    ...eventPages,
+    ...servicePages,
+    ...blogPostPages,
   ];
 }
 
