@@ -16,6 +16,18 @@ const BlogArticleList = () => {
     setVisibleArticles((prev) => prev + 3);
   };
 
+  // Category-based fallback images
+  const getFallbackImage = (categoryId: string) => {
+    const fallbacks: Record<string, string> = {
+      'software-testing': '/images/blog/fallback/software-testing.webp',
+      'data-science': '/images/blog/fallback/data-science.webp',
+      'ai-ml': '/images/blog/fallback/ai-ml.webp',
+      'web-development': '/images/blog/fallback/web-development.webp',
+      'devops': '/images/blog/fallback/devops.webp',
+    };
+    return fallbacks[categoryId] || '/images/blog/fallback/default.webp';
+  };
+
   return (
     <section className="bg-gradient-to-b from-white to-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0">
@@ -57,32 +69,28 @@ const BlogArticleList = () => {
                     className="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
                   >
                     <div className="md:flex">
-                      {/* Article Image */}
-                      <div className="md:w-64 h-48 md:h-auto bg-gradient-to-br from-indigo-50 to-blue-50 flex items-center justify-center flex-shrink-0 relative overflow-hidden">
-                        {post.featuredImage ? (
-                          <Image
-                            src={post.featuredImage}
-                            alt={post.title}
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-500"
-                          />
-                        ) : (
-                          <div className="flex flex-col items-center justify-center">
-                            <svg
-                              className="w-16 h-16 text-indigo-300"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                              />
-                            </svg>
-                          </div>
-                        )}
+                      {/* Article Image - ENHANCED: Better aspect ratio and fallback */}
+                      <div className="md:w-80 md:flex-shrink-0 relative overflow-hidden bg-gradient-to-br from-indigo-50 to-blue-50">
+                        <div className="relative w-full h-48 md:h-full md:min-h-[240px]">
+                          {post.featuredImage ? (
+                            <Image
+                              src={post.featuredImage}
+                              alt={post.title}
+                              fill
+                              className="object-cover group-hover:scale-105 transition-transform duration-500"
+                              sizes="(max-width: 768px) 100vw, 320px"
+                              quality={85}
+                            />
+                          ) : (
+                            <Image
+                              src={getFallbackImage(post.categoryId)}
+                              alt={post.title}
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 768px) 100vw, 320px"
+                            />
+                          )}
+                        </div>
                       </div>
 
                       {/* Article Content */}
@@ -146,7 +154,7 @@ const BlogArticleList = () => {
             {/* View All Link - Mobile */}
             <div className="flex sm:hidden justify-center mt-8">
               <Link
-                href="/blog"
+                href="/blog/all-posts"
                 className="flex items-center gap-2 px-6 py-3 border-2 border-indigo-600 text-indigo-600 rounded-lg font-semibold hover:bg-indigo-50 transition-all duration-200"
               >
                 View All Articles
@@ -161,4 +169,3 @@ const BlogArticleList = () => {
 };
 
 export default BlogArticleList;
-

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Image from 'next/image';
 import { getPostBySlug, getAuthorById } from '@/data/BlogPostData';
@@ -28,6 +28,18 @@ export const BlogPostHeroSection: React.FC<BlogPostHeroSectionProps> = ({ slug }
         day: 'numeric'
     });
 
+    // Category-based fallback images
+    const getFallbackImage = (categoryId: string) => {
+        const fallbacks: Record<string, string> = {
+            'software-testing': '/images/blog/fallback/software-testing.webp',
+            'data-science': '/images/blog/fallback/data-science.webp',
+            'ai-ml': '/images/blog/fallback/ai-ml.webp',
+            'web-development': '/images/blog/fallback/web-development.webp',
+            'devops': '/images/blog/fallback/devops.webp',
+        };
+        return fallbacks[categoryId] || '/images/blog/fallback/default.webp';
+    };
+
     return (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             {/* Title */}
@@ -43,7 +55,7 @@ export const BlogPostHeroSection: React.FC<BlogPostHeroSectionProps> = ({ slug }
                         alt={author.name}
                         fill
                         className="rounded-full border-2 border-blue-600 object-cover"
-                        sizes="(max-width: 640px) 64px, (max-width: 768px) 80px, 96px"
+                        sizes="(max-width: 640px) 64px, (max-width: 768px) 80px, (max-width: 1024px) 96px, 112px"
                     />
                 </div>
                 <div className="text-center sm:text-left">
@@ -55,20 +67,20 @@ export const BlogPostHeroSection: React.FC<BlogPostHeroSectionProps> = ({ slug }
                         <span className="text-xs text-gray-500">{formattedDate}</span>
                         <span className="text-gray-400">•</span>
                         <span className="text-xs text-gray-500">{post.readTime}</span>
-                        
                     </div>
                 </div>
             </div>
 
-            {/* Featured Image - OPTIMIZED: Smaller, responsive heights for better blog layout */}
-            <div className="relative w-full h-56 sm:h-64 md:h-72 lg:h-80 xl:h-96 mb-6 sm:mb-8 rounded-lg overflow-hidden shadow-lg">
+            {/* Featured Image - OPTIMIZED: ~420px max height with responsive scaling */}
+            <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[420px] mb-6 sm:mb-8 rounded-lg overflow-hidden shadow-lg bg-gradient-to-br from-indigo-50 to-blue-50">
                 <Image
-                    src={post.featuredImage || "/images/automation-testing.webp"}
+                    src={post.featuredImage || getFallbackImage(post.categoryId)}
                     alt={post.title}
                     fill
                     className="object-cover"
                     sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 85vw, 1200px"
                     priority
+                    quality={90}
                 />
             </div>
 

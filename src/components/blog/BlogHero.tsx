@@ -22,6 +22,18 @@ const BlogHero = () => {
     day: 'numeric'
   });
 
+  // Category-based fallback images
+  const getFallbackImage = (categoryId: string) => {
+    const fallbacks: Record<string, string> = {
+      'software-testing': '/images/blog/fallback/software-testing.webp',
+      'data-science': '/images/blog/fallback/data-science.webp',
+      'ai-ml': '/images/blog/fallback/ai-ml.webp',
+      'web-development': '/images/blog/fallback/web-development.webp',
+      'devops': '/images/blog/fallback/devops.webp',
+    };
+    return fallbacks[categoryId] || '/images/blog/fallback/default.webp';
+  };
+
   return (
     <section className="bg-gradient-to-br from-slate-50 via-white to-blue-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -39,7 +51,7 @@ const BlogHero = () => {
 
               {/* Title - Optimized for readability */}
               <Link href={`/blog/${featuredPost.slug}`}>
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight hover:text-indigo-600 transition-colors duration-300">
                 {featuredPost.title}
               </h1>
               </Link>
@@ -76,35 +88,28 @@ const BlogHero = () => {
               </div>
             </div>
 
-            {/* Right Column - Featured Image - FIXED for mobile */}
+            {/* Right Column - Featured Image - ENHANCED: Better aspect ratio and fallback */}
             <div className="flex items-center justify-center">
-              <div className="relative w-full h-64 sm:h-72 md:h-80 rounded-xl shadow-md overflow-hidden border border-gray-200">
+              <div className="relative w-full aspect-video rounded-xl shadow-md overflow-hidden border border-gray-200 bg-gradient-to-br from-indigo-50 to-blue-50">
                 {featuredPost.featuredImage ? (
                   <Image
                     src={featuredPost.featuredImage}
+                    alt={featuredPost.title}
+                    fill
+                    className="object-cover hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority
+                    quality={90}
+                  />
+                ) : (
+                  <Image
+                    src={getFallbackImage(featuredPost.categoryId)}
                     alt={featuredPost.title}
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 50vw"
                     priority
                   />
-                ) : (
-                  <div className="flex flex-col items-center justify-center h-full bg-gradient-to-br from-gray-50 to-gray-100 text-gray-400">
-                    <svg
-                      className="w-20 h-20 mb-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                      />
-                    </svg>
-                    <p className="text-gray-600 text-sm font-medium">Featured Article Image</p>
-                  </div>
                 )}
               </div>
             </div>
