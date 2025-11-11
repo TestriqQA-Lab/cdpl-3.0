@@ -15,9 +15,7 @@ const GoogleAnalytics = () => {
   useEffect(() => {
     if (GA_MEASUREMENT_ID) {
       const url = pathname + searchParams.toString();
-      // Manually send a pageview event for client-side navigation
-      // This is a common pattern for Next.js App Router to ensure page views are tracked
-      // when using the 'use client' directive.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (window as any).gtag('config', GA_MEASUREMENT_ID, {
         page_path: url,
       });

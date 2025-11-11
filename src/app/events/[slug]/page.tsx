@@ -1,10 +1,12 @@
-// app/events/[slug]/page.tsx
+// src/app/events/[slug]/page.tsx
 import { getEventBySlug, pastEvents } from "@/data/eventsData";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import dynamic from "next/dynamic";
 import { CorporateRegistrationModal } from "@/components/events";
 import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
+import { Suspense } from "react";
+import EventDetailPageContent from "./EventDetailPageContent";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -28,7 +30,6 @@ const EventDetailsTwoColumnSection = dynamic(
   { ssr: true, loading: () => <SectionLoader label="Loading details..." /> }
 );
 
-// Left-column extras (no ssr:false here)
 const EventDetailsOrganizerSection = dynamic(
   () => import("@/components/sections/EventDetailsOrganizerSection"),
   { ssr: true, loading: () => <SectionLoader label="Loading organizer..." /> }
@@ -138,7 +139,7 @@ export default async function EventDetailPage({ params }: PageProps) {
     }),
   };
 
-  // Article Schema (for content-rich event pages)
+  // Article Schema
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -178,7 +179,7 @@ export default async function EventDetailPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
 
-      {/* Main Content with Semantic HTML */}
+      {/* Main Content */}
       <div itemScope itemType="https://schema.org/Event">
         <meta itemProp="name" content={event.title} />
         <meta itemProp="description" content={event.purpose || event.subtitle} />
@@ -202,6 +203,11 @@ export default async function EventDetailPage({ params }: PageProps) {
       </div>
 
       <CorporateRegistrationModal />
+
+      {/* Handle referral tracking on client */}
+      <Suspense fallback={null}>
+        <EventDetailPageContent />
+      </Suspense>
     </>
   );
 }
