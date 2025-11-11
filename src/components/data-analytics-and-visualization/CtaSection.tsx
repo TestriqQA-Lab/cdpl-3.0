@@ -1,0 +1,118 @@
+import { ArrowRight, Check } from "lucide-react";
+import Link from "next/link";
+
+export default function CtaSection() {
+    return (
+        <section className="relative py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 overflow-hidden">
+            {/* Decorative background */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-1/4 right-0 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+                <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+            </div>
+
+            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    {/* Left side - Content */}
+                    <div className="text-white space-y-8 lg:col-span-8">
+                        <div className="space-y-4">
+                            <h2 className="text-3xl md:text-4xl font-bold leading-tight">
+                                Ready to <span className="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 bg-clip-text text-transparent">Master</span> Excel?
+                            </h2>
+                            <p className="text-xl text-blue-100 leading-relaxed">
+                                Join thousands of successful professionals who have transformed their careers with our comprehensive Excel training program.
+                            </p>
+                        </div>
+
+                        {/* Benefits list */}
+                        <div className="space-y-4">
+                            {[
+                                "Expert instructors with 10+ years industry experience",
+                                "100% job assistance and placement support",
+                                "Globally recognized certification",
+                                "Real-world projects and hands-on practice",
+                                "Flexible learning - Classroom + Online options",
+                                "1:1 doubt solving and personal mentoring",
+                            ].map((benefit, index) => (
+                                <div key={index} className="flex items-center gap-3">
+                                    <Check className="w-6 h-6 text-green-400 flex-shrink-0" />
+                                    <span className="text-lg">{benefit}</span>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* CTA Buttons */}
+                        <div className="flex flex-col md:flex-row gap-4 pt-4">
+                            <button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
+                                Enroll Now
+                                <ArrowRight className="w-5 h-5" />
+                            </button>
+                            <button className="border-2 border-white text-white font-semibold py-4 px-8 rounded-lg hover:bg-white/10 transition-all duration-300">
+                                Download Brochure
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Right side - Highlights */}
+                    <div className="space-y-6 lg:col-span-4">
+                        {/* Highlight cards */}
+                        {[
+                            {
+                                number: "20",
+                                label: "Hours",
+                                description: "Intensive training program",
+                            },
+                            {
+                                number: "13",
+                                label: "Modules",
+                                description: "Comprehensive curriculum",
+                            },
+                            {
+                                number: "3",
+                                label: "Projects",
+                                description: "Real-world applications",
+                            },
+                            {
+                                number: "100%",
+                                label: "Support",
+                                description: "Job assistance included",
+                            },
+                        ].map((highlight, index) => (
+                            <div
+                                key={index}
+                                className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-6 hover:bg-white/20 transition-all duration-300"
+                            >
+                                <div className="flex items-start gap-4">
+                                    <div className="text-4xl font-bold text-blue-300">
+                                        {highlight.number}
+                                    </div>
+                                    <div>
+                                        <p className="text-white font-semibold">{highlight.label}</p>
+                                        <p className="text-blue-100 text-sm">
+                                            {highlight.description}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Bottom section - Limited offer */}
+                <div className="mt-16 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/30 rounded-2xl p-8 text-center">
+                    <p className="text-yellow-100 text-lg mb-4">
+                        🎉 Limited Time Offer - Enroll Today and Get
+                    </p>
+                    <h3 className="text-3xl font-bold text-white mb-6">
+                        30% Discount + Free Career Consultation
+                    </h3>
+                    <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
+                        This exclusive offer is available for a limited time only. Don't miss out on your chance to master Excel and transform your career!
+                    </p>
+                    <Link href="contact-us" className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-slate-900 font-bold py-4 px-10 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl text-lg">
+                        Claim Your Offer Now
+                    </Link>
+                </div>
+            </div>
+        </section>
+    );
+}

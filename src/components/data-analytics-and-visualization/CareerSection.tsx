@@ -1,0 +1,228 @@
+import { BarChart3, DollarSign, Target, TrendingUp, Zap, Cog, Package, FileText } from "lucide-react";
+
+
+const jobRoles = [
+    {
+        title: "Data Analyst",
+        description: "Analyze business data and create insights",
+        icon: "BarChart3",
+    },
+    {
+        title: "Business Intelligence Analyst",
+        description: "Build BI solutions and dashboards",
+        icon: "Zap",
+    },
+    {
+        title: "Financial Analyst",
+        description: "Analyze financial data and forecasts",
+        icon: "DollarSign",
+    },
+    {
+        title: "Marketing Analyst",
+        description: "Analyze marketing campaigns and ROI",
+        icon: "Target",
+    },
+    {
+        title: "Operations Analyst",
+        description: "Optimize operational efficiency",
+        icon: "Cog",
+    },
+    {
+        title: "Sales Analyst",
+        description: "Analyze sales performance and trends",
+        icon: "TrendingUp",
+    },
+    {
+        title: "Supply Chain Analyst",
+        description: "Optimize supply chain operations",
+        icon: "Package",
+    },
+    {
+        title: "Reporting Specialist",
+        description: "Create reports and data visualizations",
+        icon: "FileText",
+    },
+];
+
+
+export const hiringCompanies = [
+    "Deloitte",
+    "Accenture",
+    "TCS",
+    "Infosys",
+    "Wipro",
+    "HCL Technologies",
+    "Cognizant",
+    "IBM",
+    "Microsoft",
+    "Google",
+    "Amazon",
+    "Goldman Sachs",
+    "JP Morgan",
+    "McKinsey",
+    "BCG",
+];
+
+const colorClasses = [
+    { bg: "bg-blue-100", text: "text-blue-600", border: "border-blue-200", gradient: "from-blue-500 to-blue-600" },
+    { bg: "bg-indigo-100", text: "text-indigo-600", border: "border-indigo-200", gradient: "from-indigo-500 to-indigo-600" },
+    { bg: "bg-cyan-100", text: "text-cyan-600", border: "border-cyan-200", gradient: "from-cyan-500 to-cyan-600" },
+    { bg: "bg-purple-100", text: "text-purple-600", border: "border-purple-200", gradient: "from-purple-500 to-purple-600" },
+    { bg: "bg-pink-100", text: "text-pink-600", border: "border-pink-200", gradient: "from-pink-500 to-pink-600" },
+    { bg: "bg-green-100", text: "text-green-600", border: "border-green-200", gradient: "from-green-500 to-green-600" },
+    { bg: "bg-orange-100", text: "text-orange-600", border: "border-orange-200", gradient: "from-orange-500 to-orange-600" },
+    { bg: "bg-red-100", text: "text-red-600", border: "border-red-200", gradient: "from-red-500 to-red-600" },
+];
+
+export default function CareerSection() {
+    return (
+        <section className="relative py-20 bg-gradient-to-b from-slate-50 to-white overflow-hidden">
+            {/* Decorative background */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-1/3 right-0 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
+                <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
+            </div>
+
+            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Section header */}
+                <div className="text-center mb-16">
+                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                        <span className="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 bg-clip-text text-transparent">Career</span> Opportunities
+                    </h2>
+                    <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+                        Excel expertise opens doors to multiple high-paying roles across industries. Explore the career paths available to you.
+                    </p>
+                </div>
+
+                {/* Job roles grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                    {jobRoles.map((role, index) => {
+                        const icons = [BarChart3, Zap, DollarSign, Target, Cog, TrendingUp, Package, FileText];
+                        const Icon = icons[index % icons.length];
+                        const color = colorClasses[index % colorClasses.length];
+
+                        return (
+                            <div
+                                key={index}
+                                className={`group relative bg-white rounded-xl border ${color.border} p-6 hover:shadow-lg transition-all duration-300 overflow-hidden`}
+                            >
+                                {/* Gradient overlay on hover */}
+                                <div className={`absolute inset-0 ${color.bg} opacity-0 group-hover:opacity-40 transition-opacity duration-300`}></div>
+
+                                <div className="relative z-10">
+                                    {/* Icon */}
+                                    <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg ${color.bg} ${color.text} mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                                        <Icon className="w-6 h-6" />
+                                    </div>
+
+                                    {/* Content */}
+                                    <h3 className="text-lg font-semibold text-slate-900 mb-2">
+                                        {role.title}
+                                    </h3>
+                                    <p className="text-slate-600 text-sm leading-relaxed">
+                                        {role.description}
+                                    </p>
+                                </div>
+
+                                {/* Bottom accent line */}
+                                <div
+                                    className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${color.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left`}
+                                ></div>
+                            </div>
+                        );
+                    })}
+                </div>
+
+                {/* Hiring companies section */}
+                <div className="bg-white rounded-2xl border border-slate-200 p-12">
+                    <h3 className="text-3xl font-bold text-slate-900 mb-8 text-center">
+                        Top Companies Hiring Excel Experts
+                    </h3>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                        {hiringCompanies.map((company, index) => (
+                            <div
+                                key={index}
+                                className="group flex items-center justify-center p-6 rounded-xl border border-slate-200 hover:border-blue-400 hover:shadow-lg transition-all duration-300 bg-gradient-to-br from-slate-50 to-white"
+                            >
+                                <p className="font-semibold text-slate-700 group-hover:text-blue-600 transition-colors text-center">
+                                    {company}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Salary and growth section */}
+                <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {/* Salary progression */}
+                    <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl border border-green-200 p-8">
+                        <h3 className="text-2xl font-bold text-slate-900 mb-6">
+                            Salary Growth Potential
+                        </h3>
+                        <div className="space-y-4">
+                            <div className="flex items-center justify-between">
+                                <span className="text-slate-700 font-medium">Fresher Level</span>
+                                <span className="text-lg font-bold text-green-600">4 LPA</span>
+                            </div>
+                            <div className="w-full bg-slate-200 rounded-full h-2">
+                                <div className="bg-green-500 h-2 rounded-full" style={{ width: "40%" }}></div>
+                            </div>
+
+                            <div className="flex items-center justify-between pt-4">
+                                <span className="text-slate-700 font-medium">1-2 Years Experience</span>
+                                <span className="text-lg font-bold text-green-600">6-8 LPA</span>
+                            </div>
+                            <div className="w-full bg-slate-200 rounded-full h-2">
+                                <div className="bg-green-500 h-2 rounded-full" style={{ width: "60%" }}></div>
+                            </div>
+
+                            <div className="flex items-center justify-between pt-4">
+                                <span className="text-slate-700 font-medium">3+ Years Experience</span>
+                                <span className="text-lg font-bold text-green-600">10-15 LPA</span>
+                            </div>
+                            <div className="w-full bg-slate-200 rounded-full h-2">
+                                <div className="bg-green-500 h-2 rounded-full" style={{ width: "100%" }}></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Career growth paths */}
+                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl border border-blue-200 p-8">
+                        <h3 className="text-2xl font-bold text-slate-900 mb-6">
+                            Career Growth Paths
+                        </h3>
+                        <div className="space-y-4">
+                            <div className="flex items-start gap-3">
+                                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold">
+                                    1
+                                </span>
+                                <div>
+                                    <p className="font-semibold text-slate-900">Data Analyst</p>
+                                    <p className="text-sm text-slate-600">Entry-level role analyzing business data</p>
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-3">
+                                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">
+                                    2
+                                </span>
+                                <div>
+                                    <p className="font-semibold text-slate-900">Senior Analyst</p>
+                                    <p className="text-sm text-slate-600">Lead analytics projects and mentor juniors</p>
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-3">
+                                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-purple-600 text-white flex items-center justify-center text-xs font-bold">
+                                    3
+                                </span>
+                                <div>
+                                    <p className="font-semibold text-slate-900">Analytics Manager</p>
+                                    <p className="text-sm text-slate-600">Manage analytics teams and strategy</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}

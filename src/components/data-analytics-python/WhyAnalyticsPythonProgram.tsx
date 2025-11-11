@@ -78,14 +78,14 @@ export default function WhyAnalyticsPythonProgram() {
     ];
 
     return (
-        <section className="py-20 md:py-32 bg-white">
-            <div className="container mx-auto px-4">
+        <section className="py-16 md:py-20 bg-white">
+            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <div className="text-center mb-16 md:mb-20">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4 text-slate-900">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">
                         Why Choose <span className="text-orange-600">Our Program</span>?
                     </h2>
-                    <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+                    <p className="text-lg text-slate-600 max-w-4xl mx-auto">
                         At Cinute Digital, we prepare you to deliver transformative value. Our curriculum bridges theoretical knowledge with practical expertise, ensuring you stand out as a proficient data analyst in any industry.
                     </p>
                 </div>

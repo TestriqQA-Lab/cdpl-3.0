@@ -1,18 +1,19 @@
 import { ArrowRight, CheckCircle } from "lucide-react";
+import Link from "next/link";
 
 export default function CtaSection() {
     return (
-        <section className="py-20 md:py-32 bg-gradient-to-r from-slate-900 via-orange-900 to-slate-900 relative overflow-hidden">
+        <section className="py-16 md:py-20 bg-gradient-to-r from-slate-900 via-orange-900 to-slate-900 relative overflow-hidden">
             {/* Background decoration */}
             <div className="absolute inset-0 opacity-10">
                 <div className="absolute top-20 right-10 w-72 h-72 bg-orange-400 rounded-full mix-blend-multiply filter blur-3xl"></div>
                 <div className="absolute bottom-20 left-10 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl"></div>
             </div>
 
-            <div className="container mx-auto px-4 relative z-10">
+            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="max-w-3xl mx-auto text-center">
                     {/* Main Heading */}
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                    <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
                         Ready to Transform Your <span className="text-orange-400">Data Career</span>?
                     </h2>
 
@@ -52,9 +53,9 @@ export default function CtaSection() {
                     </div>
 
                     {/* CTA Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+                    <div className="flex flex-col md:flex-row gap-4 justify-center mb-10">
                         <button
-                            className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-6 text-base rounded-lg shadow-lg hover:shadow-xl transition-all"
+                            className="flex items-center bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-6 text-base rounded-lg shadow-lg hover:shadow-xl transition-all"
                         >
                             Enroll Now
                             <ArrowRight className="w-5 h-5 ml-2" />
@@ -108,17 +109,17 @@ export default function CtaSection() {
                 <div className="mt-16 text-center border-t border-white/10 pt-8">
                     <p className="text-slate-300 mb-4">Have questions? Get in touch with us!</p>
                     <div className="flex flex-col sm:flex-row gap-6 justify-center items-center text-white">
-                        <a href="tel:+917888383788" className="flex items-center gap-2 hover:text-orange-400 transition-colors">
+                        <Link href="tel:+917888383788" className="flex items-center gap-2 hover:text-orange-400 transition-colors">
                             <span>📞</span> +91 788-83-83-788
-                        </a>
+                        </Link>
                         <div className="hidden sm:block w-px h-6 bg-white/20"></div>
-                        <a href="mailto:info@cinutedigital.com" className="flex items-center gap-2 hover:text-orange-400 transition-colors">
-                            <span>✉️</span> info@cinutedigital.com
-                        </a>
+                        <Link href="mailto:contact@cinutedigital.com" className="flex items-center gap-2 hover:text-orange-400 transition-colors">
+                            <span>✉️</span> contact@cinutedigital.com
+                        </Link>
                         <div className="hidden sm:block w-px h-6 bg-white/20"></div>
-                        <a href="https://www.cinutedigital.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-orange-400 transition-colors">
+                        <Link href="https://www.cinutedigital.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-orange-400 transition-colors">
                             <span>🌐</span> www.cinutedigital.com
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

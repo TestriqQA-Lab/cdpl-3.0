@@ -87,14 +87,14 @@ export default function ToolsSection() {
     ];
 
     return (
-        <section className="py-20 md:py-32 bg-white">
-            <div className="container mx-auto px-4">
+        <section className="py-16 md:py-20 bg-white">
+            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <div className="text-center mb-16 md:mb-20">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4 text-slate-900">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">
                         Tools & <span className="text-orange-600">Technologies</span>
                     </h2>
-                    <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+                    <p className="text-lg text-slate-600 max-w-3xl mx-auto">
                         Master industry-standard tools and libraries used by data professionals worldwide.
                     </p>
                 </div>

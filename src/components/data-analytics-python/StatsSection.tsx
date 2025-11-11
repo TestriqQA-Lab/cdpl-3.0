@@ -1,3 +1,6 @@
+"use client";
+
+import React from "react";
 import { TrendingUp, Briefcase, DollarSign, Smile, Globe } from "lucide-react";
 
 interface StatCard {
@@ -7,113 +10,226 @@ interface StatCard {
     description: string;
     bgGradient: string;
     iconBg: string;
+    ariaLabel: string;
 }
 
 export default function StatsSection() {
     const stats: StatCard[] = [
         {
-            icon: <TrendingUp className="w-6 h-6" />,
+            icon: <TrendingUp className="w-6 h-6" aria-hidden="true" />,
             value: "25%",
             label: "Market Growth",
-            description: "Data Analytics industry growth from 2020 to 2030",
+            description: "Data analytics industry growth from 2020 to 2030",
             bgGradient: "from-blue-50 to-blue-100",
             iconBg: "bg-blue-500",
+            ariaLabel: "Twenty five percent market growth from 2020 to 2030",
         },
         {
-            icon: <Briefcase className="w-6 h-6" />,
+            icon: <Briefcase className="w-6 h-6" aria-hidden="true" />,
             value: "101K+",
             label: "Job Vacancies",
-            description: "Active job openings for Python Data Analysts in India",
+            description: "Active openings for Python Data Analysts in India",
             bgGradient: "from-orange-50 to-orange-100",
             iconBg: "bg-orange-500",
+            ariaLabel: "Over one hundred and one thousand job vacancies",
         },
         {
-            icon: <DollarSign className="w-6 h-6" />,
-            value: "4 LPA",
+            icon: <DollarSign className="w-6 h-6" aria-hidden="true" />,
+            value: "₹4 LPA",
             label: "Average Salary",
-            description: "Starting salary for Python Data Analyst freshers",
+            description: "Typical fresher salary for Python Data Analyst roles",
             bgGradient: "from-green-50 to-green-100",
             iconBg: "bg-green-500",
+            ariaLabel: "Average salary four lakh per annum for freshers",
         },
         {
-            icon: <Smile className="w-6 h-6" />,
+            icon: <Smile className="w-6 h-6" aria-hidden="true" />,
             value: "75%",
             label: "Job Satisfaction",
-            description: "Data professionals report high job satisfaction rates",
+            description: "Data professionals report high satisfaction rates",
             bgGradient: "from-purple-50 to-purple-100",
             iconBg: "bg-purple-500",
+            ariaLabel: "Seventy five percent job satisfaction",
         },
         {
-            icon: <Globe className="w-6 h-6" />,
+            icon: <Globe className="w-6 h-6" aria-hidden="true" />,
             value: "32%",
             label: "Market Share",
-            description: "India's share in the global data analytics market",
+            description: "India’s growing share in global analytics services",
             bgGradient: "from-red-50 to-red-100",
             iconBg: "bg-red-500",
+            ariaLabel: "Thirty two percent market share",
         },
     ];
 
+    /** --------- JSON-LD (SEO): ItemList describing the stats ---------- */
+    const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "Python Data Analytics Course Highlights",
+        description:
+            "Key statistics for a Python Data Analytics Course in India: market growth, job vacancies, fresher salary, job satisfaction, and market share.",
+        itemListElement: stats.map((s, idx) => ({
+            "@type": "ListItem",
+            position: idx + 1,
+            name: s.label,
+            description: s.description,
+        })),
+        keywords:
+            "Python Data Analytics Course, Data Analyst Certification, Data Analytics Training India, Fresher Jobs, Average Salary, Placement Assistance, Job-Oriented Program, Online & Classroom Training",
+    };
+
     return (
-        <section className="py-20 md:py-32 bg-gradient-to-b from-white to-slate-50">
-            <div className="container mx-auto px-4">
+        <section
+            className="py-16 md:py-20 bg-gradient-to-b from-white to-slate-50"
+            aria-labelledby="stats-heading"
+        >
+            {/* SEO JSON-LD */}
+            <script
+                type="application/ld+json"
+                // eslint-disable-next-line react/no-danger
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
+
+            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
-                <div className="text-center mb-16 md:mb-20">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4 text-slate-900">
-                        Why Invest in <span className="text-orange-600">Data Analytics</span>?
+                <header className="text-center mb-12 md:mb-16">
+                    <h2
+                        id="stats-heading"
+                        className="text-3xl md:text-4xl font-bold mb-4 text-slate-900"
+                    >
+                        Why Choose Our{" "}
+                        <span className="text-orange-600">
+                            Python Data Analytics Course
+                        </span>
+                        ?
                     </h2>
-                    <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        The data analytics industry is booming with incredible opportunities. Here's why this course is your gateway to a lucrative career.
+
+                    <p className="text-base sm:text-lg text-slate-600 max-w-4xl mx-auto">
+                        Become a job-ready <strong>Python Data Analyst</strong> with an
+                        industry-vetted curriculum,{" "}
+                        <strong>hands-on projects</strong>, and{" "}
+                        <strong>placement assistance</strong>. Learn{" "}
+                        <strong>Pandas, NumPy, Matplotlib</strong>, SQL fundamentals,
+                        exploratory data analysis (EDA), and reporting skills recruiters
+                        actively search for.
                     </p>
-                </div>
+
+                </header>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
+                <ul
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6 mb-10 md:mb-14"
+                    aria-label="Program statistics"
+                >
                     {stats.map((stat, index) => (
-                        <div
-                            key={index}
-                            className={`bg-gradient-to-br ${stat.bgGradient} rounded-xl p-6 border border-slate-200 hover:border-orange-300 hover:shadow-lg transition-all duration-300 group`}
-                        >
-                            {/* Icon */}
-                            <div
-                                className={`${stat.iconBg} w-12 h-12 rounded-lg flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform`}
+                        <li key={index} className="h-full">
+                            <article
+                                tabIndex={0}
+                                aria-label={stat.ariaLabel}
+                                className={`h-full bg-gradient-to-br ${stat.bgGradient} rounded-2xl p-5 sm:p-6 border border-slate-200 outline-none transition-all duration-300 hover:border-orange-300 hover:shadow-lg focus-visible:ring-2 focus-visible:ring-orange-300`}
                             >
-                                {stat.icon}
-                            </div>
+                                {/* Icon */}
+                                <div
+                                    className={`${stat.iconBg} w-12 h-12 rounded-xl flex items-center justify-center text-white mb-4`}
+                                    aria-hidden="true"
+                                >
+                                    {stat.icon}
+                                </div>
 
-                            {/* Value */}
-                            <div className="mb-2">
-                                <p className="text-3xl md:text-4xl font-bold text-slate-900">
-                                    {stat.value}
+                                {/* Value */}
+                                <div className="mb-1">
+                                    <p className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight">
+                                        {stat.value}
+                                    </p>
+                                </div>
+
+                                {/* Label */}
+                                <h3 className="text-base sm:text-lg font-semibold text-slate-800 mb-1">
+                                    {stat.label}
+                                </h3>
+
+                                {/* Description */}
+                                <p className="text-sm sm:text-[15px] text-slate-600 leading-relaxed">
+                                    {stat.description}
                                 </p>
-                            </div>
-
-                            {/* Label */}
-                            <h3 className="text-lg font-semibold text-slate-800 mb-2">
-                                {stat.label}
-                            </h3>
-
-                            {/* Description */}
-                            <p className="text-sm text-slate-600 leading-relaxed">
-                                {stat.description}
-                            </p>
-                        </div>
+                            </article>
+                        </li>
                     ))}
-                </div>
+                </ul>
 
-                {/* Key Insight */}
-                <div className="bg-gradient-to-r from-orange-50 via-white to-blue-50 rounded-2xl border-2 border-orange-200 p-8 md:p-12">
-                    <div className="flex gap-4 md:gap-6">
+                <p className="mt-4 text-sm text-center sm:text-base text-slate-600 max-w-4xl mx-auto">
+                    <em>Data Analyst Certification</em>,{" "}
+                    <em>Data Analytics Training in India</em>,{" "}
+                    <em>Fresher Data Analyst Jobs</em>, <em>Average Salary</em>,{" "}
+                    <em>Beginner to Job-Ready</em>, <em>Placement Support</em>,{" "}
+                    <em>Online & Classroom</em>.
+                </p>
+
+                {/* SEO-Rich Key Insight */}
+                <div className="mt-10 bg-gradient-to-r from-orange-50 via-white to-blue-50 rounded-2xl border-2 border-orange-200 p-6 sm:p-8 md:p-10">
+                    <div className="flex items-start gap-4 sm:gap-6">
                         <div className="flex-shrink-0">
-                            <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-orange-500 text-white">
+                            <div
+                                className="flex items-center justify-center h-12 w-12 rounded-xl bg-orange-500 text-white"
+                                aria-hidden="true"
+                            >
                                 <span className="text-xl">💡</span>
                             </div>
                         </div>
                         <div>
-                            <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">
-                                The Data Revolution is Here
+                            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-2">
+                                The Data Revolution is Here — Build a High-Growth Career
                             </h3>
-                            <p className="text-slate-600 leading-relaxed">
-                                Every organization across finance, healthcare, retail, technology, and marketing is desperately seeking skilled data professionals. With Python data analytics skills, you're not just learning a tool—you're securing your future in one of the fastest-growing industries. Our comprehensive 20-hour program bridges the gap between academic learning and industry demands, ensuring you're job-ready from day one.
+                            <p className="text-slate-700 leading-relaxed text-sm sm:text-base">
+                                Companies across <strong>finance</strong>,{" "}
+                                <strong>healthcare</strong>, <strong>retail</strong>,{" "}
+                                <strong>technology</strong>, and <strong>marketing</strong> are
+                                hiring <strong>Python Data Analysts</strong> to transform raw
+                                data into business insights. Our{" "}
+                                <strong>job-oriented training</strong> bridges the gap between
+                                academics and industry demands with guided projects, interview
+                                prep, and portfolio support—so you can land{" "}
+                                <strong>fresher data analyst jobs</strong> in India with
+                                confidence.
+                            </p>
+
+                            <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-700 text-sm sm:text-[15px]">
+                                <li className="flex items-start gap-2">
+                                    <span aria-hidden="true">✅</span>
+                                    <span>
+                                        <strong>Career-ready skills:</strong> Python, Pandas, NumPy,
+                                        EDA, Visualization, Basic SQL
+                                    </span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span aria-hidden="true">✅</span>
+                                    <span>
+                                        <strong>Portfolio projects</strong> that showcase business
+                                        impact and storytelling
+                                    </span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span aria-hidden="true">✅</span>
+                                    <span>
+                                        <strong>Interview support</strong>: resume review, mock
+                                        interviews, and recruiter playbook
+                                    </span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span aria-hidden="true">✅</span>
+                                    <span>
+                                        <strong>Flexible learning</strong>: online or classroom,
+                                        weekend and evening schedules
+                                    </span>
+                                </li>
+                            </ul>
+
+                            <p className="mt-4 text-slate-600 text-xs sm:text-sm">
+                                Keywords: Python Data Analytics Course in India • Data Analyst
+                                Certification • Placement Assistance • Fresher Data Analyst Jobs
+                                • Average Salary for Data Analysts • EDA • SQL • Pandas • NumPy
+                                • Matplotlib • Job-Oriented Training.
                             </p>
                         </div>
                     </div>
