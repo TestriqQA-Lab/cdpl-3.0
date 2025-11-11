@@ -1,0 +1,194 @@
+import { CheckCircle, Users } from "lucide-react";
+
+interface AudienceSegment {
+    title: string;
+    description: string;
+    icon: string;
+    requirements: string[];
+}
+
+export default function WhoShouldEnroll() {
+    const audiences: AudienceSegment[] = [
+        {
+            title: "Beginners with Basic Python",
+            description: "If you have basic Python knowledge and want to dive into data analytics, this course is perfect for you.",
+            icon: "🎯",
+            requirements: [
+                "Basic understanding of Python variables and loops",
+                "Familiarity with fundamental programming concepts",
+                "Willingness to learn and practice regularly",
+            ],
+        },
+        {
+            title: "Intermediate Users",
+            description: "Enhance your analytics and visualization expertise with advanced Python libraries and techniques.",
+            icon: "📈",
+            requirements: [
+                "Intermediate Python programming skills",
+                "Basic understanding of data structures",
+                "Experience with simple data manipulation",
+            ],
+        },
+        {
+            title: "Professionals Seeking Career Change",
+            description: "Professionals from finance, healthcare, retail, technology, marketing, or research looking to transition into data analytics.",
+            icon: "💼",
+            requirements: [
+                "Basic Python knowledge (recommended)",
+                "Domain expertise in your industry",
+                "Motivation to learn new technical skills",
+            ],
+        },
+        {
+            title: "Students & Graduates",
+            description: "Recent graduates or students looking to build practical skills for job readiness in the data analytics field.",
+            icon: "🎓",
+            requirements: [
+                "Basic Python knowledge or willingness to learn",
+                "Strong analytical thinking",
+                "Commitment to hands-on learning",
+            ],
+        },
+    ];
+
+    const prerequisites = [
+        {
+            category: "Essential",
+            items: [
+                "Basic Python knowledge (variables, loops, functions)",
+                "Familiarity with data concepts (datasets, tables)",
+                "Computer with Python installed",
+            ],
+        },
+        {
+            category: "Recommended",
+            items: [
+                "Basic statistics knowledge",
+                "Experience with spreadsheets (Excel)",
+                "Understanding of basic SQL",
+            ],
+        },
+        {
+            category: "Nice to Have",
+            items: [
+                "Previous experience with data analysis tools",
+                "Familiarity with visualization concepts",
+                "Experience with Jupyter Notebook",
+            ],
+        },
+    ];
+
+    return (
+        <section className="py-20 md:py-32 bg-gradient-to-b from-white to-slate-50">
+            <div className="container mx-auto px-4">
+                {/* Section Header */}
+                <div className="text-center mb-16 md:mb-20">
+                    <h2 className="text-4xl md:text-5xl font-bold mb-4 text-slate-900">
+                        Who Should <span className="text-orange-600">Enroll</span>?
+                    </h2>
+                    <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+                        This course is designed for diverse learners. Whether you're a beginner or a professional seeking to advance your skills, we have the right program for you.
+                    </p>
+                </div>
+
+                {/* Audience Segments */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+                    {audiences.map((audience, idx) => (
+                        <div
+                            key={idx}
+                            className="bg-white rounded-xl p-8 border-2 border-slate-200 hover:border-orange-300 hover:shadow-lg transition-all duration-300"
+                        >
+                            {/* Icon */}
+                            <div className="text-4xl mb-4">{audience.icon}</div>
+
+                            {/* Title */}
+                            <h3 className="text-xl font-bold text-slate-900 mb-3">
+                                {audience.title}
+                            </h3>
+
+                            {/* Description */}
+                            <p className="text-slate-600 leading-relaxed mb-5">
+                                {audience.description}
+                            </p>
+
+                            {/* Requirements */}
+                            <div>
+                                <p className="text-sm font-semibold text-slate-900 mb-3">
+                                    What You Need:
+                                </p>
+                                <ul className="space-y-2">
+                                    {audience.requirements.map((req, ridx) => (
+                                        <li
+                                            key={ridx}
+                                            className="flex items-start gap-2 text-sm text-slate-600"
+                                        >
+                                            <CheckCircle className="w-4 h-4 text-orange-500 flex-shrink-0 mt-0.5" />
+                                            <span>{req}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Prerequisites Section */}
+                <div className="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-8 md:p-12 text-white mb-12">
+                    <h3 className="text-2xl md:text-3xl font-bold mb-8">Prerequisites & Requirements</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {prerequisites.map((prereq, idx) => (
+                            <div key={idx}>
+                                <h4 className="text-lg font-bold text-orange-400 mb-4">
+                                    {prereq.category}
+                                </h4>
+                                <ul className="space-y-3">
+                                    {prereq.items.map((item, iidx) => (
+                                        <li key={iidx} className="flex items-start gap-3">
+                                            <span className="text-orange-400 mt-1">✓</span>
+                                            <span className="text-slate-200 text-sm">{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Success Factors */}
+                <div className="bg-gradient-to-r from-orange-50 to-blue-50 rounded-2xl p-8 md:p-12 border-2 border-orange-200">
+                    <h3 className="text-2xl font-bold text-slate-900 mb-6">Keys to Success</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {[
+                            {
+                                title: "Regular Practice",
+                                description: "Dedicate time daily to hands-on coding and projects",
+                            },
+                            {
+                                title: "Active Participation",
+                                description: "Engage in doubt-solving sessions and ask questions",
+                            },
+                            {
+                                title: "Project Focus",
+                                description: "Complete all real-world projects to build your portfolio",
+                            },
+                            {
+                                title: "Continuous Learning",
+                                description: "Stay updated with latest tools and industry trends",
+                            },
+                        ].map((factor, idx) => (
+                            <div key={idx} className="flex gap-4">
+                                <div className="text-3xl flex-shrink-0">
+                                    {idx === 0 ? "⏰" : idx === 1 ? "🤝" : idx === 2 ? "🎯" : "📚"}
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-slate-900 mb-1">{factor.title}</h4>
+                                    <p className="text-sm text-slate-600">{factor.description}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}

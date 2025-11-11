@@ -145,25 +145,6 @@ const courseCategories: Category[] = [
         ],
       },
       {
-        name: "Advanced Data Analytics - Hero Program",
-        slug: "data-analytics",
-        description: "Craft a standout resume to impress recruiters.",
-        rightColumnImages: [
-          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
-          { name: "Advanced Automation Testing", logo: "/aaa.png" },
-        ],
-      },
-      {
-        name: "Big Data Engineering",
-        slug: "data-engineering-course",
-        description: "Master coding challenges and technical questions.",
-        rightColumnImages: [
-          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
-          { name: "Advanced Automation Testing", logo: "/aaa.png" },
-        ],
-      },
-
-      {
         name: "Advanced Data Science and Machine Learning Masterclass",
         slug: "data-science-course",
         description: "Master coding challenges and technical questions.",
@@ -182,9 +163,9 @@ const courseCategories: Category[] = [
         ],
       },
       {
-        name: "Data Analysis with BI & Big Data Engineering Master Program",
-        // no slug here (and that's OK)
-        description: "Master coding challenges and technical questions.",
+        name: "Python Programming",
+        slug: "python-course",
+        description: "Master containerization and orchestration technologies.",
         rightColumnImages: [
           { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
           { name: "Advanced Automation Testing", logo: "/aaa.png" },
@@ -199,7 +180,35 @@ const courseCategories: Category[] = [
     rightColumnImages: [
       { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
       { name: "Advanced Automation Testing", logo: "/aaa.png" },
-    ], courses: [],
+    ], courses: [
+      {
+        name: "Advanced Data Analytics - Hero Program",
+        slug: "data-analytics",
+        description: "Craft a standout resume to impress recruiters.",
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
+      },
+      // {
+      //   name: "Big Data Engineering",
+      //   slug: "data-engineering-course",
+      //   description: "Master coding challenges and technical questions.",
+      //   rightColumnImages: [
+      //     { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+      //     { name: "Advanced Automation Testing", logo: "/aaa.png" },
+      //   ],
+      // },
+      // {
+      //   name: "Data Analysis with BI & Big Data Engineering Master Program",
+      //   // no slug here (and that's OK)
+      //   description: "Master coding challenges and technical questions.",
+      //   rightColumnImages: [
+      //     { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+      //     { name: "Advanced Automation Testing", logo: "/aaa.png" },
+      //   ],
+      // },
+    ],
   },
   {
     id: "artificial-intelligence",
@@ -287,12 +296,12 @@ const courseCategories: Category[] = [
 const Header = () => {
   const pathname = usePathname();
 
-    // Extract all course slugs for active state check
-  const allCourseSlugs = courseCategories.flatMap(category => 
+  // Extract all course slugs for active state check
+  const allCourseSlugs = courseCategories.flatMap(category =>
     category.courses.map(course => course.slug)
   ).filter((slug): slug is string => !!slug);
 
-// Check if the current pathname is a course page
+  // Check if the current pathname is a course page
   const isCourseActive = allCourseSlugs.some(slug => pathname.startsWith(`/${slug}`));
 
   // Check if the current pathname is the main /courses page
@@ -304,7 +313,7 @@ const Header = () => {
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
 
 
-    const isCoursesMenuOpen = isMegaMenuOpen || isCourseActive || isCoursesBaseActive;
+  const isCoursesMenuOpen = isMegaMenuOpen || isCourseActive || isCoursesBaseActive;
 
   // const isJobsActive = pathname.startsWith("/jobs");
   // const isAboutActive = pathname.startsWith("/about") || pathname.startsWith("/our-team");
@@ -665,7 +674,7 @@ const Header = () => {
                   aria-label="Jobs"
                   className="absolute left-0 top-full mt-0 w-64 bg-white border border-gray-200 rounded-xl shadow-2xl py-2 z-50"
                 >
-                  
+
                   <div className="py-1">
                     <Link
                       href="/jobs/live-jobs"
