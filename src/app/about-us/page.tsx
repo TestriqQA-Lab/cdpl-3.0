@@ -1,122 +1,81 @@
-import { Metadata } from "next";
-import dynamic from "next/dynamic";
-import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
+/**
+ * ============================================================================
+ * ABOUT US PAGE - SEO IMPLEMENTATION
+ * ============================================================================
+ * 
+ * This page follows the centralized SEO approach:
+ * - Organization & Website schemas are in layout.tsx (global)
+ * - This page only adds page-specific schemas: AboutPage, Breadcrumb, FAQ
+ * - Metadata is generated using the centralized generator
+ */
 
-// Dynamic imports with SSR enabled
+import React from 'react';
+import dynamic from "next/dynamic";
+import type { Metadata } from "next";
+import { generateStaticPageMetadata } from "@/lib/metadata-generator";
+import {
+  generateBreadcrumbSchema,
+  generateFAQSchema,
+} from "@/lib/schema-generators";
+import JsonLd from "@/components/JsonLd";
+
+// ============================================================================
+// DYNAMIC IMPORTS
+// ============================================================================
+
 const AboutHeroSection = dynamic(
   () => import("@/components/sections/AboutHeroSection"),
-  {
-    ssr: true,
-    loading: () => (
-      <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
-        <p className="text-gray-500">Loading...</p>
-      </div>
-    )
-  }
+  { ssr: true }
 );
 
 const AboutStatsSection = dynamic(
   () => import("@/components/sections/AboutStats.Section"),
-  {
-    ssr: true,
-    loading: () => (
-      <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
-        <p className="text-gray-500">Loading...</p>
-      </div>
-    )
-  }
+  { ssr: true }
 );
 
 const AboutWhyJoinUs = dynamic(
   () => import("@/components/sections/AboutWhyJoinUs"),
-  {
-    ssr: true,
-    loading: () => (
-      <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
-        <p className="text-gray-500">Loading...</p>
-      </div>
-    )
-  }
+  { ssr: true }
 );
 
 const AboutStorySection = dynamic(
   () => import("@/components/sections/AboutStorySection"),
-  {
-    ssr: true,
-    loading: () => (
-      <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
-        <p className="text-gray-500">Loading...</p>
-      </div>
-    )
-  }
+  { ssr: true }
 );
 
 const AboutFacultyStrip = dynamic(
   () => import("@/components/sections/AboutFacultyStrip"),
-  {
-    ssr: true,
-    loading: () => (
-      <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
-        <p className="text-gray-500">Loading...</p>
-      </div>
-    )
-  }
+  { ssr: true }
 );
 
 const AboutMissionVision = dynamic(
   () => import("@/components/sections/AboutVisionMission"),
-  {
-    ssr: true,
-    loading: () => (
-      <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
-        <p className="text-gray-500">Loading...</p>
-      </div>
-    )
-  }
+  { ssr: true }
 );
 
 const AboutFAQSection = dynamic(
   () => import("@/components/sections/AboutFAQSection"),
-  {
-    ssr: true,
-    loading: () => (
-      <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
-        <p className="text-gray-500">Loading...</p>
-      </div>
-    )
-  }
+  { ssr: true }
 );
 
 const AboutCTASection = dynamic(
   () => import("@/components/sections/AboutCTASection"),
-  {
-    ssr: true,
-    loading: () => (
-      <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
-        <p className="text-gray-500">Loading...</p>
-      </div>
-    )
-  }
+  { ssr: true }
 );
 
 const AboutAccreditations = dynamic(
   () => import("@/components/sections/AboutAccreditations"),
-  {
-    ssr: true,
-    loading: () => (
-      <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
-        <p className="text-gray-500">Loading...</p>
-      </div>
-    )
-  }
+  { ssr: true }
 );
 
 // ============================================================================
-// SEO METADATA - Optimized for About Page
+// METADATA (Page-specific only)
 // ============================================================================
-export const metadata: Metadata = generateSEO({
+
+export const metadata: Metadata = generateStaticPageMetadata({
   title: "About CDPL - Leading EdTech for Software Testing, Data Science & AI Training",
-  description: "CDPL (Cinute Digital) is India's leading EdTech institute delivering industry-ready training in Software Testing, Data Science, AI/ML, and Automation with live projects, expert mentors, and guaranteed placement support. Founded in 2015, we've trained 5000+ professionals.",
+  description: "CDPL (Cinute Digital) is India's premier EdTech institute delivering industry-ready training in Software Testing, Automation, Data Science, and AI/ML. Founded in 2020, we've empowered 5000+ professionals with live projects, expert mentorship, and 100% placement support.",
+  url: "/about-us",
   keywords: [
     "about CDPL",
     "about Cinute Digital",
@@ -124,21 +83,23 @@ export const metadata: Metadata = generateSEO({
     "EdTech institute India",
     "software testing training institute",
     "data science training Mumbai",
-    "AI ML course Pune",
+    "AI ML course India",
     "automation testing institute",
     "job-ready programs",
     "placement guarantee",
     "industry mentors",
     "live projects training",
     "ISTQB certified training",
-    "Mumbai Pune India",
+    "ISO 9001 certified",
+    "Skill India partner",
   ],
-  url: "/about-us",
   image: "/og-images/og-image-about.webp",
-  imageAlt: "About CDPL - Cinute Digital | Leading EdTech Training Institute",
 });
 
-// Force light theme wrapper: ensures light UI even if site prefers dark mode
+// ============================================================================
+// LIGHT THEME WRAPPER
+// ============================================================================
+
 const LightTheme: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <div className="bg-white text-slate-800 [color-scheme:light] dark:bg-white dark:text-slate-800">
     {children}
@@ -146,185 +107,104 @@ const LightTheme: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 );
 
 // ============================================================================
-// ABOUT PAGE COMPONENT
+// PAGE COMPONENT
 // ============================================================================
-export default function AboutPage() {
-  // EducationalOrganization Schema (Enhanced)
-  const educationalOrgSchema = {
-    "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
-    "@id": "https://www.cinutedigital.com/#organization",
-    name: "CDPL - Cinute Digital Pvt. Ltd.",
-    alternateName: "Cinute Digital",
-    legalName: "Cinute Digital Private Limited",
-    url: "https://www.cinutedigital.com",
-    logo: {
-      "@type": "ImageObject",
-      url: "https://www.cinutedigital.com/logo.png",
-      width: 600,
-      height: 60,
-    },
-    description: "Leading EdTech institute offering industry-aligned training in Software Testing, Data Science, AI/ML, and Automation with live projects, expert mentorship, and placement assistance.",
-    foundingDate: "2015", // Update with actual founding year
-    slogan: "Transform Your Career with Industry-Ready Skills",
 
-    // Contact Information
-    email: "contact@cinutedigital.com",
-    telephone: "+91-788-83-83-788",
+export default function AboutPage(): React.ReactElement {
+  // ========================================
+  // PAGE-SPECIFIC SCHEMAS ONLY
+  // (Organization & Website are in layout.tsx)
+  // ========================================
+  
+  // 1. Breadcrumb Schema
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "About Us", url: "/about-us" },
+  ]);
 
-    // Address
-    address: {
-      "@type": "Office # 1, 2nd Floor, Ashley Towers, Kanakia Rd, Vagad Nagar, Beverly Park, Mira Road East, Mira Bhayandar, Maharashtra 401107dress",
-      addressLocality: "Mumbai",
-      addressRegion: "Maharashtra",
-      addressCountry: "IN",
-    },
-
-    // Area Served
-    areaServed: [
-      {
-        "@type": "Place",
-        name: "India",
-      },
-      {
-        "@type": "Place",
-        name: "Mumbai",
-      },
-      {
-        "@type": "Place",
-        name: "Pune",
-      },
-      {
-        "@type": "Place",
-        name: "Maharashtra",
-      },
-    ],
-
-    // Social Media Profiles
-    sameAs: [
-      "https://www.linkedin.com/company/cinutedigital",
-      "https://www.facebook.com/cinutedigital",
-      "https://twitter.com/cinutedigital",
-      "https://www.instagram.com/cinutedigital",
-      "https://www.youtube.com/@cinutedigital",
-    ],
-
-    // Departments/Programs
-    department: [
-      {
-        "@type": "Organization",
-        name: "Software Testing Division",
-        description: "Manual Testing, Automation Testing, API Testing, Performance Testing",
-      },
-      {
-        "@type": "Organization",
-        name: "Data Science & AI Division",
-        description: "Data Analytics, Machine Learning, Artificial Intelligence, Python Programming",
-      },
-      {
-        "@type": "Organization",
-        name: "Automation & DevOps Division",
-        description: "Test Automation, CI/CD, DevOps Practices",
-      },
-      {
-        "@type": "Organization",
-        name: "Digital Skills Division",
-        description: "Full-Stack Development, Digital Marketing, Cloud Computing",
-      },
-    ],
-
-    // Accreditations & Certifications
-    accreditationStatus: "ISTQB Certified Training Partner", // Update if applicable
-
-    // Number of employees (update with actual)
-    numberOfEmployees: {
-      "@type": "QuantitativeValue",
-      value: "50-100",
-    },
-
-    // Alumni count (update with actual)
-    alumni: {
-      "@type": "QuantitativeValue",
-      value: "5000+",
-    },
-  };
-
-  // AboutPage Schema
+  // 2. AboutPage Schema
   const aboutPageSchema = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
     "@id": "https://www.cinutedigital.com/about-us#aboutpage",
     url: "https://www.cinutedigital.com/about-us",
     name: "About CDPL - Cinute Digital",
-    description: "Learn about CDPL's mission, vision, history, and commitment to delivering industry-ready training in Software Testing, Data Science, and AI/ML.",
+    description: "Learn about CDPL's mission to empower professionals with industry-ready skills through hands-on training in Software Testing, Automation, Data Science, and AI/ML.",
     mainEntity: {
       "@id": "https://www.cinutedigital.com/#organization",
     },
     inLanguage: "en-IN",
   };
 
-  // Breadcrumb Schema
-  const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Home", url: "/" },
-    { name: "About Us", url: "/about-us" },
-  ]);
-
-  // Organization Founder Schema (if applicable)
-  const founderSchema = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: "Sandeep Maske", // Update with actual founder name
-    jobTitle: "Founder & Chief Mentor",
-    worksFor: {
-      "@type": "EducationalOrganization",
-      name: "CDPL - Cinute Digital",
-      url: "https://www.cinutedigital.com",
+  // 3. FAQ Schema
+  const faqs = [
+    {
+      question: "What is CDPL (Cinute Digital)?",
+      answer: "CDPL (Cinute Digital) is India's premier EdTech institute specializing in industry-ready training for Software Testing, Automation, Data Science, and AI/ML. Founded in 2020, we've empowered 5000+ professionals with hands-on learning, expert mentorship, and 100% placement support.",
     },
-    sameAs: [
-      "https://www.linkedin.com/in/sandeepmaske", // Update with actual profile
-    ],
-  };
-
-  // Mission & Vision as Thing
-  const missionVisionSchema = {
-    "@context": "https://schema.org",
-    "@type": "Thing",
-    name: "CDPL Mission & Vision",
-    description: "Our mission is to empower professionals with industry-ready skills through hands-on training, expert mentorship, and real-world projects. Our vision is to become India's most trusted EdTech platform for tech skill development.",
-  };
+    {
+      question: "When was CDPL founded?",
+      answer: "CDPL was founded in 2020 by a group of passionate tech professionals who believed education should evolve with industry needs. Our mission from day one has been to bridge the gap between academic learning and real-world job requirements.",
+    },
+    {
+      question: "What makes CDPL different from other training institutes?",
+      answer: "CDPL stands out through our unique combination of live projects, mentor-led learning, portfolio-first approach, and guaranteed placement support. We focus on job-ready skills with hands-on practice on real-world scenarios, not just theory. Our curriculum is continuously updated to match industry demands.",
+    },
+    {
+      question: "Where is CDPL located?",
+      answer: "CDPL is headquartered in Mira Road East, Mumbai, Maharashtra. We serve learners across India through both online and offline training modes. Our programs are accessible to students from Mumbai, Pune, Bangalore, Delhi, and other major cities.",
+    },
+    {
+      question: "What is CDPL's mission and vision?",
+      answer: "Our mission is to empower learners with real-world skills through live projects, mentor feedback, and interview preparation. Our vision is to build an inclusive EdTech ecosystem where lifelong learning, innovation, and career outcomes converge—creating talent that drives high-impact products and services.",
+    },
+    {
+      question: "What courses does CDPL offer?",
+      answer: "CDPL offers comprehensive training programs in Software Testing (Manual & Automation), API Testing, Data Science, Machine Learning, Artificial Intelligence, Data Analytics, Python Programming, Java Programming, ETL Testing, and Digital Marketing. All courses include live projects, expert mentorship, and placement assistance.",
+    },
+    {
+      question: "Does CDPL provide placement support?",
+      answer: "Yes! We provide 100% placement support including resume building, portfolio development, mock interviews, interview preparation, and direct referrals to our 50+ hiring partners. Our placement team works with you until you land your first job.",
+    },
+    {
+      question: "Who are the mentors at CDPL?",
+      answer: "Our mentors are industry experts with 10-15+ years of hands-on experience. They include QA leads, data scientists, automation architects, and senior engineers from top product companies and MNCs. All mentors are actively working professionals who bring real-world insights to the classroom.",
+    },
+    {
+      question: "Is CDPL certified or accredited?",
+      answer: "Yes, CDPL is ISO 9001:2015 certified for quality management and is a recognized Skill India (NSDC) partner. We are also an ISTQB certified training partner. Our certifications ensure that our training meets international quality standards.",
+    },
+    {
+      question: "What is CDPL's teaching methodology?",
+      answer: "We follow a hands-on, project-based learning approach with live mentor-led classes, real-world projects and case studies, collaborative peer learning, regular assessments and feedback, mock interviews and soft skills training, and continuous doubt support.",
+    },
+    {
+      question: "How many students has CDPL trained?",
+      answer: "CDPL has successfully trained and upskilled 5000+ professionals in software testing, data science, and AI/ML. Our alumni work in leading companies across India and globally.",
+    },
+    {
+      question: "Does CDPL offer flexible learning options?",
+      answer: "Yes! We offer flexible learning options including weekend batches, weekday evening batches, fast-track intensive programs, and self-paced learning with recorded sessions. You can choose the format that best fits your schedule.",
+    },
+  ];
+  
+  const faqSchema = generateFAQSchema(faqs);
 
   return (
     <LightTheme>
-      {/* Structured Data - Multiple Schemas */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(educationalOrgSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(founderSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(missionVisionSchema) }}
-      />
+      {/* ========================================
+          PAGE-SPECIFIC SCHEMAS ONLY
+          (No Organization/Website - already in layout)
+          ======================================== */}
+      <JsonLd id="about-page-schema" schema={aboutPageSchema} />
+      <JsonLd id="breadcrumb-schema" schema={breadcrumbSchema} />
+      <JsonLd id="faq-schema" schema={faqSchema} />
 
-      {/* Main Content - Semantic HTML Structure */}
-      <main className="relative isolate" itemScope itemType="https://schema.org/AboutPage">
-        {/* Hidden metadata for schema.org */}
-        <meta itemProp="name" content="About CDPL - Cinute Digital" />
-        <meta itemProp="description" content="Learn about CDPL's mission, vision, and commitment to industry-ready training" />
-        <meta itemProp="url" content="https://www.cinutedigital.com/about-us" />
-
-        {/* Subtle glow background for a futuristic, light aesthetic */}
+      {/* ========================================
+          MAIN CONTENT
+          ======================================== */}
+      <main className="relative isolate">
+        {/* Subtle background glow */}
         <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="mx-auto h-[50rem] w-[50rem] -translate-y-40 rounded-full bg-[radial-gradient(closest-side,rgba(59,130,246,0.10),transparent)] blur-3xl" />
         </div>
