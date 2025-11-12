@@ -1,5 +1,6 @@
 "use client";
 import { ChevronDown } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
 interface FAQ {
@@ -77,11 +78,11 @@ export default function FaqSection() {
     const categories = Array.from(new Set(faqs.map((faq) => faq.category)));
 
     return (
-        <section className="py-20 md:py-32 bg-gradient-to-b from-white to-slate-50">
-            <div className="container mx-auto px-4">
+        <section className="py-16 md:py-20 bg-gradient-to-b from-white to-slate-50">
+            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <div className="text-center mb-16 md:mb-20">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4 text-slate-900">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">
                         Frequently Asked <span className="text-orange-600">Questions</span>
                     </h2>
                     <p className="text-lg text-slate-600 max-w-2xl mx-auto">
@@ -151,18 +152,18 @@ export default function FaqSection() {
                         Our enrollment team is here to help! Reach out to us via phone, email, or contact form, and we&apos;ll provide personalized guidance.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                        <a
+                        <Link
                             href="tel:+917888383788"
                             className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition-colors"
                         >
                             📞 Call Us
-                        </a>
-                        <a
-                            href="mailto:info@cinutedigital.com"
+                        </Link>
+                        <Link
+                            href="mailto:contact@cinutedigital.com"
                             className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
                         >
                             ✉️ Email Us
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

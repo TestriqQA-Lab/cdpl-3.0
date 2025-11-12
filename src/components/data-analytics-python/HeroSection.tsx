@@ -192,9 +192,9 @@ export default function HeroSection() {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
             />
 
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 pb-12 md:pt-12 md:pb-10">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 pb-12 md:pt-6 md:pb-16">
                 {/* Breadcrumbs */}
-                <nav aria-label="Breadcrumb" className="mb-8">
+                <nav aria-label="Breadcrumb" className="mb-4">
                     <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
                         {breadcrumbs.map((c, i) => (
                             <li key={i} className="flex items-center gap-2">
@@ -213,9 +213,9 @@ export default function HeroSection() {
                 {/* Main grid (form aligned to top on the right) */}
                 <div className="grid min-h-[70vh] grid-cols-1 gap-10 sm:py-2 md:grid-cols-12 md:items-start">
                     {/* Left: Content */}
-                    <div className="flex flex-col items-center md:col-span-8 md:items-start">
+                    <div className="flex flex-col md:col-span-8">
                         {/* Duration Badge */}
-                        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white/80 px-4 py-2 shadow-sm backdrop-blur-sm transition-shadow hover:shadow-md">
+                        <div className="mb-4 w-fit inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white/80 px-4 py-2 shadow-sm backdrop-blur-sm transition-shadow hover:shadow-md">
                             <Clock className="h-4 w-4 text-orange-500" />
                             <span className="text-sm font-semibold text-slate-700">
                                 Duration: <span className="text-orange-600">20 Hours</span>
@@ -308,7 +308,7 @@ export default function HeroSection() {
 
                         {/* Extra SEO copy */}
                         <div className="mt-8 max-w-3xl text-center text-xs leading-relaxed text-slate-500 md:text-left">
-                            This data analytics course in Hyderabad is designed to help students and
+                            This data analytics course is designed to help students and
                             working professionals transition into analytics roles with Python. Build a
                             job-ready portfolio using real datasets, learn best practices for EDA,
                             visualization, dashboarding, and communicate insights for business impact.

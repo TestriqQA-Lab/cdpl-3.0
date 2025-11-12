@@ -23,7 +23,7 @@ export default function CurriculumSection() {
             icon: "🐍",
             color: "from-blue-50 to-blue-100",
             topics: [
-                "Introduction to Python Programming",
+                "Overview of Python Programming",
                 "Basic Syntax, Variables, and Data Types",
                 "Control Structures: Conditionals and Loops",
                 "Functions, Modules, and Script Execution",
@@ -31,7 +31,7 @@ export default function CurriculumSection() {
         },
         {
             id: 2,
-            title: "Python Visualization & Environment Setup",
+            title: "Introduction to Python Visualization & Environment Setup",
             duration: "1.5 hours",
             icon: "⚙️",
             color: "from-purple-50 to-purple-100",
@@ -49,28 +49,34 @@ export default function CurriculumSection() {
             icon: "🤖",
             color: "from-green-50 to-green-100",
             topics: [
-                "Introduction to Machine Learning",
-                "Supervised vs. unsupervised learning",
-                "A Glimpse into Model Building",
-                "Overview of basic evaluation metrics",
+                "What is Machine Learning and Why It Matters",
+                "Supervised vs. Unsupervised Learning",
+                "Demonstration of a Simple Classification Model (e.g., Logistic Regression)",
+                "Overview of Basic Evaluation Metrics (Accuracy, ROC Curve)",
             ],
         },
         {
             id: 4,
-            title: "Data Analysis with Pandas",
+            title: "Data Analysis with pandas",
             duration: "3.5 hours",
             icon: "📊",
             color: "from-orange-50 to-orange-100",
             topics: [
-                "Introduction to pandas & DataFrames",
-                "Working with External Data Sources",
-                "Data Exploration and Cleaning",
-                "Data Manipulation and Transformation",
-                "Exploratory Data Analysis (EDA) with Pandas",
-                "Cancer Data Analysis Case Study",
+                "Overview of pandas; DataFrames & Series",
+                "Importing/Exporting Data (CSV, Excel, JSON) & Saving Cleaned Data",
+                "Loading & Summarizing Datasets",
+                "Handling Missing & Duplicate Data",
+                "Filtering, Sorting, Ranking & Renaming Columns",
+                "Data Type Conversion & Pivot Tables",
+                "Merging, Joining & Concatenating DataFrames",
+                "Grouping, Aggregating & Multi-Indexing",
+                "Descriptive Statistics & Data Distribution Analysis",
+                "Correlation & Covariance",
+                "End-to-End Case Study: From Data Cleaning to Visualization",
+                "Creating Dashboards from the Cancer Dataset",
             ],
             projects: [
-                "Analysing Patient Survival Rates in Cancer Dataset",
+                "Analyzing Patient Survival Rates in the Cancer Dataset",
                 "Visualizing Cancer Incidence and Mortality Statistics",
             ],
         },
@@ -81,12 +87,18 @@ export default function CurriculumSection() {
             icon: "📈",
             color: "from-red-50 to-red-100",
             topics: [
-                "Introduction to Matplotlib",
-                "Customizing Plots",
-                "Figures, Axes, and Advanced Plot Types",
-                "Visualization with Annotations and DataFrames",
-                "Interactivity and Animation",
-                "Best Practices for Effective Visualizations",
+                "Overview, Installation & Setup; Basic Plotting",
+                "Titles, Axis Labels, Legends & Annotations",
+                "Axis Limits & Date/Time Formatting",
+                "Managing Multiple Plots & Subplots",
+                "Advanced Visuals: Histograms, Box Plots, Heatmaps, 3D Plotting",
+                "Text Annotation Techniques",
+                "Direct DataFrame Visualizations (line, bar, pie)",
+                "Interactive Plotting with Widgets (Sliders, Buttons)",
+                "Creating Simple Animations",
+                "Choosing the Right Plot & Simplifying Visuals",
+                "Clear Labelling, Legends & Color Schemes",
+                "Case Studies & Real-World Applications; End-to-End Visualization Projects",
             ],
             projects: [
                 "HR Data Plotting",
@@ -100,12 +112,17 @@ export default function CurriculumSection() {
             icon: "🎨",
             color: "from-cyan-50 to-cyan-100",
             topics: [
-                "Introduction to Seaborn",
-                "Basic Plotting with Seaborn",
-                "Statistical Visualization Techniques",
-                "Categorical Data Visualization",
-                "Advanced Visualization Techniques",
-                "Customization and Aesthetics in Seaborn",
+                "Overview, Built-in Themes & Color Palettes; Statistical Visuals Support",
+                "Basic Plotting: Line, Bar, Histogram, Scatter",
+                "Distribution Visuals: Hist, KDE, Rug",
+                "Variable Relationships: Pair & Joint Plots",
+                "Categorical Displays: Strip, Box, Violin, Swarm, Bar",
+                "Themes, Plot Styles & Aesthetic Adjustments",
+                "Titles, Axis Labels, Legends & Figure Size",
+                "Heatmaps, Cluster Maps & Hierarchical Clustering",
+                "Multi-Plot Grids: Pair & Facet",
+                "Integration with pandas: Direct DataFrame Viz, Aggregations & EDA",
+                "Domain-specific case applications",
             ],
             projects: [
                 "Titanic Survival Analysis",
@@ -114,34 +131,36 @@ export default function CurriculumSection() {
         },
         {
             id: 7,
-            title: "Scientific Computing with NumPy",
+            title: "Scientific Computing & Visualization with NumPy",
             duration: "2 hours",
             icon: "🔬",
             color: "from-indigo-50 to-indigo-100",
             topics: [
-                "Introduction to NumPy",
-                "Numpy Basics",
-                "Numpy Arrays",
-                "Data Preparation with NumPy",
-                "Mathematical Functions",
-                "Advanced Indexing",
+                "Overview & Key Features; Installation and Setup",
+                "NumPy Basics: Arithmetic & Mathematical Ops (sum, mean, etc.)",
+                "Indexing, Slicing, and Subarrays",
+                "Arrays vs. Python Lists; Creating 1D/2D/Multi-Dimensional Arrays",
+                "Random Data Generation (np.random); Reshaping, Resizing, Broadcasting",
+                "Mathematical Functions: exponents, logarithms; Linear Algebra (dot, matmul)",
+                "Boolean & Fancy Indexing; Conditional Selection (np.where)",
+                "Case Studies & Real-World Applications; End-to-End Visualization Projects",
             ],
             projects: [
-                "Analysing Patient Survival Rates in Cancer Dataset",
+                "Analyzing Patient Survival Rates in the Cancer Dataset",
                 "Visualizing Cancer Incidence and Mortality Statistics",
             ],
         },
     ];
 
     return (
-        <section className="py-20 md:py-32 bg-gradient-to-b from-slate-50 to-white">
-            <div className="container mx-auto px-4">
+        <section className="py-16 md:py-20 bg-gradient-to-b from-slate-50 to-white">
+            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <div className="text-center mb-16 md:mb-20">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4 text-slate-900">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">
                         Comprehensive <span className="text-orange-600">Curriculum</span>
                     </h2>
-                    <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+                    <p className="text-lg text-slate-600 max-w-4xl mx-auto">
                         Master 7 modules covering Python fundamentals to advanced data visualization. Each module is designed with hands-on projects and real-world applications.
                     </p>
                 </div>
@@ -156,9 +175,7 @@ export default function CurriculumSection() {
                             {/* Module Header */}
                             <button
                                 onClick={() =>
-                                    setExpandedModule(
-                                        expandedModule === module.id ? null : module.id
-                                    )
+                                    setExpandedModule(expandedModule === module.id ? null : module.id)
                                 }
                                 className="w-full px-6 py-5 flex items-center justify-between hover:bg-white/30 transition-colors"
                             >
@@ -168,9 +185,7 @@ export default function CurriculumSection() {
                                         <h3 className="text-lg font-bold text-slate-900">
                                             Module {module.id}: {module.title}
                                         </h3>
-                                        <p className="text-sm text-slate-600 mt-1">
-                                            {module.duration}
-                                        </p>
+                                        <p className="text-sm text-slate-600 mt-1">{module.duration}</p>
                                     </div>
                                 </div>
                                 <ChevronDown
@@ -190,13 +205,8 @@ export default function CurriculumSection() {
                                         </h4>
                                         <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                             {module.topics.map((topic, idx) => (
-                                                <li
-                                                    key={idx}
-                                                    className="flex items-start gap-3 text-slate-700"
-                                                >
-                                                    <span className="text-orange-500 font-bold mt-0.5">
-                                                        •
-                                                    </span>
+                                                <li key={idx} className="flex items-start gap-3 text-slate-700">
+                                                    <span className="text-orange-500 font-bold mt-0.5">•</span>
                                                     <span>{topic}</span>
                                                 </li>
                                             ))}
@@ -234,18 +244,9 @@ export default function CurriculumSection() {
                     <h3 className="text-2xl font-bold text-slate-900 mb-6">What You&apos;ll Master</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {[
-                            {
-                                title: "Data Processing",
-                                description: "Clean, transform, and prepare data for analysis",
-                            },
-                            {
-                                title: "Statistical Analysis",
-                                description: "Perform exploratory data analysis and statistical modeling",
-                            },
-                            {
-                                title: "Data Visualization",
-                                description: "Create compelling visualizations and interactive dashboards",
-                            },
+                            { title: "Data Processing", description: "Clean, transform, and prepare data for analysis" },
+                            { title: "Statistical Analysis", description: "Perform exploratory data analysis and statistical modeling" },
+                            { title: "Data Visualization", description: "Create compelling visualizations and interactive dashboards" },
                         ].map((outcome, idx) => (
                             <div key={idx} className="bg-white rounded-lg p-5 border border-orange-200">
                                 <h4 className="font-bold text-slate-900 mb-2">{outcome.title}</h4>

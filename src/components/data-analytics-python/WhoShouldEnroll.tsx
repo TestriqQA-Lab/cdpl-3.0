@@ -79,14 +79,14 @@ export default function WhoShouldEnroll() {
     ];
 
     return (
-        <section className="py-20 md:py-32 bg-gradient-to-b from-white to-slate-50">
-            <div className="container mx-auto px-4">
+        <section className="py-16 md:py-20 bg-gradient-to-b from-white to-slate-50">
+            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <div className="text-center mb-16 md:mb-20">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4 text-slate-900">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">
                         Who Should <span className="text-orange-600">Enroll</span>?
                     </h2>
-                    <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+                    <p className="text-lg text-slate-600 max-w-3xl mx-auto">
                         This course is designed for diverse learners. Whether you&apos;re a beginner or a professional seeking to advance your skills, we have the right program for you.
                     </p>
                 </div>
