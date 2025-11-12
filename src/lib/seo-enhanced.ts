@@ -75,6 +75,17 @@ export function generateOrganizationSchema() {
               name: SITE_NAME,
               url: SITE_URL,
             },
+            offers: {
+              '@type': 'Offer',
+              price: '0', // Placeholder: Use 0 or a low value if price is not fixed or known, or a representative price
+              priceCurrency: 'INR',
+              category: 'Paid',
+            },
+            hasCourseInstance: {
+              '@type': 'CourseInstance',
+              courseMode: 'online',
+              courseWorkload: 'P3M', // Placeholder: 3 Months
+            },
           },
         },
         {
@@ -89,6 +100,17 @@ export function generateOrganizationSchema() {
               name: SITE_NAME,
               url: SITE_URL,
             },
+            offers: {
+              '@type': 'Offer',
+              price: '0', // Placeholder: Use 0 or a low value if price is not fixed or known, or a representative price
+              priceCurrency: 'INR',
+              category: 'Paid',
+            },
+            hasCourseInstance: {
+              '@type': 'CourseInstance',
+              courseMode: 'online',
+              courseWorkload: 'P4M', // Placeholder: 4 Months
+            },
           },
         },
         {
@@ -102,6 +124,17 @@ export function generateOrganizationSchema() {
               '@id': `${SITE_URL}/#organization`,
               name: SITE_NAME,
               url: SITE_URL,
+            },
+            offers: {
+              '@type': 'Offer',
+              price: '0', // Placeholder: Use 0 or a low value if price is not fixed or known, or a representative price
+              priceCurrency: 'INR',
+              category: 'Paid',
+            },
+            hasCourseInstance: {
+              '@type': 'CourseInstance',
+              courseMode: 'online',
+              courseWorkload: 'P5M', // Placeholder: 5 Months
             },
           },
         },
@@ -135,6 +168,10 @@ export function generateWebsiteSchema() {
       'query-input': 'required name=search_term_string',
     },
     
+    // Breadcrumb Navigation
+    breadcrumb: {
+      '@id': `${SITE_URL}/#breadcrumb`,
+    },
   };
 }
 
