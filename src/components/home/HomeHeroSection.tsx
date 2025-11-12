@@ -82,21 +82,21 @@ const MobileFeatureList: React.FC<MobileFeatureListProps> = ({ onOpenBrochure, o
     <div className="flex flex-col sm:flex-row gap-4">
       <button
         onClick={onOpenBrochure}
-        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 w-full sm:w-auto"
+        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 w-full sm:w-auto cursor-pointer"
       >
         <Download className="h-5 w-5" />
         Download Brochure
       </button>
       <Link
         href="/jobs/placements"
-        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 w-full sm:w-auto"
+        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 w-full sm:w-auto cursor-pointer"
       >
         <Eye className="h-5 w-5" />
         View Placement Stories
       </Link>
       <button
         onClick={onOpenVideo}
-        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 w-full sm:w-auto"
+        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 w-full sm:w-auto cursor-pointer"
       >
         <Play className="h-5 w-5" />
         Watch CDPL
@@ -397,7 +397,7 @@ const HomeHeroSection: React.FC = () => {
         {/* Primary CTA - Download Brochure */}
         <button
           onClick={onOpenBrochure}
-          className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+          className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
         >
           <Download className="h-5 w-5" />
           Download Brochure
@@ -406,7 +406,7 @@ const HomeHeroSection: React.FC = () => {
         {/* Secondary CTA - View Placement Success Stories */}
         <Link
           href="/jobs/placements"
-          className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+          className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
         >
           <Eye className="h-5 w-5" />
           View Placement Stories
@@ -415,7 +415,7 @@ const HomeHeroSection: React.FC = () => {
         {/* Tertiary CTA - Watch CDPL */}
         <button
           onClick={() => setIsVideoModalOpen(true)}
-          className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+          className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
         >
           <Play className="h-5 w-5" />
           Watch CDPL
