@@ -35,7 +35,7 @@ export default function ACTDCertificationHeroSection() {
             </p>
 
             <h1 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
-              <span style={{ color: BRAND_BLUE }}>ACTD Certification Training</span>
+              <span style={{ color: BRAND_BLUE }}>ACTD Certification</span>
               <span style={{ color: BRAND_ORANGE }}> by CDPL</span>
             </h1>
 

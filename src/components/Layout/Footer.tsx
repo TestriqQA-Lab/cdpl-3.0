@@ -335,12 +335,12 @@ const Footer = () => {
               <h3 className="text-lg font-semibold text-orange-400">Certifications and Accreditation</h3>
               <ul>
                 <li className='flex flex-col space-y-2'>
-                  <Link href="/aaa-certification-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
-                    AAA Certification Course
+                  <Link href="/aaa-certification" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                    AAA Certification
                   </Link>
 
-                  <Link href="/actd-certification-training" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
-                    ACTD Certification Course
+                  <Link href="/actd-certification" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                    ACTD Certification
                   </Link>
 
                   <Link href="/cdpl-certificate-validation" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
