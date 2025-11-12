@@ -88,7 +88,7 @@ export default function ProjectsSection() {
                                     {/* Skills */}
                                     <div className="space-y-3 pt-4 border-t border-slate-200">
                                         <p className="text-sm font-semibold text-slate-900">
-                                            Skills You'll Develop:
+                                            Skills You&apos;ll Develop:
                                         </p>
                                         <div className="flex flex-wrap gap-2">
                                             {project.skills.map((skill, skillIndex) => (

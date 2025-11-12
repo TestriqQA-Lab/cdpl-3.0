@@ -1,13 +1,5 @@
-import { Star } from "lucide-react";
-import ReviewsMarquee from "../sections/ReviewMarque";
 
-interface Testimonial {
-    name: string;
-    role: string;
-    rating: number;
-    quote: string;
-    avatar: string;
-}
+import ReviewsMarquee from "../sections/ReviewMarque";
 
 export default function TestimonialsSection() {
 

@@ -87,7 +87,7 @@ export default function WhoShouldEnroll() {
                         Who Should <span className="text-orange-600">Enroll</span>?
                     </h2>
                     <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-                        This course is designed for diverse learners. Whether you're a beginner or a professional seeking to advance your skills, we have the right program for you.
+                        This course is designed for diverse learners. Whether you&apos;re a beginner or a professional seeking to advance your skills, we have the right program for you.
                     </p>
                 </div>
 

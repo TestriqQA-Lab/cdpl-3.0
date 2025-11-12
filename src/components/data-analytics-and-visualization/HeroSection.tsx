@@ -241,17 +241,17 @@ export default function HeroSection() {
             {/* JSON-LD for SEO */}
             <script
                 type="application/ld+json"
-                // @ts-ignore
+                
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(courseJsonLd) }}
             />
             <script
                 type="application/ld+json"
-                // @ts-ignore
+                
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
             />
             <script
                 type="application/ld+json"
-                // @ts-ignore
+                
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
             />
 

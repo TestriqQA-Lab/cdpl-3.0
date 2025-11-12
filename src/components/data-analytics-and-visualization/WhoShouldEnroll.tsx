@@ -54,7 +54,7 @@ export default function WhoShouldEnroll() {
                         Who Should <span className="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 bg-clip-text text-transparent">Enroll</span>?
                     </h2>
                     <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-                        This course is designed for anyone looking to master data analytics. Whether you're a beginner or professional, there's something for you.
+                        This course is designed for anyone looking to master data analytics. Whether you&apos;re a beginner or professional, there&apos;s something for you.
                     </p>
                 </div>
 
@@ -147,7 +147,7 @@ export default function WhoShouldEnroll() {
                     {/* What you get */}
                     <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl border border-purple-200 p-8">
                         <h3 className="text-2xl font-bold text-slate-900 mb-6">
-                            What You'll Get
+                            What You&apos;ll Get
                         </h3>
                         <div className="space-y-4">
                             <div className="flex items-start gap-3">

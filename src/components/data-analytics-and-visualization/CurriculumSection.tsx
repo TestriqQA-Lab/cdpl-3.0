@@ -215,7 +215,7 @@ export default function CurriculumSection() {
                     <div className="space-y-6 bg-gradient-to-br from-orange-50 to-indigo-50 rounded-2xl border border-blue-200 p-8">
                         <h3 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
                             <BookOpen className="w-8 h-8 text-blue-600" />
-                            What You'll Learn
+                            What You&apos;ll Learn
                         </h3>
                         <div className="space-y-4">
                             {[

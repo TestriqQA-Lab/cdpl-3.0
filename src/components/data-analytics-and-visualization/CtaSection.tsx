@@ -106,7 +106,7 @@ export default function CtaSection() {
                         30% Discount + Free Career Consultation
                     </h3>
                     <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
-                        This exclusive offer is available for a limited time only. Don't miss out on your chance to master Excel and transform your career!
+                        This exclusive offer is available for a limited time only. Don&apos;t miss out on your chance to master Excel and transform your career!
                     </p>
                     <Link href="contact-us" className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-slate-900 font-bold py-4 px-10 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl text-lg">
                         Claim Your Offer Now
