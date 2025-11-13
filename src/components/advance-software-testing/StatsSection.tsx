@@ -147,23 +147,7 @@ function Counter({ value, className, duration = 1200 }: { value: string; classNa
 }
 
 export default function StatsSection() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Advanced Software Testing — Key Career Stats',
-    description:
-      'Market growth, job vacancies, fresher salary, job satisfaction, market share, and program duration for Advanced Software Testing.',
-    itemListElement: stats.map((s, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: s.label,
-      additionalProperty: {
-        '@type': 'PropertyValue',
-        name: s.label,
-        value: s.value,
-      },
-    })),
-  };
+
 
   return (
     <section id="qa-stats" aria-labelledby="qa-stats-heading" className="relative py-4 md:py-10 bg-white">
@@ -222,8 +206,6 @@ export default function StatsSection() {
         </div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

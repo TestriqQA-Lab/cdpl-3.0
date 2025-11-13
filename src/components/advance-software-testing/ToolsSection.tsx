@@ -31,19 +31,7 @@ const tools: Tool[] = [
 ];
 
 export default function ToolsSection() {
-  // SEO: structured data for the tools list
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Automation Testing Tools',
-    description:
-      'SDET stack covering Selenium, Appium, REST Assured, Cypress, JMeter, Jenkins, Postman, and Git used in enterprise QA automation.',
-    itemListElement: tools.map((t, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: t.name,
-    })),
-  };
+
 
   return (
     <section
@@ -152,11 +140,7 @@ export default function ToolsSection() {
         </p>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+
     </section>
   );
 }

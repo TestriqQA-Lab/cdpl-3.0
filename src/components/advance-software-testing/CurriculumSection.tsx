@@ -78,24 +78,7 @@ const accents = [
 ];
 
 export default function CurriculumSection() {
-    // SEO: structured data for the curriculum
-    const jsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'ItemList',
-        name: 'Advanced Software Testing Curriculum',
-        description:
-            'Curriculum covering Manual Testing, Test Management & Agile, API Testing with POSTMAN & RestAPIs, DBMS with MySQL, real-time projects, and certification highlights.',
-        itemListElement: curriculum.map((m, idx) => ({
-            '@type': 'ListItem',
-            position: idx + 1,
-            name: m.title,
-            item: {
-                '@type': 'Course',
-                name: m.title,
-                description: m.topics.join(', '),
-            },
-        })),
-    };
+
 
     return (
         <section id="curriculum" className="relative py-8 md:py-10 bg-white">
@@ -184,8 +167,6 @@ export default function CurriculumSection() {
                 </div>
             </div>
 
-            {/* JSON-LD for search engines */}
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         </section>
     );
 }

@@ -4,27 +4,7 @@ import { Phone, Mail, MapPin, Clock, Award, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 
 export default function CtaSection() {
-  // Structured data (helps rankings for contact/offer queries)
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Course',
-    name: 'Full-Stack SDET Program',
-    provider: { '@type': 'Organization', name: 'Think and Do Institute' },
-    offers: {
-      '@type': 'Offer',
-      availability: 'https://schema.org/InStock',
-      price: '0',
-      priceCurrency: 'INR',
-      category: 'Education',
-    },
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: '+91-7888383788',
-      contactType: 'customer support',
-      areaServed: 'IN',
-      availableLanguage: ['English', 'Hindi'],
-    },
-  };
+
 
   return (
     <section
@@ -137,11 +117,6 @@ export default function CtaSection() {
         </div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }
