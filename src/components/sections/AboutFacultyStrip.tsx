@@ -49,21 +49,6 @@ export default function AboutFacultyStrip({
   subheading = (<>10+ years average experience across <strong>Software Testing</strong>, <strong>Automation</strong>, <strong>Data Science</strong> & <strong>AI/ML</strong>.</>),
   primaryCtaHref = "/mentors",
 }: Props) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
-    name: "Cinute Digital",
-    department: {
-      "@type": "Organization",
-      name: "Faculty & Mentors",
-      member: mentors.map((m) => ({
-        "@type": "Person",
-        name: m.name,
-        jobTitle: m.role,
-      })),
-    },
-  };
-
   const TagIcon = ({ tag }: { tag?: Mentor["tag"] }) => {
     const common = "h-3.5 w-3.5";
     switch (tag) {
@@ -247,11 +232,7 @@ export default function AboutFacultyStrip({
         AI/ML lead our job-ready, industry-aligned training with portfolio-first projects and interview preparation.
       </p>
 
-      {/* JSON-LD for rich results */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      {/* Organization schema is in layout.tsx - no need to duplicate here */}
     </section>
   );
 }

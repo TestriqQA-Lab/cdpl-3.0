@@ -30,22 +30,6 @@ const AboutStorySection = memo(function AboutStorySection() {
     []
   );
 
-  const jsonLd = useMemo(
-    () => ({
-      "@context": "https://schema.org",
-      "@type": ["Organization", "EducationalOrganization"],
-      name: "Cinute Digital",
-      url: "https://cinutedigital.com",
-      description:
-        "Cinute Digital is an ed-tech institute offering mentor-led, project-based programs in Software Testing, Automation, Data Science, and AI/ML.",
-      keywords:
-        "ed-tech institute, software testing course, automation testing training, data science program, AI ML certification, job-ready skills, mentor-led learning",
-      areaServed: "Global",
-      brand: { "@type": "Brand", name: "Cinute Digital" },
-    }),
-    []
-  );
-
   return (
     <section
       aria-labelledby="about-story-heading"
@@ -252,12 +236,7 @@ const AboutStorySection = memo(function AboutStorySection() {
         Cinute Digital’s story: A journey of empowering learners with mentor-led, project-based training for careers in Software Testing, Automation, Data Science, and AI/ML, driven by innovation and impact.
       </p>
 
-      {/* JSON-LD (unchanged) */}
-      <script
-        type="application/ld+json"
-        // eslint disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      {/* Organization schema is in layout.tsx - no need to duplicate here */}
     </section>
   );
 });

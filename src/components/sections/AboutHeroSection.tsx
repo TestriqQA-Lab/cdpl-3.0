@@ -204,36 +204,7 @@ export default function AboutHeroSection() {
                 </div>
             </motion.div>
 
-            {/* SEO JSON-LD */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": ["Organization", "EducationalOrganization"],
-                        name: "Cinute Digital",
-                        url: "https://cinutedigital.com",
-                        logo: "https://cinutedigital.com/logo.png",
-                        sameAs: [
-                            "https://www.linkedin.com/company/cinutedigital",
-                            "https://www.instagram.com/cinutedigital",
-                            "https://twitter.com/cinutedigital",
-                        ],
-                        description:
-                            "Cinute Digital is an EdTech institute offering industry-ready training in Software Testing, Automation, Data Science, and AI/ML with live projects, mentorship, and placement assistance.",
-                        address: { "@type": "PostalAddress", addressCountry: "IN" },
-                        aggregateRating: { "@type": "AggregateRating", ratingValue: "4.8", ratingCount: "1800" },
-                        offers: {
-                            "@type": "OfferCatalog",
-                            name: "Job-Oriented Tech Courses",
-                            itemListElement: [
-                                { "@type": "Offer", itemOffered: { "@type": "Course", name: "Manual & Automation Software Testing" } },
-                                { "@type": "Offer", itemOffered: { "@type": "Course", name: "Data Science & AI/ML" } },
-                            ],
-                        },
-                    }),
-                }}
-            />
+            {/* Organization schema is in layout.tsx - no need to duplicate here */}
             <span className="sr-only">
                 Cinute Digital — industry-ready courses, live projects, mentorship, and career support.
             </span>
