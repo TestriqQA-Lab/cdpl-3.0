@@ -131,9 +131,6 @@ export function generateOrganizationSchema(): WithContext<Record<string, unknown
       value: BUSINESS_INFO.numberOfEmployees,
     },
     
-    // Price Range
-    priceRange: BUSINESS_INFO.priceRange,
-    
     // Opening Hours
     openingHoursSpecification: BUSINESS_INFO.openingHours.map((hours) => {
       const [day, timeRange] = hours.split(' ');
