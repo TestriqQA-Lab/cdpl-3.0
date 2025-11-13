@@ -12,6 +12,7 @@ import CtaSection from '@/components/advance-manual-automation-testing/CtaSectio
 import StickyNav from '@/components/StickyNav2/StickyNav2';
 import JsonLd from "@/components/JsonLd";
 import { generateCourseSchema, generateFAQSchema } from "@/lib/schema-generators";
+import { getFullUrl } from "@/lib/seo-config";
 
 export const metadata = {
   title: "Advanced Manual & Automation Testing Master Program | 100% Placement",
