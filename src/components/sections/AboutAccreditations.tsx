@@ -220,45 +220,7 @@ export default function AboutAccreditations() {
         </div>
       </div>
 
-      {/* JSON-LD for SEO: Organization + Accreditation */}
-      <script
-        type="application/ld+json"
-        // eslint disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            {
-              "@context": "https://schema.org",
-              "@type": "EducationalOrganization",
-              name: "Cinute Digital",
-              url: "https://cinutedigital.com",
-              description:
-                "Cinute Digital offers industry-aligned software testing, automation, API testing, data science, AI/ML, and analytics certifications with ISO 9001:2015 quality practices and Skill India outcomes.",
-              sameAs: [
-                "https://www.linkedin.com/company/cinutedigital",
-                "https://www.youtube.com/@cinutedigital",
-              ],
-              accreditation: [
-                "ISO 9001:2015 aligned quality practices",
-                "Skill India (NSDC) aligned outcomes",
-              ],
-              hasCredential: [
-                {
-                  "@type": "EducationalOccupationalCredential",
-                  credentialCategory: "ProfessionalCertificate",
-                  name: "Software Testing & Automation Certificate",
-                },
-                {
-                  "@type": "EducationalOccupationalCredential",
-                  credentialCategory: "ProfessionalCertificate",
-                  name: "Data Science & AI/ML Certificate",
-                },
-              ],
-            },
-            null,
-            2
-          ),
-        }}
-      />
+      {/* Organization schema is in layout.tsx - no need to duplicate here */}
     </section>
   );
 }

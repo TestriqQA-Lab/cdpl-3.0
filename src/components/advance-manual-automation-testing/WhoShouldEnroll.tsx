@@ -49,21 +49,7 @@ const audience: Audience[] = [
 ];
 
 export default function WhoShouldEnroll() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Who Should Enroll — QA / SDET Program',
-    description:
-      'Audience for QA and SDET training: career switchers, fresh graduates, manual testers, and developers learning automation.',
-    itemListElement: audience.map((a, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: a.title,
-      description: a.description,
-    })),
-    keywords:
-      'who should enroll QA, SDET course for beginners, manual to automation testing, QA training India, job-ready QA skills',
-  };
+
 
   return (
     <section
@@ -148,11 +134,6 @@ export default function WhoShouldEnroll() {
         </p>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

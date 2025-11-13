@@ -30,24 +30,10 @@ export default function HeroSection() {
   const breadcrumbs = [
     { label: 'Home', href: '/' },
     { label: 'Software Testing', href: "#" },
-    { label: 'Manual + Automation Testing', href: '#hero' },
+    { label: 'Manual and Automation Testing', href: '#' },
   ];
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Course',
-    name: 'Advanced Manual & Automation Testing — ISTQB + Selenium/Cypress',
-    description:
-      'Mentor-led QA program covering ISTQB manual testing, Selenium, Cypress, API & Mobile testing, CI/CD, and job assistance with project portfolio.',
-    provider: { '@type': 'Organization', name: 'Think and Do Institute' },
-    offers: {
-      '@type': 'Offer',
-      availability: 'https://schema.org/InStock',
-      price: '0',
-      priceCurrency: 'INR',
-      category: 'Education',
-    },
-  };
+
 
   return (
     <section id="hero" aria-labelledby="qa-hero" className="relative overflow-hidden">
@@ -198,11 +184,6 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* SEO: JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

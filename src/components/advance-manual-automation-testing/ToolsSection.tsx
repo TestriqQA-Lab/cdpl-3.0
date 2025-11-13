@@ -26,19 +26,6 @@ const tools: Tool[] = [
 ];
 
 export default function ToolsSection() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Automation & QA Tools You Will Master',
-    description:
-      'Hands-on QA and SDET training covering JIRA, Selenium, Appium, Postman, Cypress, Jenkins, TestRail, and Git with CI/CD.',
-    itemListElement: tools.map((t, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: t.name,
-      keywords: t.keywords,
-    })),
-  };
 
   return (
     <section id="tools" aria-labelledby="tools-heading" className="relative bg-white py-4 md:py-10">
@@ -111,12 +98,7 @@ export default function ToolsSection() {
         </p>
       </div>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd),
-        }}
-      />
+
     </section>
   );
 }

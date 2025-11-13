@@ -124,25 +124,6 @@ export default function StatsSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const inView = useInView(sectionRef, { once: true, margin: '-10% 0px -10% 0px' });
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'QA & SDET Program Key Statistics',
-    description:
-      'Market-driven QA & SDET statistics in India including job vacancies, fresher salary, growth rate, and program duration.',
-    itemListElement: stats.map((s, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: s.label,
-      additionalProperty: {
-        '@type': 'PropertyValue',
-        name: s.label,
-        value: s.trailPlus ? `${s.value}+` : s.value,
-        unitText: s.suffix?.trim() || undefined,
-      },
-    })),
-  };
-
   return (
     <section
       ref={sectionRef}
@@ -225,12 +206,6 @@ export default function StatsSection() {
           land interviews faster and negotiate higher packages.
         </p>
       </div>
-
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

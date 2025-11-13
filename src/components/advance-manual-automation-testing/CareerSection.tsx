@@ -2,7 +2,7 @@
 
 import { Briefcase, Building2, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import React, { useMemo } from 'react';
+import React, { } from 'react';
 import type { JSX } from 'react';
 
 /* ---------- Motion typing & lazy loader (safe fallback) ---------- */
@@ -82,30 +82,6 @@ type CompanyItem = (typeof COMPANIES)[number];
 export default function CareerSection(): JSX.Element {
   const MotionDiv = useMotionDiv();
 
-  const jsonLd = useMemo(
-    () => ({
-      '@context': 'https://schema.org',
-      '@type': 'ItemList',
-      name: 'High-Paying QA Careers and Top Hiring Companies',
-      itemListElement: [
-        ...ROLES.map((r, i) => ({
-          '@type': 'ListItem',
-          position: i + 1,
-          name: r.label,
-          item: { '@type': 'Occupation', name: r.label, industry: 'Software Quality Assurance' },
-        })),
-        ...COMPANIES.map((c, i) => ({
-          '@type': 'ListItem',
-          position: ROLES.length + i + 1,
-          name: c.name,
-          item: { '@type': 'Organization', name: c.name },
-        })),
-      ],
-      keywords:
-        'QA jobs India, SDET roles, automation tester salary, QA hiring companies, API testing careers, mobile testing jobs',
-    }),
-    []
-  );
 
   return (
     <section id="career" className="relative py-4 md:py-10 bg-white">
@@ -217,12 +193,6 @@ export default function CareerSection(): JSX.Element {
           </Link>
         </MotionDiv>
       </div>
-
-      {/* SEO JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

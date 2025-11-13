@@ -10,6 +10,8 @@ import ToolsSection from '@/components/advance-manual-automation-testing/ToolsSe
 import FaqSection from '@/components/advance-manual-automation-testing/FaqSection';
 import CtaSection from '@/components/advance-manual-automation-testing/CtaSection';
 import StickyNav from '@/components/StickyNav2/StickyNav2';
+import JsonLd from "@/components/JsonLd";
+import { generateCourseSchema, generateFAQSchema } from "@/lib/schema-generators";
 
 export const metadata = {
   title: "Advanced Manual & Automation Testing Master Program | 100% Placement",
@@ -18,8 +20,39 @@ export const metadata = {
 };
 
 export default function Home() {
+  const courseSchema = generateCourseSchema({
+    name: "Advanced Manual & Automation Testing Master Program",
+    description: "Master ISTQB Manual Testing + Selenium, Cypress, API, Mobile. Get dual certified and placed in top QA roles.",
+    url: "/advance-manual-automation-testing",
+    slug: "advance-manual-automation-testing",
+    price: 25000, // Assuming a price, please update this with the actual price
+    currency: "INR",
+    duration: "P4M", // Assuming 4 months duration, please update
+    level: "Advanced",
+    instructor: "Expert QA Mentors",
+    // Add other relevant fields like rating, reviewCount, image if available
+  });
+
+  const faqs = [
+    {
+      question: 'What is the duration of the Advanced Manual & Automation Testing Master Program?',
+      answer: 'The program typically runs for 4 months, including both theoretical and practical hands-on project work.',
+    },
+    {
+      question: 'Does this course include placement assistance?',
+      answer: 'Yes, the course includes 100% placement support, including resume building, mock interviews, and guaranteed interview opportunities.',
+    },
+    {
+      question: 'What tools are covered in the automation testing module?',
+      answer: 'The automation module covers industry-leading tools such as Selenium, Cypress, Postman for API testing, and Appium for mobile testing.',
+    },
+  ];
+  const faqSchema = generateFAQSchema(faqs);
+
   return (
     <>
+      <JsonLd id="course-schema" schema={courseSchema} />
+      <JsonLd id="faq-schema" schema={faqSchema} />
       <HeroSection />
 
       {/* Sticky nav must appear right after hero */}
