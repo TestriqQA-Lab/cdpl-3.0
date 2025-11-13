@@ -4,17 +4,26 @@ import { Code2, Database, BarChart3 } from "lucide-react";
 import { courseData } from "@/components/ai-in-digital-marketing/courseData";
 import Link from "next/link";
 
-export default function ToolsSection() {
-  const { tools } = courseData;
+interface ToolItem {
+  name: string;
+  icon: React.ReactNode;
+}
 
-  // Flatten tools so we can render individual cards like the reference section
-  const flatTools =
-    tools?.flatMap((category: any) =>
-      category.items.map((tool: any) => ({
-        ...tool,
-        category: category.category,
-      }))
-    ) || [];
+interface ToolCategory {
+  category: string;
+  items: ToolItem[];
+}
+
+export default function ToolsSection() {
+  const { tools } = courseData as { tools: ToolCategory[] };
+
+  // Flatten tools
+  const flatTools = tools?.flatMap((category) =>
+    category.items.map((tool) => ({
+      ...tool,
+      category: category.category,
+    }))
+  ) || [];
 
   const colorClasses = [
     "from-orange-50 to-orange-100",
@@ -27,7 +36,7 @@ export default function ToolsSection() {
   return (
     <section className="py-16 md:py-20 bg-white">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header – same content, reference layout + SEO boost */}
+        {/* Section Header */}
         <div className="text-center mb-16 md:mb-20">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">
             Tools & <span className="text-orange-600">Technologies</span>
@@ -42,9 +51,9 @@ export default function ToolsSection() {
           </p>
         </div>
 
-        {/* Tools Grid – layout like reference, content from courseData.tools */}
+        {/* Tools Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {flatTools.map((tool: any, idx: number) => (
+          {flatTools.map((tool, idx) => (
             <div
               key={`${tool.name}-${idx}`}
               className={`bg-gradient-to-br ${colorClasses[idx % colorClasses.length]
@@ -55,17 +64,17 @@ export default function ToolsSection() {
                 {tool.icon}
               </div>
 
-              {/* Name (unchanged content) */}
+              {/* Name */}
               <h3 className="text-lg font-bold text-slate-900 mb-1">
                 {tool.name}
               </h3>
 
-              {/* Category – derived from parent category */}
+              {/* Category */}
               <p className="text-xs font-semibold text-orange-600 mb-3">
                 {tool.category}
               </p>
 
-              {/* Short SEO-friendly description (generic, but doesn’t alter original text) */}
+              {/* Description */}
               <p className="text-sm text-slate-600 leading-relaxed">
                 Learn how to use <strong>{tool.name}</strong> as part of a
                 complete AI-powered digital marketing stack for{" "}
@@ -75,7 +84,7 @@ export default function ToolsSection() {
           ))}
         </div>
 
-        {/* Technology Stack Overview – like reference, built from courseData categories */}
+        {/* Technology Stack Overview */}
         <div className="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-8 md:p-12 text-white mb-12">
           <h3 className="text-2xl md:text-3xl font-bold mb-6">
             Technology Stack Overview
@@ -92,7 +101,7 @@ export default function ToolsSection() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {tools.map((category: any, idx: number) => {
+            {tools.map((category, idx) => {
               const icon =
                 idx % 3 === 0 ? (
                   <Code2 className="w-6 h-6" />
@@ -109,7 +118,7 @@ export default function ToolsSection() {
                     <h4 className="text-lg font-bold">{category.category}</h4>
                   </div>
                   <ul className="space-y-2">
-                    {category.items.map((tool: any, tidx: number) => (
+                    {category.items.map((tool, tidx) => (
                       <li
                         key={`${tool.name}-${tidx}`}
                         className="flex items-center gap-2 text-slate-200 text-sm"
@@ -134,13 +143,12 @@ export default function ToolsSection() {
           </p>
         </div>
 
-        {/* Learning Path + “Why These Tools?” content combined */}
+        {/* Learning Path + Why These Tools */}
         <div className="bg-gradient-to-r from-orange-50 to-blue-50 rounded-2xl p-8 md:p-12 border-2 border-orange-200">
           <h3 className="text-2xl font-bold text-slate-900 mb-8 text-center">
             Your Learning Journey with These Tools
           </h3>
 
-          {/* Learning Journey steps (SEO-rich but generic) */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-10">
             {[
               {
@@ -185,7 +193,6 @@ export default function ToolsSection() {
             ))}
           </div>
 
-          {/* Original “Why These Tools?” content – kept as-is, just placed in this layout */}
           <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
             Why These Tools?
           </h3>
@@ -218,7 +225,6 @@ export default function ToolsSection() {
             </div>
           </div>
 
-          {/* Bottom CTA – original content preserved */}
           <div className="mt-6 text-center">
             <p className="text-lg text-gray-900 font-semibold mb-4">
               Master all these tools and become a digital marketing expert

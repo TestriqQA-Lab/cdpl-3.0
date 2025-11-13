@@ -1,8 +1,18 @@
 import { courseData } from "@/components/ai-in-digital-marketing/courseData";
 import Link from "next/link";
 
+interface Advantage {
+  id: number | string;
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  bgColor: string;
+  borderColor: string;
+  highlight?: string;
+}
+
 export default function WhyThisProgram() {
-  const { advantages } = courseData;
+  const { advantages } = courseData as { advantages: Advantage[] };
 
   return (
     <section className="py-16 md:py-20 bg-white">
@@ -16,7 +26,6 @@ export default function WhyThisProgram() {
             Unique advantages that set us apart from other digital marketing
             courses.
           </p>
-          {/* Extra SEO copy */}
           <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-4xl mx-auto">
             Our AI-powered digital marketing program is designed for{" "}
             <strong>students, working professionals, business owners, freelancers, and agency founders</strong>{" "}
@@ -27,9 +36,9 @@ export default function WhyThisProgram() {
           </p>
         </div>
 
-        {/* Advantages Grid – layout & design aligned with reference section */}
+        {/* Advantages Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {advantages.map((advantage: any) => (
+          {advantages.map((advantage) => (
             <div
               key={advantage.id}
               className={`bg-gradient-to-br ${advantage.bgColor} rounded-xl p-6 border-2 ${advantage.borderColor} hover:shadow-xl transition-all duration-300 group`}
@@ -55,7 +64,7 @@ export default function WhyThisProgram() {
                 </div>
               )}
 
-              {/* Description (content preserved) */}
+              {/* Description */}
               <p className="text-sm text-slate-600 leading-relaxed">
                 {advantage.description}
               </p>
@@ -63,7 +72,7 @@ export default function WhyThisProgram() {
           ))}
         </div>
 
-        {/* Why This Matters Section – dark block like reference, keeping your CTA content */}
+        {/* Why This Matters Section */}
         <div className="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-8 md:p-12 text-white">
           <div className="max-w-3xl">
             <h3 className="text-2xl md:text-3xl font-bold mb-4">
@@ -110,7 +119,6 @@ export default function WhyThisProgram() {
               </div>
             </div>
 
-            {/* Your original CTA content preserved */}
             <div className="mt-4">
               <p className="text-lg text-slate-100 mb-4">
                 Ready to transform your business with digital marketing and AI?
@@ -120,7 +128,6 @@ export default function WhyThisProgram() {
               </Link>
             </div>
 
-            {/* Extra subtle SEO line */}
             <p className="mt-6 text-xs sm:text-sm text-slate-400">
               Keywords: AI in digital marketing course • digital marketing course with
               AI tools • performance marketing and automation • social media marketing training

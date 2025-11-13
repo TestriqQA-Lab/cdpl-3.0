@@ -3,8 +3,15 @@
 import React from "react";
 import { courseData } from "@/components/ai-in-digital-marketing/courseData";
 
+interface Stat {
+  icon: React.ReactNode;
+  value: string;
+  label: string;
+  description: string;
+}
+
 export default function StatsSection() {
-  const { stats } = courseData;
+  const { stats } = courseData as { stats: Stat[] };
 
   /** --------- JSON-LD (SEO): ItemList describing the stats ---------- */
   const jsonLd = {
@@ -13,7 +20,7 @@ export default function StatsSection() {
     name: "AI in Digital Marketing Program Statistics",
     description:
       "Key statistics for an AI in Digital Marketing course: student success rate, business growth impact, career transformation metrics, and program credibility.",
-    itemListElement: stats.map((s: any, idx: number) => ({
+    itemListElement: stats.map((s, idx) => ({
       "@type": "ListItem",
       position: idx + 1,
       name: s.label,
@@ -59,12 +66,12 @@ export default function StatsSection() {
           </p>
         </header>
 
-        {/* Stats Grid – layout/design like reference section */}
+        {/* Stats Grid */}
         <ul
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-10 md:mb-14"
           aria-label="Program statistics"
         >
-          {stats.map((stat: any, index: number) => {
+          {stats.map((stat, index) => {
             const bgGradient =
               index === 0
                 ? "from-orange-50 to-orange-100"
@@ -129,7 +136,7 @@ export default function StatsSection() {
           <em>Mumbai Digital Marketing Institute</em>.
         </p>
 
-        {/* Bottom Insight / Additional Info – reusing your content inside a richer block */}
+        {/* Bottom Insight */}
         <div className="mt-10 bg-gradient-to-r from-orange-50 via-white to-indigo-50 rounded-2xl border-2 border-orange-200 p-6 sm:p-8 md:p-10">
           <div className="flex items-start gap-4 sm:gap-6">
             <div className="flex-shrink-0">
@@ -153,7 +160,6 @@ export default function StatsSection() {
                 measurable results for brands and businesses in any niche.
               </p>
 
-              {/* Your original “Additional Info” content preserved as bullet points */}
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-800 text-sm sm:text-[15px]">
                 <li className="flex items-start gap-2">
                   <span aria-hidden="true" className="mt-1">
@@ -186,7 +192,6 @@ export default function StatsSection() {
                 </li>
               </ul>
 
-              {/* Extra subtle SEO line */}
               <p className="mt-4 text-slate-600 text-xs sm:text-sm">
                 Keywords: AI digital marketing certification • Social media marketing
                 course with AI • Performance marketing and analytics • Google Ads & Meta
