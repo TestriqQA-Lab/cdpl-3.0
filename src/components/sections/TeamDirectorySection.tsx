@@ -290,7 +290,7 @@ function Avatar({ name, src }: { name: string; src?: string }) {
 
     return src ? (
         <div className="relative w-40 h-40 md:w-30 md:h-30 overflow-hidden rounded-full ring-1 ring-slate-200">
-            <Image src={src} alt={`${name} avatar`} width={160} height={120} className="object-cover rounded-full" />
+            <Image src={src} alt={`${name} avatar`} title={`${name} avatar`} width={160} height={120} className="object-cover rounded-full" />
         </div>
     ) : (
         <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-100 to-amber-100 text-sm font-semibold text-orange-700 ring-1 ring-slate-200">

@@ -255,7 +255,7 @@ export default function TeamHero() {
           </div>
 
           <div className="col-span-4 mt-10 lg:mt-0 flex justify-center">
-            <Image src="/Our-team-hero.png" alt="team-image" width={410} height={300} />
+            <Image src="/Our-team-hero.png" alt="team-image" title="team-image" width={410} height={300} />
           </div>
         </div>
 

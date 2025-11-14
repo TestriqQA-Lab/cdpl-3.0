@@ -241,7 +241,7 @@ export default function ReviewsMarquee() {
         <div className="mx-auto max-w-3xl text-center">
           <div className="mt-1 flex items-center justify-center gap-3 text-sm text-slate-600">
             <span className="inline-flex items-center gap-2 rounded-full bg-white px-2 pr-7 md:pr-3 py-1 border border-slate-200 shadow-sm">
-              <Image src={statLogo.src} alt={statLogo.alt} width={18} height={18} />
+              <Image src={statLogo.src} alt={statLogo.alt} title={statLogo.title} width={18} height={18} />
               {stat.overall}
             </span>
             <span className="opacity-60">•</span>
@@ -294,6 +294,7 @@ export default function ReviewsMarquee() {
                       <Image
                         src={PLATFORM[p].logo.src}
                         alt={PLATFORM[p].logo.alt}
+                        title={PLATFORM[p].logo.title}
                         width={80}
                         height={68}
                         priority={p === "Google"}
@@ -375,7 +376,7 @@ export default function ReviewsMarquee() {
                 shrink-0
               "
                     >
-                      <Image src={r.logo.src} alt={r.logo.alt} width={14} height={14} className="sm:h-4 sm:w-4" />
+                      <Image src={r.logo.src} alt={r.logo.alt} title={r.logo.title} width={14} height={14} className="sm:h-4 sm:w-4" />
                       Verified
                     </span>
                   </header>
@@ -398,7 +399,7 @@ export default function ReviewsMarquee() {
           {SUMMARY_CARDS.map((b) => (
             <div key={b.label} className="rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-md">
               <div className="mx-auto mb-2 flex items-center justify-center">
-                <Image src={b.logo} alt={`${b.label} logo`} width={50} height={50} className={b.class} />
+                <Image src={b.logo} alt={`${b.label} logo`} title={`${b.label}logo`} width={50} height={50} className={b.class} />
               </div>
               <div className="text-3xl font-extrabold tracking-tight text-slate-900">{b.value}</div>
               <div className="mt-1 text-sm font-medium text-slate-700">{b.label}</div>

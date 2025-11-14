@@ -141,6 +141,7 @@ export default function TeamTrainersSection({
                 <Image
                   src={t.avatar}
                   alt={`${t.name}, ${t.role}`}
+                  title={`${t.name}, ${t.role}`}
                   width={160}
                   height={160}
                   sizes="160px"

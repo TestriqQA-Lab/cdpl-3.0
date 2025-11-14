@@ -146,6 +146,7 @@ export default function AboutFacultyStrip({
                   <Image
                     src={m.avatar}
                     alt={`${m.name}, ${m.role}`}
+                    title={`${m.name}, ${m.role}`}
                     width={200}
                     height={100}
                     className="object-cover"
