@@ -1,87 +1,10 @@
 'use client';
-import { useMemo } from 'react';
 import ReviewsMarquee from '../sections/ReviewMarque';
 
 
-type Testimonial = {
-  name: string;
-  role: string;
-  rating: number;
-  text: string;
-  // Visual accents (distinct per card; no color repetition)
-  accent: string; // top bar color
-  ring: string; // ring color
-  chip: string; // chip bg/text
-  avatar: string; // avatar bg
-};
-
-const testimonials: Testimonial[] = [
-  {
-    name: 'Riya Patel',
-    role: 'QA Lead at TCS',
-    rating: 5,
-    text:
-      'From fresher to QA Lead in 45 days. The banking project is now in my resume!',
-    accent: 'bg-sky-600',
-    ring: 'ring-sky-200',
-    chip: 'bg-sky-50 text-sky-800 border-sky-200',
-    avatar: 'bg-sky-100 text-sky-800',
-  },
-  {
-    name: 'Aman Verma',
-    role: 'SDET, Infosys',
-    rating: 5,
-    text: 'Manual + Cypress combo got me ₹14 LPA offer.',
-    accent: 'bg-emerald-600',
-    ring: 'ring-emerald-200',
-    chip: 'bg-emerald-50 text-emerald-800 border-emerald-200',
-    avatar: 'bg-emerald-100 text-emerald-800',
-  },
-  {
-    name: 'Shalini Gupta',
-    role: 'Fresher → Wipro',
-    rating: 5,
-    text: 'Best decision! Dual skills opened 5 job offers.',
-    accent: 'bg-violet-600',
-    ring: 'ring-violet-200',
-    chip: 'bg-violet-50 text-violet-800 border-violet-200',
-    avatar: 'bg-violet-100 text-violet-800',
-  },
-];
-
 export default function TestimonialsSection() {
 
-  /** SEO: Aggregate rating + individual reviews */
-  const jsonLd = useMemo(() => {
-    const average = (
-      testimonials.reduce((a, t) => a + t.rating, 0) / testimonials.length
-    ).toFixed(1);
 
-    return {
-      '@context': 'https://schema.org',
-      '@type': 'ItemList',
-      name: 'Student Success Stories — QA, SDET & Automation',
-      itemListElement: testimonials.map((t, i) => ({
-        '@type': 'Review',
-        position: i + 1,
-        reviewBody: t.text,
-        author: { '@type': 'Person', name: t.name },
-        itemReviewed: {
-          '@type': 'Course',
-          name: 'Manual + Automation Testing Master Program',
-        },
-        reviewRating: { '@type': 'Rating', ratingValue: t.rating, bestRating: '5' },
-      })),
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: average,
-        reviewCount: testimonials.length,
-        bestRating: '5',
-      },
-      keywords:
-        'QA success stories, SDET placement, automation testing reviews, Cypress, Selenium, portfolio projects',
-    };
-  }, []);
 
   return (
     <section id='testimonials' className="relative py-8 md:py-10 bg-white">
@@ -109,10 +32,7 @@ export default function TestimonialsSection() {
       </div>
 
       {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+   
     </section>
   );
 }

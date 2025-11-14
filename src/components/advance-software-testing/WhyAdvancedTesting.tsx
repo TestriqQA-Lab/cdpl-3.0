@@ -31,20 +31,7 @@ const benefits: Benefit[] = [
 ];
 
 export default function WhyAdvancedTesting() {
-  // SEO: structured data describing the benefits
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Why Learn Advanced Software Testing',
-    description:
-      'Top reasons to learn Advanced Testing / SDET: faster automation, CI/CD quality gates, real device testing, higher salaries, AI testing, and full-stack QA.',
-    itemListElement: benefits.map((b, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: b.title,
-      description: b.description,
-    })),
-  };
+
 
   return (
     <section
@@ -111,11 +98,6 @@ export default function WhyAdvancedTesting() {
         </p>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

@@ -21,20 +21,7 @@ const audience: Audience[] = [
 ];
 
 export default function WhoShouldEnroll() {
-  // SEO: structured data describing target audience
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Who Should Enroll — SDET & Automation Testing Program',
-    description:
-      'Ideal learners include manual testers, fresh graduates, career switchers, and developers seeking automation testing skills.',
-    itemListElement: audience.map((a, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: a.title,
-      description: a.description,
-    })),
-  };
+
 
   return (
     <section
@@ -109,11 +96,6 @@ export default function WhoShouldEnroll() {
         </p>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

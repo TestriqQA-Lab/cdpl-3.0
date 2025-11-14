@@ -221,4 +221,4 @@ export default function AboutPage(): React.ReactElement {
       </main>
     </LightTheme>
   );
-}
+} 

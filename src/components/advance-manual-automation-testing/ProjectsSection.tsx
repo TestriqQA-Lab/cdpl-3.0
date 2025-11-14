@@ -1,6 +1,6 @@
 'use client';
 import { Building2, ShoppingCart, Smartphone, CheckCircle } from 'lucide-react';
-import { useMemo, JSX } from 'react';
+import { JSX } from 'react';
 import { motion } from 'framer-motion';
 
 
@@ -66,28 +66,6 @@ const projects: Project[] = [
 
 export default function ProjectsSection() {
 
-  /** JSON-LD for SEO */
-  const jsonLd = useMemo(
-    () => ({
-      '@context': 'https://schema.org',
-      '@type': 'ItemList',
-      name: 'QA Automation Portfolio Projects',
-      description:
-        'Hands-on QA portfolio projects in Banking, E-Commerce, and FinTech using Selenium, Appium, Cypress, Playwright, Postman, and CI/CD.',
-      itemListElement: projects.map((p, i) => ({
-        '@type': 'ListItem',
-        position: i + 1,
-        item: {
-          '@type': 'CreativeWork',
-          name: p.title,
-          description: p.description,
-          keywords:
-            'QA portfolio, Selenium, Appium, Cypress, Playwright, Postman, BDD, Cucumber, Jenkins, Allure, CI/CD, E2E testing',
-        },
-      })),
-    }),
-    []
-  );
 
   return (
     <section
@@ -209,11 +187,6 @@ export default function ProjectsSection() {
         </p>
       </div>
 
-      {/* JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

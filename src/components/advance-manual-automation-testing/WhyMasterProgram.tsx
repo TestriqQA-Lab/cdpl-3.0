@@ -23,19 +23,6 @@ const benefits: Benefit[] = [
 ];
 
 export default function WhyMasterProgram() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Why Choose the Manual + Automation Master Program',
-    description:
-      'Benefits of a combined Manual Testing and Automation Testing program covering ISTQB, Selenium, Cypress, Playwright, API, Mobile, CI/CD, and AI-driven testing.',
-    itemListElement: benefits.map((b, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: b.title,
-      description: b.description,
-    })),
-  };
 
   return (
     <section
@@ -108,10 +95,6 @@ export default function WhyMasterProgram() {
       </div>
 
       {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

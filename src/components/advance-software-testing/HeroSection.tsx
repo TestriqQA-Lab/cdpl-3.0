@@ -54,22 +54,7 @@ const features = [
 ];
 
 export default function HeroSection() {
-    // SEO: Course JSON-LD
-    const jsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'Course',
-        name: 'Advanced Software Testing (Selenium, Appium, API, Cypress, Performance)',
-        description:
-            'Hands-on Advanced Software Testing program covering Selenium, Appium, API testing, Cypress, and performance testing with mentor-led projects and job assistance.',
-        provider: { '@type': 'Organization', name: 'Think and Do Institute' },
-        offers: {
-            '@type': 'Offer',
-            price: '0',
-            priceCurrency: 'INR',
-            availability: 'https://schema.org/InStock',
-            category: 'Education',
-        },
-    };
+
 
     const breadcrumbs = [
         { label: "Home", href: "/" },
@@ -222,11 +207,6 @@ export default function HeroSection() {
                 </div>
             </div>
 
-            {/* JSON-LD for search engines */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
         </section>
     );
 }

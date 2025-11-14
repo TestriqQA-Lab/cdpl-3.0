@@ -1,0 +1,260 @@
+// src/components/data-analytics-bi-bigdata/WhoShouldEnroll.tsx
+"use client";
+
+import React from "react";
+import { WhoShouldEnrollItem } from "./types";
+import { User, GraduationCap, RefreshCw, Briefcase, CheckCircle } from "lucide-react";
+
+const enrollmentCriteria: WhoShouldEnrollItem[] = [
+  {
+    id: 1,
+    title: "IT Professionals",
+    description:
+      "Looking to transition from traditional IT roles (e.g., QA, Support) into high-demand, future-proof data engineering and analytics positions.",
+    icon: "Briefcase",
+  },
+  {
+    id: 2,
+    title: "Recent Graduates",
+    description:
+      "Seeking a comprehensive, job-ready skill set right out of college to secure a high-paying entry-level role in the data domain.",
+    icon: "GraduationCap",
+  },
+  {
+    id: 3,
+    title: "BI Analysts & Data Analysts",
+    description:
+      "Wanting to upgrade their skills to include Big Data Engineering tools (Spark, Hadoop) to handle massive datasets and advance their careers.",
+    icon: "RefreshCw",
+  },
+  {
+    id: 4,
+    title: "Career Changers",
+    description:
+      "Anyone with a basic understanding of programming or databases who is eager to enter the lucrative and rapidly growing field of data.",
+    icon: "User",
+  },
+];
+
+const iconMap: { [key: string]: React.ElementType } = {
+  Briefcase: Briefcase,
+  GraduationCap: GraduationCap,
+  RefreshCw: RefreshCw,
+  User: User,
+};
+
+// Extra "requirements" for each audience segment (for layout like reference)
+const audienceRequirements: Record<number, string[]> = {
+  1: [
+    "Basic understanding of software development or IT workflows",
+    "Interest in Data Analytics, BI, or Big Data Engineering roles",
+    "Willingness to learn tools like SQL, Python, Power BI, and Spark",
+  ],
+  2: [
+    "Strong desire to build a job-ready, practical skill set",
+    "Comfort with basic logic, math, or programming concepts",
+    "Commitment to hands-on labs, capstone projects, and mock interviews",
+  ],
+  3: [
+    "Existing experience in BI or data analysis (reports/dashboards)",
+    "Curiosity about Big Data tools like Hadoop, Spark, and Databricks",
+    "Goal to move into senior BI Engineer or Data Engineer positions",
+  ],
+  4: [
+    "Basic knowledge of programming or databases (any language/SQL)",
+    "Open mindset to switch into the data analytics & engineering domain",
+    "Motivation to follow a structured Data Analytics with BI & Big Data roadmap",
+  ],
+};
+
+const prerequisites = [
+  {
+    category: "Essential",
+    items: [
+      "Comfort using a computer and web-based tools",
+      "Interest in working with numbers, reports, and business data",
+      "Laptop/PC with stable internet connection",
+    ],
+  },
+  {
+    category: "Recommended",
+    items: [
+      "Basic SQL or spreadsheet (Excel/Google Sheets) knowledge",
+      "Familiarity with any programming language (Python preferred)",
+      "Understanding of basic statistics and business metrics",
+    ],
+  },
+  {
+    category: "Nice to Have",
+    items: [
+      "Prior exposure to BI tools like Excel, Tableau, or Power BI",
+      "Awareness of cloud platforms such as AWS, Azure, or GCP",
+      "Experience with any analytics or reporting projects in your domain",
+    ],
+  },
+];
+
+const successFactors = [
+  {
+    title: "Regular Practice",
+    description:
+      "Allocate consistent weekly time for coding exercises, SQL queries, BI dashboards, and Big Data labs.",
+    icon: "⏰",
+  },
+  {
+    title: "Active Participation",
+    description:
+      "Engage in doubt-solving, peer discussions, and mentor sessions to accelerate your learning.",
+    icon: "🤝",
+  },
+  {
+    title: "Project-First Mindset",
+    description:
+      "Complete all real-world projects to build a strong portfolio in BI, Data Analytics, and Big Data Engineering.",
+    icon: "🎯",
+  },
+  {
+    title: "Continuous Learning",
+    description:
+      "Stay updated with new tools, cloud services, and industry use cases in the data ecosystem.",
+    icon: "📚",
+  },
+];
+
+const WhoShouldEnroll: React.FC = () => {
+  return (
+    <section className="py-16 md:py-20 bg-gradient-to-b from-white to-slate-50">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Section Header – text kept same, styling upgraded */}
+        <div className="text-center mb-16 md:mb-20">
+          <h2 className="text-sm font-semibold tracking-[0.25em] text-teal-600 uppercase">
+            Target Audience
+          </h2>
+          <h3 className="mt-2 text-3xl md:text-4xl font-bold mb-4 text-slate-900">
+            Who Is This Master Program For?
+          </h3>
+          <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+            This program is designed for ambitious individuals ready to take on
+            the most challenging and rewarding roles in the data industry.
+          </p>
+          <p className="mt-3 text-sm text-slate-500 max-w-3xl mx-auto">
+            Whether you&apos;re an <strong>IT professional</strong>,{" "}
+            <strong>recent graduate</strong>,{" "}
+            <strong>BI / Data Analyst</strong>, or{" "}
+            <strong>career changer</strong>, this{" "}
+            <strong>Data Analytics with BI and Big Data Engineering Master Program</strong>{" "}
+            gives you a structured path toward{" "}
+            <em>high-paying data analytics, BI, and data engineering jobs</em>.
+          </p>
+        </div>
+
+        {/* Audience Segments – layout inspired by reference section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+          {enrollmentCriteria.map((item) => {
+            const Icon = iconMap[item.icon];
+            const requirements = audienceRequirements[item.id] || [];
+            return (
+              <div
+                key={item.id}
+                className="bg-white rounded-xl p-8 border-2 border-slate-200 hover:border-teal-300 hover:shadow-lg transition-all duration-300"
+              >
+                {/* Icon */}
+                <div className="mb-4 inline-flex items-center justify-center rounded-full bg-teal-50 border border-teal-200 p-4 text-teal-600">
+                  <Icon className="h-8 w-8" aria-hidden="true" />
+                </div>
+
+                {/* Title (unchanged) */}
+                <h4 className="text-xl font-bold text-slate-900 mb-3">
+                  {item.title}
+                </h4>
+
+                {/* Description (unchanged) */}
+                <p className="text-slate-600 leading-relaxed mb-5">
+                  {item.description}
+                </p>
+
+                {/* Requirements list (new, SEO friendly) */}
+                <div>
+                  <p className="text-sm font-semibold text-slate-900 mb-3">
+                    What You Need:
+                  </p>
+                  <ul className="space-y-2">
+                    {requirements.map((req, idx) => (
+                      <li
+                        key={idx}
+                        className="flex items-start gap-2 text-sm text-slate-600"
+                      >
+                        <CheckCircle className="w-4 h-4 text-teal-500 flex-shrink-0 mt-0.5" />
+                        <span>{req}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Prerequisites Section – dark band like reference */}
+        <div className="bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-8 md:p-12 text-white mb-12">
+          <h3 className="text-2xl md:text-3xl font-bold mb-8">
+            Prerequisites & Requirements
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {prerequisites.map((prereq, idx) => (
+              <div key={idx}>
+                <h4 className="text-lg font-bold text-teal-300 mb-4">
+                  {prereq.category}
+                </h4>
+                <ul className="space-y-3">
+                  {prereq.items.map((item, iidx) => (
+                    <li key={iidx} className="flex items-start gap-3">
+                      <span className="text-teal-300 mt-1">✓</span>
+                      <span className="text-slate-200 text-sm">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <p className="mt-6 text-xs text-slate-300 sm:text-sm">
+            Ideal for learners aiming for{" "}
+            <strong>Business Intelligence, Data Analytics, and Big Data Engineering</strong>{" "}
+            careers with technologies like <em>SQL, Python, Power BI, Tableau,
+            Hadoop, Spark, Databricks, and cloud platforms</em>.
+          </p>
+        </div>
+
+        {/* Success Factors */}
+        <div className="bg-gradient-to-r from-orange-50 to-blue-50 rounded-2xl p-8 md:p-12 border-2 border-orange-200">
+          <h3 className="text-2xl font-bold text-slate-900 mb-6">
+            Keys to Success in This Program
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {successFactors.map((factor, idx) => (
+              <div key={idx} className="flex gap-4">
+                <div className="text-3xl flex-shrink-0">{factor.icon}</div>
+                <div>
+                  <h4 className="font-bold text-slate-900 mb-1">
+                    {factor.title}
+                  </h4>
+                  <p className="text-sm text-slate-600">
+                    {factor.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="mt-6 text-xs text-slate-600 sm:text-sm">
+            Keywords: Who should enroll in Data Analytics with BI and Big Data Engineering •
+            IT professionals transitioning to data engineering • recent graduates looking
+            for data analytics jobs • BI analysts upskilling to Big Data roles • career
+            changers entering the data field.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default WhoShouldEnroll;

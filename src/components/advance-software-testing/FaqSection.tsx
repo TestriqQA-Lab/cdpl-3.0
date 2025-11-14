@@ -48,16 +48,6 @@ export default function FaqSection() {
     }
   };
 
-  // JSON-LD for SEO
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((f) => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
-    })),
-  };
 
   return (
     <section id="faq" className="relative py-8 md:py-10 bg-white">
@@ -154,11 +144,6 @@ export default function FaqSection() {
         </div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

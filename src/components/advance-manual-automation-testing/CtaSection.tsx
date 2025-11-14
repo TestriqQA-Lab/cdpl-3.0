@@ -4,21 +4,7 @@ import { Phone, Mail, MapPin, Clock, Award, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 
 export default function CtaSection() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'Complete QA Engineer Program',
-    url: 'https://example.com',
-    contactPoint: [
-      {
-        '@type': 'ContactPoint',
-        telephone: '+91-788-83-83-788',
-        contactType: 'sales',
-        areaServed: 'IN',
-        availableLanguage: ['en', 'hi'],
-      },
-    ],
-  };
+
 
   return (
     <section
@@ -122,11 +108,7 @@ export default function CtaSection() {
         </motion.div>
       </div>
 
-      {/* JSON-LD for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+
     </section>
   );
 }
