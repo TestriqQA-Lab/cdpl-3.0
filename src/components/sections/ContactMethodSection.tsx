@@ -57,7 +57,7 @@ export function ContactMethodsSection() {
       title: "Request Syllabus",
       desc: "Download program curriculum PDFs for Software Testing, Data Science & AI, Full-Stack Development.",
       cta: "Get Curriculum PDF",
-      href: "/pdf/dummy-pdf_2.pdf",
+      href: "#contact-hero",
       icon: <IoBookSharp className="h-10 w-10 text-red-700" />,
       badges: ["Updated", "Detailed topics"],
       aria: "Download course syllabus PDF",

@@ -1,6 +1,7 @@
 // components/powerbi/HeroSection.tsx
 import React from 'react';
-import { Clock, CheckCircle, Award, Briefcase, ArrowRight, Download, Star, Users, TrendingUp } from 'lucide-react';
+import { Clock, CheckCircle, Award, Briefcase, ArrowRight, Download, Star, Users, TrendingUp, Home, ChevronRight } from 'lucide-react';
+import Link from 'next/link';
 
 // Interface for the key features under the main title
 interface FeatureCardProps {
@@ -47,9 +48,32 @@ const HeroSection: React.FC = () => {
     { icon: <TrendingUp size={20} className="text-green-500" />, text: '14+ Years Industry Experience' },
   ];
 
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Data Analytics & Visualization with Power BI", href: "/power-bi-course" },
+  ];
+
   return (
-    <section className="bg-gray-50 py-12 md:py-20">
+    <section className="bg-gray-50 py-12 md:py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Breadcrumbs */}
+        <nav aria-label="Breadcrumb" className="mb-8">
+          <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+            {breadcrumbs.map((c, i) => (
+              <li key={i} className="flex items-center gap-2">
+                {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                <Link
+                  href={c.href}
+                  className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? 'font-semibold text-slate-900' : ''}`}
+                >
+                  {c.label}
+                </Link>
+              </li>
+            ))}
+          </ol>
+        </nav>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
 
           {/* Left Column: Course Details */}

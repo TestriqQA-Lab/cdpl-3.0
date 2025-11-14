@@ -41,7 +41,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Data Science, AI - ML & BI Courses */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-orange-400">Data Science, AI - ML &amp; BI Courses</h3>
+            <h3 className="text-lg font-semibold text-orange-400">Data Science</h3>
             <ul>
               <li className='flex flex-col space-y-2'>
                 <Link href="/ai-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
@@ -56,23 +56,32 @@ const Footer = () => {
                   Deep Learning, NLP and Generative AI
                 </Link>
 
-                <Link href="/data-analytics" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
-                  Advanced Data Analytics
-                </Link>
-
-                <Link href="/data-engineering-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
-                  Big Data Engineering
-                </Link>
-
-                <Link href="/prompt-engineering-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
-                  Prompt Engineering with Gen AI
-                </Link>
-
                 <Link href="/data-science-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Advanced Data Science &amp; Machine Learning Masterclass
                 </Link>
+
+                <Link href="/machine-learning-using-python" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Machine Learning Algorithms using python Programming
+                </Link>
+
+                <Link href="/data-visualization-in-r-programming" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Machine Learning and Data Visualization using R Programming
+                </Link>
+
               </li>
             </ul>
+
+            {/* Artificial Intelligence */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-orange-400">Artificial Intelligence(AI)</h3>
+              <ul>
+                <li className='flex flex-col space-y-2'>
+                  <Link href="/prompt-engineering-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                    Prompt Engineering with Gen AI
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
             {/* Follow Us (desktop) */}
             <div className="space-y-4 hidden lg:block">
@@ -113,15 +122,15 @@ const Footer = () => {
                 </Link>
 
                 <Link href="/api-testing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
-                  API Testing
+                  API Testing using POSTMAN and RestAPIs
                 </Link>
 
                 <Link href="/dbms-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
-                  Database Management System
+                  Database Management System using MySQL
                 </Link>
 
                 <Link href="/etl-testing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
-                  ETL Testing
+                  ETL Testing Course
                 </Link>
 
                 <Link href="/advance-software-testing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
@@ -135,6 +144,18 @@ const Footer = () => {
                 <Link href="/advance-manual-automation-testing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Advanced Manual and Automation Testing
                 </Link>
+
+                <Link href="/advance-manual-automation-testing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Advanced Manual and Automation Testing
+                </Link>
+
+                <Link href="/python-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Python Programming
+                </Link>
+
+                <Link href="/java-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Java Programming
+                </Link>
               </li>
             </ul>
 
@@ -144,31 +165,66 @@ const Footer = () => {
               <ul>
                 <li className='flex flex-col space-y-2'>
                   <Link href="/digital-marketing-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
-                    Digital Marketing &amp; Analytics
+                    Digital Marketing and Analytics - Master Program
+                  </Link>
+
+                  <Link href="/ai-in-digital-marketing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                    Digital Marketing and AI (For Business Owners)
+                  </Link>
+
+                  <Link href="/ai-bootcamp" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                    Digital Marketing With AI Bootcamp
                   </Link>
                 </li>
               </ul>
             </div>
 
             {/* Programming Languages */}
-            <div className="space-y-4">
+            {/* <div className="space-y-4">
               <h3 className="text-lg font-semibold text-orange-400">Programming Languages</h3>
               <ul>
                 <li className='flex flex-col space-y-2'>
-                  <Link href="/python-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
-                    Python Programming
-                  </Link>
 
-                  <Link href="/java-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
-                    Java Programming
-                  </Link>
                 </li>
               </ul>
-            </div>
+            </div> */}
+          </div>
+
+          {/* Digital Marketing */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-orange-400">Business Development(BI)</h3>
+            <ul>
+              <li className='flex flex-col space-y-2'>
+                <Link href="/data-analytics" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Advanced Data Analytics - Hero Program
+                </Link>
+
+                <Link href="/data-analytics-python" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Advanced Data Analytics with Python Libraries
+                </Link>
+
+                <Link href="/data-analytics-and-visualization" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Excel for Data Analytics & Visualization
+                </Link>
+
+                <Link href="/data-analytics-with-tableau" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Data Analytics & Visualization with Tableau
+                </Link>
+
+                <Link href="/power-bi-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Data Analytics & Visualization with Power BI
+                </Link>
+
+                <Link href="/masters-in-data-engineering" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Data Analytics With BI And Big Data Engineering - Master Program
+                </Link>
+
+              </li>
+            </ul>
           </div>
 
           {/* City Pages */}
-          <div className="space-y-4">
+          {/* <div className="space-y-4">
             <h3 className="text-lg font-semibold text-orange-400">Cities</h3>
             <ul>
               <li className='flex flex-col space-y-2'>
@@ -245,7 +301,7 @@ const Footer = () => {
                 </Link>
               </li>
             </ul>
-          </div>
+          </div> */}
 
           {/* Blogs and Categories */}
           <div className="space-y-4">
