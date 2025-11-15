@@ -171,9 +171,9 @@ export default function HeroSection() {
                 </nav>
 
                 {/* Top-aligned columns */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
                     {/* Left content */}
-                    <div className="flex flex-col md:col-span-8 justify-start space-y-8">
+                    <div className="flex flex-col md:col-span-7 lg:col-span-8 justify-start space-y-8">
                         <div className="space-y-4">
                             {/* Badge / tagline */}
                             <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
@@ -192,6 +192,8 @@ export default function HeroSection() {
                                     Data Analytics & Visualization
                                 </span>
                             </h1>
+
+                            <LeadForm className="md:hidden" />
 
                             {/* SEO-optimized description */}
                             <p className="mt-2 max-w-3xl text-base leading-relaxed text-slate-600 md:text-lg">
@@ -279,7 +281,7 @@ export default function HeroSection() {
                     </div>
 
                     {/* Right section: form + floating cards kept */}
-                    <div className="relative hidden lg:block lg:col-span-4 mt-5">
+                    <div className="relative hidden md:block md:col-span-5 lg:col-span-4 mt-5">
                         <div className="relative w-full">
                             <div className="absolute inset-0 rounded-3xl" />
                             {/* Form card */}
@@ -290,7 +292,7 @@ export default function HeroSection() {
                             </div>
 
                             {/* Floating cards (KEPT as requested) */}
-                            <div className="absolute -bottom-18 -left-30 bg-white rounded-2xl shadow-xl p-4 border border-slate-100 max-w-xs animate-[bounce_5s_ease-in-out_infinite] motion-reduce:animate-none">
+                            <div className="absolute hidden xl:block -bottom-18 -left-30 bg-white rounded-2xl shadow-xl p-4 border border-slate-100 max-w-xs animate-[bounce_5s_ease-in-out_infinite] motion-reduce:animate-none">
                                 <div className="flex items-center gap-3">
                                     <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-white font-bold">
                                         ✓
@@ -302,7 +304,7 @@ export default function HeroSection() {
                                 </div>
                             </div>
 
-                            <div className="absolute -top-15 -right-20 bg-white rounded-2xl shadow-xl p-4 border border-slate-100 max-w-xs animate-[bounce_5s_ease-in-out_infinite] motion-reduce:animate-none">
+                            <div className="absolute hidden xl:block -top-15 -right-20 bg-white rounded-2xl shadow-xl p-4 border border-slate-100 max-w-xs animate-[bounce_5s_ease-in-out_infinite] motion-reduce:animate-none">
                                 <div className="flex items-center gap-3">
                                     <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-400 to-pink-600 flex items-center justify-center text-white font-bold">
                                         ★

@@ -40,7 +40,7 @@ const colorClasses = [
 
 export default function WhoShouldEnroll() {
     return (
-        <section className="relative py-20 bg-white overflow-hidden">
+        <section className="relative py-10 md:py-20 bg-white overflow-hidden">
             {/* Decorative background */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
@@ -195,9 +195,26 @@ export default function WhoShouldEnroll() {
                     <p className="text-lg text-slate-700 mb-6">
                         Ready to start your Excel mastery journey?
                     </p>
-                    <Link href="contact-us" className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-4 px-10 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl text-lg">
+                    <Link
+                        href="/contact-us"
+                        className="
+    inline-flex items-center justify-center
+    w-full sm:w-auto
+    px-4 py-3 sm:px-6 sm:py-3 md:px-10 md:py-4
+    text-sm sm:text-base md:text-lg
+    bg-gradient-to-r from-blue-600 to-indigo-600
+    hover:from-blue-700 hover:to-indigo-700
+    text-white font-semibold
+    rounded-lg
+    text-center
+    shadow-lg hover:shadow-xl
+    transition-all duration-300
+    break-words
+  "
+                    >
                         Enroll Now and Transform Your Career
                     </Link>
+
                 </div>
             </div>
         </section>

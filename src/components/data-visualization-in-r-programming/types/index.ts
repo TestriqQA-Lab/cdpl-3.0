@@ -1,5 +1,6 @@
 // src/types/index.ts
 
+
 export interface Stat {
   value: string;
   label: string;

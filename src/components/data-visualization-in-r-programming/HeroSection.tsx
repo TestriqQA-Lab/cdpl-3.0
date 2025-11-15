@@ -166,7 +166,7 @@ export const HeroSection: React.FC = () => {
         {/* Main grid (form right, top-aligned) */}
         <div className="grid min-h-[70vh] grid-cols-1 gap-10 sm:py-2 md:grid-cols-12 md:items-start">
           {/* Left: Content */}
-          <div className="flex flex-col md:col-span-8">
+          <div className="flex flex-col md:col-span-7 lg:col-span-8">
             {/* Duration Badge (using hero_section.duration) */}
             <div className="mb-4 w-fit inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white/80 px-4 py-2 shadow-sm backdrop-blur-sm transition-shadow hover:shadow-md">
               <Clock className="h-4 w-4 text-orange-500" />
@@ -250,7 +250,7 @@ export const HeroSection: React.FC = () => {
               <div className="flex items-center gap-2">
                 <span className="text-2xl">🏆</span>
                 <span>
-                  <strong className="text-slate-900">14+ Years</strong> Industry Experience
+                  <strong className="text-slate-900">5+ Years</strong> Industry Experience
                 </span>
               </div>
             </div>
@@ -265,19 +265,9 @@ export const HeroSection: React.FC = () => {
           </div>
 
           {/* Right: Desktop form (top-aligned) */}
-          <div className="hidden md:block md:col-span-4 lg:col-span-4 md:top-8">
+          <div className="hidden md:block md:col-span-5 lg:col-span-4 md:top-8">
             <LeadForm />
           </div>
-        </div>
-      </div>
-
-      {/* Scroll indicator (optional, same as reference) */}
-      <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
-        <div className="flex flex-col items-center gap-2 text-slate-600 animate-bounce">
-          <span className="text-sm font-medium">Scroll to explore</span>
-          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
         </div>
       </div>
     </section>

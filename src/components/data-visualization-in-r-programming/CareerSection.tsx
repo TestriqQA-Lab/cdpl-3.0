@@ -200,7 +200,7 @@ export const CareerSection: React.FC = () => {
             {topHiringCompanies.map((company, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-lg p-6 border border-orange-200 text-center hover:shadow-lg transition-shadow"
+                className="bg-white rounded-lg p-2 md:p-6 border border-orange-200 text-center hover:shadow-lg transition-shadow"
               >
                 <p className="font-bold text-slate-900">{company}</p>
                 <p className="text-xs text-slate-600 mt-2">Active Hiring for Data Roles</p>

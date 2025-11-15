@@ -230,9 +230,22 @@ export default function WhyVisualizationProgram() {
                         <strong>MIS Executive</strong>, and <strong>Business Analyst</strong> roles.
                     </p>
 
-                    <Link href="contact-us" className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl">
+                    <Link
+                        href="contact-us"
+                        className="inline-flex items-center justify-center w-full sm:w-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-3.5 lg:py-4 text-sm sm:text-base lg:text-lg
+    text-center font-semibold
+    bg-gradient-to-r from-blue-500 to-indigo-600
+    hover:from-blue-600 hover:to-indigo-700
+    text-white
+    rounded-lg
+    shadow-lg hover:shadow-xl
+    transition-all duration-300
+    focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-indigo-500
+  "
+                    >
                         Start Your Journey Today
                     </Link>
+
                 </div>
 
             </div>
