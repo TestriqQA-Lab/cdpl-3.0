@@ -140,48 +140,6 @@ export default function HeroSection() {
     formSection?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const courseJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Course",
-    name: "Machine Learning Algorithms with Python",
-    description:
-      "45-hour intensive Machine Learning course covering supervised and unsupervised algorithms, model evaluation, feature engineering, and deployment using Python.",
-    provider: {
-      "@type": "Organization",
-      name: "Your Academy",
-      sameAs: "https://www.youracademy.example",
-    },
-    timeRequired: "PT45H",
-    educationalLevel: "Beginner to Intermediate",
-    keywords:
-      "machine learning course, python machine learning, ML algorithms, regression, classification, clustering, model deployment, AI course in Mumbai, job-ready data science, ML with Python",
-  };
-
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: "https://www.yoursite.example/",
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Courses",
-        item: "https://www.yoursite.example/courses",
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: "Machine Learning with Python",
-        item: "https://www.yoursite.example/courses/machine-learning-python",
-      },
-    ],
-  };
-
   const breadcrumbs = [
     { label: "Home", href: "/" },
     { label: "Machine Learning Algorithms with Python", href: "/machine-learning-using-python" },
@@ -196,15 +154,6 @@ export default function HeroSection() {
         <div className="animate-blob animation-delay-4000 absolute top-1/2 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-purple-200 opacity-20 mix-blend-multiply blur-3xl" />
       </div>
 
-      {/* JSON-LD for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(courseJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-      />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 pb-12 md:pt-6 md:pb-16 relative z-10">
         {/* Breadcrumbs */}

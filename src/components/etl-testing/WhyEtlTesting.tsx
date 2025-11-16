@@ -23,20 +23,7 @@ const benefits: Benefit[] = [
 ];
 
 export default function WhyEtlTesting() {
-  // SEO: ItemList for benefits
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Why Learn ETL Testing',
-    description:
-      'Key reasons to master ETL Testing: data accuracy, faster validation, compliance, reliable pipelines, global demand, and higher salaries.',
-    itemListElement: benefits.map((b, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: b.title,
-      description: b.description,
-    })),
-  };
+
 
   return (
     <section id="why-etl" aria-labelledby="why-etl-heading" className="relative py-12 md:py-10 bg-white">
@@ -95,11 +82,6 @@ export default function WhyEtlTesting() {
         </p>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

@@ -69,8 +69,7 @@ export default function StatsSection() {
         <section
             className="py-16 px-4 bg-white"
             aria-label="Platform statistics"
-            itemScope
-            itemType="https://schema.org/ItemList"
+           
         >
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-10">
@@ -81,8 +80,6 @@ export default function StatsSection() {
                         Job-ready tech training with certification, hands-on projects, mentorship, and career support.
                     </p>
                 </div>
-
-                <meta itemProp="itemListOrder" content="http://schema.org/ItemListOrderAscending" />
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                     {STATS.map((s, i) => {
@@ -97,8 +94,7 @@ export default function StatsSection() {
                                     accent.panel,
                                 ].join(" ")}
                                 itemProp="itemListElement"
-                                itemScope
-                                itemType="https://schema.org/ListItem"
+
                                 aria-label={`${s.value} ${s.label}`}
                             >
                                 <meta itemProp="position" content={String(i + 1)} />
@@ -132,8 +128,7 @@ export default function StatsSection() {
                                     <div
                                         className="sr-only"
                                         itemProp="aggregateRating"
-                                        itemScope
-                                        itemType="https://schema.org/AggregateRating"
+
                                     >
                                         <span itemProp="ratingValue">{s.rating.toFixed(1)}</span>
                                         <meta itemProp="bestRating" content="5" />

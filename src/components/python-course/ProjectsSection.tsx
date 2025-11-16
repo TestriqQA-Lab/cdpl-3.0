@@ -93,26 +93,7 @@ const ACCENTS = [
 ];
 
 export default function ProjectsSection() {
-  // SEO JSON-LD
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Python Master Program — Real-World Projects",
-    description:
-      "Portfolio-ready Python projects covering web, ML, automation, scraping, dashboards, APIs and CLI apps.",
-    itemListElement: PROJECTS.map((p, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: {
-        "@type": "CreativeWork",
-        name: p.title,
-        keywords: p.stack.join(", "),
-        description: p.outcome,
-      },
-    })),
-    keywords:
-      "python projects, django project, streamlit dashboard, web scraping, machine learning project, nlp chatbot, automation, portfolio",
-  };
+
 
   return (
     <section
@@ -228,11 +209,6 @@ export default function ProjectsSection() {
         </div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

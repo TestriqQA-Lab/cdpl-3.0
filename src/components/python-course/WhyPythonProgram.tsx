@@ -26,17 +26,7 @@ const HIGHLIGHTS = [
 ];
 
 export default function WhyPythonProgram() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Course",
-    name: "Master Program in Python Programming",
-    description:
-      "80-hour hands-on Python program covering AI, Data Science, Web APIs, and Automation with industry projects and job assistance.",
-    educationalCredentialAwarded: "Certificate with QR verification",
-    provider: { "@type": "Organization", name: "Cinute Digital Pvt. Ltd." },
-    keywords:
-      "Python course, Python training, data science with Python, Python web development, FastAPI, Django, pytest, portfolio projects",
-  };
+
 
   return (
     <section id="why-python" aria-labelledby="why-python-heading" className="relative py-8 md:py-12 bg-white">
@@ -121,11 +111,6 @@ export default function WhyPythonProgram() {
         </p>
       </div>
 
-      {/* SEO JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

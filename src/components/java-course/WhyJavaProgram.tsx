@@ -184,38 +184,7 @@ export default function WhyJavaProgram() {
         </div>
       </div>
 
-      {/* JSON-LD (structured data for SEO) */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Course",
-            name: "Top 1% Java Developer Program",
-            description:
-              "Job-ready Java training with Core Java, Spring Boot, Microservices, SQL, and Cloud fundamentals. Beginner friendly with hands-on projects and interview prep.",
-            provider: {
-              "@type": "Organization",
-              name: "Cinute Digital Pvt. Ltd.",
-            },
-            hasCourseInstance: {
-              "@type": "CourseInstance",
-              courseMode: "Online/Hybrid",
-              endDate: "2025-12-31",
-              startDate: "2025-01-01",
-            },
-            educationalCredentialAwarded: "Certificate of Completion",
-            timeRequired: "PT80H",
-            aggregateRating: {
-              "@type": "AggregateRating",
-              ratingValue: "9.9",
-              bestRating: "10",
-              ratingCount: "100",
-            },
-            keywords: keywords,
-          }),
-        }}
-      />
+    
       {/* Assist crawlers that read visible content */}
       <h1 className="sr-only">{title}</h1>
     </section>

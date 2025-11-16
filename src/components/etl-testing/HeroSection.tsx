@@ -58,24 +58,7 @@ const features = [
  * Hero Section
  * ----------------------------- */
 export default function HeroSection() {
-    const jsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'Course',
-        name: 'ETL Testing using SQL & Tools',
-        description:
-            'Hands-on ETL testing course covering data validation, SQL for data quality, pipeline automation, and enterprise reporting with job assistance.',
-        provider: {
-            '@type': 'Organization',
-            name: 'Think and Do Institute',
-        },
-        offers: {
-            '@type': 'Offer',
-            availability: 'https://schema.org/InStock',
-            price: '0',
-            priceCurrency: 'INR',
-            category: 'Education',
-        },
-    };
+
 
     const breadcrumbs = [
         { label: 'Home', href: '/' },
@@ -215,11 +198,6 @@ export default function HeroSection() {
                 </div>
             </div>
 
-            {/* JSON-LD for SEO */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
         </section>
     );
 }

@@ -29,19 +29,7 @@ const accents = [
 ];
 
 export default function ToolsSection() {
-  // SEO: structured data for tools
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'ETL Testing Tools',
-    description:
-      'Industry-standard ETL and data testing tools you will master: SQL Developer, Informatica, Talend, Datastage, SSIS, and Control-M.',
-    itemListElement: tools.map((t, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: t.name,
-    })),
-  };
+
 
   return (
     <section id="tools" aria-labelledby="tools-heading" className="relative py-8 md:py-10 bg-white">
@@ -129,13 +117,6 @@ export default function ToolsSection() {
         </p>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd),
-        }}
-      />
     </section>
   );
 }

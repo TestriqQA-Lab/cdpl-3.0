@@ -91,20 +91,6 @@ export default function CurriculumSection() {
   const keywords =
     "advanced data analytics curriculum, MySQL SQL joins window functions, Excel Power Query dashboards, Power BI DAX modeling, Tableau stories analytics, pandas matplotlib seaborn NumPy, data analyst projects";
 
-  // JSON-LD (ItemList) for modules
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Advanced Data Analytics Curriculum",
-    itemListElement: MODULES.map((m, idx) => ({
-      "@type": "ListItem",
-      position: idx + 1,
-      item: { "@type": "Course", name: m.title, description: m.outcome },
-    })),
-    numberOfItems: MODULES.length,
-    keywords,
-  };
-
   return (
     <section
       id="curriculum"
@@ -230,11 +216,6 @@ export default function CurriculumSection() {
         </p>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

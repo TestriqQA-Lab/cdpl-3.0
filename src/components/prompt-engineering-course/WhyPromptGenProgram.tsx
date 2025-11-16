@@ -1,7 +1,6 @@
 // components/sections/WhyPromptGenProgram.tsx
 "use client";
 
-import { useMemo } from "react";
 import {
     Sparkles,
     Wand2,
@@ -17,36 +16,7 @@ import {
 import Link from "next/link";
 
 export default function WhyPromptGenProgram() {
-    // SEO: Course schema (rich results)
-    const courseJsonLd = useMemo(
-        () =>
-            JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "Course",
-                name: "Prompt Engineering with Generative AI",
-                description:
-                    "Hands-on prompt engineering program covering LLM basics, prompting frameworks, system prompts, evaluation, guardrails, and automation with popular generative AI tools. Build job-ready projects for content generation, customer support, and workflow automation.",
-                provider: {
-                    "@type": "Organization",
-                    name: "Cinute Digital Pvt. Ltd.",
-                    sameAs: "https://example.com",
-                },
-                timeRequired: "PT20H",
-                educationalCredentialAwarded: "Certificate of Completion",
-                inLanguage: "en",
-                keywords: [
-                    "prompt engineering course",
-                    "generative AI training",
-                    "LLM prompting",
-                    "system prompt design",
-                    "AI content generation",
-                    "RAG and guardrails",
-                    "ChatGPT prompts",
-                    "automation with LLMs",
-                ],
-            }),
-        []
-    );
+
 
     const featureChips = [
         { label: "20 Hours", color: "bg-indigo-600 text-white" },
@@ -259,8 +229,6 @@ export default function WhyPromptGenProgram() {
                 </div>
             </div>
 
-            {/* JSON-LD for SEO */}
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: courseJsonLd }} />
         </section>
     );
 }

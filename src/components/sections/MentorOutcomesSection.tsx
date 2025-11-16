@@ -2,12 +2,6 @@
 
 import { useMemo, useState } from "react";
 
-/**
- * MentorOutcomesSection — big avatars aligned to the ring center
- * - Orbit positions use the exact same radius as the SVG ring (RING_R)
- * - No elliptical offset, so centers sit precisely on the path
- * - Avatars remain larger on desktop (h-20 lg:h-24)
- */
 
 type Case = {
   name: string;

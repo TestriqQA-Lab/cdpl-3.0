@@ -20,24 +20,7 @@ export default function TestimonialsSection() {
     const avgRating =
         testimonials.reduce((s, t) => s + (t.rating || 0), 0) / (testimonials.length || 1);
 
-    const jsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'Product', // you can switch to Course if this is part of a specific course page
-        name: 'MySQL Training & Certification',
-        aggregateRating: {
-            '@type': 'AggregateRating',
-            ratingValue: avgRating.toFixed(1),
-            reviewCount: testimonials.length,
-            bestRating: 5,
-            worstRating: 1,
-        },
-        review: testimonials.map((t) => ({
-            '@type': 'Review',
-            reviewBody: t.text,
-            reviewRating: { '@type': 'Rating', ratingValue: t.rating, bestRating: 5, worstRating: 1 },
-            author: { '@type': 'Person', name: t.name },
-        })),
-    };
+
 
     return (
         <section id="testimonials" aria-labelledby="testimonials-heading" className="relative py-6 md:py-10 bg-white">
@@ -71,11 +54,6 @@ export default function TestimonialsSection() {
                 </div>
             </div>
 
-            {/* JSON-LD for search engines */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
         </section>
     );
 }

@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import type { Metadata } from "next";
-import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
+import { generateSEO } from "@/lib/seo";
 
 
 // SEO METADATA - Enhanced for Careers Page
@@ -157,43 +157,7 @@ const JOBS: Job[] = [
     },
 ];
 
-// ====== JSON-LD (JobPosting) for SEO ======
-const jobPostingJsonLd = (jobs: Job[]) => ({
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    itemListElement: jobs.map((j, idx) => ({
-        "@type": "ListItem",
-        position: idx + 1,
-        item: {
-            "@type": "JobPosting",
-            title: j.title,
-            employmentType: j.type,
-            industry: "Education Technology",
-            hiringOrganization: {
-                "@type": "Organization",
-                name: "Cinute Digital Pvt Ltd (CDPL)",
-                sameAs: "https://www.cinutedigital.com",
-            },
-            jobLocationType: j.location.includes("Remote") ? "TELECOMMUTE" : "ONSITE",
-            jobLocation: j.location.includes("Remote")
-                ? undefined
-                : {
-                    "@type": "Place",
-                    address: {
-                        "@type": "PostalAddress",
-                        addressCountry: "IN",
-                        addressLocality: j.location,
-                    },
-                },
-            description: j.summary,
-            responsibilities: j.responsibilities,
-            qualifications: j.requirements,
-            url: j.applyLink
-                ? j.applyLink
-                : "mailto:" + (j.applyEmail ?? "careers@cinutedigital.com"),
-        },
-    })),
-});
+
 
 // ====== Section Loader ======
 function SectionLoader({ label = "Loading..." }: { label?: string }) {
@@ -243,25 +207,10 @@ const JobsCareersCTASection = dynamic(
 // ====== Page =====
 export default function Page() {
 
-    
-    const breadcrumbSchema = generateBreadcrumbSchema([
-        { name: "Home", url: "/" },
-        { name: "Jobs", url: "/jobs/careers" },
-        { name: "Careers", url: "/jobs/careers" },
-    ]);
+
     return (
         <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify(jobPostingJsonLd(JOBS)),
-                }}
-            />
 
-             <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-            />
             <main className="w-full bg-white text-neutral-900 dark:bg-white dark:text-neutral-900">
                 {/* Sections now manage their own inner container (max-w-7xl px-4 py-12 sm:px-6 lg:px-8) */}
                 <JobsCareersHeroSection />

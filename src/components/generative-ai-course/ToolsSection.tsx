@@ -38,19 +38,6 @@ export default function ToolsSection() {
   const seoKeywords =
     "python, tensorflow, pytorch, keras, nltk, spacy, hugging face, docker, numpy, pandas, scikit-learn, fastapi, ai tools, machine learning libraries, data science stack, generative ai framework";
 
-  // JSON-LD ItemList for better snippets
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Tools & Technologies You’ll Master",
-    itemListElement: TOOLS.map((t, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: { "@type": "SoftwareApplication", name: t.name },
-    })),
-    keywords:
-      "ai tools list, machine learning tools, python data science libraries, deep learning frameworks, nlp tools",
-  };
 
   return (
     <section
@@ -122,11 +109,6 @@ export default function ToolsSection() {
         </div>
       </div>
 
-      {/* Structured data for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

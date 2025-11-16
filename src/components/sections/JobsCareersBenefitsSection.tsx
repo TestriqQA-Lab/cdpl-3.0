@@ -114,8 +114,6 @@ export default function JobsCareersBenefitsSection() {
                                 whileHover={{ y: -4, rotateX: 0.6, rotateY: -0.6 }}
                                 style={{ transformPerspective: 800 }}
                                 itemProp="itemListElement"
-                                itemScope
-                                itemType="https://schema.org/ListItem"
                             >
                                 <span
                                     aria-hidden
@@ -216,21 +214,6 @@ export default function JobsCareersBenefitsSection() {
                 </p>
             </div>
 
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "ItemList",
-                        name: "Why work at Cinute Digital Pvt Ltd (CDPL)",
-                        itemListElement: benefits.map((b, idx) => ({
-                            "@type": "ListItem",
-                            position: idx + 1,
-                            item: { "@type": "Thing", name: b.title, description: b.desc },
-                        })),
-                    }),
-                }}
-            />
 
             <style jsx>{`
         @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }

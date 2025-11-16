@@ -1,6 +1,5 @@
 "use client";
 
-import Script from "next/script";
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
@@ -320,28 +319,6 @@ export default function JobsLiveJobsTestimonialSection(
     } catch {}
   };
 
-  const jsonLd = useMemo(() => {
-    const items = videos.map((v) => ({
-      "@type": "VideoObject",
-      name: v.title,
-      description: v.transcript || v.title,
-      thumbnailUrl: [
-        v.poster.startsWith("http")
-          ? v.poster
-          : `${typeof window !== "undefined" ? window.location.origin : ""}${v.poster}`,
-      ],
-      uploadDate: "2025-01-01",
-      duration: v.duration ? `PT${v.duration.replace(":", "M")}S` : undefined,
-      contentUrl: v.src,
-      embedUrl: v.src,
-      publisher: { "@type": "Organization", name: "CDPL" },
-    }));
-    return JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      itemListElement: items,
-    });
-  }, [videos]);
 
   const GAP = 16;
 
@@ -551,10 +528,6 @@ export default function JobsLiveJobsTestimonialSection(
         </AnimatePresence>
       </ClientPortal>
 
-      {/* Structured data */}
-      <Script id="cdpl-videoobject-jsonld" type="application/ld+json">
-        {jsonLd}
-      </Script>
     </section>
   );
 }

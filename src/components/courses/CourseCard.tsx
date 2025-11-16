@@ -39,12 +39,8 @@ export default function CourseCard({
     const duration = course.duration ?? "6–8 weeks";
     const students = course.students ?? "2,000+ students enrolled";
     const level = course.level ?? "Beginner";
-    const priceLabel = course.price ?? "";
 
-    const currency =
-        priceLabel.includes("₹") ? "INR" :
-            priceLabel.includes("$") ? "USD" :
-                priceLabel.includes("€") ? "EUR" : "USD";
+
 
     const { headerGradient, accentBorder, accentText, primaryBtn, primaryBtnHover } =
         getAccentsFromClass(categoryBgColor);
@@ -60,8 +56,7 @@ export default function CourseCard({
                 "transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(0,0,0,0.10)]",
                 "flex flex-col",
             ].join(" ")}
-            itemScope
-            itemType="https://schema.org/Course"
+
             aria-label={`${course.title} course`}
         >
             {/* Header band */}
@@ -81,8 +76,7 @@ export default function CourseCard({
                     <span
                         className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-white text-slate-900 shadow-sm"
                         itemProp="aggregateRating"
-                        itemScope
-                        itemType="https://schema.org/AggregateRating"
+
                         aria-label={`Rating ${rating} out of 5`}
                     >
                         <Star className="h-3.5 w-3.5 text-amber-500 fill-amber-500" aria-hidden />
@@ -151,14 +145,8 @@ export default function CourseCard({
                 </div>
 
                 {/* CTAs pinned to the bottom */}
-                <div className="mt-auto pt-5 flex flex-col gap-3" itemProp="offers" itemScope itemType="https://schema.org/Offer">
-                    {priceLabel && (
-                        <>
-                            <span className="sr-only" itemProp="price">{priceLabel}</span>
-                            <meta itemProp="priceCurrency" content={currency} />
-                            <link itemProp="availability" href="https://schema.org/InStock" />
-                        </>
-                    )}
+                <div className="mt-auto pt-5 flex flex-col gap-3">
+
 
                     <Link
                         href={href ?? "#"}

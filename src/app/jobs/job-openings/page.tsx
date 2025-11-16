@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
+import { generateSEO } from "@/lib/seo";
 
 // ---- Types ---------------------------------------------------------------
 export type Skill = { skill_name: string; years?: string | number | null; level?: string | null };
@@ -269,146 +269,13 @@ const JobOpeningsJobBrowser = dynamic(
 export default async function JobSharePage() {
   const initial = await getJobsServer({ page: 1, size: 20 });
 
-  // Breadcrumb Schema
-  const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Home", url: "/" },
-    { name: "Jobs", url: "/jobs/job-openings" },
-    { name: "Job Openings", url: "/jobs/job-openings" },
-  ]);
 
-  // CollectionPage Schema
-  const collectionPageSchema = {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "@id": "https://www.cinutedigital.com/jobs/job-openings#collectionpage",
-    url: "https://www.cinutedigital.com/jobs/job-openings",
-    name: "Job Openings",
-    description: "Browse and apply to latest job openings curated by CDPL",
-    inLanguage: "en-IN",
-  };
 
-  // JobPosting ItemList Schema (using JobSummary type)
-  const jobListSchema = initial?.data?.job && initial.data.job.length > 0 ? {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "@id": "https://www.cinutedigital.com/jobs/job-openings#itemlist",
-    name: "CDPL Partner Job Openings",
-    description: "Latest job openings available through CDPL's partnership with OptimHire",
-    numberOfItems: initial.data.total_count || initial.data.job.length,
-    itemListElement: initial.data.job.slice(0, 10).map((job, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      item: {
-        "@type": "JobPosting",
-        "@id": `https://www.cinutedigital.com/jobs/job-openings#job-${job.job_id}`,
-        title: job.job_title,
-        description: job.description || `${job.job_title} position`,
-        datePosted: job.job_created_at || new Date().toISOString(),
-        hiringOrganization: {
-          "@type": "Organization",
-          name: "CDPL Partner Companies",
-        },
-        employmentType: job.job_type || "FULL_TIME",
-        ...(job.location && {
-          jobLocation: {
-            "@type": "Place",
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: job.location,
-              addressCountry: "IN",
-            },
-          },
-        }),
-        ...(job.location_type && {
-          jobLocationType: job.location_type === "remote" ? "TELECOMMUTE" : undefined,
-        }),
-        ...(job.min_experience && job.max_experience && {
-          experienceRequirements: {
-            "@type": "OccupationalExperienceRequirements",
-            description: `${job.min_experience}-${job.max_experience} years`,
-          },
-        }),
-        ...(job.job_referral_url && {
-          directApply: true,
-          applicationContact: {
-            "@type": "ContactPoint",
-            url: job.job_referral_url,
-          },
-        }),
-      },
-    })),
-  } : null;
 
-  // FAQ Schema - NEW!
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "@id": "https://www.cinutedigital.com/jobs/job-openings#faq",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "How do I apply for jobs on CDPL job portal?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "To apply for jobs on CDPL job portal, browse the available positions, click on a job that interests you, and submit your application with your resume. The portal is powered by OptimHire, our recruitment partner.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "What types of jobs are available through CDPL?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "CDPL offers various tech job opportunities including QA/Software Testing, Automation, Data Science, Full-Stack Development, DevOps, and other IT roles from partner companies.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Is the CDPL job portal free to use?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes, the CDPL job portal is completely free for job seekers. You can browse jobs, apply, and upload your resume at no cost.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Can I apply for remote jobs through CDPL?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes, the job portal includes remote, onsite, and hybrid positions. You can filter jobs by location type to find remote opportunities.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Who is OptimHire and how does it work with CDPL?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "OptimHire is CDPL's recruitment partner that powers the job portal. It's a third-party recruitment platform that helps connect CDPL learners and job seekers with opportunities from partner companies.",
-        },
-      },
-    ],
-  };
 
   return (
     <>
-      {/* Structured Data - Multiple Schemas */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionPageSchema) }}
-      />
-      {jobListSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jobListSchema) }}
-        />
-      )}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+    
 
       {/* Main Content - Semantic HTML Structure */}
       <main 

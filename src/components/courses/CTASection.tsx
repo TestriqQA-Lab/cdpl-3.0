@@ -8,8 +8,7 @@ export default function CTASection() {
         <section
             className="relative overflow-hidden py-20 px-4 bg-slate-950 text-white"
             aria-label="Call to action"
-            itemScope
-            itemType="https://schema.org/WebSite"
+
         >
             {/* Animated background */}
             <div
@@ -85,9 +84,6 @@ export default function CTASection() {
                     </Link>
                 </div>
 
-                {/* Structured data helpers */}
-                <meta itemProp="name" content="Cinute Digital — Tech Courses & Certifications" />
-                <link itemProp="url" href="https://example.com/" />
                 <p className="sr-only">
                     Explore online courses with certification, live mentorship, portfolio projects, and job-focused training.
                 </p>

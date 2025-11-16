@@ -13,42 +13,9 @@ import {
   LineChart,
 } from "lucide-react";
 import Link from "next/link";
-import { useMemo } from "react";
 
 export default function WhyGenAIProgram() {
-  // JSON-LD for SEO (Course schema)
-  const courseJsonLd = useMemo(
-    () =>
-      JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Course",
-        name: "Deep Learning, NLP & Generative AI with Python",
-        description:
-          "Advanced hands-on program covering neural networks, NLP, transformers, LLMs, and generative AI workflows. Build, fine-tune, and deploy production-grade models with Python.",
-        provider: {
-          "@type": "Organization",
-          name: "Cinute Digital Pvt. Ltd.",
-          sameAs: "https://example.com",
-        },
-        educationalCredentialAwarded: "Certificate of Completion",
-        timeRequired: "PT55H",
-        occupationalCredentialAwarded: "Job-ready portfolio projects",
-        inLanguage: "en",
-        keywords: [
-          "Deep Learning course",
-          "NLP course",
-          "Generative AI course",
-          "Python AI course",
-          "LLM fine-tuning",
-          "Transformer models",
-          "MLOps",
-          "AI career",
-          "prompt engineering",
-          "model deployment",
-        ],
-      }),
-    []
-  );
+
 
   const featureChips = [
     { label: "55 Hours", color: "bg-indigo-600 text-white" },
@@ -275,11 +242,6 @@ export default function WhyGenAIProgram() {
         </div>
       </div>
 
-      {/* JSON-LD for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: courseJsonLd }}
-      />
     </section>
   );
 }

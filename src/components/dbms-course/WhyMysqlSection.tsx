@@ -23,20 +23,7 @@ const benefits: Benefit[] = [
 ];
 
 export default function WhyMysqlSection() {
-  // SEO: structured data (benefits list)
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Why Learn MySQL',
-    description:
-      'Reasons to master MySQL: platform coverage, performance, security & compliance, scalability, ACID support, and market demand.',
-    itemListElement: benefits.map((b, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: b.title,
-      description: b.description,
-    })),
-  };
+
 
   return (
     <section id="why-mysql" aria-labelledby="why-mysql-heading" className="relative py-8 md:py-10 bg-white">
@@ -96,11 +83,6 @@ export default function WhyMysqlSection() {
         </div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

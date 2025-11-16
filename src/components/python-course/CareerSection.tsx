@@ -29,28 +29,6 @@ const ACCENTS = [
 ];
 
 export default function CareerSection() {
-  // SEO JSON-LD
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Python Careers & Job Roles",
-    description:
-      "Explore high-demand Python career paths including Data Science, Machine Learning, Backend Development, Automation, and DevOps.",
-    itemListElement: JOBS.map((title, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: {
-        "@type": "Occupation",
-        name: title,
-        industry: "Software / Technology",
-        skills:
-          "Python, Data Structures, Algorithms, APIs, Databases, Cloud, CI/CD, Testing, ML/AI",
-        experienceRequirements: "0–5 years",
-      },
-    })),
-    keywords:
-      "python jobs, data scientist roles, ml engineer, backend developer, django developer, automation engineer, devops engineer, data analyst",
-  };
 
   return (
     <section
@@ -155,11 +133,6 @@ export default function CareerSection() {
         </div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

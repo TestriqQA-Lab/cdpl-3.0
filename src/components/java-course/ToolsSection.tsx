@@ -229,32 +229,6 @@ export default function ToolsSection() {
         </div>
       </div>
 
-      {/* Structured data for SEO (ItemList of tools) */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            name: "Developer Tools for Java Program",
-            itemListElement: TOOLS.map((t, index) => ({
-              "@type": "ListItem",
-              position: index + 1,
-              item: {
-                "@type": "SoftwareApplication",
-                name: t.name,
-                applicationCategory: "DeveloperTool",
-                operatingSystem: "Cross-platform",
-                programmingLanguage: "Java",
-                keywords:
-                  "Java, Spring Boot, Hibernate, Maven, Docker, AWS, Git, Postman, IntelliJ IDEA",
-              },
-            })),
-            numberOfItems: TOOLS.length,
-            keywords: keywords,
-          }),
-        }}
-      />
 
       {/* Accessible helpers for crawlers & screen readers */}
       <h1 className="sr-only">{title}</h1>

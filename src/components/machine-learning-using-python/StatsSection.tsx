@@ -79,34 +79,12 @@ export default function StatsSection() {
     },
   ];
 
-  /** --------- JSON-LD (SEO): ItemList describing the ML stats ---------- */
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Machine Learning & AI Career Statistics in India",
-    description:
-      "Key statistics for Machine Learning and AI careers in India: market growth, ML engineer salary for freshers, job vacancies, years of expertise, job satisfaction and India's global market share in machine learning.",
-    itemListElement: stats.map((s, idx) => ({
-      "@type": "ListItem",
-      position: idx + 1,
-      name: s.label,
-      description: `${s.label} - ${s.subtext}`,
-    })),
-    keywords:
-      "Machine Learning Course in India, Machine Learning Engineer Salary, ML Engineer Jobs for Freshers, Artificial Intelligence Training, Data Science and Machine Learning Course, Python Machine Learning Certification, AI Engineer Career, Deep Learning Training, Job-Oriented Machine Learning Program, Online and Classroom ML Training in India",
-  };
 
   return (
     <section
       className="py-16 md:py-20 bg-gradient-to-b from-white to-slate-50"
       aria-labelledby="stats-heading"
     >
-      {/* SEO JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <header className="text-center mb-12 md:mb-16">

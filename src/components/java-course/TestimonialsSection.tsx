@@ -28,69 +28,16 @@ type Props = {
 // ---------- Default Content (Java Programming page) ----------
 const DEFAULT_TITLE = "Java Programming";
 
-const DEFAULT_TESTIMONIALS: Testimonial[] = [
-  {
-    name: "Samar Verma",
-    role: "Backend Developer (Spring Boot)",
-    rating: 5,
-    text:
-      "Crystal-clear OOP foundations, collections, and concurrency. The Spring Boot labs made REST APIs, JPA, and validation feel straightforward and production-ready.",
-  },
-  {
-    name: "Ananya Gupta",
-    role: "SDE 1 (Microservices)",
-    rating: 5,
-    text:
-      "Loved the microservices module—circuit breakers, Feign clients, and centralized config. CI/CD and Docker sessions helped me deploy confidently.",
-  },
-  {
-    name: "Rahul Kulkarni",
-    role: "Android Engineer (Kotlin + Java interop)",
-    rating: 5,
-    text:
-      "Practical focus on JVM basics, memory model, and performance tuning. I finally understood GC logs and optimized cold starts on real apps.",
-  },
-  {
-    name: "Nisha Reddy",
-    role: "DSA + Interview Prep",
-    rating: 5,
-    text:
-      "Daily coding patterns with clean Java templates for arrays, graphs, and DP. Mock interviews improved my problem-solving speed by a mile.",
-  },
-];
-
-
 // ---------- Component ----------
 export default function TestimonialsSection({
   id = "testimonials",
   title = DEFAULT_TITLE,
-  items = DEFAULT_TESTIMONIALS,
   ctas = [
     { label: "Enroll now", href: "/enroll", variant: "primary" },
     { label: "Download syllabus", href: "/java-programming/syllabus", variant: "secondary" },
   ],
 }: Props) {
-  // SEO: JSON-LD (Review + AggregateRating)
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: `${title} — Job-Ready Course`,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: `${items.length}`,
-      bestRating: "5",
-      worstRating: "1",
-    },
-    review: items.map((t) => ({
-      "@type": "Review",
-      reviewBody: t.text,
-      reviewRating: { "@type": "Rating", ratingValue: String(t.rating ?? 5), bestRating: "5" },
-      author: { "@type": "Person", name: t.name },
-    })),
-    keywords:
-      "Java programming course reviews, Spring Boot training testimonials, best Java course India, Java interview preparation, microservices with Spring Cloud feedback, Java DSA bootcamp, Hibernate JPA course review, JVM performance tuning, Docker CI/CD for Java",
-  } as const;
+
 
   return (
     <section id={id} aria-labelledby={`${id}-heading`} className="relative py-12 sm:py-16 md:py-20">
@@ -147,8 +94,6 @@ export default function TestimonialsSection({
         )}
       </div>
 
-      {/* JSON-LD for SEO */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

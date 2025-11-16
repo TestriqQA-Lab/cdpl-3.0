@@ -121,8 +121,6 @@ function RevealCoursesGrid({
             key={course.id}
             className="h-full"
             itemProp="itemListElement"
-            itemScope
-            itemType="https://schema.org/ListItem"
           >
             <meta itemProp="position" content={String(idx + 1)} />
             <CourseCard course={course} categoryBgColor={categoryBgColor} />
@@ -151,8 +149,7 @@ function RevealCoursesGrid({
                   key={course.id}
                   className="h-full"
                   itemProp="itemListElement"
-                  itemScope
-                  itemType="https://schema.org/ListItem"
+
                 >
                   <meta itemProp="position" content={String(visibleCount + idx + 1)} />
                   <CourseCard course={course} categoryBgColor={categoryBgColor} />
@@ -211,8 +208,7 @@ export default function FilterableCourseSections() {
       {/* Categories Overview */}
       <section
         className="py-16 px-4 bg-white"
-        itemScope
-        itemType="https://schema.org/ItemList"
+
         aria-label="Course Categories Overview"
       >
         <div className="max-w-7xl mx-auto">
@@ -226,7 +222,6 @@ export default function FilterableCourseSections() {
             </p>
           </div>
 
-          <meta itemProp="itemListOrder" content="http://schema.org/ItemListOrderAscending" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {coursesData.map((category, idx) => (
               <div
@@ -234,8 +229,7 @@ export default function FilterableCourseSections() {
                 id={category.id}
                 className="h-full"
                 itemProp="itemListElement"
-                itemScope
-                itemType="https://schema.org/ListItem"
+
               >
                 <meta itemProp="position" content={String(idx + 1)} />
                 <CategoryCard category={category as unknown as UICategory} />
@@ -291,8 +285,8 @@ export default function FilterableCourseSections() {
                 </div>
 
                 {/* Courses grid with reveal */}
-                <div itemScope itemType="https://schema.org/ItemList">
-                  <meta itemProp="itemListOrder" content="http://schema.org/ItemListOrderAscending" />
+                <div>
+
                   <RevealCoursesGrid
                     courses={category.courses as UICourse[]}
                     categoryBgColor={textToBg(category.color)}

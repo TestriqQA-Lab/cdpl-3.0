@@ -204,30 +204,6 @@ export default function WhoShouldEnroll() {
         </div>
       </div>
 
-      {/* JSON-LD structured data for richer snippets */}
-      <script
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: structured data for SEO
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            name: "Who Should Enroll — Data Science & Machine Learning Course",
-            itemListElement: PERSONAS.map((p, i) => ({
-              "@type": "ListItem",
-              position: i + 1,
-              item: {
-                "@type": "Audience",
-                audienceType: p.title,
-                description: p.blurb,
-                educationalRole: "student",
-                keywords:
-                  "data science course audience, who should enroll, python beginners, working professionals upskill, intermediate machine learning, career switch to data science",
-              },
-            })),
-          }),
-        }}
-      />
     </section>
   );
 }

@@ -73,23 +73,6 @@ export default function WhoShouldEnroll() {
   const seoKeywords =
     "who should enroll prompt engineering course, generative ai training audience, content marketing ai automation, developer llm prompting, career switch to ai, structured outputs json, rag evaluation guardrails";
 
-  // JSON-LD Audience list for richer snippets
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Who Should Enroll — Prompt Engineering with Gen AI",
-    itemListElement: PERSONAS.map((p, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: {
-        "@type": "Audience",
-        audienceType: p.title,
-        description: p.blurb,
-        keywords:
-          "prompt engineering audience, beginners, content marketing professionals, developers engineers, career switchers",
-      },
-    })),
-  };
 
   return (
     <section
@@ -212,11 +195,6 @@ export default function WhoShouldEnroll() {
         </div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

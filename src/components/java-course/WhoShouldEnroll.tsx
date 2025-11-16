@@ -189,28 +189,6 @@ export default function WhoShouldEnroll() {
         </div>
       </div>
 
-      {/* Structured data for SEO (EducationalAudience) */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "EducationalAudience",
-            educationalRole: "Learner",
-            audienceType: [
-              "Students & Freshers",
-              "Career Switchers",
-              "Entrepreneurs",
-              "IT Professionals",
-            ],
-            description:
-              "Java course for beginners and working professionals—covering Core Java, Spring Boot, REST APIs, Microservices, Docker, Kubernetes and Cloud fundamentals with portfolio projects and interview preparation.",
-            keywords:
-              "Java course audience, Java for beginners, Spring Boot upskilling, microservices training, Java backend developer",
-            provider: { "@type": "Organization", name: "Cinute Digital Pvt. Ltd." },
-          }),
-        }}
-      />
 
       {/* Accessible helpers */}
       <h1 className="sr-only">{title}</h1>

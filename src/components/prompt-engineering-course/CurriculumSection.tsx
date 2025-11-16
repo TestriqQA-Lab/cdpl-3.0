@@ -90,19 +90,6 @@ export default function CurriculumSection() {
   const keywords =
     "prompt engineering syllabus, generative ai course curriculum, LLM evolution, transformer architecture, embeddings and context window, computer vision LIMs, TTS STT tools, responsible AI governance, capstone certification";
 
-  // JSON-LD (ItemList) for modules
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Prompt Engineering with Gen AI — Course Curriculum",
-    itemListElement: MODULES.map((m, idx) => ({
-      "@type": "ListItem",
-      position: idx + 1,
-      item: { "@type": "Course", name: m.title, description: m.outcome },
-    })),
-    numberOfItems: MODULES.length,
-    keywords,
-  };
 
   return (
     <section id="curriculum" aria-labelledby="curriculum-heading" className="relative overflow-hidden py-4 md:py-6 bg-white">
@@ -220,11 +207,6 @@ export default function CurriculumSection() {
         </p>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

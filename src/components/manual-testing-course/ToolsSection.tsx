@@ -149,23 +149,6 @@ const ToolsSection: FC = () => {
         return TOOL_DATA.filter((t) => t.category === active);
     }, [active]);
 
-    // JSON-LD for SEO: ItemList of tools
-    const jsonLd = useMemo(() => {
-        const items = TOOL_DATA.map((t, idx) => ({
-            "@type": "ListItem",
-            position: idx + 1,
-            name: `${t.name} — ${t.tagline}`,
-            description: t.desc,
-        }));
-        return {
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            name: "Top QA & Software Testing Tools You’ll Master",
-            itemListOrder: "http://schema.org/ItemListOrderAscending",
-            itemListElement: items,
-        } as const;
-    }, []);
-
     return (
         <section id="tools" aria-labelledby="tools-heading" className="py-2 md:py-5 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -196,8 +179,6 @@ const ToolsSection: FC = () => {
                     ))}
                 </div>
 
-                {/* SEO JSON-LD */}
-                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             </div>
         </section>
     );

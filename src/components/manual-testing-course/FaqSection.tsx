@@ -265,18 +265,7 @@ export default function FaqSection() {
     });
   }, [query, activeCat]);
 
-  const jsonLd = useMemo(() => {
-    const items = filtered.map((f) => ({
-      "@type": "Question",
-      name: f.question,
-      acceptedAnswer: { "@type": "Answer", text: f.answer },
-    }));
-    return {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: items,
-    };
-  }, [filtered]);
+
 
   return (
     <section className="py-10 md:py-10 bg-white" id="faq">
@@ -393,11 +382,7 @@ export default function FaqSection() {
         </div>
       </div>
 
-      {/* JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+
     </section>
   );
 }

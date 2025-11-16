@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 
 import React, { type ReactNode, type ReactElement, useEffect, useMemo, useRef, useState } from "react";
-import Script from "next/script";
+
 import Image from "next/image";
 import Link from "next/link";
 import { EnrollPopup, type EnrollFormData } from "@/components/EnrollForms";
@@ -494,35 +494,7 @@ export default function HeroManualTesting() {
                 </div>
             </div>
 
-            {/* JSON-LD */}
-            <Script id="course-json-ld" type="application/ld+json">
-                {JSON.stringify({
-                    "@context": "https://schema.org",
-                    "@type": "Course",
-                    name: "Manual Testing Course with ISTQB Prep",
-                    description:
-                        "Job-oriented Manual Testing training with live classes, ISTQB Foundation preparation, real projects, and 100% placement support.",
-                    provider: {
-                        "@type": "Organization",
-                        name: "Your Ed-Tech Institute",
-                        sameAs: "https://www.example.com",
-                    },
-                    hasCourseInstance: {
-                        "@type": "CourseInstance",
-                        courseMode: ["Online", "InPerson"],
-                        startDate: "2025-11-15",
-                        location: { "@type": "Place", name: "Mumbai • Pune • Bengaluru" },
-                    },
-                    educationalCredentialAwarded: "ISTQB Foundation (prep included)",
-                    offers: {
-                        "@type": "Offer",
-                        url: "https://www.example.com/manual-testing",
-                        availability: "https://schema.org/InStock",
-                        price: "0",
-                        priceCurrency: "INR",
-                    },
-                })}
-            </Script>
+
         </section>
     );
 }

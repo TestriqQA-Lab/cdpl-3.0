@@ -180,37 +180,6 @@ export default function StatsSection() {
   const seoKeywords =
     "advanced data analytics course, business analytics training, python sql bi ml, job assistance data analyst, hands-on analytics program, dashboard reporting, power bi tableau excel";
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Advanced Data Analytics — Program Highlights",
-    itemListElement: STATS.map((s, i) => {
-      let description: string;
-      switch (s.kind) {
-        case "ratio":
-          description = `${s.leftTarget}:${s.rightTarget} — ${s.label}${s.hint ? ` (${s.hint})` : ""}`;
-          break;
-        case "single":
-          description = `${s.target}${s.suffix ? ` ${s.suffix}` : ""} — ${s.label}${s.hint ? ` (${s.hint})` : ""}`;
-          break;
-        case "text":
-          description = `${s.value} — ${s.label}${s.hint ? ` (${s.hint})` : ""}`;
-          break;
-      }
-      return {
-        "@type": "ListItem",
-        position: i + 1,
-        item: {
-          "@type": "Thing",
-          name: s.label,
-          description,
-        },
-      };
-    }),
-    keywords:
-      "advanced data analytics highlights, analytics course benefits, data analyst training features, job ready analytics",
-  };
-
   return (
     <section
       ref={sectionRef}
@@ -313,8 +282,6 @@ export default function StatsSection() {
         </div>
       </div>
 
-      {/* JSON-LD */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

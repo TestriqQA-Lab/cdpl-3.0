@@ -108,19 +108,6 @@ export default function ToolsSection() {
   const keywords =
     "python pandas numpy scikit-learn matplotlib seaborn jupyter sql, data science tools, machine learning stack, analytics technologies";
 
-  // JSON-LD: ItemList of tools
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Tools & Technologies for ML and Data Science",
-    itemListElement: TOOLS.map((t, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: { "@type": "SoftwareApplication", name: t.name, description: t.desc },
-    })),
-    numberOfItems: TOOLS.length,
-    keywords,
-  };
 
   return (
     <section id="tools" aria-labelledby="tools-heading" className="relative overflow-hidden py-8 md:py-10 bg-white">
@@ -211,11 +198,6 @@ export default function ToolsSection() {
         </p>
       </div>
 
-      {/* JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

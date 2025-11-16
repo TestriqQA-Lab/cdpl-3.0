@@ -88,22 +88,7 @@ const AUDIENCE: Audience[] = [
 ];
 
 export default function WhoShouldEnrollSection() {
-    // SEO: structured data for target personas
-    const jsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'ItemList',
-        name: 'Who Should Enroll — Digital Marketing & Analytics Mentorship',
-        description:
-            'Ideal learners include career switchers, fresh graduates, working professionals, founders, product teams, developers, and data-focused marketers.',
-        itemListElement: AUDIENCE.map((a, i) => ({
-            '@type': 'ListItem',
-            position: i + 1,
-            name: a.title,
-            description: a.description,
-        })),
-        keywords:
-            'who should enroll digital marketing course, best digital marketing mentorship, GA4 course audience, performance marketing for beginners, analytics training for professionals',
-    };
+
 
     return (
         <section
@@ -157,11 +142,6 @@ export default function WhoShouldEnrollSection() {
                 </p>
             </div>
 
-            {/* JSON-LD for search engines */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
         </section>
     );
 }

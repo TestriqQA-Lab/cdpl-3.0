@@ -1,6 +1,5 @@
 // SERVER COMPONENT — Live Jobs (CDPL)
 import type { Metadata } from "next";
-import Script from "next/script";
 import dynamic from "next/dynamic";
 import { JOBS } from "@/lib/jobsData";
 import type { Job } from "@/lib/jobsData";
@@ -86,34 +85,7 @@ const JOBS_WITH_BANNER: Job[] = JOBS.map((j) => ({
 }));
 
 export default function Page() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "CDPL Live Jobs",
-    itemListElement: JOBS_WITH_BANNER.map((j, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: {
-        "@type": "JobPosting",
-        title: j.title,
-        hiringOrganization: { "@type": "Organization", name: j.company },
-        employmentType: j.type,
-        jobLocation: {
-          "@type": "Place",
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: j.location,
-            addressCountry: "IN",
-          },
-        },
-        datePosted: j.postedOn,
-        validThrough: j.eventDate ?? j.postedOn,
-        description: (j.highlights ?? []).join(" • "),
-        applicantLocationRequirements: "IN",
-        directApply: Boolean(j.applyEmail || j.applyLink),
-      },
-    })),
-  };
+
 
   return (
     <main className="bg-white text-slate-900 relative">
@@ -124,11 +96,6 @@ export default function Page() {
         />
       </div>
 
-      <Script
-        id="cdpl-live-jobs-jsonld"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
 
       <JobsLiveJobsJobsHeroSection />
       <JobsLiveJobsJobsTickerSection jobs={JOBS_WITH_BANNER} />

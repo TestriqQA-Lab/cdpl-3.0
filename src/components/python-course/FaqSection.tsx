@@ -45,18 +45,7 @@ const faqs: FAQ[] = [
 ];
 
 export default function FaqSection() {
-  // JSON-LD for rich results
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-    keywords:
-      "Python course FAQ, Python certificate, placement assistance, live classes, recordings, Python portfolio projects",
-  };
+
 
   return (
     <section
@@ -151,11 +140,6 @@ export default function FaqSection() {
         </p>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

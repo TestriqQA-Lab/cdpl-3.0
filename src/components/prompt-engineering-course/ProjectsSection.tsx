@@ -64,21 +64,6 @@ export default function ProjectsSection() {
   const seoKeywords =
     "prompt engineering projects, gen ai portfolio, code assistant bot, content generator prompt patterns, rag citations guardrails, structured output json prompts, llm evaluation, image generation prompts";
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Prompt Engineering — Projects You’ll Build",
-    itemListElement: PROJECTS.map((p, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: {
-        "@type": "CreativeWork",
-        name: p.title,
-        description: p.desc,
-        keywords: "prompting, gen ai, rag, guardrails, evaluation, structured outputs",
-      },
-    })),
-  };
 
   return (
     <section id="projects" aria-labelledby="projects-heading" className="relative py-12 md:py-18 bg-white">
@@ -182,8 +167,6 @@ export default function ProjectsSection() {
         </div>
       </div>
 
-      {/* JSON-LD structured data */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

@@ -121,25 +121,7 @@ export default function FaqSection() {
   const keywords =
     "Java course FAQ, Spring Boot FAQ, Java certification, placement assistance, Java developer tools, microservices training questions";
 
-  // Helper: turn a ReactNode (JSX) into a plain string for JSON-LD
-  function renderToPlainText(node: React.ReactNode): string {
-    if (typeof node === "string") return node;
-    if (typeof node === "number") return String(node);
-    if (node === null || node === undefined) return "";
 
-    if (React.isValidElement(node)) {
-      // Safely extract children from props
-      const props = node.props as { children?: React.ReactNode };
-      const children = React.Children.toArray(props.children);
-      return children.map(renderToPlainText).join("");
-    }
-
-    if (Array.isArray(node)) {
-      return node.map(renderToPlainText).join("");
-    }
-
-    return "";
-  }
 
   return (
     <section
@@ -243,25 +225,6 @@ export default function FaqSection() {
         </div>
       </div>
 
-      {/* Structured data for SEO (FAQPage) */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: FAQS.map((f) => ({
-              "@type": "Question",
-              name: f.q,
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: renderToPlainText(f.a),
-              },
-            })),
-            keywords: keywords,
-          }),
-        }}
-      />
 
       {/* Accessible helpers */}
       <h1 className="sr-only">{title}</h1>

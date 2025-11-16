@@ -7,19 +7,7 @@ import LeadForm from "../CourseLeadForm";
 import { ChevronRight, Home } from "lucide-react";
 
 export default function HeroSection() {
-    // JSON-LD for SEO (Course)
-    const jsonLd = {
-        "@context": "https://schema.org",
-        "@type": "Course",
-        name: "Master Program in Deep Learning, NLP & Generative AI",
-        description:
-            "Industry-ready training covering neural networks, CNNs, RNNs/LSTMs, Transformers, NLP pipelines, prompt engineering, fine-tuning, vector databases, and model deployment. Includes live projects, mentor-led sessions, and placement assistance.",
-        provider: { "@type": "Organization", name: "Cinute Digital Pvt. Ltd. (CDPL)" },
-        educationalCredentialAwarded: "CDPL Verified Certificate (QR-enabled)",
-        timeRequired: "PT55H",
-        keywords:
-            "Generative AI course Mumbai, Deep Learning training, NLP with Transformers, Prompt Engineering, LLM fine-tuning, MLOps, AI jobs India",
-    };
+
 
     const breadcrumbs = [
         { label: "Home", href: "/" },
@@ -175,11 +163,6 @@ export default function HeroSection() {
                 </div>
             </div>
 
-            {/* JSON-LD */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
         </section>
     );
 }

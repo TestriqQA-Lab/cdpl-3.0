@@ -1,7 +1,7 @@
 // components/sections/StatsSection.tsx
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /** ---------- Types ---------- */
 type Stat = {
@@ -155,30 +155,7 @@ function CountUp({
 
 /** ---------- Component ---------- */
 export default function StatsSection() {
-  // JSON-LD
-  const jsonLd = useMemo(
-    () => ({
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      name: "Python Career & Market Stats",
-      description:
-        "Statistics from the course brochure summarizing Python job demand, salary, satisfaction, and market growth.",
-      itemListElement: STATS.map((s, i) => ({
-        "@type": "ListItem",
-        position: i + 1,
-        name: s.label,
-        additionalProperty: {
-          "@type": "PropertyValue",
-          name: s.label,
-          value: s.value,
-          description: s.caption,
-        },
-      })),
-      keywords:
-        "Python jobs India, Python salary LPA, market growth, job satisfaction, global share",
-    }),
-    []
-  );
+
 
   const sectionRef = useRef<HTMLElement | null>(null);
 
@@ -253,11 +230,6 @@ export default function StatsSection() {
         </p>
       </div>
 
-      {/* JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

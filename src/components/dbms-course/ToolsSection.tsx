@@ -22,18 +22,7 @@ const accents = [
 ];
 
 export default function ToolsSection() {
-    const jsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'ItemList',
-        name: 'MySQL Tooling & Ecosystem',
-        description:
-            'Enterprise MySQL toolkit: Workbench, DBeaver, phpMyAdmin, MySQL Shell, replication and backup utilities used by DBAs worldwide.',
-        itemListElement: tools.map((t, i) => ({
-            '@type': 'ListItem',
-            position: i + 1,
-            name: t.name,
-        })),
-    };
+
 
     return (
         <section id="tools" aria-labelledby="tools-heading" className="relative py-8 sm:py-10 bg-white">
@@ -103,10 +92,6 @@ export default function ToolsSection() {
                 </p>
             </div>
 
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
         </section>
     );
 }

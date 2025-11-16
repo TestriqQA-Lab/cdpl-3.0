@@ -116,35 +116,9 @@ const Dot = ({ className = "bg-indigo-600" }: { className?: string }) => (
 );
 
 export default function ComparisonSection({
-  providerName = "Your Ed-Tech Institute",
-  showSchema = true,
   className = "",
 }: ComparisonSectionProps) {
-  const schema = React.useMemo(
-    () =>
-      JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Course",
-        name: "Manual Testing Course with Placement Support",
-        description:
-          "Job-ready QA training: ISTQB-aligned curriculum, live projects, interview prep, and hiring support to become a Software Tester.",
-        provider: {
-          "@type": "Organization",
-          name: providerName,
-        },
-        offers: {
-          "@type": "Offer",
-          priceCurrency: "INR",
-          availability: "https://schema.org/InStock",
-        },
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: "4.8",
-          reviewCount: "5000",
-        },
-      }),
-    [providerName]
-  );
+
 
   return (
     <section className={`py-10 md:py-20 bg-white ${className}`} id="comparison" aria-labelledby="comparison-heading">
@@ -323,12 +297,7 @@ export default function ComparisonSection({
         </div>
 
         {/* Structured Data for SEO */}
-        {showSchema && (
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: schema }}
-          />
-        )}
+
       </div>
     </section>
   );

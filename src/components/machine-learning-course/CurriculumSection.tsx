@@ -119,24 +119,6 @@ export default function CurriculumSection() {
   const keywords =
     "data science curriculum, Python programming syllabus, pandas course, NumPy training, Matplotlib Seaborn visualization, statistics and probability, sampling and hypothesis testing, linear regression, logistic regression, SVM, KNN, decision trees, random forest, cross-validation, ROC AUC, end-to-end ML project";
 
-  // JSON-LD (ItemList) for modules
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Machine Learning & Data Science Curriculum",
-    itemListElement: MODULES.map((m, idx) => ({
-      "@type": "ListItem",
-      position: idx + 1,
-      item: {
-        "@type": "Course",
-        name: m.title,
-        description: m.outcome,
-      },
-    })),
-    numberOfItems: MODULES.length,
-    keywords,
-  };
-
   return (
     <section
       id="curriculum"
@@ -262,11 +244,6 @@ export default function CurriculumSection() {
         </p>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

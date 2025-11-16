@@ -4,25 +4,9 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { useMemo } from "react";
 
 export default function JobsLiveJobsJobsHeroSection() {
-  const jsonLd = useMemo(
-    () => ({
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      name: "Cinute Digital Pvt Ltd (CDPL)",
-      description:
-        "CDPL posts curated jobs and internships to help students and alumni get placed across QA Automation, Data Science, Full-Stack, and DevOps.",
-      url: "https://cdpl.example",
-      department: {
-        "@type": "EducationalOrganization",
-        name: "CDPL Mentorship & Placements",
-      },
-      areaServed: "IN",
-    }),
-    []
-  );
+
 
   return (
     <section aria-label="CDPL jobs hero" className="bg-white text-slate-900">
@@ -173,8 +157,6 @@ export default function JobsLiveJobsJobsHeroSection() {
         </div>
       </div>
 
-      {/* SEO JSON-LD */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

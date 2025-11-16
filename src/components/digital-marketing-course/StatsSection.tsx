@@ -88,33 +88,7 @@ export default function StatsSection() {
   // - Global jobs: “141,000+ Digital marketing jobs are available worldwide” (page 6)
   // :contentReference[oaicite:1]{index=1}
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Digital Marketing Career Highlights",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Global digital marketing market by 2028",
-        item: { "@type": "Thing", name: "$671.86 Billion (by 2028)" },
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "High-income skills to learn",
-        item: { "@type": "Thing", name: "4th Most High-Income Skill (2024)" },
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: "Most in-demand skills",
-        item: { "@type": "Thing", name: "#3 Most In-Demand Skill (2023 Guide)" },
-      },
-    ],
-    keywords:
-      "digital marketing course, AI marketing, marketing analytics, GA4 training, performance marketing career, SEO course Mumbai",
-  };
+
 
   // Helpers for nice formatting
   const formatBillion = (n: number) =>
@@ -296,11 +270,6 @@ export default function StatsSection() {
         </p>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

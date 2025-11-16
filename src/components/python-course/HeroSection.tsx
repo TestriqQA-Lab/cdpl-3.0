@@ -55,16 +55,6 @@ const features = [
 ];
 
 export default function HeroSection() {
-    const jsonLd = {
-        "@context": "https://schema.org",
-        "@type": "Course",
-        name: "Master Program in Python Programming",
-        description:
-            "Industry-ready Python program: problem solving, data structures, OOP, APIs, testing, automation, data analysis, and deployment. Includes projects, certificate, and placement support.",
-        provider: { "@type": "Organization", name: "Cinute Digital Pvt. Ltd." },
-        keywords:
-            "Python course, Python training Mumbai, OOP, data structures, API automation, data analysis, pandas, SQL, portfolio projects",
-    };
 
     const breadcrumbs = [
         { label: "Home", href: "/" },
@@ -239,11 +229,6 @@ export default function HeroSection() {
                 </div>
             </div>
 
-            {/* JSON-LD for SEO */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
         </section>
     );
 }

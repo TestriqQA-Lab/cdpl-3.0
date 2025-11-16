@@ -4,7 +4,7 @@
 
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 /** ---------- Types ---------- */
 type NumericStat = {
@@ -219,30 +219,6 @@ export default function StatsSection() {
   const seoKeywords =
     "prompt engineering course, gen ai training, llm prompting patterns, guardrails and safety, chatgpt enterprise skills, ai automation workflows, llm evaluation, job assistance ai roles";
 
-  // JSON-LD (ItemList) built from the PDF-backed stats
-  const jsonLd = useMemo(
-    () => ({
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      name: "Prompt Engineering with Gen AI — Program Highlights",
-      itemListElement: STATS.map((s, i) => ({
-        "@type": "ListItem",
-        position: i + 1,
-        item: {
-          "@type": "Thing",
-          name: s.label,
-          description:
-            s.data.kind === "ratio"
-              ? `${s.data.left}${s.data.separator ?? " : "}${s.data.right} — ${s.label}${s.hint ? ` (${s.hint})` : ""}`
-              : `${s.data.value}${s.data.suffix ?? ""} — ${s.label}${s.hint ? ` (${s.hint})` : ""}`,
-        },
-      })),
-      keywords:
-        "prompt engineering highlights, gen ai course features, llm training benefits, chatgpt prompting, ai job readiness",
-    }),
-    []
-  );
-
   return (
     <section
       id="pe-stats"
@@ -345,8 +321,6 @@ export default function StatsSection() {
         </div>
       </div>
 
-      {/* JSON-LD structured data */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

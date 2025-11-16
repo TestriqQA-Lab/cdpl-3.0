@@ -139,22 +139,6 @@ export default function ProjectsSection() {
   const seoKeywords =
     "deep learning projects, nlp sentiment analysis, generative ai project, image recognition cnn, time series forecasting, customer segmentation clustering, end-to-end ml app, data science portfolio projects";
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Deep Learning, NLP & Generative AI — Projects You’ll Build",
-    itemListElement: PROJECTS.map((p, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: {
-        "@type": "CreativeWork",
-        name: p.title,
-        description: p.desc,
-        keywords:
-          "deep learning, nlp, generative ai, cnn, forecasting, clustering, mlops, portfolio projects",
-      },
-    })),
-  };
 
   return (
     <section
@@ -283,11 +267,6 @@ export default function ProjectsSection() {
         </div>
       </div>
 
-      {/* JSON-LD structured data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

@@ -129,33 +129,6 @@ export default function TestimonialsSection() {
         </div>
       </div>
 
-      {/* JSON-LD – Review + AggregateRating */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Course",
-            name: "Machine Learning & Data Science with Python — Hero Program",
-            aggregateRating: {
-              "@type": "AggregateRating",
-              ratingValue: aggregateRating.ratingValue,
-              reviewCount: aggregateRating.reviewCount,
-              bestRating: "5",
-              worstRating: "1",
-            },
-            review: TESTIMONIALS.map((t) => ({
-              "@type": "Review",
-              reviewRating: { "@type": "Rating", ratingValue: t.rating, bestRating: "5" },
-              author: { "@type": "Person", name: t.name },
-              reviewBody: t.quote,
-              name: `${t.name} — ${t.role}`,
-            })),
-            keywords:
-              "data science reviews, machine learning testimonials, python training rating, portfolio success, placement outcomes",
-          }),
-        }}
-      />
     </section>
   );
 }

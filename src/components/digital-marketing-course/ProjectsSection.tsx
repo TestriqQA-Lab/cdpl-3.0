@@ -35,24 +35,6 @@ const ACCENTS = [
 ];
 
 export default function ProjectsSection() {
-    // SEO JSON-LD
-    const jsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'ItemList',
-        name: 'Digital Marketing Hands-on Projects',
-        description:
-            'Portfolio-ready digital marketing projects: content calendars, paid ads setup, GA4, CRO, dashboards, attribution, automation, and full-funnel strategy.',
-        itemListOrder: 'http://schema.org/ItemListOrderAscending',
-        itemListElement: projects.map((p, i) => ({
-            '@type': 'ListItem',
-            position: i + 1,
-            name: p.title,
-            description: p.blurb ?? '',
-        })),
-        keywords:
-            'digital marketing projects, GA4 project, content calendar project, Facebook Ads setup, LinkedIn plan, CRO tests, Data Studio dashboard, attribution model, email automation',
-    };
-
     return (
         <section id="projects" aria-labelledby="projects-heading" className="relative py-8 md:py-10 bg-white">
             {/* subtle futuristic scaffold */}
@@ -149,11 +131,6 @@ export default function ProjectsSection() {
                 </div>
             </div>
 
-            {/* JSON-LD for SEO */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
         </section>
     );
 }
