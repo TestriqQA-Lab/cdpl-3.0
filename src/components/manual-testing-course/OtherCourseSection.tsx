@@ -181,8 +181,7 @@ const CourseCard = ({ course }: { course: Course }) => {
         a.hover,
         "transition-shadow"
       )}
-      itemScope
-      itemType="https://schema.org/Course"
+
     >
       {/* Top accent bar */}
       <div className={cx("absolute inset-x-0 -top-0.5 h-1.5 rounded-t-2xl", a.topBar)} aria-hidden="true" />

@@ -94,9 +94,6 @@ export default async function CoursePage({ params }: PageProps) {
     return <NotFoundPage />;
   }
 
-  // Extract city from location
-  const city = data.location || "";
-
   return (
     <>
 
@@ -104,19 +101,7 @@ export default async function CoursePage({ params }: PageProps) {
       {/* Semantic HTML Structure */}
       <main 
         className="overflow-hidden" 
-        itemScope 
-        itemType="https://schema.org/Course"
       >
-        {/* Hidden metadata for schema.org */}
-        <meta itemProp="name" content={data.courseName} />
-        <meta itemProp="description" content={data.metadata.description} />
-        <meta itemProp="provider" content="CDPL - Cinute Digital Pvt. Ltd." />
-
-        {/* SEO-friendly H1 - Hidden visually but available for SEO */}
-        <h1 className="sr-only">
-          {data.courseName} {city && `in ${city}`} - Professional Training Course by CDPL
-        </h1>
-
         <HeroSection data={data} />
         <CourseOverviewSection data={data} />
         <CurriculumSection data={data} />

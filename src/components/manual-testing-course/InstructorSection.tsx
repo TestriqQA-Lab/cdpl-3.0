@@ -109,8 +109,6 @@ export default function InstructorSection() {
     <section
       id="instructor"
       className="py-16 md:py-2 bg-white"
-      itemScope
-      itemType="https://schema.org/CourseInstructor"
       aria-label="Learn from Industry Leaders"
     >
 
@@ -138,7 +136,7 @@ export default function InstructorSection() {
                   <span className="text-lg font-extrabold text-slate-800" itemProp="name">RS</span>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-slate-900" itemProp="employee" itemScope itemType="https://schema.org/Person">
+                  <h3 className="text-2xl font-bold text-slate-900" itemProp="employee">
                     <span itemProp="name">Rajesh Sharma</span>
                   </h3>
                   <p className="text-sm font-medium text-indigo-700">Lead QA Instructor • ISTQB Advanced</p>

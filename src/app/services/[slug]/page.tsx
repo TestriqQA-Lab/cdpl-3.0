@@ -164,18 +164,7 @@ export default async function ServiceDetailPage(
       {/* Semantic HTML Structure */}
       <main 
         className="overflow-hidden" 
-        itemScope 
-        itemType="https://schema.org/Course"
       >
-        {/* Hidden metadata for schema.org */}
-        <meta itemProp="name" content={service.title} />
-        <meta itemProp="description" content={service.shortDescription} />
-        <meta itemProp="provider" content="CDPL - Cinute Digital Pvt. Ltd." />
-
-        {/* SEO-friendly H1 - Hidden visually but available for SEO */}
-        <h1 className="sr-only">
-          {service.title} Training & Corporate Programs by CDPL - {service.tagline}
-        </h1>
 
         <ServiceDetailHeroSection service={serviceForClient} />
         <ServiceDetailAboutSection service={serviceForClient} />

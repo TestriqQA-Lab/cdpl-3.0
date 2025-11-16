@@ -125,7 +125,7 @@ export default function LearningPath() {
         </div>
 
         {/* Phases */}
-        <ol className="grid grid-cols-1 md:grid-cols-2 gap-6" itemScope itemType="https://schema.org/ItemList">
+        <ol className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {phases.map((p, i) => {
             const colors = COLOR_MAP[p.accent];
 
@@ -133,8 +133,6 @@ export default function LearningPath() {
               <li
                 key={p.id}
                 itemProp="itemListElement"
-                itemScope
-                itemType="https://schema.org/ListItem"
                 className={`group relative rounded-2xl ${colors.cardBg} border ${colors.border} border-l-4 ${colors.accentBorder} hover:shadow-lg transition-all duration-200 p-6 focus-within:ring-2 focus-within:ring-offset-2 ${colors.ring}`}
               >
                 <meta itemProp="position" content={(i + 1).toString()} />

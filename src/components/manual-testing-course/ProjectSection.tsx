@@ -54,8 +54,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
 
     return (
         <article
-            itemScope={true}
-            itemType="https://schema.org/CreativeWork"
+
             aria-label={`${project.title} QA project`}
             className={`group relative rounded-2xl border-2 bg-white p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg ${colorClass}`}
         >

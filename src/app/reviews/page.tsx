@@ -71,18 +71,9 @@ export const metadata: Metadata = generateSEO({
 
 export default function Page() {
   return (
-    <div className="bg-white text-neutral-900" itemScope itemType="https://schema.org/CollectionPage">
+    <div className="bg-white text-neutral-900">
 
 
-      {/* Hidden metadata for schema.org */}
-      <meta itemProp="name" content="Customer Testimonials & Reviews | CDPL" />
-      <meta itemProp="description" content="Verified customer testimonials and success stories for CDPL" />
-      <meta itemProp="url" content="https://www.cinutedigital.com/testimonials" />
-
-      {/* SEO-friendly H1 - Hidden visually but available for SEO */}
-      <h1 className="sr-only">
-        Customer Testimonials and Reviews - Success Stories from CDPL Clients and Students
-      </h1>
 
       {/* Sections (unchanged) */}
       <ReviewsHeroSection />
