@@ -229,9 +229,25 @@ export default function ToolsSection() {
             <p className="text-lg text-gray-900 font-semibold mb-4">
               Master all these tools and become a digital marketing expert
             </p>
-            <Link href="contact-us" className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-xl transition-all shadow-lg hover:shadow-xl">
+            <Link
+              href="/contact-us"
+              className="
+    inline-flex items-center justify-center
+    w-full sm:w-auto
+    px-4 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-3
+    text-sm sm:text-base md:text-lg
+    bg-orange-600 hover:bg-orange-700
+    text-white font-bold
+    rounded-xl
+    text-center
+    shadow-lg hover:shadow-xl
+    transition-all duration-300
+    break-words
+  "
+            >
               Start Learning Today
             </Link>
+
             <p className="mt-5 text-xs sm:text-sm text-slate-600 max-w-3xl mx-auto">
               Perfect for anyone looking for a{" "}
               <em>job-oriented digital marketing course with tools</em>,{" "}

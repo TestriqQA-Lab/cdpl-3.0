@@ -218,7 +218,7 @@ export default function CareerRoadmapSection() {
                     <h3 className="text-3xl font-bold text-slate-900 mb-12 text-center">
                         Success Metrics of Our Learning Path
                     </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {[
                             { metric: "95%", label: "Completion Rate", description: "Students who complete all modules" },
                             { metric: "4.8/5", label: "Student Rating", description: "Average course satisfaction score" },
@@ -244,9 +244,25 @@ export default function CareerRoadmapSection() {
                     <p className="text-lg text-slate-700 mb-6">
                         Ready to start your transformation journey?
                     </p>
-                    <Link href="contact-us" className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-4 px-10 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl text-lg">
+                    <Link
+                        href="/contact-us"
+                        className="
+    inline-flex items-center justify-center
+    w-full sm:w-auto
+    px-4 py-3 sm:px-6 sm:py-3 md:px-10 md:py-4
+    text-sm sm:text-base md:text-lg
+    bg-gradient-to-r from-blue-600 to-indigo-600
+    hover:from-blue-700 hover:to-indigo-700
+    text-white font-semibold
+    rounded-lg
+    text-center
+    shadow-lg hover:shadow-xl
+    transition-all duration-300
+  "
+                    >
                         Begin Your Learning Path Now
                     </Link>
+
                 </div>
             </div>
         </section>

@@ -146,7 +146,7 @@ export default function WhoShouldEnroll() {
                                 </h3>
 
                                 {/* Transformation Badge */}
-                                <div className="badge-primary mb-4">
+                                <div className="badge-primary text-gray-700 mb-4">
                                     {audience.transformation}
                                 </div>
 

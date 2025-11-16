@@ -112,7 +112,7 @@ export default function WhyTableauProgram() {
                             <div className="text-4xl mb-3">🏆</div>
                             <h4 className="font-bold text-gray-900 mb-2">Industry Experience</h4>
                             <p className="text-sm text-gray-600">
-                                14+ years of expertise in IT training
+                                5+ years of expertise in IT training
                             </p>
                         </div>
 

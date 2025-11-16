@@ -194,10 +194,10 @@ export const ProjectsSection: React.FC = () => {
                 key={idx}
                 className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20 hover:border-orange-400 transition-colors text-center"
               >
-                <div className="mx-auto mb-2 flex items-center justify-center w-10 h-10 rounded-full bg-white/20 text-sm font-bold">
+                <div className="mx-auto mb-2 flex items-center justify-center w-10 h-10 rounded-full bg-white/20 text-xs md:text-sm font-bold">
                   {domain.charAt(0).toUpperCase()}
                 </div>
-                <p className="text-sm font-semibold text-white">{domain}</p>
+                <p className="text-xs md:text-sm font-semibold text-white">{domain}</p>
               </div>
             ))}
           </div>

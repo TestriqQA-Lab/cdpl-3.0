@@ -206,7 +206,7 @@ export const ToolsSection: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {learningPhases.map((phase, idx) => (
               <div key={idx} className="relative">
-                <div className="bg-white rounded-lg p-6 border-2 border-orange-200 text-center h-full flex flex-col">
+                <div className="bg-white rounded-lg p-6 md:p-3 lg:p-6 border-2 border-orange-200 text-center h-full flex flex-col">
                   <div className="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold mx-auto mb-3">
                     {phase.step}
                   </div>

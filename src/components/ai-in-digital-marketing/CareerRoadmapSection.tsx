@@ -30,18 +30,16 @@ export default function CareerRoadmapSection() {
             {learningPath.map((step, idx) => (
               <div
                 key={step.step}
-                className={`flex flex-col ${
-                  idx % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-                } gap-8 items-center`}
+                className={`flex flex-col ${idx % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
+                  } gap-8 items-center`}
               >
                 {/* Content */}
                 <div className="flex-1">
                   <div
-                    className={`p-8 rounded-2xl border-2 transition-all hover:shadow-xl ${
-                      idx % 2 === 0
+                    className={`p-8 rounded-2xl border-2 transition-all hover:shadow-xl ${idx % 2 === 0
                         ? "bg-orange-50 border-orange-200 hover:border-orange-400"
                         : "bg-indigo-50 border-indigo-200 hover:border-indigo-400"
-                    }`}
+                      }`}
                   >
                     <h3 className="text-2xl font-bold text-gray-900 mb-3">
                       {step.title}
@@ -55,11 +53,10 @@ export default function CareerRoadmapSection() {
                 {/* Step Number Circle */}
                 <div className="flex-shrink-0 z-10">
                   <div
-                    className={`w-20 h-20 rounded-full flex items-center justify-center text-3xl font-bold text-white border-4 border-white shadow-lg ${
-                      idx % 2 === 0
+                    className={`w-20 h-20 rounded-full flex items-center justify-center text-3xl font-bold text-white border-4 border-white shadow-lg ${idx % 2 === 0
                         ? "bg-orange-600"
                         : "bg-indigo-700"
-                    }`}
+                      }`}
                   >
                     {step.step}
                   </div>
@@ -140,9 +137,25 @@ export default function CareerRoadmapSection() {
             <p className="text-lg text-gray-900 font-semibold mb-4">
               Ready to start your 8-step transformation journey?
             </p>
-            <Link href="contact-us" className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-xl transition-all shadow-lg hover:shadow-xl">
+            <Link
+              href="/contact-us"
+              className="
+    inline-flex items-center justify-center
+    w-full sm:w-auto
+    px-4 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-3
+    text-sm sm:text-base md:text-lg
+    bg-orange-600 hover:bg-orange-700
+    text-white font-bold
+    rounded-xl
+    text-center
+    shadow-lg hover:shadow-xl
+    transition-all duration-300
+    break-words
+  "
+            >
               Begin Your Journey Now
             </Link>
+
           </div>
         </div>
       </div>

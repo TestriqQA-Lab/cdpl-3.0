@@ -114,7 +114,7 @@ function LeadForm({ className = "" }: { className?: string }) {
 
         <p className="text-xs text-slate-500">
           By submitting, you agree to our{" "}
-          <Link href="/privacy" className="underline hover:text-slate-700">
+          <Link href="/privacy-policy" className="underline hover:text-slate-700">
             Privacy Policy
           </Link>
           .
@@ -141,7 +141,7 @@ export default function HeroSection() {
         <div className="animate-blob animation-delay-4000 absolute -bottom-8 left-20 h-72 w-72 rounded-full bg-blue-200 opacity-20 mix-blend-multiply blur-3xl" />
       </div>
 
-    
+
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-12 md:pb-16">
         {/* Breadcrumbs */}
@@ -157,8 +157,8 @@ export default function HeroSection() {
                 <Link
                   href={c.href}
                   className={`hover:text-orange-700 ${i === breadcrumbs.length - 1
-                      ? "font-semibold text-slate-900"
-                      : ""
+                    ? "font-semibold text-slate-900"
+                    : ""
                     }`}
                 >
                   {c.label}
@@ -282,21 +282,6 @@ export default function HeroSection() {
           <div className="hidden md:block md:col-span-4 lg:col-span-4 md:top-8">
             <LeadForm />
           </div>
-        </div>
-      </div>
-
-      {/* Scroll Indicator (optional but matches reference layout) */}
-      <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
-        <div className="flex flex-col items-center gap-2 text-slate-600 animate-bounce">
-          <span className="text-sm font-medium">Scroll to explore</span>
-          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
-          </svg>
         </div>
       </div>
     </section>

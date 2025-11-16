@@ -18,7 +18,7 @@ const heroData = {
     stats: [
         { value: "4.8/5", label: "Average Rating", icon: "⭐" },
         { value: "500+", label: "Successful Graduates", icon: "👥" },
-        { value: "14+", label: "Years Experience", icon: "🏆" },
+        { value: "5+", label: "Years Experience", icon: "🏆" },
     ],
     cta: {
         primary: "Enroll Now",
@@ -156,7 +156,7 @@ export default function HeroSection() {
 
 
     return (
-        <section className="relative min-h-screen bg-gradient-to-br from-white via-blue-50 to-white pt-12 pb-16 overflow-hidden">
+        <section className="relative min-h-screen bg-gradient-to-br from-white via-blue-50 to-white pt-8 md:pt-12 pb-16 overflow-hidden">
             <Head>
                 <title>Tableau Course | Data Analytics & BI Dashboard Training (20 Hours)</title>
                 <meta
