@@ -192,31 +192,6 @@ export default function MentorHelpCTASection({
         </div>
       </div>
 
-      {/* Minimal JSON-LD for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "EducationalOrganization",
-            name: "CDPL — Career Development & Placement Lab",
-            url: "https://cdpl.example.com/mentors",
-            department: {
-              "@type": "EducationalOrganization",
-              name: "CDPL Mentorship",
-              areaServed: "IN",
-            },
-            offers: {
-              "@type": "Offer",
-              category: "Mentorship",
-              url: "https://cdpl.example.com/contact-us",
-              description:
-                "1:1 mentorship for AI/ML, Data Science, Full-Stack, and DevOps with resume reviews, project feedback, mock interviews, and placement support.",
-              availability: "InStock",
-            },
-          }),
-        }}
-      />
     </section>
   );
 }

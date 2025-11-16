@@ -1,123 +1,12 @@
 // components/sections/TestimonialsSection.tsx
 "use client";
 
-import { useMemo } from "react";
 import { Quote, ShieldCheck, Sparkles } from "lucide-react";
 import ReviewsMarquee from "../sections/ReviewMarque";
 
-type Testimonial = {
-  quote: string;
-  name: string;
-  role: string;
-  company?: string;
-  rating: number; // 1–5
-  bg: string; // card background
-  border: string; // card border
-  nameColor: string; // name accent
-};
 
 export default function TestimonialsSection() {
-  const testimonials: Testimonial[] = [
-    {
-      quote:
-        "Mastered prompt engineering in 20 hours—frameworks like ReAct and CRISPE improved my output quality instantly.",
-      name: "Rohan Mehta",
-      role: "AI Specialist",
-      company: "MediaTech",
-      rating: 5,
-      bg: "bg-amber-50",
-      border: "border-amber-200",
-      nameColor: "text-amber-700",
-    },
-    {
-      quote:
-        "Portfolio-ready GenAI projects boosted my visibility. I now automate content workflows with measurable quality.",
-      name: "Sneha Patel",
-      role: "Content Creator",
-      company: "Creator Studio",
-      rating: 5,
-      bg: "bg-emerald-50",
-      border: "border-emerald-200",
-      nameColor: "text-emerald-700",
-    },
-    {
-      quote:
-        "Landed a Prompt Engineer role. Evaluation harness + guardrails made my interviews a breeze.",
-      name: "Arjun Singh",
-      role: "Prompt Engineer",
-      company: "EdTech",
-      rating: 5,
-      bg: "bg-sky-50",
-      border: "border-sky-200",
-      nameColor: "text-sky-700",
-    },
-    {
-      quote:
-        "Multi-model fluency across ChatGPT and open-source LLMs. Learned to adapt prompts and control cost/latency.",
-      name: "Nandini Rao",
-      role: "Automation Engineer",
-      company: "SaaS",
-      rating: 5,
-      bg: "bg-rose-50",
-      border: "border-rose-200",
-      nameColor: "text-rose-700",
-    },
-    {
-      quote:
-        "Great mix of safety, bias mitigation, and practical templates. My support bot now performs with higher CSAT.",
-      name: "Aditya Kulkarni",
-      role: "Product Analyst",
-      company: "FinTech",
-      rating: 5,
-      bg: "bg-violet-50",
-      border: "border-violet-200",
-      nameColor: "text-violet-700",
-    },
-    {
-      quote:
-        "The evaluation rubric and A/B testing mindset were game-changers. Clear, repeatable improvement process.",
-      name: "Priya Sharma",
-      role: "Technical Writer",
-      company: "HealthTech",
-      rating: 5,
-      bg: "bg-lime-50",
-      border: "border-lime-200",
-      nameColor: "text-lime-700",
-    },
-  ];
 
-  // SEO: AggregateRating + Review JSON-LD
-  const jsonLd = useMemo(
-    () =>
-      JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Product",
-        name: "Prompt Engineering with Generative AI",
-        brand: { "@type": "Organization", name: "Cinute Digital Pvt. Ltd." },
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: "4.9",
-          reviewCount: testimonials.length.toString(),
-          bestRating: "5",
-          worstRating: "1",
-        },
-        review: testimonials.slice(0, 3).map((t) => ({
-          "@type": "Review",
-          reviewBody: t.quote,
-          reviewRating: {
-            "@type": "Rating",
-            ratingValue: t.rating.toString(),
-            bestRating: "5",
-            worstRating: "1",
-          },
-          author: { "@type": "Person", name: t.name },
-        })),
-        keywords:
-          "prompt engineering reviews, generative AI course testimonials, LLM prompting ratings, ChatGPT prompt training feedback",
-      }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
 
   return (
     <section
@@ -170,8 +59,6 @@ export default function TestimonialsSection() {
         </p>
       </div>
 
-      {/* JSON-LD for SEO */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
     </section>
   );
 }

@@ -1,7 +1,7 @@
 // app/services/page.tsx
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
+import { generateSEO } from "@/lib/seo";
 
 // ============================================================================
 // SEO METADATA - Optimized for Services Page
@@ -63,143 +63,10 @@ const ServicesCTASection = dynamic(
 // SERVICES PAGE COMPONENT
 // ============================================================================
 export default function TrainingServicesPage() {
-  // Breadcrumb Schema
-  const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Home", url: "/" },
-    { name: "Services", url: "/services" },
-  ]);
-
-  // Service Schema
-  const serviceSchema = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": "https://www.cinutedigital.com/services#service",
-    name: "CDPL Corporate Training & Consulting Services",
-    description: "Comprehensive corporate training, consulting, and custom solutions for enterprises in Software Testing, Data Science, AI/ML, and DevOps",
-    provider: {
-      "@type": "EducationalOrganization",
-      "@id": "https://www.cinutedigital.com/#organization",
-      name: "CDPL - Cinute Digital Pvt. Ltd.",
-      url: "https://www.cinutedigital.com",
-    },
-    serviceType: [
-      "Corporate Training",
-      "Software Testing Consulting",
-      "Test Automation Services",
-      "Custom Training Programs",
-      "Technical Workshops",
-      "Team Upskilling",
-    ],
-    areaServed: {
-      "@type": "Country",
-      name: "India",
-    },
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "CDPL Services",
-      itemListElement: [
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Corporate Training Programs",
-            description: "Customized training programs for enterprises in Software Testing, Data Science, AI/ML, and Automation",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Software Testing Consulting",
-            description: "Expert QA consulting and test strategy development for enterprises",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Test Automation Solutions",
-            description: "Custom test automation framework development and implementation",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Technical Workshops",
-            description: "Hands-on workshops on latest technologies and best practices",
-          },
-        },
-      ],
-    },
-  };
-
-  // Organization Schema with Services
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
-    "@id": "https://www.cinutedigital.com/#organization",
-    name: "CDPL - Cinute Digital Pvt. Ltd.",
-    url: "https://www.cinutedigital.com",
-    description: "Leading EdTech providing corporate training and consulting services",
-    makesOffer: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Corporate Training",
-          serviceType: "Educational Service",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Software Testing Consulting",
-          serviceType: "Professional Service",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Custom Automation Solutions",
-          serviceType: "Technical Service",
-        },
-      },
-    ],
-  };
-
-  // CollectionPage Schema
-  const collectionPageSchema = {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "@id": "https://www.cinutedigital.com/services#collectionpage",
-    url: "https://www.cinutedigital.com/services",
-    name: "CDPL Services - Corporate Training & Consulting",
-    description: "Explore our comprehensive range of corporate training, consulting, and custom solutions",
-    inLanguage: "en-IN",
-  };
 
   return (
     <>
-      {/* Structured Data - Multiple Schemas */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionPageSchema) }}
-      />
+  
 
       {/* Main Content - Semantic HTML Structure */}
       <div 

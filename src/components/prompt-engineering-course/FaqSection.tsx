@@ -47,16 +47,6 @@ export default function FaqSection() {
   const seoKeywords =
     "prompt engineering faq, generative ai course questions, llm prompting certification, job assistance ai india, structured outputs json, guardrails evaluation, rag citations";
 
-  // JSON-LD (FAQPage) for rich results
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: FAQS.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  };
 
   return (
     <section id="faq" aria-labelledby="faq-heading" className="relative py-8 md:py-14 bg-white">
@@ -136,8 +126,6 @@ export default function FaqSection() {
         </div>
       </div>
 
-      {/* Structured data for SEO */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

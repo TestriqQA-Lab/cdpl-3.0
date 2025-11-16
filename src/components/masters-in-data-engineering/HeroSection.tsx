@@ -131,47 +131,8 @@ const highlights = [
 ];
 
 export default function HeroSection() {
-  const courseJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Course",
-    name: "Data Analytics with BI and Big Data Engineering Master Program",
-    description:
-      "155-hour master program covering Business Intelligence, Data Analytics, Big Data Engineering, ETL pipelines, cloud data platforms, and real-world analytics projects with guaranteed job assistance.",
-    provider: {
-      "@type": "Organization",
-      name: "Your Academy",
-      sameAs: "https://www.youracademy.example",
-    },
-    timeRequired: "P5M15D",
-    educationalLevel: "Beginner to Advanced",
-    keywords:
-      "data analytics course, BI course, Big Data engineering, Power BI, Tableau, SQL, Python, Hadoop, Spark, data warehouse, ETL, data pipelines, data engineer training, analytics master program, job-ready BI course",
-  };
 
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: "https://www.yoursite.example/",
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Courses",
-        item: "https://www.yoursite.example/courses",
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: "Data Analytics with BI and Big Data Engineering Master Program",
-        item: "https://www.yoursite.example/courses/data-analytics-bi-big-data-master-program",
-      },
-    ],
-  };
+
 
   const breadcrumbs = [
     { label: "Home", href: "/" },
@@ -187,15 +148,6 @@ export default function HeroSection() {
         <div className="animate-blob animation-delay-4000 absolute -bottom-8 left-20 h-72 w-72 rounded-full bg-indigo-200 opacity-20 mix-blend-multiply blur-3xl" />
       </div>
 
-      {/* JSON-LD for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(courseJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-      />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 pb-12 md:pt-6 md:pb-16">
         {/* Breadcrumbs */}

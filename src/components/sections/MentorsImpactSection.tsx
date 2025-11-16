@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useRef, useState, useEffect } from "react";
-import Script from "next/script";
 
 /**
  * MentorsImpactSection — refined spacing:
@@ -378,24 +377,6 @@ export default function MentorsImpactSection() {
         </p>
       </div>
 
-      <Script id="mentors-jsonld" type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "ItemList",
-          name: "CDPL Mentors — Industry Experts for Career Growth",
-          itemListElement: MENTORS.map((m, i) => ({
-            "@type": "ListItem",
-            position: i + 1,
-            item: {
-              "@type": "Person",
-              name: m.name,
-              jobTitle: m.role,
-              affiliation: m.company,
-              knowsAbout: [...m.tags, m.domain],
-            },
-          })),
-        })}
-      </Script>
     </section>
   );
 }

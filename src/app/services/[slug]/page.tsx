@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import type { ServiceClient } from '@/types/service';
-import { generateSEO, generateBreadcrumbSchema } from '@/lib/seo';
+import { generateSEO} from '@/lib/seo';
 
 // --- infer the concrete service type from your data function ---
 type TrainingService = ReturnType<typeof getServiceBySlug> extends infer T
@@ -143,9 +143,6 @@ export async function generateMetadata(
   });
 }
 
-// ============================================================================
-// PAGE COMPONENT WITH ENHANCED STRUCTURED DATA
-// ============================================================================
 export default async function ServiceDetailPage(
   { params }: { params: Promise<{ slug: string }> }
 ) {
@@ -158,150 +155,11 @@ export default async function ServiceDetailPage(
   // map to client-safe shape (no Record<string, unknown> cast; no destructuring of icon)
   const serviceForClient = toClientService(service);
 
-  // ============================================================================
-  // ENHANCED STRUCTURED DATA (JSON-LD)
-  // ============================================================================
-  const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Home", url: "/" },
-    { name: "Services", url: "/services" },
-    { name: service.title, url: `/services/${slug}` }
-  ]);
+;
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      // BreadcrumbList Schema
-      breadcrumbSchema,
-      
-      // Course Schema - Enhanced
-      {
-        "@type": "Course",
-        "@id": `https://www.cinutedigital.com/services/${slug}#course`,
-        "name": service.title,
-        "description": service.fullDescription || service.shortDescription,
-        "provider": {
-          "@type": "Organization",
-          "name": "CDPL - Cinute Digital Pvt. Ltd.",
-          "url": "https://www.cinutedigital.com",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.cinutedigital.com/logo.png",
-            "width": 250,
-            "height": 60
-          },
-          "sameAs": [
-            "https://www.cinutedigital.com",
-            "https://twitter.com/cinutedigital"
-          ]
-        },
-        "url": `https://www.cinutedigital.com/services/${slug}`,
-        "image": `https://www.cinutedigital.com/og-images/og-service-${slug}.webp`,
-        "courseCode": slug.toUpperCase(),
-        "educationalLevel": "Professional Development",
-        "teaches": service.title,
-        "inLanguage": "en-IN",
-        "availableLanguage": ["en-IN", "hi-IN"],
-        "coursePrerequisites": "Basic understanding of professional concepts",
-        "occupationalCredentialAwarded": {
-          "@type": "EducationalOccupationalCredential",
-          "credentialCategory": "Certificate",
-          "name": `${service.title} Training Certificate`
-        },
-        ...(service.outcomes && service.outcomes.length > 0 && {
-          "courseOutcome": service.outcomes.map(outcome => ({
-            "@type": "DefinedTerm",
-            "name": outcome
-          }))
-        })
-      },
-
-      // Service Schema
-      {
-        "@type": "Service",
-        "@id": `https://www.cinutedigital.com/services/${slug}#service`,
-        "serviceType": service.title,
-        "name": `${service.title} Training`,
-        "description": service.fullDescription || service.shortDescription,
-        "provider": {
-          "@id": "https://www.cinutedigital.com/#organization"
-        },
-        "areaServed": {
-          "@type": "Country",
-          "name": "India"
-        },
-        "availableChannel": {
-          "@type": "ServiceChannel",
-          "serviceUrl": `https://www.cinutedigital.com/services/${slug}`,
-          "servicePhone": "+91-XXXXXXXXXX",
-          "availableLanguage": ["en-IN", "hi-IN"]
-        },
-        ...(service.features && service.features.length > 0 && {
-          "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": `${service.title} Features`,
-            "itemListElement": service.features.map((feature, index) => ({
-              "@type": "Offer",
-              "position": index + 1,
-              "itemOffered": {
-                "@type": "Service",
-                "name": feature
-              }
-            }))
-          }
-        })
-      },
-
-      // WebPage Schema
-      {
-        "@type": "WebPage",
-        "@id": `https://www.cinutedigital.com/services/${slug}`,
-        "url": `https://www.cinutedigital.com/services/${slug}`,
-        "name": `${service.title} Training & Corporate Programs`,
-        "description": service.shortDescription,
-        "isPartOf": {
-          "@id": "https://www.cinutedigital.com/#website"
-        },
-        "breadcrumb": {
-          "@id": `https://www.cinutedigital.com/services/${slug}#breadcrumb`
-        },
-        "inLanguage": "en-IN",
-        "potentialAction": {
-          "@type": "ReadAction",
-          "target": `https://www.cinutedigital.com/services/${slug}`
-        }
-      },
-
-      // Organization Schema
-      {
-        "@type": "Organization",
-        "@id": "https://www.cinutedigital.com/#organization",
-        "name": "CDPL - Cinute Digital Pvt. Ltd.",
-        "url": "https://www.cinutedigital.com",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://www.cinutedigital.com/logo.png",
-          "width": 250,
-          "height": 60
-        },
-        "description": "Leading provider of professional training and corporate programs in technology and business skills.",
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "IN"
-        },
-        "sameAs": [
-          "https://twitter.com/cinutedigital"
-        ]
-      }
-    ]
-  };
 
   return (
     <>
-      {/* Enhanced JSON-LD Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
 
       {/* Semantic HTML Structure */}
       <main 
