@@ -123,9 +123,25 @@ export default function WhyThisProgram() {
               <p className="text-lg text-slate-100 mb-4">
                 Ready to transform your business with digital marketing and AI?
               </p>
-              <Link href="contact-us" className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-xl transition-all shadow-lg hover:shadow-xl">
+              <Link
+                href="/contact-us"
+                className="
+    inline-flex items-center justify-center
+    w-full sm:w-auto
+    px-4 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-3
+    text-sm sm:text-base md:text-lg
+    bg-orange-600 hover:bg-orange-700
+    text-white font-bold
+    rounded-xl
+    text-center
+    shadow-lg hover:shadow-xl
+    transition-all duration-300
+    break-words
+  "
+              >
                 Start Your Journey Today
               </Link>
+
             </div>
 
             <p className="mt-6 text-xs sm:text-sm text-slate-400">

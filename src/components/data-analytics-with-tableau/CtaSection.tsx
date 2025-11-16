@@ -71,7 +71,7 @@ export default function CtaSection() {
                     </div>
 
                     <div>
-                        <div className="text-3xl font-bold">14+</div>
+                        <div className="text-3xl font-bold">5+</div>
                         <p className="text-orange-100 text-sm">Years Experience</p>
                     </div>
 

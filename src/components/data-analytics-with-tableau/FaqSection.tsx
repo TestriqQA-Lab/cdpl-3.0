@@ -157,7 +157,7 @@ export default function FaqSection() {
                             </p>
                             <Link
                                 href="mailto:contact@cinutedigital.com"
-                                className="text-orange-600 text-xs md:text-base font-semibold hover:underline"
+                                className="text-orange-600 text-xs lg:text-base font-semibold hover:underline"
                             >
                                 contact@cinutedigital.com
                             </Link>

@@ -1,3 +1,4 @@
+"use client";
 // components/powerbi/HeroSection.tsx
 import React from 'react';
 import { Clock, CheckCircle, Award, Briefcase, ArrowRight, Download, Star, Users, TrendingUp, Home, ChevronRight } from 'lucide-react';
@@ -16,23 +17,6 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title }) => (
   </div>
 );
 
-// Interface for the lead form input
-interface InputFieldProps {
-  label: string;
-  placeholder: string;
-  type?: string;
-}
-
-const InputField: React.FC<InputFieldProps> = ({ label, placeholder, type = 'text' }) => (
-  <div className="mb-4">
-    <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
-    <input
-      type={type}
-      placeholder={placeholder}
-      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150"
-    />
-  </div>
-);
 
 const HeroSection: React.FC = () => {
   const features = [
@@ -47,6 +31,126 @@ const HeroSection: React.FC = () => {
     { icon: <Users size={20} className="text-blue-500" />, text: '500+ Successful Graduates' },
     { icon: <TrendingUp size={20} className="text-green-500" />, text: '14+ Years Industry Experience' },
   ];
+
+  function LeadForm({ className = "" }: { className?: string }) {
+    const countries = [
+      { code: "IN", dial: "+91", label: "India", flag: "🇮🇳" },
+      { code: "US", dial: "+1", label: "United States", flag: "🇺🇸" },
+      { code: "GB", dial: "+44", label: "United Kingdom", flag: "🇬🇧" },
+      { code: "AE", dial: "+971", label: "United Arab Emirates", flag: "🇦🇪" },
+      { code: "SG", dial: "+65", label: "Singapore", flag: "🇸🇬" },
+      { code: "AU", dial: "+61", label: "Australia", flag: "🇦🇺" },
+    ];
+
+    return (
+      <form
+        id="enrollment-form"
+        className={[
+          "w-full rounded-2xl border border-slate-200 bg-white/90 backdrop-blur-sm shadow-lg",
+          "p-5 sm:p-6",
+          className,
+        ].join(" ")}
+        onSubmit={(e) => {
+          e.preventDefault();
+          // submit handling here
+        }}
+        aria-label="Enroll for Machine Learning with Python"
+      >
+        <h2 className="text-xl font-semibold text-slate-900">
+          Request Syllabus & Free Consultation
+        </h2>
+        <p className="mt-1 text-sm text-slate-600">
+          Get the detailed curriculum, career roadmap, and upcoming batch details
+          for Machine Learning with Python.
+        </p>
+
+        <div className="mt-4 grid grid-cols-1 gap-4">
+          {/* Name */}
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-slate-700">
+              Full Name
+            </label>
+            <input
+              id="name"
+              name="name"
+              required
+              autoComplete="name"
+              placeholder="Your full name"
+              className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-300"
+            />
+          </div>
+
+          {/* Email */}
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-slate-700">
+              Email
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              autoComplete="email"
+              placeholder="you@example.com"
+              className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-300"
+            />
+          </div>
+
+          {/* Phone with country code + flag */}
+          <div>
+            <label htmlFor="phone" className="block text-sm font-medium text-slate-700">
+              Mobile Number
+            </label>
+            <div className="mt-1 flex items-stretch gap-2">
+              <div className="flex min-w-[7.5rem] items-center rounded-lg border border-slate-300 bg-white px-2">
+                <select
+                  name="country"
+                  aria-label="Country code"
+                  defaultValue="IN"
+                  className="w-full bg-transparent py-2 text-slate-900 focus:outline-none"
+                >
+                  {countries.map((c) => (
+                    <option key={c.code} value={c.code}>
+                      {c.flag} {c.label} ({c.dial})
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                inputMode="tel"
+                required
+                placeholder="98765 43210"
+                pattern="^[0-9\\s\\-()+]{7,20}$"
+                className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-300"
+              />
+            </div>
+            <p className="mt-1 text-xs text-slate-500">
+              We’ll never share your number. Standard rates may apply.
+            </p>
+          </div>
+
+          <button
+            type="submit"
+            className="group inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 px-5 py-3 font-semibold text-white shadow-lg transition-all hover:from-orange-600 hover:to-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300"
+          >
+            Get Syllabus & Pricing
+            <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
+          </button>
+
+          <p className="text-xs text-slate-500">
+            By submitting, you agree to our{" "}
+            <Link href="/privacy-policy" className="underline hover:text-slate-700">
+              Privacy Policy
+            </Link>
+            .
+          </p>
+        </div>
+      </form>
+    );
+  }
 
   const breadcrumbs = [
     { label: "Home", href: "/" },
@@ -74,10 +178,10 @@ const HeroSection: React.FC = () => {
           </ol>
         </nav>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
 
           {/* Left Column: Course Details */}
-          <div className="lg:col-span-2">
+          <div className="md:col-span-7 lg:col-span-8">
             <div className="mb-4">
               <span className="inline-flex items-center px-3 py-1 text-sm font-medium text-blue-800 bg-blue-100 rounded-full">
                 <Clock size={16} className="mr-2" />
@@ -89,7 +193,9 @@ const HeroSection: React.FC = () => {
               Master <span className="text-blue-600">Data Analytics</span> & Visualization with <span className="text-orange-500">Power BI</span>
             </h1>
 
-            <p className="mt-3 text-xl text-gray-600 mb-8 max-w-3xl">
+            <LeadForm className='md:hidden' />
+
+            <p className="mt-3 text-lg text-gray-600 mb-8 max-w-3xl">
               Transform raw data into powerful, actionable insights. Learn from industry experts to master Microsoft Power BI, DAX, and Data Modeling for creating stunning, interactive dashboards.
             </p>
 
@@ -126,32 +232,9 @@ const HeroSection: React.FC = () => {
           </div>
 
           {/* Right Column: Lead Form */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-8 p-8 bg-white rounded-2xl shadow-2xl border border-blue-100">
-              <h2 className="text-2xl font-bold text-gray-900 mb-3">
-                Request Syllabus & Free Consultation
-              </h2>
-              <p className="text-gray-500 mb-6 text-sm">
-                Get the detailed curriculum, career guidance, and upcoming batch information.
-              </p>
+          <div className="hidden md:block md:col-span-5 lg:col-span-4">
 
-              <form>
-                <InputField label="Full Name" placeholder="Your full name" />
-                <InputField label="Email" placeholder="you@example.com" type="email" />
-                <InputField label="Mobile Number" placeholder="98765 43210" type="tel" />
-
-                <button
-                  type="submit"
-                  className="w-full flex items-center justify-center px-6 py-3 text-lg font-semibold text-white bg-blue-600 rounded-xl shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-[1.01] mt-4"
-                >
-                  Get Syllabus & Pricing <ArrowRight size={20} className="ml-2" />
-                </button>
-
-                <p className="text-xs text-gray-400 mt-4 text-center">
-                  By submitting, you agree to our <a href="#" className="text-blue-500 hover:underline">Privacy Policy</a>.
-                </p>
-              </form>
-            </div>
+            <LeadForm />
           </div>
 
         </div>
