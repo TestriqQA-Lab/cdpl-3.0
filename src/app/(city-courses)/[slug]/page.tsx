@@ -1,4 +1,3 @@
-// app/(city-courses)/[slug]/page.tsx
 import React from "react";
 import type { Metadata } from "next";
 import { courseData, type CourseData } from "@/types/courseData";

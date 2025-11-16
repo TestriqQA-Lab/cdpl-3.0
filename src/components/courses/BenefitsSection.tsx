@@ -41,8 +41,7 @@ export default function BenefitsSection() {
     <section
       className="py-20 px-4 bg-white"
       aria-label="Key benefits of our learning platform"
-      itemScope
-      itemType="https://schema.org/ItemList"
+
     >
       <div className="max-w-7xl mx-auto">
         {/* Heading + concise, SEO-friendly subline */}
@@ -54,7 +53,6 @@ export default function BenefitsSection() {
             Job-ready training with certification, mentor support, and real projects—built to
             accelerate your tech career and improve placement outcomes.
           </p>
-          <meta itemProp="itemListOrder" content="http://schema.org/ItemListOrderAscending" />
         </div>
 
         {/* Benefits grid */}
@@ -71,8 +69,6 @@ export default function BenefitsSection() {
                   a.panel,
                 ].join(" ")}
                 itemProp="itemListElement"
-                itemScope
-                itemType="https://schema.org/ListItem"
               >
                 <meta itemProp="position" content={String(i + 1)} />
 
