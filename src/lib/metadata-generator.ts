@@ -127,10 +127,12 @@ export function generateMetadata(input: MetadataGeneratorInput): Metadata {
     // Category
     category: 'education',
     
-    // Canonical URL
+    // Canonical URL & Hreflang
     alternates: {
       canonical: canonicalUrl,
       languages: {
+        'x-default': fullUrl,
+        'en': fullUrl,
         'en-IN': fullUrl,
         'en-US': fullUrl,
         'en-GB': fullUrl,
