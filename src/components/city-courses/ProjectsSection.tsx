@@ -1,10 +1,11 @@
 "use client";
 
 import React from "react";
-import { easeOut, motion } from "framer-motion";
-import { Code2, Briefcase, Award, Zap } from "lucide-react";
+import { motion, easeOut } from "framer-motion"; // easeOut is already imported correctly
+import { Code2, Briefcase, Award, Zap, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
+// --- Type Definitions (Unchanged) ---
 interface Project {
   name: string;
   description: string;
@@ -26,16 +27,18 @@ interface CourseData {
 interface ProjectsSectionProps {
   data: CourseData;
 }
+// ------------------------------------
 
 const difficultyConfig = {
-  Beginner: { bg: "bg-emerald-100", text: "text-emerald-700", border: "border-emerald-300" },
-  Intermediate: { bg: "bg-amber-100", text: "text-amber-700", border: "border-amber-300" },
-  Advanced: { bg: "bg-rose-100", text: "text-rose-700", border: "border-rose-300" },
+  Beginner: { bg: "bg-emerald-50", text: "text-emerald-700", border: "border-emerald-200" },
+  Intermediate: { bg: "bg-amber-50", text: "text-amber-700", border: "border-amber-200" },
+  Advanced: { bg: "bg-rose-50", text: "text-rose-700", border: "border-rose-200" },
 };
 
 const ProjectsSection: React.FC<ProjectsSectionProps> = ({ data }) => {
   const { projectsContent } = data;
 
+  // Fixed Variants: Using easeOut (type-safe, smooth, and matches your original feel)
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -48,55 +51,62 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ data }) => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: easeOut },
+      transition: {
+        duration: 0.6,
+        ease: easeOut, // Type-safe and beautiful
+      },
     },
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
+    hidden: { opacity: 0, y: 50, scale: 0.98 },
     visible: {
       opacity: 1,
+      y: 0,
       scale: 1,
-      transition: { duration: 0.5, ease: easeOut },
+      transition: {
+        duration: 0.7,
+        ease: easeOut, // Perfect modern easing
+      },
     },
   };
 
   return (
-    <section className="relative py-16 md:py-24 bg-gradient-to-b from-slate-50 to-white overflow-hidden">
+    <section className="relative py-20 md:py-32 bg-white overflow-hidden">
       {/* Subtle Background Pattern */}
-      <div className="absolute inset-0 pointer-events-none opacity-40">
-        <div className="absolute top-20 right-10 w-64 h-64 bg-cyan-200 rounded-full mix-blend-multiply filter blur-3xl"></div>
-        <div className="absolute bottom-20 left-10 w-64 h-64 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl"></div>
+      <div className="absolute inset-0 pointer-events-none opacity-30">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-cyan-50 rounded-full mix-blend-multiply filter blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-indigo-50 rounded-full mix-blend-multiply filter blur-3xl transform translate-x-1/2 translate-y-1/2"></div>
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
-          className="text-center mb-12 md:mb-16"
+          className="text-center mb-16 md:mb-20"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-50 text-cyan-700 rounded-full text-sm font-semibold mb-4 border border-cyan-200"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-50 text-cyan-700 rounded-full text-sm font-semibold mb-4 border border-cyan-200 shadow-sm"
             variants={itemVariants}
           >
             <Code2 className="w-4 h-4" />
             Hands-On Projects
           </motion.div>
           <motion.h2
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4"
+            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-4 tracking-tight"
             variants={itemVariants}
           >
             {projectsContent.title}
           </motion.h2>
           <motion.p
-            className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto"
+            className="text-xl text-slate-600 max-w-4xl mx-auto font-light"
             variants={itemVariants}
           >
             {projectsContent.description}
@@ -105,7 +115,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ data }) => {
 
         {/* Projects Grid */}
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mb-16"
+          className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10 mb-20"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -120,54 +130,47 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ data }) => {
                 className="group"
                 variants={cardVariants}
               >
-                <div className="relative h-full bg-white rounded-2xl border border-slate-200 p-6 md:p-8 hover:border-cyan-400 hover:shadow-xl transition-all duration-300">
-                  {/* Content */}
-                  <div className="space-y-5">
-                    {/* Header */}
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-cyan-500 to-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-cyan-500/30 group-hover:scale-110 transition-transform duration-300">
-                        <Code2 className="w-6 h-6" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">
-                          {project.name}
-                        </h3>
-                        <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${diffConfig.bg} ${diffConfig.text}`}>
-                          {project.difficulty}
-                        </span>
-                      </div>
+                <div className="relative h-full bg-white rounded-3xl border border-slate-100 p-8 shadow-xl transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-100/50 hover:border-cyan-300 transform hover:-translate-y-1">
+                  <div className="flex items-start justify-between mb-6">
+                    <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-cyan-500 to-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-cyan-500/40">
+                      <Code2 className="w-7 h-7" />
                     </div>
+                    <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${diffConfig.bg} ${diffConfig.text} border ${diffConfig.border}`}>
+                      {project.difficulty}
+                    </span>
+                  </div>
 
-                    {/* Description */}
-                    <p className="text-slate-600 leading-relaxed">
+                  <div className="space-y-5">
+                    <h3 className="text-2xl font-bold text-slate-900 leading-snug">
+                      {project.name}
+                    </h3>
+
+                    <p className="text-slate-500 leading-relaxed text-base">
                       {project.description}
                     </p>
 
-                    {/* Skills */}
-                    <div className="space-y-3 pt-4 border-t border-slate-100">
-                      <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
-                        What You&apos;ll Build
+                    <div className="pt-4 border-t border-slate-50">
+                      <p className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">
+                        Key Skills
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {project.skills.map((skill, skillIndex) => (
                           <span
                             key={skillIndex}
-                            className="inline-flex items-center gap-1.5 bg-slate-50 text-slate-700 px-3 py-1.5 rounded-lg text-sm border border-slate-200 hover:border-cyan-300 hover:bg-cyan-50 hover:text-cyan-700 transition-all duration-200"
+                            className="inline-flex items-center bg-slate-50 text-slate-700 px-3 py-1 rounded-full text-sm font-medium transition-all duration-200 border border-transparent group-hover:border-cyan-200 group-hover:bg-cyan-50"
                           >
-                            <span className="text-cyan-500 text-xs">✓</span>
                             {skill}
                           </span>
                         ))}
                       </div>
                     </div>
 
-                    {/* CTA */}
                     <Link
-                      href="contact-us"
-                      className="w-full mt-4 px-6 py-3 bg-gradient-to-r from-cyan-500 to-indigo-600 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300 flex items-center justify-center gap-2 group/btn"
+                      href="/contact-us"
+                      className="inline-flex items-center justify-center gap-2 mt-6 px-6 py-3 bg-slate-900 text-white font-semibold rounded-xl shadow-lg shadow-slate-900/20 transition-all duration-300 hover:bg-cyan-600 hover:shadow-cyan-500/40 transform hover:scale-[1.02]"
                     >
-                      Explore Project
-                      <span className="group-hover/btn:translate-x-1 transition-transform duration-200">→</span>
+                      View Project Details
+                      <ArrowRight className="w-5 h-5 ml-1 transition-transform duration-200 group-hover:translate-x-1" />
                     </Link>
                   </div>
                 </div>
@@ -176,9 +179,14 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ data }) => {
           })}
         </motion.div>
 
-        {/* Project Benefits */}
+        {/* Why Build With Us Section */}
+        <div className="text-center mb-12">
+          <h3 className="text-3xl font-bold text-slate-900 mb-2">Why Build With Us?</h3>
+          <p className="text-lg text-slate-500">The benefits of completing these hands-on projects.</p>
+        </div>
+
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -186,33 +194,33 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ data }) => {
         >
           {[
             {
-              icon: <Briefcase className="w-6 h-6" />,
+              icon: <Briefcase className="w-7 h-7" />,
               title: "Portfolio Ready",
-              description: "Build projects that impress employers and stand out in your portfolio.",
+              description: "Build high-quality, deployable projects that will impress employers and make your portfolio stand out.",
             },
             {
-              icon: <Award className="w-6 h-6" />,
+              icon: <Award className="w-7 h-7" />,
               title: "Real-World Skills",
-              description: "Gain practical experience with industry-standard tools and workflows.",
+              description: "Gain practical, in-demand experience using industry-standard tools, frameworks, and modern workflows.",
             },
             {
-              icon: <Zap className="w-6 h-6" />,
-              title: "Learn by Doing",
-              description: "Master concepts through hands-on coding and problem-solving.",
+              icon: <Zap className="w-7 h-7" />,
+              title: "Accelerated Learning",
+              description: "Master complex concepts faster through hands-on coding, immediate feedback, and guided problem-solving.",
             },
           ].map((benefit, index) => (
             <motion.div
               key={index}
-              className="bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-xl p-6 text-center hover:border-cyan-300 hover:shadow-lg transition-all duration-300 group"
+              className="bg-white border border-slate-100 rounded-2xl p-8 text-center shadow-lg transition-all duration-500 group hover:shadow-xl hover:shadow-indigo-100/50 hover:border-indigo-300"
               variants={cardVariants}
             >
-              <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-cyan-500 to-indigo-600 rounded-xl text-white mb-4 shadow-lg shadow-cyan-500/30 group-hover:scale-110 transition-transform duration-300">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl text-white mb-6 shadow-xl shadow-indigo-500/40 group-hover:scale-105 transition-transform duration-300">
                 {benefit.icon}
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">
+              <h3 className="text-xl font-bold text-slate-900 mb-3">
                 {benefit.title}
               </h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
+              <p className="text-slate-500 text-base leading-relaxed">
                 {benefit.description}
               </p>
             </motion.div>

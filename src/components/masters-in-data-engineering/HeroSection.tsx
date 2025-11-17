@@ -142,7 +142,7 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-teal-50 to-slate-100">
       {/* Decorative background */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute overflow-hidden">
         <div className="animate-blob animation-delay-0 absolute right-10 top-20 h-72 w-72 rounded-full bg-teal-200 opacity-20 mix-blend-multiply blur-3xl" />
         <div className="animate-blob animation-delay-2000 absolute left-10 top-40 h-72 w-72 rounded-full bg-sky-200 opacity-20 mix-blend-multiply blur-3xl" />
         <div className="animate-blob animation-delay-4000 absolute -bottom-8 left-20 h-72 w-72 rounded-full bg-indigo-200 opacity-20 mix-blend-multiply blur-3xl" />
