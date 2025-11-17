@@ -3,6 +3,10 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { generateSEO } from "@/lib/seo";
+import { generateReviewSchema } from "@/lib/schema-generators";
+import { STATISTICS } from "@/lib/seo-config";
+import { getAllReviews } from "src/data/reviews/reviewsData";
+import JsonLd from "@/components/JsonLd";
 
 // Revalidate content periodically (change to 0 if you fetch SSR)
 export const revalidate = 120;
@@ -44,36 +48,49 @@ const ReviewsCTAJoinSection = dynamic(
 
 // ---------- SEO Metadata ----------
 export const metadata: Metadata = generateSEO({
-  title: "Customer Testimonials & Reviews - Success Stories | CDPL",
+  title: "Authentic Student Reviews & Testimonials | CDPL - Cinute Digital",
   description:
-    "See why product leaders and students choose CDPL. Read authentic client testimonials, student reviews, and success stories across training, consulting, and software development. Trusted by 1000+ professionals.",
+    "Read 5000+ authentic student reviews and success stories for CDPL's Software Testing, Data Science, and AI/ML courses. See why we are rated 4.9/5 for career transformation and placement support.",
   keywords: [
-    "CDPL testimonials",
     "CDPL reviews",
-    "client success stories",
     "student testimonials",
+    "Cinute Digital reviews",
+    "software testing course reviews",
+    "data science course reviews",
+    "AI ML course reviews",
+    "best tech training reviews",
+    "placement success stories",
     "customer reviews",
-    "training testimonials",
-    "software development partner",
-    "product engineering reviews",
-    "UI UX design testimonials",
-    "testing training reviews",
-    "CDPL student feedback",
-    "course reviews",
-    "certification testimonials",
-    "tech training reviews",
-    "EdTech testimonials",
   ],
-  url: "/testimonials",
+  url: "/reviews",
   image: "/og-images/og-image-testimonials.webp",
   type: "website",
 });
 
 export default function Page() {
+  // 1. Get all reviews data
+  const allReviews = getAllReviews();
+
+  // 2. Prepare data for schema
+  const reviewSchemaData = {
+    ratingValue: STATISTICS.rating,
+    reviewCount: STATISTICS.reviewCount,
+    reviews: allReviews.slice(0, 10).map(review => ({
+      author: review.name,
+      rating: review.rating,
+      text: review.quote,
+      // datePublished is optional, but good to include if available in data
+      // For now, we'll omit it as it's not in the source data
+    })),
+  };
+
+  // 3. Generate the schema
+  const reviewSchema = generateReviewSchema(reviewSchemaData);
+
   return (
     <div className="bg-white text-neutral-900">
-
-
+      {/* JSON-LD SCHEMA INJECTION */}
+       <JsonLd id="review-schema" schema={reviewSchema} />
 
       {/* Sections (unchanged) */}
       <ReviewsHeroSection />
