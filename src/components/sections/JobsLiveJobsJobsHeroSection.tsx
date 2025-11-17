@@ -119,6 +119,7 @@ export default function JobsLiveJobsJobsHeroSection() {
               <Image
                 src="/live-jobs_images/live-jobs_hero2.png"
                 alt="Live jobs hero"
+                title="Live jobs hero"
                 width={960}
                 height={960}
                 priority

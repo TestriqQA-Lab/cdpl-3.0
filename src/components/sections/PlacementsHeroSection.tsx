@@ -254,6 +254,7 @@ export default function PlacementsHeroSection() {
               <Image
                 src="/placement_images/placments_hero2.png"
                 alt="CDPL Student Placements illustration — partner companies & verified outcomes"
+                title="CDPL Student Placements illustration — partner companies & verified outcomes"
                 width={1280}
                 height={960}
                 priority

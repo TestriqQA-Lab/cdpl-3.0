@@ -255,6 +255,7 @@ export default function JobsCareersHeroSection() {
               <Image
                 src="/careers/careers-hero.png"
                 alt="Student and recruiter shaking hands illustration"
+                title="Student and recruiter shaking hands illustration"
                 width={1536}
                 height={1152}
                 priority

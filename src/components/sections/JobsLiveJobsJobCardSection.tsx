@@ -150,6 +150,7 @@ export function JobsLiveJobsJobCardSection({
               key={currentSrc}
               src={currentSrc}
               alt={job.bannerImageAlt || `${job.company} hiring`}
+              title={job.bannerImageAlt || `${job.company} hiring`}
               width={1600}
               height={900}
               className="w-full h-auto rounded-2xl object-contain bg-white"
