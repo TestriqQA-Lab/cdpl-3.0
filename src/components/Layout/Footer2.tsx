@@ -18,6 +18,7 @@ const Footer: React.FC = () => {
                 <Image
                   src="/cdpl-logo.png"
                   alt="Cinute Digital logo"
+                  title="Cinute Digital logo"
                   width={48}
                   height={48}
                   className="rounded"
@@ -94,6 +95,7 @@ const Footer: React.FC = () => {
                   <Image
                     src="/images/msme.png"
                     alt="MSME"
+                    title="MSME Registered Company Badge"
                     width={120}
                     height={120}
                     className="h-16 md:h-20 w-auto object-contain"
@@ -103,6 +105,7 @@ const Footer: React.FC = () => {
                   <Image
                     src="/images/Skill-India-Color.svg"
                     alt="Skill India"
+                    title="Skill India Logo"
                     width={130}
                     height={130}
                     className="h-16 md:h-20 w-auto object-contain"
@@ -112,6 +115,7 @@ const Footer: React.FC = () => {
                   <Image
                     src="/images/Trustpilot.png"
                     alt="Trustpilot"
+                    title="Trustpilot Reviews Badge"
                     width={150}
                     height={150}
                     className="h-16 md:h-20 w-auto object-contain"
@@ -121,6 +125,7 @@ const Footer: React.FC = () => {
                   <Image
                     src="/images/ISO-27001.png"
                     alt="ISO 27001 Certified"
+                    title="ISO 27001 Certified Badge"
                     width={130}
                     height={130}
                     className="h-16 md:h-20 w-auto object-contain"
@@ -130,6 +135,7 @@ const Footer: React.FC = () => {
                   <Image
                     src="/images/ISO-9001.png"
                     alt="ISO 9001 Certified"
+                    title="ISO 9001 Certified Badge"
                     width={130}
                     height={130}
                     className="h-16 md:h-20 w-auto object-contain"
@@ -185,7 +191,7 @@ const Footer: React.FC = () => {
               <div className="flex gap-4 space-y-4">
                 <h3 className="text-xl font-semibold text-orange-400">Powered By</h3>
                 <Link href="https://www.testriq.com/" className="text-gray-300 hover:text-blue-400 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
-                  <Image src={'/images/Testriq-Logo-1.webp'} alt='Testriq_logo' width={100} height={100} />
+                  <Image src={'/images/Testriq-Logo-1.webp'} alt='Testriq_logo' title="Testriq-Logo" width={100} height={100} />
                 </Link>
               </div>
             </div>

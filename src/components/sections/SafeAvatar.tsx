@@ -40,6 +40,7 @@ export default function SafeAvatar({
       <Image
         src={src}
         alt={alt || `${name} avatar`}
+        title={alt || `${name} avatar`}
         fill
         sizes={sizes}
         className="object-cover"

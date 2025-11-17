@@ -286,6 +286,7 @@ function Orbit({
                   <img
                     src={active.avatar}
                     alt={`${active.name} avatar`}
+                    title={`${active.name} avatar`}
                     className="h-14 w-14 sm:h-16 sm:w-16 rounded-full object-cover ring-2 ring-white shadow-sm"
                     loading="lazy"
                   />

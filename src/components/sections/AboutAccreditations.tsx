@@ -12,9 +12,9 @@ import { ShieldCheck, Award, CheckCircle2, Sparkles, Star, Users, Building2 } fr
  */
 export default function AboutAccreditations() {
   const logos = [
-    { src: "/images/Skill-India-Color.svg", alt: "Skill India (NSDC)" },
-    { src: "/images/ISO-9001.png", alt: "ISO 9001:2015 Certified" },
-    { src: "/images/Testriq-Logo-1.webp", alt: "Testriq – Hiring Partner" },
+    { src: "/images/Skill-India-Color.svg", alt: "Skill India (NSDC)", title: "Skill India (NSDC)" },
+    { src: "/images/ISO-9001.png", alt: "ISO 9001:2015 Certified", title: "ISO 9001:2015 Certified" },
+    { src: "/images/Testriq-Logo-1.webp", alt: "Testriq – Hiring Partner", title: "Testriq – Hiring Partner" },
   ];
 
   const highlights = [
@@ -110,6 +110,7 @@ export default function AboutAccreditations() {
                 <Image
                   src={l.src}
                   alt={l.alt}
+                  title={l.title}
                   width={120}
                   height={48}
                   className="h-12 w-auto object-contain"

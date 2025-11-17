@@ -159,6 +159,7 @@ function TickerRow({
                   <Image
                     src={logoSrc}
                     alt={`${name} logo`}
+                    title={`${name} logo`}
                     fill
                     className="object-contain"
                     sizes="(max-width: 425px) 100vw, (max-width: 640px) 100vw, (max-width: 768px) 100vw, 100vw"

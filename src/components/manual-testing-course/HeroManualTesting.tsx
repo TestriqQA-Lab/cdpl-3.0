@@ -372,10 +372,10 @@ export default function HeroManualTesting() {
                         <div className="mt-10">
                             <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Alumni work at</p>
                             <div className="mt-4 flex flex-wrap items-center gap-x-8 gap-y-3 opacity-90">
-                                <Image src="/company_images/Testriq-Logo-Black.webp" alt="Testriq" width={120} height={24} />
-                                <Image src="/company_images/axiom.webp" alt="Pixelwave" width={120} height={24} />
-                                <Image src="/company_images/credility.webp" alt="Groundwork Systems" width={120} height={24} />
-                                <Image src="/company_images/marqetrix.webp" alt="Nitrosoft" width={120} height={24} />
+                                <Image src="/company_images/Testriq-Logo-Black.webp" alt="Testriq" title="Testriq" width={120} height={24} />
+                                <Image src="/company_images/axiom.webp" alt="Pixelwave" title="Pixelwave" width={120} height={24} />
+                                <Image src="/company_images/credility.webp" alt="Groundwork Systems" title="Groundwork Systems" width={120} height={24} />
+                                <Image src="/company_images/marqetrix.webp" alt="Nitrosoft" title="Nitrosoft" width={120} height={24} />
                             </div>
 
                             {/* NEW: PDF Stats with animated counters */}

@@ -60,6 +60,7 @@ const CompanyBadge = ({ name, logoSrc }: CompanyBadgeProps) => (
       <Image
         src={logoSrc}
         alt={`${name} logo`}
+        title={`${name} logo`}
         width={110}
         height={28}
         className="object-contain opacity-90"

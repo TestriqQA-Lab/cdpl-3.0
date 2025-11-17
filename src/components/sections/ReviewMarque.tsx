@@ -10,13 +10,13 @@ type Review = {
   source: 'Google' | 'Sulekha' | 'Justdial';
   text: string;
   city?: string;
-  logo: { src: string; alt: string };
+  logo: { src: string; alt: string; title:string };
 };
 
 const PLATFORM = {
-  Google: { title: 'Google', statLabel: 'Based on', statValue: '289 reviews', overall: 'EXCELLENT', logo: { src: '/slider_logos/google-logo.svg', alt: 'Google logo' } },
-  Sulekha: { title: 'Sulekha', statLabel: 'Rating', statValue: '5.0 · 84 reviews', overall: 'EXCELLENT', logo: { src: '/slider_logos/sulekha.svg', alt: 'Sulekha logo' } },
-  Justdial: { title: 'Justdial', statLabel: 'Ratings', statValue: '210 ratings', overall: 'GREAT', logo: { src: '/slider_logos/justdial.svg', alt: 'Justdial logo' } },
+  Google: { title: 'Google', statLabel: 'Based on', statValue: '289 reviews', overall: 'EXCELLENT', logo: { src: '/slider_logos/google-logo.svg', alt: 'Google logo',title:"Google logo" } },
+  Sulekha: { title: 'Sulekha', statLabel: 'Rating', statValue: '5.0 · 84 reviews', overall: 'EXCELLENT', logo: { src: '/slider_logos/sulekha.svg', alt: 'Sulekha logo',title:"Sulekha logo" } },
+  Justdial: { title: 'Justdial', statLabel: 'Ratings', statValue: '210 ratings', overall: 'GREAT', logo: { src: '/slider_logos/justdial.svg', alt: 'Justdial logo',title:"Justdial logo" } },
 } as const;
 
 const REVIEWS: Review[] = [
@@ -27,30 +27,30 @@ const REVIEWS: Review[] = [
     source: "Google",
     text:
       "I had the opportunity to intern at Cinute, and it has been a great learning experience... I worked on data analysis in Excel, created dashboards, and explored Power BI & Tableau. The quality of teaching is so good...",
-    logo: { src: "/slider_logos/google.svg", alt: "Google logo" },
+    logo: { src: "/slider_logos/google.svg", alt: "Google logo", title:"Google logo" },
   },
-  { name: "YASH", date: "2025-06-27", source: "Google", text: "—", logo: { src: "/slider_logos/google.svg", alt: "Google logo" } },
-  { name: "Sujal Vaity", date: "2025-06-27", source: "Google", text: "—", logo: { src: "/slider_logos/google.svg", alt: "Google logo" } },
+  { name: "YASH", date: "2025-06-27", source: "Google", text: "—", logo: { src: "/slider_logos/google.svg", alt: "Google logo", title:"Google logo" } },
+  { name: "Sujal Vaity", date: "2025-06-27", source: "Google", text: "—", logo: { src: "/slider_logos/google.svg", alt: "Google logo", title:"Google logo" } },
   {
     name: "bhumika Ankush",
     date: "2025-06-27",
     source: "Google",
     text: "The subjects taught are relevant and help prepare students for real-world challenges.",
-    logo: { src: "/slider_logos/google.svg", alt: "Google logo" },
+    logo: { src: "/slider_logos/google.svg", alt: "Google logo",title:"Google logo" },
   },
   {
     name: "Vedang Mohit",
     date: "2025-06-27",
     source: "Google",
     text: "The subjects taught are relevant and help prepare students for real-world challenges.",
-    logo: { src: "/slider_logos/google.svg", alt: "Google logo" },
+    logo: { src: "/slider_logos/google.svg", alt: "Google logo",title:"Google logo" },
   },
   {
     name: "Aryan Prasad",
     date: "2025-06-27",
     source: "Google",
     text: "It's a good opportunity to do course and learn coding languages... good mentors.",
-    logo: { src: "/slider_logos/google.svg", alt: "Google logo" },
+    logo: { src: "/slider_logos/google.svg", alt: "Google logo",title:"Google logo" },
   },
   {
     name: "Dhruv Salvi",
@@ -58,7 +58,7 @@ const REVIEWS: Review[] = [
     source: "Google",
     text:
       "Helped me to learn and gain a lot of knowledge and skills growth throughout, humble and good communicating staff and members.",
-    logo: { src: "/slider_logos/google.svg", alt: "Google logo" },
+    logo: { src: "/slider_logos/google.svg", alt: "Google logo",title:"Google logo" },
   },
   {
     name: "Bhuvan Sharma",
@@ -66,16 +66,16 @@ const REVIEWS: Review[] = [
     source: "Google",
     text:
       "Good information provided by the domain providers, very good at communicating and humble...",
-    logo: { src: "/slider_logos/google.svg", alt: "Google logo" },
+    logo: { src: "/slider_logos/google.svg", alt: "Google logo",title:"Google logo" },
   },
-  { name: "Sahil Bhaye", date: "2025-06-27", source: "Google", text: "—", logo: { src: "/slider_logos/google.svg", alt: "Google logo" } },
+  { name: "Sahil Bhaye", date: "2025-06-27", source: "Google", text: "—", logo: { src: "/slider_logos/google.svg", alt: "Google logo",title:"Google logo" } },
   {
     name: "Durgesh parab",
     date: "2025-06-27",
     source: "Google",
     text:
       "It is best company to get experience... I’m learning full-stack with highly talented staff...",
-    logo: { src: "/slider_logos/google.svg", alt: "Google logo" },
+    logo: { src: "/slider_logos/google.svg", alt: "Google logo",title:"Google logo" },
   },
 
   // SULEKHA
@@ -86,7 +86,7 @@ const REVIEWS: Review[] = [
     source: "Sulekha",
     text:
       "Excellent Service, Extremely Professional Behavior, Most Trusted Company. Good explanation and friendly nature.",
-    logo: { src: "/slider_logos/sulekha-logo.webp", alt: "Sulekha logo" },
+    logo: { src: "/slider_logos/sulekha-logo.webp", alt: "Sulekha logo", title:"Sulekha logo" },
   },
   {
     name: "Riya Rajnath Yadav",
@@ -95,7 +95,7 @@ const REVIEWS: Review[] = [
     source: "Sulekha",
     text:
       "Highly Affordable Service, Extremely Professional Behavior, Most Trusted Company. The instructor teaches very well...",
-    logo: { src: "/slider_logos/sulekha-logo.webp", alt: "Sulekha logo" },
+    logo: { src: "/slider_logos/sulekha-logo.webp", alt: "Sulekha logo", title:"Sulekha logo" },
   },
   {
     name: "Shital Sawant",
@@ -104,7 +104,7 @@ const REVIEWS: Review[] = [
     source: "Sulekha",
     text:
       "Highly Affordable Service, Extremely Professional Behavior, Most Trusted Company. Would recommend the class to freshers & newcomers...",
-    logo: { src: "/slider_logos/sulekha-logo.webp", alt: "Sulekha logo" },
+    logo: { src: "/slider_logos/sulekha-logo.webp", alt: "Sulekha logo", title:"Sulekha logo" },
   },
   {
     name: "Piyush Prasad",
@@ -113,7 +113,7 @@ const REVIEWS: Review[] = [
     source: "Sulekha",
     text:
       "Tableau and Excel are excellent batches and the instructors are helpful... I recommend students to enroll in Cinute Digital.",
-    logo: { src: "/slider_logos/sulekha-logo.webp", alt: "Sulekha logo" },
+    logo: { src: "/slider_logos/sulekha-logo.webp", alt: "Sulekha logo", title:"Sulekha logo" },
   },
 
   // JUSTDIAL
@@ -123,7 +123,7 @@ const REVIEWS: Review[] = [
     source: "Justdial",
     text:
       "EMI available, one-on-one mentoring from specialized faculty in AC classrooms. Approachable faculty and resourceful library...",
-    logo: { src: "/slider_logos/justdial-logo.png", alt: "Justdial logo" },
+    logo: { src: "/slider_logos/justdial-logo.png", alt: "Justdial logo",  title:"Justdial logo" },
   },
   {
     name: "User",
@@ -131,7 +131,7 @@ const REVIEWS: Review[] = [
     source: "Justdial",
     text:
       "Amazing trainers who make even tough topics easy to understand. Super approachable and always ready to help.",
-    logo: { src: "/slider_logos/justdial-logo.png", alt: "Justdial logo" },
+    logo: { src: "/slider_logos/justdial-logo.png", alt: "Justdial logo", title:"Justdial logo" },
   },
   {
     name: "Aatish",
@@ -139,14 +139,14 @@ const REVIEWS: Review[] = [
     source: "Justdial",
     text:
       "Clean and highly specialized facilities. Regular evaluation ensures top-notch quality; multiple facilities cater to diverse needs.",
-    logo: { src: "/slider_logos/justdial-logo.png", alt: "Justdial logo" },
+    logo: { src: "/slider_logos/justdial-logo.png", alt: "Justdial logo", title:"Justdial logo" },
   },
   {
     name: "Ami",
     date: "18 Nov",
     source: "Justdial",
     text: "Trainers were amazing.",
-    logo: { src: "/slider_logos/justdial-logo.png", alt: "Justdial logo" },
+    logo: { src: "/slider_logos/justdial-logo.png", alt: "Justdial logo", title:"Justdial logo" },
   },
 ];
 
@@ -241,7 +241,7 @@ export default function ReviewsMarquee() {
         <div className="mx-auto max-w-3xl text-center">
           <div className="mt-1 flex items-center justify-center gap-3 text-sm text-slate-600">
             <span className="inline-flex items-center gap-2 rounded-full bg-white px-2 pr-7 md:pr-3 py-1 border border-slate-200 shadow-sm">
-              <Image src={statLogo.src} alt={statLogo.alt} width={18} height={18} />
+              <Image src={statLogo.src} alt={statLogo.alt} title={statLogo.title} width={18} height={18} />
               {stat.overall}
             </span>
             <span className="opacity-60">•</span>
@@ -294,6 +294,7 @@ export default function ReviewsMarquee() {
                       <Image
                         src={PLATFORM[p].logo.src}
                         alt={PLATFORM[p].logo.alt}
+                        title={PLATFORM[p].logo.title}
                         width={80}
                         height={68}
                         priority={p === "Google"}
@@ -375,7 +376,7 @@ export default function ReviewsMarquee() {
                 shrink-0
               "
                     >
-                      <Image src={r.logo.src} alt={r.logo.alt} width={14} height={14} className="sm:h-4 sm:w-4" />
+                      <Image src={r.logo.src} alt={r.logo.alt} title={r.logo.title} width={14} height={14} className="sm:h-4 sm:w-4" />
                       Verified
                     </span>
                   </header>
@@ -398,7 +399,7 @@ export default function ReviewsMarquee() {
           {SUMMARY_CARDS.map((b) => (
             <div key={b.label} className="rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-md">
               <div className="mx-auto mb-2 flex items-center justify-center">
-                <Image src={b.logo} alt={`${b.label} logo`} width={50} height={50} className={b.class} />
+                <Image src={b.logo} alt={`${b.label} logo`} title={`${b.label}logo`} width={50} height={50} className={b.class} />
               </div>
               <div className="text-3xl font-extrabold tracking-tight text-slate-900">{b.value}</div>
               <div className="mt-1 text-sm font-medium text-slate-700">{b.label}</div>

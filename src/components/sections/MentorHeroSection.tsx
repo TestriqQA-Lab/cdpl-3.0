@@ -181,6 +181,7 @@ export default function MentorHeroSection() {
             <Image
               src="/mentors_images/mentors-hero2.png"
               alt="CDPL Mentors"
+              title="CDPL Mentors"
               width={1280}
               height={960}
               className="

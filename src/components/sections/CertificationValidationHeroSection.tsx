@@ -53,6 +53,7 @@ export default function CertificationValidationHeroSection() {
             <Image
               src="/certifications_images/cdpl_certifications_validation/cdpl_certificate_validation.jpg"
               alt="Certificate verification illustration"
+              title="Certificate verification illustration"
               width={1280}
               height={960}
               className="h-auto w-full max-w-[36rem] rounded-2xl"

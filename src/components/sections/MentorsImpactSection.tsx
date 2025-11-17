@@ -309,6 +309,7 @@ export default function MentorsImpactSection() {
                     <img
                       src={m.img}
                       alt={`Mentor portrait — ${m.domain} ${m.company}`}
+                      title={`Mentor portrait — ${m.domain} ${m.company}`}
                       width={108}
                       height={108}
                       loading="lazy"

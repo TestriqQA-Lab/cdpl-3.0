@@ -193,6 +193,7 @@ function ShortsCard({
           <Image
             src={v.poster}
             alt={`${v.person} — ${v.title}`}
+            title={`${v.person} — ${v.title}`}
             fill
             sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 26rem"
             className="object-cover pointer-events-none"

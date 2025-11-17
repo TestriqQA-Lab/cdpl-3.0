@@ -129,6 +129,7 @@ export default function CareerSection() {
                 <img
                   src={c.logo}
                   alt={c.alt}
+                  title={c.alt}
                   className="mx-auto h-10 w-auto select-none grayscale opacity-80 transition-all duration-200 group-hover:grayscale-0 group-hover:opacity-100"
                   loading="lazy"
                 />

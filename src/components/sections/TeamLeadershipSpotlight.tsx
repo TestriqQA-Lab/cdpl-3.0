@@ -179,6 +179,7 @@ function LeaderCard({ leader, index }: { leader: TeamLeaderType; index: number }
                             <Image
                                 src={leader.avatar}
                                 alt={`${leader.name} - ${leader.title}`}
+                                title={`${leader.name} - ${leader.title}`}
                                 fill
                                 className="object-cover transition-transform duration-500 hover:scale-105"
                                 loading="lazy"

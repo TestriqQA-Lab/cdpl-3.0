@@ -61,6 +61,7 @@ export default function HomeTrustBarSection() {
               <Image 
                 src={getLogoPath(partner)}
                 alt={`${partner} Logo`}
+                title={`${partner} Logo`}
                 width={180} // Increased width for better visibility
                 height={60}
                 className="object-contain w-full h-full grayscale hover:grayscale-0 transition-all duration-300"

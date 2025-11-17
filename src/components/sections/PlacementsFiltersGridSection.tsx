@@ -208,6 +208,7 @@ export default function PlacementsFiltersGridSection({ contained = false }: Prop
                       <Image
                         src={p.image}
                         alt={p.name}
+                        title={p.name}
                         width={64}
                         height={64}
                         className="absolute -left-3 -top-3 h-16 w-16 rounded-full object-cover border border-slate-200 ring-4 ring-white shadow"
@@ -219,6 +220,7 @@ export default function PlacementsFiltersGridSection({ contained = false }: Prop
                         <Image
                           src={logoSrc}
                           alt={`${p.company} logo`}
+                          title={`${p.company} logo`}
                           width={128}
                           height={40}
                           className="max-h-10 sm:max-h-11 w-auto object-contain"

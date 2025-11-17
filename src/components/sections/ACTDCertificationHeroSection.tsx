@@ -65,6 +65,7 @@ export default function ACTDCertificationHeroSection() {
             <Image
               src="/certifications_images/actd_certifications/actd_certificate_cinute.jpg"
               alt="ACTD training illustration"
+              title="ACTD training illustration"
               width={1280}
               height={960}
               className="h-auto w-full max-w-[36rem] rounded-2xl"

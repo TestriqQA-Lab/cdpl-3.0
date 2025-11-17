@@ -110,6 +110,7 @@ export default function PlacementsSuccessStoriesCarousel({ contained = false }: 
                           <Image
                             src={s.src}
                             alt={`${s.name} — CDPL success story`}
+                             title={`${s.name} — CDPL success story`}
                             fill
                             sizes="48px"
                             className="object-cover"

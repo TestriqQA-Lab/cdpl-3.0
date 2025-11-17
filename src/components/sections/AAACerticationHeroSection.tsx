@@ -56,6 +56,7 @@ export default function AAACerticationHeroSection() {
               // /certifications_images/aaa_certifications/aaa_certificate_cinute
               src="/certifications_images/aaa_certifications/aaa_certificate_cinute.jpg"
               alt="AAA certification illustration"
+              title="AAA certification illustration"
               width={1280}
               height={960}
               className="h-auto w-full max-w-[36rem] rounded-2xl"

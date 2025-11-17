@@ -142,6 +142,7 @@ export default function EventsPastEventsHeroSection() {
             <Image
               src="/events/services_past-events-hero.png"
               alt="CDPL training events collage"
+              title="CDPL training events collage"
               width={1280}
               height={960}
               className="w-full h-auto object-contain"

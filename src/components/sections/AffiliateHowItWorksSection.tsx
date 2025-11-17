@@ -43,9 +43,11 @@ const palette = [
 export default function AffiliateHowItWorksSection({
     imageSrc = "/affiliate_images/affiliate_steps.png",
     imageAlt = "Affiliate program illustration",
+    imagetitle = "Affiliate program illustration",
 }: {
     imageSrc?: string;
     imageAlt?: string;
+     imagetitle?: string;
 }) {
     // Subtle parallax tilt for the illustration (blended, no card)
     const rx = useMotionValue(0);
@@ -101,6 +103,7 @@ export default function AffiliateHowItWorksSection({
                             <Image
                                 src={imageSrc}
                                 alt={imageAlt}
+                                title={imagetitle}
                                 width={820}
                                 height={820}
                                 priority

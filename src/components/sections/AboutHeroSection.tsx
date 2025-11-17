@@ -170,6 +170,7 @@ export default function AboutHeroSection() {
                     <Image
                         src="/images/cdpl-logo.png"
                         alt="Cinute Digital learners collaborating on live tech projects"
+                        title="Cinute Digital learners collaborating on live tech projects"
                         fill
                         sizes="(max-width: 1024px) 100vw, 50vw"
                         className="object-contain"
@@ -198,7 +199,7 @@ export default function AboutHeroSection() {
                         "/company_images/vistaar.webp",
                     ].map((src, i) => (
                         <div key={i} className="relative mt-1 h-7 w-full grayscale sm:h-8 md:h-9 lg:h-10">
-                            <Image src={src} alt="Brand logo" fill sizes="(max-width: 768px) 33vw, 16vw" className="object-contain" />
+                            <Image src={src} alt="Brand logo" title="Brand logo" fill sizes="(max-width: 768px) 33vw, 16vw" className="object-contain" />
                         </div>
                     ))}
                 </div>

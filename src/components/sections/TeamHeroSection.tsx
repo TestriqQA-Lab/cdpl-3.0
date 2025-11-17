@@ -14,6 +14,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
+
 const BRAND = "#ff8c00";
 
 const stats = [
@@ -35,10 +36,10 @@ const highlights = [
 ];
 
 const logos = [
-  { src: "/images/Skill-India-Color.svg", alt: "Skill India" },
-  { src: "/images/ISO-9001.png", alt: "ISO Certified" },
-  { src: "/images/ISO-27001.png", alt: "ISO Certified" },
-  { src: "/images/Testriq-Logo-1.webp", alt: "Testriq" },
+  { src: "/images/Skill-India-Color.svg", alt: "Skill India",title: "Skill India" },
+  { src: "/images/ISO-9001.png", alt: "ISO Certified",title:"ISO Certified" },
+  { src: "/images/ISO-27001.png", alt: "ISO Certified",title:"ISO Certified" },
+  { src: "/images/Testriq-Logo-1.webp", alt: "Testriq",title: "Testriq" },
 ];
 
 const VIS = {
@@ -255,7 +256,7 @@ export default function TeamHero() {
           </div>
 
           <div className="col-span-4 mt-10 lg:mt-0 flex justify-center">
-            <Image src="/Our-team-hero.png" alt="team-image" width={410} height={300} />
+            <Image src="/Our-team-hero.png" alt="team-image" title="team-image" width={410} height={300} />
           </div>
         </div>
 
@@ -308,7 +309,7 @@ export default function TeamHero() {
                 key={l.alt}
                 className="relative h-8 w-28 opacity-80 transition hover:opacity-100"
               >
-                <Image src={l.src} alt={l.alt} className="object-contain" width={100} height={100} />
+                <Image src={l.src} alt={l.alt} title={l.title} className="object-contain" width={100} height={100} />
               </div>
             ))}
           </div>
