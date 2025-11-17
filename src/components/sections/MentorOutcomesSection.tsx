@@ -1,7 +1,20 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import dynamic from "next/dynamic";
 
+function SectionLoader({ label = "Loading..." }: { label?: string }) {
+    return (
+        <div className="flex items-center justify-center py-16">
+            <p className="text-gray-500 dark:text-gray-400">{label}</p>
+        </div>
+    );
+}
+
+const PlacementsCompanyWallSection = dynamic(
+    () => import("@/components/sections/PlacementsCompanyWallSection"),
+    { ssr: true, loading: () => <SectionLoader label="Loading partners…" /> }
+);
 
 type Case = {
   name: string;
@@ -185,7 +198,10 @@ export default function MentorOutcomesSection() {
         />
 
         {/* Brand strip */}
-        <BrandMarquee />
+
+
+<PlacementsCompanyWallSection />
+
         <p className="mt-4 text-center text-xs text-zinc-700">
           Results vary by effort, background, and market conditions. Your CDPL
           mentor will map a plan that fits your goals.
@@ -199,98 +215,6 @@ export default function MentorOutcomesSection() {
         idfy, and testriq.
       </div>
     </section>
-  );
-}
-
-/* ============================ BrandMarquee ============================ */
-function BrandMarquee() {
-  const [paused, setPaused] = useState(false);
-  const toggleClickPause = () => setPaused((p) => !p);
-
-  const BRANDS = [
-    { name: "Technoscripts", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006266.webp" },
-    { name: "JM-Financial", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006267.webp" },
-    { name: "Vistaar", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006278.webp" },
-    { name: "SP-Ultraflex", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006279.webp" },
-    { name: "Marqetrix", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006280.webp" },
-    { name: "Raw-Engineering", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006281.webp" },
-    { name: "Galentic", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006282.webp" },
-    { name: "Tech-Cryptors", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006283.webp" },
-    { name: "Axiom", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006284.webp" },
-    { name: "Medi-Venturz", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006285.webp" },
-    { name: "Aryan-Technologies", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006286.webp" },
-    { name: "Credility", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006287.webp" },
-    { name: "IDfy", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006289.webp" },
-    { name: "Testriq", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006290.webp" },
-  ];
-
-  const scrollingList = [...BRANDS, ...BRANDS];
-
-  const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      toggleClickPause();
-    }
-  };
-
-  return (
-    <>
-      <div
-        className="group relative mt-8 select-none overflow-hidden rounded-2xl border border-orange-100 bg-gradient-to-b from-orange-50/60 to-orange-100/40 p-2"
-        role="region"
-        aria-label="Hiring partners carousel"
-      >
-        <div
-          className="marquee-track flex w-[200%] items-center gap-4"
-          style={{ animationPlayState: paused ? "paused" : "running" }}
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          onClick={toggleClickPause}
-          onKeyDown={onKeyDown}
-          tabIndex={0}
-          aria-roledescription="marquee"
-          aria-live="off"
-        >
-          {scrollingList.map((brand, i) => (
-            <div
-              key={brand.name + i}
-              className="flex min-w-56 max-w-64 flex-none items-center gap-3 rounded-2xl bg-white/80 px-5 py-3 shadow-sm ring-1 ring-zinc-200 backdrop-blur"
-              title={brand.name}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={brand.logo}
-                alt={`${brand.name} logo`}
-                className="h-9 w-9 flex-none rounded-md object-contain"
-                loading="lazy"
-              />
-              <span className="block w-full truncate text-sm font-semibold text-zinc-800">
-                {brand.name}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        {/* subtle gradient edges */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-orange-50/90 to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-orange-50/90 to-transparent" />
-      </div>
-
-      <style jsx>{`
-        .marquee-track {
-          animation: marquee-ltr 28s linear infinite;
-          will-change: transform;
-        }
-        @keyframes marquee-ltr {
-          0% {
-            transform: translateX(-50%);
-          }
-          100% {
-            transform: translateX(0%);
-          }
-        }
-      `}</style>
-    </>
   );
 }
 
