@@ -217,6 +217,7 @@ export default function ServicesHeroSection() {
           <Image
             src="/services/events_servies-hero.png"
             alt="Training & Event Services hero"
+            title="Training & Event Services hero"
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-contain pointer-events-none select-none mix-blend-multiply dark:mix-blend-normal transform-gpu scale-[1.10] md:scale-[1.16] lg:scale-[1.20]"

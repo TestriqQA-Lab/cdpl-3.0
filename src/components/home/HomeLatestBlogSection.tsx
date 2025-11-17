@@ -33,6 +33,7 @@ const BlogCard: React.FC<{ post: BlogPost; index: number }> = ({ post, index }) 
             <Image
               src={post.featuredImage}
               alt={post.title}
+              title={post.title}
               fill
               className="object-cover group-hover:scale-110 transition-transform duration-300"
             />
