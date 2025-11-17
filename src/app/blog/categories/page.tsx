@@ -31,16 +31,16 @@ export const metadata: Metadata = {
     "cloud computing guides",
     "database optimization",
   ],
-  authors: [{ name: "Tech Experts Team", url: "https://yoursite.com/about" }],
+  authors: [{ name: "Tech Experts Team", url: "https://www.cinutedigital.com/about" }],
   creator: "Your Company",
   publisher: "Your Company",
-  metadataBase: new URL("https://yoursite.com"),
+  metadataBase: new URL("https://www.cinutedigital.com"),
   openGraph: {
     title: "Blog Categories | Explore Tech Topics - Software Testing, Development & AI",
     description:
       "Browse 100+ expert articles by category: software testing, web development, AI/ML, data science, DevOps, and more. Find your perfect learning resource.",
     type: "website",
-    url: "https://yoursite.com/blog/categories",
+    url: "https://www.cinutedigital.com/blog/categories",
     siteName: "Your Company Tech Blog",
     images: [
       {
@@ -58,11 +58,11 @@ export const metadata: Metadata = {
     description:
       "Browse expert articles by category across software testing, development, AI, and more.",
     images: ["/blog/og-image.jpg"],
-    creator: "@yourcompany",
-    site: "@yourcompany",
+    creator: "Cinute Digital",
+    site: "https://www.cinutedigital.com/",
   },
   alternates: {
-    canonical: "https://yoursite.com/blog/categories",
+    canonical: "https://www.cinutedigital.com/blog/categories",
     languages: {
       "en-US": "/blog/categories",
     },
@@ -113,25 +113,25 @@ export default function CategoriesPage() {
       // CollectionPage Schema
       {
         "@type": "CollectionPage",
-        "@id": "https://yoursite.com/blog/categories#collectionpage",
-        url: "https://yoursite.com/blog/categories",
+        "@id": "https://www.cinutedigital.com/blog/categories#collectionpage",
+        url: "https://www.cinutedigital.com/blog/categories",
         name: "Blog Categories - Technology Topics",
         description:
           "Browse expert articles by category across software testing, web development, AI, data science, and more",
         isPartOf: {
-          "@id": "https://yoursite.com/blog#blog",
+          "@id": "https://www.cinutedigital.com/blog#blog",
         },
         mainEntity: {
-          "@id": "https://yoursite.com/blog/categories#itemlist",
+          "@id": "https://www.cinutedigital.com/blog/categories#itemlist",
         },
         breadcrumb: {
-          "@id": "https://yoursite.com/blog/categories#breadcrumb",
+          "@id": "https://www.cinutedigital.com/blog/categories#breadcrumb",
         },
       },
       // ItemList Schema - All Categories
       {
         "@type": "ItemList",
-        "@id": "https://yoursite.com/blog/categories#itemlist",
+        "@id": "https://www.cinutedigital.com/blog/categories#itemlist",
         name: "Blog Categories",
         description: `${totalCategories} categories with ${totalPosts} articles`,
         numberOfItems: totalCategories,
@@ -140,10 +140,10 @@ export default function CategoriesPage() {
           position: index + 1,
           item: {
             "@type": "Thing",
-            "@id": `https://yoursite.com/blog/category/${category.slug}`,
+            "@id": `https://www.cinutedigital.com/blog/category/${category.slug}`,
             name: category.name,
             description: category.description,
-            url: `https://yoursite.com/blog/category/${category.slug}`,
+            url: `https://www.cinutedigital.com/blog/category/${category.slug}`,
             image: category.latestPost?.featuredImage,
           },
         })),
@@ -151,40 +151,40 @@ export default function CategoriesPage() {
       // BreadcrumbList Schema
       {
         "@type": "BreadcrumbList",
-        "@id": "https://yoursite.com/blog/categories#breadcrumb",
+        "@id": "https://www.cinutedigital.com/blog/categories#breadcrumb",
         itemListElement: [
           {
             "@type": "ListItem",
             position: 1,
             name: "Home",
-            item: "https://yoursite.com",
+            item: "https://www.cinutedigital.com",
           },
           {
             "@type": "ListItem",
             position: 2,
             name: "Blog",
-            item: "https://yoursite.com/blog",
+            item: "https://www.cinutedigital.com/blog",
           },
           {
             "@type": "ListItem",
             position: 3,
             name: "Categories",
-            item: "https://yoursite.com/blog/categories",
+            item: "https://www.cinutedigital.com/blog/categories",
           },
         ],
       },
       // WebPage Schema
       {
         "@type": "WebPage",
-        "@id": "https://yoursite.com/blog/categories",
-        url: "https://yoursite.com/blog/categories",
+        "@id": "https://www.cinutedigital.com/blog/categories",
+        url: "https://www.cinutedigital.com/blog/categories",
         name: "Blog Categories",
         description: "Browse articles by category",
         isPartOf: {
-          "@id": "https://yoursite.com/#website",
+          "@id": "https://www.cinutedigital.com/#website",
         },
         breadcrumb: {
-          "@id": "https://yoursite.com/blog/categories#breadcrumb",
+          "@id": "https://www.cinutedigital.com/blog/categories#breadcrumb",
         },
         inLanguage: "en-US",
       },
