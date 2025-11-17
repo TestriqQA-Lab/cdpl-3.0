@@ -16,7 +16,8 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import IconCard from '@/components/ui/IconCard';
-import LeadForm from '../CourseLeadForm';
+// import LeadForm from '../CourseLeadForm';
+import LeadForm from '../forms/ApiCourseLeadForm';
 import Link from 'next/link';
 
 /** -----------------------------
