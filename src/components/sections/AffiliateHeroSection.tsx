@@ -224,6 +224,7 @@ export default function AffiliateHeroSection() {
               <Image
                 src="/affiliate_images/affiliate_hero.png"
                 alt="CDPL Affiliate Program — partner growth illustration"
+                title="CDPL Affiliate Program — partner growth illustration"
                 width={1600}
                 height={1200}
                 priority
