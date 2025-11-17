@@ -76,23 +76,7 @@ const STEPS: Step[] = [
 ];
 
 export default function CareerRoadmapSection() {
-  // SEO structured data (HowTo)
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    name: "Data Science Career Roadmap",
-    description:
-      "Step-by-step roadmap to become a job-ready Data Science/ML professional with portfolio projects, interview prep, and placement support.",
-    totalTime: "P3M",
-    step: STEPS.map((s) => ({
-      "@type": "HowToStep",
-      position: s.n,
-      name: s.title,
-      text: s.desc,
-    })),
-    keywords:
-      "data science career roadmap, machine learning jobs india, data scientist salary, ml engineer path, portfolio projects, mlops deployment",
-  };
+
 
   const subtitle =
     "Follow these four proven steps to go from learner to job-ready Data Science professional with a portfolio recruiters trust.";
@@ -226,12 +210,6 @@ export default function CareerRoadmapSection() {
           </p>
         </div>
       </div>
-
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

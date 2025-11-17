@@ -23,16 +23,6 @@ const accents = [
 export default function FaqSection() {
   const [open, setOpen] = useState<number | null>(0); // open first by default for engagement
 
-  // SEO: FAQPage JSON-LD
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((f) => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
-    })),
-  };
 
   return (
     <section id="faq" aria-labelledby="faq-heading" className="relative py-7 md:py-10 bg-white">
@@ -122,11 +112,6 @@ export default function FaqSection() {
         </p>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

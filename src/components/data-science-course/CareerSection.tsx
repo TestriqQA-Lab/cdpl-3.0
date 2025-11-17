@@ -78,19 +78,6 @@ export default function CareerSection() {
   const keywords =
     "data science jobs India, machine learning engineer hiring, AI careers, analytics roles, data scientist vacancies, MLOps jobs";
 
-  // SEO structured data (ItemList of orgs)
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Companies hiring Data Science professionals in India",
-    itemListElement: COMPANIES.map((c, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: { "@type": "Organization", name: c.name, sameAs: c.href || "" },
-    })),
-    numberOfItems: COMPANIES.length,
-    keywords,
-  };
 
   return (
     <section id="careers" aria-labelledby="careers-heading" className="relative overflow-hidden py-6 md:py-14 bg-white">
@@ -184,11 +171,6 @@ export default function CareerSection() {
         </p>
       </div>
 
-      {/* JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

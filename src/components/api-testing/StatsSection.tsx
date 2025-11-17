@@ -65,20 +65,7 @@ function useCountUp(target: number, inView: boolean, durationMs = 1200, decimals
 }
 
 export default function StatsSection() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    itemListElement: stats.map((s, idx) => ({
-      '@type': 'ListItem',
-      position: idx + 1,
-      name: s.label,
-      additionalProperty: {
-        '@type': 'PropertyValue',
-        name: s.label,
-        value: `${s.prefix ?? ''}${s.valueNumber}${s.suffix ?? ''}`,
-      },
-    })),
-  };
+
 
   return (
     <section
@@ -123,11 +110,6 @@ export default function StatsSection() {
         </div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

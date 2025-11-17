@@ -116,23 +116,7 @@ const ACCENTS = [
 ];
 
 export default function CurriculumSection() {
-  // SEO JSON-LD — auto-built from `modules`
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "AI-Driven Digital Marketing & Analytics — Curriculum",
-    description:
-      "Career-ready digital marketing syllabus: SEO, performance marketing, GA4/GTM, CRO, media planning, dashboards, attribution, automation.",
-    itemListOrder: "http://schema.org/ItemListOrderAscending",
-    itemListElement: modules.map((m, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: m.title,
-      description: m.outcome,
-    })),
-    keywords:
-      "digital marketing curriculum, SEO course modules, GA4 training, CRO syllabus, media planning, attribution, performance marketing course",
-  };
+
 
   return (
     <section id="curriculum" aria-labelledby="curriculum-heading" className="relative py-8 md:py-8 bg-white">
@@ -231,8 +215,6 @@ export default function CurriculumSection() {
         </div>
       </div>
 
-      {/* Structured data */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

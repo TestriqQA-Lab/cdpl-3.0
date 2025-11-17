@@ -92,19 +92,6 @@ export default function CurriculumSection() {
   const keywords =
     "advanced data analytics curriculum, business intelligence syllabus, data visualization storytelling, predictive analytics forecasting, statistics for data analysts, Power BI Tableau SQL";
 
-  // JSON-LD (ItemList) for modules
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Advanced Data Analytics Curriculum",
-    itemListElement: MODULES.map((m, idx) => ({
-      "@type": "ListItem",
-      position: idx + 1,
-      item: { "@type": "Course", name: m.title, description: m.outcome },
-    })),
-    numberOfItems: MODULES.length,
-    keywords,
-  };
 
   return (
     <section
@@ -231,11 +218,6 @@ export default function CurriculumSection() {
         </p>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

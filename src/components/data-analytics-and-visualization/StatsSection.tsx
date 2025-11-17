@@ -52,20 +52,7 @@ export const stats = [
 ];
 
 export default function StatsSection() {
-    // Structured data for SEO (doesn't change functionality)
-    const itemListJsonLd = {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        name: "Excel & Data Analytics Career Highlights",
-        itemListElement: stats.map((s, i) => ({
-            "@type": "ListItem",
-            position: i + 1,
-            name: `${s.number} — ${s.label}`,
-            description: s.description,
-        })),
-        keywords:
-            "advanced excel course, excel for data analytics, data analytics course mumbai, excel dashboard training, pivot tables, power query, power pivot, data visualization, job assistance, placement support",
-    };
+
 
     const icons = [BarChart3, TrendingUp, Users, Award, Zap, Target];
 
@@ -250,11 +237,6 @@ export default function StatsSection() {
                     </p>
                 </div>
 
-                {/* Structured data for SEO */}
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
-                />
             </div>
         </section>
     );

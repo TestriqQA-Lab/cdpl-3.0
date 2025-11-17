@@ -65,23 +65,6 @@ export default function WhoShouldEnroll() {
   const keywords =
     "who should enroll deep learning course, nlp generative ai audience, ml program for students professionals career switchers, ai deployment specialization";
 
-  // JSON-LD (ItemList) — audiences
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Who Should Enroll — Deep Learning • NLP • Generative AI",
-    itemListElement: AUDIENCES.map((a, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: {
-        "@type": "CreativeWork",
-        name: a.title,
-        description: a.desc,
-      },
-    })),
-    numberOfItems: AUDIENCES.length,
-    keywords,
-  };
 
   return (
     <section
@@ -174,11 +157,6 @@ export default function WhoShouldEnroll() {
         </div>
       </div>
 
-      {/* JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

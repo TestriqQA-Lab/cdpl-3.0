@@ -4,22 +4,7 @@
 import Link from "next/link";
 
 export default function CtaSection() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Cinute Digital Pvt. Ltd.",
-    url: "https://cinutedigital.com",
-    contactPoint: [
-      {
-        "@type": "ContactPoint",
-        contactType: "Admissions",
-        telephone: "+91-7888383788",
-        email: "contact@cinutedigital.com",
-        areaServed: "IN",
-        availableLanguage: ["en"],
-      },
-    ],
-  };
+
 
   return (
     <section
@@ -94,11 +79,6 @@ export default function CtaSection() {
         </p>
       </div>
 
-      {/* JSON-LD for rich contact info */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

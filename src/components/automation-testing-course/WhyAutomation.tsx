@@ -23,18 +23,7 @@ const benefits: Benefit[] = [
 ];
 
 export default function WhyAutomation() {
-  // SEO: structured data for search engines
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Why Learn Automation Testing / SDET in 2025',
-    itemListElement: benefits.map((b, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: b.title,
-      description: b.description,
-    })),
-  };
+
 
   return (
     <section
@@ -103,12 +92,6 @@ export default function WhyAutomation() {
           observability,</em> and <em>scalable frameworks</em> that hiring managers value.
         </p>
       </div>
-
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

@@ -73,24 +73,6 @@ export default function WhoShouldEnroll() {
   const seoKeywords =
     "who should enroll advanced data analytics course, analytics for students, working professionals upskill, business analyst training, career switch to data analytics, python sql power bi course, job ready analytics program";
 
-  // JSON-LD Audience list for richer snippets
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Who Should Enroll — Advanced Data Analytics Program",
-    itemListElement: PERSONAS.map((p, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: {
-        "@type": "Audience",
-        audienceType: p.title,
-        description: p.blurb,
-        educationalRole: "student",
-        keywords:
-          "advanced data analytics audience, who should enroll, students, working professionals, business analysts, career switchers",
-      },
-    })),
-  };
 
   return (
     <section
@@ -207,11 +189,6 @@ export default function WhoShouldEnroll() {
         </div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

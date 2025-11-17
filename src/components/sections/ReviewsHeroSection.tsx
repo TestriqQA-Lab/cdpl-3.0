@@ -3,7 +3,6 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import Script from "next/script";
 import { Star } from "lucide-react";
 import { useMemo } from "react";
 import type { CSSProperties } from "react";
@@ -35,30 +34,10 @@ export default function TestimonialHeroSection() {
         })),
     []
   );
-
-  const jsonLd = useMemo(
-    () => ({
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      name: "CDPL Student Ratings & Reviews",
-      itemListElement: REVIEWS.map((r, i) => ({
-        "@type": "Review",
-        position: i + 1,
-        author: { "@type": "Person", name: r.name },
-        reviewBody: r.quote,
-        reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5 },
-        itemReviewed: { "@type": "Course", name: "CDPL Programs" },
-      })),
-    }),
-    [REVIEWS]
-  );
-
   const sectionStyle: CSSVars = useMemo(() => ({ "--color-brand": BRAND_ORANGE }), []);
 
   return (
     <section className="relative overflow-hidden bg-white" aria-label="Student ratings and reviews" style={sectionStyle}>
-      <Script id="cdpl-students-hero-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-
       <div className="max-w-7xl mx-auto px-4 pb-8 sm:px-6 lg:px-8 pt-8">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-3">

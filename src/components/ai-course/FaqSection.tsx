@@ -47,16 +47,6 @@ export default function FaqSection() {
   const seoKeywords =
     "data science faq, ai course questions, machine learning program india, job assistance data science, ds ai certification, ml projects tools duration";
 
-  // JSON-LD (FAQPage) for rich results
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: FAQS.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  };
 
   return (
     <section id="faq" aria-labelledby="faq-heading" className="relative py-8 md:py-12 bg-white">
@@ -151,8 +141,6 @@ export default function FaqSection() {
         </div>
       </div>
 
-      {/* Structured data for SEO */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

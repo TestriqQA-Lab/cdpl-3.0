@@ -57,18 +57,7 @@ const features = [
 ];
 
 export default function HeroSection() {
-  // JSON-LD
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Course',
-    name: 'AI-Driven Digital Marketing & Analytics — Master Program',
-    description:
-      'Hands-on program covering Performance Marketing, SEO, Content Strategy, GA4, Tag Manager, Looker Studio, Marketing Automation, and AI tools. Live projects, certification, and placement support.',
-    provider: { '@type': 'Organization', name: 'Cinute Digital Pvt. Ltd.' },
-    timeRequired: 'P80H',
-    keywords:
-      'digital marketing course mumbai, AI marketing, GA4 training, performance marketing, seo course, marketing analytics, tag manager, looker studio, marketing automation',
-  };
+
 
   const breadcrumbs = [
     { label: 'Home', href: '/' },
@@ -221,8 +210,6 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* JSON-LD */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

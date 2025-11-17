@@ -56,24 +56,7 @@ function CountUp({ value, className }: { value: string; className?: string }) {
 }
 
 export default function StatsSection() {
-  // SEO structured data (keeps your original shape, updated values)
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'MySQL Course Key Statistics',
-    description:
-      'Job vacancies, fresher salary, market growth, and training hours for the DBMS using MySQL course in India.',
-    itemListElement: stats.map((s, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: s.label,
-      additionalProperty: {
-        '@type': 'PropertyValue',
-        name: s.label,
-        value: s.value,
-      },
-    })),
-  };
+
 
   return (
     <section
@@ -138,8 +121,6 @@ export default function StatsSection() {
         </div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

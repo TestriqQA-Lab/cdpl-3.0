@@ -103,36 +103,15 @@ const ReviewCard: React.FC<ReviewProps> = ({ quote, name, role }) => (
 
 /* ==================== Instructor Section ==================== */
 export default function InstructorSection() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Rajesh Sharma",
-    "jobTitle": "Lead QA Instructor",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Your Institute Name"
-    },
-    "alumniOf": "Fortune 500 Projects",
-    "affiliation": "ISTQB",
-    "award": ["ISTQB Advanced Test Manager", "Top Mentor Award"],
-    "knowsAbout": ["Manual Testing", "Automation Testing", "API Testing", "Agile Testing", "Test Strategy", "Test Management"],
-    "sameAs": [
-      "https://www.istqb.org/"
-    ]
-  };
+
 
   return (
     <section
       id="instructor"
       className="py-16 md:py-2 bg-white"
-      itemScope
-      itemType="https://schema.org/CourseInstructor"
       aria-label="Learn from Industry Leaders"
     >
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-14">
@@ -157,7 +136,7 @@ export default function InstructorSection() {
                   <span className="text-lg font-extrabold text-slate-800" itemProp="name">RS</span>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-slate-900" itemProp="employee" itemScope itemType="https://schema.org/Person">
+                  <h3 className="text-2xl font-bold text-slate-900" itemProp="employee">
                     <span itemProp="name">Rajesh Sharma</span>
                   </h3>
                   <p className="text-sm font-medium text-indigo-700">Lead QA Instructor • ISTQB Advanced</p>

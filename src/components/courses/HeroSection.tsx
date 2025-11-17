@@ -293,34 +293,6 @@ export default function HeroSection() {
                 </div>
             </div>
 
-            {/* JSON-LD: helps SEO for course/training pages */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "Course",
-                        name: "Master In-Demand Tech Skills — Launch Your Career",
-                        description:
-                            "Hands-on training in software testing, automation with Selenium/Cypress/Playwright, web development (React, Node.js), data analytics, and digital marketing. Mentor-led, project-based learning with placement assistance and industry certifications.",
-                        provider: {
-                            "@type": "Organization",
-                            name: "Industry-Leading Tech Education Platform",
-                        },
-                        educationalCredentialAwarded: "Industry Certifications",
-                        about: [
-                            "Software Testing",
-                            "Automation Testing",
-                            "SDET Training",
-                            "Web Development",
-                            "React",
-                            "Node.js",
-                            "Data Analytics",
-                            "Digital Marketing",
-                        ],
-                    }),
-                }}
-            />
         </section>
     );
 }

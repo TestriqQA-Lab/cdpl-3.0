@@ -377,30 +377,6 @@ export default function CurriculumSection() {
         </div>
       </div>
 
-      {/* Structured data for SEO (ItemList of modules) */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            name: "Java Programming Curriculum",
-            itemListElement: MODULES.map((m, idx) => ({
-              "@type": "ListItem",
-              position: idx + 1,
-              item: {
-                "@type": "Course",
-                name: m.title,
-                description: m.outcome,
-                position: m.num,
-              },
-            })),
-            numberOfItems: MODULES.length,
-            keywords:
-              "Java curriculum, JDK JRE JVM, arrays vs ArrayList, control flow, functions, OOP, access modifiers, collections framework, regex, exception handling, capstone project",
-          }),
-        }}
-      />
 
       {/* Assist crawlers & screen readers */}
       <h1 className="sr-only">{title}</h1>

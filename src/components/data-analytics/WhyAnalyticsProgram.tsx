@@ -1,7 +1,6 @@
 // components/sections/WhyAnalyticsProgram.tsx
 "use client";
 
-import { useMemo } from "react";
 import {
     BarChart3,
     PieChart,
@@ -17,38 +16,7 @@ import {
 import Link from "next/link";
 
 export default function WhyAnalyticsProgram() {
-    // SEO: Course schema
-    const courseJsonLd = useMemo(
-        () =>
-            JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "Course",
-                name: "Advanced Data Analytics Hero Program",
-                description:
-                    "Hands-on data analytics course covering data visualization, statistics, predictive modeling, SQL, Python, Power BI, and Tableau. Build job-ready BI dashboards, reports, and analytics solutions.",
-                provider: {
-                    "@type": "Organization",
-                    name: "Cinute Digital Pvt. Ltd.",
-                    sameAs: "https://example.com",
-                },
-                educationalCredentialAwarded: "Certificate of Completion",
-                timeRequired: "PT110H",
-                inLanguage: "en",
-                keywords: [
-                    "data analytics course",
-                    "business intelligence training",
-                    "Power BI course",
-                    "Tableau course",
-                    "SQL for data analytics",
-                    "Python data analysis",
-                    "predictive modeling",
-                    "data visualization",
-                    "analytics portfolio",
-                    "dashboard design",
-                ],
-            }),
-        []
-    );
+
 
     const featureChips = [
         { label: "110 Hours", color: "bg-indigo-600 text-white" },
@@ -272,8 +240,6 @@ export default function WhyAnalyticsProgram() {
 
             </div>
 
-            {/* JSON-LD */}
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: courseJsonLd }} />
         </section>
     );
 }

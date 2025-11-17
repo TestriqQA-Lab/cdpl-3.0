@@ -2,40 +2,8 @@
 import { BadgeCheck } from 'lucide-react';
 import ReviewsMarquee from '../sections/ReviewMarque';
 
-
-type Testimonial = {
-    name: string;
-    role: string;
-    rating: number;
-    text: string;
-    // optional avatar initials
-    initials?: string;
-};
-
-const testimonials: Testimonial[] = [
-    { name: 'Neha Gupta', role: 'ETL Tester at Cognizant', rating: 5, text: 'Landed ₹9 LPA job in 20 days. The banking project was a game-changer!', initials: 'NG' },
-    { name: 'Vikram Singh', role: 'Data QA, Infosys', rating: 5, text: 'Learned reconciliation queries that saved 40 hours weekly.', initials: 'VS' },
-    { name: 'Pooja Rao', role: 'Fresher → TCS', rating: 5, text: 'From BCom to ETL expert. Best career move!', initials: 'PR' },
-];
-
-
 export default function TestimonialsSection() {
-    // SEO: Review JSON-LD
-    const jsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'ItemList',
-        name: 'ETL Testing Student Testimonials',
-        itemListElement: testimonials.map((t, i) => ({
-            '@type': 'ListItem',
-            position: i + 1,
-            item: {
-                '@type': 'Review',
-                author: { '@type': 'Person', name: t.name },
-                reviewBody: t.text,
-                reviewRating: { '@type': 'Rating', ratingValue: t.rating, bestRating: 5, worstRating: 1 },
-            },
-        })),
-    };
+
 
     return (
         <section id="testimonials" aria-labelledby="testimonials-heading" className="relative py-8 md:py-10 bg-white">
@@ -69,11 +37,6 @@ export default function TestimonialsSection() {
                 </p>
             </div>
 
-            {/* JSON-LD for search engines */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
         </section>
     );
 }

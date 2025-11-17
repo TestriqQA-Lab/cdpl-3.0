@@ -67,23 +67,7 @@ const STEPS: Step[] = [
 ];
 
 export default function CareerRoadmapSection() {
-  // SEO structured data (HowTo)
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    name: "AI Career Roadmap (Deep Learning, NLP & Generative AI)",
-    description:
-      "Step-by-step roadmap to become a job-ready AI professional with LLM fine-tuning, RAG, MLOps, cloud deployment, interview prep, and placement support.",
-    totalTime: "P2M",
-    step: STEPS.map((s) => ({
-      "@type": "HowToStep",
-      position: s.n,
-      name: s.title,
-      text: s.desc,
-    })),
-    keywords:
-      "ai career roadmap, deep learning roadmap, nlp roadmap, generative ai career, llm fine-tuning, rag pipeline, mlops deployment, python ai course, get ai job",
-  };
+
 
   return (
     <section
@@ -209,11 +193,6 @@ export default function CareerRoadmapSection() {
         </div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

@@ -88,22 +88,6 @@ const enrichedStats: EnrichedStat[] = statsData.map((stat) => {
   }
 });
 
-/** --------- JSON-LD (SEO): ItemList describing the stats ---------- */
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  name: "Data Analytics with BI and Big Data Engineering Program Highlights",
-  description:
-    "Key statistics for a Data Analytics with BI and Big Data Engineering Master Program in India: program duration, total training hours, data engineering job growth, and average salary hike for certified engineers.",
-  itemListElement: enrichedStats.map((s, idx) => ({
-    "@type": "ListItem",
-    position: idx + 1,
-    name: s.label,
-    description: s.description,
-  })),
-  keywords:
-    "Data Analytics with BI, Big Data Engineering Course, Business Intelligence training, Data Engineering jobs India, BI Developer salary, Big Data Engineer certification, ETL and Data Warehouse course, cloud data engineering, job-oriented data engineering program, master program in data analytics",
-};
 
 const StatsSection: React.FC = () => {
   return (
@@ -111,11 +95,7 @@ const StatsSection: React.FC = () => {
       className="py-16 md:py-20 bg-gradient-to-b from-white to-slate-50"
       aria-labelledby="stats-heading"
     >
-      {/* SEO JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section Header */}

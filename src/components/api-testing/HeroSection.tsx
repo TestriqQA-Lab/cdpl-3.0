@@ -33,24 +33,7 @@ const features = [
 ];
 
 export default function HeroSection() {
-    const jsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'Course',
-        name: 'API Testing Course with Postman & REST',
-        description:
-            'Hands-on API testing course covering Postman, REST, GraphQL, test automation, CI/CD, and API security with mentor-led projects and job assistance.',
-        provider: {
-            '@type': 'Organization',
-            name: 'Think and Do Institute',
-        },
-        offers: {
-            '@type': 'Offer',
-            availability: 'https://schema.org/InStock',
-            price: '0',
-            priceCurrency: 'INR',
-            category: 'Education',
-        },
-    };
+
 
     const breadcrumbs = [
         { label: "Home", href: "/" },
@@ -217,11 +200,6 @@ export default function HeroSection() {
                 </div>
             </div>
 
-            {/* JSON-LD for SEO */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
         </section>
     );
 }

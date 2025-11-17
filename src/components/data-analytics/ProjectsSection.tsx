@@ -73,16 +73,6 @@ export default function ProjectsSection() {
   const seoKeywords =
     "advanced analytics projects, sales forecasting dashboard, customer segmentation clustering, churn prediction pipeline, bi reporting power bi, sql data warehouse etl, a/b testing uplift analysis, data science portfolio projects";
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Advanced Data Analytics — Projects You’ll Build",
-    itemListElement: PROJECTS.map((p, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: { "@type": "CreativeWork", name: p.title, description: p.desc, keywords: "analytics, forecasting, segmentation, churn, BI, SQL, ETL, experimentation" },
-    })),
-  };
 
   return (
     <section id="projects" aria-labelledby="projects-heading" className="relative py-10 md:py-12 bg-white">
@@ -190,8 +180,6 @@ export default function ProjectsSection() {
         </div>
       </div>
 
-      {/* JSON-LD structured data */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

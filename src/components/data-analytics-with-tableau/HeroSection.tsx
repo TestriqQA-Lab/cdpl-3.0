@@ -18,7 +18,7 @@ const heroData = {
     stats: [
         { value: "4.8/5", label: "Average Rating", icon: "⭐" },
         { value: "500+", label: "Successful Graduates", icon: "👥" },
-        { value: "14+", label: "Years Experience", icon: "🏆" },
+        { value: "5+", label: "Years Experience", icon: "🏆" },
     ],
     cta: {
         primary: "Enroll Now",
@@ -153,44 +153,10 @@ const breadcrumbs = [
 ];
 
 export default function HeroSection() {
-    const courseLd = {
-        '@context': 'https://schema.org',
-        '@type': 'Course',
-        name: 'Tableau Data Analytics & Visualization Course',
-        description:
-            'Hands-on Tableau training: dashboards, data storytelling, BI reporting, data prep, and analytics. 20-hour intensive with certification and job assistance.',
-        provider: { '@type': 'Organization', name: 'Cinute Digital Pvt. Ltd.' },
-        educationalCredentialAwarded: 'Certificate of Completion',
-        timeRequired: 'PT20H',
-    } as const;
 
-    const faqLd = {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: [
-            {
-                '@type': 'Question',
-                name: 'Is Tableau good for data analytics and BI? ',
-                acceptedAnswer: {
-                    '@type': 'Answer',
-                    text:
-                        'Yes. Tableau is a leading Business Intelligence (BI) platform used for dashboards, self-service analytics, and data storytelling across industries.',
-                },
-            },
-            {
-                '@type': 'Question',
-                name: 'Do I get a certificate after completing the course?',
-                acceptedAnswer: {
-                    '@type': 'Answer',
-                    text:
-                        'Yes, you will receive an industry-recognized certificate and portfolio-ready dashboard projects.',
-                },
-            },
-        ],
-    } as const;
 
     return (
-        <section className="relative min-h-screen bg-gradient-to-br from-white via-blue-50 to-white pt-12 pb-16 overflow-hidden">
+        <section className="relative min-h-screen bg-gradient-to-br from-white via-blue-50 to-white pt-8 md:pt-12 pb-16 overflow-hidden">
             <Head>
                 <title>Tableau Course | Data Analytics & BI Dashboard Training (20 Hours)</title>
                 <meta
@@ -201,8 +167,7 @@ export default function HeroSection() {
                     name="keywords"
                     content="Tableau course, Tableau training in Mumbai, Tableau certification, business intelligence, data analytics, data visualization, dashboards, Power BI vs Tableau, LOD expressions, parameters, Tableau maps, data storytelling, analytics course, BI developer training, Tableau Desktop course, Tableau interview preparation, KPI dashboards, ETL and data prep"
                 />
-                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(courseLd) }} />
-                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+
             </Head>
 
             {/* Decorative background elements */}

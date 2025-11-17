@@ -76,23 +76,7 @@ const STEPS: Step[] = [
 ];
 
 export default function CareerRoadmapSection() {
-  // SEO structured data (HowTo)
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    name: "Generative AI Career Roadmap",
-    description:
-      "Step-by-step roadmap to become a job-ready Prompt/GenAI professional with portfolio projects, interview prep, and placement support.",
-    totalTime: "P1M",
-    step: STEPS.map((s) => ({
-      "@type": "HowToStep",
-      position: s.n,
-      name: s.title,
-      text: s.desc,
-    })),
-    keywords:
-      "genai career roadmap, prompt engineer jobs india, rag knowledge engineer, llm application engineer, ai portfolio projects",
-  };
+
 
   const subtitle =
     "Follow these four proven steps to go from beginner to job-ready Prompt/GenAI professional with portfolio projects recruiters trust.";
@@ -226,11 +210,6 @@ export default function CareerRoadmapSection() {
         </div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

@@ -94,30 +94,6 @@ export default function CtaSection() {
         </div>
       </div>
 
-      {/* JSON-LD (Organization + ContactPoint) */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: "Cinute Digital Pvt. Ltd.",
-            url: "https://www.cinutedigital.com",
-            contactPoint: [
-              {
-                "@type": "ContactPoint",
-                telephone: "+91-788-83-83-788",
-                contactType: "sales",
-                areaServed: "IN",
-                availableLanguage: ["en", "hi"],
-              },
-            ],
-            sameAs: ["https://www.cinutedigital.com"],
-            keywords: keywords,
-          }),
-        }}
-      />
-
       {/* Accessibility helpers */}
       <h1 className="sr-only">{title}</h1>
       <p className="sr-only">{subtitle}</p>

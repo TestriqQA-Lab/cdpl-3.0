@@ -303,24 +303,6 @@ export default function JobsCareersCultureSection() {
                 </div>
             </div>
 
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "ItemList",
-                        name: "CDPL Culture & Principles",
-                        itemListElement: principles.map((p, idx) => ({
-                            "@type": "ListItem",
-                            position: idx + 1,
-                            name: p.k,
-                            description: p.v,
-                        })),
-                        author: { "@type": "Organization", name: "Cinute Digital Pvt Ltd (CDPL)" },
-                    }),
-                }}
-            />
-
             <style
                 dangerouslySetInnerHTML={{
                     __html: `

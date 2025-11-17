@@ -43,18 +43,7 @@ const benefits = [
 ];
 
 export default function WhyApiTesting() {
-  // Structured data for SEO
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Why Learn API Testing in 2025',
-    itemListElement: benefits.map((b, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: b.title,
-      description: b.description,
-    })),
-  };
+
 
   return (
     <section id="why" aria-labelledby="why-heading" className="relative py-10 sm:py-20">
@@ -129,11 +118,6 @@ export default function WhyApiTesting() {
         </div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

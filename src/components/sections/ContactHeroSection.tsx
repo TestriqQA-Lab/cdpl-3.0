@@ -592,7 +592,7 @@ export function ContactHeroSection() {
 
                   {/* Schedule Meeting */}
                   <Link
-                    href="/book-a-call"
+                    href="https://calendar.app.google/tvh9dsXZsX9BujRR8"
                     aria-label="Schedule a Meeting"
                     className="group inline-flex w-full items-center gap-4 lg:gap-3 xl:gap-4 rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 shadow-sm transition hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 overflow-hidden"
                   >

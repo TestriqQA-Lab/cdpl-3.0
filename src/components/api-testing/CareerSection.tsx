@@ -15,26 +15,7 @@ const roleAccents = ['sky', 'amber', 'emerald', 'violet', 'rose', 'cyan', 'lime'
 const companyAccents = ['slate', 'sky', 'amber', 'emerald', 'violet', 'rose', 'cyan', 'lime', 'indigo', 'orange'] as const;
 
 export default function CareerSection() {
-    // JSON-LD for SEO (roles + companies as ItemLists)
-    const jsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'ItemList',
-        name: 'API Testing Career Outcomes',
-        itemListElement: [
-            ...roles.map((r, i) => ({
-                '@type': 'ListItem',
-                position: i + 1,
-                name: r,
-            })),
-            ...companies.map((c, i) => ({
-                '@type': 'ListItem',
-                position: roles.length + i + 1,
-                name: c,
-            })),
-        ],
-        description:
-            'High-demand API Testing roles (API Tester, QA Engineer, Automation Tester, SDET) and top hiring companies in India.',
-    };
+
 
     return (
         <section id="career" aria-labelledby="career-heading" className="relative py-8 sm:py-10 bg-white">
@@ -166,12 +147,6 @@ export default function CareerSection() {
                     </Link>
                 </motion.div>
             </div>
-
-            {/* JSON-LD for search engines */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
         </section>
     );
 }

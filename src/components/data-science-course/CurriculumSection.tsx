@@ -83,19 +83,6 @@ export default function CurriculumSection() {
   const keywords =
     "advanced data science curriculum, MySQL DBMS, Excel analytics, Power BI, Tableau, Python syllabus, statistics probability, machine learning with Python, R programming projects, capstone data science";
 
-  // JSON-LD (ItemList) for modules
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Advanced Data Science & Machine Learning Masterclass Curriculum",
-    itemListElement: MODULES.map((m, idx) => ({
-      "@type": "ListItem",
-      position: idx + 1,
-      item: { "@type": "Course", name: m.title, description: m.outcome },
-    })),
-    numberOfItems: MODULES.length,
-    keywords,
-  };
 
   return (
     <section id="curriculum" aria-labelledby="curriculum-heading" className="relative overflow-hidden py-4 md:py-0 bg-white">
@@ -210,8 +197,6 @@ export default function CurriculumSection() {
         </p>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

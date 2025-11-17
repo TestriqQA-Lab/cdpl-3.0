@@ -42,20 +42,7 @@ const accents = [
 ];
 
 export default function ProjectsSection() {
-  // SEO: Structured data for the projects/portfolio
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'ETL Testing Portfolio Projects',
-    description:
-      'Hands-on ETL testing projects across banking, e-commerce, and healthcare with data quality validation and compliance.',
-    itemListElement: projects.map((p, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: p.title,
-      description: p.description,
-    })),
-  };
+
 
   return (
     <section id="projects" aria-labelledby="projects-heading" className="relative py-6 md:py-10 bg-white">
@@ -136,13 +123,6 @@ export default function ProjectsSection() {
         </p>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd),
-        }}
-      />
     </section>
   );
 }

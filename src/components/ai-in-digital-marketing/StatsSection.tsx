@@ -13,33 +13,13 @@ interface Stat {
 export default function StatsSection() {
   const { stats } = courseData as { stats: Stat[] };
 
-  /** --------- JSON-LD (SEO): ItemList describing the stats ---------- */
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "AI in Digital Marketing Program Statistics",
-    description:
-      "Key statistics for an AI in Digital Marketing course: student success rate, business growth impact, career transformation metrics, and program credibility.",
-    itemListElement: stats.map((s, idx) => ({
-      "@type": "ListItem",
-      position: idx + 1,
-      name: s.label,
-      description: s.description,
-    })),
-    keywords:
-      "AI in Digital Marketing course, digital marketing with AI tools, performance marketing training, social media marketing course, AI marketing institute in Mumbai, growth marketing, lead generation, marketing analytics, job-oriented digital marketing program",
-  };
 
   return (
     <section
       className="py-16 md:py-20 bg-gradient-to-b from-white to-slate-50"
       aria-labelledby="stats-heading"
     >
-      {/* SEO JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}

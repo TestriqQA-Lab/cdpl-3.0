@@ -49,23 +49,7 @@ export default function WhoShouldEnroll() {
   const seoKeywords =
     "who should enroll data science course, ai ml audience, career switch to data science, working professional upskilling, data analyst to data scientist, mlops deployment skills";
 
-  // JSON-LD: Audience list for richer snippets
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Who Should Enroll — Comprehensive Data Science & AI",
-    itemListElement: PERSONAS.map((p, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: {
-        "@type": "Audience",
-        audienceType: p.title,
-        description: p.blurb,
-        keywords:
-          "data science audience, students, working professionals, data analysts, career switchers",
-      },
-    })),
-  };
+
 
   return (
     <section
@@ -162,8 +146,6 @@ export default function WhoShouldEnroll() {
         </div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

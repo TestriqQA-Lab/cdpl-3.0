@@ -1,7 +1,6 @@
 // components/sections/WhyAIProgram.tsx
 "use client";
 
-import { useMemo } from "react";
 import {
   Brain,
   Cpu,
@@ -19,33 +18,7 @@ import {
 import Link from "next/link";
 
 export default function WhyAIProgram() {
-  // SEO: Course schema
-  const courseJsonLd = useMemo(
-    () =>
-      JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Course",
-        name: "Comprehensive Data Science & AI — Master Program",
-        description:
-          "Hands-on master program covering data engineering, classical ML, deep learning, NLP/GenAI, MLOps, and cloud deployment. Build a job-ready portfolio with real-world projects and ethical AI practices.",
-        provider: { "@type": "Organization", name: "Cinute Digital Pvt. Ltd." },
-        educationalCredentialAwarded: "Certificate of Completion",
-        timeRequired: "PT255H",
-        inLanguage: "en",
-        keywords: [
-          "data science course",
-          "AI master program",
-          "machine learning training",
-          "deep learning",
-          "NLP",
-          "Generative AI",
-          "MLOps",
-          "cloud AI deployment",
-          "ethical AI",
-        ],
-      }),
-    []
-  );
+
 
   const featureChips = [
     { label: "255 Hours", color: "bg-indigo-600 text-white" },
@@ -273,9 +246,6 @@ export default function WhyAIProgram() {
           </aside>
         </div>
       </div>
-
-      {/* JSON-LD for SEO */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: courseJsonLd }} />
     </section>
   );
 }

@@ -72,21 +72,7 @@ const TOOLS: Tool[] = [
 ];
 
 export default function ToolsSection() {
-  // SEO JSON-LD
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Tools & Technologies You Will Learn',
-    description:
-      'Hands-on digital marketing & analytics stack: ChatGPT for content, Google Insights for performance, Grok/DeepSeek for research, Meta Ads, Google Calendar for ops, Ahrefs & SEMrush for SEO/SEM.',
-    itemListElement: TOOLS.map((t, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      item: { '@type': 'SoftwareApplication', name: t.name, applicationCategory: 'Marketing & Analytics' },
-    })),
-    keywords:
-      'best digital marketing tools, SEO tools, AI marketing tools, Ahrefs vs SEMrush, Meta ads, Google PageSpeed Insights, content automation, campaign planning',
-  };
+
 
   return (
     <section id="tools" aria-labelledby="tools-heading" className="relative py-8 md:py-14 bg-white">
@@ -169,11 +155,6 @@ export default function ToolsSection() {
         </p>
       </div>
 
-      {/* JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

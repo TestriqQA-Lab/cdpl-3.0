@@ -4,29 +4,7 @@ import { Phone, Mail, MapPin, Clock, Award, CheckCircle, BadgeCheck } from 'luci
 import Link from 'next/link';
 
 export default function CtaSection() {
-  // SEO: ContactPoint JSON-LD
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'EducationalOrganization',
-    name: 'Think and Do Institute',
-    url: 'https://example.com/api-testing/etl', // replace with your canonical URL
-    contactPoint: [
-      {
-        '@type': 'ContactPoint',
-        contactType: 'Admissions',
-        telephone: '+91-788-83-83-788',
-        email: 'contact@cinutedigital.com',
-        areaServed: 'IN',
-        availableLanguage: ['en', 'hi'],
-      },
-    ],
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Mira Road & Vasai',
-      addressRegion: 'Maharashtra',
-      addressCountry: 'IN',
-    },
-  };
+
 
   return (
     <section
@@ -130,11 +108,6 @@ export default function CtaSection() {
         </motion.div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

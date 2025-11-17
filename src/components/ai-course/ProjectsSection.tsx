@@ -64,22 +64,6 @@ export default function ProjectsSection() {
   const seoKeywords =
     "data science projects, ai portfolio projects, healthcare ai diagnostic, fraud detection ml, recommendation engine, mlops pipeline deployment, rag question answering, time series forecasting";
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Data Science & AI — Projects You’ll Build",
-    itemListElement: PROJECTS.map((p, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: {
-        "@type": "CreativeWork",
-        name: p.title,
-        description: p.desc,
-        keywords:
-          "machine learning, deep learning, recommendation systems, forecasting, rag, mlops",
-      },
-    })),
-  };
 
   return (
     <section id="projects" aria-labelledby="projects-heading" className="relative py-12 md:py-20 bg-white">
@@ -181,8 +165,6 @@ export default function ProjectsSection() {
         </div>
       </div>
 
-      {/* JSON-LD structured data */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

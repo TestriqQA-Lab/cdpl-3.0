@@ -21,20 +21,7 @@ const audience: Audience[] = [
 ];
 
 export default function WhoShouldEnroll() {
-  // SEO: structured data for audiences
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Who Should Enroll in the MySQL Course',
-    description:
-      'Target learners for the MySQL course: career switchers, fresh graduates, job seekers, and developers adding SQL and database design skills.',
-    itemListElement: audience.map((a, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: a.title,
-      description: a.description,
-    })),
-  };
+
 
   return (
     <section id="who-should-enroll" aria-labelledby="who-heading" className="relative py-8 md:py-10 bg-white">
@@ -92,11 +79,6 @@ export default function WhoShouldEnroll() {
         </p>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

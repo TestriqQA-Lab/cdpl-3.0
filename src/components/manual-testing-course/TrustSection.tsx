@@ -64,20 +64,7 @@ function StatCard({
 
 
 export default function TrustSection() {
-    const jsonLd = {
-        "@context": "https://schema.org",
-        "@type": "EducationalOrganization",
-        name: "Your Institute Name",
-        description:
-            "Job-focused ed-tech institute offering industry-ready training, hands-on projects, and placement assistance across Software Testing, Full Stack Development, and Data Science.",
-        url: "https://example.com",
-        aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: "4.8",
-            reviewCount: "3200",
-        },
-        numberOfEmployees: "50-200",
-    };
+
 
     return (
         <section
@@ -183,11 +170,6 @@ export default function TrustSection() {
                     </div>
                 </div>
 
-                {/* Hidden JSON-LD for SEO */}
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-                />
             </div>
         </section>
     );

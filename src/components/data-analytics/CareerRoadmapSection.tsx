@@ -72,23 +72,7 @@ const STEPS: Step[] = [
 ];
 
 export default function CareerRoadmapSection() {
-  // SEO structured data (HowTo)
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    name: "Analytics Career Roadmap",
-    description:
-      "Step-by-step roadmap to become a job-ready Data Analytics professional with portfolio projects, interview prep, and placement support.",
-    totalTime: "P3M",
-    step: STEPS.map((s) => ({
-      "@type": "HowToStep",
-      position: s.n,
-      name: s.title,
-      text: s.desc,
-    })),
-    keywords:
-      "analytics career roadmap, data analyst jobs India, BI developer path, Power BI Tableau portfolio, SQL interview prep, analytics engineer",
-  };
+
 
   const subtitle =
     "Follow these 4 proven steps to move from learner to job-ready Analytics professional with a portfolio recruiters trust.";
@@ -202,11 +186,6 @@ export default function CareerRoadmapSection() {
         </div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

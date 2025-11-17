@@ -62,24 +62,7 @@ const stats: Stat[] = [
 ];
 
 export default function StatsSection() {
-  // SEO: structured data
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'ETL Testing & Development — Key Stats',
-    description:
-      'Core figures from the ETL Testing & Development program: total duration, modules, capstone projects, and mapped job roles.',
-    itemListElement: stats.map((s, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: s.label,
-      additionalProperty: {
-        '@type': 'PropertyValue',
-        name: s.label,
-        value: `${s.target}${s.suffix ?? ''}`,
-      },
-    })),
-  };
+
 
   return (
     <section
@@ -148,11 +131,6 @@ export default function StatsSection() {
         </div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

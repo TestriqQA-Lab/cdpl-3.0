@@ -96,35 +96,6 @@ const PlacementFeature = ({ icon, title, description, badge }: FeatureProps) => 
   </div>
 );
 
-/* ---------- JSON-LD for SEO Rich Results (optional but helpful) ---------- */
-const CareerSchema = () => {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Course",
-    name: "Manual & Software Testing Career Outcomes",
-    description:
-      "Job-ready manual testing course with 100% placement support. QA Engineer salary, top roles, interview prep, and hiring partners in India.",
-    provider: {
-      "@type": "Organization",
-      name: "Your EdTech Institute",
-      sameAs: "https://example.com",
-    },
-    offers: {
-      "@type": "Offer",
-      availability: "https://schema.org/InStock",
-      priceCurrency: "INR",
-      price: "0",
-    },
-    educationalCredentialAwarded: "ISTQB-aligned Certificate",
-    occupationalCredentialAwarded: "QA Engineer / Manual Tester",
-  };
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
-  );
-};
 
 /* ==================== SECTION ==================== */
 type Company = { name: string; logoSrc?: string };
@@ -167,7 +138,7 @@ export default function CareerSection() {
       id="career"
       aria-label="Career outcomes and salary insights for Software Testing"
     >
-      <CareerSchema />
+
 
       {/* Decorative, subtle futuristic accents (no heavy gradients) */}
       <div className="pointer-events-none absolute inset-0 [mask-image:radial-gradient(50%_50%_at_50%_40%,black,transparent)]">

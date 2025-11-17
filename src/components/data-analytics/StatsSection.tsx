@@ -93,23 +93,6 @@ export default function StatsSection() {
   const seoKeywords =
     "advanced data analytics course, business analytics training, python sql bi ml, job assistance data analyst, hands-on analytics program, dashboard reporting, power bi tableau excel";
 
-  // JSON-LD (ItemList) for richer snippets
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Advanced Data Analytics — Program Highlights",
-    itemListElement: STATS.map((s, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: {
-        "@type": "Thing",
-        name: s.label,
-        description: `${s.value} — ${s.label}${s.hint ? ` (${s.hint})` : ""}`,
-      },
-    })),
-    keywords:
-      "advanced data analytics highlights, analytics course benefits, data analyst training features, job ready analytics",
-  };
 
   return (
     <section
@@ -208,11 +191,6 @@ export default function StatsSection() {
         </div>
       </div>
 
-      {/* JSON-LD structured data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

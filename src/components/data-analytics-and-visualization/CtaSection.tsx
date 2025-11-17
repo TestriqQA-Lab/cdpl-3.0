@@ -108,9 +108,26 @@ export default function CtaSection() {
                     <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
                         This exclusive offer is available for a limited time only. Don&apos;t miss out on your chance to master Excel and transform your career!
                     </p>
-                    <Link href="contact-us" className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-slate-900 font-bold py-4 px-10 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl text-lg">
+                    <Link
+                        href="/contact-us"
+                        className="
+    inline-flex items-center justify-center
+    w-full sm:w-auto
+    px-4 py-3 sm:px-6 sm:py-3 md:px-10 md:py-4
+    text-sm sm:text-base md:text-lg
+    bg-gradient-to-r from-yellow-400 to-orange-500
+    hover:from-yellow-500 hover:to-orange-600
+    text-slate-900 font-bold
+    rounded-lg
+    text-center
+    shadow-lg hover:shadow-xl
+    transition-all duration-300
+    break-words
+  "
+                    >
                         Claim Your Offer Now
                     </Link>
+
                 </div>
             </div>
         </section>

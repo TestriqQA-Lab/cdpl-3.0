@@ -54,16 +54,6 @@ export default function FaqSection() {
         { wrap: 'bg-violet-50 border-violet-200', ink: 'text-violet-900', chip: 'bg-violet-100 text-violet-800' },
     ];
 
-    // SEO JSON-LD
-    const jsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: RAW_FAQS.map(f => ({
-            '@type': 'Question',
-            name: f.q,
-            acceptedAnswer: { '@type': 'Answer', text: f.a },
-        })),
-    };
 
     // ensure open index stays valid after filtering
     useEffect(() => {
@@ -195,11 +185,6 @@ export default function FaqSection() {
                 </div>
             </div>
 
-            {/* JSON-LD (SEO) */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
         </section>
     );
 }

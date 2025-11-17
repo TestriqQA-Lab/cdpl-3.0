@@ -4,42 +4,8 @@
 import Link from "next/link";
 import ReviewsMarquee from "../sections/ReviewMarque";
 
-type Testimonial = {
-  name: string;
-  text: string;
-  role?: string;
-  rating?: number;
-};
-
-const testimonials: Testimonial[] = [
-  { name: 'Kishore Jha', role: 'Digital Marketing Analyst', rating: 5, text: 'This course is designed in an efficient and effective manner. The instructor is excellent and under his guidance I was able to learn a lot of new things.' },
-  { name: 'Ragini Kumari', role: 'Performance Marketer', rating: 5, text: 'Best training institute for learning. It has the best skilled faculty in my experience and they have placed me in a good company.' },
-  { name: 'Faiz Khan', role: 'SEO Specialist', rating: 5, text: 'Everything about this course is great! From the comprehensive content to the engaging delivery, it’s been an enlightening journey.' },
-  { name: 'Dakshali Merya', role: 'Content Strategist', rating: 5, text: 'The instructor is highly skilled and the concepts are well comprehended.' },
-];
-
 export default function TestimonialsSection() {
-  // JSON-LD (Review + AggregateRating)
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Product', // course/program as a product-like entity for reviews
-    name: 'AI-Driven Digital Marketing & Analytics — Mentorship Program',
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: `${testimonials.length}`,
-      bestRating: '5',
-      worstRating: '1',
-    },
-    review: testimonials.map((t) => ({
-      '@type': 'Review',
-      reviewBody: t.text,
-      reviewRating: { '@type': 'Rating', ratingValue: String(t.rating ?? 5), bestRating: '5' },
-      author: { '@type': 'Person', name: t.name },
-    })),
-    keywords:
-      'digital marketing reviews, student testimonials, marketing mentorship feedback, SEO course review, performance marketing training',
-  };
+
 
   return (
     <section
@@ -88,11 +54,6 @@ export default function TestimonialsSection() {
         </div>
       </div>
 
-      {/* JSON-LD for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

@@ -1,7 +1,6 @@
 // components/sections/WhoShouldEnroll.tsx
 "use client";
 
-import { useMemo } from "react";
 import {
   GraduationCap,
   Briefcase,
@@ -62,27 +61,7 @@ const AUDIENCES: Audience[] = [
 ];
 
 export default function WhoShouldEnroll() {
-  // SEO: ItemList of target audiences (rich results)
-  const jsonLd = useMemo(
-    () =>
-      JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        name: "Who Should Enroll — Advanced Data Science & ML Masterclass",
-        itemListElement: AUDIENCES.map((a, i) => ({
-          "@type": "ListItem",
-          position: i + 1,
-          item: {
-            "@type": "Audience",
-            audienceType: a.title,
-            description: a.desc,
-            keywords:
-              "who should enroll data science, DS ML masterclass audience, career switch to data science, upskill machine learning",
-          },
-        })),
-      }),
-    []
-  );
+
 
   return (
     <section
@@ -138,8 +117,6 @@ export default function WhoShouldEnroll() {
         </p>
       </div>
 
-      {/* JSON-LD */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
     </section>
   );
 }

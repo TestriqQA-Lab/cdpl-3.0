@@ -121,18 +121,7 @@ export default function CurriculumSection() {
   const keywords =
     "MySQL DBMS course, Advanced Excel analytics, Power BI training, Tableau storytelling, Python programming, pandas matplotlib seaborn, NumPy, statistics and probability, machine learning with Python, R ggplot2 lm glm, deep learning NLP generative AI, prompt engineering, data science capstone projects";
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Comprehensive Data Science & AI Curriculum",
-    itemListElement: MODULES.map((m, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: { "@type": "Course", name: m.title, description: m.outcome },
-    })),
-    numberOfItems: MODULES.length,
-    keywords,
-  };
+
 
   return (
     <section id="curriculum" aria-labelledby="curriculum-heading" className="relative overflow-hidden py-6 md:py-0 xl:py-4 bg-white">
@@ -244,8 +233,6 @@ export default function CurriculumSection() {
         </p>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

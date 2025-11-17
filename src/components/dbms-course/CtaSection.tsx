@@ -4,28 +4,7 @@ import { Phone, Mail, MapPin, Clock, Award, CheckCircle, BadgeCheck } from 'luci
 import Link from 'next/link';
 
 export default function CtaSection() {
-  // SEO: ContactPoint structured data
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'Think and Do Institute',
-    url: 'https://example.com', // update to your domain
-    contactPoint: [
-      {
-        '@type': 'ContactPoint',
-        telephone: '+91-7888383788',
-        contactType: 'sales',
-        areaServed: 'IN',
-        availableLanguage: ['English', 'Hindi', 'Marathi'],
-      },
-    ],
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Mira Road & Vasai',
-      addressRegion: 'Maharashtra',
-      addressCountry: 'IN',
-    },
-  };
+
 
   return (
     <section
@@ -125,11 +104,6 @@ export default function CtaSection() {
         </motion.div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

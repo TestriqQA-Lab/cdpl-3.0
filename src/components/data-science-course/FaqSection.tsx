@@ -27,15 +27,7 @@ export default function FaqSection() {
     },
   ];
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  };
+
 
   return (
     <section
@@ -114,11 +106,6 @@ export default function FaqSection() {
         </p>
       </div>
 
-      {/* JSON-LD for rich results */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

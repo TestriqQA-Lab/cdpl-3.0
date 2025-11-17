@@ -1,123 +1,12 @@
 // components/sections/TestimonialsSection.tsx
 "use client";
 
-import { useMemo } from "react";
 import { Quote, ShieldCheck, Sparkles } from "lucide-react";
 import ReviewsMarquee from "../sections/ReviewMarque";
 
-type Testimonial = {
-  quote: string;
-  name: string;
-  role: string;
-  company?: string;
-  rating: number; // 1–5
-  bg: string; // card background
-  border: string; // card border
-  nameColor: string; // name accent
-};
-
 export default function TestimonialsSection() {
-  const testimonials: Testimonial[] = [
-    {
-      quote:
-        "Transformed my analytics skills. Built KPI dashboards and cracked a BI interview in two weeks.",
-      name: "Priya Sharma",
-      role: "Data Analyst",
-      company: "Retail BI",
-      rating: 5,
-      bg: "bg-amber-50",
-      border: "border-amber-200",
-      nameColor: "text-amber-700",
-    },
-    {
-      quote:
-        "Real-world projects with SQL, Python, and Power BI. My portfolio became the highlight of every interview.",
-      name: "Rahul Verma",
-      role: "Business Analyst",
-      company: "FinTech",
-      rating: 5,
-      bg: "bg-emerald-50",
-      border: "border-emerald-200",
-      nameColor: "text-emerald-700",
-    },
-    {
-      quote:
-        "From fresher to analytics professional in 110 hours. Clear rubrics, feedback, and measurable outcomes.",
-      name: "Ananya Patel",
-      role: "Junior BI Analyst",
-      company: "SaaS",
-      rating: 5,
-      bg: "bg-sky-50",
-      border: "border-sky-200",
-      nameColor: "text-sky-700",
-    },
-    {
-      quote:
-        "Great balance of statistics, data modeling, and dashboard storytelling. Stakeholders loved the clarity.",
-      name: "Sandeep Nair",
-      role: "Senior Analyst",
-      company: "E-commerce",
-      rating: 5,
-      bg: "bg-rose-50",
-      border: "border-rose-200",
-      nameColor: "text-rose-700",
-    },
-    {
-      quote:
-        "ETL best practices plus governance and QA. I now publish reliable datasets the whole team uses.",
-      name: "Nandini Rao",
-      role: "BI Developer",
-      company: "Healthcare",
-      rating: 5,
-      bg: "bg-violet-50",
-      border: "border-violet-200",
-      nameColor: "text-violet-700",
-    },
-    {
-      quote:
-        "Interview prep and SQL challenges mirrored real questions. Immediate confidence boost.",
-      name: "Aditya Kulkarni",
-      role: "Data Scientist",
-      company: "Logistics",
-      rating: 5,
-      bg: "bg-lime-50",
-      border: "border-lime-200",
-      nameColor: "text-lime-700",
-    },
-  ];
 
-  // SEO: AggregateRating + Review JSON-LD
-  const jsonLd = useMemo(
-    () =>
-      JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Product",
-        name: "Advanced Data Analytics Hero Program",
-        brand: { "@type": "Organization", name: "Cinute Digital Pvt. Ltd." },
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: "4.9",
-          reviewCount: testimonials.length.toString(),
-          bestRating: "5",
-          worstRating: "1",
-        },
-        review: testimonials.slice(0, 3).map((t) => ({
-          "@type": "Review",
-          reviewBody: t.quote,
-          reviewRating: {
-            "@type": "Rating",
-            ratingValue: t.rating.toString(),
-            bestRating: "5",
-            worstRating: "1",
-          },
-          author: { "@type": "Person", name: t.name },
-        })),
-        keywords:
-          "analytics course reviews, business intelligence testimonials, Power BI Tableau ratings, SQL Python analytics training feedback",
-      }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
+
 
   return (
     <section
@@ -170,8 +59,6 @@ export default function TestimonialsSection() {
         </p>
       </div>
 
-      {/* JSON-LD for SEO */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
     </section>
   );
 }

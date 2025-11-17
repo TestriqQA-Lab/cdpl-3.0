@@ -1,7 +1,6 @@
 // components/sections/ToolsSection.tsx
 "use client";
 
-import { useMemo } from "react";
 import {
   Bot,          // ChatGPT
   Image as ImageIcon, // DALL·E
@@ -119,24 +118,6 @@ const TOOLS: Tool[] = [
 ];
 
 export default function ToolsSection() {
-  // SEO: ItemList for rich results
-  const jsonLd = useMemo(
-    () =>
-      JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        name: "Prompt Engineering Tools & Technologies You’ll Master",
-        itemListElement: TOOLS.map((t, i) => ({
-          "@type": "ListItem",
-          position: i + 1,
-          name: t.name,
-          description: t.desc,
-          keywords:
-            "prompt engineering tools, generative ai platforms, chatgpt, dalle, midjourney, stable diffusion, claude ai, bard, gemini, groq, prompt testing",
-        })),
-      }),
-    []
-  );
 
   return (
     <section
@@ -185,8 +166,6 @@ export default function ToolsSection() {
         </p>
       </div>
 
-      {/* JSON-LD */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
     </section>
   );
 }

@@ -29,28 +29,7 @@ const COMPANIES: Company[] = [
 ];
 
 export default function CareerSection() {
-  // SEO: structured data for roles & companies
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Elite SDET Careers & Top Hiring Companies',
-    description:
-      'High-demand SDET and Automation Testing roles with placement opportunities at global product companies.',
-    itemListElement: [
-      ...ROLES.map((r, i) => ({
-        '@type': 'ListItem',
-        position: i + 1,
-        name: r.label,
-        item: { '@type': 'Occupation', name: r.label },
-      })),
-      ...COMPANIES.map((c, i) => ({
-        '@type': 'ListItem',
-        position: ROLES.length + i + 1,
-        name: c.label,
-        item: { '@type': 'Organization', name: c.label },
-      })),
-    ],
-  };
+
 
   return (
     <section id="career" aria-labelledby="career-heading" className="relative py-8 md:py-10 bg-white">
@@ -186,11 +165,6 @@ export default function CareerSection() {
         </motion.div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

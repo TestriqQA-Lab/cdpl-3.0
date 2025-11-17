@@ -32,26 +32,7 @@ const companyAccents = [
 ];
 
 export default function CareerSection() {
-    // SEO structured data (roles + companies)
-    const jsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'ItemList',
-        name: 'MySQL Careers & Hiring Companies',
-        description:
-            'High-paying MySQL career paths and top companies hiring for SQL, data, and backend roles in India.',
-        itemListElement: [
-            ...roles.map((r, i) => ({
-                '@type': 'ListItem',
-                position: i + 1,
-                name: r,
-            })),
-            ...companies.map((c, i) => ({
-                '@type': 'ListItem',
-                position: roles.length + i + 1,
-                name: c,
-            })),
-        ],
-    };
+
 
     return (
         <section id="career" aria-labelledby="career-heading" className="relative py-10 md:py-10 bg-white">
@@ -179,11 +160,6 @@ export default function CareerSection() {
                 </motion.div>
             </div>
 
-            {/* JSON-LD */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
         </section>
     );
 }

@@ -147,35 +147,6 @@ export default function CtaSection() {
         </address>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: "Cinute Digital — Data Science Program",
-            url: "https://cinutedigital.com",
-            contactPoint: [
-              {
-                "@type": "ContactPoint",
-                contactType: "sales",
-                telephone: "+91-788-83-83-788",
-                email: "contact@cinutedigital.com",
-                areaServed: "IN",
-                availableLanguage: ["en", "hi"],
-              },
-            ],
-            potentialAction: {
-              "@type": "EnrollAction",
-              target: "#apply",
-              name: "Apply Now — Data Science Course",
-            },
-            keywords:
-              "enroll data science course, data science training india, machine learning certification, data analyst placement, python course with projects",
-          }),
-        }}
-      />
     </section>
   );
 }

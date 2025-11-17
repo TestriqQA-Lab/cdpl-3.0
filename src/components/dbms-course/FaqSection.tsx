@@ -18,16 +18,6 @@ const accents = ['border-sky-300', 'border-emerald-300', 'border-amber-300', 'bo
 export default function FaqSection() {
   const [open, setOpen] = useState<number | null>(null);
 
-  // SEO: FAQPage JSON-LD
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((f) => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
-    })),
-  };
 
   return (
     <section id="faq" aria-labelledby="faq-heading" className="relative py-8 md:py-10 bg-white">
@@ -114,11 +104,7 @@ export default function FaqSection() {
         </div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+
     </section>
   );
 }

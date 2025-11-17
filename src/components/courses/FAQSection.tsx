@@ -58,8 +58,6 @@ export default function FAQSection() {
         <section
             className="py-20 px-4 bg-white"
             aria-label="Frequently Asked Questions"
-            itemScope
-            itemType="https://schema.org/FAQPage"
         >
             <div className="max-w-4xl mx-auto">
                 {/* Header */}
@@ -89,8 +87,6 @@ export default function FAQSection() {
                                     isOpen ? `ring-2 ${accent.ring}` : "hover:shadow-md",
                                 ].join(" ")}
                                 itemProp="mainEntity"
-                                itemScope
-                                itemType="https://schema.org/Question"
                             >
                                 <h3 className="sr-only" itemProp="name">{faq.q}</h3>
 
@@ -138,8 +134,6 @@ export default function FAQSection() {
                                     hidden={!isOpen}
                                     className="px-5 pb-4"
                                     itemProp="acceptedAnswer"
-                                    itemScope
-                                    itemType="https://schema.org/Answer"
                                 >
                                     <div className="rounded-lg bg-slate-50 border border-slate-200 p-4">
                                         <p className="text-slate-700" itemProp="text">

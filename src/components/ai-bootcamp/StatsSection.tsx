@@ -57,34 +57,13 @@ const stats: Stat[] = [
     },
 ];
 
-/** --------- JSON-LD (SEO): ItemList describing the stats ---------- */
-const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Digital Marketing with AI Bootcamp Key Statistics",
-    description:
-        "Key statistics for a Digital Marketing with AI Bootcamp: global market value, high-income skill ranking, demand ranking, and worldwide job opportunities.",
-    itemListElement: stats.map((s, idx) => ({
-        "@type": "ListItem",
-        position: idx + 1,
-        name: s.label,
-        description: s.description,
-    })),
-    keywords:
-        "digital marketing course, digital marketing with AI, digital marketing institute in Mumbai, performance marketing course, SEO training, social media marketing course, PPC advertising, marketing automation training, content marketing, AI tools for marketing, high-income digital marketing skills, digital marketing jobs, digital marketing bootcamp, job oriented digital marketing course, online digital marketing classes",
-};
-
 export default function StatsSection() {
     return (
         <section
             className="py-16 md:py-20 bg-gradient-to-b from-white to-slate-50"
             aria-labelledby="stats-heading"
         >
-            {/* SEO JSON-LD */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
+
 
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}

@@ -161,7 +161,7 @@ export default function CareerSection() {
                         ].map((company, idx) => (
                             <div
                                 key={idx}
-                                className="bg-white rounded-lg p-6 border border-orange-200 text-center hover:shadow-lg transition-shadow"
+                                className="bg-white rounded-lg p-3 lg:p-6 border border-orange-200 text-center hover:shadow-lg transition-shadow"
                             >
                                 <p className="font-bold text-slate-900">{company}</p>
                                 <p className="text-xs text-slate-600 mt-2">Active Hiring</p>

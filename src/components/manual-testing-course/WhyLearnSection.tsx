@@ -295,45 +295,6 @@ export default function WhyLearnSection() {
                 </p>
             </div>
 
-            {/* JSON-LD FAQ for SEO (rich results) */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "FAQPage",
-                        mainEntity: [
-                            {
-                                "@type": "Question",
-                                name: "Is manual testing still relevant in 2025?",
-                                acceptedAnswer: {
-                                    "@type": "Answer",
-                                    text:
-                                        "Yes. Manual testing remains essential for user experience, exploratory testing, accessibility, and validating edge cases before automation.",
-                                },
-                            },
-                            {
-                                "@type": "Question",
-                                name: "Do I need coding skills to start in QA?",
-                                acceptedAnswer: {
-                                    "@type": "Answer",
-                                    text:
-                                        "No. You can start with manual testing and later transition to automation with tools like Selenium and Cypress.",
-                                },
-                            },
-                            {
-                                "@type": "Question",
-                                name: "How long does it take to become job-ready?",
-                                acceptedAnswer: {
-                                    "@type": "Answer",
-                                    text:
-                                        "With a focused curriculum and hands-on projects, most learners become job-ready in 8–12 weeks.",
-                                },
-                            },
-                        ],
-                    }),
-                }}
-            />
         </section>
     );
 }

@@ -113,18 +113,7 @@ function StatCard({ s }: { s: Stat }) {
 }
 
 export default function StatsSection() {
-  // SEO: structured data for search engines
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Automation Testing & SDET Key Stats',
-    itemListElement: stats.map((s, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: s.label,
-      additionalProperty: { '@type': 'PropertyValue', name: s.label, value: `${s.value}${s.suffix ?? ''}` },
-    })),
-  };
+
 
   return (
     <section id="automation-stats" aria-labelledby="automation-stats-heading" className="relative py-8 md:py-10">
@@ -163,8 +152,6 @@ export default function StatsSection() {
         </div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

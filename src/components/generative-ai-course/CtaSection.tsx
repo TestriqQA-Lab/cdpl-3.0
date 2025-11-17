@@ -132,35 +132,7 @@ export default function CtaSection() {
         </address>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: "Cinute Digital — Deep Learning & AI Program",
-            url: "https://cinutedigital.com",
-            contactPoint: [
-              {
-                "@type": "ContactPoint",
-                contactType: "sales",
-                telephone: "+91-788-83-83-788",
-                email: "contact@cinutedigital.com",
-                areaServed: "IN",
-                availableLanguage: ["en", "hi"],
-              },
-            ],
-            potentialAction: {
-              "@type": "EnrollAction",
-              target: "#apply",
-              name: "Apply Now — Deep Learning & AI Course",
-            },
-            keywords:
-              "deep learning course enroll, generative ai certification india, machine learning jobs assistance, nlp training, python ai course with projects",
-          }),
-        }}
-      />
+      
     </section>
   );
 }

@@ -92,19 +92,7 @@ const accents = [
 ];
 
 export default function CurriculumSection() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'API Testing Course Curriculum',
-    description:
-      'Industry-ready API Testing curriculum: Postman, REST, JSON Schema validation, automation, security testing, performance, and capstone projects.',
-    itemListElement: curriculum.map((m, idx) => ({
-      '@type': 'ListItem',
-      position: idx + 1,
-      name: m.title,
-      item: { '@type': 'Course', name: m.title, description: m.topics.join(', ') },
-    })),
-  };
+
 
   return (
     <section id="curriculum" className="relative py-8 sm:py-20 bg-white">
@@ -189,8 +177,6 @@ export default function CurriculumSection() {
         </div>
       </div>
 
-      {/* JSON-LD */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

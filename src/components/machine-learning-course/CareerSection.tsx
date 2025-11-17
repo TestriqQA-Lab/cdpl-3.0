@@ -79,23 +79,7 @@ export default function CareerSection() {
   const keywords =
     "data science jobs India, machine learning hiring companies, analytics careers, Python ML roles, fresher data scientist openings, placement assistance";
 
-  // JSON-LD (ItemList of organizations)
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Companies hiring Data Science professionals in India",
-    itemListElement: COMPANIES.map((c, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      item: {
-        "@type": "Organization",
-        name: c.name,
-        sameAs: c.href || "",
-      },
-    })),
-    numberOfItems: COMPANIES.length,
-    keywords,
-  };
+
 
   return (
     <section id="careers" aria-labelledby="career-heading" className="relative overflow-hidden py-8 md:py-10 bg-white">
@@ -187,11 +171,6 @@ export default function CareerSection() {
         </p>
       </div>
 
-      {/* JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

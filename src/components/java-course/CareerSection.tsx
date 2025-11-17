@@ -222,41 +222,6 @@ export default function CareerSection() {
         </div>
       </div>
 
-      {/* Structured data for SEO (ItemList of roles) */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            name: "Popular Java Career Roles in India",
-            itemListElement: ROLES.map((r, index) => ({
-              "@type": "ListItem",
-              position: index + 1,
-              item: {
-                "@type": "Occupation",
-                name: r.title,
-                description:
-                  "In-demand Java career path focusing on Spring Boot, REST APIs, Microservices, Cloud and DevOps skills.",
-                skills: [
-                  "Java",
-                  "Spring Boot",
-                  "REST API",
-                  "Microservices",
-                  "SQL/JPA",
-                  "Docker/Kubernetes",
-                  "CI/CD",
-                  "Cloud",
-                ],
-                occupationalCategory: "Software Development",
-              },
-            })),
-            numberOfItems: ROLES.length,
-            keywords: keywords,
-          }),
-        }}
-      />
-
       {/* Accessible helpers for crawlers & screen readers */}
       <h1 className="sr-only">{title}</h1>
       <p className="sr-only">{subtitle}</p>

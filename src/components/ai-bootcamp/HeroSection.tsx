@@ -121,7 +121,7 @@ function LeadForm({ className = "" }: { className?: string }) {
 
                 <p className="text-xs text-slate-500">
                     By submitting, you agree to our{" "}
-                    <Link href="/privacy" className="underline hover:text-slate-700">
+                    <Link href="/privacy-policy" className="underline hover:text-slate-700">
                         Privacy Policy
                     </Link>
                     .
@@ -132,42 +132,6 @@ function LeadForm({ className = "" }: { className?: string }) {
 }
 
 export default function HeroSection() {
-    const courseJsonLd = {
-        "@context": "https://schema.org",
-        "@type": "Course",
-        name: "Digital Marketing with AI Bootcamp",
-        description:
-            "Intensive 30-hour Digital Marketing with AI bootcamp covering SEO, SEM, Social Media Marketing, Performance Marketing, Marketing Automation, AI tools for content & ads, and real-world campaigns.",
-        provider: {
-            "@type": "Organization",
-            name: "Your Academy",
-            sameAs: "https://www.youracademy.example",
-        },
-        timeRequired: "PT30H",
-        educationalLevel: "Beginner to Intermediate",
-        keywords:
-            "digital marketing with AI, AI marketing course, digital marketing course in Mumbai, performance marketing, SEO, SEM, social media marketing, marketing automation, AI tools for marketing, high-income digital marketing skill",
-    };
-
-    const breadcrumbJsonLd = {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        itemListElement: [
-            {
-                "@type": "ListItem",
-                position: 1,
-                name: "Home",
-                item: "https://www.yoursite.example/",
-            },
-            {
-                "@type": "ListItem",
-                position: 2,
-                name: "Digital Marketing with AI Bootcamp",
-                item: "https://www.yoursite.example/courses/digital-marketing-with-ai",
-            },
-        ],
-    };
-
     const breadcrumbs = [
         { label: "Home", href: "/" },
         { label: "Digital Marketing with AI Bootcamp", href: "/digital-marketing-with-ai" },
@@ -182,17 +146,6 @@ export default function HeroSection() {
                 <div className="animate-blob animation-delay-4000 absolute -bottom-8 left-20 h-72 w-72 rounded-full bg-pink-200 opacity-20 mix-blend-multiply blur-3xl" />
             </div>
 
-            {/* JSON-LD for SEO */}
-            <script
-                type="application/ld+json"
-                
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(courseJsonLd) }}
-            />
-            <script
-                type="application/ld+json"
-                
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-            />
 
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 pb-12 md:pt-6 md:pb-16">
                 {/* Breadcrumbs */}
@@ -216,7 +169,7 @@ export default function HeroSection() {
                 {/* Main grid (form aligned to top on the right) */}
                 <div className="grid min-h-[70vh] grid-cols-1 gap-10 sm:py-2 md:grid-cols-12 md:items-start">
                     {/* Left: Content */}
-                    <div className="flex flex-col md:col-span-8">
+                    <div className="flex flex-col md:col-span-7 lg:col-span-8">
                         {/* Duration Badge + Institute line (badge from original hero) */}
                         <div className="mb-3 flex flex-wrap items-center gap-3">
                             <div className="w-fit inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white/80 px-4 py-2 shadow-sm backdrop-blur-sm transition-shadow hover:shadow-md">
@@ -324,24 +277,9 @@ export default function HeroSection() {
                     </div>
 
                     {/* Right: Desktop form (top-aligned) */}
-                    <div className="hidden md:block md:col-span-4 lg:col-span-4 md:top-8">
+                    <div className="hidden md:block md:col-span-5 lg:col-span-4 md:top-8">
                         <LeadForm />
                     </div>
-                </div>
-            </div>
-
-            {/* Scroll Indicator */}
-            <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
-                <div className="flex flex-col items-center gap-2 text-slate-600 animate-bounce">
-                    <span className="text-sm font-medium">Scroll to explore</span>
-                    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                        />
-                    </svg>
                 </div>
             </div>
         </section>

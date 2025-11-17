@@ -171,6 +171,24 @@ const courseCategories: Category[] = [
           { name: "Advanced Automation Testing", logo: "/aaa.png" },
         ],
       },
+      {
+        name: "Machine Learning Algorithms using python Programming",
+        slug: "machine-learning-using-python",
+        description: "Master containerization and orchestration technologies.",
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
+      },
+      {
+        name: "Machine Learning and Data Visualization using R Programming",
+        slug: "data-visualization-in-r-programming",
+        description: "Master containerization and orchestration technologies.",
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
+      },
     ],
   },
   {
@@ -190,6 +208,51 @@ const courseCategories: Category[] = [
           { name: "Advanced Automation Testing", logo: "/aaa.png" },
         ],
       },
+      {
+        name: " Advanced Data Analytics with Python Libraries",
+        slug: "data-analytics-python",
+        description: "Craft a standout resume to impress recruiters.",
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
+      },
+      {
+        name: "Excel for Data Analytics & Visualization",
+        slug: "data-analytics-and-visualization",
+        description: "Craft a standout resume to impress recruiters.",
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
+      },
+      {
+        name: "Data Analytics & Visualization with Tableau",
+        slug: "data-analytics-with-tableau",
+        description: "Craft a standout resume to impress recruiters.",
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
+      },
+      {
+        name: "Data Analytics & Visualization with Power BI",
+        slug: "power-bi-course",
+        description: "Craft a standout resume to impress recruiters.",
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
+      },
+      {
+        name: "Data Analytics With BI And Big Data Engineering Master Program",
+        slug: "masters-in-data-engineering",
+        description: "Craft a standout resume to impress recruiters.",
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
+      },
       // {
       //   name: "Big Data Engineering",
       //   slug: "data-engineering-course",
@@ -199,15 +262,7 @@ const courseCategories: Category[] = [
       //     { name: "Advanced Automation Testing", logo: "/aaa.png" },
       //   ],
       // },
-      // {
-      //   name: "Data Analysis with BI & Big Data Engineering Master Program",
-      //   // no slug here (and that's OK)
-      //   description: "Master coding challenges and technical questions.",
-      //   rightColumnImages: [
-      //     { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
-      //     { name: "Advanced Automation Testing", logo: "/aaa.png" },
-      //   ],
-      // },
+      
     ],
   },
   {
@@ -246,6 +301,24 @@ const courseCategories: Category[] = [
           { name: "Advanced Automation Testing", logo: "/aaa.png" },
         ],
       },
+      {
+        name: " Digital Marketing and AI (For Business Owners)",
+        slug: "ai-in-digital-marketing",
+        description: "Earn the globally recognized PMP certification.",
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
+      },
+      {
+        name: "Digital Marketing With AI Bootcamp",
+        slug: "ai-bootcamp",
+        description: "Earn the globally recognized PMP certification.",
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
+      },
     ],
   },
   {
@@ -258,6 +331,7 @@ const courseCategories: Category[] = [
     ], courses: [
       {
         name: "Advanced Software Testing",
+        slug: "advance-software-testing",
         description: "Analyze data to drive business decisions.",
         rightColumnImages: [
           { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
@@ -266,6 +340,7 @@ const courseCategories: Category[] = [
       },
       {
         name: "Advanced Automation Testing",
+        slug: "automation-testing-course",
         description: "Build predictive models with machine learning techniques.",
         rightColumnImages: [
           { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
@@ -274,6 +349,7 @@ const courseCategories: Category[] = [
       },
       {
         name: "Advanced Data Science and Machine Learning - Masterclass",
+        slug: "data-science-course",
         description: "Use Python for data analysis and visualization.",
         rightColumnImages: [
           { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
@@ -282,6 +358,7 @@ const courseCategories: Category[] = [
       },
       {
         name: "Data Analysis with BI & Big Data Engineering - Master Program",
+        slug: "masters-in-data-engineering",
         description: "Create interactive data visualizations with Power BI.",
         rightColumnImages: [
           { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },

@@ -91,34 +91,13 @@ export const StatsSection: React.FC = () => {
     };
   });
 
-  // -------- JSON-LD (SEO) --------
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "R Programming, Data Visualization & Machine Learning Course Statistics",
-    description:
-      "Key statistics and success metrics for our R programming, data visualization, and machine learning course: student ratings, number of learners, faculty experience, placement support, and career outcomes.",
-    itemListElement: stats.map((s, idx) => ({
-      "@type": "ListItem",
-      position: idx + 1,
-      name: s.label,
-      description: s.description,
-    })),
-    keywords:
-      "R programming course, R data visualization training, R for data science, R machine learning course, data analytics with R, R course with placement, learn ggplot2 and dplyr, R programming institute in India, data analyst course with R, R for statistics and predictive modeling",
-  };
 
   return (
     <section
       className="py-16 md:py-20 bg-gradient-to-b from-white to-slate-50"
       aria-labelledby="stats-heading"
     >
-      {/* SEO JSON-LD */}
-      <script
-        type="application/ld+json"
-        
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header (SEO-optimized) */}

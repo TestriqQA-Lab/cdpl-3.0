@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Script from "next/script";
 import { motion, AnimatePresence } from "framer-motion";
 import { Star } from "lucide-react";
 
@@ -43,24 +42,6 @@ export default function ReviewsFeedbackSection() {
     };
   }, []);
 
-  const jsonLd = useMemo(() => {
-    const slice = REVIEWS.slice(0, visible);
-    return {
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      name: "CDPL Student Testimonials",
-      itemListElement: slice.map((r, i) => ({
-        "@type": "Review",
-        position: i + 1,
-        author: { "@type": "Person", name: r.name },
-        itemReviewed: { "@type": "Course", name: r.course },
-        reviewBody: r.quote,
-        reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5 },
-        publisher: { "@type": "Organization", name: "CDPL" },
-      })),
-    };
-  }, [REVIEWS, visible]);
-
   const canLoadMore = visible < REVIEWS.length;
 
   return (
@@ -69,7 +50,7 @@ export default function ReviewsFeedbackSection() {
       className="relative mx-auto w-full max-w-7xl px-4 pb-8 pt-8 sm:pb-12 sm:pt-12 lg:pt-0 sm:px-6 lg:px-8"
       aria-label="Student success stories and testimonials"
     >
-      <Script id="cdpl-students-grid-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+
 
       <header className="mx-auto mb-6 pt-4 max-w-3xl text-center">
         <h2 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">What our alumni say</h2>
@@ -104,8 +85,7 @@ export default function ReviewsFeedbackSection() {
                 "group relative overflow-hidden rounded-2xl bg-white ring-1 ring-neutral-200 shadow-[0_24px_80px_-40px_rgba(0,0,0,.35)]",
                 spanClasses[r.span ?? "normal"],
               ].join(" ")}
-              itemScope
-              itemType="https://schema.org/Review"
+
             >
               <article className="flex h-full flex-col">
                 <div className="flex-1 p-5">
@@ -127,7 +107,7 @@ export default function ReviewsFeedbackSection() {
                 <footer className="mt-auto flex items-center gap-3 border-t border-neutral-100 bg-neutral-50/50 p-4">
                   <SafeAvatar name={r.name} />
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-neutral-900" itemProp="author" itemScope itemType="https://schema.org/Person">
+                    <p className="truncate text-sm font-semibold text-neutral-900" itemProp="author">
                       <span itemProp="name">{r.name}</span>
                     </p>
                     <p className="truncate text-xs text-neutral-500">

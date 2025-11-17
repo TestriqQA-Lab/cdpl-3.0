@@ -1,7 +1,7 @@
 // components/sections/StatsSection.tsx
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 type Stat = {
   valueLabel: string;
@@ -175,25 +175,6 @@ export default function StatsSection() {
   const seoKeywords =
     "advanced data science course, machine learning training, data analyst salary India, data science jobs, python ml program, ai career growth, ml engineer placement assistance";
 
-  const jsonLd = useMemo(
-    () => ({
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      name: "Advanced Data Science & ML — Program Highlights",
-      itemListElement: STATS.map((s, i) => ({
-        "@type": "ListItem",
-        position: i + 1,
-        item: {
-          "@type": "Thing",
-          name: s.label,
-          description: `${s.valueLabel} — ${s.label}${s.hint ? ` (${s.hint})` : ""}`,
-        },
-      })),
-      keywords:
-        "data science highlights, ml career stats, ai market growth, data jobs India, fresher salary ds ml",
-    }),
-    []
-  );
 
   return (
     <section
@@ -295,7 +276,6 @@ export default function StatsSection() {
         </div>
       </div>
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

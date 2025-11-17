@@ -78,19 +78,6 @@ export default function CareerSection() {
   const keywords =
     "prompt engineer jobs India, generative AI careers, LLM engineer hiring, RAG developer, AI automation roles, enterprise AI jobs";
 
-  // JSON-LD (ItemList of organizations)
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Companies hiring Prompt Engineers in India",
-    itemListElement: COMPANIES.map((c, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: { "@type": "Organization", name: c.name, sameAs: c.href || "" },
-    })),
-    numberOfItems: COMPANIES.length,
-    keywords,
-  };
 
   return (
     <section id="careers" aria-labelledby="careers-heading" className="relative overflow-hidden py-6 md:py-12 bg-white">
@@ -182,11 +169,6 @@ export default function CareerSection() {
         </p>
       </div>
 
-      {/* JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

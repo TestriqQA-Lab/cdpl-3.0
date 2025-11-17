@@ -152,7 +152,7 @@ export default function CurriculumSection() {
         </div>
 
         {/* Learning Outcomes */}
-        <div className="mt-16 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl md:p-12 border border-blue-200">
+        <div className="mt-16 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 md:p-12 border border-blue-200">
           <h3 className="text-2xl font-bold text-slate-900 mb-8">What You&apos;ll Master</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[

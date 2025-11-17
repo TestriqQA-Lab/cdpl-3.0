@@ -92,23 +92,6 @@ export default function LearningPath() {
     },
   ];
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "12-Week QA Learning Path",
-    "itemListElement": phases.map((p, idx) => ({
-      "@type": "ListItem",
-      "position": idx + 1,
-      "name": p.title,
-      "description": p.seo,
-      "item": {
-        "@type": "Course",
-        "name": p.title,
-        "provider": { "@type": "Organization", "name": "Your Institute", "sameAs": "https://example.com" }
-      }
-    })),
-  };
-
   return (
     <section className="relative md:py-20 bg-white overflow-hidden" id="learning-path" aria-labelledby="learning-path-title">
       {/* Subtle futuristic accents */}
@@ -142,7 +125,7 @@ export default function LearningPath() {
         </div>
 
         {/* Phases */}
-        <ol className="grid grid-cols-1 md:grid-cols-2 gap-6" itemScope itemType="https://schema.org/ItemList">
+        <ol className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {phases.map((p, i) => {
             const colors = COLOR_MAP[p.accent];
 
@@ -150,8 +133,6 @@ export default function LearningPath() {
               <li
                 key={p.id}
                 itemProp="itemListElement"
-                itemScope
-                itemType="https://schema.org/ListItem"
                 className={`group relative rounded-2xl ${colors.cardBg} border ${colors.border} border-l-4 ${colors.accentBorder} hover:shadow-lg transition-all duration-200 p-6 focus-within:ring-2 focus-within:ring-offset-2 ${colors.ring}`}
               >
                 <meta itemProp="position" content={(i + 1).toString()} />
@@ -295,11 +276,6 @@ export default function LearningPath() {
         </div>
       </div>
 
-      {/* Structured Data for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

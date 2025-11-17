@@ -37,27 +37,7 @@ const ACCENTS = [
 ];
 
 export default function CareerSection() {
-  // Structured Data for SEO
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Digital Marketing & Analytics Careers',
-    itemListElement: jobs.map((title, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      item: {
-        '@type': 'Occupation',
-        name: title,
-        industry: 'Digital Marketing',
-        educationRequirements: 'Bachelor’s degree or equivalent experience',
-        skills:
-          'SEO, PPC, Analytics, Social Media, Email Marketing, CRO, GA4, Data Studio, CRM',
-        experienceRequirements: '0-5 years',
-      },
-    })),
-    keywords:
-      'digital marketing jobs, SEO specialist, PPC careers, social media manager, analytics roles, remote marketing jobs, CRO specialist',
-  };
+ 
 
   return (
     <section id="careers" aria-labelledby="careers-heading" className="relative py-12 sm:py-16 md:py-20 bg-white">
@@ -152,11 +132,6 @@ export default function CareerSection() {
         </div>
       </div>
 
-      {/* JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

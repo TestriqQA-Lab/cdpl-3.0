@@ -7,19 +7,7 @@ import LeadForm from "../CourseLeadForm";
 import { ChevronRight, Home } from "lucide-react";
 
 export default function HeroSection() {
-  // JSON-LD for SEO (Course)
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Course",
-    name: "Master Program in Prompt Engineering with Generative AI",
-    description:
-      "Hands-on program covering prompt design, chain-of-thought scaffolding, RAG workflows, function/tool calling, agents, guardrails, evaluation, and deployment. Mentor-led labs, live projects, and placement assistance included.",
-    provider: { "@type": "Organization", name: "Cinute Digital Pvt. Ltd. (CDPL)" },
-    educationalCredentialAwarded: "CDPL Verified Certificate (QR-enabled)",
-    timeRequired: "PT20H",
-    keywords:
-      "prompt engineering course, generative AI training, LLM fine-tuning, RAG pipelines, OpenAI prompt design, AI agent workflows, evaluation guardrails",
-  };
+
 
   const breadcrumbs = [
     { label: "Home", href: "/" },
@@ -177,11 +165,6 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

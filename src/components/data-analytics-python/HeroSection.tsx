@@ -124,47 +124,7 @@ function LeadForm({ className = "" }: { className?: string }) {
 }
 
 export default function HeroSection() {
-    const courseJsonLd = {
-        "@context": "https://schema.org",
-        "@type": "Course",
-        name: "Advanced Data Analytics with Python Libraries",
-        description:
-            "Intensive 20-hour data analytics course covering Python, Pandas, NumPy, Matplotlib, Seaborn, Plotly, Streamlit, dashboards, and real-world projects.",
-        provider: {
-            "@type": "Organization",
-            name: "Your Academy",
-            sameAs: "https://www.youracademy.example",
-        },
-        timeRequired: "PT20H",
-        educationalLevel: "Beginner to Intermediate",
-        keywords:
-            "data analytics course, python data analysis, pandas, numpy, matplotlib, seaborn, plotly, streamlit, dashboards, EDA, data visualization, analytics training in Hyderabad, job-ready data analytics",
-    };
 
-    const breadcrumbJsonLd = {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        itemListElement: [
-            {
-                "@type": "ListItem",
-                position: 1,
-                name: "Home",
-                item: "https://www.yoursite.example/",
-            },
-            {
-                "@type": "ListItem",
-                position: 2,
-                name: "Courses",
-                item: "https://www.yoursite.example/courses",
-            },
-            {
-                "@type": "ListItem",
-                position: 3,
-                name: "Advanced Data Analytics with Python",
-                item: "https://www.yoursite.example/courses/advanced-data-analytics-python",
-            },
-        ],
-    };
 
     const breadcrumbs = [
         { label: "Home", href: "/" },
@@ -179,18 +139,6 @@ export default function HeroSection() {
                 <div className="animate-blob animation-delay-2000 absolute left-10 top-40 h-72 w-72 rounded-full bg-blue-200 opacity-20 mix-blend-multiply blur-3xl" />
                 <div className="animate-blob animation-delay-4000 absolute -bottom-8 left-20 h-72 w-72 rounded-full bg-indigo-200 opacity-20 mix-blend-multiply blur-3xl" />
             </div>
-
-            {/* JSON-LD for SEO */}
-            <script
-                type="application/ld+json"
-                // @"@ts-expect-error
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(courseJsonLd) }}
-            />
-            <script
-                type="application/ld+json"
-                // @"@ts-expect-error
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-            />
 
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 pb-12 md:pt-6 md:pb-16">
                 {/* Breadcrumbs */}
@@ -213,7 +161,7 @@ export default function HeroSection() {
                 {/* Main grid (form aligned to top on the right) */}
                 <div className="grid min-h-[70vh] grid-cols-1 gap-10 sm:py-2 md:grid-cols-12 md:items-start">
                     {/* Left: Content */}
-                    <div className="flex flex-col md:col-span-8">
+                    <div className="flex flex-col md:col-span-7 lg:col-span-8">
                         {/* Duration Badge */}
                         <div className="mb-4 w-fit inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white/80 px-4 py-2 shadow-sm backdrop-blur-sm transition-shadow hover:shadow-md">
                             <Clock className="h-4 w-4 text-orange-500" />
@@ -301,7 +249,7 @@ export default function HeroSection() {
                             <div className="flex items-center gap-2">
                                 <span className="text-2xl">🏆</span>
                                 <span>
-                                    <strong className="text-slate-900">14+ Years</strong> Industry Experience
+                                    <strong className="text-slate-900">5+ Years</strong> Industry Experience
                                 </span>
                             </div>
                         </div>
@@ -316,19 +264,9 @@ export default function HeroSection() {
                     </div>
 
                     {/* Right: Desktop form (top-aligned & sticky) */}
-                    <div className="hidden md:block md:col-span-4 lg:col-span-4 md:top-8">
+                    <div className="hidden md:block md:col-span-5 lg:col-span-4 md:top-8">
                         <LeadForm />
                     </div>
-                </div>
-            </div>
-
-            {/* Scroll Indicator */}
-            <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
-                <div className="flex flex-col items-center gap-2 text-slate-600 animate-bounce">
-                    <span className="text-sm font-medium">Scroll to explore</span>
-                    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                    </svg>
                 </div>
             </div>
         </section >

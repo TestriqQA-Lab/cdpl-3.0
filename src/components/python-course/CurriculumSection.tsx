@@ -134,26 +134,7 @@ const ACCENTS = [
 ];
 
 export default function CurriculumSection() {
-  // SEO: JSON-LD for syllabus visibility (updated to 16 items: 15 modules + capstone)
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Python Programming — 15-Module Curriculum + Capstone",
-    description:
-      "From Python fundamentals to OOP, decorators, regex, collections, nested data, and a hands-on capstone project. Includes setup, functions, sorting, error handling, and more.",
-    itemListElement: MODULES.map((m, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: {
-        "@type": "Course",
-        name: m.title,
-        description: m.outcome,
-        educationalCredentialAwarded: "Certificate (QR-verified)",
-      },
-    })),
-    keywords:
-      "python programming syllabus, python course modules, object oriented python, python regex, python collections, beginner to advanced python, python capstone project",
-  };
+
 
   return (
     <section id="curriculum" aria-labelledby="curriculum-heading" className="relative py-12 sm:py-16 md:py-20 bg-gray-50">
@@ -247,8 +228,6 @@ export default function CurriculumSection() {
         </div>
       </div>
 
-      {/* JSON-LD */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

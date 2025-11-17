@@ -34,18 +34,7 @@ const FAQS: Faq[] = [
 ];
 
 export default function FaqSection() {
-  // SEO JSON-LD (FAQPage)
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: FAQS.map((f) => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
-    })),
-    keywords:
-      'digital marketing course FAQ, placement assistance, globally recognized certificate, live cohort training, project based learning',
-  };
+
 
   return (
     <section id="faq" aria-labelledby="faq-heading" className="relative py-12 sm:py-16 md:py-20 bg-gradient-to-b from-slate-50 to-white">
@@ -136,11 +125,6 @@ export default function FaqSection() {
         </div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

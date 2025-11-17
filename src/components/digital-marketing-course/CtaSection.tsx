@@ -4,26 +4,7 @@
 import Link from "next/link";
 
 export default function CtaSection() {
-    // SEO JSON-LD (Action/Offer-style CTA)
-    const jsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'Course',
-        name: 'AI-Driven Digital Marketing & Analytics — Master Program',
-        provider: { '@type': 'Organization', name: 'Cinute Digital Pvt. Ltd.' },
-        offers: {
-            '@type': 'Offer',
-            availability: 'https://schema.org/InStock',
-            url: 'https://www.cinutedigital.com',
-            eligibleRegion: 'IN',
-        },
-        potentialAction: {
-            '@type': 'RegisterAction',
-            target: 'tel:+917888383788',
-            name: 'Call to Enroll',
-        },
-        keywords:
-            'digital marketing course, AI marketing, analytics training, job assistance, mentorship program, Mumbai',
-    };
+
 
     return (
         <section
@@ -127,11 +108,6 @@ export default function CtaSection() {
                 </div>
             </div>
 
-            {/* JSON-LD for search engines */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
         </section>
     );
 }

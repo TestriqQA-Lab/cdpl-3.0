@@ -143,7 +143,7 @@ export default function ProjectsSection() {
                         ].map((item, index) => (
                             <div key={index} className="relative">
                                 <div className="flex items-start gap-4">
-                                    <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-blue-400 to-indigo-600 text-white flex items-center justify-center font-bold text-lg">
+                                    <div className="flex-shrink-0 md:w-8 xl:w-12 h-12 rounded-lg bg-gradient-to-br from-blue-400 to-indigo-600 text-white flex items-center justify-center font-bold text-lg">
                                         {item.step}
                                     </div>
                                     <div>

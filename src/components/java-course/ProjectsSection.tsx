@@ -256,33 +256,6 @@ export default function ProjectsSection() {
         </div>
       </div>
 
-      {/* Structured data for SEO (ItemList of projects) */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            name: "Enterprise Java Project Portfolio",
-            itemListElement: PROJECTS.map((p, index) => ({
-              "@type": "ListItem",
-              position: index + 1,
-              item: {
-                "@type": "SoftwareApplication",
-                name: p.title,
-                applicationCategory: "BusinessApplication",
-                description: p.summary,
-                operatingSystem: "Cross-platform",
-                programmingLanguage: "Java",
-                keywords:
-                  "Java, Spring Boot, Microservices, REST API, Hibernate, JPA, Kafka, WebSocket, Docker, AWS",
-              },
-            })),
-            numberOfItems: PROJECTS.length,
-            keywords: keywords,
-          }),
-        }}
-      />
 
       {/* Accessible helpers */}
       <h1 className="sr-only">{title}</h1>

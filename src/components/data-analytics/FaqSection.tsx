@@ -77,16 +77,6 @@ export default function FaqSection() {
   const seoKeywords =
     "advanced data analytics faq, data analytics course questions, job assistance analytics India, python sql bi course details, data science placement support, analytics projects portfolio";
 
-  // JSON-LD (FAQPage) for rich results
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: FAQS.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  };
 
   return (
     <section
@@ -195,11 +185,6 @@ export default function FaqSection() {
         </div>
       </div>
 
-      {/* Structured data for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

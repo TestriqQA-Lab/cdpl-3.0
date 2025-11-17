@@ -70,22 +70,6 @@ export default function ProjectsSection() {
   const seoKeywords =
     "data science projects, machine learning portfolio, predictive maintenance, nlp sentiment analysis, stock price forecasting, churn prediction uplift, image classification transfer learning, recommendation system tutorial";
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Data Science & Machine Learning — Projects You’ll Build",
-    itemListElement: PROJECTS.map((p, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: {
-        "@type": "CreativeWork",
-        name: p.title,
-        description: p.desc,
-        keywords:
-          "data science, machine learning, nlp, forecasting, computer vision, recommender systems",
-      },
-    })),
-  };
 
   return (
     <section
@@ -212,11 +196,6 @@ export default function ProjectsSection() {
         </div>
       </div>
 
-      {/* JSON-LD structured data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

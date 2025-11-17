@@ -34,19 +34,6 @@ export default function CareerSection() {
   const seoKeywords =
     "ai jobs india, data science jobs, machine learning hiring companies, top companies hiring ai, fresher data analyst jobs, ml engineer roles india, analytics careers, generative ai jobs, python data science careers";
 
-  // JSON-LD (ItemList of hiring companies)
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Top Companies Hiring AI & Data Professionals in India",
-    itemListElement: BRANDS.map((b, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: { "@type": "Organization", name: b.name },
-    })),
-    keywords:
-      "top ai companies india, data science hiring, ml engineer jobs, analytics employers, tech companies hiring",
-  };
 
   return (
     <section
@@ -154,11 +141,6 @@ export default function CareerSection() {
         <p className="mt-10 text-sm md:text-base text-slate-600">…and many more leading product & services companies.</p>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

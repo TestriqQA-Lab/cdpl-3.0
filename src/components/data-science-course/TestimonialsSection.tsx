@@ -1,125 +1,14 @@
 // components/sections/TestimonialsSection.tsx
 "use client";
 
-import { useMemo } from "react";
 import { ShieldCheck, Sparkles, Trophy } from "lucide-react";
 import ReviewsMarquee from "../sections/ReviewMarque";
 
-type Testimonial = {
-  quote: string;
-  name: string;
-  role: string;
-  company?: string;
-  rating: number; // 1–5
-  highlight?: string; // optional short headline
-  bg: string; // card background
-  border: string; // card border
-  nameColor: string; // name accent
-};
+
 
 export default function TestimonialsSection() {
-  const testimonials: Testimonial[] = [
-    {
-      quote:
-        "This masterclass is the best for advancing in DS & ML. The evaluation mindset and reproducible pipelines helped me ship confidently.",
-      name: "Rohan Mehta",
-      role: "Data Scientist",
-      company: "Analytics Consulting",
-      rating: 5,
-      bg: "bg-amber-50",
-      border: "border-amber-200",
-      nameColor: "text-amber-700",
-    },
-    {
-      quote:
-        "Projects were challenging and rewarding—end-to-end ML with MLflow, feature stores, and clear READMEs made my portfolio stand out.",
-      name: "Sneha Patel",
-      role: "ML Engineer",
-      company: "E-commerce",
-      rating: 5,
-      bg: "bg-emerald-50",
-      border: "border-emerald-200",
-      nameColor: "text-emerald-700",
-    },
-    {
-      highlight: "Landed 12 LPA!",
-      quote:
-        "The 200-hour program was worth it. Deployed a FastAPI model on cloud with monitoring and got offers quickly.",
-      name: "Arjun Singh",
-      role: "Fresher → ML Engineer",
-      company: "FinTech",
-      rating: 5,
-      bg: "bg-sky-50",
-      border: "border-sky-200",
-      nameColor: "text-sky-700",
-    },
-    {
-      quote:
-        "Strong focus on MLOps, drift detection, and cost control. Exactly what hiring managers asked about.",
-      name: "Anita Desai",
-      role: "Senior Data Scientist",
-      company: "HealthTech",
-      rating: 5,
-      bg: "bg-rose-50",
-      border: "border-rose-200",
-      nameColor: "text-rose-700",
-    },
-    {
-      quote:
-        "Clear coverage of classical ML to deep learning—solid baselines, fair comparisons, and great storytelling in dashboards.",
-      name: "Faizan Khan",
-      role: "Applied Scientist",
-      company: "SaaS",
-      rating: 5,
-      bg: "bg-violet-50",
-      border: "border-violet-200",
-      nameColor: "text-violet-700",
-    },
-    {
-      quote:
-        "Mock interviews + DSA warm-ups + system design primer gave me confidence. I recommend it for serious career switchers.",
-      name: "Priya Sharma",
-      role: "Data Analyst → DS",
-      company: "Retail BI",
-      rating: 5,
-      bg: "bg-lime-50",
-      border: "border-lime-200",
-      nameColor: "text-lime-700",
-    },
-  ];
 
-  // SEO: AggregateRating + Review JSON-LD
-  const jsonLd = useMemo(
-    () =>
-      JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Product",
-        name: "Advanced Data Science & Machine Learning Masterclass",
-        brand: { "@type": "Organization", name: "Cinute Digital Pvt. Ltd." },
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: "4.9",
-          reviewCount: testimonials.length.toString(),
-          bestRating: "5",
-          worstRating: "1",
-        },
-        review: testimonials.slice(0, 3).map((t) => ({
-          "@type": "Review",
-          reviewBody: t.quote,
-          reviewRating: {
-            "@type": "Rating",
-            ratingValue: t.rating.toString(),
-            bestRating: "5",
-            worstRating: "1",
-          },
-          author: { "@type": "Person", name: t.name },
-        })),
-        keywords:
-          "data science course reviews, machine learning masterclass testimonials, MLOps training ratings, TensorFlow scikit-learn feedback",
-      }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
+
 
   return (
     <section
@@ -171,8 +60,6 @@ export default function TestimonialsSection() {
         </p>
       </div>
 
-      {/* JSON-LD for SEO */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
     </section>
   );
 }

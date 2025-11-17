@@ -78,49 +78,7 @@ export const advantages = [
 
 export default function WhyVisualizationProgram() {
     // --- SEO: FAQPage structured data for rich results (non-visual, no functionality change) ---
-    const faqJsonLd = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: [
-            {
-                "@type": "Question",
-                name: "What makes Cinute Digital the best choice for Advanced Excel and Data Analytics training?",
-                acceptedAnswer: {
-                    "@type": "Answer",
-                    text:
-                        "Cinute Digital offers an industry-focused curriculum with 80% practical learning, real-time projects, 1:1 doubt solving, global certification, and 100% job assistance with resume and interview support.",
-                },
-            },
-            {
-                "@type": "Question",
-                name: "Do you provide placement assistance after the Excel course?",
-                acceptedAnswer: {
-                    "@type": "Answer",
-                    text:
-                        "Yes. We provide comprehensive placement support including resume building, mock interviews, HR screening preparation, and job referrals through our hiring partners.",
-                },
-            },
-            {
-                "@type": "Question",
-                name: "Is the certification recognized by employers?",
-                acceptedAnswer: {
-                    "@type": "Answer",
-                    text:
-                        "You receive a globally recognized certificate with a verifiable QR code that employers can validate instantly.",
-                },
-            },
-        ],
-    };
 
-    // --- SEO: Organization (EducationalOrganization) markup (optional but useful) ---
-    const orgJsonLd = {
-        "@context": "https://schema.org",
-        "@type": "EducationalOrganization",
-        name: "Cinute Digital",
-        description:
-            "Cinute Digital provides Advanced Excel training and Data Analytics courses with real-time projects, global certification, and 100% job assistance.",
-        sameAs: [],
-    };
 
     return (
         <section className="relative py-20 bg-gradient-to-b from-slate-50 to-white overflow-hidden">
@@ -272,20 +230,24 @@ export default function WhyVisualizationProgram() {
                         <strong>MIS Executive</strong>, and <strong>Business Analyst</strong> roles.
                     </p>
 
-                    <Link href="contact-us" className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl">
+                    <Link
+                        href="contact-us"
+                        className="inline-flex items-center justify-center w-full sm:w-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-3.5 lg:py-4 text-sm sm:text-base lg:text-lg
+    text-center font-semibold
+    bg-gradient-to-r from-blue-500 to-indigo-600
+    hover:from-blue-600 hover:to-indigo-700
+    text-white
+    rounded-lg
+    shadow-lg hover:shadow-xl
+    transition-all duration-300
+    focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-indigo-500
+  "
+                    >
                         Start Your Journey Today
                     </Link>
+
                 </div>
 
-                {/* --- Inject JSON-LD for SEO (no visual impact) --- */}
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-                />
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
-                />
             </div>
         </section>
     );

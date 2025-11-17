@@ -116,20 +116,7 @@ const TOOLS: Tool[] = [
 ];
 
 export default function ToolsSection() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Tools & Technologies You Will Learn — Python Master Program",
-    description:
-      "Hands-on mastery of Python, VS Code, Jupyter, Django, Pandas, NumPy, Scikit-Learn, Git, and AWS for production-grade development.",
-    itemListElement: TOOLS.map((t, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: { "@type": "SoftwareApplication", name: t.name },
-    })),
-    keywords:
-      "python tools, jupyter, django, pandas, numpy, scikit-learn, git, aws, developer stack, data science stack",
-  };
+
 
   return (
     <section
@@ -229,11 +216,6 @@ export default function ToolsSection() {
         </p>
       </div>
 
-      {/* JSON-LD (SEO) */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+
 import {
   Clock,
   Star,
@@ -181,8 +181,7 @@ const CourseCard = ({ course }: { course: Course }) => {
         a.hover,
         "transition-shadow"
       )}
-      itemScope
-      itemType="https://schema.org/Course"
+
     >
       {/* Top accent bar */}
       <div className={cx("absolute inset-x-0 -top-0.5 h-1.5 rounded-t-2xl", a.topBar)} aria-hidden="true" />
@@ -245,19 +244,7 @@ const SparkLine = () => (
 );
 
 export default function OtherCoursesSection() {
-  const itemListJson = useMemo(() => {
-    const list = COURSES.map((c, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      url: `https://example.com/courses/${c.slug}`,
-      name: c.title,
-    }));
-    return {
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      itemListElement: list,
-    };
-  }, []);
+
 
   return (
     <section className="py-10 md:py-10 bg-white" id="other-courses" aria-label="Other professional software testing courses">
@@ -348,13 +335,7 @@ export default function OtherCoursesSection() {
         </div>
       </div>
 
-      {/* JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(itemListJson),
-        }}
-      />
+
     </section>
   );
 }

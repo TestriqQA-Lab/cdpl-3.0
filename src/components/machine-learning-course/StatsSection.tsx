@@ -239,29 +239,6 @@ export default function StatsSection() {
         </div>
       </div>
 
-      {/* Structured data for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            name: "Machine Learning & Data Science Key Statistics",
-            itemListElement: STATS.map((s, index) => ({
-              "@type": "ListItem",
-              position: index + 1,
-              item: {
-                "@type": "Thing",
-                name: s.label,
-                description: `${s.prefix ?? ""}${s.end}${s.suffix ?? ""} — ${s.label}`,
-              },
-            })),
-            numberOfItems: STATS.length,
-            keywords:
-              "machine learning market growth, data science jobs India, average data scientist salary, ML demand India",
-          }),
-        }}
-      />
     </section>
   );
 }

@@ -4,29 +4,7 @@
 import Link from "next/link";
 
 export default function CtaSection() {
-  // SEO: org + contact hints for rich results
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
-    name: "CDPL — Cinute Digital Pvt. Ltd.",
-    url: "https://www.cinutedigital.com",
-    contactPoint: [
-      {
-        "@type": "ContactPoint",
-        contactType: "Admissions",
-        telephone: "+91-788-83-83-788",
-        areaServed: "IN",
-        availableLanguage: ["en", "hi"],
-      },
-    ],
-    makesOffer: {
-      "@type": "Offer",
-      name: "Python Master Program — Admissions Open",
-      category: "Education",
-      availabilityEnds: "2025-12-31",
-      priceCurrency: "INR",
-    },
-  };
+
 
   return (
     <section
@@ -112,11 +90,6 @@ export default function CtaSection() {
         </p>
       </div>
 
-      {/* JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

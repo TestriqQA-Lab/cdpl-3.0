@@ -1,7 +1,6 @@
 // components/sections/WhyDSProgram.tsx
 "use client";
 
-import { useMemo } from "react";
 import {
     Brain,
     Layers,
@@ -19,38 +18,7 @@ import {
 import Link from "next/link";
 
 export default function WhyDSProgram() {
-    // SEO: Course schema
-    const courseJsonLd = useMemo(
-        () =>
-            JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "Course",
-                name: "Advanced Data Science & Machine Learning Masterclass",
-                description:
-                    "Hands-on masterclass covering data processing, feature engineering, classical ML, deep learning, MLOps, and scalable deployment on cloud platforms. Build a job-ready portfolio with real-world projects.",
-                provider: {
-                    "@type": "Organization",
-                    name: "Cinute Digital Pvt. Ltd.",
-                    sameAs: "https://example.com",
-                },
-                educationalCredentialAwarded: "Certificate of Completion",
-                timeRequired: "PT200H",
-                inLanguage: "en",
-                keywords: [
-                    "data science course",
-                    "machine learning training",
-                    "deep learning",
-                    "MLOps",
-                    "TensorFlow",
-                    "scikit-learn",
-                    "Python data science",
-                    "cloud ML deployment",
-                    "feature engineering",
-                    "model monitoring",
-                ],
-            }),
-        []
-    );
+
 
     const featureChips = [
         { label: "200 Hours", color: "bg-indigo-600 text-white" },
@@ -276,8 +244,6 @@ export default function WhyDSProgram() {
                 </div>
             </div>
 
-            {/* JSON-LD for SEO */}
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: courseJsonLd }} />
         </section>
     );
 }

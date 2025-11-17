@@ -4,33 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 export default function CtaSection() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Course',
-    name: 'Advanced Automation Testing (SDET) — Enrollment',
-    description:
-      'Join a mentor-led SDET program with ISTQB prep, AI-powered automation, CI/CD integration, and job assistance.',
-    provider: {
-      '@type': 'Organization',
-      name: 'Think and Do Institute',
-    },
-    offers: {
-      '@type': 'Offer',
-      availability: 'https://schema.org/InStock',
-      price: '0',
-      priceCurrency: 'INR',
-    },
-    contactPoint: [
-      {
-        '@type': 'ContactPoint',
-        contactType: 'admissions',
-        telephone: '+91-788-83-83-788',
-        email: 'contact@cinutedigital.com',
-        areaServed: 'IN',
-        availableLanguage: ['English', 'Hindi'],
-      },
-    ],
-  };
+
 
   return (
     <section
@@ -152,11 +126,6 @@ export default function CtaSection() {
         </div>
       </div>
 
-      {/* JSON-LD for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

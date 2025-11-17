@@ -255,7 +255,7 @@ export default function CareerSection() {
             {hiringCompanies.map((company, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-lg p-6 border border-orange-200 text-center hover:shadow-lg transition-shadow"
+                className="bg-white rounded-lg p-1 md:p-6 border border-orange-200 text-center hover:shadow-lg transition-shadow"
               >
                 <p className="font-bold text-slate-900">{company}</p>
                 <p className="text-xs text-slate-600 mt-2">Active Hiring</p>
@@ -270,9 +270,25 @@ export default function CareerSection() {
             <p className="text-lg text-gray-900 font-semibold mb-4">
               Ready to launch your digital marketing career?
             </p>
-            <Link href="contact-us" className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-xl transition-all shadow-lg hover:shadow-xl">
+            <Link
+              href="/contact-us"
+              className="
+    inline-flex items-center justify-center
+    w-full sm:w-auto
+    px-4 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-3
+    text-sm sm:text-base md:text-lg
+    bg-orange-600 hover:bg-orange-700
+    text-white font-bold
+    rounded-xl
+    text-center
+    shadow-lg hover:shadow-xl
+    transition-all duration-300
+    break-words
+  "
+            >
               Start Your Career Transformation
             </Link>
+
           </div>
         </div>
       </div>

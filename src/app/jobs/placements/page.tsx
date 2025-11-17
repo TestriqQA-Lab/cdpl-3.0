@@ -2,7 +2,7 @@
 import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import Script from "next/script";
-import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
+import { generateSEO } from "@/lib/seo";
 
 // ============================================================================
 // SEO METADATA - Enhanced for Placements Page
@@ -83,114 +83,10 @@ const PlacementsNewsletterCTASection = dynamic(
 );
 
 export default function PlacementsPage() {
-    // Breadcrumb Schema
-    const breadcrumbSchema = generateBreadcrumbSchema([
-        { name: "Home", url: "/" },
-        { name: "Jobs", url: "/jobs/placements" },
-        { name: "Placements", url: "/jobs/placements" },
-    ]);
 
-    // Enhanced Organization Schema with Placements
-    const organizationSchema = {
-        "@context": "https://schema.org",
-        "@type": "EducationalOrganization",
-        "@id": "https://www.cinutedigital.com/#organization",
-        name: "Cinute Digital Pvt Ltd (CDPL)",
-        url: "https://www.cinutedigital.com",
-        description: "Leading EdTech with proven placement track record",
-        sameAs: [
-            "https://www.linkedin.com/company/cinutedigital",
-            "https://twitter.com/cinutedigital",
-            "https://www.facebook.com/cinutedigital",
-            "https://www.instagram.com/cinutedigital",
-        ],
-        department: {
-            "@type": "CollegeOrUniversity",
-            name: "CDPL Placements",
-            url: "https://www.cinutedigital.com/jobs/placements",
-            description: "Placement assistance and career support for CDPL students",
-        },
-    };
-
-    // CollectionPage Schema for Placements
-    const collectionPageSchema = {
-        "@context": "https://schema.org",
-        "@type": "CollectionPage",
-        "@id": "https://www.cinutedigital.com/jobs/placements#collectionpage",
-        url: "https://www.cinutedigital.com/jobs/placements",
-        name: "CDPL Student Placements",
-        description: "Browse verified student placements, hiring partners, and success stories",
-        inLanguage: "en-IN",
-    };
-
-    // Service Schema for Placement Assistance
-    const placementServiceSchema = {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "@id": "https://www.cinutedigital.com/jobs/placements#service",
-        name: "Placement Assistance & Career Support",
-        description: "Comprehensive placement assistance including resume building, interview preparation, and job referrals to top companies",
-        provider: {
-            "@type": "EducationalOrganization",
-            "@id": "https://www.cinutedigital.com/#organization",
-            name: "CDPL - Cinute Digital",
-        },
-        serviceType: "Career Services",
-        areaServed: {
-            "@type": "Country",
-            name: "India",
-        },
-        audience: {
-            "@type": "EducationalAudience",
-            educationalRole: "student",
-        },
-    };
-
-    // WebPage Schema with placement statistics
-    const webPageSchema = {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "@id": "https://www.cinutedigital.com/jobs/placements#webpage",
-        url: "https://www.cinutedigital.com/jobs/placements",
-        name: "Student Placements - CDPL",
-        description: "Verified CDPL placements across QA, Automation, Data, Full-Stack, and Cloud/DevOps",
-        inLanguage: "en-IN",
-        isPartOf: {
-            "@type": "WebSite",
-            "@id": "https://www.cinutedigital.com/#website",
-            url: "https://www.cinutedigital.com",
-            name: "CDPL - Cinute Digital",
-        },
-        about: {
-            "@type": "Thing",
-            name: "Student Placements",
-            description: "Real hiring outcomes and success stories from CDPL training programs",
-        },
-    };
 
     return (
         <>
-            {/* Structured Data - Multiple Schemas */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-            />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-            />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionPageSchema) }}
-            />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(placementServiceSchema) }}
-            />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
-            />
 
             {/* Main Content - Semantic HTML Structure */}
             <main 

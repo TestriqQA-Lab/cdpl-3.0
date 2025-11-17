@@ -59,29 +59,6 @@ export default function CtaSection() {
   const seoKeywords =
     "enroll data science machine learning course india, ds ml certification, job assistance placement support, contact training institute, download syllabus brochure";
 
-  // JSON-LD: Organization contact points for rich results (phone + email)
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Cinute Digital Pvt. Ltd.",
-    contactPoint: [
-      {
-        "@type": "ContactPoint",
-        telephone: "+91-788-83-83-788",
-        contactType: "sales",
-        areaServed: "IN",
-        availableLanguage: ["en", "hi"],
-      },
-      {
-        "@type": "ContactPoint",
-        email: "contact@cinutedigital.com",
-        contactType: "customer support",
-        areaServed: "IN",
-        availableLanguage: ["en", "hi"],
-      },
-    ],
-    sameAs: [],
-  };
 
   return (
     <section
@@ -187,11 +164,6 @@ export default function CtaSection() {
         </div>
       </div>
 
-      {/* JSON-LD for search engines (contact points) */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

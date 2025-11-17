@@ -62,34 +62,12 @@ export default function StatsSection() {
         },
     ];
 
-    /** --------- JSON-LD (SEO): ItemList describing the stats ---------- */
-    const jsonLd = {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        name: "Python Data Analytics Course Highlights",
-        description:
-            "Key statistics for a Python Data Analytics Course in India: market growth, job vacancies, fresher salary, job satisfaction, and market share.",
-        itemListElement: stats.map((s, idx) => ({
-            "@type": "ListItem",
-            position: idx + 1,
-            name: s.label,
-            description: s.description,
-        })),
-        keywords:
-            "Python Data Analytics Course, Data Analyst Certification, Data Analytics Training India, Fresher Jobs, Average Salary, Placement Assistance, Job-Oriented Program, Online & Classroom Training",
-    };
-
     return (
         <section
             className="py-16 md:py-20 bg-gradient-to-b from-white to-slate-50"
             aria-labelledby="stats-heading"
         >
-            {/* SEO JSON-LD */}
-            <script
-                type="application/ld+json"
-                
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
+ 
 
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}

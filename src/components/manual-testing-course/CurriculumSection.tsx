@@ -325,26 +325,10 @@ export default function CurriculumSection() {
         });
     }, [query, sectionFilter]);
 
-    /* ---------- SEO: JSON-LD (Course + Program) ---------- */
-    const jsonLd = {
-        "@context": "https://schema.org",
-        "@type": "EducationalOccupationalProgram",
-        "name": "Manual Software Testing — Curriculum",
-        "timeToComplete": "P0D",
-        "hasCourse": MODULES.map((m) => ({
-            "@type": "Course",
-            "name": `${m.weeks}: ${m.title}`,
-            "description": `Topics: ${m.topics.join(", ")}.`
-        }))
-    };
 
     return (
         <section className="py-15 md:py-20 bg-white" id="curriculum" aria-label="Manual Software Testing Curriculum">
-            {/* JSON-LD */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
+
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}

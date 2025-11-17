@@ -99,7 +99,7 @@ export const content: ContentData = {
   projects_section: {
     title: "Real-Time Industry Projects to Build Your Portfolio",
     domains: [
-      "Aviation", "Healthcare", "Telecommunication", "BFSI", "Social Media", "Automobile", "Sales & Marketing", "Human Resources", "Supply Chain Management"
+      "Aviation", "Healthcare", "BFSI", "Social Media", "Automobile", "Sales & Marketing", "Human Resources", "Supply Chain Management"
     ],
     project_examples: [
       {

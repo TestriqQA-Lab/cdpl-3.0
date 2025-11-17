@@ -10,24 +10,6 @@ export default function WhyMLPythonProgram() {
   const keywords =
     "machine learning course, data science with Python, statistics and probability, data visualization, ML algorithms, portfolio projects, placement assistance, Mumbai";
 
-  // JSON-LD (Course)
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Course",
-    name: "Machine Learning & Data Science with Python — Hero Program",
-    description:
-      "Comprehensive program covering Python, data visualization, statistics & probability, and machine learning algorithms. Includes hands-on projects, mentor support, and placement assistance.",
-    provider: { "@type": "Organization", name: "Cinute Digital Pvt. Ltd. (CDPL)" },
-    educationalCredentialAwarded: [
-      "Certificate: Python Programming",
-      "Certificate: Data Visualization",
-      "Certificate: Statistics & Probability",
-      "Certificate: Machine Learning Algorithms",
-    ],
-    timeRequired: "PT95H",
-    keywords:
-      "machine learning course, data science with python, ML algorithms, python certification, data visualization certification, statistics certification",
-  };
 
   const CHIPS: { label: string; cls: string }[] = [
     { label: "95 Hours", cls: "bg-sky-50 text-sky-900 border-sky-200" },
@@ -159,11 +141,6 @@ export default function WhyMLPythonProgram() {
         </p>
       </div>
 
-      {/* JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

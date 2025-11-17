@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 
 import { buildLocationsHierarchy } from "@/data/courseData/buildLocationsHierarchy";
-import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
+import { generateSEO } from "@/lib/seo";
 
 // Types
 import type { CourseData } from "@/types/courseData";
@@ -99,132 +99,16 @@ export default function LocationsWeServePage() {
     if (course.location) uniqueCities.add(course.location);
   });
 
-  const statesArray = Array.from(uniqueStates);
-  const citiesArray = Array.from(uniqueCities);
 
   // ============================================================================
   // ENHANCED STRUCTURED DATA (JSON-LD)
   // ============================================================================
-  const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Home", url: "/" },
-    { name: "Locations We Serve", url: "/locations-we-serve" }
-  ]);
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      // BreadcrumbList Schema
-      breadcrumbSchema,
 
-      // WebPage Schema
-      {
-        "@type": "WebPage",
-        "@id": "https://www.cinutedigital.com/locations-we-serve",
-        "url": "https://www.cinutedigital.com/locations-we-serve",
-        "name": "Locations We Serve | Software Testing & Programming Courses",
-        "description": "Explore CDPL training centers across India and the UAE. Find the nearest software testing, programming, and QA courses in 50+ cities.",
-        "isPartOf": {
-          "@id": "https://www.cinutedigital.com/#website"
-        },
-        "breadcrumb": {
-          "@id": "https://www.cinutedigital.com/locations-we-serve#breadcrumb"
-        },
-        "inLanguage": "en-IN",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://www.cinutedigital.com/locations-we-serve?search={search_term}",
-          "query-input": "required name=search_term"
-        }
-      },
-
-      // Organization Schema with Multiple Locations
-      {
-        "@type": "Organization",
-        "@id": "https://www.cinutedigital.com/#organization",
-        "name": "CDPL - Cinute Digital Pvt. Ltd.",
-        "url": "https://www.cinutedigital.com",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://www.cinutedigital.com/logo.png",
-          "width": 250,
-          "height": 60
-        },
-        "description": "Leading provider of software testing, programming, and professional training across India and UAE with 50+ locations.",
-        "areaServed": [
-          {
-            "@type": "Country",
-            "name": "India",
-            "containsPlace": statesArray.map(state => ({
-              "@type": "State",
-              "name": state
-            }))
-          },
-          {
-            "@type": "Country",
-            "name": "United Arab Emirates"
-          }
-        ],
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "IN"
-        },
-        "sameAs": [
-          "https://twitter.com/cinutedigital"
-        ]
-      },
-
-      // ItemList Schema for Locations
-      {
-        "@type": "ItemList",
-        "@id": "https://www.cinutedigital.com/locations-we-serve#locationlist",
-        "name": "CDPL Training Locations",
-        "description": "Complete list of cities where CDPL offers software testing and programming courses",
-        "numberOfItems": citiesArray.length,
-        "itemListElement": citiesArray.slice(0, 20).map((city, index) => ({
-          "@type": "ListItem",
-          "position": index + 1,
-          "item": {
-            "@type": "Place",
-            "name": city,
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": city,
-              "addressCountry": "IN"
-            }
-          }
-        }))
-      },
-
-      // Service Schema
-      {
-        "@type": "Service",
-        "@id": "https://www.cinutedigital.com/locations-we-serve#service",
-        "serviceType": "Professional Training Services",
-        "name": "Software Testing & Programming Training",
-        "description": "Comprehensive training programs in software testing, programming, and professional development across multiple locations in India and UAE.",
-        "provider": {
-          "@id": "https://www.cinutedigital.com/#organization"
-        },
-        "areaServed": [
-          { "@type": "Country", "name": "India" },
-          { "@type": "Country", "name": "United Arab Emirates" }
-        ],
-        "availableChannel": {
-          "@type": "ServiceChannel",
-          "serviceUrl": "https://www.cinutedigital.com/locations-we-serve",
-          "availableLanguage": ["en-IN", "hi-IN", "en-AE", "ar-AE"]
-        }
-      }
-    ]
-  };
 
   return (
     <>
-      {/* Enhanced JSON-LD Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+
 
       {/* Semantic HTML Structure */}
       <div

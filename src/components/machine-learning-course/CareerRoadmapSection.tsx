@@ -67,23 +67,7 @@ const STEPS: Step[] = [
 ];
 
 export default function CareerRoadmapSection() {
-  // SEO structured data (HowTo)
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    name: "Data Science Career Roadmap",
-    description:
-      "Step-by-step roadmap to become a job-ready Data Science professional with portfolio projects, cloud/MLOps deployments, interview prep, and placement support.",
-    totalTime: "P3M",
-    step: STEPS.map((s) => ({
-      "@type": "HowToStep",
-      position: s.n,
-      name: s.title,
-      text: s.desc,
-    })),
-    keywords:
-      "data science career roadmap, data analyst roadmap, machine learning roadmap, python data science course, ml projects portfolio, fastapi docker deploy, mlops for beginners",
-  };
+
 
   return (
     <section
@@ -207,11 +191,6 @@ export default function CareerRoadmapSection() {
         </div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

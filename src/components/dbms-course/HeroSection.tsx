@@ -28,15 +28,7 @@ const features = [
 ];
 
 export default function HeroSection() {
-    // JSON-LD
-    const jsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'Course',
-        name: 'Database Management using MySQL',
-        description:
-            'Hands-on MySQL course covering SQL queries, database design, normalization, indexing, transactions, and performance tuning. Includes projects, certification, and placement support.',
-        provider: { '@type': 'Organization', name: 'Think and Do Institute' },
-    };
+
 
     const breadcrumbs = [
         { label: 'Home', href: '/' },
@@ -187,11 +179,6 @@ export default function HeroSection() {
                 </div>
             </div>
 
-            {/* JSON-LD */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
         </section>
     );
 }

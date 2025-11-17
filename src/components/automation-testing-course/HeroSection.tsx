@@ -28,21 +28,7 @@ const features = [
    HERO
 ---------------------------------------- */
 export default function HeroSection() {
-    const jsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'Course',
-        name: 'Advanced Automation Testing (SDET) — Selenium, Cypress, Playwright, AI, CI/CD',
-        description:
-            'Mentor-led SDET program focusing on Selenium, Cypress, Playwright, API automation, AI-powered testing, CI/CD with Jenkins/GitHub Actions, and job assistance.',
-        provider: { '@type': 'Organization', name: 'Think and Do Institute' },
-        offers: {
-            '@type': 'Offer',
-            availability: 'https://schema.org/InStock',
-            price: '0',
-            priceCurrency: 'INR',
-            category: 'Education',
-        },
-    };
+
 
     const breadcrumbs = [
         { label: "Home", href: "/" },
@@ -192,11 +178,6 @@ export default function HeroSection() {
                 </div>
             </div>
 
-            {/* SEO JSON-LD */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
         </section>
     );
 }

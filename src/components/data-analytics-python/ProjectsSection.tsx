@@ -35,7 +35,7 @@ export default function ProjectsSection() {
     const domains = [
         { name: "Aviation", icon: "✈️" },
         { name: "Healthcare", icon: "🏥" },
-        { name: "Telecommunication", icon: "📱" },
+        { name: <>Telecomm<br className="lg:hidden"/>unication</>, icon: "📱" },
         { name: "BFSI", icon: "🏦" },
         { name: "Social Media", icon: "📱" },
         { name: "Automobile", icon: "🚗" },

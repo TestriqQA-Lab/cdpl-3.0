@@ -134,93 +134,6 @@ export default function HeroSection() {
         tagline: "#1 MUMBAI's PREMIUM TRAINING INSTITUTE",
     };
 
-    /** ---- JSON-LD: Course ---- */
-    const courseJsonLd = {
-        "@context": "https://schema.org",
-        "@type": "Course",
-        name: courseInfo.title,
-        description:
-            "Hands-on Advanced Excel training in Mumbai focused on data analytics, dashboarding, and visualization using PivotTables, Power Query, Power Pivot, DAX basics, and automation techniques.",
-        provider: {
-            "@type": "Organization",
-            name: courseInfo.institute,
-            url: "https://www.example.com",
-        },
-        timeRequired: "PT20H",
-        educationalLevel: "Beginner to Intermediate",
-        keywords:
-            "Advanced Excel course Mumbai, Excel data analytics training, Excel dashboards course, PivotTables training India, Power Query certification, Power Pivot DAX basics, Excel business analytics, Excel reporting automation, Excel charts & visualization, Excel for data analysis, best Excel course in Mumbai",
-        areaServed: ["Mumbai", "Maharashtra", "India"],
-        inLanguage: "en",
-        offers: {
-            "@type": "Offer",
-            availability: "https://schema.org/InStock",
-            priceCurrency: "INR",
-            price: "0",
-            url: "https://www.example.com/courses/advanced-excel",
-            eligibleRegion: "IN",
-        },
-    };
-
-    /** ---- JSON-LD: Breadcrumbs ---- */
-    const breadcrumbJsonLd = {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.example.com/" },
-            { "@type": "ListItem", position: 2, name: "Courses", item: "https://www.example.com/courses" },
-            {
-                "@type": "ListItem",
-                position: 3,
-                name: "Advanced Excel for Data Analytics & Visualization",
-                item: "https://www.example.com/courses/advanced-excel",
-            },
-        ],
-    };
-
-    /** ---- JSON-LD: FAQ (high-intent queries) ---- */
-    const faqJsonLd = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: [
-            {
-                "@type": "Question",
-                name: "Who should take this Advanced Excel course in Mumbai?",
-                acceptedAnswer: {
-                    "@type": "Answer",
-                    text:
-                        "Beginners, business analysts, MIS executives, marketers, operations and finance professionals who want to analyze data, build dashboards, and automate reports using Excel.",
-                },
-            },
-            {
-                "@type": "Question",
-                name: "What topics are covered in the Excel data analytics training?",
-                acceptedAnswer: {
-                    "@type": "Answer",
-                    text:
-                        "Advanced formulas, PivotTables, Power Query, Power Pivot, data modeling (intro to DAX), interactive charts, KPI dashboards, and best practices for reporting automation.",
-                },
-            },
-            {
-                "@type": "Question",
-                name: "Is there a certificate after the Excel course?",
-                acceptedAnswer: {
-                    "@type": "Answer",
-                    text:
-                        "Yes. You will receive a course completion certificate from Cinute Digital Pvt. Ltd. after finishing the training and project evaluations.",
-                },
-            },
-            {
-                "@type": "Question",
-                name: "Do I need prior Excel experience?",
-                acceptedAnswer: {
-                    "@type": "Answer",
-                    text:
-                        "Basic Excel knowledge helps, but the 20-hour program is beginner-friendly and progresses quickly to advanced analytics and dashboard skills.",
-                },
-            },
-        ],
-    };
 
     /** ---- Optional: visible breadcrumb for internal linking (kept minimal) ---- */
     const breadcrumbs = [
@@ -238,22 +151,6 @@ export default function HeroSection() {
                 <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-cyan-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
             </div>
 
-            {/* JSON-LD for SEO */}
-            <script
-                type="application/ld+json"
-                
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(courseJsonLd) }}
-            />
-            <script
-                type="application/ld+json"
-                
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-            />
-            <script
-                type="application/ld+json"
-                
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-            />
 
             <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* Breadcrumbs */}
@@ -274,9 +171,9 @@ export default function HeroSection() {
                 </nav>
 
                 {/* Top-aligned columns */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
                     {/* Left content */}
-                    <div className="flex flex-col md:col-span-8 justify-start space-y-8">
+                    <div className="flex flex-col md:col-span-7 lg:col-span-8 justify-start space-y-8">
                         <div className="space-y-4">
                             {/* Badge / tagline */}
                             <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
@@ -295,6 +192,8 @@ export default function HeroSection() {
                                     Data Analytics & Visualization
                                 </span>
                             </h1>
+
+                            <LeadForm className="md:hidden" />
 
                             {/* SEO-optimized description */}
                             <p className="mt-2 max-w-3xl text-base leading-relaxed text-slate-600 md:text-lg">
@@ -382,7 +281,7 @@ export default function HeroSection() {
                     </div>
 
                     {/* Right section: form + floating cards kept */}
-                    <div className="relative hidden lg:block lg:col-span-4 mt-5">
+                    <div className="relative hidden md:block md:col-span-5 lg:col-span-4 mt-5">
                         <div className="relative w-full">
                             <div className="absolute inset-0 rounded-3xl" />
                             {/* Form card */}
@@ -393,7 +292,7 @@ export default function HeroSection() {
                             </div>
 
                             {/* Floating cards (KEPT as requested) */}
-                            <div className="absolute -bottom-18 -left-30 bg-white rounded-2xl shadow-xl p-4 border border-slate-100 max-w-xs animate-[bounce_5s_ease-in-out_infinite] motion-reduce:animate-none">
+                            <div className="absolute hidden xl:block -bottom-18 -left-30 bg-white rounded-2xl shadow-xl p-4 border border-slate-100 max-w-xs animate-[bounce_5s_ease-in-out_infinite] motion-reduce:animate-none">
                                 <div className="flex items-center gap-3">
                                     <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-white font-bold">
                                         ✓
@@ -405,7 +304,7 @@ export default function HeroSection() {
                                 </div>
                             </div>
 
-                            <div className="absolute -top-15 -right-20 bg-white rounded-2xl shadow-xl p-4 border border-slate-100 max-w-xs animate-[bounce_5s_ease-in-out_infinite] motion-reduce:animate-none">
+                            <div className="absolute hidden xl:block -top-15 -right-20 bg-white rounded-2xl shadow-xl p-4 border border-slate-100 max-w-xs animate-[bounce_5s_ease-in-out_infinite] motion-reduce:animate-none">
                                 <div className="flex items-center gap-3">
                                     <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-400 to-pink-600 flex items-center justify-center text-white font-bold">
                                         ★

@@ -2,17 +2,7 @@
 // Server component — no client/runtime JS needed
 
 export default function WhyMasterProgram() {
-  // SEO: help search engines understand this section
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Course',
-    name: 'CDPL Digital Marketing Mentorship — Master Program',
-    description:
-      'AI-driven Digital Marketing mentorship with hands-on projects, analytics, performance marketing, SEO, and GA4. Cohort-based, portfolio-first, and placement-focused.',
-    provider: { '@type': 'Organization', name: 'Cinute Digital Pvt. Ltd.' },
-    keywords:
-      'digital marketing mentorship, AI marketing course, performance marketing, SEO course, GA4 analytics training, social media marketing, PPC ads',
-  };
+
 
   const highlights = [
     { label: '2-Months Duration', accent: 'bg-sky-50 text-sky-900 border-sky-200' },
@@ -159,11 +149,6 @@ export default function WhyMasterProgram() {
         </div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

@@ -28,65 +28,12 @@ type Props = {
 // ---------- Default Content (Python Programming page) ----------
 const DEFAULT_TITLE = "Python Programming";
 
-const DEFAULT_TESTIMONIALS: Testimonial[] = [
-  {
-    name: "Aarav Deshmukh",
-    role: "Data Analyst (Pandas/Excel to Python)",
-    rating: 5,
-    text:
-      "The curriculum focuses on practical data tasks: cleaning, analysis, and dashboards. Switching from Excel to Python felt natural thanks to the structured exercises.",
-  },
-  {
-    name: "Meera Nair",
-    role: "Backend Developer (FastAPI)",
-    rating: 5,
-    text:
-      "Loved the hands-on approach. From functions to APIs and testing, every concept had a real project. The mentor feedback loop was fast and actionable.",
-  },
-  {
-    name: "Irfan Shaikh",
-    role: "ML Engineer (scikit-learn)",
-    rating: 5,
-    text:
-      "Crystal-clear explanations of OOP, NumPy broadcasting, and model evaluation. The capstone on feature engineering helped me ace my interviews.",
-  },
-  {
-    name: "Ritika Bose",
-    role: "Automation Specialist (Selenium + Python)",
-    rating: 5,
-    text:
-      "Concise lessons, sharp challenges, and a supportive community. I automated repetitive QA flows in week two and cut manual hours to near zero.",
-  },
-];
-
-
 // ---------- Component ----------
 export default function TestimonialsSection({
   id = "testimonials",
   title = DEFAULT_TITLE,
-  items = DEFAULT_TESTIMONIALS,
 }: Props) {
-  // SEO: JSON-LD (Review + AggregateRating)
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: `${title} — Job-Ready Course`,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: `${items.length}`,
-      bestRating: "5",
-      worstRating: "1",
-    },
-    review: items.map((t) => ({
-      "@type": "Review",
-      reviewBody: t.text,
-      reviewRating: { "@type": "Rating", ratingValue: String(t.rating ?? 5), bestRating: "5" },
-      author: { "@type": "Person", name: t.name },
-    })),
-    keywords:
-      "Python programming course reviews, Python training testimonials, best Python course India, learn Python for data science, FastAPI backend course review, scikit-learn training feedback, NumPy Pandas bootcamp, automation testing with Python, Python interview prep",
-  } as const;
+
 
   return (
     <section id={id} aria-labelledby={`${id}-heading`} className="relative py-12 sm:py-16 md:py-20">
@@ -135,8 +82,6 @@ export default function TestimonialsSection({
         </div>
       </div>
 
-      {/* JSON-LD for SEO */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

@@ -7,19 +7,7 @@ import LeadForm from "../CourseLeadForm";
 import { ChevronRight, Home } from "lucide-react";
 
 export default function HeroSection() {
-  // JSON-LD for SEO (Course)
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Course",
-    name: "Master Program in Machine Learning & Data Science with Python",
-    description:
-      "Industry-ready ML & Data Science training covering Python, NumPy, Pandas, Data Visualization, scikit-learn, ML workflows, APIs, MLOps fundamentals, and cloud deployments. Includes live projects, mentor-led sessions, and placement assistance.",
-    provider: { "@type": "Organization", name: "Cinute Digital Pvt. Ltd. (CDPL)" },
-    educationalCredentialAwarded: "CDPL Verified Certificate (QR-enabled)",
-    timeRequired: "PT95H",
-    keywords:
-      "Machine Learning course Mumbai, Data Science with Python training, NumPy Pandas scikit-learn, ML projects, MLOps basics, placement assistance",
-  };
+
 
   const breadcrumbs = [
     { label: "Home", href: "/" },
@@ -188,8 +176,6 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* JSON-LD */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

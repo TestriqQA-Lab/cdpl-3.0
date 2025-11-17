@@ -87,17 +87,6 @@ export default function FaqSection() {
   const keywords =
     "deep learning course FAQ, generative AI program questions, NLP training Mumbai, AI certificate, ML placement assistance, PyTorch Hugging Face";
 
-  // JSON-LD (FAQPage)
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: FAQS.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-    keywords,
-  };
 
   return (
     <section id="faq" aria-labelledby="faq-heading" className="relative overflow-hidden py-8 md:py-10 bg-white">
@@ -172,11 +161,6 @@ export default function FaqSection() {
         </div>
       </div>
 
-      {/* JSON-LD for rich FAQ snippets */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

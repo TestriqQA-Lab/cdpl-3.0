@@ -132,22 +132,6 @@ export default function ToolsSection() {
   const seoKeywords =
     "data science tools with icons, machine learning stack icons, python numpy pandas scikit-learn icons, pytorch tensorflow icons, spark airflow sql, aws cloud mlops, data visualization matplotlib seaborn";
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Tools & Technologies — You’ll Master",
-    itemListElement: TOOLS.map((t, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: {
-        "@type": "SoftwareApplication",
-        name: t.name,
-        applicationCategory: t.tier,
-        operatingSystem: "Cross-platform",
-        description: t.blurb,
-      },
-    })),
-  };
 
   return (
     <section id="tools" aria-labelledby="tools-heading" className="relative py-6 md:py-10 bg-white">
@@ -251,8 +235,6 @@ export default function ToolsSection() {
         </aside>
       </div>
 
-      {/* JSON-LD structured data for SEO */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

@@ -84,24 +84,7 @@ const projects: Project[] = [
 ];
 
 export default function ProjectsSection() {
-  // SEO: structured data for projects
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'SDET Projects — Automation, Mobile, and Reliability Engineering',
-    description:
-      'Portfolio-ready SDET projects featuring web automation, mobile testing, performance, security, chaos engineering, CI/CD, and live dashboards.',
-    itemListElement: projects.map((p, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      item: {
-        '@type': 'CreativeWork',
-        name: p.title,
-        description: p.description,
-        keywords: p.features.join(', '),
-      },
-    })),
-  };
+
 
   return (
     <section id="projects" className="relative py-8 md:py-14 bg-white">
@@ -199,11 +182,6 @@ export default function ProjectsSection() {
         </p>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

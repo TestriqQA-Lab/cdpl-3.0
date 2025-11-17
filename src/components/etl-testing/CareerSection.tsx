@@ -40,26 +40,7 @@ const companyAccents = [
 ];
 
 export default function CareerSection() {
-  // SEO: JobPosting-like overview (aggregated)
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'ETL Testing Career Paths & Hiring Companies',
-    itemListElement: [
-      ...roles.map((r, i) => ({
-        '@type': 'ListItem',
-        position: i + 1,
-        name: r,
-      })),
-      ...companies.map((c, i) => ({
-        '@type': 'ListItem',
-        position: roles.length + i + 1,
-        name: c,
-      })),
-    ],
-    description:
-      'High-demand ETL testing roles, salary ranges, and top hiring companies across India.',
-  };
+
 
   return (
     <section
@@ -193,11 +174,6 @@ export default function CareerSection() {
         </motion.div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

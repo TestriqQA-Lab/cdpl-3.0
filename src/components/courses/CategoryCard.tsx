@@ -39,8 +39,6 @@ export default function CategoryCard({ category }: { category: UICategory }) {
                 category.bgColor ?? "bg-white",
                 "p-6 group",
             ].join(" ")}
-            itemScope
-            itemType="https://schema.org/DefinedTerm"
             role="article"
             aria-label={`${displayName} category`}
         >
@@ -54,7 +52,7 @@ export default function CategoryCard({ category }: { category: UICategory }) {
                 }}
             />
 
-            <meta itemProp="inDefinedTermSet" content="https://schema.org/Course" />
+
             <meta itemProp="termCode" content={displayName} />
 
             <div className="mb-5 flex items-start justify-between">

@@ -4,37 +4,7 @@ import { Phone, Mail, MapPin, Clock, Award, CheckCircle, Shield, Sparkles } from
 import Link from 'next/link';
 
 export default function CtaSection() {
-  // SEO: structured data for your training org + contact
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'API Testing Master Program',
-    description:
-      'Hands-on API Testing training with Postman, REST/GraphQL, JSON Schema validation, OWASP API security, and CI/CD. Live 15-hour program with job assistance.',
-    url: 'https://cinutedigital.com', // optional: replace with your actual URL
-    contactPoint: [
-      {
-        '@type': 'ContactPoint',
-        telephone: '+91 788-83-83-788',
-        contactType: 'customer support',
-        areaServed: 'IN',
-        availableLanguage: ['en', 'hi'],
-      },
-      {
-        '@type': 'ContactPoint',
-        email: 'contact@cinutedigital.com',
-        contactType: 'sales',
-        areaServed: 'IN',
-        availableLanguage: ['en', 'hi'],
-      },
-    ],
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Mira Road & Vasai',
-      addressRegion: 'Maharashtra',
-      addressCountry: 'IN',
-    },
-  };
+
 
   return (
     <section id="contact" aria-labelledby="cta-heading" className="relative py-8 sm:py-10 bg-white">
@@ -126,11 +96,6 @@ export default function CtaSection() {
         </motion.div>
       </div>
 
-      {/* JSON-LD for search engines */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

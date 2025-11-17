@@ -4,7 +4,7 @@
 
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 /** ---------- Types ---------- */
 type Stat = {
@@ -113,29 +113,9 @@ export default function StatsSection() {
   const [hasRevealed, setHasRevealed] = useState(false);
   const [values, setValues] = useState<number[]>(() => STATS.map(() => 0));
 
-  // SEO keywords + JSON-LD
   const seoKeywords =
     "comprehensive data science and ai course, machine learning training india, data science jobs, fresher salary ds ml, ai market growth, 255 hour data science program, mentor led projects";
 
-  const jsonLd = useMemo(
-    () => ({
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      name: "Comprehensive Data Science & AI — Program Highlights",
-      itemListElement: STATS.map((s, i) => ({
-        "@type": "ListItem",
-        position: i + 1,
-        item: {
-          "@type": "Thing",
-          name: s.label,
-          description: `${s.prefix ?? ""}${s.end}${s.suffix ?? ""} — ${s.label}${s.hint ? ` (${s.hint})` : ""}`,
-        },
-      })),
-      keywords:
-        "data science highlights, ai career stats, ml market growth, data jobs india, fresher salary data science",
-    }),
-    []
-  );
 
   // Observe section once; animate all stats together on first reveal
   useEffect(() => {
@@ -280,12 +260,6 @@ export default function StatsSection() {
           </p>
         </div>
       </div>
-
-      {/* JSON-LD structured data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }

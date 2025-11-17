@@ -28,12 +28,7 @@ const accents = [
 ];
 
 export default function ToolsSection() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Automation Testing Tools — Selenium, Cypress, Playwright, Jenkins, Docker, k6, Applitools, AI Testing',
-    itemListElement: tools.map((t, i) => ({ '@type': 'ListItem', position: i + 1, name: t.name })),
-  };
+
 
   return (
     <section id="tools" aria-labelledby="tools-heading" className="relative py-8 md:py-10 bg-white">
@@ -89,10 +84,6 @@ export default function ToolsSection() {
         </div>
       </div>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
     </section>
   );
 }
