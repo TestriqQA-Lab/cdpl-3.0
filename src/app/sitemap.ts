@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { statesData, getFlatLocations } from '@/data/cities/citiesData';
+import { courseData } from '@/types/courseData';
 import { pastEvents } from '@/data/eventsData';
 import { trainingServices } from '@/data/servicesData';
 import { BLOG_POSTS } from '@/data/BlogPostData';
@@ -199,18 +199,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'advance-software-testing',
     'api-testing',
     'etl-testing',
-    'aaa-certification-course',
-    'actd-certification-training',
 
     // Data & Analytics Courses
     'data-science-course',
     'data-analytics',
-    'data-engineering-course',
+    'data-analytics-and-visualization',
+    'data-analytics-python',
+    'data-analytics-with-tableau',
+    'data-visualization-in-r-programming',
     'dbms-course',
+    'masters-in-data-engineering',
+    'power-bi-course',
 
     // AI & ML Courses
     'ai-course',
+    'ai-bootcamp',
+    'ai-in-digital-marketing',
     'machine-learning-course',
+    'machine-learning-using-python',
     'generative-ai-course',
     'prompt-engineering-course',
 
@@ -232,11 +238,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // ========================================
 
   // 1. City-Course Pages (e.g., /software-testing-course-in-mumbai)
-  const cityCoursePages: MetadataRoute.Sitemap = getFlatLocations(statesData).map((city) => ({
-    // The 'link' property in city object already contains the full slug path, e.g., /software-testing-course-in-mumbai
-    url: `${siteUrl}${city.link}`,
+  // Generate from actual courseData to ensure only real pages are in sitemap
+  const cityCoursePages: MetadataRoute.Sitemap = Object.values(courseData).map((course) => ({
+    url: `${siteUrl}/${course.slug.toLowerCase()}`,
     lastModified: currentDate,
-    changeFrequency: 'monthly',
+    changeFrequency: 'monthly' as const,
     priority: 0.6,
   }));
 
