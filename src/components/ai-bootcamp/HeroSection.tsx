@@ -134,13 +134,13 @@ function LeadForm({ className = "" }: { className?: string }) {
 export default function HeroSection() {
     const breadcrumbs = [
         { label: "Home", href: "/" },
-        { label: "Digital Marketing with AI Bootcamp", href: "/digital-marketing-with-ai" },
+        { label: "Digital Marketing with AI Bootcamp", href: "/ai-bootcamp" },
     ];
 
     return (
         <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50">
             {/* Decorative background (keeps the soft blobs) */}
-            <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute overflow-hidden">
                 <div className="animate-blob animation-delay-0 absolute right-10 top-20 h-72 w-72 rounded-full bg-orange-200 opacity-20 mix-blend-multiply blur-3xl" />
                 <div className="animate-blob animation-delay-2000 absolute left-10 top-40 h-72 w-72 rounded-full bg-blue-200 opacity-20 mix-blend-multiply blur-3xl" />
                 <div className="animate-blob animation-delay-4000 absolute -bottom-8 left-20 h-72 w-72 rounded-full bg-pink-200 opacity-20 mix-blend-multiply blur-3xl" />

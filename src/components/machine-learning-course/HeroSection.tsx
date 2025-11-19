@@ -165,14 +165,6 @@ export default function HeroSection() {
             <span className="text-yellow-600">★★★★★</span>
             <span>#1 Mumbai’s Premium Training Institute</span>
           </div>
-          <Link
-            href="https://www.cinutedigital.com"
-            className="mt-3 block text-sm text-sky-700 hover:underline"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            www.cinutedigital.com
-          </Link>
         </div>
       </div>
 

@@ -337,7 +337,7 @@ export default function CurriculumSection() {
                         Manual Software Testing <span className="text-blue-700">Curriculum</span>
                     </h2>
                     <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-                        Extracted directly from the provided syllabus PDF — focusing strictly on curriculum items.
+                        Extracted directly from the provided syllabus PDF - focusing strictly on curriculum items.
                     </p>
                 </div>
 
@@ -371,7 +371,7 @@ export default function CurriculumSection() {
                 </div>
 
                 {/* Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-8">
+                <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-8 items-start">
                     {filtered.map((m) => (
                         <CurriculumCard key={m.id} mod={m} />
                     ))}
@@ -380,4 +380,3 @@ export default function CurriculumSection() {
         </section>
     );
 }
-

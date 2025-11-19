@@ -134,7 +134,7 @@ export default function HeroSection() {
     return (
         <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50">
             {/* Decorative background */}
-            <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute overflow-hidden">
                 <div className="animate-blob animation-delay-0 absolute right-10 top-20 h-72 w-72 rounded-full bg-orange-200 opacity-20 mix-blend-multiply blur-3xl" />
                 <div className="animate-blob animation-delay-2000 absolute left-10 top-40 h-72 w-72 rounded-full bg-blue-200 opacity-20 mix-blend-multiply blur-3xl" />
                 <div className="animate-blob animation-delay-4000 absolute -bottom-8 left-20 h-72 w-72 rounded-full bg-indigo-200 opacity-20 mix-blend-multiply blur-3xl" />
@@ -142,14 +142,14 @@ export default function HeroSection() {
 
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 pb-12 md:pt-6 md:pb-16">
                 {/* Breadcrumbs */}
-                <nav aria-label="Breadcrumb" className="mb-4">
+                <nav aria-label="Breadcrumb" className="mb-5">
                     <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
                         {breadcrumbs.map((c, i) => (
                             <li key={i} className="flex items-center gap-2">
                                 {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
                                 <Link
                                     href={c.href}
-                                    className={`hover:text-orange-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
+                                    className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
                                 >
                                     {c.label}
                                 </Link>
@@ -157,7 +157,6 @@ export default function HeroSection() {
                         ))}
                     </ol>
                 </nav>
-
                 {/* Main grid (form aligned to top on the right) */}
                 <div className="grid min-h-[70vh] grid-cols-1 gap-10 sm:py-2 md:grid-cols-12 md:items-start">
                     {/* Left: Content */}

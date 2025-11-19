@@ -208,10 +208,8 @@ export default function HeroSection() {
                         <div className="space-y-4">
                             <h1 className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900">
                                 Master {" "}
-                                <span className="text-orange-600">Data Analytics &</span>
-                                <br />
-                                <span className="text-blue-600">Visualization</span>
-                                <br />
+                                <span className="text-orange-600">Data Analytics &</span>{" "}
+                                <span className="text-blue-600">Visualization</span>{" "}
                                 <span className="text-purple-600">with Tableau</span>
                             </h1>
 

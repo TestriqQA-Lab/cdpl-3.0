@@ -262,7 +262,7 @@ const courseCategories: Category[] = [
       //     { name: "Advanced Automation Testing", logo: "/aaa.png" },
       //   ],
       // },
-      
+
     ],
   },
   {
@@ -599,7 +599,7 @@ const Header = () => {
                               </button>
                             ))}
                           </div>
-                          <Link href="/courses" className="mt-4 flex items-center text-brand hover:text-brand font-medium text-sm group">
+                          <Link href="/courses" className="mt-4 flex items-center text-brand hover:text-brand font-medium text-sm group" onClick={closeMega}>
                             View All Courses
                             <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                           </Link>
@@ -635,6 +635,7 @@ const Header = () => {
                                   href={href}
                                   onMouseEnter={() => setHoveredCourse(course.name)}
                                   className={itemClasses}
+                                  onClick={closeMega}
                                 >
                                   {inner}
                                 </Link>

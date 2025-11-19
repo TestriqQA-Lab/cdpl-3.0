@@ -11,7 +11,6 @@ export default function MentorHelpCTASection({
   title = "CDPL Mentorship: Learn from people who’ve shipped it",
   subtitle = "1:1 guidance for AI/ML, Data Science, Full-Stack, and DevOps, resume reviews, project feedback, and interview prep to accelerate outcomes.",
   ctaText = "Get matched with a CDPL mentor",
-  href = "#mentors-impact",
   bgImageSrc = "/images/cta-helping-hands.png",
   className = "",
 }: {
@@ -125,8 +124,7 @@ export default function MentorHelpCTASection({
             {/* CTA rail */}
             <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
               <Link
-                href={href}
-                onClick={handleAnchorClick}
+                href="contact-us"
                 className="group inline-flex items-center gap-2 rounded-full text-white transition-transform active:translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-500
                            whitespace-nowrap overflow-hidden text-ellipsis
                            text-[13px] leading-none px-4 py-2 min-h-[40px]

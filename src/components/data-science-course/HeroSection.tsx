@@ -12,7 +12,7 @@ export default function HeroSection() {
   const breadcrumbs = [
     { label: "Home", href: "/" },
     { label: "Data • AI", href: "#" },
-    { label: "Advanced DS & ML Masterclass", href: "/advanced-data-science" },
+    { label: "Advanced DS & ML Masterclass", href: "/data-science-course" },
   ];
 
   return (
@@ -127,23 +127,6 @@ export default function HeroSection() {
               <span className="text-yellow-600">★★★★★</span>
               <span>#1 Mumbai’s Premium Training Institute</span>
             </div>
-
-            {/* Secondary contact links */}
-            <div className="mt-4 flex flex-wrap justify-center gap-3 text-sm text-slate-800">
-              <Link href="tel:+917888383788" className="underline underline-offset-4">+91 788-83-83-788</Link>
-              <span className="text-slate-400">•</span>
-              <Link href="tel:+918488988984" className="underline underline-offset-4">+91 84-889-889-84</Link>
-              <span className="text-slate-400">•</span>
-              <Link href="tel:+918062785870" className="underline underline-offset-4">+91 806-27-85-870</Link>
-            </div>
-            <Link
-              href="https://www.cinutedigital.com"
-              className="mt-2 block text-center text-sm text-purple-700 hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              www.cinutedigital.com
-            </Link>
           </div>
 
           {/* Right column: Desktop form & visual (FORM 2) */}

@@ -136,7 +136,7 @@ export default function HeroSection() {
 
   const breadcrumbs = [
     { label: "Home", href: "/" },
-    { label: "Data Analytics with BI & Big Data Engineering", href: "/data-engineering-courses" },
+    { label: "Data Analytics with BI & Big Data Engineering", href: "/masters-in-data-engineering" },
   ];
 
   return (

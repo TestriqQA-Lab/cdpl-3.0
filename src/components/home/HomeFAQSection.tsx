@@ -95,7 +95,7 @@ export default function HomeFAQSection() {
     },
     {
       question: 'Are the classes online or offline?',
-      answer: 'We offer both online and offline training options. Our live online classes are interactive with real-time doubt resolution, just like classroom training. You can also attend our classroom sessions at our Pune center.',
+      answer: 'We offer both online and offline training options. Our live online classes are interactive with real-time doubt resolution, just like classroom training.',
     },
     {
       question: 'Do I need prior experience to join?',

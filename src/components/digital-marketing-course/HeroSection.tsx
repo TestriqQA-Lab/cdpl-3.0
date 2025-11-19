@@ -61,8 +61,7 @@ export default function HeroSection() {
 
   const breadcrumbs = [
     { label: 'Home', href: '/' },
-    { label: 'Marketing Programs', href: "#" },
-    { label: 'AI Digital Marketing', href: '/ai-digital-marketing' },
+    { label: 'AI Digital Marketing', href: '/digital-marketing-course' },
   ];
 
   return (

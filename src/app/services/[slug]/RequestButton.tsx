@@ -1,20 +1,16 @@
 'use client';
 
+import Link from "next/link";
+
 interface RequestButtonProps {
   serviceTitle: string;
 }
 
 export default function RequestButton({ serviceTitle }: RequestButtonProps) {
-  const handleClick = () => {
-    const event = new CustomEvent('openCorporateRegistration', {
-      detail: { service: serviceTitle },
-    });
-    window.dispatchEvent(event);
-  };
 
   return (
-    <button
-      onClick={handleClick}
+    <Link
+      href="/contact-us"
       aria-label={`Request ${serviceTitle}`}
       className="
         group relative inline-flex items-center justify-center
@@ -95,6 +91,6 @@ export default function RequestButton({ serviceTitle }: RequestButtonProps) {
           blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500
         "
       />
-    </button>
+    </Link>
   );
 }

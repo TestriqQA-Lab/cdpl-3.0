@@ -59,7 +59,7 @@ export default function HeroSection() {
     const breadcrumbs = [
         { label: "Home", href: "/" },
         { label: "Programming", href: "#" },
-        { label: "Python Master Program", href: "/python-program" },
+        { label: "Python Master Program", href: "/python-course" },
     ];
 
     return (
@@ -193,27 +193,6 @@ export default function HeroSection() {
                     <aside className="hidden md:col-span-5 lg:col-span-4 md:block">
                         <div className="sticky top-20">
                             <LeadForm variant="elevated" />
-                            {/* Quick contact chips, distinct colors (no repeats) */}
-                            <div className="mt-4 grid grid-cols-1 gap-2 text-sm">
-                                <Link
-                                    href="tel:+917888383788"
-                                    className="inline-flex items-center justify-center rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 font-semibold text-emerald-800 hover:bg-emerald-100"
-                                >
-                                    +91 788-83-83-788
-                                </Link>
-                                <Link
-                                    href="tel:+918488988984"
-                                    className="inline-flex items-center justify-center rounded-lg border border-sky-200 bg-sky-50 px-3 py-2 font-semibold text-sky-800 hover:bg-sky-100"
-                                >
-                                    +91 84-889-889-84
-                                </Link>
-                                <Link
-                                    href="tel:+918062785870"
-                                    className="inline-flex items-center justify-center rounded-lg border border-violet-200 bg-violet-50 px-3 py-2 font-semibold text-violet-800 hover:bg-violet-100"
-                                >
-                                    +91 806-27-85-870
-                                </Link>
-                            </div>
                         </div>
                     </aside>
                 </div>

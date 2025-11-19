@@ -11,8 +11,7 @@ export default function HeroSection() {
 
   const breadcrumbs = [
     { label: "Home", href: "/" },
-    { label: "AI & ML", href: "#" },
-    { label: "Prompt Engineering with Generative AI", href: "/prompt-engineering" },
+    { label: "Prompt Engineering with Generative AI", href: "/prompt-engineering-course" },
   ];
 
   return (
@@ -137,31 +136,6 @@ export default function HeroSection() {
               </div>
             </div>
           </aside>
-        </div>
-
-        {/* Alt contact links */}
-        <div className="mt-8 text-center">
-          <div className="flex flex-wrap justify-center gap-3 text-sm">
-            <Link href="tel:+917888383788" className="underline underline-offset-4 text-slate-800">
-              +91 788-83-83-788
-            </Link>
-            <span className="text-slate-400">•</span>
-            <Link href="tel:+918488988984" className="underline underline-offset-4 text-slate-800">
-              +91 84-889-889-84
-            </Link>
-            <span className="text-slate-400">•</span>
-            <Link href="tel:+918062785870" className="underline underline-offset-4 text-slate-800">
-              +91 806-27-85-870
-            </Link>
-          </div>
-          <Link
-            href="https://www.cinutedigital.com"
-            className="mt-3 block text-sm text-green-700 hover:underline"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            www.cinutedigital.com
-          </Link>
         </div>
       </div>
 
