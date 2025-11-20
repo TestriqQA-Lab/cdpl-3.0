@@ -19,12 +19,12 @@ export default function Home() {
                 <StatsSection />
                 <WhyEngineerProgram />
                 <CurriculumSection />
+                <ToolsSection />
+                <CareerRoadmapSection />
                 <ProjectsSection />
                 <TestimonialsSection />
                 <CareerSection />
                 <WhoShouldEnroll />
-                <ToolsSection />
-                <CareerRoadmapSection />
                 <FaqSection />
                 <CtaSection />
             </main>

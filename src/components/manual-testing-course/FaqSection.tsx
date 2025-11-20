@@ -2,7 +2,7 @@
 
 import React, { useMemo, useState } from "react";
 import {
-  Search, Plus, Minus, HelpCircle, BadgeCheck, Clock, Video, UserCheck,
+  Plus, Minus, HelpCircle, BadgeCheck, Clock, Video, UserCheck,
   CreditCard, BookOpen, Globe, Headphones, GraduationCap
 } from "lucide-react";
 import Link from "next/link";
@@ -194,9 +194,9 @@ function Chip({
       onClick={onClick}
       aria-pressed={active}
       className={`
-        inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-medium transition
+        inline-flex items-center gap-2 rounded-full border px-5 py-2 text-sm font-medium transition
         ${active
-          ? `bg-white shadow-sm border-gray-300 ${meta.text}`
+          ? `bg-white shadow-lg border-gray-400 ${meta.text}`
           : `${meta.lightBg} ${meta.text} border-transparent`
         }
         ring-1 ring-inset ${meta.ring} hover:ring-gray-300
@@ -252,6 +252,7 @@ function FAQItem({
 ========================= */
 export default function FaqSection() {
   const [query, setQuery] = useState("");
+  void setQuery;
   const [activeCat, setActiveCat] = useState<QA["category"] | "All">("All");
 
   const categories: (QA["category"] | "All")[] = ["All", ...categoryOrder];
@@ -284,18 +285,7 @@ export default function FaqSection() {
         </div>
 
         {/* Controls */}
-        <div className="mb-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-          <div className="relative flex-1">
-            <Search className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search FAQs: ISTQB, fees, projects, placement…"
-              aria-label="Search FAQs"
-              className="w-full rounded-xl border border-gray-200 bg-white px-11 py-3 text-sm sm:text-base outline-none ring-0 focus:border-indigo-300"
-            />
-          </div>
-
+        <div className="mb-8 flex flex-col sm:flex-row sm:items-center gap-3">
           <div className="flex flex-wrap gap-2">
             {categories.map((cat) => {
               if (cat === "All") {

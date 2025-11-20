@@ -58,11 +58,12 @@ export default function CtaSection() {
               <Mail className="mr-2 h-5 w-5" />
               Email Us
             </Link>
-            <button
+            <Link
+              href="contact-us"
               className="inline-flex items-center justify-center rounded-xl border-2 border-emerald-600 bg-white px-6 py-3 text-base font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-4 focus:ring-emerald-200"
             >
               Book Free Demo
-            </button>
+            </Link>
           </div>
         </motion.div>
 

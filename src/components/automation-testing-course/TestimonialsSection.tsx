@@ -24,7 +24,7 @@ export default function TestimonialsSection() {
                 <p className="mx-auto mt-8 max-w-4xl text-center text-sm sm:text-base text-slate-600">
                     Our alumni showcase <strong>Playwright/Cypress</strong>, <strong>Appium</strong>,{' '}
                     <strong>REST Assured</strong>, and <strong>Docker + Jenkins</strong> projects with clean, reviewed code and
-                    <em> measurable impact</em>—a winning combo for SDET interviews.
+                    <em> measurable impact</em>-a winning combo for SDET interviews.
                 </p>
             </div>
 

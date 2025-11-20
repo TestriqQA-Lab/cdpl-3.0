@@ -28,10 +28,10 @@ const DataAnalyticsMasterProgramPage: React.FC = () => {
                 <HeroSection />
                 <StatsSection />
                 <WhyEngineerProgram />
-                <ToolsSection />
                 <CurriculumSection />
-                <ProjectsSection />
+                <ToolsSection />
                 <CareerRoadmapSection /> {/* NEW SEO BOOST SECTION */}
+                <ProjectsSection />
                 <CareerSection />
                 <WhoShouldEnroll />
                 <TestimonialsSection />

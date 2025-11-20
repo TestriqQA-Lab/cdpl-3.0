@@ -119,7 +119,7 @@ export default function HeroSection() {
 
                         {/* Sub copy */}
                         <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-700 sm:text-lg">
-                            Validate data at every stage—<strong>extract</strong>,{' '}
+                            Validate data at every stage-<strong>extract</strong>,{' '}
                             <strong>transform</strong>, and <strong>load</strong>. Learn{' '}
                             <em>dataset profiling, schema checks, reconciliation, automation,
                                 and reporting</em> to ensure accurate BI & analytics.
@@ -147,12 +147,6 @@ export default function HeroSection() {
                             >
                                 View Curriculum
                             </Link>
-                            <button
-                                className="inline-flex items-center justify-center rounded-xl border border-emerald-300 bg-white px-6 py-3 text-base font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-4 focus:ring-emerald-200"
-                                aria-label="Book a free demo for ETL testing"
-                            >
-                                Free Demo
-                            </button>
                         </div>
 
                         {/* Quick highlights */}

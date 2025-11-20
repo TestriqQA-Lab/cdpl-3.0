@@ -108,7 +108,7 @@ export default function ProjectsSection() {
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
             Ship <strong>production-grade automation frameworks</strong> with <em>AI self-healing</em>,{' '}
-            <strong>visual testing</strong>, <strong>secure mobile E2E</strong>, and <strong>reliability engineering</strong>—
+            <strong>visual testing</strong>, <strong>secure mobile E2E</strong>, and <strong>reliability engineering-</strong>
             the exact portfolio hiring managers search for.
           </p>
         </motion.header>

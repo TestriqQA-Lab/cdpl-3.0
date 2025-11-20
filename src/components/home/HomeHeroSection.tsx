@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Link from 'next/link';
-import { motion} from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   Award,
   TrendingUp,
@@ -105,6 +105,151 @@ const MobileFeatureList: React.FC<MobileFeatureListProps> = ({ onOpenBrochure, o
   </div>
 );
 
+// Animation variants
+const fadeUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const }
+};
+
+// Component for desktop hero content
+interface DesktopHeroContentProps {
+  onOpenBrochure: () => void;
+  onOpenVideo: () => void;
+}
+
+const DesktopHeroContent: React.FC<DesktopHeroContentProps> = ({ onOpenBrochure, onOpenVideo }) => (
+  <>
+    {/* Top Badge */}
+    <motion.div
+      {...fadeUp}
+      className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-50 to-blue-50 border border-indigo-200 rounded-full px-4 py-2 mb-5"
+    >
+      <Sparkles className="h-3.5 w-3.5 text-indigo-500" aria-hidden="true" />
+      <span className="text-[11px] sm:text-xs font-semibold text-indigo-700">
+        🏆 India&apos;s #1 Software Testing & Data Science Training Institute
+      </span>
+    </motion.div>
+
+    {/* Main Headline - Updated Copy */}
+    <motion.h1
+      id="home-heading"
+      {...fadeUp}
+      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.06 }}
+      className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900"
+    >
+      Transform Your Career with{' '}
+      <span className="block lg:mt-2 md:mt-2 mt-1 text-brand">Industry-Ready Skills</span>
+    </motion.h1>
+
+    {/* Enhanced Subheadline */}
+    <motion.p
+      {...fadeUp}
+      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.12 }}
+      className="mt-5 text-[15px] sm:text-base md:text-lg leading-7 text-slate-700"
+    >
+      Master Software Testing, Data Science, AI/ML, and Full Stack Development through expert-led
+      classroom and online live training programs.
+    </motion.p>
+
+    {/* Trust Indicators - 3 Cards */}
+    <motion.div
+      {...fadeUp}
+      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.18 }}
+      className="mt-7 grid grid-cols-1 sm:grid-cols-3 gap-4"
+    >
+      {/* Card 1 - Students Placed */}
+      <div className="flex items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+        <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
+          <Users className="h-5 w-5 text-white" />
+        </div>
+        <div>
+          <div className="text-xl font-bold text-slate-900">5,000+</div>
+          <div className="text-xs text-slate-600">Students Placed</div>
+        </div>
+      </div>
+
+      {/* Card 2 - Rating */}
+      <div className="flex items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+        <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg flex items-center justify-center">
+          <Star className="h-5 w-5 text-white fill-white" />
+        </div>
+        <div>
+          <div className="text-xl font-bold text-slate-900">4.9/5</div>
+          <div className="text-xs text-slate-600">Student Rating</div>
+        </div>
+      </div>
+
+      {/* Card 3 - Experience */}
+      <div className="flex items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+        <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
+          <Award className="h-5 w-5 text-white" />
+        </div>
+        <div>
+          <div className="text-xl font-bold text-slate-900">15+ Years</div>
+          <div className="text-xs text-slate-600">Industry Experience</div>
+        </div>
+      </div>
+    </motion.div>
+
+    {/* Key Features - 6 Benefits */}
+    <motion.div
+      {...fadeUp}
+      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.24 }}
+      className="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-3"
+    >
+      {[
+        { icon: CheckCircle2, text: '100% Live Interactive Classes', color: 'text-green-600' },
+        { icon: CheckCircle2, text: '90+ Real-World Projects', color: 'text-blue-600' },
+        { icon: CheckCircle2, text: 'ISTQB & Industry Certifications', color: 'text-purple-600' },
+        { icon: CheckCircle2, text: '100% Job Support with Interview Guarantee', color: 'text-indigo-600' },
+        { icon: CheckCircle2, text: 'Flexible Weekend & Weekday Batches', color: 'text-orange-600' },
+        { icon: CheckCircle2, text: 'Lifetime Access to Course Materials', color: 'text-teal-600' },
+      ].map((feature, index) => (
+        <div key={index} className="flex items-start gap-2">
+          <feature.icon className={`h-5 w-5 ${feature.color} flex-shrink-0 mt-0.5`} />
+          <span className="text-sm text-slate-700">{feature.text}</span>
+        </div>
+      ))}
+    </motion.div>
+
+
+    {/* CTA Buttons */}
+    <motion.div
+      {...fadeUp}
+      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.36 }}
+      className="mt-7 flex flex-col sm:flex-row gap-4"
+    >
+      {/* Primary CTA - Download Brochure */}
+      <button
+        onClick={onOpenBrochure}
+        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
+      >
+        <Download className="h-5 w-5" />
+        Download Brochure
+      </button>
+
+      {/* Secondary CTA - View Placement Success Stories */}
+      <Link
+        href="/jobs/placements"
+        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
+      >
+        <Eye className="h-5 w-5" />
+        View Placement Stories
+      </Link>
+
+      {/* Tertiary CTA - Watch CDPL */}
+      <button
+        onClick={onOpenVideo}
+        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
+      >
+        <Play className="h-5 w-5" />
+        Watch CDPL
+      </button>
+    </motion.div>
+  </>
+);
+
 const HomeHeroSection: React.FC = () => {
   // Form state
   const [formData, setFormData] = useState({
@@ -127,7 +272,7 @@ const HomeHeroSection: React.FC = () => {
 
   // Video modal state
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-  
+
   // YouTube video URL - UPDATE THIS WITH YOUR VIDEO URL
   const videoUrl = 'https://www.youtube.com/watch?v=8kB2wESj1n8'; // Replace YOUR_VIDEO_ID with actual video ID
 
@@ -270,12 +415,8 @@ const HomeHeroSection: React.FC = () => {
     }
   };
 
-  // Animation variants
-  const fadeUp = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const }
-  };
+  const openBrochure = useCallback(() => setIsBrochureModalOpen(true), []);
+  const openVideo = useCallback(() => setIsVideoModalOpen(true), []);
 
   // The original Breadcrumb component
   const Breadcrumb = (
@@ -289,139 +430,6 @@ const HomeHeroSection: React.FC = () => {
         </li>
       </ol>
     </nav>
-  );
-
-  // The original Hero Content block (Left side of the grid)
-  const DesktopHeroContent = ({ onOpenBrochure }: { onOpenBrochure: () => void }) => (
-    <>
-      {/* Top Badge */}
-      <motion.div
-        {...fadeUp}
-        className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-50 to-blue-50 border border-indigo-200 rounded-full px-4 py-2 mb-5"
-      >
-        <Sparkles className="h-3.5 w-3.5 text-indigo-500" aria-hidden="true" />
-        <span className="text-[11px] sm:text-xs font-semibold text-indigo-700">
-          🏆 India&apos;s #1 Software Testing & Data Science Training Institute
-        </span>
-      </motion.div>
-
-      {/* Main Headline - Updated Copy */}
-      <motion.h1
-        id="home-heading"
-        {...fadeUp}
-        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.06 }}
-        className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900"
-      >
-        Transform Your Career with{' '}
-        <span className="block lg:mt-2 md:mt-2 mt-1 text-brand">Industry-Ready Skills</span>
-      </motion.h1>
-
-      {/* Enhanced Subheadline */}
-      <motion.p
-        {...fadeUp}
-        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.12 }}
-        className="mt-5 text-[15px] sm:text-base md:text-lg leading-7 text-slate-700"
-      >
-        Master Software Testing, Data Science, AI/ML, and Full Stack Development through expert-led
-        classroom and online live training programs.
-      </motion.p>
-
-      {/* Trust Indicators - 3 Cards */}
-      <motion.div
-        {...fadeUp}
-        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.18 }}
-        className="mt-7 grid grid-cols-1 sm:grid-cols-3 gap-4"
-      >
-        {/* Card 1 - Students Placed */}
-        <div className="flex items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-          <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
-            <Users className="h-5 w-5 text-white" />
-          </div>
-          <div>
-            <div className="text-xl font-bold text-slate-900">5,000+</div>
-            <div className="text-xs text-slate-600">Students Placed</div>
-          </div>
-        </div>
-
-        {/* Card 2 - Rating */}
-        <div className="flex items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-          <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg flex items-center justify-center">
-            <Star className="h-5 w-5 text-white fill-white" />
-          </div>
-          <div>
-            <div className="text-xl font-bold text-slate-900">4.9/5</div>
-            <div className="text-xs text-slate-600">Student Rating</div>
-          </div>
-        </div>
-
-        {/* Card 3 - Experience */}
-        <div className="flex items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-          <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
-            <Award className="h-5 w-5 text-white" />
-          </div>
-          <div>
-            <div className="text-xl font-bold text-slate-900">15+ Years</div>
-            <div className="text-xs text-slate-600">Industry Experience</div>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Key Features - 6 Benefits */}
-      <motion.div
-        {...fadeUp}
-        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.24 }}
-        className="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-3"
-      >
-        {[
-          { icon: CheckCircle2, text: '100% Live Interactive Classes', color: 'text-green-600' },
-          { icon: CheckCircle2, text: '90+ Real-World Projects', color: 'text-blue-600' },
-          { icon: CheckCircle2, text: 'ISTQB & Industry Certifications', color: 'text-purple-600' },
-          { icon: CheckCircle2, text: '100% Job Support with Interview Guarantee', color: 'text-indigo-600' },
-          { icon: CheckCircle2, text: 'Flexible Weekend & Weekday Batches', color: 'text-orange-600' },
-          { icon: CheckCircle2, text: 'Lifetime Access to Course Materials', color: 'text-teal-600' },
-        ].map((feature, index) => (
-          <div key={index} className="flex items-start gap-2">
-            <feature.icon className={`h-5 w-5 ${feature.color} flex-shrink-0 mt-0.5`} />
-            <span className="text-sm text-slate-700">{feature.text}</span>
-          </div>
-        ))}
-      </motion.div>
-
-
-      {/* CTA Buttons */}
-      <motion.div
-        {...fadeUp}
-        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.36 }}
-        className="mt-7 flex flex-col sm:flex-row gap-4"
-      >
-        {/* Primary CTA - Download Brochure */}
-        <button
-          onClick={onOpenBrochure}
-          className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
-        >
-          <Download className="h-5 w-5" />
-          Download Brochure
-        </button>
-
-        {/* Secondary CTA - View Placement Success Stories */}
-        <Link
-          href="/jobs/placements"
-          className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
-        >
-          <Eye className="h-5 w-5" />
-          View Placement Stories
-        </Link>
-
-        {/* Tertiary CTA - Watch CDPL */}
-        <button
-          onClick={() => setIsVideoModalOpen(true)}
-          className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
-        >
-          <Play className="h-5 w-5" />
-          Watch CDPL
-        </button>
-      </motion.div>
-    </>
   );
 
   // The original Lead Form block (Right side of the grid)
@@ -486,9 +494,8 @@ const HomeHeroSection: React.FC = () => {
                   onChange={handleInputChange}
                   onBlur={() => validateFullName(formData.fullName)}
                   required
-                  className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${
-                    fullNameError ? 'border-red-500' : 'border-gray-300'
-                  }`}
+                  className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${fullNameError ? 'border-red-500' : 'border-gray-300'
+                    }`}
                   placeholder="Enter your full name"
                   style={{ color: '#1e293b' }}
                 />
@@ -512,9 +519,8 @@ const HomeHeroSection: React.FC = () => {
                   onChange={handleInputChange}
                   onBlur={() => validateEmail(formData.email)}
                   required
-                  className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${
-                    emailError ? 'border-red-500' : 'border-gray-300'
-                  }`}
+                  className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${emailError ? 'border-red-500' : 'border-gray-300'
+                    }`}
                   placeholder="Enter your email address"
                   style={{ color: '#1e293b' }}
                 />
@@ -536,9 +542,8 @@ const HomeHeroSection: React.FC = () => {
                   value={formData.phone}
                   onChange={handlePhoneChange}
                   onBlur={() => validatePhoneNumber(formData.phone)}
-                  className={`phone-input-container ${
-                    phoneError ? 'border-red-500' : ''
-                  }`}
+                  className={`phone-input-container ${phoneError ? 'border-red-500' : ''
+                    }`}
                   placeholder="Enter phone number"
                 />
               </div>
@@ -674,7 +679,7 @@ const HomeHeroSection: React.FC = () => {
 
         {/* Main Container */}
         <div className="relative max-w-7xl mx-auto">
-          
+
           {/* --- Mobile Layout (lg:hidden) --- */}
           <div className="lg:hidden">
             {/* 1. Breadcrumb */}
@@ -705,9 +710,9 @@ const HomeHeroSection: React.FC = () => {
             {LeadForm}
 
             {/* 5. Mobile Feature List (The long list of stats/CTAs) */}
-            <MobileFeatureList 
-              onOpenBrochure={() => setIsBrochureModalOpen(true)}
-              onOpenVideo={() => setIsVideoModalOpen(true)}
+            <MobileFeatureList
+              onOpenBrochure={openBrochure}
+              onOpenVideo={openVideo}
             />
           </div>
 
@@ -718,10 +723,10 @@ const HomeHeroSection: React.FC = () => {
 
             {/* 2. Grid Layout - 8 columns left, 4 columns right */}
             <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12">
-              
+
               {/* Left Content - 8 columns (66.67% width) */}
               <div className="order-1 lg:order-1 lg:col-span-7">
-                <DesktopHeroContent onOpenBrochure={() => setIsBrochureModalOpen(true)} />
+                <DesktopHeroContent onOpenBrochure={openBrochure} onOpenVideo={openVideo} />
               </div>
 
               {/* Right Form - 4 columns (33.33% width) */}

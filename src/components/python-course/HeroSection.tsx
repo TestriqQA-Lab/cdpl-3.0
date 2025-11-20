@@ -148,13 +148,6 @@ export default function HeroSection() {
                             >
                                 View Curriculum
                             </Link>
-                            <Link
-                                href="https://www.cinutedigital.com"
-                                className="inline-flex items-center justify-center rounded-xl border border-rose-300 bg-white px-6 py-3 text-base font-semibold text-rose-700 shadow-sm transition hover:bg-rose-50 focus:outline-none focus:ring-4 focus:ring-rose-200"
-                                aria-label="Visit Cinute Digital website"
-                            >
-                                Visit Website
-                            </Link>
                         </div>
 
                         {/* Highlights (two columns on sm+, distinct dot colors) */}

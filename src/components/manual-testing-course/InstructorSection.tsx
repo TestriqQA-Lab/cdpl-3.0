@@ -249,16 +249,13 @@ export default function InstructorSection() {
               </div>
 
               {/* Social proof banner */}
-              <div className="flex items-center justify-between gap-3 rounded-2xl bg-slate-50 ring-1 ring-slate-200 p-4">
+              <div className="flex items-center w-fit justify-between gap-3 rounded-2xl bg-slate-50 ring-1 ring-slate-200 p-4">
                 <div className="flex items-center gap-2">
                   <Sparkles className="h-4 w-4 text-rose-600" />
                   <p className="text-sm font-semibold text-slate-800">
                     Top-Rated QA Mentor • 4.8/5
                   </p>
                 </div>
-                <Link href="#reviews" className="text-sm font-medium text-indigo-700 hover:underline">
-                  Read all reviews
-                </Link>
               </div>
             </div>
           </div>

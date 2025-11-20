@@ -6,7 +6,6 @@ import {
     Download,
     Star,
     ShieldCheck,
-    PlayCircle,
     Sparkles,
     Home,
 } from "lucide-react";
@@ -338,14 +337,6 @@ export default function HeroManualTesting() {
                                 <Download className="mr-2 h-5 w-5 text-slate-700" />
                                 Download Syllabus (PDF)
                             </button>
-
-                            <button
-                                className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-sky-700 px-3 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-sky-800 hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 sm:ml-1"
-                                aria-label="Book a free demo class"
-                            >
-                                <PlayCircle className="mr-2 h-5 w-5" />
-                                Free Demo Class
-                            </button>
                         </div>
 
                         {/* Feature bullets */}
@@ -366,11 +357,11 @@ export default function HeroManualTesting() {
                         {/* Company logos + Stats */}
                         <div className="mt-10">
                             <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Alumni work at</p>
-                            <div className="mt-4 flex flex-wrap items-center gap-x-8 gap-y-3 opacity-90">
-                                <Image src="/company_images/Testriq-Logo-Black.webp" alt="Testriq" title="Testriq" width={120} height={24} />
-                                <Image src="/company_images/axiom.webp" alt="Pixelwave" title="Pixelwave" width={120} height={24} />
-                                <Image src="/company_images/credility.webp" alt="Groundwork Systems" title="Groundwork Systems" width={120} height={24} />
-                                <Image src="/company_images/marqetrix.webp" alt="Nitrosoft" title="Nitrosoft" width={120} height={24} />
+                            <div className="mt-4 grid grid-cols-2 lg:grid-cols-4 items-center gap-x-8 gap-y-3 opacity-90">
+                                <Image src="/company_images/Testriq-Logo-Black.webp" alt="Testriq" title="Testriq" width={150} height={24} />
+                                <Image src="/company_images/axiom.webp" alt="Pixelwave" title="Pixelwave" width={150} height={24} />
+                                <Image src="/company_images/credility.webp" alt="Groundwork Systems" title="Groundwork Systems" width={150} height={24} />
+                                <Image src="/company_images/marqetrix.webp" alt="Nitrosoft" title="Nitrosoft" width={150} height={24} />
                             </div>
 
                             {/* NEW: PDF Stats with animated counters */}

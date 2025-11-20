@@ -21,10 +21,10 @@ export default function Home() {
                 <StatsSection />
                 <WhyVisualizationProgram />
                 <CurriculumSection />
-                <ProjectsSection />
-                <CareerRoadmapSection />
-                <CareerSection />
                 <ToolsSection />
+                <CareerRoadmapSection />
+                <ProjectsSection />
+                <CareerSection />
                 <WhoShouldEnroll />
                 <TestimonialsSection />
                 <FaqSection />

@@ -163,8 +163,8 @@ export default function StatsSection() {
           <h2 id="qa-stats-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
             Real-World <span className="text-ST">QA & Automation</span> Career Metrics
           </h2>
-          <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-600">
-            Figures below are sourced from our program brochure and industry snapshot—market demand, salary benchmarks,
+          <p className="mt-3 text-lg leading-relaxed text-slate-600">
+            Figures below are sourced from our program brochure and industry snapshot-market demand, salary benchmarks,
             satisfaction, and duration.
           </p>
         </header>

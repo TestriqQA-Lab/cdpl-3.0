@@ -23,7 +23,7 @@ export default function TestimonialsSection() {
                 {/* SEO-supportive copy */}
                 <p className="mx-auto mt-8 max-w-4xl text-center text-sm sm:text-base text-slate-600">
                     Alumni highlight <strong>CI/CD automation</strong>, <strong>Appium & Selenium mastery</strong>, and{' '}
-                    <strong>framework design</strong> as key differentiators in interviews—backed by portfolio projects and
+                    <strong>framework design</strong> as key differentiators in interviews-backed by portfolio projects and
                     evidence-rich reports.
                 </p>
             </div>

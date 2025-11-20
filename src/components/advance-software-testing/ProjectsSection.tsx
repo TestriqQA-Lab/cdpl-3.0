@@ -140,7 +140,7 @@ export default function ProjectsSection() {
         <div className="mx-auto mt-8 max-w-4xl text-center">
           <p className="text-sm sm:text-base leading-relaxed text-slate-600">
             These projects validate <strong>framework design</strong>, <strong>data-driven testing</strong>,{' '}
-            <strong>parallel execution</strong>, <strong>API/DB assertions</strong>, and <strong>CI/CD quality gates</strong>—the exact
+            <strong>parallel execution</strong>, <strong>API/DB assertions</strong>, and <strong>CI/CD quality gates</strong>-the exact
             capabilities hiring managers expect from modern <strong>SDETs</strong>.
           </p>
         </div>

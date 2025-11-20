@@ -28,9 +28,9 @@ const PowerBIPage: React.FC = () => {
                 <HeroSection />
                 <StatsSection />
                 <WhyBIProgram />
-                <CareerRoadmapSection /> {/* NEW SEO BOOST SECTION */}
                 <CurriculumSection />
                 <ToolsSection />
+                <CareerRoadmapSection /> {/* NEW SEO BOOST SECTION */}
                 <ProjectsSection />
                 <CareerSection />
                 <WhoShouldEnroll />

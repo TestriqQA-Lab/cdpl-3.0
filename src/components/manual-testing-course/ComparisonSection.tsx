@@ -158,7 +158,6 @@ export default function ComparisonSection({
             <div className="flex items-center gap-2">
               <span className="inline-flex items-center gap-2 rounded-lg bg-gray-50 border border-gray-200 px-3 py-2 text-sm text-gray-700">
                 <span className="inline-block animate-pulse h-2.5 w-2.5 rounded-full bg-indigo-600 shadow-[0_0_8px_rgba(79,70,229,0.6)]" />
-                Light, distraction-free UI
               </span>
             </div>
           </div>
@@ -262,13 +261,6 @@ export default function ComparisonSection({
                   </li>
                 ))}
               </ul>
-              <div className="mt-6">
-                <button
-                  className="inline-flex justify-center rounded-xl border border-gray-300 px-5 py-3 text-gray-800 font-semibold hover:bg-white focus:outline-none focus:ring-4 focus:ring-gray-100"
-                >
-                  Read Student Outcomes
-                </button>
-              </div>
             </div>
           </div>
         </div>

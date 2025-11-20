@@ -93,7 +93,7 @@ export default function WhyAdvancedTesting() {
         {/* SEO supportive microcopy */}
         <p className="mx-auto mt-8 max-w-4xl text-center text-sm sm:text-base text-slate-600">
           Learn <strong>framework design</strong>, <strong>self-healing tests</strong>, <strong>parallel execution</strong>,{' '}
-          <strong>reporting & metrics</strong>, and <strong>release quality gates</strong>—skills hiring managers expect
+          <strong>reporting & metrics</strong>, and <strong>release quality gates</strong>-skills hiring managers expect
           in modern <strong>SDET</strong> roles.
         </p>
       </div>

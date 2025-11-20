@@ -53,7 +53,7 @@ export default function WhoShouldEnroll() {
           <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
             Perfect for <strong>manual testers</strong>, <strong>freshers</strong>,{' '}
             <strong>developers</strong>, and <strong>QA leads</strong> who want
-            industry-ready <em>Automation Testing</em> & <em>SDET</em> skills—framework design,
+            industry-ready <em>Automation Testing</em> & <em>SDET</em> skills-framework design,
             CI/CD integration, API automation, and real projects.
           </p>
 

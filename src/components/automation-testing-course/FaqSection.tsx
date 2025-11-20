@@ -1,5 +1,5 @@
 'use client';
-import { ChevronDown, HelpCircle, Mail, Phone } from 'lucide-react';
+import { ChevronDown, HelpCircle } from 'lucide-react';
 import { useEffect, useId, useMemo, useState } from 'react';
 
 type Faq = { q: string; a: string; tag?: string };
@@ -164,24 +164,6 @@ export default function FaqSection() {
                             </div>
                         );
                     })}
-                </div>
-
-                {/* soft CTA help row */}
-                <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                    <a
-                        href="mailto:contact@cinutedigital.com"
-                        className="inline-flex items-center justify-center gap-2 rounded-xl border border-indigo-200 bg-indigo-50 px-4 py-3 text-sm font-semibold text-indigo-900 hover:bg-indigo-100 transition"
-                    >
-                        <Mail className="h-5 w-5" />
-                        Still have questions? Email support
-                    </a>
-                    <a
-                        href="tel:+917888383788"
-                        className="inline-flex items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-900 hover:bg-emerald-100 transition"
-                    >
-                        <Phone className="h-5 w-5" />
-                        Talk to an advisor: +91 788-83-83-788
-                    </a>
                 </div>
             </div>
 

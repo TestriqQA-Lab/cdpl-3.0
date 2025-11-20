@@ -86,7 +86,7 @@ export default function StatsSection() {
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
             Figures sourced from the official ETL Testing &amp; Development brochure: total training time,
-            curriculum depth, hands-on capstones, and mapped job roles—so you know exactly what you’ll get.
+            curriculum depth, hands-on capstones, and mapped job roles-so you know exactly what you’ll get.
           </p>
         </header>
 
@@ -115,7 +115,7 @@ export default function StatsSection() {
               </div>
               <div className="mt-1 text-[11px] sm:text-sm font-medium text-slate-600">{s.label}</div>
               <div className="mt-3 text-[11px] leading-5 text-slate-500">
-                Verified from the official program PDF: duration, curriculum items, capstone projects, and job-role mapping.
+                Verified from the official program: duration, curriculum items, capstone projects, and job-role mapping.
               </div>
             </motion.div>
           ))}

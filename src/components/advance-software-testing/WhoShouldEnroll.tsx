@@ -53,7 +53,7 @@ export default function WhoShouldEnroll() {
           <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
             Perfect for <strong>manual testers</strong>, <strong>fresh graduates</strong>,{' '}
             <strong>career switchers</strong>, and <strong>developers</strong> who want industry-ready
-            <em> Automation Testing</em> & <em> SDET</em> skills—framework design, CI/CD, and real projects.
+            <em> Automation Testing</em> & <em> SDET</em> skills-framework design, CI/CD, and real projects.
           </p>
           {/* micro badges row */}
           <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-[11px] font-semibold">
@@ -91,7 +91,7 @@ export default function WhoShouldEnroll() {
         <p className="mx-auto mt-8 max-w-4xl text-center text-sm sm:text-base text-slate-600">
           Whether you’re transitioning from manual QA or enhancing your dev toolkit, this program
           covers <strong>Selenium/Appium</strong>, <strong>REST Assured</strong>, <strong>Playwright/Cypress</strong>,
-          version control, and <strong>CI/CD</strong>—everything required to stand out as an industry-ready{' '}
+          version control, and <strong>CI/CD</strong>-everything required to stand out as an industry-ready{' '}
           <strong>SDET</strong>.
         </p>
       </div>

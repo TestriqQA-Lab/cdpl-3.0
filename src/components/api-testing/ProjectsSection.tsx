@@ -143,16 +143,6 @@ export default function ProjectsSection() {
 
                 {/* card footer actions */}
                 <div className="mt-6 flex flex-wrap items-center gap-3">
-                  <button
-                    className={[
-                      'inline-flex items-center justify-center rounded-xl border bg-white px-4 py-2 text-sm font-semibold shadow-sm transition hover:bg-slate-50 focus:outline-none',
-                      p.border,
-                      p.ink,
-                    ].join(' ')}
-                    aria-label={`Request syllabus for ${p.title}`}
-                  >
-                    Project Syllabus
-                  </button>
                   <Link
                     href="contact-us"
                     className={[

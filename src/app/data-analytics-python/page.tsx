@@ -26,20 +26,20 @@ export default function Home() {
             {/* Curriculum Section */}
             <CurriculumSection />
 
-            {/* Projects Section */}
-            <ProjectsSection />
-
             {/* Tools & Technologies Section */}
             <ToolsSection />
+
+            {/* Career Roadmap Section */}
+            <CareerRoadmapSection />
+
+            {/* Projects Section */}
+            <ProjectsSection />
 
             {/* Who Should Enroll Section */}
             <WhoShouldEnroll />
 
             {/* Career Section */}
             <CareerSection />
-
-            {/* Career Roadmap Section */}
-            <CareerRoadmapSection />
 
             {/* Testimonials Section */}
             <TestimonialsSection />

@@ -127,12 +127,6 @@ export default function HeroSection() {
                             >
                                 View Curriculum
                             </Link>
-                            <button
-                                className="inline-flex items-center justify-center rounded-xl border border-emerald-300 bg-white px-6 py-3 text-base font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-4 focus:ring-emerald-200"
-                                aria-label="Book a free demo for MySQL"
-                            >
-                                Free Demo
-                            </button>
                         </div>
 
                         {/* Quick highlights */}

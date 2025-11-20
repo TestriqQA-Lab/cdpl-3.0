@@ -35,12 +35,12 @@ const PythonPage: NextPage = () => {
             <section id='program-stats'><StatsSection /></section>
             <section id='why-master-program'><WhyPythonProgram /></section>
             <section id='curriculum'><CurriculumSection /></section>
+            <section id='tools'><ToolsSection /></section>
+            <section id='roadmap'><CareerRoadmapSection /></section>
             <section id='projects'><ProjectsSection /></section>
             <section id='testimonials'><TestimonialsSection /></section>
             <section id='career'><CareerSection /></section>
             <section id='who-should-enroll'><WhoShouldEnroll /></section>
-            <section id='tools'><ToolsSection /></section>
-            <section id='roadmap'><CareerRoadmapSection /></section>
             <section id='faqs'><FaqSection /></section>
             <section id='contact'><CtaSection /></section>
     </>

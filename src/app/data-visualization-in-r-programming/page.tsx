@@ -29,14 +29,14 @@ export default function Home() {
                 {/* Section 4: Detailed Curriculum */}
                 <CurriculumSection />
 
-                {/* Section 5: Real-Time Projects */}
-                <ProjectsSection />
-
                 {/* Section 6: Tools & Technologies */}
                 <ToolsSection />
 
                 {/* Section 7: Career Roadmap (New SEO Boost Section) */}
                 <CareerRoadmapSection />
+
+                {/* Section 5: Real-Time Projects */}
+                <ProjectsSection />
 
                 {/* Section 8: Career Opportunities & Placement Support */}
                 <CareerSection />

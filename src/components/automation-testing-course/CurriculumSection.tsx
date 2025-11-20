@@ -106,7 +106,7 @@ export default function CurriculumSection() {
                 <p className="mx-auto mt-2 mb-8 max-w-3xl text-center text-sm sm:text-base text-slate-600">
                     Master <strong>Java/Python</strong>, <strong>Selenium WebDriver</strong>, synchronization & interactions,
                     <strong> TestNG/PyTest</strong>, and build a production-ready <em>Hybrid Framework (E2E)</em> with reporting,
-                    logging, and data-driven tests—plus <strong>Git</strong> and the web automation process model.
+                    logging, and data-driven tests-plus <strong>Git</strong> and the web automation process model.
                 </p>
 
                 {/* Responsive grid */}
@@ -175,11 +175,6 @@ export default function CurriculumSection() {
                         className="inline-flex items-center justify-center rounded-xl border-2 border-emerald-700 bg-white px-4 py-2 text-sm font-semibold text-emerald-800 shadow-sm transition hover:bg-emerald-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-emerald-200"
                     >
                         Get Syllabus PDF
-                    </button>
-                    <button
-                        className="inline-flex items-center justify-center rounded-xl border-2 border-violet-700 bg-white px-4 py-2 text-sm font-semibold text-violet-800 shadow-sm transition hover:bg-violet-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-violet-200"
-                    >
-                        View Capstone
                     </button>
                 </div>
             </div>
