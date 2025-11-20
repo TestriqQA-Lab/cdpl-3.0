@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { motion, type Variants } from "framer-motion";
 import { X } from "lucide-react";
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 
 export type LeadFormData = {
   name: string;
@@ -153,6 +155,52 @@ export function LeadForm({
   );
 }
 
+// Custom CSS for PhoneInput to match the form's style
+const PhoneInputStyles = () => (
+  <style jsx global>{`
+    .phone-input-enroll-popup {
+      /* Match the wrapper style of other inputs */
+      display: block;
+      width: 100%;
+      border-radius: 0.5rem; /* rounded-lg */
+      border: 1px solid #e2e8f0; /* border-slate-300 */
+      background-color: #fff; /* bg-white */
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+      transition: all 0.15s ease-in-out;
+    }
+
+    .phone-input-enroll-popup:focus-within {
+      border-color: #4f46e5; /* focus:border-indigo-500 */
+      box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.3); /* focus:ring-2 focus:ring-indigo-500/30 */
+    }
+
+    /* Target the actual input field inside the component */
+    .phone-input-enroll-popup .PhoneInputInput {
+      /* Remove default border, padding, etc. */
+      border: none !important;
+      padding: 0.75rem 1rem !important; /* px-4 py-3 */
+      font-size: 1rem !important;
+      line-height: 1.5rem !important;
+      color: #1e293b !important; /* text-slate-900 */
+      background-color: transparent !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    /* Target the country select dropdown */
+    .phone-input-enroll-popup .PhoneInputCountry {
+      padding-left: 1rem; /* Match the left padding */
+      background-color: transparent !important;
+    }
+
+    /* Remove the border from the internal PhoneInput wrapper */
+    .phone-input-enroll-popup.PhoneInput {
+      border: none !important;
+    }
+  `}</style>
+);
+
+
 export type EnrollPopupProps = CommonProps & {
   isOpen: boolean;
   onClose: () => void;
@@ -190,92 +238,101 @@ export function EnrollPopup({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    // Basic validation for phone number before submitting
+    if (!form.phone || !isValidPhoneNumber(form.phone)) {
+      alert("Please enter a valid mobile number.");
+      return;
+    }
+
     onSubmit?.(form, e);
   };
 
   return (
-    <motion.div
-      variants={variants ?? popupVariants}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
-      onClick={onClose}
-    >
-      <div
-        className="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-xl"
-        onClick={(e) => e.stopPropagation()}
+    <>
+      <PhoneInputStyles />
+      <motion.div
+        variants={variants ?? popupVariants}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+        onClick={onClose}
       >
-        <button
-          onClick={onClose}
-          className="absolute right-4 top-4 text-slate-500 hover:text-slate-700"
-          aria-label="Close popup"
+        <div
+          className="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-xl"
+          onClick={(e) => e.stopPropagation()}
         >
-          <X className="h-5 w-5" />
-        </button>
-
-        <h2 className="text-xl font-bold text-slate-900">{title}</h2>
-        <p className="mt-1 text-sm text-slate-600">{subtitle}</p>
-
-        <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-          <div>
-            <label htmlFor="ep-name" className="mb-1 block text-sm font-medium text-slate-700">
-              Full Name *
-            </label>
-            <input
-              id="ep-name"
-              type="text"
-              required
-              value={form.name}
-              onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-              className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
-              placeholder="Enter your name"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="ep-email" className="mb-1 block text-sm font-medium text-slate-700">
-              Email *
-            </label>
-            <input
-              id="ep-email"
-              type="email"
-              required
-              value={form.email}
-              onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-              className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
-              placeholder="you@example.com"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="ep-phone" className="mb-1 block text-sm font-medium text-slate-700">
-              Phone *
-            </label>
-            <input
-              id="ep-phone"
-              type="tel"
-              required
-              pattern="^[0-9+\\-\\s()]{7,15}$"
-              value={form.phone}
-              onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
-              className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
-              placeholder="+91 98765 43210"
-            />
-          </div>
-
           <button
-            type="submit"
-            className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-3 font-semibold text-white shadow-md transition hover:shadow-lg"
+            onClick={onClose}
+            className="absolute right-4 top-4 text-slate-500 hover:text-slate-700"
+            aria-label="Close popup"
           >
-            Submit Enrollment
+            <X className="h-5 w-5" />
           </button>
 
-          <p className="text-xs text-slate-500">
-            By submitting, you agree to be contacted about courses and placements.
-          </p>
-        </form>
-      </div>
-    </motion.div>
+          <h2 className="text-xl font-bold text-slate-900">{title}</h2>
+          <p className="mt-1 text-sm text-slate-600">{subtitle}</p>
+
+          <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+            <div>
+              <label htmlFor="ep-name" className="mb-1 block text-sm font-medium text-slate-700">
+                Full Name *
+              </label>
+              <input
+                id="ep-name"
+                type="text"
+                required
+                value={form.name}
+                onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                placeholder="Enter your name"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="ep-email" className="mb-1 block text-sm font-medium text-slate-700">
+                Email *
+              </label>
+              <input
+                id="ep-email"
+                type="email"
+                required
+                value={form.email}
+                onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                placeholder="you@example.com"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="ep-phone" className="mb-1 block text-sm font-medium text-slate-700">
+                Mobile Number *
+              </label>
+              <PhoneInput
+                id="ep-phone"
+                international
+                defaultCountry="IN"
+                value={form.phone}
+                onChange={(phone) => setForm((f) => ({ ...f, phone: phone || '' }))}
+                className="phone-input-enroll-popup"
+                placeholder="+91 98765 43210"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-3 font-semibold text-white shadow-md transition hover:shadow-lg"
+            >
+              Submit Enrollment
+            </button>
+
+            <p className="text-xs text-slate-500">
+              By submitting, you agree to be contacted about courses and placements.
+            </p>
+          </form>
+        </div>
+      </motion.div>
+    </>
   );
 }

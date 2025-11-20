@@ -57,10 +57,10 @@ const BrochureDownloadModal: React.FC<BrochureDownloadModalProps> = ({ isOpen, o
   };
 
   const validatePhoneNumber = (phone: string | undefined) => {
-    // Phone is optional for brochure download
+    // Phone is now mandatory for brochure download
     if (!phone || phone.trim() === '') {
-      setPhoneError(null);
-      return true;
+      setPhoneError('Mobile Number is required.');
+      return false;
     }
 
     if (!isValidPhoneNumber(phone)) {
@@ -326,21 +326,20 @@ const BrochureDownloadModal: React.FC<BrochureDownloadModalProps> = ({ isOpen, o
                     )}
                   </div>
 
-                  {/* Phone Field (Optional) */}
-                  <div>
-                    <label htmlFor="brochure-phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                      Mobile Number <span className="text-gray-400 text-xs">(Optional)</span>
-                    </label>
-                    <div className="relative">
-                      <PhoneIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none z-10" />
-                      <PhoneInput
+	                  {/* Phone Field (Mandatory) */}
+	                  <div>
+	                    <label htmlFor="brochure-phone" className="block text-sm font-semibold text-gray-700 mb-2">
+	                      Mobile Number <span className="text-red-500">*</span>
+	                    </label>
+	                    <div className="relative">
+	                      <PhoneInput
                         id="brochure-phone"
                         international
                         defaultCountry="IN"
                         value={formData.phone}
                         onChange={handlePhoneChange}
-                        placeholder="Enter your mobile number"
-                        className={`w-full [&>input]:pl-11 [&>input]:pr-4 [&>input]:py-3 [&>input]:border-2 [&>input]:rounded-lg [&>input]:text-gray-900 [&>input]:placeholder:text-gray-400 [&>input]:focus:outline-none [&>input]:focus:ring-2 [&>input]:transition-all ${
+	                        placeholder="Enter your mobile number (e.g., 98765 43210)"
+	                        className={`w-full [&>input]:pl-4 [&>input]:pr-4 [&>input]:py-3 [&>input]:border-2 [&>input]:rounded-lg [&>input]:text-gray-900 [&>input]:placeholder:text-gray-400 [&>input]:focus:outline-none [&>input]:focus:ring-2 [&>input]:transition-all [&>input]:placeholder-opacity-100 [&>input]:placeholder-shown:text-gray-400 ${
                           phoneError
                             ? '[&>input]:border-red-300 [&>input]:focus:border-red-500 [&>input]:focus:ring-red-200'
                             : '[&>input]:border-gray-200 [&>input]:focus:border-[#ff8c00] [&>input]:focus:ring-orange-100'
