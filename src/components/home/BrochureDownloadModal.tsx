@@ -212,6 +212,21 @@ const BrochureDownloadModal: React.FC<BrochureDownloadModalProps> = ({ isOpen, o
   }, [isOpen, isSubmitting, handleClose]);
 
   return (
+
+
+     <>
+      {/* Custom CSS for phone input */}
+      <style jsx global>{`
+
+        /* Country dropdown styling */
+        .PhoneInputCountrySelect {
+          color: #1e293b !important;
+          font-weight: 500 !important;
+        }
+
+
+        }
+      `}</style>
     <AnimatePresence>
       {isOpen && (
         <motion.div
@@ -384,6 +399,7 @@ const BrochureDownloadModal: React.FC<BrochureDownloadModalProps> = ({ isOpen, o
         </motion.div>
       )}
     </AnimatePresence>
+    </>
   );
 };
 
