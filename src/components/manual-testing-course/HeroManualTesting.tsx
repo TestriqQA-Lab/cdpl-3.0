@@ -3,12 +3,11 @@
 import {
     CheckCircle2,
     ChevronRight,
-    Download,
     Star,
     ShieldCheck,
-    PlayCircle,
     Sparkles,
     Home,
+    ArrowRight,
 } from "lucide-react";
 
 import React, { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
@@ -176,7 +175,7 @@ const StatsBar: React.FC = () => {
 
 const breadcrumbs = [
     { label: "Home", href: "/" },
-    { label: "software-testing", href: "#" },
+    { label: "Software Testing", href: "#" },
     { label: "Manual Testing", href: "/about-us" },
 ];
 
@@ -201,15 +200,15 @@ export default function HeroManualTesting() {
             <div className="relative overflow-hidden mx-auto max-w-full xl:max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* Breadcrumbs for SEO & UX */}
                 <nav aria-label="Breadcrumb" className="mb-4 -mx-4 px-4 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-                    <ol className="flex items-center gap-3 text-sm text-slate-600 whitespace-nowrap">
+                    <ol className="flex items-center gap-2 text-sm text-slate-600 whitespace-nowrap">
                         {breadcrumbs.map((c, i) => {
                             const isLast = i === breadcrumbs.length - 1;
                             return (
-                                <li key={i} className="flex items-center gap-2 min-w-0">
-                                    {i === 0 ? <Home className="h-4 w-4 shrink-0" /> : <ChevronRight className="h-4 w-4 shrink-0" />}
+                                <li key={i} className="flex items-center gap-2">
+                                    {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
                                     <Link
                                         href={c.href}
-                                        className={`hover:text-indigo-700 ${isLast ? "font-semibold text-slate-900" : ""} block truncate max-w-[70vw] sm:max-w-none`}
+                                        className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
                                         aria-current={isLast ? "page" : undefined}
                                         title={c.label}
                                     >
@@ -231,13 +230,13 @@ export default function HeroManualTesting() {
 
                         <h1
                             id="manual-testing-hero"
-                            className="mt-3 md:mt-0 max-w-3xl text-3xl md:text-4xl xl:text-5xl font-extrabold leading-snug md:leading-tight tracking-tight text-slate-900 break-words"
+                            className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900"
                         >
-                            Best <span className="text-blue-700">Manual Testing Course</span>{" "}
+                            Best <span className='text-ST'>Manual Testing Course</span>{" "}
                             with 100% Placement <br className="md:hidden" /> Support
                         </h1>
 
-                        <p className="mt-4 max-w-2xl text-base sm:text-lg md:text-xl text-slate-600">
+                        <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-700 sm:text-lg">
                             Upgrade your QA career with hands-on <strong>Software Testing Training</strong>, <strong>ISTQB Prep</strong>, and real-world{" "}
                             <strong>Manual Testing</strong> projects. Live classes, mentor support, interview preparation, and a curated job pipeline.
                         </p>
@@ -320,7 +319,7 @@ export default function HeroManualTesting() {
                         </div>
 
                         {/* CTAs */}
-                        <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                        {/* <div className="mt-8 flex flex-col sm:flex-row gap-3">
                             <button
                                 onClick={() => setIsPopupOpen(true)}
                                 className="group inline-flex items-center justify-center rounded-xl bg-indigo-600 px-3 py-4 text-base font-bold text-white shadow-md transition-transform hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
@@ -345,6 +344,31 @@ export default function HeroManualTesting() {
                             >
                                 <PlayCircle className="mr-2 h-5 w-5" />
                                 Free Demo Class
+                            </button>
+                        </div> */}
+
+                                                {/* CTAs */}
+                        <div className="mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+                            <button
+                                className="group inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
+                                aria-label="Enroll now in API Testing program"
+                            >
+                                Enroll Now
+                                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                            </button>
+
+                            <Link
+                                href="#curriculum"
+                                className="inline-flex items-center justify-center rounded-xl border border-sky-300 bg-white px-6 py-3 text-base font-semibold text-sky-700 shadow-sm transition hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-200"
+                                aria-label="View full API testing curriculum"
+                            >
+                                View Curriculum
+                            </Link>
+                            <button
+                                className="inline-flex items-center justify-center rounded-xl border border-emerald-300 bg-white px-6 py-3 text-base font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-4 focus:ring-emerald-200"
+                                aria-label="Book a free demo for API testing"
+                            >
+                                Free Demo
                             </button>
                         </div>
 
