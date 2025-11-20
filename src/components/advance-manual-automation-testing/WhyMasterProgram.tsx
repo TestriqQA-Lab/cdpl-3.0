@@ -54,7 +54,7 @@ export default function WhyMasterProgram() {
           </h2>
           <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-600 max-w-3xl mx-auto">
             Become a <strong>complete QA engineer</strong>: build an <em>ISTQB-level foundation</em> and
-            advance to <strong>automation frameworks</strong> used in modern pipelines —
+            advance to <strong>automation frameworks</strong> used in modern pipelines -
             Selenium, Cypress, Playwright, API, Mobile, <strong>CI/CD</strong>, and <strong>AI-assisted testing</strong>.
           </p>
 
@@ -90,7 +90,7 @@ export default function WhyMasterProgram() {
         <p className="mx-auto mt-8 max-w-4xl text-center text-sm sm:text-base text-slate-600">
           This dual-track approach accelerates hiring for <strong>QA Engineer</strong>, <strong>SDET</strong>, and
           <strong> Automation Engineer</strong> roles by proving mastery across <em>test strategy</em>, <em>tooling</em>,
-          and <em>release engineering</em>—skills recruiters and engineering managers actively search for.
+          and <em>release engineering</em>-skills recruiters and engineering managers actively search for.
         </p>
       </div>
 

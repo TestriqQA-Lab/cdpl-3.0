@@ -26,7 +26,7 @@ export default function TestimonialsSection() {
         {/* SEO supportive line */}
         <p className="mx-auto mt-8 max-w-4xl text-center text-sm sm:text-base text-slate-600">
           All reviews cite <strong>job outcomes</strong>, <strong>real project work</strong>, and{' '}
-          <strong>automation-first skills</strong> (Selenium, Cypress, Playwright, API, CI/CD)—the exact
+          <strong>automation-first skills</strong> (Selenium, Cypress, Playwright, API, CI/CD)-the exact
           keywords hiring managers search for.
         </p>
       </div>

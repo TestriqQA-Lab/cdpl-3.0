@@ -115,7 +115,7 @@ const PROJECTS: Project[] = [
 export default function ProjectsSection() {
   const title = "50+ Enterprise Projects";
   const subtitle =
-    "Hands-on, real-world Java projects that mirror production challenges—covering Spring Boot, Microservices, REST APIs, Messaging, Security, and Cloud Deployments.";
+    "Hands-on, real-world Java projects that mirror production challenges-covering Spring Boot, Microservices, REST APIs, Messaging, Security, and Cloud Deployments.";
   const keywords =
     "Java projects, Spring Boot projects, microservices portfolio, real-time chat WebSocket, e-commerce Java, banking microservices, REST API, Hibernate JPA, AWS deployment, enterprise Java applications";
 

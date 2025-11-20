@@ -165,7 +165,7 @@ export default function WhoShouldEnroll() {
         <p className="mx-auto mt-8 max-w-4xl text-center text-sm sm:text-base text-slate-600">
           From writing your <strong>first Python script</strong> to deploying{" "}
           <strong>production-ready apps</strong>, this program helps you develop real skills that
-          companies hire for—clean code, testing, <strong>Git/GitHub</strong>, and cloud deployment.
+          companies hire for-clean code, testing, <strong>Git/GitHub</strong>, and cloud deployment.
         </p>
       </div>
 

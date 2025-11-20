@@ -12,15 +12,12 @@ type Testimonial = {
   rating?: number;
 };
 
-type CTA = { label: string; href: string; variant?: "primary" | "secondary" };
 
 type Props = {
   /** Page or product title for SEO copy (e.g., "Java Programming") */
   title?: string;
   /** Testimonials to render */
   items?: Testimonial[];
-  /** Optional CTA buttons */
-  ctas?: CTA[];
   /** Optional id for anchor link */
   id?: string;
 };
@@ -32,10 +29,6 @@ const DEFAULT_TITLE = "Java Programming";
 export default function TestimonialsSection({
   id = "testimonials",
   title = DEFAULT_TITLE,
-  ctas = [
-    { label: "Enroll now", href: "/enroll", variant: "primary" },
-    { label: "Download syllabus", href: "/java-programming/syllabus", variant: "secondary" },
-  ],
 }: Props) {
 
 
@@ -69,29 +62,20 @@ export default function TestimonialsSection({
         <ReviewsMarquee />
 
         {/* CTAs */}
-        {!!ctas?.length && (
-          <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3">
-            {ctas.map((c, idx) =>
-              c.variant === "secondary" ? (
-                <Link
-                  key={idx}
-                  href={c.href}
-                  className="rounded-xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200"
-                >
-                  {c.label}
-                </Link>
-              ) : (
-                <Link
-                  key={idx}
-                  href={c.href}
-                  className="rounded-xl border border-indigo-600 bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200"
-                >
-                  {c.label}
-                </Link>
-              )
-            )}
-          </div>
-        )}
+        <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3">
+          <Link
+            href="contact-us"
+            className="rounded-xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200"
+          >
+            Enroll now
+          </Link>
+
+          <button
+            className="rounded-xl border border-slate-300 bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition focus:outline-none focus:ring-4 focus:ring-slate-200"
+          >
+            Download Syllabus
+          </button>
+        </div>
       </div>
 
     </section>

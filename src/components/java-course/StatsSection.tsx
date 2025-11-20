@@ -176,7 +176,7 @@ export default function StatsSection() {
   const title =
     "Why Java Leads Enterprise Development in 2025: Performance, Security & Scalability";
   const description =
-    "Java remains the #1 enterprise language for building secure, cloud-native, high-performance applications at scale. With Spring Boot, Microservices, Kubernetes, and the JVM, teams ship resilient software faster—backed by a vast talent pool and Fortune 500 adoption.";
+    "Java remains the #1 enterprise language for building secure, cloud-native, high-performance applications at scale. With Spring Boot, Microservices, Kubernetes, and the JVM, teams ship resilient software faster-backed by a vast talent pool and Fortune 500 adoption.";
 
   const { ref: sectionRef, inView } = useInView<HTMLElement>({ threshold: 0.15 });
 

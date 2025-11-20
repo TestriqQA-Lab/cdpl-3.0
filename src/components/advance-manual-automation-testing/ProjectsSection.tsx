@@ -91,7 +91,7 @@ export default function ProjectsSection() {
           <p className="mx-auto mt-3 max-w-3xl text-sm sm:text-base text-slate-600">
             Real applications, real defects, <strong>production-like data</strong>, and{' '}
             <strong>CI/CD-ready frameworks</strong>. These projects showcase <em>manual testing</em> depth
-            and <em>automation</em> mastery—exactly what recruiters search for.
+            and <em>automation</em> mastery-exactly what recruiters search for.
           </p>
 
           {/* Micro badges */}
@@ -182,7 +182,7 @@ export default function ProjectsSection() {
         <p className="mx-auto mt-8 max-w-4xl text-center text-sm sm:text-base text-slate-600">
           Each project demonstrates <strong>test strategy</strong>, <strong>defect reporting</strong>,{' '}
           <strong>traceability</strong>, and <strong>automation depth</strong> (UI • API • Mobile) with
-          CI/CD and dashboards—making you stand out for <strong>QA Engineer</strong>, <strong>Automation
+          CI/CD and dashboards-making you stand out for <strong>QA Engineer</strong>, <strong>Automation
             Tester</strong>, and <strong>SDET</strong> roles.
         </p>
       </div>

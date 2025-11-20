@@ -74,13 +74,13 @@ export default function CtaSection() {
             </Link>
 
             <Link
-              href="https://www.cinutedigital.com"
+              href="mailto:contact@cinutedigital.com"
               className="inline-flex w-full items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-base font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-purple-200 sm:w-auto"
               aria-label="Visit Cinute Digital website"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Visit Website
+              Email
               <svg className="ml-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
                 <path d="M12.293 4.293a1 1 0 011.414 0l4 4a1 1 0 01.083 1.32l-.083.094-4 4a1 1 0 01-1.497-1.32l.083-.094L14.585 10H7a1 1 0 110-2h7.585l-2.292-2.293a1 1 0 010-1.414z" />
               </svg>

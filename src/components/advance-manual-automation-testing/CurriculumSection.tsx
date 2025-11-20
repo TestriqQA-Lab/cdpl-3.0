@@ -91,7 +91,7 @@ export default function CurriculumSection() {
         </h2>
 
         <p className="text-slate-600 text-lg text-center">
-          Manual to Automation — <strong>180 hours</strong> of job-ready, project-based training over <strong>6.5 months</strong>
+          Manual to Automation - <strong>180 hours</strong> of job-ready, project-based training over <strong>6.5 months</strong>
         </p>
 
         {/* Cards */}

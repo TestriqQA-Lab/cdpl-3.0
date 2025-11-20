@@ -6,7 +6,7 @@ import { ChevronDown } from 'lucide-react';
 type Faq = { q: string; a: string };
 
 const faqs: Faq[] = [
-  { q: 'Do I need any experience?', a: 'No — we start from the basics. Logical thinking helps, and we guide you step-by-step with practice tasks.' },
+  { q: 'Do I need any experience?', a: 'No - we start from the basics. Logical thinking helps, and we guide you step-by-step with practice tasks.' },
   { q: 'Will I get an ISTQB certificate?', a: 'Yes. We include ISTQB Foundation prep along with Automation interview practice and exam tips.' },
   { q: 'What is the duration?', a: '40 hours of live, mentor-led training + lifetime access to recordings, notes, and updates.' },
   { q: 'Is placement guaranteed?', a: 'We provide 100% job assistance: resume reviews, mock interviews, referrals, and portfolio projects.' },

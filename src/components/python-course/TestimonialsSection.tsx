@@ -52,7 +52,7 @@ export default function TestimonialsSection({
           <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
             Read verified <strong>student testimonials</strong> from our industry-aligned <strong>{title}</strong> program.
             Projects cover <strong>NumPy</strong>, <strong>Pandas</strong>, <strong>APIs (FastAPI)</strong>, <strong>testing</strong>, and
-            <strong> deployment</strong> — everything you need to become <strong>job-ready</strong>.
+            <strong> deployment</strong> - everything you need to become <strong>job-ready</strong>.
           </p>
           <div className="mt-5 mb-5 flex flex-wrap items-center justify-center gap-2 text-[11px] font-semibold">
             <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-slate-700">4.9★ Avg Rating</span>
@@ -68,13 +68,13 @@ export default function TestimonialsSection({
         <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3">
           <Link
             href="contact-us"
-            className="rounded-xl bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200"
+            className="rounded-xl bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-slate-200"
           >
             Enroll now
           </Link>
 
           <button
-            className="rounded-xl bg-white border-2 border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-200"
+            className="rounded-xl bg-white border-2 border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-emerald-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-emerald-200"
           >
             Download syllabus
           </button>

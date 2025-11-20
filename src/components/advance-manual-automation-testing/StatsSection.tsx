@@ -149,7 +149,7 @@ export default function StatsSection() {
           </h2>
           <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-600">
             Up-to-date insights on <strong>QA jobs in India</strong>, typical <strong>SDET salaries</strong>,{' '}
-            <strong>market growth</strong>, and our <strong>industry-focused training duration</strong>—everything you
+            <strong>market growth</strong>, and our <strong>industry-focused training duration</strong>-everything you
             need to plan a high-paying QA career.
           </p>
         </header>

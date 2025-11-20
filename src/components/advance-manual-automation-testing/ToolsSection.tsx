@@ -46,7 +46,7 @@ export default function ToolsSection() {
             <span className='text-ST'>Tools</span> You’ll Master
           </h2>
           <p className="mx-auto mt-3 max-w-3xl text-sm sm:text-base text-slate-600">
-            Industry-standard QA & automation stack used by top tech companies — designed for <strong>real projects</strong>, <strong>scalable frameworks</strong>, and <strong>CI/CD delivery</strong>.
+            Industry-standard QA & automation stack used by top tech companies - designed for <strong>real projects</strong>, <strong>scalable frameworks</strong>, and <strong>CI/CD delivery</strong>.
           </p>
           <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-[11px] font-semibold">
             <span className="rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-sky-700">Job-Ready Skills</span>
@@ -94,7 +94,7 @@ export default function ToolsSection() {
         </div>
 
         <p className="mx-auto mt-8 max-w-4xl text-center text-sm sm:text-base text-slate-600">
-          Learn how these tools work together in <strong>framework design</strong>, <strong>test management</strong>, <strong>API & UI automation</strong>, and <strong>continuous delivery</strong>—so you can ship high-quality software faster.
+          Learn how these tools work together in <strong>framework design</strong>, <strong>test management</strong>, <strong>API & UI automation</strong>, and <strong>continuous delivery</strong>-so you can ship high-quality software faster.
         </p>
       </div>
 

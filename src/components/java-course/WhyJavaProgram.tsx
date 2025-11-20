@@ -76,7 +76,7 @@ const PILLS: Pill[] = [
 export default function WhyJavaProgram() {
   const title = "Your Gateway to Top 1% Java Developer";
   const subtitle =
-    "Job-ready Java training covering Core Java, Spring Boot, REST APIs, Microservices, SQL, and Cloud fundamentals—designed for high-growth engineering careers.";
+    "Job-ready Java training covering Core Java, Spring Boot, REST APIs, Microservices, SQL, and Cloud fundamentals-designed for high-growth engineering careers.";
   const keywords =
     "Java training, Spring Boot course, Microservices, REST API, Java developer certification, cloud-native Java, job-ready Java program, placement assistance, beginner friendly Java";
 

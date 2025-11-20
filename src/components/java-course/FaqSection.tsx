@@ -30,7 +30,7 @@ const FAQS: QA[] = [
     q: "Do I need coding experience?",
     a: (
       <>
-        No—this Java course is beginner-friendly. We start with programming
+        No-this Java course is beginner-friendly. We start with programming
         fundamentals, Core Java, and hands-on exercises before moving to Spring Boot
         and Microservices. You’ll get guided labs and mentor feedback to accelerate
         learning.
@@ -46,7 +46,7 @@ const FAQS: QA[] = [
     a: (
       <>
         Yes. We provide{" "}
-        <strong>100% job assistance</strong>—resume building, mock interviews,
+        <strong>100% job assistance</strong>-resume building, mock interviews,
         profile optimization, and referrals where applicable. You’ll graduate with
         portfolio projects that showcase production-style Java, REST APIs, and Cloud.
       </>

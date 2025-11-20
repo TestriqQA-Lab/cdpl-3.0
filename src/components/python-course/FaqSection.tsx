@@ -14,7 +14,7 @@ const faqs: FAQ[] = [
   },
   {
     q: "Will I get a certificate?",
-    a: "Yes — you’ll receive a globally recognized CDPL certificate with QR validation that recruiters can instantly verify.",
+    a: "Yes - you’ll receive a globally recognized CDPL certificate with QR validation that recruiters can instantly verify.",
     accent: "border-emerald-200 hover:border-emerald-300",
     chip: "bg-emerald-50 text-emerald-800 border-emerald-200",
   },
@@ -38,7 +38,7 @@ const faqs: FAQ[] = [
   },
   {
     q: "Will I build a portfolio?",
-    a: "Yes — at least 3 deployable projects (web, data, and automation/ML). Each includes a README, demo, and metrics so you can showcase outcomes.",
+    a: "Yes - at least 3 deployable projects (web, data, and automation/ML). Each includes a README, demo, and metrics so you can showcase outcomes.",
     accent: "border-indigo-200 hover:border-indigo-300",
     chip: "bg-indigo-50 text-indigo-800 border-indigo-200",
   },
