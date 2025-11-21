@@ -37,7 +37,7 @@ export default function CtaSection() {
             Enroll now for a project-first program with{" "}
             <strong>global certification</strong>,{" "}
             <strong>110+ guided hours</strong>, and{" "}
-            <strong>100% job assistance</strong>—covering{" "}
+            <strong>100% job assistance</strong>-covering{" "}
             <strong>Power BI</strong>, <strong>Tableau</strong>,{" "}
             <strong>SQL</strong>, and <strong>Python</strong>.
           </p>
@@ -79,7 +79,7 @@ export default function CtaSection() {
         {/* reassurance */}
         <p className="mt-3 text-xs sm:text-sm text-slate-600">
           No prerequisites required. Flexible batches.{" "}
-          <span className="font-semibold text-slate-800">Seats fill fast—secure yours today.</span>
+          <span className="font-semibold text-slate-800">Seats fill fast-secure yours today.</span>
         </p>
       </div>
 

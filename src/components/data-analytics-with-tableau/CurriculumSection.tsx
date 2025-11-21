@@ -218,7 +218,7 @@ export default function CurriculumSection() {
                             value={`module-${module.id}`}
                             className="border-2 border-gray-200 rounded-xl overflow-hidden hover:border-orange-300 transition-all"
                         >
-                            <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-orange-50 transition-colors">
+                            <AccordionTrigger className="px-6 py-4 hover:no-underline cursor-pointer hover:bg-orange-50 transition-colors">
                                 <div className="flex items-center gap-4 w-full text-left">
                                     {/* Icon */}
                                     <div className="text-3xl flex-shrink-0">{module.icon}</div>

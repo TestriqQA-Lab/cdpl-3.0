@@ -248,7 +248,7 @@ export default function HeroSection() {
                             <div className="flex items-center gap-2">
                                 <span className="text-2xl">🏆</span>
                                 <span>
-                                    <strong className="text-slate-900">5+ Years</strong> Industry Experience
+                                    <strong className="text-slate-900">15+ Years</strong> Industry Experience
                                 </span>
                             </div>
                         </div>

@@ -130,7 +130,7 @@ export default function CurriculumSection() {
       <div className="mx-auto max-w-7xl px-4 xl:px-6">
         <header className="text-center">
           <h2 id="curriculum-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-            Course Curriculum — <span className="text-green-700">14 Modules</span>
+            Course Curriculum - <span className="text-green-700">14 Modules</span>
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
             A <strong>portfolio-first</strong>, <strong>job-ready</strong> roadmap: master SEO, performance ads, GA4/GTM,

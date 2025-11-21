@@ -9,6 +9,7 @@ import {
     Rocket,
     Award,
 } from "lucide-react";
+import Link from "next/link";
 
 interface RoadmapStep {
     number: number;
@@ -86,12 +87,15 @@ const roadmapSteps: RoadmapStep[] = [
 ];
 
 export default function CareerRoadmapSection() {
+    const firstPartSteps = roadmapSteps.slice(0, 4);
+    const secondPartSteps = roadmapSteps.slice(4);
+
     return (
         <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-b from-white to-slate-50 overflow-x-hidden">
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <div className="text-center mb-10 sm:mb-14 md:mb-20">
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 md:mb-6 text-slate-900 leading-snug sm:leading-tight">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-3 sm:mb-4 md:mb-6 text-slate-900 leading-snug sm:leading-tight">
                         Your 8-Step <br className="hidden sm:block" />
                         <span className="text-orange-600">
                             Career Acceleration Roadmap
@@ -124,13 +128,14 @@ export default function CareerRoadmapSection() {
                 <div className="mb-12 sm:mb-16">
                     {/* Show desktop timeline only on xl and above to avoid crowding on small/medium */}
                     <div className="hidden xl:block">
-                        <div className="relative">
+                        {/* First Part: Steps 1-4 */}
+                        <div className="relative mb-12">
                             {/* Timeline Line */}
-                            <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 via-orange-400 to-purple-400 transform -translate-y-1/2"></div>
+                            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 via-orange-400 to-purple-400 transform -translate-y-1/2"></div>
 
                             {/* Timeline Cards */}
                             <div className="grid grid-cols-4 gap-6 2xl:gap-8 relative z-10">
-                                {roadmapSteps.map((step) => (
+                                {firstPartSteps.map((step) => (
                                     <div
                                         key={step.number}
                                         className="relative flex flex-col items-center max-w-full"
@@ -180,7 +185,70 @@ export default function CareerRoadmapSection() {
                                         </div>
 
                                         {/* Connector Circle */}
-                                        <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-white border-4 border-orange-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                                        <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-white border-4 border-orange-500 absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Second Part: Steps 5-8 */}
+                        <div className="relative">
+                            {/* Timeline Line */}
+                            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 via-orange-400 to-purple-400 transform -translate-y-1/2"></div>
+
+                            {/* Timeline Cards */}
+                            <div className="grid grid-cols-4 gap-6 2xl:gap-8 relative z-10">
+                                {secondPartSteps.map((step) => (
+                                    <div
+                                        key={step.number}
+                                        className="relative flex flex-col items-center max-w-full"
+                                    >
+                                        {/* Card */}
+                                        <div
+                                            className={`w-full bg-gradient-to-br ${step.color} rounded-xl p-4 sm:p-5 lg:p-6 border border-slate-200 mb-10 hover:shadow-lg transition-shadow`}
+                                        >
+                                            {/* Icon + Step */}
+                                            <div className="flex items-center justify-between gap-2 mb-3">
+                                                <span className="text-orange-600 flex-shrink-0">
+                                                    {step.icon}
+                                                </span>
+                                                <span className="text-[10px] sm:text-xs font-bold text-orange-600 uppercase tracking-wide">
+                                                    Step {step.number}
+                                                </span>
+                                            </div>
+
+                                            {/* Title */}
+                                            <h3 className="text-sm sm:text-base lg:text-lg font-bold text-slate-900 mb-2 leading-snug break-words">
+                                                {step.title}
+                                            </h3>
+
+                                            {/* Description */}
+                                            <p className="text-xs sm:text-sm text-slate-600 mb-3 leading-relaxed break-words">
+                                                {step.description}
+                                            </p>
+
+                                            {/* Outcome / SEO block */}
+                                            <div className="bg-white/80 rounded-lg p-2 text-center">
+                                                <p className="text-[10px] sm:text-[11px] text-slate-600">
+                                                    Outcome:
+                                                </p>
+                                                <p className="text-[10px] sm:text-xs font-semibold text-orange-600 break-words">
+                                                    Build{" "}
+                                                    <strong>
+                                                        practical digital
+                                                        marketing skills
+                                                    </strong>{" "}
+                                                    and{" "}
+                                                    <strong>
+                                                        job-ready portfolio
+                                                    </strong>
+                                                    .
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        {/* Connector Circle */}
+                                        <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-white border-4 border-orange-500 absolute bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
                                     </div>
                                 ))}
                             </div>
@@ -421,9 +489,9 @@ export default function CareerRoadmapSection() {
                         with live projects, mentorship and{" "}
                         <strong>100% placement assistance</strong>.
                     </p>
-                    <button className="btn-cta text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3">
+                    <Link href="contact-us" className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:from-orange-600 hover:to-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300">
                         Start Your 8-Step Journey Today
-                    </button>
+                    </Link>
                 </div>
             </div>
         </section>

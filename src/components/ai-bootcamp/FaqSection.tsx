@@ -52,11 +52,11 @@ export default function FaqSection() {
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <div className="text-center mb-16 md:mb-20">
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-slate-900">
-                        Frequently Asked{" "}
-                        <span className="text-orange-600">Questions (FAQs)</span>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4 md:mb-8 text-slate-900">
+                        Frequently Asked Questions{" "}
+                        <span className="text-orange-600">(FAQs)</span>
                     </h2>
-                    <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+                    <p className="text-lg text-slate-600 max-w-4xl mx-auto">
                         Everything you need to know about the program, logistics, flexible hybrid learning,
                         certification, and 100% job assistance support for our AI-powered digital marketing bootcamp.
                     </p>

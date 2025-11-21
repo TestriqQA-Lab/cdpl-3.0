@@ -150,24 +150,6 @@ export default function WhoShouldEnroll() {
                   ))}
                 </ul>
 
-                {/* emphasis row */}
-                <div className="mt-5 flex items-center justify-between">
-                  <span
-                    className={["text-xs font-semibold uppercase tracking-wide", p.accent.text].join(" ")}
-                  >
-                    Beginner-Friendly • Job-Ready
-                  </span>
-                  <span
-                    className={[
-                      "text-sm opacity-0 translate-x-1 transition-all duration-200",
-                      "group-hover:opacity-100 group-hover:translate-x-0 group-focus-visible:opacity-100 group-focus-visible:translate-x-0",
-                      p.accent.text,
-                    ].join(" ")}
-                  >
-                    Learn more →
-                  </span>
-                </div>
-
                 {/* micro-interaction underline */}
                 <div className="mt-4 h-1 w-full rounded-full bg-slate-100" aria-hidden>
                   <div

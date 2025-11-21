@@ -13,7 +13,7 @@ export default function CtaSection() {
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="max-w-3xl mx-auto text-center">
                     {/* Main Heading */}
-                    <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
                         Ready to Transform Your <span className="text-orange-400">Data Career</span>?
                     </h2>
 
@@ -115,10 +115,6 @@ export default function CtaSection() {
                         <div className="hidden sm:block w-px h-6 bg-white/20"></div>
                         <Link href="mailto:contact@cinutedigital.com" className="flex items-center gap-2 hover:text-orange-400 transition-colors">
                             <span>✉️</span> contact@cinutedigital.com
-                        </Link>
-                        <div className="hidden sm:block w-px h-6 bg-white/20"></div>
-                        <Link href="https://www.cinutedigital.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-orange-400 transition-colors">
-                            <span>🌐</span> www.cinutedigital.com
                         </Link>
                     </div>
                 </div>

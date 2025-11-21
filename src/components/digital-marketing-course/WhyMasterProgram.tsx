@@ -81,7 +81,7 @@ export default function WhyMasterProgram() {
           <p className="mt-3 text-base sm:text-lg text-slate-700">
             A mentor-led, AI-powered program that blends{' '}
             <strong>performance marketing</strong>, <strong>SEO</strong>, <strong>GA4 analytics</strong>, and{' '}
-            <strong>creative strategy</strong>—so you can launch campaigns that scale with measurable ROI.
+            <strong>creative strategy</strong>-so you can launch campaigns that scale with measurable ROI.
           </p>
         </header>
 

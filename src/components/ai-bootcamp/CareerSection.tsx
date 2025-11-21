@@ -62,7 +62,7 @@ export default function CareerSection() {
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <div className="text-center mb-16 md:mb-20">
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 text-slate-900">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6 text-slate-900">
                         Your <span className="text-orange-600">Digital Marketing Career Path</span>
                     </h2>
                     <p className="text-lg text-slate-600 max-w-3xl mx-auto">

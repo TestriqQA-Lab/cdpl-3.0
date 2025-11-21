@@ -2,6 +2,7 @@
 
 import React from "react";
 import { TrendingUp, Award, Users, Zap } from "lucide-react";
+import Link from "next/link";
 
 interface Stat {
     value: string;
@@ -215,9 +216,9 @@ export default function StatsSection() {
                                     Ready to be part of this booming industry? Our bootcamp prepares you
                                     for high-paying roles in just 30 hours.
                                 </p>
-                                <button className="btn-cta">
+                                <Link href="contact-us" className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:from-orange-600 hover:to-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300">
                                     Start Your Journey Today
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>

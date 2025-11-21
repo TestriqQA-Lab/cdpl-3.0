@@ -1,5 +1,6 @@
 import React from "react";
 import { Users, Briefcase, Lightbulb, Zap, CheckCircle } from "lucide-react";
+import Link from "next/link";
 
 type IconType = React.ComponentType<React.SVGProps<SVGSVGElement>>;
 
@@ -101,11 +102,11 @@ const prerequisites = [
 
 export default function WhoShouldEnroll() {
     return (
-        <section className="py-16 md:py-20 bg-gradient-to-b from-white to-slate-50">
+        <section className="py-8 md:py-10 bg-gradient-to-b from-white to-slate-50">
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <div className="text-center mb-16 md:mb-20 animate-fadeInUp">
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-slate-900">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-6 text-slate-900">
                         Who is Ready to Accelerate
                         <br />
                         <span className="gradient-text">
@@ -261,9 +262,9 @@ export default function WhoShouldEnroll() {
                             </strong>{" "}
                             with in-demand, job-ready skills.
                         </p>
-                        <button className="btn-cta">
+                        <Link href="contact-us" className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:from-orange-600 hover:to-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300">
                             Check Your Eligibility
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>

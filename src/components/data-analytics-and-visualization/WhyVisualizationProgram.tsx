@@ -101,7 +101,7 @@ export default function WhyVisualizationProgram() {
                     {/* --- SEO helper paragraph: natural keywords, no UI change --- */}
                     <p className="mt-3 text-slate-600 max-w-5xl mx-auto text-base">
                         Join the <strong>Advanced Excel Training</strong> and{" "}
-                        <strong>Data Analytics Course</strong> by Cinute Digital—built for{" "}
+                        <strong>Data Analytics Course</strong> by Cinute Digital-built for{" "}
                         <strong>freshers</strong> and <strong>working professionals</strong> seeking
                         <strong> placement assistance</strong>, <strong>live project experience</strong>,{" "}
                         and a <strong>globally recognized Excel certification</strong>. Master{" "}

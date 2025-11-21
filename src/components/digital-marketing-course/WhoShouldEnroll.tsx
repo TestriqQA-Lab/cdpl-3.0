@@ -114,7 +114,7 @@ export default function WhoShouldEnrollSection() {
                     <p className="mt-4 text-sm sm:text-base text-slate-600">
                         Beginner-friendly yet <strong>career-accelerating</strong>. Ideal for{' '}
                         <strong>switchers, students, professionals</strong> and <strong>founders</strong> who want
-                        practical <em>Digital Marketing</em> & <em>Analytics</em> skills — SEO, PPC, Social, GA4, CRO and Automation.
+                        practical <em>Digital Marketing</em> & <em>Analytics</em> skills - SEO, PPC, Social, GA4, CRO and Automation.
                     </p>
 
                     <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-[11px] font-semibold">
@@ -138,7 +138,7 @@ export default function WhoShouldEnrollSection() {
                     Whether you’re launching a new career or scaling an existing one, you’ll build hands-on
                     experience with <strong>GA4 & GTM</strong>, <strong>Meta/Google Ads</strong>,{' '}
                     <strong>SEO & Content</strong>, <strong>Looker Studio</strong> dashboards and{' '}
-                    <strong>conversion rate optimization</strong> — the exact stack employers hire for.
+                    <strong>conversion rate optimization</strong> - the exact stack employers hire for.
                 </p>
             </div>
 

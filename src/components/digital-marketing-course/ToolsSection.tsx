@@ -88,7 +88,7 @@ export default function ToolsSection() {
             <span className='text-green-700'>Tools</span> & <span className='text-green-700'>Technologies</span> You Will Learn
           </h2>
           <p className="mt-4 text-sm sm:text-base text-slate-600">
-            Practice on a modern <strong>AI + SEO + Ads</strong> stack — from <strong>ChatGPT</strong> ideation and{' '}
+            Practice on a modern <strong>AI + SEO + Ads</strong> stack - from <strong>ChatGPT</strong> ideation and{' '}
             <strong>Meta Ads</strong> execution to <strong>Ahrefs</strong>/<strong>SEMrush</strong> audits and{' '}
             <strong>Google Insights</strong> performance tuning. Everything is <em>job-ready and portfolio-ready</em>.
           </p>

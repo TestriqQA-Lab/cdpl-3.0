@@ -15,14 +15,14 @@ export default function CtaSection() {
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="max-w-3xl mx-auto text-center">
                     {/* Main Heading – content preserved */}
-                    <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
                         Ready to Become an{" "}
                         <span className="text-orange-400">AI-Powered Digital Marketing Leader?</span>
                     </h2>
 
                     {/* Subheadline – original text + SEO keywords */}
                     <p className="text-lg md:text-xl text-slate-200 mb-8 leading-relaxed">
-                        The future of marketing is here. Don&apos;t just adapt—lead. Secure your spot in the next cohort
+                        The future of marketing is here. Don&apos;t just adapt-lead. Secure your spot in the next cohort
                         and unlock your high-income potential today with a{" "}
                         <strong>job-oriented AI digital marketing course</strong> that covers{" "}
                         <strong>performance marketing, SEO, social media marketing, marketing automation, and analytics</strong>.

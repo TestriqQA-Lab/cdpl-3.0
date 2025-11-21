@@ -18,7 +18,7 @@ const heroData = {
     stats: [
         { value: "4.8/5", label: "Average Rating", icon: "⭐" },
         { value: "500+", label: "Successful Graduates", icon: "👥" },
-        { value: "5+", label: "Years Experience", icon: "🏆" },
+        { value: "14+", label: "Years Experience", icon: "🏆" },
     ],
     cta: {
         primary: "Enroll Now",

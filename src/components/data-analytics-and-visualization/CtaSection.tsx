@@ -42,11 +42,11 @@ export default function CtaSection() {
 
                         {/* CTA Buttons */}
                         <div className="flex flex-col md:flex-row gap-4 pt-4">
-                            <button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
+                            <button className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 cursor-pointer text-white font-semibold py-4 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
                                 Enroll Now
                                 <ArrowRight className="w-5 h-5" />
                             </button>
-                            <button className="border-2 border-white text-white font-semibold py-4 px-8 rounded-lg hover:bg-white/10 transition-all duration-300">
+                            <button className="border-2 border-white text-white cursor-pointer font-semibold py-4 px-8 rounded-lg hover:bg-white/10 transition-all duration-300">
                                 Download Brochure
                             </button>
                         </div>

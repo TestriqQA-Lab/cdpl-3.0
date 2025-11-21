@@ -43,10 +43,10 @@ export default function CtaSection() {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-                    <button className="bg-white text-orange-600 font-bold py-4 px-8 rounded-lg hover:bg-gray-100 transition-all text-lg">
+                    <button className="bg-white cursor-pointer text-orange-600 font-bold py-4 px-8 rounded-lg hover:bg-gray-100 transition-all text-lg">
                         Enroll Now & Get Started →
                     </button>
-                    <button className="border-2 border-white text-white font-bold py-4 px-8 rounded-lg hover:bg-white hover:text-slate-900 hover:bg-opacity-10 transition-all text-lg">
+                    <button className="border-2 border-white cursor-pointer text-white font-bold py-4 px-8 rounded-lg hover:bg-white hover:text-slate-900 hover:bg-opacity-10 transition-all text-lg">
                         Download Free Syllabus
                     </button>
                 </div>

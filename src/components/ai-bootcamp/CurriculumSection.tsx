@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronDown, BookOpen } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
 interface Module {
@@ -436,7 +437,7 @@ export default function CurriculumSection() {
                         Master all 20 modules and become job-ready in just 30 hours of intensive
                         training.
                     </p>
-                    <button className="btn-cta">Explore Full Curriculum</button>
+                    <Link href="contact-us" className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:from-orange-600 hover:to-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300">Explore Full Curriculum</Link>
                 </div>
             </div>
         </section>

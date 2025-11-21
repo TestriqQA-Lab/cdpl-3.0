@@ -105,7 +105,7 @@ export default function FaqSection() {
                             value={`faq-${faq.id}`}
                             className="border-2 border-gray-200 rounded-xl overflow-hidden hover:border-orange-300 transition-all"
                         >
-                            <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-orange-50 transition-colors">
+                            <AccordionTrigger className="px-6 py-4 hover:no-underline cursor-pointer hover:bg-orange-50 transition-colors">
                                 <div className="flex items-center gap-4 w-full text-left">
                                     {/* Number */}
                                     <div className="flex-shrink-0">
@@ -169,69 +169,10 @@ export default function FaqSection() {
                             <p className="text-gray-700 mb-3">
                                 Chat with our support team in real-time
                             </p>
-                            <button className="text-orange-600 text-xs md:text-base font-semibold hover:underline">
+                            <Link href="https://wa.me/9152929342" className="text-orange-600 text-xs md:text-base font-semibold hover:underline">
                                 Start Chat
-                            </button>
+                            </Link>
                         </div>
-                    </div>
-                </div>
-
-                {/* Quick Links */}
-                <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="p-6 bg-blue-50 rounded-xl border-2 border-blue-200">
-                        <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-                            <span className="text-2xl">📚</span> Learning Resources
-                        </h4>
-                        <ul className="space-y-2 text-sm">
-                            <li>
-                                <a href="#" className="text-blue-600 hover:underline">
-                                    Course Syllabus & Curriculum
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className="text-blue-600 hover:underline">
-                                    Sample Lessons & Materials
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className="text-blue-600 hover:underline">
-                                    Student Success Stories
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className="text-blue-600 hover:underline">
-                                    Course Reviews & Ratings
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div className="p-6 bg-green-50 rounded-xl border-2 border-green-200">
-                        <h4 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-                            <span className="text-2xl">🎓</span> Enrollment & Support
-                        </h4>
-                        <ul className="space-y-2 text-sm">
-                            <li>
-                                <a href="#" className="text-green-600 hover:underline">
-                                    How to Enroll
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className="text-green-600 hover:underline">
-                                    Payment Options & Plans
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className="text-green-600 hover:underline">
-                                    Refund Policy
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className="text-green-600 hover:underline">
-                                    Technical Support
-                                </a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
 

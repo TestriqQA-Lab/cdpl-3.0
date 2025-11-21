@@ -165,7 +165,7 @@ export default function CurriculumSection() {
                                 onClick={() =>
                                     setExpandedModule(expandedModule === index ? null : index)
                                 }
-                                className="w-full px-6 py-5 flex items-center justify-between bg-gradient-to-r from-slate-50 to-white hover:from-blue-50 hover:to-indigo-50 transition-all duration-300"
+                                className="w-full px-6 py-5 flex items-center justify-between cursor-pointer bg-gradient-to-r from-slate-50 to-white hover:from-blue-50 hover:to-indigo-50 transition-all duration-300"
                             >
                                 <div className="flex items-center gap-4 text-left">
                                     <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center font-bold">

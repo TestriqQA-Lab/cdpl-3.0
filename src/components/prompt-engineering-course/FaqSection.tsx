@@ -62,7 +62,7 @@ export default function FaqSection() {
             Frequently Asked Questions
           </h2>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-700">
-            Everything about our <strong>Prompt Engineering with Gen&nbsp;AI</strong> program—curriculum,
+            Everything about our <strong>Prompt Engineering with Gen&nbsp;AI</strong> program-curriculum,
             tools, projects, timelines, certification, and <strong>career support</strong>.
           </p>
           {/* SEO helper (visually hidden) */}

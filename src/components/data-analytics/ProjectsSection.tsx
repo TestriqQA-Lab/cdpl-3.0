@@ -150,20 +150,6 @@ export default function ProjectsSection() {
                     </span>
                   ))}
                 </div>
-
-                {/* micro interaction footer */}
-                <div className="mt-6 flex items-center justify-between">
-                  <span className={["text-xs font-semibold uppercase tracking-wide", p.accent.text].join(" ")}>Portfolio-Ready • Recruiter-Friendly</span>
-                  <span
-                    className={[
-                      "text-sm opacity-0 translate-x-1 transition-all duration-200",
-                      "group-hover:opacity-100 group-hover:translate-x-0 group-focus-visible:opacity-100 group-focus-visible:translate-x-0",
-                      p.accent.text,
-                    ].join(" ")}
-                  >
-                    View details →
-                  </span>
-                </div>
               </article>
             );
           })}

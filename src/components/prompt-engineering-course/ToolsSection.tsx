@@ -105,7 +105,7 @@ const TOOLS: Tool[] = [
     desc: "Structure long-form prompts, safety rails, and analysis workflows with extended context.",
   },
   {
-    name: "Groq",
+    name: "Grok",
     badge: "Fast Inference",
     icon: Gauge,
     bg: "bg-cyan-50",

@@ -51,7 +51,7 @@ export default function FaqSection() {
             Frequently Asked Questions
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600">
-            Everything you need to know about the program — certifications, placements, projects, and schedules.
+            Everything you need to know about the program - certifications, placements, projects, and schedules.
           </p>
         </header>
 

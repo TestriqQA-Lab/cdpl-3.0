@@ -74,7 +74,7 @@ export default function FaqSection() {
                                 onClick={() =>
                                     setExpandedIndex(expandedIndex === index ? null : index)
                                 }
-                                className="w-full px-6 py-5 flex items-center justify-between bg-gradient-to-r from-slate-50 to-white hover:from-blue-50 hover:to-indigo-50 transition-all duration-300"
+                                className="w-full px-6 py-5 flex items-center justify-between cursor-pointer bg-gradient-to-r from-slate-50 to-white hover:from-blue-50 hover:to-indigo-50 transition-all duration-300"
                             >
                                 <div className="flex items-center gap-4 text-left">
                                     <HelpCircle className="w-6 h-6 text-blue-600 flex-shrink-0" />

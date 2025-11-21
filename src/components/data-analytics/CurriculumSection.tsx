@@ -3,6 +3,7 @@
 // Unique accent colors per module (no repeats). Explicit top-bar classes (no dynamic Tailwind).
 
 import Link from "next/link";
+import { CheckCircle } from 'lucide-react';
 
 type Module = {
   num: string;
@@ -86,136 +87,100 @@ const MODULES: Module[] = [
 ];
 
 export default function CurriculumSection() {
-  
+
   const subtitle =
     "An industry-aligned data analytics pathway from clean data and statistics to dashboards, predictive modeling, and BI decisioning.";
   const keywords =
     "advanced data analytics curriculum, business intelligence syllabus, data visualization storytelling, predictive analytics forecasting, statistics for data analysts, Power BI Tableau SQL";
 
+  const accents = [
+    { cardBg: 'bg-orange-50', cardBorder: 'border-orange-200', badgeBg: 'bg-orange-600', badgeText: 'text-white', ink: 'text-orange-800', icon: 'text-orange-700' },
+    { cardBg: 'bg-emerald-50', cardBorder: 'border-emerald-200', badgeBg: 'bg-emerald-600', badgeText: 'text-white', ink: 'text-emerald-800', icon: 'text-emerald-700' },
+    { cardBg: 'bg-sky-50', cardBorder: 'border-sky-200', badgeBg: 'bg-sky-600', badgeText: 'text-white', ink: 'text-sky-800', icon: 'text-sky-700' },
+    { cardBg: 'bg-rose-50', cardBorder: 'border-rose-200', badgeBg: 'bg-rose-600', badgeText: 'text-white', ink: 'text-rose-800', icon: 'text-rose-700' },
+    { cardBg: 'bg-indigo-50', cardBorder: 'border-indigo-200', badgeBg: 'bg-indigo-600', badgeText: 'text-white', ink: 'text-indigo-800', icon: 'text-indigo-700' },
+  ];
 
   return (
-    <section
-      id="curriculum"
-      aria-labelledby="curriculum-heading"
-      className="relative overflow-hidden py-6 md:py-4 lg:py-10 bg-white"
-    >
-      {/* Subtle futuristic backdrop (thin grid + soft mask; minimal, non-distracting) */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(2,6,23,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(2,6,23,0.035)_1px,transparent_1px)] bg-[size:28px_28px]" />
-        <div className="absolute inset-0 [mask-image:radial-gradient(1200px_600px_at_50%_-10%,black,transparent)]" />
+    <section id="curriculum" className="relative py-8 sm:py-20 bg-white">
+      {/* subtle separators */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-x-0 top-0 mx-auto h-px max-w-7xl bg-slate-100" />
+        <div className="absolute inset-x-0 bottom-0 mx-auto h-px max-w-7xl bg-slate-100" />
       </div>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <header className="mx-auto max-w-3xl text-center">
-          <h2
-            id="curriculum-heading"
-            className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
-          >
-            5-Core <span className="text-DS">Curriculum Modules</span>
-          </h2>
-          <p className="mt-3 text-base md:text-lg text-slate-700">{subtitle}</p>
-          {/* Hidden SEO keywords */}
-          <p className="sr-only">{keywords}</p>
+        <h2 className="text-3xl md:text-4xl text-center text-slate-900 font-bold mb-4">
+          5-Core <span className="text-DS">Curriculum Modules</span>
+        </h2>
 
-          {/* Micro badges (distinct accents, no repeats) */}
-          <div className="mt-5 grid grid-cols-2 gap-2 text-[11px] font-semibold text-slate-700 sm:grid-cols-4">
-            <span className="rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-orange-900">Job-Ready Skills</span>
-            <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-emerald-900">Project-Based</span>
-            <span className="rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-sky-900">Dashboards & BI</span>
-            <span className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-rose-900">Interview Prep</span>
-          </div>
-        </header>
+        <p className="mx-auto mb-8 max-w-3xl text-center text-sm leading-relaxed text-slate-600 sm:text-base">
+          {subtitle}
+        </p>
+        {/* Hidden SEO keywords */}
+        <p className="sr-only">{keywords}</p>
 
-        {/* Modules grid */}
-        <ol
-          className="mx-auto mt-10 grid max-w-5xl grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2"
-          aria-label="Program modules"
-        >
-          {MODULES.map((m) => (
-            <li key={m.num} className="relative">
-              <article
-                tabIndex={0}
+        {/* Cards */}
+        <ol className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2">
+          {MODULES.map((mod, i) => {
+            const a = accents[i % accents.length];
+            return (
+              <li
+                key={mod.title}
                 className={[
-                  "group relative overflow-hidden rounded-2xl border p-5 md:p-6 shadow-sm backdrop-blur transition-all duration-200",
-                  "hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:-translate-y-0.5",
-                  m.accent.bg,
-                  m.accent.border,
-                  m.accent.ring,
-                ].join(" ")}
-                aria-label={`${m.num} — ${m.title}`}
-                title={m.title}
+                  'group relative overflow-hidden rounded-2xl border p-6 md:p-7',
+                  'md:pt-12',
+                  a.cardBg,
+                  a.cardBorder,
+                  'shadow-[0_1px_0_0_rgba(15,23,42,0.04)] transition hover:shadow-md focus-within:ring-2 focus-within:ring-slate-300',
+                ].join(' ')}
               >
-                {/* Top accent bar (explicit class so Tailwind keeps it) */}
-                <div className={["absolute left-0 top-0 h-1.5 w-full", m.accent.bar].join(" ")} aria-hidden />
-
-                <div className="flex items-start gap-3">
-                  {/* Number badge */}
-                  <div
-                    className={[
-                      "grid h-10 w-10 place-items-center rounded-xl border text-sm font-extrabold shadow-sm bg-white ring-1 ring-black/5",
-                      m.accent.text,
-                      m.accent.border,
-                    ].join(" ")}
-                    aria-label={`Module ${m.num}`}
-                  >
-                    {m.num}
-                  </div>
-
-                  {/* Text block */}
-                  <div className="min-w-0">
-                    <h3 className="text-lg md:text-xl font-bold text-slate-900">
-                      {m.title}
-                    </h3>
-                    <p className="mt-1 text-sm md:text-base leading-relaxed text-slate-700">
-                      {m.outcome}
-                    </p>
-                  </div>
+                {/* index badge */}
+                <div
+                  className={[
+                    'absolute right-4 top-4 grid place-items-center rounded-xl font-bold shadow-sm',
+                    'h-8 w-8 text-[13px] sm:h-9 sm:w-9 sm:text-sm',
+                    a.badgeBg,
+                    a.badgeText,
+                  ].join(' ')}
+                  aria-hidden="true"
+                >
+                  {mod.num}
                 </div>
 
-                {/* Footer chips */}
-                <div className="mt-4 flex flex-wrap gap-2">
-                  <span className="rounded-md bg-white px-2.5 py-1 text-[11px] font-semibold text-slate-700 ring-1 ring-black/5">
-                    Hands-On Lab
-                  </span>
-                  <span className="rounded-md bg-white px-2.5 py-1 text-[11px] font-semibold text-slate-700 ring-1 ring-black/5">
-                    Best Practices
-                  </span>
-                  <span className={["rounded-md px-2.5 py-1 text-[11px] font-semibold text-white ring-1 ring-black/5", m.accent.bar].join(" ")}>
-                    Mentor Tips
-                  </span>
-                </div>
+                <h3 className={['mb-4 text-xl font-semibold leading-snug break-words', a.ink, 'pr-14 sm:pr-0'].join(' ')}>
+                  {mod.title}
+                </h3>
 
-                {/* Bottom progress hint (non-gradient) */}
-                <div className="mt-4 h-1 w-full rounded-full bg-white/80" aria-hidden>
-                  <div className={["h-1 w-0 rounded-full transition-[width] duration-500 ease-out", m.accent.bar].join(" ")} />
-                </div>
-              </article>
-            </li>
-          ))}
+                <ul className="grid gap-2.5 sm:grid-cols-2">
+                  <li key={mod.outcome} className="flex items-start gap-2 text-slate-700">
+                    <CheckCircle className={['mt-0.5 h-5 w-5 flex-shrink-0', a.icon].join(' ')} />
+                    <span className="text-sm">{mod.outcome}</span>
+                  </li>
+                </ul>
+
+                <p className="mt-4 text-xs text-slate-500">
+                  Outcomes: hands-on labs, assessment checklists, and take-home exercises for mastery.
+                </p>
+              </li>
+            );
+          })}
         </ol>
 
-        {/* CTA row */}
-        <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 text-center sm:flex-row">
+        {/* CTAs */}
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <button
-            className="inline-flex items-center justify-center rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
-            aria-label="Download the detailed Advanced Data Analytics syllabus"
+            className="inline-flex items-center justify-center rounded-xl border-2 border-green-700 bg-white px-4 py-2 text-sm font-semibold text-green-800 shadow-sm transition hover:bg-green-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-emerald-200"
           >
             Download Detailed Syllabus (PDF)
           </button>
           <Link
             href="contact-us"
-            className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-orange-200"
-            aria-label="Apply for the Advanced Data Analytics program"
+            className="inline-flex items-center justify-center rounded-xl bg-indigo-700 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-200"
           >
             Apply Now
           </Link>
         </div>
-
-        {/* Footnote */}
-        <p className="mx-auto mt-3 max-w-3xl text-center text-[11px] text-slate-500">
-          *Module order may vary slightly based on cohort needs and instructor discretion.
-        </p>
       </div>
 
     </section>

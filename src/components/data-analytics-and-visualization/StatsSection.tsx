@@ -82,10 +82,10 @@ export default function StatsSection() {
                     </h2>
                     <p className="mt-4 text-base md:text-lg text-slate-600 max-w-6xl mx-auto leading-relaxed">
                         The data analytics industry is booming across India and globally.
-                        Mastering <strong>Advanced Excel for Data Analytics</strong>—from{" "}
+                        Mastering <strong>Advanced Excel for Data Analytics</strong>-from{" "}
                         <strong>PivotTables</strong> and <strong>Power Query</strong> to{" "}
                         <strong>Power Pivot</strong> and{" "}
-                        <strong>interactive dashboards</strong>—helps you analyze,
+                        <strong>interactive dashboards</strong>-helps you analyze,
                         visualize, and present business insights faster. Ideal for{" "}
                         <strong>freshers</strong>, <strong>working professionals</strong>,
                         and <strong>career switchers</strong>.
@@ -101,25 +101,25 @@ export default function StatsSection() {
                         return (
                             <article
                                 key={`${stat.label}-${index}`}
-                                className="group relative rounded-2xl border border-slate-200/80 bg-white/80 backdrop-blur-sm p-6 sm:p-7 md:p-8 shadow-sm hover:shadow-xl transition-all duration-300 focus-within:shadow-xl outline-none"
+                                className="group relative rounded-2xl border border-slate-200/80 bg-white/80 backdrop-blur-sm p-6 sm:p-7 md:p-8 shadow-sm hover:shadow-xl focus-within:shadow-xl focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 transition-all duration-300 outline-none"
                                 tabIndex={0}
                                 aria-label={`${stat.number} ${stat.label}`}
                             >
                                 {/* gradient overlay on hover */}
                                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-slate-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                                <div className="relative z-10">
+                                <div className="relative z-10 pb-4"> {/* Added pb-4 for space above the accent line */}
                                     {/* Icon */}
                                     <div
-                                        className={`inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br ${colorClass} text-white mb-5 sm:mb-6 group-hover:scale-105 transition-transform duration-300`}
+                                        className={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br ${colorClass} text-white mb-5 sm:mb-6 group-hover:scale-105 transition-transform duration-300`}
                                         aria-hidden="true"
                                     >
-                                        <Icon className="w-7 h-7 sm:w-8 sm:h-8" />
+                                        <Icon className="w-5 h-5 sm:w-8 sm:h-8" />
                                     </div>
 
                                     {/* Numbers & labels */}
                                     <div className="space-y-2 sm:space-y-3">
-                                        <p className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+                                        <p className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
                                             {stat.number}
                                         </p>
                                         <h3 className="text-base sm:text-lg font-semibold text-slate-900 leading-snug">
@@ -130,9 +130,9 @@ export default function StatsSection() {
                                         </p>
                                     </div>
 
-                                    {/* bottom accent */}
+                                    {/* bottom accent - made slightly thicker for better visibility */}
                                     <div
-                                        className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${colorClass} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-b-2xl`}
+                                        className={`absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r ${colorClass} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-b-2xl`}
                                         aria-hidden="true"
                                     />
                                 </div>
@@ -144,7 +144,7 @@ export default function StatsSection() {
                 {/* Additional insights */}
                 <div className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                     {/* Market insights */}
-                    <section className="rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 sm:p-8">
+                    <section className="rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 p-6 sm:p-8 shadow-sm hover:shadow-md transition-shadow duration-300">
                         <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4">
                             Market Insights
                         </h3>
@@ -180,7 +180,7 @@ export default function StatsSection() {
                     </section>
 
                     {/* Career benefits */}
-                    <section className="rounded-2xl border border-purple-200 bg-gradient-to-br from-purple-50 to-pink-50 p-6 sm:p-8">
+                    <section className="rounded-2xl border border-purple-200 bg-gradient-to-br from-purple-50 to-pink-50 p-6 sm:p-8 shadow-sm hover:shadow-md transition-shadow duration-300">
                         <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-4">
                             Career Benefits
                         </h3>
@@ -217,24 +217,26 @@ export default function StatsSection() {
                 </div>
 
                 {/* SEO helper copy (natural keywords) */}
-                <div className="mt-12 md:mt-16 max-w-4xl text-slate-700 leading-relaxed">
-                    <h3 className="text-xl md:text-2xl font-semibold text-slate-900 mb-3">
-                        Advanced Excel for Data Analytics & Visualization — Skills You’ll
-                        Use Daily
-                    </h3>
-                    <p className="text-sm sm:text-base">
-                        Build job-ready skills with hands-on practice in{" "}
-                        <strong>Excel dashboards</strong>, <strong>data cleaning</strong>,{" "}
-                        <strong>Power Query</strong>, <strong>Power Pivot</strong>,{" "}
-                        <strong>DAX basics</strong>, and <strong>visual storytelling</strong>.{" "}
-                        This program is designed for <strong>analysts</strong>,{" "}
-                        <strong>business managers</strong>, and <strong>students</strong>{" "}
-                        aiming to improve decision-making and reporting. If you’re searching
-                        for an <em>Advanced Excel course in Mumbai</em> with{" "}
-                        <em>placement assistance</em>, or need{" "}
-                        <em>Excel training for data analytics</em> to boost your career,
-                        this course gives you a competitive edge.
-                    </p>
+                <div className="w-full flex justify-center text-center">
+                    <div className="mt-12 md:mt-16 max-w-5xl text-slate-700 leading-relaxed">
+                        <h3 className="text-xl md:text-2xl font-semibold text-slate-900 mb-3">
+                            Advanced Excel for Data Analytics & Visualization — Skills You’ll
+                            Use Daily
+                        </h3>
+                        <p className="text-sm sm:text-base">
+                            Build job-ready skills with hands-on practice in{" "}
+                            <strong>Excel dashboards</strong>, <strong>data cleaning</strong>,{" "}
+                            <strong>Power Query</strong>, <strong>Power Pivot</strong>,{" "}
+                            <strong>DAX basics</strong>, and <strong>visual storytelling</strong>.{" "}
+                            This program is designed for <strong>analysts</strong>,{" "}
+                            <strong>business managers</strong>, and <strong>students</strong>{" "}
+                            aiming to improve decision-making and reporting. If you’re searching
+                            for an <em>Advanced Excel course in Mumbai</em> with{" "}
+                            <em>placement assistance</em>, or need{" "}
+                            <em>Excel training for data analytics</em> to boost your career,
+                            this course gives you a competitive edge.
+                        </p>
+                    </div>
                 </div>
 
             </div>

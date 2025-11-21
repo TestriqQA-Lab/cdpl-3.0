@@ -157,7 +157,7 @@ export default function StatsSection() {
                         </div>
                         <div>
                             <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-2">
-                                The Data Revolution is Here — Build a High-Growth Career
+                                The Data Revolution is Here - Build a High-Growth Career
                             </h3>
                             <p className="text-slate-700 leading-relaxed text-sm sm:text-base">
                                 Companies across <strong>finance</strong>,{" "}

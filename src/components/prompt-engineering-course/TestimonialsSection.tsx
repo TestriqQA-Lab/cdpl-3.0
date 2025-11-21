@@ -25,9 +25,9 @@ export default function TestimonialsSection() {
           >
             What Our <span className="text-DS">Students Say</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
+          <p className="mt-4 text-base sm:text-lg md:text-xl text-gray-700 max-w-4xl mx-auto">
             Real feedback from graduates of our{" "}
-            <strong>Prompt Engineering with Gen&nbsp;AI</strong> program—covering{" "}
+            <strong>Prompt Engineering with Gen&nbsp;AI</strong> program-covering{" "}
             <strong>prompt frameworks</strong>, <strong>evaluation</strong>,{" "}
             <strong>guardrails</strong>, and <strong>automation</strong>. Portfolio-first and
             job-focused outcomes.
