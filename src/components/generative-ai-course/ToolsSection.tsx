@@ -101,7 +101,7 @@ export default function ToolsSection() {
         {/* Context strip */}
         <div className="mx-auto mt-8 max-w-4xl rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
           <p className="text-sm text-slate-700">
-            Master the <strong>Python data science toolkit</strong> end-to-end — from{" "}
+            Master the <strong>Python data science toolkit</strong> end-to-end - from{" "}
             <strong>data wrangling</strong> and <strong>feature engineering</strong> to{" "}
             <strong>deep learning</strong>, <strong>LLMs</strong>, and <strong>deployment</strong>.
           </p>

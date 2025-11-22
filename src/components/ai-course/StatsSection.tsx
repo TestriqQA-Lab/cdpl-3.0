@@ -184,7 +184,7 @@ export default function StatsSection() {
           </h2>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-700">
             Equip yourself for tomorrow’s roles with <strong>Python</strong>, <strong>ML</strong>,{" "}
-            <strong>DL</strong>, and <strong>data engineering</strong> foundations—delivered via mentor-led,
+            <strong>DL</strong>, and <strong>data engineering</strong> foundations-delivered via mentor-led,
             project-first learning.
           </p>
           {/* SEO helper (visually hidden) */}
@@ -252,7 +252,7 @@ export default function StatsSection() {
         {/* Context strip */}
         <div className="mx-auto mt-8 max-w-4xl rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
           <p className="text-sm text-slate-700">
-            Build a <strong>recruiter-ready portfolio</strong> with dashboards, models, and pipelines—aimed at{" "}
+            Build a <strong>recruiter-ready portfolio</strong> with dashboards, models, and pipelines-imed at{" "}
             <strong>Data Analyst</strong>, <strong>Data Scientist</strong>, and <strong>ML Engineer</strong> roles.
           </p>
           <p className="mt-2 text-[11px] text-slate-500">

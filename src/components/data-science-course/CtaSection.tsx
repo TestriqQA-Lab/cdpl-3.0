@@ -152,7 +152,7 @@ export default function CtaSection() {
 
           {/* Compliance & reassurance */}
           <p className="mt-5 text-center text-xs text-slate-500">
-            *By contacting us, you agree to receive course updates. No spam—unsubscribe anytime.
+            *By contacting us, you agree to receive course updates. No spam-unsubscribe anytime.
           </p>
         </div>
 

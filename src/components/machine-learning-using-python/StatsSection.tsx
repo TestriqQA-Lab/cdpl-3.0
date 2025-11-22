@@ -184,7 +184,7 @@ export default function StatsSection() {
             </div>
             <div>
               <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-2">
-                The Machine Learning &amp; AI Boom — Build a High-Growth Career
+                The Machine Learning &amp; AI Boom - Build a High-Growth Career
               </h3>
               <p className="text-slate-700 leading-relaxed text-sm sm:text-base">
                 Companies across <strong>finance</strong>,{" "}
@@ -237,7 +237,7 @@ export default function StatsSection() {
               </ul>
 
               <p className="mt-4 text-slate-600 text-xs sm:text-sm">
-                Keywords: Machine Learning Course in India • Artificial
+                Machine Learning Course in India • Artificial
                 Intelligence and Machine Learning Training • Machine Learning
                 Engineer Salary for Freshers • ML Engineer Jobs • Data Science
                 and Machine Learning Certification • Python and Scikit-learn

@@ -159,7 +159,7 @@ export default function CareerSection() {
             Apply for Placement Assistance
           </Link>
           <button
-            className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-indigo-200"
+            className="inline-flex items-center justify-center cursor-pointer rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-indigo-200"
             aria-label="Download the DS & AI portfolio guide"
           >
             Download Portfolio Guide (PDF)

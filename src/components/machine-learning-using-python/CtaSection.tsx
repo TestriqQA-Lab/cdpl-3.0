@@ -1,5 +1,6 @@
 
 import { CheckCircle2, Clock, Users, Award } from "lucide-react";
+import Link from "next/link";
 
 export default function CtaSection() {
   
@@ -15,12 +16,12 @@ export default function CtaSection() {
       <div className="relative z-10 container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
           {/* Main Heading */}
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
             Ready to Transform Your Career?
           </h2>
 
           {/* Subheading */}
-          <p className="text-xl text-blue-100 mb-8 leading-relaxed">
+          <p className="text-lg text-blue-100 mb-8 leading-relaxed">
             Join hundreds of successful graduates who have landed high-paying ML engineering roles. Start your journey today with our comprehensive 45-hour master program.
           </p>
 
@@ -73,15 +74,16 @@ export default function CtaSection() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <button
-              className="bg-white text-blue-600 hover:bg-blue-50 font-bold rounded-lg text-lg px-8 py-3"
+              className="bg-white text-blue-600 cursor-pointer hover:bg-blue-50 font-bold rounded-lg text-lg px-8 py-3"
             >
               Enroll Now & Get Started
             </button>
-            <button
+            <Link
+            href="https://calendar.app.google/tvh9dsXZsX9BujRR8"
               className="border-white text-white bg-orange-500 hover:bg-orange-700 transition-all font-bold rounded-lg text-lg px-8 py-3"
             >
               Schedule Free Demo
-            </button>
+            </Link>
           </div>
 
           {/* Trust Indicators */}
@@ -107,19 +109,19 @@ export default function CtaSection() {
             Questions? Our team is here to help!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center text-white">
-            <a
+            <Link
               href="tel:+917888383788"
               className="flex items-center justify-center gap-2 hover:text-blue-200 transition-colors"
             >
               <span>📞</span> +91 788-83-83-788
-            </a>
+            </Link>
             <span className="hidden sm:block text-blue-300">•</span>
-            <a
+            <Link
               href="mailto:contact@cinutedigital.com"
               className="flex items-center justify-center gap-2 hover:text-blue-200 transition-colors"
             >
               <span>✉️</span> contact@cinutedigital.com
-            </a>
+            </Link>
           </div>
         </div>
       </div>

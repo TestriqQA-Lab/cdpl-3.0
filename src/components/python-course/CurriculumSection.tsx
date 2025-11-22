@@ -216,7 +216,7 @@ export default function CurriculumSection() {
         {/* CTA */}
         <div className="mt-10 text-center">
           <button
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-900 bg-slate-900 px-4 md:px-6 py-3 text-base font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:translate-y-[-1px] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
+            className="inline-flex items-center gap-2 rounded-xl cursor-pointer border border-slate-900 bg-slate-900 px-4 md:px-6 py-3 text-base font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:translate-y-[-1px] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
             aria-label="Download detailed Python curriculum"
           >
             Download Detailed Syllabus

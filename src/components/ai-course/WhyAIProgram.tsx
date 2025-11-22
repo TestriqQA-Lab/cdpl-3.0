@@ -141,7 +141,7 @@ export default function WhyAIProgram() {
             <strong>advanced AI deployment</strong>. Build a{" "}
             <strong>job-ready portfolio</strong> in <strong>Python</strong>,{" "}
             <strong>scikit-learn</strong>, <strong>TensorFlow</strong>,{" "}
-            <strong>NLP/GenAI</strong>, and <strong>MLOps</strong>—guided by industry experts.
+            <strong>NLP/GenAI</strong>, and <strong>MLOps</strong>-guided by industry experts.
           </p>
         </header>
 

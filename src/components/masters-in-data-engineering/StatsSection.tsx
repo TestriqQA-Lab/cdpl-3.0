@@ -218,7 +218,7 @@ const StatsSection: React.FC = () => {
                   real-world projects, interview preparation, and portfolio
                   guidance
                 </strong>
-                —so you can confidently target{" "}
+                -so you can confidently target{" "}
                 <strong>
                   Data Engineer, BI Developer, Analytics Engineer, and
                   Reporting Analyst

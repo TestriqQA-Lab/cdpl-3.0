@@ -115,7 +115,7 @@ export default function FaqSection() {
               {/* Question */}
               <button
                 onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
-                className="w-full px-6 py-5 flex items-center justify-between hover:bg-slate-50 transition-colors"
+                className="w-full px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors"
               >
                 <div className="flex items-start gap-4 text-left">
                   <HelpCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1" />

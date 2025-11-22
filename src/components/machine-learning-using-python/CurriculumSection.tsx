@@ -110,7 +110,7 @@ export default function CurriculumSection() {
               {/* Module Header */}
               <button
                 onClick={() => setExpandedModule(expandedModule === index ? null : index)}
-                className="w-full px-6 py-4 flex items-center justify-between bg-gradient-to-r from-slate-50 to-slate-100 hover:from-slate-100 hover:to-slate-200 transition-colors"
+                className="w-full px-6 py-4 flex items-center justify-between cursor-pointer bg-gradient-to-r from-slate-50 to-slate-100 hover:from-slate-100 hover:to-slate-200 transition-colors"
               >
                 <div className="flex items-center gap-4 text-left">
                   <span className="text-3xl">{module.icon}</span>

@@ -13,15 +13,15 @@ export const CtaSection: React.FC = () => {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-5xl mx-auto text-center">
           {/* Main Heading */}
-          <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
             Ready to Master{" "}
             <span className="text-orange-400">R for Machine Learning</span>?
           </h2>
 
           {/* Subheading (SEO-optimized) */}
-          <p className="text-lg md:text-xl text-slate-200 mb-8 leading-relaxed">
+          <p className="text-lg text-slate-200 mb-8 leading-relaxed">
             Enroll now in our intensive{" "}
             <strong>20-hour R Programming for Machine Learning Master
               Program</strong> and accelerate your{" "}
@@ -72,11 +72,11 @@ export const CtaSection: React.FC = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col md:flex-row gap-4 justify-center mb-10">
-            <button className="flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-6 text-base rounded-lg shadow-lg hover:shadow-xl transition-all">
+            <button className="flex items-center justify-center cursor-pointer bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-6 text-base rounded-lg shadow-lg hover:shadow-xl transition-all">
               Enroll Now
               <ArrowRight className="w-5 h-5 ml-2" />
             </button>
-            <button className="flex items-center justify-center border-2 border-white text-white hover:bg-white/10 font-semibold px-8 py-6 text-base rounded-lg transition-all">
+            <button className="flex items-center justify-center cursor-pointer border-2 border-white text-white hover:bg-white/10 font-semibold px-8 py-6 text-base rounded-lg transition-all">
               Download Free Syllabus
             </button>
           </div>
@@ -150,15 +150,6 @@ export const CtaSection: React.FC = () => {
               className="flex items-center gap-2 hover:text-orange-400 transition-colors"
             >
               <span>✉️</span> contact@cinutedigital.com
-            </Link>
-            <div className="hidden sm:block w-px h-6 bg-white/20"></div>
-            <Link
-              href="https://www.cinutedigital.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:text-orange-400 transition-colors"
-            >
-              <span>🌐</span> www.cinutedigital.com
             </Link>
           </div>
         </div>

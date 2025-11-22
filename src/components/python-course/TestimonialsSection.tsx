@@ -74,7 +74,7 @@ export default function TestimonialsSection({
           </Link>
 
           <button
-            className="rounded-xl bg-white border-2 border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-emerald-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-emerald-200"
+            className="rounded-xl bg-white cursor-pointer border-2 border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-emerald-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-emerald-200"
           >
             Download syllabus
           </button>

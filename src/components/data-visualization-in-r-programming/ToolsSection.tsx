@@ -191,7 +191,7 @@ export const ToolsSection: React.FC = () => {
           </div>
           <p className="mt-8 text-sm text-slate-300">
             This <strong>R data visualization course</strong> equips you with a
-            complete analytics stack—from <strong>RStudio</strong> and{" "}
+            complete analytics stack-from <strong>RStudio</strong> and{" "}
             <strong>tidyverse</strong> to <strong>ggplot2</strong>,{" "}
             <strong>Shiny dashboards</strong> and interactive{" "}
             <strong>business intelligence reporting</strong>.

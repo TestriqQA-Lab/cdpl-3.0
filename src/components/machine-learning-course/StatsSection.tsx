@@ -181,7 +181,7 @@ function StatCard({ stat, revealed }: { stat: Stat; revealed: boolean }) {
 
 export default function StatsSection() {
   const subtitle =
-    "Data is the new oil—and Python is the engine powering AI, analytics, and automation across industries.";
+    "Data is the new oil-and Python is the engine powering AI, analytics, and automation across industries.";
   const keywords =
     "machine learning market growth, data science jobs India, data analyst salary, ML career trends, Python analytics demand";
 

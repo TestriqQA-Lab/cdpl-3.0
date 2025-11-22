@@ -99,7 +99,7 @@ function FaqRow({
       >
         <button
           id={btnId}
-          className="flex justify-between items-center w-full py-4 px-3 md:px-4 text-left"
+          className="flex justify-between cursor-pointer items-center w-full py-4 px-3 md:px-4 text-left"
           onClick={toggle}
           aria-expanded={isOpen}
           aria-controls={panelId}

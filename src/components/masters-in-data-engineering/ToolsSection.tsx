@@ -143,7 +143,7 @@ const ToolsSection: React.FC = () => {
             <strong>Apache Spark</strong>, <strong>Databricks</strong>, and{" "}
             <strong>Hadoop</strong> to build end-to-end{" "}
             <strong>data pipelines, BI dashboards, and scalable Big Data
-              solutions</strong>—skills that are highly demanded for{" "}
+              solutions</strong>-skills that are highly demanded for{" "}
             <strong>BI Analyst, Data Engineer, and Analytics Engineer</strong>{" "}
             roles.
           </p>

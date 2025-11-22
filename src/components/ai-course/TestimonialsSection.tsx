@@ -28,7 +28,7 @@ export default function TestimonialsSection() {
           </h2>
           <p className="mt-4 text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
             Real reviews from the{" "}
-            <strong>Comprehensive Data Science & AI — Master Program</strong>: end-to-end ML,
+            <strong>Comprehensive Data Science & AI - Master Program</strong>: end-to-end ML,
             GenAI, and <strong>MLOps</strong> with a portfolio recruiters trust.
           </p>
 

@@ -104,7 +104,7 @@ const FaqSection: React.FC = () => {
                           expandedFAQ === item.id ? null : item.id
                         )
                       }
-                      className="w-full px-6 py-5 flex items-center justify-between hover:bg-slate-50 transition-colors text-left"
+                      className="w-full px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors text-left"
                     >
                       <h4 className="text-lg font-semibold text-slate-900">
                         {item.question}

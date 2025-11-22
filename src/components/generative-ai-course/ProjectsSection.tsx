@@ -241,15 +241,6 @@ export default function ProjectsSection() {
                   <span className={["text-xs font-semibold uppercase tracking-wide", p.accent.text].join(" ")}>
                     Portfolio-Ready • Recruiter-Friendly
                   </span>
-                  <span
-                    className={[
-                      "text-sm opacity-0 translate-x-1 transition-all duration-200",
-                      "group-hover:opacity-100 group-hover:translate-x-0 group-focus-visible:opacity-100 group-focus-visible:translate-x-0",
-                      p.accent.text,
-                    ].join(" ")}
-                  >
-                    View details →
-                  </span>
                 </div>
               </article>
             );
@@ -260,7 +251,7 @@ export default function ProjectsSection() {
         <div className="mx-auto mt-10 max-w-4xl rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
           <p className="text-sm text-slate-700">
             These <strong>industry-aligned projects</strong> demonstrate real metrics, clean engineering, and
-            clear communication—exactly what <strong>hiring managers</strong> want for{" "}
+            clear communication-exactly what <strong>hiring managers</strong> want for{" "}
             <strong>Data Analyst</strong>, <strong>ML Engineer</strong>, and <strong>Data Scientist</strong> roles.
           </p>
           <p className="mt-2 text-[11px] text-slate-500">*Project scope may vary by dataset, domain, and pace.</p>

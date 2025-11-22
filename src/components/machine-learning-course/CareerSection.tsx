@@ -126,15 +126,15 @@ export default function CareerSection() {
               >
                 {/* logo */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                {/* <Image
                   src={c.logo}
                   alt={c.alt}
                   title={c.alt}
                   className="mx-auto h-10 w-auto select-none grayscale opacity-80 transition-all duration-200 group-hover:grayscale-0 group-hover:opacity-100"
                   loading="lazy"
-                />
+                /> */}
                 {/* label */}
-                <p className={["mt-3 text-xs font-semibold", c.accent.text].join(" ")}>{c.name}</p>
+                <p className={["mt-3 text-md font-semibold", c.accent.text].join(" ")}>{c.name}</p>
               </div>
             </li>
           ))}
@@ -159,7 +159,7 @@ export default function CareerSection() {
             Apply for Placement Assistance
           </Link>
           <button
-            className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-purple-200"
+            className="inline-flex items-center justify-center cursor-pointer rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-purple-200"
             aria-label="Download the syllabus to see job-ready skills"
           >
             Download Job-Ready Syllabus (PDF)

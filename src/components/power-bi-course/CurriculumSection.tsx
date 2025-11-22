@@ -173,7 +173,7 @@ const CurriculumSection: React.FC = () => {
             return (
               <div key={index} className="rounded-xl border border-gray-200 shadow-md overflow-hidden">
                 <button
-                  className="flex justify-between items-center w-full p-5 text-left bg-gray-50 hover:bg-gray-100 transition duration-150"
+                  className="flex justify-between items-center w-full p-5 cursor-pointer text-left bg-gray-50 hover:bg-gray-100 transition duration-150"
                   onClick={() => toggleModule(index)}
                   aria-expanded={activeIndex === index}
                   aria-controls={`module-panel-${index}`}

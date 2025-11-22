@@ -19,7 +19,7 @@ export default function FaqSection() {
     },
     {
       q: "Will I build a job-ready portfolio?",
-      a: "Absolutely. Each module ends with a deployable artifact—APIs, dashboards, notebooks, and experiment reports—to showcase in interviews.",
+      a: "Absolutely. Each module ends with a deployable artifact-APIs, dashboards, notebooks, and experiment reports-to showcase in interviews.",
     },
     {
       q: "Are classes flexible for working professionals?",

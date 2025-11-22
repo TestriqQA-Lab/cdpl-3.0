@@ -123,7 +123,7 @@ export default function WhyGenAIProgram() {
           </h1>
           <p className="mt-4 text-base sm:text-lg md:text-xl text-gray-700 max-w-4xl mx-auto">
             An advanced, practical program to{" "}
-            <strong>design, train, fine-tune, and deploy</strong> modern AI models—
+            <strong>design, train, fine-tune, and deploy</strong> modern AI models-
             including <strong>Transformers, LLMs, and generative pipelines</strong>.
             Get industry-ready with hands-on projects, portfolio artifacts, and
             <strong> real deployment workflows</strong>.

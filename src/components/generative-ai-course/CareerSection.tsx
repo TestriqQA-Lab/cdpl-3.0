@@ -64,7 +64,7 @@ export default function CareerSection() {
 
           <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-700">
             Careers across <strong>Artificial Intelligence</strong>, <strong>Data Science</strong>,{" "}
-            <strong>Machine Learning</strong>, <strong>NLP</strong>, and <strong>Generative AI</strong> — from{" "}
+            <strong>Machine Learning</strong>, <strong>NLP</strong>, and <strong>Generative AI</strong> - from{" "}
             <strong>Data Analyst</strong> to <strong>ML Engineer</strong> and <strong>Applied Scientist</strong>.
           </p>
           {/* SEO helper (visually hidden) */}

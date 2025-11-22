@@ -55,12 +55,12 @@ export const CurriculumSection: React.FC = () => {
           </h2>
 
           {/* Original description */}
-          <p className="text-lg text-slate-600 max-w-4xl mx-auto">
+          <p className="text-lg text-slate-600 max-w-6xl mx-auto">
             {curriculum_section.description}
           </p>
 
           {/* Extra SEO-optimized copy */}
-          <p className="mt-4 text-base md:text-lg text-slate-700 max-w-4xl mx-auto">
+          <p className="mt-4 text-base md:text-lg text-slate-700 max-w-5xl mx-auto">
             This{" "}
             <strong>Data Visualization in R Programming course</strong> is
             carefully structured to help you{" "}
@@ -103,7 +103,7 @@ export const CurriculumSection: React.FC = () => {
                 {/* Module Header */}
                 <button
                   onClick={() => handleToggle(index)}
-                  className="w-full px-6 py-5 flex items-center justify-between hover:bg-white/30 transition-colors"
+                  className="w-full px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-white/30 transition-colors"
                 >
                   <div className="flex items-center gap-4 text-left">
                     <span className="text-3xl">{iconEmoji}</span>

@@ -83,7 +83,7 @@ export const FaqSection: React.FC = () => {
                             expandedFAQ === globalIdx ? null : globalIdx
                           )
                         }
-                        className="w-full px-6 py-5 flex items-center justify-between hover:bg-slate-50 transition-colors gap-4"
+                        className="w-full px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors gap-4"
                       >
                         <div className="flex items-center gap-3 text-left">
                           <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-orange-50 text-orange-600">

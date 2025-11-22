@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function WhyMLPythonProgram() {
   const subtitle =
-    "A mentor-led, job-ready journey through Python, Data Visualization, Statistics & Probability, and Machine Learning — built around hands-on labs and real portfolio projects.";
+    "A mentor-led, job-ready journey through Python, Data Visualization, Statistics & Probability, and Machine Learning - built around hands-on labs and real portfolio projects.";
   const keywords =
     "machine learning course, data science with Python, statistics and probability, data visualization, ML algorithms, portfolio projects, placement assistance, Mumbai";
 

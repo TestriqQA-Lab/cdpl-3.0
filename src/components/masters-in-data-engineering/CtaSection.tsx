@@ -20,14 +20,14 @@ const CtaSection: React.FC = () => {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
           {/* Main Heading (content preserved) */}
-          <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
             Ready to Launch Your{" "}
             <span className="text-teal-300">High-Paying Data Career?</span>
           </h2>
 
           {/* Subheading (content preserved) */}
           <p className="text-lg md:text-xl text-slate-200 mb-4 leading-relaxed">
-            Don&apos;t just analyze data—engineer the future. Enroll now to secure
+            Don&apos;t just analyze data-engineer the future. Enroll now to secure
             your spot in the next cohort.
           </p>
           {/* Extra SEO copy */}
@@ -75,11 +75,11 @@ const CtaSection: React.FC = () => {
 
           {/* CTA Buttons (labels/content preserved, layout upgraded) */}
           <div className="flex flex-col md:flex-row gap-4 justify-center mb-10">
-            <button className="flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white font-semibold px-8 py-6 text-base rounded-lg shadow-lg hover:shadow-xl transition-all">
+            <button className="flex items-center justify-center cursor-pointer bg-teal-500 hover:bg-teal-600 text-white font-semibold px-8 py-6 text-base rounded-lg shadow-lg hover:shadow-xl transition-all">
               Enroll Now
               <ArrowRight className="w-5 h-5 ml-2" />
             </button>
-            <button className="flex items-center justify-center border-2 border-white text-white hover:bg-white/10 font-semibold px-8 py-6 text-base rounded-lg transition-all">
+            <button className="flex items-center justify-center cursor-pointer border-2 border-white text-white hover:bg-white/10 font-semibold px-8 py-6 text-base rounded-lg transition-all">
               <Download className="w-5 h-5 mr-2" />
               Download Brochure
             </button>
@@ -150,15 +150,6 @@ const CtaSection: React.FC = () => {
               className="flex items-center gap-2 hover:text-teal-300 transition-colors"
             >
               <span>✉️</span> contact@cinutedigital.com
-            </Link>
-            <div className="hidden sm:block w-px h-6 bg-white/20" />
-            <Link
-              href="https://www.cinutedigital.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:text-teal-300 transition-colors"
-            >
-              <span>🌐</span> www.cinutedigital.com
             </Link>
           </div>
           <p className="mt-4 text-xs text-slate-400 sm:text-sm">

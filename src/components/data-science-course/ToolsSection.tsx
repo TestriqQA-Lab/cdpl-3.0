@@ -229,7 +229,7 @@ export default function ToolsSection() {
         {/* Reassurance strip */}
         <aside className="mx-auto mt-8 max-w-5xl rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
           <p className="text-sm text-slate-700">
-            Practice with <strong>real datasets</strong>, version control, reviews, and deploy checklists—
+            Practice with <strong>real datasets</strong>, version control, reviews, and deploy checklists -
             the exact toolchain hiring managers expect.
           </p>
         </aside>

@@ -60,7 +60,7 @@ export const CareerRoadmapSection: React.FC = () => {
           </p>
 
           {/* Extra SEO-optimized copy */}
-          <p className="mt-4 text-base md:text-lg text-slate-700 max-w-3xl mx-auto">
+          <p className="mt-4 text-base md:text-lg text-slate-700 max-w-4xl mx-auto">
             This <strong>career roadmap in Data Visualization with R</strong>{" "}
             walks you step-by-step from{" "}
             <strong>beginner in R programming and statistics</strong> to{" "}

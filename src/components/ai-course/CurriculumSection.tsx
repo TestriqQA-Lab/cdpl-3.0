@@ -1,144 +1,241 @@
-// components/sections/CurriculumSection.tsx
-// Server component — sleek, SEO-optimized, slightly futuristic, fully responsive.
-// Updated with detailed curriculum extracted from the provided PDF (MySQL, Excel, Power BI, Tableau, Python, Stats,
-// ML with Python, R, Deep Learning/NLP/GenAI, Prompt Engineering, and Capstone/Projects).
-// Unique accent colors per module (no repeats). Hover progress visible on all cards.
-
+"use client";
+import { ChevronDown, BookOpen } from "lucide-react";
+import { useState } from "react";
 import Link from "next/link";
 
-type Module = {
-  num: string;
+interface Module {
+  id: number;
   title: string;
-  outcome: string;
-  accent: { bg: string; text: string; border: string; ring: string; bar: string };
-};
-
-// === Canonical curriculum extracted from the PDF ===
-// Page refs (for internal mapping):
-// - MySQL DBMS (pp. 15–18)
-// - Advanced Excel (pp. 19–23)
-// - Power BI (pp. 24–27)
-// - Tableau (pp. 33–36)
-// - Python Programming (pp. 37–40)
-// - Data Visualization in Python: pandas/matplotlib/seaborn + NumPy (pp. 28–32)
-// - Statistics & Probability (pp. 41–43)
-// - ML Algorithms with Python (pp. 44–45)
-// - Machine Learning & Data Viz with R (p. 46)
-// - Deep Learning, NLP & Generative AI (pp. 47–48)
-// - Prompt Engineering with Gen AI (pp. 49–50)
-// - Real-time Projects & Capstone (pp. 51–52)
-
-const MODULES: Module[] = [
-  {
-    num: "01",
-    title: "DBMS using MySQL",
-    outcome:
-      "ER modeling, normalization (1NF–BCNF), SQL (joins, subqueries, windows), indexing & EXPLAIN, backup/restore, DDL/DML/TCL/DCL, views, procs, triggers, CTEs, and a capstone database design.",
-    accent: { bg: "bg-indigo-50", text: "text-indigo-900", border: "border-indigo-200", ring: "focus:ring-indigo-300", bar: "bg-indigo-600" },
-  },
-  {
-    num: "02",
-    title: "Advanced Excel for Analytics & Viz",
-    outcome:
-      "Data types/cleaning, formulas (IF/XLOOKUP), conditional formatting, PivotTables/Charts, ToolPak stats, forecasting, Power Query, interactive dashboards, and hands-on projects.",
-    accent: { bg: "bg-emerald-50", text: "text-emerald-900", border: "border-emerald-200", ring: "focus:ring-emerald-300", bar: "bg-emerald-600" },
-  },
-  {
-    num: "03",
-    title: "Power BI (Data Analytics & Visualization)",
-    outcome:
-      "Power Query transforms, schema modeling (star/snowflake), DAX measures, core & advanced visuals, drill/focus interactivity, dashboards, publishing, and end-to-end projects.",
-    accent: { bg: "bg-amber-50", text: "text-amber-900", border: "border-amber-200", ring: "focus:ring-amber-300", bar: "bg-amber-600" },
-  },
-  {
-    num: "04",
-    title: "Tableau (Analytics & Storytelling)",
-    outcome:
-      "Data integration (joins/unions/relationships), logical vs physical layers, dimensions/measures, specialized/geospatial charts, table calcs, parameters/sets, dashboards & stories.",
-    accent: { bg: "bg-sky-50", text: "text-sky-900", border: "border-sky-200", ring: "focus:ring-sky-300", bar: "bg-sky-600" },
-  },
-  {
-    num: "05",
-    title: "Core Python Programming",
-    outcome:
-      "Syntax, data structures (lists/tuples/sets/dicts), control flow, functions & recursion, file I/O, OOP (inheritance/encapsulation), modules/packages, and Jupyter workflows.",
-    accent: { bg: "bg-violet-50", text: "text-violet-900", border: "border-violet-200", ring: "focus:ring-violet-300", bar: "bg-violet-600" },
-  },
-  {
-    num: "06",
-    title: "Python Data Viz (pandas, Matplotlib, Seaborn) + NumPy",
-    outcome:
-      "EDA/cleaning with pandas, plot customization & annotations, interactive/animated plots, seaborn statistical & categorical charts, heatmaps/grids, and NumPy arrays/broadcasting.",
-    accent: { bg: "bg-rose-50", text: "text-rose-900", border: "border-rose-200", ring: "focus:ring-rose-300", bar: "bg-rose-600" },
-  },
-  {
-    num: "07",
-    title: "Statistics & Probability",
-    outcome:
-      "Descriptive stats, probability & Bayes, discrete/continuous distributions, sampling & CLT, hypothesis tests (z/t/χ²/ANOVA), correlation/regression, and ML-centric metrics.",
-    accent: { bg: "bg-orange-50", text: "text-orange-900", border: "border-orange-200", ring: "focus:ring-orange-300", bar: "bg-orange-600" },
-  },
-  {
-    num: "08",
-    title: "ML with Python",
-    outcome:
-      "Preprocessing (imputation/encoding/scaling), regression & regularization, classifiers (LR/KNN/DT/RF/SVM), model validation (CV, metrics, ROC-AUC), PCA & clustering, and a capstone.",
-    accent: { bg: "bg-teal-50", text: "text-teal-900", border: "border-teal-200", ring: "focus:ring-teal-300", bar: "bg-teal-600" },
-  },
-  {
-    num: "09",
-    title: "Machine Learning & Data Viz with R",
-    outcome:
-      "RStudio workflow, vectors/lists/factors/matrices/DFs, CSV/Excel I/O, ggplot2 visuals, and ML projects using lm() and glm().",
-    accent: { bg: "bg-fuchsia-50", text: "text-fuchsia-900", border: "border-fuchsia-200", ring: "focus:ring-fuchsia-300", bar: "bg-fuchsia-600" },
-  },
-  {
-    num: "10",
-    title: "Deep Learning, NLP & Generative AI",
-    outcome:
-      "ANN/CNN essentials, RNN/LSTM/autoencoders, NLP with NLTK/spaCy & TensorFlow, OCR basics, and GenAI tooling across text, image (LIM), video, and speech.",
-    accent: { bg: "bg-lime-50", text: "text-lime-900", border: "border-lime-200", ring: "focus:ring-lime-300", bar: "bg-lime-600" },
-  },
-  {
-    num: "11",
-    title: "Prompt Engineering with Gen AI",
-    outcome:
-      "AI foundations & ML ecosystem, GenAI basics & technicals (GANs, transfer learning), LLM evolution, computer vision tie-ins, hands-on prompting patterns, and responsible AI.",
-    accent: { bg: "bg-cyan-50", text: "text-cyan-900", border: "border-cyan-200", ring: "focus:ring-cyan-300", bar: "bg-cyan-600" },
-  },
-  {
-    num: "12",
-    title: "Real-Time Projects & Capstone Portfolio",
-    outcome:
-      "Domain projects: credit risk, customer segmentation, sales forecasting, fraud detection, hospital resource forecasting, and HR attrition analytics—plus portfolio-ready deliverables.",
-    accent: { bg: "bg-stone-50", text: "text-stone-900", border: "border-stone-200", ring: "focus:ring-stone-300", bar: "bg-stone-600" },
-  },
-];
+  duration: string;
+  topics: string[];
+  projects?: string[];
+  color: string;
+  icon: string;
+}
 
 export default function CurriculumSection() {
+  const [expandedModule, setExpandedModule] = useState<number | null>(null);
+
   const subtitle =
-    "An industry-aligned path spanning SQL & BI to Python, Statistics, ML, R, and modern GenAI—with real projects that recruiters can run and trust.";
+    "An industry-aligned path spanning SQL & BI to Python, Statistics, ML, R, and modern GenAI-with real projects that recruiters can run and trust.";
   const keywords =
     "MySQL DBMS course, Advanced Excel analytics, Power BI training, Tableau storytelling, Python programming, pandas matplotlib seaborn, NumPy, statistics and probability, machine learning with Python, R ggplot2 lm glm, deep learning NLP generative AI, prompt engineering, data science capstone projects";
 
-
+  const modules: Module[] = [
+    {
+      id: 1,
+      title: "DBMS using MySQL",
+      duration: "",
+      icon: "🗄️",
+      color: "from-indigo-50 to-indigo-100",
+      topics: [
+        "ER modeling",
+        "normalization (1NF–BCNF)",
+        "SQL (joins, subqueries, windows)",
+        "indexing & EXPLAIN",
+        "backup/restore",
+        "DDL/DML/TCL/DCL",
+        "views",
+        "procs",
+        "triggers",
+        "CTEs",
+      ],
+      projects: [
+        "a capstone database design.",
+      ],
+    },
+    {
+      id: 2,
+      title: "Advanced Excel for Analytics & Viz",
+      duration: "",
+      icon: "📑",
+      color: "from-emerald-50 to-emerald-100",
+      topics: [
+        "Data types/cleaning",
+        "formulas (IF/XLOOKUP)",
+        "conditional formatting",
+        "PivotTables/Charts",
+        "ToolPak stats",
+        "forecasting",
+        "Power Query",
+        "interactive dashboards",
+      ],
+      projects: [
+        "hands-on projects.",
+      ],
+    },
+    {
+      id: 3,
+      title: "Power BI (Data Analytics & Visualization)",
+      duration: "",
+      icon: "📊",
+      color: "from-amber-50 to-amber-100",
+      topics: [
+        "Power Query transforms",
+        "schema modeling (star/snowflake)",
+        "DAX measures",
+        "core & advanced visuals",
+        "drill/focus interactivity",
+        "dashboards",
+        "publishing",
+      ],
+      projects: [
+        "end-to-end projects.",
+      ],
+    },
+    {
+      id: 4,
+      title: "Tableau (Analytics & Storytelling)",
+      duration: "",
+      icon: "📉",
+      color: "from-sky-50 to-sky-100",
+      topics: [
+        "Data integration (joins/unions/relationships)",
+        "logical vs physical layers",
+        "dimensions/measures",
+        "specialized/geospatial charts",
+        "table calcs",
+        "parameters/sets",
+        "dashboards & stories.",
+      ],
+    },
+    {
+      id: 5,
+      title: "Core Python Programming",
+      duration: "",
+      icon: "🐍",
+      color: "from-violet-50 to-violet-100",
+      topics: [
+        "Syntax",
+        "data structures (lists/tuples/sets/dicts)",
+        "control flow",
+        "functions & recursion",
+        "file I/O",
+        "OOP (inheritance/encapsulation)",
+        "modules/packages",
+        "Jupyter workflows.",
+      ],
+    },
+    {
+      id: 6,
+      title: "Python Data Viz (pandas, Matplotlib, Seaborn) + NumPy",
+      duration: "",
+      icon: "📈",
+      color: "from-rose-50 to-rose-100",
+      topics: [
+        "EDA/cleaning with pandas",
+        "plot customization & annotations",
+        "interactive/animated plots",
+        "seaborn statistical & categorical charts",
+        "heatmaps/grids",
+        "NumPy arrays/broadcasting.",
+      ],
+    },
+    {
+      id: 7,
+      title: "Statistics & Probability",
+      duration: "",
+      icon: "🔢",
+      color: "from-orange-50 to-orange-100",
+      topics: [
+        "Descriptive stats",
+        "probability & Bayes",
+        "discrete/continuous distributions",
+        "sampling & CLT",
+        "hypothesis tests (z/t/χ²/ANOVA)",
+        "correlation/regression",
+        "ML-centric metrics.",
+      ],
+    },
+    {
+      id: 8,
+      title: "ML with Python",
+      duration: "",
+      icon: "🤖",
+      color: "from-teal-50 to-teal-100",
+      topics: [
+        "Preprocessing (imputation/encoding/scaling)",
+        "regression & regularization",
+        "classifiers (LR/KNN/DT/RF/SVM)",
+        "model validation (CV, metrics, ROC-AUC)",
+        "PCA & clustering",
+      ],
+      projects: [
+        "a capstone.",
+      ],
+    },
+    {
+      id: 9,
+      title: "Machine Learning & Data Viz with R",
+      duration: "",
+      icon: "📊",
+      color: "from-fuchsia-50 to-fuchsia-100",
+      topics: [
+        "RStudio workflow",
+        "vectors/lists/factors/matrices/DFs",
+        "CSV/Excel I/O",
+        "ggplot2 visuals",
+        "ML projects using lm() and glm().",
+      ],
+    },
+    {
+      id: 10,
+      title: "Deep Learning, NLP & Generative AI",
+      duration: "",
+      icon: "🧠",
+      color: "from-lime-50 to-lime-100",
+      topics: [
+        "ANN/CNN essentials",
+        "RNN/LSTM/autoencoders",
+        "NLP with NLTK/spaCy & TensorFlow",
+        "OCR basics",
+        "GenAI tooling across text, image (LIM), video, and speech.",
+      ],
+    },
+    {
+      id: 11,
+      title: "Prompt Engineering with Gen AI",
+      duration: "",
+      icon: "💬",
+      color: "from-cyan-50 to-cyan-100",
+      topics: [
+        "AI foundations & ML ecosystem",
+        "GenAI basics & technicals (GANs, transfer learning)",
+        "LLM evolution",
+        "computer vision tie-ins",
+        "hands-on prompting patterns",
+        "responsible AI.",
+      ],
+    },
+    {
+      id: 12,
+      title: "Real-Time Projects & Capstone Portfolio",
+      duration: "",
+      icon: "🚀",
+      color: "from-stone-50 to-stone-100",
+      topics: [
+        "Domain projects: credit risk",
+        "customer segmentation",
+        "sales forecasting",
+        "fraud detection",
+        "hospital resource forecasting",
+        "HR attrition analytics—plus portfolio-ready deliverables.",
+      ],
+    },
+  ];
 
   return (
-    <section id="curriculum" aria-labelledby="curriculum-heading" className="relative overflow-hidden py-6 md:py-0 xl:py-4 bg-white">
-      {/* Subtle futuristic grid */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(2,6,23,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(2,6,23,0.035)_1px,transparent_1px)] bg-[size:28px_28px]" />
-      </div>
-
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <header className="mx-auto max-w-3xl text-center">
-          <h2 id="curriculum-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-            {MODULES.length}-Module <span className="text-DS">Curriculum</span>
+    <section id="curriculum" className="py-16 md:py-20 bg-gradient-to-b from-slate-50 to-white">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-16 md:mb-20">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">
+            12-Module <span className="text-orange-600">Curriculum</span>
           </h2>
-          <p className="mt-3 text-base md:text-lg text-slate-700">{subtitle}</p>
+          <p className="text-lg text-slate-600 max-w-4xl mx-auto">
+            {subtitle}
+          </p>
           <p className="sr-only">{keywords}</p>
-
           {/* Micro badges (no color repeats) */}
           <div className="mt-5 grid grid-cols-2 gap-2 text-[11px] font-semibold text-slate-700 sm:grid-cols-6">
             <span className="rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-indigo-900">MySQL & SQL</span>
@@ -148,91 +245,106 @@ export default function CurriculumSection() {
             <span className="rounded-full border border-violet-200 bg-violet-50 px-3 py-1 text-violet-900">Python</span>
             <span className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-rose-900">Stats & ML</span>
           </div>
-        </header>
-
-        {/* Modules grid */}
-        <ol role="list" aria-label="Program modules" className="mx-auto mt-10 grid max-w-5xl grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2">
-          {MODULES.map((m) => (
-            <li key={m.num} className="min-w-0">
-              <article
-                tabIndex={0}
-                className={[
-                  "group relative overflow-hidden rounded-2xl border p-5 md:p-6 shadow-sm backdrop-blur transition-all duration-200",
-                  "hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:-translate-y-0.5",
-                  m.accent.bg,
-                  m.accent.border,
-                  m.accent.ring,
-                ].join(" ")}
-                aria-label={`${m.num} — ${m.title}`}
-                title={m.title}
-              >
-                {/* Top accent bar (explicit class names so Tailwind won't purge) */}
-                <div className={["absolute left-0 top-0 h-1.5 w-full", m.accent.bar].join(" ")} aria-hidden />
-
-                <div className="flex items-start gap-3">
-                  {/* Number badge */}
-                  <div
-                    className={[
-                      "grid h-10 w-10 place-items-center rounded-xl border text-sm font-extrabold shadow-sm bg-white ring-1 ring-black/5",
-                      m.accent.text,
-                      m.accent.border,
-                    ].join(" ")}
-                    aria-label={`Module ${m.num}`}
-                  >
-                    {m.num}
-                  </div>
-
-                  {/* Text block */}
-                  <div className="min-w-0">
-                    <h3 className="text-lg md:text-xl font-bold text-slate-900">{m.title}</h3>
-                    <p className="mt-1 text-sm md:text-base leading-relaxed text-slate-700">{m.outcome}</p>
-                  </div>
-                </div>
-
-                {/* Feature chips */}
-                <div className="mt-4 flex flex-wrap gap-2">
-                  <span className="rounded-md bg-white px-2.5 py-1 text-[11px] font-semibold text-slate-700 ring-1 ring-black/5">
-                    Hands-On Lab
-                  </span>
-                  <span className="rounded-md bg-white px-2.5 py-1 text-[11px] font-semibold text-slate-700 ring-1 ring-black/5">
-                    Best Practices
-                  </span>
-                  <span className={["rounded-md px-2.5 py-1 text-[11px] font-semibold text-white ring-1 ring-black/5", m.accent.bar].join(" ")}>
-                    Mentor Tips
-                  </span>
-                </div>
-
-                {/* Bottom progress (fills on hover for ALL cards) */}
-                <div className="mt-4 h-1 w-full rounded-full bg-white/80" aria-hidden>
-                  <div className={["h-1 w-0 rounded-full transition-[width] duration-500 ease-out group-hover:w-4/5", m.accent.bar].join(" ")} />
-                </div>
-              </article>
-            </li>
-          ))}
-        </ol>
-
-        {/* CTA row */}
-        <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 text-center sm:flex-row">
-          <button
-            className="inline-flex items-center justify-center rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
-            aria-label="Download detailed DS & AI syllabus"
-          >
-            Download Detailed Syllabus (PDF)
-          </button>
-          <Link
-            href="contact-us"
-            className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-indigo-200"
-            aria-label="Apply for the Comprehensive DS & AI program"
-          >
-            Apply Now
-          </Link>
         </div>
 
-        <p className="mx-auto mt-3 max-w-3xl text-center text-[11px] text-slate-500">
-          *Module order may vary slightly by cohort to maximize outcomes.
-        </p>
-      </div>
+        {/* Modules List */}
+        <div className="space-y-4 mb-12">
+          {modules.map((module) => (
+            <div
+              key={module.id}
+              className={`bg-gradient-to-r ${module.color} rounded-xl border-2 border-slate-200 hover:border-orange-300 transition-all duration-300 overflow-hidden`}
+            >
+              {/* Module Header */}
+              <button
+                onClick={() =>
+                  setExpandedModule(expandedModule === module.id ? null : module.id)
+                }
+                className="w-full px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-white/30 transition-colors"
+              >
+                <div className="flex items-center gap-4 text-left">
+                  <span className="text-3xl">{module.icon}</span>
+                  <div>
+                    <h3 className="text-lg font-bold text-slate-900">
+                      Module {module.id}: {module.title}
+                    </h3>
+                    <p className="text-sm text-slate-600 mt-1">{module.duration}</p>
+                  </div>
+                </div>
+                <ChevronDown
+                  className={`w-6 h-6 text-orange-600 transition-transform duration-300 ${expandedModule === module.id ? "rotate-180" : ""
+                    }`}
+                />
+              </button>
 
+              {/* Module Content */}
+              {expandedModule === module.id && (
+                <div className="px-6 pb-6 border-t border-slate-200/50 bg-white/50">
+                  {/* Topics */}
+                  <div className="mb-6">
+                    <h4 className="font-semibold text-slate-900 mb-3 flex items-center gap-2">
+                      <BookOpen className="w-5 h-5 text-orange-600" />
+                      Topics Covered
+                    </h4>
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {module.topics.map((topic, idx) => (
+                        <li key={idx} className="flex items-start gap-3 text-slate-700">
+                          <span className="text-orange-500 font-bold mt-0.5">•</span>
+                          <span>{topic}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Projects */}
+                  {module.projects && module.projects.length > 0 && (
+                    <div>
+                      <h4 className="font-semibold text-slate-900 mb-3 flex items-center gap-2">
+                        <span className="text-2xl">🚀</span>
+                        Hands-On Projects
+                      </h4>
+                      <ul className="space-y-2">
+                        {module.projects.map((project, idx) => (
+                          <li
+                            key={idx}
+                            className="flex items-start gap-3 bg-orange-50 p-3 rounded-lg border border-orange-200"
+                          >
+                            <span className="text-orange-600 font-bold">→</span>
+                            <span className="text-slate-700">{project}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* CTA Section (adapted to match the learning outcomes layout structure) */}
+        <div className="bg-gradient-to-r from-orange-50 to-blue-50 rounded-2xl p-8 md:p-12 border-2 border-orange-200">
+          <div className="flex flex-col items-center justify-center gap-3 text-center">
+            <div className="flex flex-col items-center gap-3 sm:flex-row">
+              <button
+                className="inline-flex items-center justify-center cursor-pointer rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
+                aria-label="Download detailed DS & AI syllabus"
+              >
+                Download Detailed Syllabus (PDF)
+              </button>
+              <Link
+                href="contact-us"
+                className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-orange-200"
+                aria-label="Apply for the Comprehensive DS & AI program"
+              >
+                Apply Now
+              </Link>
+            </div>
+            <p className="mx-auto mt-3 max-w-3xl text-center text-[11px] text-slate-500">
+              *Module order may vary slightly by cohort to maximize outcomes.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
