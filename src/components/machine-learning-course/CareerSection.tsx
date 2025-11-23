@@ -125,7 +125,7 @@ export default function CareerSection() {
                 ].join(" ")}
               >
                 {/* logo */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
+                
                 {/* <Image
                   src={c.logo}
                   alt={c.alt}

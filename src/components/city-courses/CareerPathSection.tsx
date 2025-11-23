@@ -127,17 +127,17 @@ const CareerPathSection = ({ data = mockData }) => {
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 border border-emerald-500/20 rounded-full px-4 py-2 mb-6"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 border border-emerald-500/20 rounded-full px-2 py-1 mb-6"
             variants={itemVariants}
           >
             <Sparkles className="w-4 h-4 text-emerald-400" />
-            <span className="text-emerald-300 font-semibold text-sm uppercase tracking-wider">
+            <span className="text-emerald-300 font-semibold text-[13px] tracking-wider">
               Your Future Awaits
             </span>
           </motion.div>
 
           <motion.h2
-            className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight"
+            className="text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6 leading-tight"
             variants={itemVariants}
           >
             {careerPathContent.title}
@@ -163,7 +163,7 @@ const CareerPathSection = ({ data = mockData }) => {
 
         {/* Career Paths Grid */}
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-16"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-16"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -311,7 +311,7 @@ const CareerPathSection = ({ data = mockData }) => {
                 section.scrollIntoView({ behavior: 'smooth', block: 'start' });
               }
             }}
-              className="px-6 md:px-10 py-3 md:py-4 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-bold rounded-xl hover:shadow-2xl hover:shadow-cyan-500/30 transition-all duration-300 inline-flex items-center gap-2 text-sm md:text-base group"
+              className="px-6 md:px-10 py-3 md:py-4 cursor-pointer bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-bold rounded-xl hover:shadow-2xl hover:shadow-cyan-500/30 transition-all duration-300 inline-flex items-center gap-2 text-sm md:text-base group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

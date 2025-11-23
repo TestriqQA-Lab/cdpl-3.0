@@ -76,7 +76,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ data }) => {
   };
 
   return (
-    <section className="relative py-20 md:py-32 bg-white overflow-hidden">
+    <section className="relative py-8 md:py-16 bg-white overflow-hidden">
       {/* Subtle Background Pattern */}
       <div className="absolute inset-0 pointer-events-none opacity-30">
         <div className="absolute top-0 left-0 w-96 h-96 bg-cyan-50 rounded-full mix-blend-multiply filter blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
@@ -93,14 +93,14 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ data }) => {
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-50 text-cyan-700 rounded-full text-sm font-semibold mb-4 border border-cyan-200 shadow-sm"
+            className="inline-flex items-center gap-2 px-2 py-1 bg-cyan-50 text-cyan-700 rounded-full text-[13px] font-semibold mb-4 border border-cyan-200 shadow-sm"
             variants={itemVariants}
           >
             <Code2 className="w-4 h-4" />
             Hands-On Projects
           </motion.div>
           <motion.h2
-            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-4 tracking-tight"
+            className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight"
             variants={itemVariants}
           >
             {projectsContent.title}
@@ -115,7 +115,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ data }) => {
 
         {/* Projects Grid */}
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10 mb-20"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 mb-20"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"

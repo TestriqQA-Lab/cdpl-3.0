@@ -2,7 +2,8 @@
 
 import React from "react";
 import { easeOut, motion } from "framer-motion";
-import { Award, Users, Clock, MapPin, Star, Sparkles } from "lucide-react";
+import { Award, Users, Clock, MapPin, Sparkles } from "lucide-react";
+import ReviewsMarquee from "../sections/ReviewMarque";
 
 interface Reason {
   icon: "Award" | "Users" | "Clock" | "MapPin" | string;
@@ -99,14 +100,8 @@ const WhyChooseSection: React.FC<WhyChooseSectionProps> = ({ data = mockData }) 
     visible: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: easeOut } },
   };
 
-  // --- ⭐ SAFE RATING SANITIZATION ---
-  const rawRating = whyChooseContent?.testimonial?.rating;
-  const parsed = Number(rawRating); // handles "5", "4.5", null, etc.
-  const safeRating =
-    Number.isFinite(parsed) ? Math.max(0, Math.min(5, Math.floor(parsed))) : 0;
-
   return (
-    <section className="relative py-16 sm:py-20 lg:py-28 bg-gradient-to-b from-slate-50 via-white to-slate-50 overflow-hidden">
+    <section className="relative py-8 md:py-16 lg:py-28 bg-gradient-to-b from-slate-50 via-white to-slate-50 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-emerald-200/30 to-teal-200/30 rounded-full blur-3xl" />
@@ -124,17 +119,17 @@ const WhyChooseSection: React.FC<WhyChooseSectionProps> = ({ data = mockData }) 
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-full mb-4 sm:mb-6"
+            className="inline-flex items-center gap-2 px-2 py-1 bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-full mb-4 sm:mb-6"
             variants={itemVariants}
           >
             <Sparkles className="w-4 h-4 text-emerald-600" />
-            <span className="text-emerald-700 font-semibold text-sm uppercase tracking-wide">
+            <span className="text-emerald-700 font-semibold text-[13px] uppercase tracking-wide">
               Why Choose Us
             </span>
           </motion.div>
 
           <motion.h2
-            className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight"
+            className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight"
             variants={itemVariants}
           >
             {whyChooseContent?.title ?? "Why Choose Us"}
@@ -148,9 +143,12 @@ const WhyChooseSection: React.FC<WhyChooseSectionProps> = ({ data = mockData }) 
           </motion.p>
         </motion.div>
 
+        {/* Marquee Review */}
+        <ReviewsMarquee />
+
         {/* Reasons Grid */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 lg:gap-7 mb-12 sm:mb-16 lg:mb-20"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 lg:gap-7 mt-10 mb-12 sm:mb-16 lg:mb-20"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -194,72 +192,6 @@ const WhyChooseSection: React.FC<WhyChooseSectionProps> = ({ data = mockData }) 
             </motion.div>
           ))}
         </motion.div>
-
-        {/* Testimonial Section (only if present) */}
-        {whyChooseContent?.testimonial && (
-          <motion.div
-            className="relative mb-12 sm:mb-16 lg:mb-20"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-          >
-            <div className="relative bg-gradient-to-br from-emerald-600 via-teal-600 to-blue-600 rounded-3xl p-8 sm:p-12 lg:p-16 overflow-hidden shadow-2xl">
-              <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-0 right-0 w-64 sm:w-96 h-64 sm:h-96 bg-white rounded-full blur-3xl" />
-                <div className="absolute bottom-0 left-0 w-48 sm:w-80 h-48 sm:h-80 bg-white rounded-full blur-3xl" />
-              </div>
-
-              <div className="relative z-10 max-w-4xl mx-auto text-center">
-                {/* Stars */}
-                {safeRating > 0 && (
-                  <motion.div
-                    className="flex justify-center gap-1.5 sm:gap-2 mb-6 sm:mb-8"
-                    variants={itemVariants}
-                  >
-                    {Array.from({ length: safeRating }).map((_, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, scale: 0 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: i * 0.1, duration: 0.3 }}
-                      >
-                        <Star className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-300 fill-yellow-300" />
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                )}
-
-                {/* Text */}
-                {whyChooseContent.testimonial?.text && (
-                  <motion.p
-                    className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-6 sm:mb-8 leading-relaxed"
-                    variants={itemVariants}
-                  >
-                    &quot;{whyChooseContent.testimonial.text}&quot;
-                  </motion.p>
-                )}
-
-                {/* Author */}
-                {(whyChooseContent.testimonial?.author ||
-                  whyChooseContent.testimonial?.role) && (
-                    <motion.div className="space-y-1 sm:space-y-2" variants={itemVariants}>
-                      {whyChooseContent.testimonial?.author && (
-                        <p className="text-base sm:text-lg font-bold text-white">
-                          {whyChooseContent.testimonial.author}
-                        </p>
-                      )}
-                      {whyChooseContent.testimonial?.role && (
-                        <p className="text-sm sm:text-base text-emerald-100">
-                          {whyChooseContent.testimonial.role}
-                        </p>
-                      )}
-                    </motion.div>
-                  )}
-              </div>
-            </div>
-          </motion.div>
-        )}
 
         {/* Stats Section */}
         <motion.div

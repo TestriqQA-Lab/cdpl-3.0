@@ -91,7 +91,7 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
             <Zap className="h-4 w-4" />
             Curriculum Matrix
           </motion.p>
-          <motion.h2 className="mt-4 text-3xl md:text-5xl font-bold tracking-tight text-slate-900" variants={itemVariants}>
+          <motion.h2 className="mt-4 text-3xl md:text-4xl font-bold tracking-tight text-slate-900" variants={itemVariants}>
             {curriculumContent.title}
           </motion.h2>
           {curriculumContent.subtitle && (
@@ -129,7 +129,6 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
                     onClick={() => setActiveTrack(i)}
                     title={t.title}
                     className={[
-                      // layout — allow content-based width and wrapping
                       "flex items-center justify-center text-center",
                       "flex-none max-w-full px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 rounded-lg",
                       "text-sm font-bold leading-tight whitespace-normal break-words hyphens-auto text-pretty",
@@ -139,7 +138,7 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
                         : ["bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200/70", variant.hoverBorder].join(" "),
                     ].join(" ")}
                   >
-                    <span className="block">{t.title}</span>
+                    <span className="block break-words w-full">{t.title}</span>
                   </button>
                 );
               })}
@@ -170,33 +169,37 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
                 id={`track-panel-${current.id ?? activeTrack}`}
                 role="tabpanel"
                 aria-labelledby={`track-tab-${current.id ?? activeTrack}`}
-                className="rounded-xl border border-slate-200 bg-slate-50 p-4 sm:p-6 lg:p-8 shadow-xl shadow-slate-200/50"
+                className="rounded-xl border border-slate-200 bg-slate-50 p-4 sm:p-6 lg:p-8 shadow-xl shadow-slate-200/50 overflow-hidden"
               >
                 {/* Curriculum List/Table */}
                 <div className="space-y-6">
                   {current.weeks.map((w: Week, idx: number) => (
                     <div
                       key={idx}
-                      className="p-4 sm:p-6 rounded-xl bg-white border border-slate-100 hover:border-slate-300 transition-all duration-300 shadow-md"
+                      className="p-4 sm:p-6 rounded-xl bg-white border border-slate-100 hover:border-slate-300 transition-all duration-300 shadow-md overflow-hidden"
                     >
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
                         {/* Week/Module Number */}
                         <div className="flex-shrink-0">
                           <span
-                            className={`inline-flex items-center justify-center h-10 w-10 rounded-full text-base font-bold ${currentVariant.activeBg} ${currentVariant.activeText}`}
+                            className={`inline-flex items-center justify-center h-13 w-13 rounded-full text-base font-bold ${currentVariant.activeBg} ${currentVariant.activeText}`}
                           >
                             {w.number || String(idx + 1)}
                           </span>
                         </div>
 
-                        {/* Module Title and Description */}
-                        <div className="flex-grow min-w-0 sm:w-1/2">
-                          <h3 className="text-xl font-semibold text-slate-900">{w.title}</h3>
-                          <p className="mt-2 text-base text-slate-700">{w.description}</p>
+                        {/* Module Title and Description – Fixed overflow */}
+                        <div className="flex-grow min-w-0"> {/* min-w-0 is critical */}
+                          <h3 className="text-xl font-semibold text-slate-900 break-words">
+                            {w.title}
+                          </h3>
+                          <p className="mt-2 text-base text-slate-700 break-words">
+                            {w.description}
+                          </p>
                         </div>
 
-                        {/* Deliverables */}
-                        <div className="flex-shrink-0 sm:w-1/3">
+                        {/* Deliverables – Fixed overflow */}
+                        <div className="flex-shrink-0 min-w-0"> {/* min-w-0 added */}
                           <div className="text-sm font-semibold uppercase text-slate-500 mb-2 border-b border-slate-100 pb-1">
                             Key Deliverables
                           </div>
@@ -205,7 +208,7 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
                               {w.deliverables.map((d: string, i: number) => (
                                 <li key={i} className="flex items-start gap-2 text-sm text-slate-800">
                                   <CheckCircle2 className={`mt-0.5 h-4 w-4 flex-shrink-0 ${currentVariant.accentColor}`} />
-                                  <span>{d}</span>
+                                  <span className="break-words min-w-0">{d}</span>
                                 </li>
                               ))}
                             </ul>

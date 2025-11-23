@@ -82,17 +82,17 @@ const FAQSection: React.FC<FAQSectionProps> = ({ data = mockData }) => {
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-100 to-teal-100 rounded-full mb-6"
+            className="inline-flex items-center gap-2 px-2 py-1 bg-gradient-to-r from-emerald-100 to-teal-100 rounded-full mb-6"
             variants={itemVariants}
           >
             <Sparkles className="w-4 h-4 text-emerald-600" />
-            <span className="text-sm font-semibold text-emerald-700 uppercase tracking-wide">
+            <span className="text-sm font-semibold text-emerald-700 tracking-wide">
               Questions & Answers
             </span>
           </motion.div>
 
           <motion.h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight"
+            className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight"
             variants={itemVariants}
           >
             {faqsContent.title}
@@ -124,7 +124,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({ data = mockData }) => {
                 onClick={() =>
                   setExpandedFAQ(expandedFAQ === index ? null : index)
                 }
-                className="w-full text-left"
+                className="w-full text-left cursor-pointer"
               >
                 <div className="relative bg-white border-2 border-gray-200 rounded-2xl p-5 md:p-6 transition-all duration-300 hover:border-emerald-400 hover:shadow-xl hover:shadow-emerald-100/50 overflow-hidden group">
                   {/* Gradient Hover Effect */}
@@ -216,7 +216,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({ data = mockData }) => {
                 </Link>
 
                 <Link
-                  href="https://calendar.app.google/14RAvFHwRASBBfyc9"
+                  href="https://calendar.app.google/tvh9dsXZsX9BujRR8"
                   className="group px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2">
                   <Calendar className="w-5 h-5 group-hover:scale-110 transition-transform" />
                   <span>Schedule a Call</span>

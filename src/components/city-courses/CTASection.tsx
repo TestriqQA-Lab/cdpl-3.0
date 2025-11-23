@@ -144,7 +144,7 @@ const CTASection: React.FC<CTASectionProps> = ({ data }) => {
             >
               <button
                 onClick={() => setIsPopupOpen(true)}
-                className="group inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-8 py-3.5 font-semibold text-white shadow-lg transition hover:shadow-xl"
+                className="group inline-flex items-center justify-center cursor-pointer rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-8 py-3.5 font-semibold text-white shadow-lg transition hover:shadow-xl"
               >
                 Enroll Now
                 <ArrowRight className="ml-2 h-5 w-5 transition group-hover:translate-x-0.5" />
@@ -185,7 +185,7 @@ const CTASection: React.FC<CTASectionProps> = ({ data }) => {
               </div>
 
               {/* Email */}
-              <div className="group rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow-md">
+              <div className="group rounded-xl border border-slate-200 bg-white p-4 lg:p-2 xl:p-4 shadow-sm transition hover:shadow-md">
                 <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-500">
                   <Mail className="h-5 w-5 text-white" />
                 </div>
@@ -194,7 +194,7 @@ const CTASection: React.FC<CTASectionProps> = ({ data }) => {
                 </p>
                 <Link
                   href={`mailto:${ctaContent.contactInfo.email}`}
-                  className="mt-1 block text-sm font-semibold text-slate-900 transition group-hover:text-indigo-600"
+                  className="mt-1 block text-sm lg:text-xs xl:text-sm font-semibold text-slate-900 transition group-hover:text-indigo-600"
                 >
                   {ctaContent.contactInfo.email}
                 </Link>

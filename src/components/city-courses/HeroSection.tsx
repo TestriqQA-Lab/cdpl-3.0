@@ -131,7 +131,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
             </motion.h1>
 
             {/* Mobile form uses reusable LeadForm */}
-            <div className="md:hidden">
+            <div className="md:hidden mt-6">
               <LeadForm
                 variants={itemVariants}
                 tracks={data.specializations && data.specializations.length ? data.specializations : undefined}
@@ -192,7 +192,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
             <motion.div variants={itemVariants} className="mt-8 flex flex-col gap-3 sm:flex-row">
               <button
                 onClick={() => setIsPopupOpen(true)}
-                className="group inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-3 font-semibold text-white shadow-md transition hover:shadow-lg"
+                className="group inline-flex items-center justify-center cursor-pointer rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-3 font-semibold text-white shadow-md transition hover:shadow-lg"
               >
                 Enroll Now
                 <ArrowRight className="ml-2 h-5 w-5 transition group-hover:translate-x-0.5" />

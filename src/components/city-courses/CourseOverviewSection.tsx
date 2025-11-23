@@ -201,37 +201,39 @@ const ModuleCard: React.FC<{
               Limited-time offer ends in
             </p>
 
+            {/* ← THIS IS THE ONLY PART THAT CHANGED */}
             <div
-              className="grid grid-cols-3 gap-3 text-center"
+              className="grid grid-cols-3 gap-2 sm:gap-3 text-center"
               role="timer"
               aria-live="polite"
               aria-atomic="true"
             >
-              <div className="rounded-lg bg-white shadow-sm p-3">
-                <div className="text-xl font-bold text-slate-900 tabular-nums">
+              <div className="rounded-lg bg-white shadow-sm p-2 sm:p-3">
+                <div className="text-lg sm:text-xl font-bold text-slate-900 tabular-nums">
                   {hours}
                 </div>
-                <div className="text-[10px] text-slate-500 tracking-wide uppercase">
+                <div className="text-[9px] sm:text-[10px] text-slate-500 tracking-wide uppercase mt-0.5">
                   Hours
                 </div>
               </div>
-              <div className="rounded-lg bg-white shadow-sm p-3">
-                <div className="text-xl font-bold text-slate-900 tabular-nums">
+              <div className="rounded-lg bg-white shadow-sm p-2 sm:p-3">
+                <div className="text-lg sm:text-xl font-bold text-slate-900 tabular-nums">
                   {minutes}
                 </div>
-                <div className="text-[10px] text-slate-500 tracking-wide uppercase">
+                <div className="text-[9px] sm:text-[10px] text-slate-500 tracking-wide uppercase mt-0.5">
                   Minutes
                 </div>
               </div>
-              <div className="rounded-lg bg-white shadow-sm p-3">
-                <div className="text-xl font-bold text-slate-900 tabular-nums">
+              <div className="rounded-lg bg-white shadow-sm p-2 sm:p-3">
+                <div className="text-lg sm:text-xl font-bold text-slate-900 tabular-nums">
                   {seconds}
                 </div>
-                <div className="text-[10px] text-slate-500 tracking-wide uppercase">
+                <div className="text-[9px] sm:text-[10px] text-slate-500 tracking-wide uppercase mt-0.5">
                   Seconds
                 </div>
               </div>
             </div>
+            {/* ← END OF CHANGE */}
 
             {isOver && (
               <p className="mt-2 text-xs text-red-600 font-semibold">
@@ -317,7 +319,7 @@ const CourseOverviewSection: React.FC<CourseOverviewSectionProps> = ({ data }) =
             Course Structure
           </motion.p>
           <motion.h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 mb-4"
+            className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4"
             variants={itemVariants}
           >
             {courseOverviewContent.title}
@@ -398,7 +400,7 @@ const CourseOverviewSection: React.FC<CourseOverviewSectionProps> = ({ data }) =
                 section.scrollIntoView({ behavior: 'smooth', block: 'start' });
               }
             }}
-            className="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-indigo-600 to-fuchsia-600 text-white font-semibold rounded-xl hover:shadow-xl transition-all duration-300 inline-flex items-center gap-2"
+            className="px-6 sm:px-8 py-3 sm:py-4 cursor-pointer bg-gradient-to-r from-indigo-600 to-fuchsia-600 text-white font-semibold rounded-xl hover:shadow-xl transition-all duration-300 inline-flex items-center gap-2"
           >
             View Full Curriculum
             <ArrowRight className="w-5 h-5" />
