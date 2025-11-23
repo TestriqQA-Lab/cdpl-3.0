@@ -1,6 +1,11 @@
+"use client";
 /* ==================== LEARNING PATH (Light Theme, SEO-Optimized) ==================== */
 import { CheckCircle2, Clock, Rocket, BookOpen, ClipboardList, Bug, Briefcase, ShieldCheck, Target, Sparkles } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
+import CallbackModal from "@/components/CallbackModal";
+import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
+import EnrollModal from "@/components/EnrollModal";
 
 const ACCENTS = ["cyan", "indigo", "emerald", "rose"] as const;
 type Accent = typeof ACCENTS[number];
@@ -45,6 +50,10 @@ const COLOR_MAP: Record<Accent, {
 };
 
 export default function LearningPath() {
+  const [isCallbackModalOpen, setIsCallbackModalOpen] = useState(false);
+  const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+
   const phases = [
     {
       id: "phase-1",
@@ -182,13 +191,13 @@ export default function LearningPath() {
                     <Clock className="w-4 h-4" aria-hidden="true" />
                     <span>{p.title.split("•")[1]?.trim() ?? "Weeks"}</span>
                   </div>
-                  <Link
-                    href="contact-us"
-                    className={`inline-flex items-center gap-2 text-sm font-medium text-white hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg px-3 py-2 ${p.accent === "cyan" ? "bg-cyan-600 focus:ring-cyan-500" : p.accent === "indigo" ? "bg-indigo-600 focus:ring-indigo-500" : p.accent === "emerald" ? "bg-emerald-600 focus:ring-emerald-500" : "bg-rose-600 focus:ring-rose-500"}`}
-                    aria-label={`Explore ${p.title}`}
+                  <button
+                    onClick={() => setIsCallbackModalOpen(true)}
+                    className={`cursor-pointer inline-flex items-center gap-2 text-sm font-medium text-white hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg px-3 py-2 ${p.accent === "cyan" ? "bg-cyan-600 focus:ring-cyan-500" : p.accent === "indigo" ? "bg-indigo-600 focus:ring-indigo-500" : p.accent === "emerald" ? "bg-emerald-600 focus:ring-emerald-500" : "bg-rose-600 focus:ring-rose-500"}`}
+                    aria-label={`Request callback for ${p.title}`}
                   >
                     Explore <Target className="w-4 h-4" aria-hidden="true" />
-                  </Link>
+                  </button>
                 </div>
               </li>
             );
@@ -255,7 +264,8 @@ export default function LearningPath() {
               <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 mt-0.5" /> Capstone project with repository</li>
             </ul>
             <button
-              className="mt-4 inline-flex items-center gap-2 text-sm font-medium bg-blue-800 text-white hover:bg-emerald-900 transition focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 rounded-lg px-3 py-2 border border-emerald-200"
+              onClick={() => setIsSyllabusModalOpen(true)}
+              className="cursor-pointer mt-4 inline-flex items-center gap-2 text-sm font-medium bg-blue-800 text-white hover:bg-emerald-900 transition focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 rounded-lg px-3 py-2 border border-emerald-200"
             >
               Download Syllabus
             </button>
@@ -264,18 +274,32 @@ export default function LearningPath() {
 
         {/* Soft CTA */}
         <div className="mt-10 text-center">
-          <Link
-            href="contact-us"
-            className="inline-flex items-center gap-2 rounded-xl border border-gray-300 bg-red-800 px-6 py-3 text-base font-semibold text-white hover:bg-red-700 transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+          <button
+            onClick={() => setIsEnrollModalOpen(true)}
+            className="cursor-pointer inline-flex items-center gap-2 rounded-xl border border-gray-300 bg-indigo-700 px-6 py-3 text-base font-semibold text-white hover:bg-indigo-800 transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
           >
             Start Your QA Journey <ArrowRightTiny />
-          </Link>
+          </button>
           <p className="mt-3 text-sm text-gray-600">
             Cohort starts monthly • Live sessions + recorded classes • Certificates on completion
           </p>
         </div>
       </div>
 
+      <CallbackModal
+        isOpen={isCallbackModalOpen}
+        onClose={() => setIsCallbackModalOpen(false)}
+      />
+      <SyllabusDownloadModal
+        isOpen={isSyllabusModalOpen}
+        onClose={() => setIsSyllabusModalOpen(false)}
+        courseName="Manual Testing"
+      />
+      <EnrollModal
+        isOpen={isEnrollModalOpen}
+        onClose={() => setIsEnrollModalOpen(false)}
+        courseName="Manual Testing"
+      />
     </section>
   );
 }

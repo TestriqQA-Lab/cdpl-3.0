@@ -17,6 +17,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
+import CareerSessionModal from "@/components/CareerSessionModal";
 
 type Course = {
   slug: string;
@@ -244,7 +246,7 @@ const SparkLine = () => (
 );
 
 export default function OtherCoursesSection() {
-
+  const [isCareerModalOpen, setIsCareerModalOpen] = useState(false);
 
   return (
     <section className="py-10 md:py-10 bg-white" id="other-courses" aria-label="Other professional software testing courses">
@@ -325,17 +327,20 @@ export default function OtherCoursesSection() {
           <p className="mt-2 text-neutral-700">
             Talk to a mentor for a personalized **career roadmap** based on your experience and goals.
           </p>
-          <Link
-            href="contact-us"
-            className="mt-4 inline-flex items-center gap-2 rounded-xl bg-neutral-900 px-5 py-3 text-sm font-semibold text-white hover:bg-neutral-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-700 focus-visible:ring-offset-2"
+          <button
+            onClick={() => setIsCareerModalOpen(true)}
+            className="cursor-pointer mt-4 inline-flex items-center gap-2 rounded-xl bg-neutral-900 px-5 py-3 text-sm font-semibold text-white hover:bg-neutral-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-700 focus-visible:ring-offset-2"
           >
             Get Free Counselling
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
+          </button>
         </div>
       </div>
 
-
+      <CareerSessionModal
+        isOpen={isCareerModalOpen}
+        onClose={() => setIsCareerModalOpen(false)}
+      />
     </section>
   );
 }

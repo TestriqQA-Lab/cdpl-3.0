@@ -1,6 +1,10 @@
+"use client";
+
 // components/ComparisonSection.tsx
 import Link from "next/link";
 import * as React from "react";
+import { useState } from "react";
+import EnrollModal from "@/components/EnrollModal";
 
 type Badge = { label: string; colorClasses: string };
 
@@ -118,7 +122,7 @@ const Dot = ({ className = "bg-indigo-600" }: { className?: string }) => (
 export default function ComparisonSection({
   className = "",
 }: ComparisonSectionProps) {
-
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
 
   return (
     <section className={`py-10 md:py-20 bg-white ${className}`} id="comparison" aria-labelledby="comparison-heading">
@@ -227,7 +231,8 @@ export default function ComparisonSection({
               </ul>
               <div className="mt-6 flex flex-col sm:flex-row sm:items-center gap-3">
                 <button
-                  className="inline-flex justify-center rounded-xl bg-indigo-600 px-5 py-3 text-white font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200"
+                  onClick={() => setIsEnrollModalOpen(true)}
+                  className="cursor-pointer inline-flex justify-center rounded-xl bg-indigo-600 px-5 py-3 text-white font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200"
                 >
                   Enroll Now — Become a QA Tester
                 </button>
@@ -291,6 +296,12 @@ export default function ComparisonSection({
         {/* Structured Data for SEO */}
 
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollModalOpen}
+        onClose={() => setIsEnrollModalOpen(false)}
+        courseName="Manual Testing"
+      />
     </section>
   );
 }

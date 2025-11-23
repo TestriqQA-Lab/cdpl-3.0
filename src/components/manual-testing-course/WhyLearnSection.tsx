@@ -1,4 +1,5 @@
 /* ==================== WHY LEARN (Manual Testing 2025) ==================== */
+"use client";
 
 import {
     TrendingUp,
@@ -15,6 +16,8 @@ import {
 } from "lucide-react";
 
 import Link from "next/link";
+import { useState } from "react";
+import EnrollModal from "@/components/EnrollModal";
 
 type BenefitCardProps = {
     icon: React.ReactNode;
@@ -73,6 +76,8 @@ function BenefitCard({
 }
 
 export default function WhyLearnSection() {
+    const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+
     return (
         <section
             className="py-5 md:py-10 bg-gradient-to-b from-white to-indigo-50"
@@ -231,12 +236,12 @@ export default function WhyLearnSection() {
                             >
                                 View curriculum <ArrowRight className="h-4 w-4" />
                             </Link>
-                            <Link
-                                href="contact-us"
-                                className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700"
+                            <button
+                                onClick={() => setIsEnrollModalOpen(true)}
+                                className="cursor-pointer inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700 transition-colors"
                             >
                                 Apply now
-                            </Link>
+                            </button>
                         </div>
                     </div>
 
@@ -295,6 +300,13 @@ export default function WhyLearnSection() {
                 </p>
             </div>
 
-        </section>
+
+
+            <EnrollModal
+                isOpen={isEnrollModalOpen}
+                onClose={() => setIsEnrollModalOpen(false)}
+                courseName="Manual Testing"
+            />
+        </section >
     );
 }

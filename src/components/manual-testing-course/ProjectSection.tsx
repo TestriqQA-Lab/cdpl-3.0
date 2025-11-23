@@ -12,7 +12,8 @@ import {
     GraduationCap,
 } from "lucide-react";
 import Link from "next/link";
-import type { JSX } from "react";
+import { useState, type JSX } from "react";
+import EnrollModal from "@/components/EnrollModal";
 
 
 type AccentColor = "indigo" | "emerald" | "sky" | "amber" | "rose" | "violet";
@@ -32,6 +33,7 @@ type Project = {
 
 type ProjectCardProps = {
     project: Project;
+    onEnroll: () => void;
 };
 
 const accentClasses: Record<AccentColor, string> = {
@@ -49,7 +51,7 @@ const accentClasses: Record<AccentColor, string> = {
         "border-violet-200 hover:shadow-violet-100 [&_.chip]:bg-violet-50 [&_.chip]:text-violet-700 [&_.dot]:bg-violet-500",
 };
 
-const ProjectCard = ({ project }: ProjectCardProps) => {
+const ProjectCard = ({ project, onEnroll }: ProjectCardProps) => {
     const colorClass = accentClasses[project.color];
 
     return (
@@ -114,15 +116,15 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
                 </ul>
             </div>
 
-            <div className="flex items-center justify-between">
-                <Link
-                    href="contact-us"
-                    className="rounded-lg px-3.5 py-2 text-sm font-semibold text-white transition"
+            <div className="flex items-center justify-center mt-auto pt-6">
+                <button
+                    onClick={onEnroll}
+                    className="cursor-pointer w-full rounded-xl py-3 text-sm font-bold text-white transition shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]"
                     style={{ backgroundColor: "var(--btn-color, #111827)" }}
                     aria-label={`Start ${project.title} project`}
                 >
                     Start Project
-                </Link>
+                </button>
             </div>
             <meta itemProp="educationalUse" content="Practical, Portfolio, Job-Ready" />
         </article>
@@ -235,6 +237,7 @@ const projects: Project[] = [
 ];
 
 export default function ProjectsSection(): JSX.Element {
+    const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
 
 
     return (
@@ -282,11 +285,21 @@ export default function ProjectsSection(): JSX.Element {
                 {/* Grid */}
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {projects.map((p) => (
-                        <ProjectCard key={p.title} project={p} />
+                        <ProjectCard
+                            key={p.title}
+                            project={p}
+                            onEnroll={() => setIsEnrollModalOpen(true)}
+                        />
                     ))}
                 </div>
 
             </div>
-        </section>
+
+            <EnrollModal
+                isOpen={isEnrollModalOpen}
+                onClose={() => setIsEnrollModalOpen(false)}
+                courseName="Manual Testing Projects"
+            />
+        </section >
     );
 }

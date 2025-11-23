@@ -11,9 +11,13 @@ import { isValidPhoneNumber } from 'libphonenumber-js';
 export default function LeadForm({
   className = '',
   variant = 'elevated',
+  title = 'Request a Callback',
+  subtitle = 'Want to know exactly how much it costs & when the next batch starts? Tell us where to call you!'
 }: {
   className?: string;
   variant?: 'default' | 'elevated';
+  title?: string;
+  subtitle?: string;
 }) {
   // Form state
   const [formData, setFormData] = useState({
@@ -203,12 +207,12 @@ export default function LeadForm({
         <div className="mb-6">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-xl font-bold text-slate-900">
-              Request a Callback
+              {title}
             </h3>
 
           </div>
           <p className="text-xs text-slate-600 mt-1">
-            Want to know exactly how much it costs & when the next batch starts? Tell us where to call you!
+            {subtitle}
           </p>
         </div>
 
@@ -245,9 +249,8 @@ export default function LeadForm({
                 onChange={handleInputChange}
                 onBlur={() => validateFullName(formData.fullName)}
                 required
-                className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${
-                  fullNameError ? 'border-red-500' : 'border-gray-300'
-                }`}
+                className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${fullNameError ? 'border-red-500' : 'border-gray-300'
+                  }`}
                 placeholder="Enter your full name"
                 style={{ color: '#1e293b' }}
               />
@@ -271,9 +274,8 @@ export default function LeadForm({
                 onChange={handleInputChange}
                 onBlur={() => validateEmail(formData.email)}
                 required
-                className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${
-                  emailError ? 'border-red-500' : 'border-gray-300'
-                }`}
+                className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${emailError ? 'border-red-500' : 'border-gray-300'
+                  }`}
                 placeholder="Enter your email address"
                 style={{ color: '#1e293b' }}
               />
@@ -295,9 +297,8 @@ export default function LeadForm({
                 value={formData.phone}
                 onChange={handlePhoneChange}
                 onBlur={() => validatePhoneNumber(formData.phone)}
-                className={`phone-input-container ${
-                  phoneError ? 'border-red-500' : ''
-                }`}
+                className={`phone-input-container ${phoneError ? 'border-red-500' : ''
+                  }`}
                 placeholder="Enter phone number"
               />
             </div>
@@ -325,10 +326,10 @@ export default function LeadForm({
             )}
           </button>
 
-<p className="text-xs text-slate-500">
-          By submitting, you agree to our <a href="https://cinutedigital.com/privacy-policy">Privacy Policy</a>.
-        </p>
-         
+          <p className="text-xs text-slate-500">
+            By submitting, you agree to our <a href="https://cinutedigital.com/privacy-policy">Privacy Policy</a>.
+          </p>
+
         </div>
       </form>
     </>

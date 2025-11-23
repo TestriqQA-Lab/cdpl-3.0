@@ -1,3 +1,5 @@
+"use client";
+
 /* ==================== CAREER & SALARY (Light Theme) ==================== */
 
 import {
@@ -13,9 +15,13 @@ import {
   ShieldCheck,
   Globe2,
   PhoneIcon,
+  CloudDownload,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import CareerSessionModal from "@/components/CareerSessionModal";
+import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
 
 /* ---------- Local, strongly-typed UI primitives ---------- */
 type JobRoleProps = { role: string; salary: string; keywords?: string[] };
@@ -102,6 +108,9 @@ const PlacementFeature = ({ icon, title, description, badge }: FeatureProps) => 
 type Company = { name: string; logoSrc?: string };
 
 export default function CareerSection() {
+  const [isCareerModalOpen, setIsCareerModalOpen] = useState(false);
+  const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
+
   const companies: Company[] = [
     { name: "Axiom", logoSrc: "/company_images/axiom.webp" },
     { name: "Credility", logoSrc: "/company_images/credility.webp" },
@@ -304,16 +313,17 @@ export default function CareerSection() {
 
           {/* CTA */}
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link
-              href="contact-us"
-              className="inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-5 py-3 text-white font-semibold hover:bg-indigo-700"
+            <button
+              onClick={() => setIsCareerModalOpen(true)}
+              className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-5 py-3 text-white font-semibold hover:bg-indigo-700"
             >
               Get Free Career Session <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
+            </button>
             <button
-              className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-gray-900 font-semibold hover:bg-gray-50"
+              onClick={() => setIsSyllabusModalOpen(true)}
+              className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-gray-900 font-semibold hover:bg-gray-50 hover:text-indigo-700 hover:border-indigo-700"
             >
-              Download Syllabus
+              Download Syllabus <CloudDownload className="ml-2 h-4 w-4" />
             </button>
           </div>
         </div>
@@ -340,6 +350,16 @@ export default function CareerSection() {
           </div>
         </div>
       </div>
+
+      <CareerSessionModal
+        isOpen={isCareerModalOpen}
+        onClose={() => setIsCareerModalOpen(false)}
+      />
+      <SyllabusDownloadModal
+        isOpen={isSyllabusModalOpen}
+        onClose={() => setIsSyllabusModalOpen(false)}
+        courseName="Manual Testing"
+      />
     </section>
   );
 }

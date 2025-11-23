@@ -6,6 +6,7 @@ import {
   CreditCard, BookOpen, Globe, Headphones, GraduationCap
 } from "lucide-react";
 import Link from "next/link";
+import EnrollModal from "@/components/EnrollModal";
 
 /* =========================
    Types
@@ -254,6 +255,7 @@ export default function FaqSection() {
   const [query, setQuery] = useState("");
   void setQuery;
   const [activeCat, setActiveCat] = useState<QA["category"] | "All">("All");
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
 
   const categories: (QA["category"] | "All")[] = ["All", ...categoryOrder];
 
@@ -364,7 +366,10 @@ export default function FaqSection() {
               <Link href="contact-us" className="inline-flex items-center justify-center rounded-xl border border-indigo-300 bg-white px-4 py-2.5 text-sm font-semibold text-indigo-700 hover:bg-indigo-100">
                 Contact Us
               </Link>
-              <button className="inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700">
+              <button
+                onClick={() => setIsEnrollModalOpen(true)}
+                className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700"
+              >
                 Apply Now
               </button>
             </div>
@@ -372,7 +377,11 @@ export default function FaqSection() {
         </div>
       </div>
 
-
+      <EnrollModal
+        isOpen={isEnrollModalOpen}
+        onClose={() => setIsEnrollModalOpen(false)}
+        courseName="Manual Testing"
+      />
     </section>
   );
 }
