@@ -107,7 +107,6 @@ const BlogContentRenderer: React.FC<BlogContentRendererProps> = ({ slug }) => {
                 src={section.image}
                 alt={section.title}
                 fill
-                className="object-cover"
                 sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 85vw, 1200px"
                 priority={index === 0}
               />

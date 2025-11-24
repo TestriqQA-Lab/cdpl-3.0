@@ -77,7 +77,7 @@ const BlogArticleList = () => {
                               src={post.featuredImage}
                               alt={post.title}
                               fill
-                              className="object-cover group-hover:scale-105 transition-transform duration-500"
+                              className="group-hover:scale-105 transition-transform duration-500"
                               sizes="(max-width: 768px) 100vw, 320px"
                               quality={85}
                             />
@@ -86,7 +86,7 @@ const BlogArticleList = () => {
                               src={getFallbackImage(post.categoryId)}
                               alt={post.title}
                               fill
-                              className="object-cover"
+                              className=""
                               sizes="(max-width: 768px) 100vw, 320px"
                             />
                           )}
@@ -143,7 +143,7 @@ const BlogArticleList = () => {
               <div className="flex justify-center mt-10">
                 <button
                   onClick={loadMoreArticles}
-                  className="group bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-2"
+                  className="group bg-gradient-to-r from-indigo-600 to-blue-600 text-white cursor-pointer px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-2"
                 >
                   Load More Articles
                   <ChevronDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />

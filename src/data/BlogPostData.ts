@@ -449,7 +449,7 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "Manual Testing 101: Test Scenarios, Test Cases, and Test Suites",
     description: "Learn manual testing fundamentals for CDPL learners and partner teams. Write clear test scenarios, actionable test cases, and maintainable test suites with examples and templates.",
     excerpt: "Start manual testing the right way. Understand scenarios vs cases vs suites, write steps that catch real defects, link to requirements, and organize suites that scale with CI and releases.",
-    featuredImage: "/blog/featured/manual-testing-101.png",
+    featuredImage: "/blog/featured/Manual-testing-101.jpg",
     category: "Software Testing",
     categoryId: "software-testing",
     author: "Adnan Khan",

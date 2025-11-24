@@ -93,7 +93,7 @@ export default function WhyLearnSection() {
                         Why <span className="text-blue-700">Manual Testing</span> in 2025?
                     </h2>
                     <p className="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-                        The foundation of <strong>software quality assurance</strong> — high
+                        The foundation of <strong>software quality assurance</strong> - high
                         demand, beginner-friendly, and a proven gateway to{" "}
                         <strong>automation testing</strong>, <strong>API testing</strong>,
                         and <strong>DevOps-ready QA</strong>.
@@ -145,7 +145,7 @@ export default function WhyLearnSection() {
                     <BenefitCard
                         icon={<TrendingUp className="h-6 w-6" />}
                         title="Consistent Hiring Across Industries"
-                        description="Every product—fintech, e-commerce, healthcare, SaaS—needs reliable QA to ship confidently."
+                        description="Every product-fintech, e-commerce, healthcare, SaaS-needs reliable QA to ship confidently."
                         highlights={[
                             "Work with web, mobile, and API layers",
                             "Join Agile/Scrum teams from day one",
@@ -156,7 +156,7 @@ export default function WhyLearnSection() {
                     <BenefitCard
                         icon={<Target className="h-6 w-6" />}
                         title="No Coding Prerequisite"
-                        description="Manual testing builds analytical thinking, test design, and defect reporting—no prior programming needed."
+                        description="Manual testing builds analytical thinking, test design, and defect reporting-no prior programming needed."
                         highlights={[
                             "Test case writing & boundary analysis",
                             "Bug tracking (Jira) & reporting",
@@ -189,7 +189,7 @@ export default function WhyLearnSection() {
                     <BenefitCard
                         icon={<BookOpen className="h-6 w-6" />}
                         title="Gateway to Automation"
-                        description="Manual first, automation next—transition smoothly to Selenium, Cypress, and API test frameworks."
+                        description="Manual first, automation next-transition smoothly to Selenium, Cypress, and API test frameworks."
                         highlights={[
                             "Strong fundamentals = easier automation",
                             "Data-driven testing mindset",
@@ -200,7 +200,7 @@ export default function WhyLearnSection() {
                     <BenefitCard
                         icon={<Shield className="h-6 w-6" />}
                         title="Recession-Resilient Skill"
-                        description="Quality is non-negotiable: companies prioritize user experience, security, and reliability—always."
+                        description="Quality is non-negotiable: companies prioritize user experience, security, and reliability-always."
                         highlights={[
                             "Critical for regulated domains",
                             "Reduces production incidents",
