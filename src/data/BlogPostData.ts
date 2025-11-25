@@ -368,7 +368,7 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "Mastering Automated Software Testing: The Complete 2025 Guide",
     description: "A comprehensive guide to automated software testing covering fundamentals, best practices, advanced techniques, tools, real-world examples, and future trends in 2025.",
     excerpt: "Discover how to build a robust automated testing strategy that saves time, reduces bugs, and scales with modern software development. From Selenium to AI-powered testing, this guide has everything QA engineers and developers need.",
-    featuredImage: "/blog/featured/testing.png",
+    featuredImage: "/blog/featured/mastering-automated-software-testing-2025.png",
     category: "Software Testing",
     categoryId: "software-testing",
     author: "Shoeb Shaikh",
@@ -1203,7 +1203,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "A 2025 UX guide to build high-converting dashboards using drill-through, bookmarks, and buttons. Includes patterns for Power BI, Tableau, and Looker, with navigation, context, and accessibility best practices.",
     excerpt:
       "Design dashboards users love. Learn actionable UX patterns for drill-through, bookmarks, and buttons—optimize task flows, preserve context, and speed insights across Power BI, Tableau, and Looker.",
-    featuredImage: "/blog/featured/ux-pro-dashboards-2025.png",
+    featuredImage: "/blog/featured/drill-through-bookmarks-buttons-ux-patterns-pro-dashboards.png",
     category: "Business Intelligence",
     categoryId: "business-intelligence",
     author: "Ashish Shetty",
@@ -1242,7 +1242,7 @@ export const BLOG_POSTS: BlogPost[] = [
         "data storytelling dashboards",
         "business intelligence best practices"
       ],
-      ogImage: "/blog/featured/ux-pro-dashboards-2025-og.jpg",
+      ogImage: "/blog/featured/dux-pro-dashboards-2025-og.jpg",
       canonical: "/blog/drill-through-bookmarks-buttons-ux-patterns-pro-dashboards"
     }
   }
