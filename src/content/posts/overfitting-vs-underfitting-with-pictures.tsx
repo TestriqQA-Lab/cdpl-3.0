@@ -11,7 +11,7 @@ export const content = {
         <li><strong>Underfitting:</strong> the model is too simple to learn the pattern. It has <em>high bias</em> and performs poorly on both train and test data.</li>
         <li><strong>Overfitting:</strong> the model is too complex and memorizes noise. It has <em>high variance</em>, high train accuracy, but poor test accuracy.</li>
       </ul>`,
-            image: "/blog/section/ofuf-definitions.png"
+            image: "/blog/section/overfitting-vs-underfitting-with-pictures/section-1.png"
         },
         {
             title: "Visual Intuition: Lines and Curves",
@@ -21,12 +21,12 @@ export const content = {
         <li><strong>Good fit:</strong> the curve follows the trend without chasing every point.</li>
         <li><strong>Overfitting (wiggly curve):</strong> the model bends through every point, including noise, and fails on new data.</li>
       </ul>`,
-            image: "/blog/section/ofuf-visual-comparison.png"
+            image: "/blog/section/overfitting-vs-underfitting-with-pictures/section-2.png"
         },
         {
             title: "Bias Variance Trade Off",
             content: `<p>Model error = <strong>bias²</strong> + <strong>variance</strong> + <strong>irreducible noise</strong>. Increasing complexity reduces bias but increases variance; simplifying reduces variance but increases bias. You want the <em>minimum</em> of total error on <strong>unseen</strong> data.</p>`,
-            image: "/blog/section/ofuf-bias-variance.png"
+            image: "/blog/section/overfitting-vs-underfitting-with-pictures/section-3.png"
         },
         {
             title: "How to Detect Overfitting and Underfitting",
@@ -52,7 +52,7 @@ train_sizes, train_scores, val_scores = learning_curve(
 print(train_sizes, train_scores.mean(axis=1), val_scores.mean(axis=1))</code></pre>
         <p class="code-caption">Use learning curves to see if more data helps and if the gap is shrinking</p>
       </div>`,
-            image: "/blog/section/ofuf-learning-curve.png"
+            image: "/blog/section/overfitting-vs-underfitting-with-pictures/section-4.png"
         },
         {
             title: "How to Fix Underfitting",
@@ -62,7 +62,7 @@ print(train_sizes, train_scores.mean(axis=1), val_scores.mean(axis=1))</code></p
         <li>Add better features (domain signals, interactions, non linear transforms).</li>
         <li>Decrease bias in algorithms (switch from linear to tree based or kernel methods).</li>
       </ul>`,
-            image: "/blog/section/ofuf-fix-underfit.png"
+            image: "/blog/section/overfitting-vs-underfitting-with-pictures/section-5.png"
         },
         {
             title: "How to Fix Overfitting",
@@ -85,7 +85,7 @@ model = make_pipeline(
 model.fit(X, y)  # high-degree curve with regularization to tame variance</code></pre>
         <p class="code-caption">Use regularization when you need expressive features but want control over variance</p>
       </div>`,
-            image: "/blog/section/ofuf-fix-overfit.png"
+            image: "/blog/section/overfitting-vs-underfitting-with-pictures/section-6.png"
         },
         {
             title: "Pictures You Can Recreate Quickly",
@@ -116,7 +116,7 @@ plt.plot(xx, m_over.predict(xx), label="Overfit")
 plt.legend(); plt.show()</code></pre>
         <p class="code-caption">Three curves on the same data make the differences obvious for teams and reports</p>
       </div>`,
-            image: "/blog/content/ofuf-three-curves.png"
+            image: "/blog/section/overfitting-vs-underfitting-with-pictures/section-7.png"
         },
         {
             title: "Checklist for Projects at CDPL",
@@ -126,14 +126,14 @@ plt.legend(); plt.show()</code></pre>
         <li>Track train vs validation metrics in one dashboard.</li>
         <li>Prefer simple models that meet the target metric; complexity must justify maintenance cost.</li>
       </ul>`,
-            image: "/blog/section/ofuf-checklist.png"
+            image: "/blog/section/overfitting-vs-underfitting-with-pictures/section-8.png"
         },
         {
             title: "FAQ",
             content: `<p><strong>Does more data always fix overfitting</strong> Often but not always. If labels are noisy or features leak, more data will not help.</p>
       <p><strong>Is regularization mandatory</strong> When features are many or correlated, yes. It stabilizes estimates and improves generalization.</p>
       <p><strong>Tree models do not need scaling; can they still overfit</strong> Yes. Limit depth, use min samples per split, and try ensembles like Random Forests.</p>`,
-            image: "/blog/section/ofuf-faq.png"
+            image: "/blog/section/overfitting-vs-underfitting-with-pictures/section-9.png"
         }
     ],
 

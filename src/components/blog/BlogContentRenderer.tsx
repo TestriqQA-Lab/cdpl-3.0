@@ -151,7 +151,7 @@ const BlogContentRenderer: React.FC<BlogContentRendererProps> = ({ slug }) => {
                         src={relatedPost.featuredImage}
                         alt={relatedPost.title}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
                   )}

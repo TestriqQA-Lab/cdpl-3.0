@@ -8,7 +8,7 @@ export const content = {
         {
             title: "What Is an AI Agent",
             content: `<p>An AI agent is a loop: observe state, reason about options, act with a tool, and update memory before repeating. Unlike a single prompt, agents chain steps and learn from context. A practical agent needs three pillars: <strong>tools</strong> to take actions, <strong>memory</strong> to keep relevant facts, and <strong>planning</strong> to choose the next step.</p>`,
-            image: "/blog/section/ai-agent-definition.png"
+            image: "/blog/section/ai-agents-101-tools-memory-and-planning/section-1.png"
         },
         {
             title: "Agent Architecture at a Glance",
@@ -20,7 +20,7 @@ export const content = {
         <li><strong>Planner:</strong> strategies like ReAct, task decomposition, or graph based workflows.</li>
         <li><strong>Evaluator:</strong> quality, cost, latency, and safety checks with fallbacks.</li>
       </ul>`,
-            image: "/blog/section/ai-agent-architecture.png"
+            image: "/blog/section/ai-agents-101-tools-memory-and-planning/section-2.png"
         },
         {
             title: "Tools and Function Calling",
@@ -49,7 +49,7 @@ def agent_step(state, llm):
   return state</code></pre>
 <p class="code-caption">Give tools strong names, concise descriptions, and strict argument schemas</p>
 </div>`,
-            image: "/blog/content/ai-agent-tools.png"
+            image: "/blog/section/ai-agents-101-tools-memory-and-planning/section-3.png"
         },
         {
             title: "Memory: Short Term and Long Term",
@@ -73,7 +73,7 @@ def retrieve(q, k=2):
   return [docs[i] for i in idx]</code></pre>
 <p class="code-caption">In production use a real embedding model and FAISS, Milvus, or a managed vector DB</p>
 </div>`,
-            image: "/blog/section/ai-agent-memory.png"
+            image: "/blog/section/ai-agents-101-tools-memory-and-planning/section-4.png"
         },
         {
             title: "Planning Strategies That Work",
@@ -93,7 +93,7 @@ Plan:
 4) Ask for confirmation before sending</code></pre>
 <p class="code-caption">Keep plans explicit and auditable for users and reviewers</p>
 </div>`,
-            image: "/blog/section/ai-agent-planning.png"
+            image: "/blog/section/ai-agents-101-tools-memory-and-planning/section-5.png"
         },
         {
             title: "RAG for Agents",
@@ -103,7 +103,7 @@ Plan:
   <li>Hybrid search with dense and keyword</li>
   <li>Citations and confidence in every answer</li>
 </ul>`,
-            image: "/blog/section/ai-agent-rag.png"
+            image: "/blog/section/ai-agents-101-tools-memory-and-planning/section-6.png"
         },
         {
             title: "Guardrails and Safety",
@@ -113,7 +113,7 @@ Plan:
         <li><strong>Tool policies:</strong> rate limits, dry run mode, and human approval for high risk actions.</li>
         <li><strong>Observability:</strong> logs, traces, metrics, and cost dashboards.</li>
       </ul>`,
-            image: "/blog/section/ai-agent-safety.png"
+            image: "/blog/section/ai-agents-101-tools-memory-and-planning/section-7.png"
         },
         {
             title: "Evaluate Agents Like a Product",
@@ -134,7 +134,7 @@ def evaluate(agent, tests):
   return sum(scores) / len(scores)</code></pre>
 <p class="code-caption">Start simple, then add human review and rubrics per use case</p>
 </div>`,
-            image: "/blog/content/ai-agent-eval.png"
+            image: "/blog/section/ai-agents-101-tools-memory-and-planning/section-8.png"
         },
         {
             title: "Real World Patterns",
@@ -143,7 +143,7 @@ def evaluate(agent, tests):
         <li><strong>Data analyst agent:</strong> query warehouse, explain metrics, and generate charts with approval.</li>
         <li><strong>QA workflow agent:</strong> run tests, open issues with evidence, and post results to a channel.</li>
       </ul>`,
-            image: "/blog/content/ai-agent-patterns.png"
+            image: "/blog/section/ai-agents-101-tools-memory-and-planning/section-9.png"
         },
         {
             title: "Quick Start Checklist for CDPL Learners",
@@ -154,7 +154,7 @@ def evaluate(agent, tests):
         <li>Start with ReAct planning and visible step by step logs.</li>
         <li>Ship behind a flag, collect feedback, and iterate weekly.</li>
       </ol>`,
-            image: "/blog/section/ai-agent-checklist.png"
+            image: "/blog/section/ai-agents-101-tools-memory-and-planning/section-10.png"
         }
     ],
 
