@@ -56,7 +56,7 @@ driver.quit()</code></pre>
       </div>
       
       <p>In summary, grasping these fundamentals empowers teams to build robust automated software testing frameworks. This foundation not only improves efficiency but also enhances overall software quality, setting you up for success in more sophisticated implementations.</p>`,
-      image: "/blog/content/fundamentals-automated-testing.jpg"
+      image: "/blog/section/mastering-automated-software-testing-2025/Section-1.png"
     },
     {
       title: "Best Practices for Implementing Automated Tests",
@@ -98,7 +98,7 @@ class LoginPage:
       <p>Monitor flakiness and maintain clean test data. Regular reviews ensure the suite remains relevant as the application evolves.</p>
       
       <p>Adopting these best practices transforms automated software testing from a chore into a powerful asset. Teams that implement them report up to 50% reduction in testing time, allowing focus on innovation rather than bug hunting.</p>`,
-      image: "/blog/content/best-practices-testing.jpg"
+      image: "/blog/section/mastering-automated-software-testing-2025/Section-2.png"
     },
     {
       title: "Common Pitfalls in Automated Testing and How to Avoid Them",
@@ -126,7 +126,7 @@ class LoginPage:
       <p>Employ test data factories and isolation techniques. Analyze failures to root out non-determinism, like network dependencies.</p>
       
       <p>By steering clear of these pitfalls, your automated software testing initiative can thrive. Teams that proactively address them often see defect detection rates improve by 30-50%, leading to smoother releases and happier stakeholders.</p>`,
-      image: "/blog/content/common-pitfalls-testing.jpg"
+      image: "/blog/section/mastering-automated-software-testing-2025/Section-3.png"
     },
     {
       title: "Advanced Techniques in Automated Software Testing",
@@ -154,7 +154,7 @@ class LoginPage:
       <p>Extend to shift-right: monitor production with automated canaries and synthetic tests.</p>
       
       <p>These advanced techniques elevate automated software testing from basic validation to strategic advantage. Organizations adopting them report faster cycles and higher quality, staying competitive in rapid-release environments.</p>`,
-      image: "/blog/content/advanced-techniques-testing.jpg"
+      image: "/blog/section/mastering-automated-software-testing-2025/Section-4.png"
     },
     {
       title: "Essential Tools and Resources for Automated Testing",
@@ -180,7 +180,7 @@ class LoginPage:
       <p>Books such as "Lessons Learned in Software Testing" offer timeless advice. Attend conferences like TestCon for networking.</p>
       
       <p>Equipping yourself with these tools and resources streamlines automated software testing implementation. Stay updated, as the field evolves rapidly with AI integrations promising even greater efficiencies.</p>`,
-      image: "/blog/content/testing-tools.jpg"
+      image: "/blog/section/mastering-automated-software-testing-2025/Section-5.png"
     },
     {
       title: "Real-World Examples and Case Studies",
@@ -206,7 +206,7 @@ class LoginPage:
       <p><strong>Outcome:</strong> Improved reliability during updates, ensuring patient safety. Automation freed testers for exploratory work on new features.</p>
       
       <p>These examples highlight how automated software testing drives business value. From e-commerce to healthcare, proper implementation leads to faster, more reliable software delivery.</p>`,
-      image: "/blog/content/real-world-examples.jpg"
+      image: "/blog/section/mastering-automated-software-testing-2025/Section-6.png"
     },
     {
       title: "Future Trends in Automated Software Testing",
@@ -232,7 +232,7 @@ class LoginPage:
       <p>Hyper-automation combining RPA with testing will streamline end-to-end processes.</p>
       
       <p>Embracing these trends in automated software testing will future-proof your efforts. As AI and integration advance, teams that adapt will deliver superior software with unprecedented speed and efficiency.</p>`,
-      image: "/blog/content/future-trends-testing.jpg"
+      image: "/blog/section/mastering-automated-software-testing-2025/Section-7.png"
     }
   ],
 

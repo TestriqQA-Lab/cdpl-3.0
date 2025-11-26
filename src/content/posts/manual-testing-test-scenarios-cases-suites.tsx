@@ -14,7 +14,7 @@ export const content = {
         <li><strong>Test Suite:</strong> an organized collection of cases that target a scope such as smoke, regression, or module level coverage.</li>
         <li><strong>Coverage and Traceability:</strong> map cases to requirements and risks to ensure important behavior is tested.</li>
       </ul>`,
-      image: "/blog/section/manual-testing-definitions.png"
+      image: "/blog/section/Manual-testing-101/Manual-testing-101-section-1.jpg"
     },
     {
       title: "How to Write Effective Test Scenarios",
@@ -31,7 +31,7 @@ When the user pays with a valid card
 Then the order is created and a receipt email is sent</code></pre>
         <p class="code-caption">Plain English scenario that teams understand</p>
       </div>`,
-      image: "/blog/section/manual-testing-scenarios.png"
+      image: "/blog/section/Manual-testing-101/Manual-testing-101-section-2.jpg"
     },
     {
       title: "Test Case Template and Writing Guidelines",
@@ -62,7 +62,7 @@ Postconditions: cart is emptied, order appears in Order History</code></pre>
         <li>Keep one clear expected result per outcome. If there are many, split into separate cases.</li>
         <li>Use realistic data and include boundary values.</li>
       </ul>`,
-      image: "/blog/section/manual-testing-cases.png"
+      image: "/blog/section/Manual-testing-101/Manual-testing-101-section-3.jpg"
     },
     {
       title: "Designing Test Suites that Scale",
@@ -74,7 +74,7 @@ Postconditions: cart is emptied, order appears in Order History</code></pre>
         <li><strong>UAT:</strong> business acceptance with production like data and workflows.</li>
       </ul>
       <p>Store suite membership in your test management tool so CI can trigger the right sets automatically.</p>`,
-      image: "/blog/section/manual-testing-suites.png"
+      image: "/blog/section/Manual-testing-101/Manual-testing-101-section-4.jpg"
     },
     {
       title: "Traceability Matrix and Prioritization",
@@ -86,7 +86,7 @@ REQ-PAY-02   | MT-PAY-001..003  | High     | Fail (rollback)
 REQ-ADDR-04  | MT-ADR-001..002  | Medium   | Pass</code></pre>
         <p class="code-caption">Simple matrix that maps requirements to cases and status</p>
       </div>`,
-      image: "/blog/content/manual-testing-traceability.jpg"
+      image: "/blog/section/Manual-testing-101/Manual-testing-101-section-5.jpg"
     },
     {
       title: "Exploratory Testing Charters",
@@ -96,7 +96,7 @@ REQ-ADDR-04  | MT-ADR-001..002  | Medium   | Pass</code></pre>
         <li>Record notes, paths taken, and issues found with timestamps and data used.</li>
         <li>Convert valuable findings into repeatable cases and add them to suites.</li>
       </ul>`,
-      image: "/blog/content/manual-testing-exploratory.jpg"
+      image: "/blog/section/Manual-testing-101/Manual-testing-101-section-6.jpg"
     },
     {
       title: "Bug Reporting that Engineers Love",
@@ -106,7 +106,7 @@ REQ-ADDR-04  | MT-ADR-001..002  | Medium   | Pass</code></pre>
         <li>Include build version, environment, device or browser, exact steps, actual vs expected, logs or screenshots, and severity.</li>
         <li>Tag with requirement ID and test case ID for traceability.</li>
       </ul>`,
-      image: "/blog/content/manual-testing-bug-report.jpg"
+      image: "/blog/section/Manual-testing-101/Manual-testing-101-section-7.jpg"
     },
     {
       title: "Common Pitfalls and How to Avoid Them",
@@ -117,7 +117,7 @@ REQ-ADDR-04  | MT-ADR-001..002  | Medium   | Pass</code></pre>
         <li>Only happy paths. Add negative and boundary tests.</li>
         <li>Untracked coverage. Always link cases to requirements and risks.</li>
       </ul>`,
-      image: "/blog/content/manual-testing-pitfalls.jpg"
+      image: "/blog/section/Manual-testing-101/Manual-testing-101-section-8.jpg"
     },
     {
       title: "Recommended Tools for Manual Test Management",
@@ -127,7 +127,7 @@ REQ-ADDR-04  | MT-ADR-001..002  | Medium   | Pass</code></pre>
         <li>Test management: tools that support suites, traceability, and CI exports.</li>
         <li>Team stack: ticketing for defects, dashboards for quality KPIs, and storage for evidence.</li>
       </ul>`,
-      image: "/blog/content/manual-testing-tools.jpg"
+      image: "/blog/section/Manual-testing-101/Manual-testing-101-section-9.jpg"
     },
     {
       title: "Checklist for CDPL Learners",
@@ -138,7 +138,7 @@ REQ-ADDR-04  | MT-ADR-001..002  | Medium   | Pass</code></pre>
         <li>Maintain a traceability matrix and update status on every run.</li>
         <li>Report bugs with full context and link to the failing case.</li>
       </ul>`,
-      image: "/blog/content/manual-testing-checklist.jpg"
+      image: "/blog/section/Manual-testing-101/Manual-testing-101-section-10.jpg"
     }
   ],
 

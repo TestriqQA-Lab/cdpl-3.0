@@ -18,7 +18,7 @@ export const content = {
       </ul>
       <h3>Testing Across the SDLC</h3>
       <p>Plan strategy during requirements, design tests alongside development, automate critical paths in CI/CD, and monitor in production with synthetic and observability-led checks.</p>`,
-      image: "/blog/section/testing-fundamentals.png"
+      image: "/blog/section/what-is-software-testing-section-1.jpg"
     },
     {
       title: "Testing Types: Functional vs Non-Functional",
@@ -39,7 +39,7 @@ export const content = {
         <li><strong>Reliability and Resilience:</strong> fault injection and chaos scenarios.</li>
         <li><strong>Compatibility:</strong> devices, browsers, operating systems, network conditions.</li>
       </ul>`,
-      image: "/blog/section/testing-types.png"
+      image: "/blog/section/what-is-software-testing-section-2.jpg"
     },
     {
       title: "Testing Levels: Unit to Integration to System to Acceptance",
@@ -58,7 +58,7 @@ test("sum adds numbers", () => {
 });</code></pre>
         <p class="code-caption">Example unit test verifying a pure function</p>
       </div>`,
-      image: "/blog/section/testing-levels.png"
+      image: "/blog/section/what-is-software-testing-section-3.jpg"
     },
     {
       title: "Best Practices: Strategy, Automation, and CI/CD",
@@ -83,7 +83,7 @@ jobs:
       - run: npm run test:ci</code></pre>
         <p class="code-caption">Automated tests wired into CI for fast feedback</p>
       </div>`,
-      image: "/blog/content/best-practices-testing.jpg"
+      image: "/blog/section/what-is-software-testing-section-4.jpg"
     },
     {
       title: "Common Pitfalls, and How to Avoid Them",
@@ -94,7 +94,7 @@ jobs:
         <li><strong>Poor data setup:</strong> use factories and fixtures; reset the database per test; avoid cross-test coupling.</li>
         <li><strong>Ignoring accessibility and security:</strong> add automated checks and periodic expert reviews.</li>
       </ul>`,
-      image: "/blog/content/testing-pitfalls.jpg"
+      image: "/blog/section/what-is-software-testing-section-5.jpg"
     },
     {
       title: "Advanced Techniques",
@@ -105,7 +105,7 @@ jobs:
         <li><strong>AI-assisted testing:</strong> generate scenarios, prioritize cases, and detect anomalies.</li>
         <li><strong>Chaos and resilience:</strong> inject failures to validate recovery and service level objectives.</li>
       </ul>`,
-      image: "/blog/content/advanced-testing.jpg"
+      image: "/blog/section/what-is-software-testing-section-6.jpg"
     },
     {
       title: "Tools and Quick Examples",
@@ -123,7 +123,7 @@ it("returns 201 on creating a user", async () => {
 });</code></pre>
         <p class="code-caption">API test verifying happy-path behavior</p>
       </div>`,
-      image: "/blog/content/tools-examples.jpg"
+      image: "/blog/section/what-is-software-testing-section-7.jpg"
     },
     {
       title: "Real-World Scenarios",
@@ -132,12 +132,12 @@ it("returns 201 on creating a user", async () => {
         <li><strong>API compatibility:</strong> consumer-driven contracts prevent breaking changes across services.</li>
         <li><strong>Performance objectives:</strong> baseline 95th percentile response time and fail the pipeline on regression.</li>
       </ul>`,
-      image: "/blog/content/real-world-testing.jpg"
+      image: "/blog/section/what-is-software-testing-section-8.jpg"
     },
     {
       title: "Future Outlook",
       content: `<p>Expect tighter DevTestOps loops, AI-generated tests guided by risk, and production verification with feature flags and observability. The goal is managed risk and continuous, confident delivery.</p>`,
-      image: "/blog/content/future-of-testing.jpg"
+      image: "/blog/section/what-is-software-testing-section-9.jpg"
     }
   ],
 

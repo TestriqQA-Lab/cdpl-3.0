@@ -125,7 +125,7 @@ export default function CareerSection() {
                 ].join(" ")}
               >
                 {/* logo */}
-                
+
                 {/* <Image
                   src={c.logo}
                   alt={c.alt}

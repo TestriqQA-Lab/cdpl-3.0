@@ -1,253 +1,287 @@
 "use client";
 
-
+import React from "react";
+import { motion, Variants } from "framer-motion";
+import Link from "next/link";
 import {
   Clock,
   Star,
+  Zap,
+  ArrowRight,
+  CheckCircle,
+  Users,
+  Code,
+  Shield,
+  BarChart3,
+  Settings,
+  Trophy,
+  BookOpen,
+  ShieldCheck,
   BadgeCheck,
   TrendingUp,
-  Zap,
-  ShieldCheck,
-  BookOpen,
-  Layers,
-  Code,
-  Network,
-  BarChart3,
-  Smartphone,
-  ArrowRight,
 } from "lucide-react";
-import Link from "next/link";
-import { useState } from "react";
-import CareerSessionModal from "@/components/CareerSessionModal";
 
 type Course = {
-  slug: string;
+  id: number;
   title: string;
+  category: string;
+  description: string;
   duration: string;
-  originalPrice?: string;
-  features: string[];
+  students: string;
+  rating: number;
   level: "Beginner" | "Intermediate" | "Advanced";
-  mode: "Online" | "Hybrid" | "Classroom";
-  badge?: "Most Popular" | "New" | "Placement Prep";
-  accent: string;
-  icon: React.ReactNode;
+  popular: boolean;
+  link: string;
+  icon: IconName;
+  features: string[];
 };
+
+const iconMap = {
+  Code: <Code className="w-6 h-6" aria-hidden="true" />,
+  Zap: <Zap className="w-6 h-6" aria-hidden="true" />,
+  Shield: <Shield className="w-6 h-6" aria-hidden="true" />,
+  BarChart3: <BarChart3 className="w-6 h-6" aria-hidden="true" />,
+  Settings: <Settings className="w-6 h-6" aria-hidden="true" />,
+  Trophy: <Trophy className="w-6 h-6" aria-hidden="true" />,
+} as const;
+
+type IconName = keyof typeof iconMap;
 
 const COURSES: Course[] = [
   {
-    slug: "automation-testing-selenium-java",
-    title: "Automation Testing (Selenium + Java)",
-    duration: "16 Weeks",
-    originalPrice: "₹39,999",
-    features: [
-      "Selenium WebDriver",
-      "Java OOPs + Collections",
-      "TestNG + Maven",
-      "API + CI/CD (Jenkins, GitHub Actions)",
-      "3 Industry Projects",
-    ],
+    id: 2,
+    title: "Advanced Automation Testing",
+    category: "Software Testing",
+    description: "Drive product vision and delivery in SAFe settings.",
+    duration: "85 Hours",
+    students: "950+",
+    rating: 4.8,
     level: "Intermediate",
-    mode: "Online",
-    badge: "Most Popular",
-    accent: "indigo",
-    icon: <Code className="w-6 h-6" aria-hidden="true" />,
+    popular: true,
+    link: "/automation-testing-course",
+    icon: "Code",
+    features: ["Selenium WebDriver", "CI/CD Integration (Jenkins)", "Advanced Java Concepts"],
   },
   {
-    slug: "full-stack-qa-manual-automation",
-    title: "Full-Stack QA (Manual + Automation)",
-    duration: "20 Weeks",
-    originalPrice: "₹49,999",
-    features: [
-      "Manual + Automation",
-      "API & DB Testing",
-      "Git, Jenkins, Docker basics",
-      "5 Capstone Projects",
-      "ISTQB + Placement Assistance",
-    ],
-    level: "Advanced",
-    mode: "Hybrid",
-    badge: "Placement Prep",
-    accent: "cyan",
-    icon: <Layers className="w-6 h-6" aria-hidden="true" />,
-  },
-  {
-    slug: "api-testing-postman-restassured",
-    title: "API Testing (Postman + RestAssured)",
-    duration: "8 Weeks",
-    originalPrice: "₹24,999",
-    features: [
-      "Postman Advanced",
-      "RestAssured + Java",
-      "JSON/XML + Auth",
-      "Automation Frameworks",
-      "Live API Project",
-    ],
+    id: 3,
+    title: "API Testing using POSTMAN and RestAPIs",
+    category: "Software Testing",
+    description: "Master API testing using Postman, Rest Assured, and Groovy for robust web services.",
+    duration: "15 Hours",
+    students: "700+",
+    rating: 4.7,
     level: "Intermediate",
-    mode: "Online",
-    accent: "emerald",
-    icon: <Network className="w-6 h-6" aria-hidden="true" />,
+    popular: false,
+    link: "/api-testing",
+    icon: "Zap",
+    features: ["Postman & Swagger", "Rest Assured Framework", "JSON/XML Validation"],
   },
   {
-    slug: "performance-testing-jmeter",
-    title: "Performance Testing (JMeter)",
-    duration: "6 Weeks",
-    features: [
-      "Load/Stress/Soak Testing",
-      "Throughput & Latency Analysis",
-      "Distributed Testing",
-      "Grafana + InfluxDB Dashboards",
-      "Real E-commerce Scenario",
-    ],
+    id: 4,
+    title: "ETL Testing Course",
+    category: "Software Testing",
+    description: "Learn to lead Agile transformations using the SAFe framework.",
+    duration: "100 Hours",
+    students: "500+",
+    rating: 4.6,
     level: "Intermediate",
-    mode: "Online",
-    badge: "New",
-    accent: "amber",
-    icon: <BarChart3 className="w-6 h-6" aria-hidden="true" />,
+    popular: false,
+    link: "/etl-testing",
+    icon: "Shield",
+    features: ["Data Warehousing Concepts", "SQL Testing", "ETL Tools"],
   },
   {
-    slug: "mobile-app-testing",
-    title: "Mobile App Testing (Android + iOS)",
-    duration: "8 Weeks",
-    features: [
-      "Appium Basics to Advanced",
-      "Real Devices & Emulators",
-      "Mobile Gestures & Locators",
-      "Hybrid/Native App Coverage",
-      "Device Lab Project",
-    ],
-    level: "Intermediate",
-    mode: "Online",
-    accent: "rose",
-    icon: <Smartphone className="w-6 h-6" aria-hidden="true" />,
-  },
-  {
-    slug: "istqb-foundation",
-    title: "ISTQB® Foundation Certification Prep",
-    duration: "4 Weeks",
-    features: [
-      "Syllabus-Aligned Modules",
-      "High-Yield Question Bank",
-      "Mock Exams & Explanations",
-      "Exam Strategy Workshops",
-      "Official-Style Patterns",
-    ],
+    id: 5,
+    title: "Advanced Software Testing",
+    category: "Software Testing",
+    description: "Go beyond the basics—build strategies, manage risk, and measure quality with actionable metrics.",
+    duration: "95 Hours",
+    students: "2,268+",
+    rating: 4.8,
     level: "Beginner",
-    mode: "Online",
-    accent: "sky",
-    icon: <BookOpen className="w-6 h-6" aria-hidden="true" />,
+    popular: true,
+    link: "/advance-software-testing",
+    icon: "BarChart3",
+    features: ["Test Strategy & Risk-Based Testing", "Traceability & Coverage Techniques", "Test Management & Metrics", "Performance/Security Test Readiness"],
+  },
+  {
+    id: 6,
+    title: "Master Program in Java Programming",
+    category: "Software Testing",
+    description: "Become industry-ready with Core Java, OOP, Collections, JDBC, Spring Boot, REST APIs, unit testing, and deployment. Build portfolio projects and earn a QR-verified certificate.",
+    duration: "30 Hours",
+    students: "Not specified",
+    rating: 4.9,
+    level: "Beginner",
+    popular: true,
+    link: "/java-course",
+    icon: "Settings",
+    features: ["Core Java Fundamentals (Variables, OOP, Collections, Exception Handling)", "Enterprise Java (Spring Boot, REST APIs, Hibernate/JPA)", "Testing & Build Tools (JUnit/Mockito, Maven/Gradle)", "CI/CD & Deployment (GitHub Actions, Docker, AWS Basics)", "50+ Hands-on Projects (E-Commerce, Banking System, etc.)", "Tools: IntelliJ IDEA, Git, Postman"],
+  },
+  {
+    id: 7,
+    title: "Advanced Manual & Automation Testing — Master Program",
+    category: "Software Testing",
+    description: "End-to-end mastery: advanced test strategy and leadership combined with enterprise-grade automation and CI/CD.",
+    duration: "180 Hours",
+    students: "2,302+",
+    rating: 4.8,
+    level: "Beginner",
+    popular: true,
+    link: "/automation-testing-course",
+    icon: "Trophy",
+    features: ["Risk-Based Strategy & Quality Metrics", "Advanced Test Design & Bug Advocacy", "Automation Frameworks (POM/Hybrid, API + UI)", "CI/CD, Parallel & Cross-Browser at Scale"],
   },
 ];
 
-function cx(...classes: Array<string | false | undefined>) {
-  return classes.filter(Boolean).join(" ");
+function pickVariant(index: number) {
+  const variants = [
+    {
+      header: "bg-gradient-to-br from-indigo-600 to-blue-700",
+      button: "bg-indigo-600 hover:bg-indigo-700",
+      hoverBorder: "hover:border-indigo-300",
+    },
+    {
+      header: "bg-gradient-to-br from-emerald-600 to-teal-700",
+      button: "bg-emerald-600 hover:bg-emerald-700",
+      hoverBorder: "hover:border-emerald-300",
+    },
+    {
+      header: "bg-gradient-to-br from-rose-600 to-pink-700",
+      button: "bg-rose-600 hover:bg-rose-700",
+      hoverBorder: "hover:border-rose-300",
+    },
+    {
+      header: "bg-gradient-to-br from-amber-600 to-orange-700",
+      button: "bg-amber-600 hover:bg-amber-700",
+      hoverBorder: "hover:border-amber-300",
+    },
+    {
+      header: "bg-gradient-to-br from-violet-600 to-purple-700",
+      button: "bg-violet-600 hover:bg-violet-700",
+      hoverBorder: "hover:border-violet-300",
+    },
+    {
+      header: "bg-gradient-to-br from-cyan-600 to-sky-700",
+      button: "bg-cyan-600 hover:bg-cyan-700",
+      hoverBorder: "hover:border-cyan-300",
+    },
+  ];
+  return variants[index % variants.length];
 }
 
-function accentClass(accent: Course["accent"]) {
-  return {
-    ring: `ring-1 ring-${accent}-200`,
-    border: `border border-${accent}-100`,
-    topBar: `bg-${accent}-600`,
-    iconBg: `bg-${accent}-600`,
-    badge: `bg-${accent}-50 text-${accent}-700`,
-    check: `text-${accent}-600`,
-    hover: `hover:shadow-[0_8px_40px_-12px_rgba(0,0,0,0.15)]`,
-    buttonBg: `bg-${accent}-600 hover:bg-${accent}-700 focus:ring-${accent}-500`,
+const CourseCard = ({ course, index }: { course: Course; index: number }) => {
+  const variant = pickVariant(index);
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 18 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
-}
 
-const Badge = ({ label }: { label: string }) => (
-  <span className="inline-flex items-center gap-1 rounded-full bg-neutral-100 px-2.5 py-1 text-xs font-medium text-neutral-700 ring-1 ring-inset ring-neutral-200">
-    <BadgeCheck className="h-3.5 w-3.5" aria-hidden="true" />
-    {label}
-  </span>
-);
-
-const Feature = ({ text, accent }: { text: string; accent: Course["accent"] }) => {
-  const styles = accentClass(accent);
   return (
-    <li className="flex items-start gap-3">
-      <ShieldCheck className={cx("mt-0.5 h-5 w-5 flex-none", styles.check)} aria-hidden="true" />
-      <span className="text-sm text-neutral-700">{text}</span>
-    </li>
-  );
-};
-
-const CourseCard = ({ course }: { course: Course }) => {
-  const a = accentClass(course.accent);
-  return (
-    <article
-      className={cx(
-        "group relative flex flex-col rounded-2xl bg-white/90 backdrop-blur p-6 shadow-sm",
-        a.border,
-        a.ring,
-        a.hover,
-        "transition-shadow"
-      )}
-
+    <motion.article
+      variants={itemVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+      whileHover={{ y: -10 }}
+      className={`relative group bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-white/20 ${variant.hoverBorder} transform hover:-translate-y-2 flex flex-col h-full`}
     >
-      {/* Top accent bar */}
-      <div className={cx("absolute inset-x-0 -top-0.5 h-1.5 rounded-t-2xl", a.topBar)} aria-hidden="true" />
+      <div className={`${variant.header} p-6 relative overflow-hidden`}>
+        {/* Background Pattern (simplified) */}
+        <div className="absolute inset-0 opacity-10">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            }}
+          />
+        </div>
 
-      <header className="mb-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          {/* Icon with matching dark background */}
-          <div className={cx("grid place-items-center rounded-xl p-2.5", a.iconBg)}>
-            <div className="text-white">{course.icon}</div>
+        <div className="relative z-10">
+          <div className="flex items-start justify-between mb-4">
+            <div className="text-5xl transform group-hover:scale-110 transition-transform duration-300 text-white">
+              {iconMap[course.icon]}
+            </div>
+            <div
+              className="flex items-center space-x-1 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg"
+              aria-label={`Rating ${course.rating.toFixed(1)} out of 5`}
+            >
+              <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+              <span className="text-sm font-semibold text-gray-800">
+                {course.rating.toFixed(1)}
+              </span>
+            </div>
           </div>
-          <h3 className="text-lg font-semibold text-neutral-900" itemProp="name">
+
+          {course.popular && (
+            <span className="inline-flex items-center gap-1 bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-xs font-bold mb-3 shadow-lg">
+              <Zap className="w-3 h-3" />
+              POPULAR
+            </span>
+          )}
+
+          <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 group-hover:scale-105 transition-transform duration-300">
             {course.title}
           </h3>
+
+          <p className="text-white/90 text-sm leading-relaxed">
+            {course.description}
+          </p>
         </div>
-        {course.badge && (
-          <span className={cx("ml-3 hidden rounded-full px-2.5 py-1 text-xs font-medium md:inline-flex", a.badge)}>
-            <SparkLine />
-            {course.badge}
+      </div>
+
+      <div className="p-6 flex-grow flex flex-col space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-3 text-sm">
+          <div className="flex items-center space-x-2 text-slate-700">
+            <Clock className="w-4 h-4 text-blue-500" />
+            <span className="font-medium">{course.duration}</span>
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <span className="px-3 py-1 bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 rounded-full text-xs font-semibold">
+              {course.level}
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center space-x-2 text-sm text-slate-700 bg-slate-50 rounded-lg p-3">
+          <Users className="w-4 h-4 text-purple-500" />
+          <span className="font-medium">
+            {course.students} students enrolled
           </span>
-        )}
-      </header>
+        </div>
 
-      <div className="mb-4 flex flex-wrap items-center gap-3">
-        <span className="inline-flex items-center gap-1 rounded-full bg-neutral-50 px-2.5 py-1 text-xs font-medium text-neutral-700 ring-1 ring-inset ring-neutral-200">
-          <Clock className="h-3.5 w-3.5" aria-hidden="true" />
-          <span itemProp="timeRequired">{course.duration}</span>
-        </span>
-        <Badge label={course.level} />
-        <Badge label={course.mode} />
+        <ul className="space-y-2 flex-grow">
+          {course.features.map((feature, i) => (
+            <li
+              key={i}
+              className="flex items-start space-x-2 text-sm text-slate-700"
+            >
+              <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+              <span>{feature}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="pt-4 mt-auto">
+          <Link
+            href={course.link}
+            className={`flex items-center justify-center gap-2 w-full ${variant.button} text-white font-semibold py-3 rounded-xl hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300`}
+          >
+            <span>View Course Details</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
       </div>
 
-      <ul className="mb-6 space-y-2" itemProp="description">
-        {course.features.map((f) => (
-          <Feature key={f} text={f} accent={course.accent} />
-        ))}
-      </ul>
-
-      {/* Removed Price Section */}
-      <div className="mt-auto">
-        <button
-          className={cx(
-            "inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-2 text-md font-semibold text-white",
-            a.buttonBg,
-            "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-          )}
-          aria-label={`View syllabus for ${course.title}`}
-        >
-          View Syllabus
-          <ArrowRight className="h-4 w-4" aria-hidden="true" />
-        </button>
-      </div>
-    </article>
+      {/* Subtle overlay like ModuleCard */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black/0 to-black/0 group-hover:from-black/0 group-hover:to-black/0 transition-all duration-500 pointer-events-none" />
+    </motion.article>
   );
 };
 
-const SparkLine = () => (
-  <svg className="mr-1 h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-    <path d="M3 17l5-6 4 3 6-8 3 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-
 export default function OtherCoursesSection() {
-  const [isCareerModalOpen, setIsCareerModalOpen] = useState(false);
-
   return (
     <section className="py-10 md:py-10 bg-white" id="other-courses" aria-label="Other professional software testing courses">
       {/* Invisible SEO keywords */}
@@ -284,8 +318,8 @@ export default function OtherCoursesSection() {
 
         {/* Cards */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {COURSES.map((c) => (
-            <CourseCard key={c.slug} course={c} />
+          {COURSES.map((c, index) => (
+            <CourseCard key={c.id} course={c} index={index} />
           ))}
         </div>
 
@@ -336,12 +370,6 @@ export default function OtherCoursesSection() {
           </button>
         </div>
       </div>
-
-      <CareerSessionModal
-        isOpen={isCareerModalOpen}
-        onClose={() => setIsCareerModalOpen(false)}
-      />
     </section>
   );
 }
-

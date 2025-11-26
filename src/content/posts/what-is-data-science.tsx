@@ -7,7 +7,7 @@ export const content = {
         {
             title: "Data Science Definition",
             content: `<p>Data science is a multidisciplinary practice that combines statistics, programming, and domain knowledge to extract insights from data and support decisions. It spans data collection, cleaning, analysis, modeling, and communication so teams can act with confidence.</p>`,
-            image: "/blog/section/ds-definition.png"
+            image: "/blog/section/what-is-data-science/section-1.png"
         },
         {
             title: "How Data Becomes Decisions",
@@ -19,7 +19,7 @@ export const content = {
         <li><strong>Explain and deliver:</strong> present insights, quantify impact, recommend actions.</li>
       </ol>
       <p>The output is not only a model. It is a decision with evidence and trade offs the business understands.</p>`,
-            image: "/blog/section/ds-workflow.png"
+            image: "/blog/section/what-is-data-science/section-2.png"
         },
         {
             title: "Real World Examples",
@@ -30,7 +30,7 @@ export const content = {
         <li><strong>Recommendation systems:</strong> suggest content or products to increase engagement and sales.</li>
         <li><strong>A B testing:</strong> measure the impact of a new feature before global rollout.</li>
       </ul>`,
-            image: "/blog/content/ds-examples.jpg"
+            image: "/blog/section/what-is-data-science/section-3.png"
         },
         {
             title: "Core Skills for Beginners",
@@ -41,7 +41,7 @@ export const content = {
         <li><strong>Visualization:</strong> clear charts and dashboards with Matplotlib or Plotly.</li>
         <li><strong>Communication:</strong> write short summaries with findings and next steps.</li>
       </ul>`,
-            image: "/blog/section/ds-skills.png"
+            image: "/blog/section/what-is-data-science/section-4.png"
         },
         {
             title: "Common Tools You Will Use",
@@ -51,7 +51,7 @@ export const content = {
         <li><strong>Data sources:</strong> CSV, databases, and APIs.</li>
         <li><strong>Workflow:</strong> reproducible notebooks, requirements file, version control.</li>
       </ul>`,
-            image: "/blog/section/ds-tools.png"
+            image: "/blog/section/what-is-data-science/section-5.png"
         },
         {
             title: "A Simple Walkthrough",
@@ -63,7 +63,7 @@ summary = df.groupby("country")["revenue"].agg(["count","mean","sum"]).reset_ind
 print(summary.sort_values("sum", ascending=False).head())</code></pre>
         <p class="code-caption">A small pandas example that answers a real question</p>
       </div>`,
-            image: "/blog/content/ds-walkthrough.jpg"
+            image: "/blog/section/what-is-data-science/section-6.png"
         },
         {
             title: "Roles and Career Paths",
@@ -74,7 +74,7 @@ print(summary.sort_values("sum", ascending=False).head())</code></pre>
         <li><strong>Analytics engineer:</strong> build data models and transform raw data for analysis.</li>
       </ul>
       <p>Start with analyst or junior data scientist, then specialize based on interests and strengths.</p>`,
-            image: "/blog/content/ds-careers.jpg"
+            image: "/blog/section/what-is-data-science/section-7.png"
         },
         {
             title: "Common Myths",
@@ -83,7 +83,7 @@ print(summary.sort_values("sum", ascending=False).head())</code></pre>
         <li><strong>Only deep learning matters:</strong> many business wins come from clean data and simple models.</li>
         <li><strong>It is all coding:</strong> problem framing and communication are just as important.</li>
       </ul>`,
-            image: "/blog/content/ds-myths.jpg"
+            image: "/blog/section/what-is-data-science/section-8.png"
         },
         {
             title: "How to Start Learning at CDPL",
@@ -93,14 +93,14 @@ print(summary.sort_values("sum", ascending=False).head())</code></pre>
         <li><strong>Month 3:</strong> time series or NLP basics. Second project and portfolio polish.</li>
       </ul>
       <p>Publish projects on GitHub with a short README that states the problem, dataset, method, results, and chart.</p>`,
-            image: "/blog/section/ds-learning-plan.png"
+            image: "/blog/section/what-is-data-science/section-9.png"
         },
         {
             title: "FAQ",
             content: `<p><strong>Is data science only for large companies</strong> No. Startups use it to find product market fit and grow efficiently.</p>
       <p><strong>Which language should I learn first</strong> Python for flexibility and the ecosystem around it.</p>
       <p><strong>Do I need advanced math</strong> Basic statistics and linear algebra concepts are enough to begin.</p>`,
-            image: "/blog/section/ds-faq.png"
+            image: "/blog/section/what-is-data-science/section-10.png"
         }
     ],
 

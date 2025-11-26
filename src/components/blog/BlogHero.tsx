@@ -7,7 +7,7 @@ import { getFeaturedPost, getCategoryById, getAuthorById } from "@/data/BlogPost
 
 const BlogHero = () => {
   const featuredPost = getFeaturedPost();
-  
+
   if (!featuredPost) return null;
 
   const category = getCategoryById(featuredPost.categoryId);
@@ -51,13 +51,13 @@ const BlogHero = () => {
 
               {/* Title - Optimized for readability */}
               <Link href={`/blog/${featuredPost.slug}`}>
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight hover:text-indigo-600 transition-colors duration-300">
-                {featuredPost.title}
-              </h1>
+                <h1 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight hover:text-indigo-600 transition-colors duration-300">
+                  {featuredPost.title}
+                </h1>
               </Link>
 
               {/* Description - Optimal reading color */}
-              <p className="text-gray-700 text-lg leading-relaxed">
+              <p className="mt-5 text-gray-700 text-lg leading-relaxed">
                 {featuredPost.description}
               </p>
 
@@ -79,11 +79,9 @@ const BlogHero = () => {
 
               {/* CTA Button - High contrast */}
               <div>
-                <Link href={`/blog/${featuredPost.slug}`}>
-                  <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-semibold transition-all bg-indigo-600 hover:bg-indigo-700 text-white shadow-md hover:shadow-lg h-11 px-6 py-2 transform hover:-translate-y-0.5 duration-200">
-                    Read Full Article
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
+                <Link href={`/blog/${featuredPost.slug}`} className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-semibold transition-all bg-indigo-600 hover:bg-indigo-700 text-white shadow-md hover:shadow-lg h-11 px-6 py-2 transform hover:-translate-y-0.5 duration-200">
+                  Read Full Article
+                  <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
             </div>
@@ -96,7 +94,7 @@ const BlogHero = () => {
                     src={featuredPost.featuredImage}
                     alt={featuredPost.title}
                     fill
-                    className="object-cover hover:scale-105 transition-transform duration-500"
+                    className="hover:scale-105 transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, 50vw"
                     priority
                     quality={90}

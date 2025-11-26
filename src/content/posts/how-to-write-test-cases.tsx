@@ -17,7 +17,7 @@ export const content = {
         <li><strong>Priority and Tags:</strong> risk, module, release, smoke or regression.</li>
         <li><strong>Attachments or Evidence:</strong> screenshots, logs, or recordings when needed.</li>
       </ul>`,
-            image: "/blog/section/test-case-anatomy.png"
+            image: "/blog/section/how-to-write-test-cases/section_1.png"
         },
         {
             title: "Good vs Bad Test Case Examples",
@@ -69,7 +69,7 @@ Expected:
   - Email receipt sent within 60 seconds</code></pre>
         <p class="code-caption">Good cases are deterministic and verifiable</p>
       </div>`,
-            image: "/blog/section/test-case-good-vs-bad.png"
+            image: "/blog/section/how-to-write-test-cases/section_2.png"
         },
         {
             title: "Free Test Case Template",
@@ -90,7 +90,7 @@ Attachments:</code></pre>
         <p class="code-caption">Minimal template that fits most projects</p>
       </div>
       <p>Tip for CDPL learners: keep IDs stable across releases and add a changelog note when steps or expected results change.</p>`,
-            image: "/blog/content/test-case-template.jpg"
+            image: "/blog/section/how-to-write-test-cases/section_3.png"
         },
         {
             title: "Common Mistakes to Avoid",
@@ -101,7 +101,7 @@ Attachments:</code></pre>
         <li><strong>Missing traceability:</strong> always link to a story or requirement ID.</li>
         <li><strong>Unmaintained suites:</strong> review and retire duplicates every release.</li>
       </ul>`,
-            image: "/blog/content/test-case-mistakes.jpg"
+            image: "/blog/section/how-to-write-test-cases/section_4.png"
         },
         {
             title: "QA Tips that Raise Quality",
@@ -112,7 +112,7 @@ Attachments:</code></pre>
         <li><strong>Track status with a matrix:</strong> map cases to requirements and show pass or fail per release.</li>
         <li><strong>Promote high value cases to automation:</strong> focus on stable critical paths like login and checkout.</li>
       </ul>`,
-            image: "/blog/content/test-case-qa-tips.jpg"
+            image: "/blog/section/how-to-write-test-cases/section_5.png"
         }
     ],
 
