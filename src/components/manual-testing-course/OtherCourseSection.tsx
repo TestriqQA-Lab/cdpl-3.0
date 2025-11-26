@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
 import {
@@ -20,6 +20,7 @@ import {
   BadgeCheck,
   TrendingUp,
 } from "lucide-react";
+import CareerSessionModal from "@/components/CareerSessionModal";
 
 type Course = {
   id: number;
@@ -126,7 +127,7 @@ const COURSES: Course[] = [
     duration: "180 Hours",
     students: "2,302+",
     rating: 4.8,
-    level: "Beginner",
+    level: 'Beginner',
     popular: true,
     link: "/automation-testing-course",
     icon: "Trophy",
@@ -282,6 +283,8 @@ const CourseCard = ({ course, index }: { course: Course; index: number }) => {
 };
 
 export default function OtherCoursesSection() {
+  const [isCareerModalOpen, setIsCareerModalOpen] = useState(false);
+
   return (
     <section className="py-10 md:py-10 bg-white" id="other-courses" aria-label="Other professional software testing courses">
       {/* Invisible SEO keywords */}
@@ -370,6 +373,7 @@ export default function OtherCoursesSection() {
           </button>
         </div>
       </div>
+      <CareerSessionModal isOpen={isCareerModalOpen} onClose={() => setIsCareerModalOpen(false)} />
     </section>
   );
 }
