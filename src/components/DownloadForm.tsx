@@ -14,12 +14,14 @@ export interface DownloadFormValues {
 
 interface DownloadFormContentProps {
   courseTitle: string;
+  syllabusLink?: string;
   onSubmit: (data: DownloadFormValues) => void;
   onClose: () => void;
 }
 
 export interface DownloadFormButtonProps {
   courseTitle: string;
+  syllabusLink?: string;
   buttonText: React.ReactNode;
   buttonClassName: string;
   onSubmit: (data: DownloadFormValues) => void;
@@ -72,7 +74,7 @@ const validatePhoneNumber = (phone: string | undefined): string | null => {
 };
 
 // --- Reusable Form Component (Modal Content) ---
-const DownloadFormContent: React.FC<DownloadFormContentProps> = ({ courseTitle, onSubmit, onClose }) => {
+const DownloadFormContent: React.FC<DownloadFormContentProps> = ({ courseTitle, syllabusLink, onSubmit, onClose }) => {
   const [formData, setFormData] = useState<DownloadFormValues>({
     fullName: '',
     email: '',
@@ -82,16 +84,19 @@ const DownloadFormContent: React.FC<DownloadFormContentProps> = ({ courseTitle, 
   const [errors, setErrors] = useState<Partial<Record<keyof DownloadFormValues, string | null>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     setErrors(prev => ({ ...prev, [name]: null })); // Clear error on change
+    setSubmitError(null);
   };
 
   const handlePhoneChange = (phone: string | undefined) => {
     setFormData(prev => ({ ...prev, phone: phone || '' }));
     setErrors(prev => ({ ...prev, phone: null })); // Clear error on change
+    setSubmitError(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -109,21 +114,33 @@ const DownloadFormContent: React.FC<DownloadFormContentProps> = ({ courseTitle, 
 
     if (isValid) {
       setIsSubmitting(true);
-      // Simulate API call for submission
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      setSubmitError(null);
 
-      // In a real app, you would call the actual API here
-      // const response = await fetch('/api/download-brochure', { ... });
-      // if (response.ok) { ... }
+      try {
+        const response = await fetch('/api/download-brochure', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...formData,
+            courseTitle,
+            syllabusLink,
+          }),
+        });
 
-      onSubmit(formData); // Execute the passed-in submit logic
-      setIsSubmitting(false);
-      setIsSubmitted(true);
+        if (!response.ok) {
+          throw new Error('Failed to submit form');
+        }
 
-      // Optionally close the modal after a delay
-      // setTimeout(() => {
-      //   onClose();
-      // }, 3000);
+        onSubmit(formData); // Execute the passed-in submit logic (logging, analytics, etc.)
+        setIsSubmitting(false);
+        setIsSubmitted(true);
+      } catch (error) {
+        console.error('Submission error:', error);
+        setSubmitError('Something went wrong. Please try again later.');
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -173,6 +190,13 @@ const DownloadFormContent: React.FC<DownloadFormContentProps> = ({ courseTitle, 
         )}
       </AnimatePresence>
 
+      {/* Error Message */}
+      {submitError && (
+        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm text-center">
+          {submitError}
+        </div>
+      )}
+
       {/* Form */}
       {!isSubmitted && (
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -191,9 +215,8 @@ const DownloadFormContent: React.FC<DownloadFormContentProps> = ({ courseTitle, 
                 onChange={handleInputChange}
                 onBlur={(e) => setErrors(prev => ({ ...prev, fullName: validateFullName(e.target.value) }))}
                 required
-                className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${
-                  errors.fullName ? 'border-red-500' : 'border-gray-300'
-                }`}
+                className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${errors.fullName ? 'border-red-500' : 'border-gray-300'
+                  }`}
                 placeholder="Enter your full name"
                 style={{ color: '#1e293b' }}
               />
@@ -217,9 +240,8 @@ const DownloadFormContent: React.FC<DownloadFormContentProps> = ({ courseTitle, 
                 onChange={handleInputChange}
                 onBlur={(e) => setErrors(prev => ({ ...prev, email: validateEmail(e.target.value) }))}
                 required
-                className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${
-                  errors.email ? 'border-red-500' : 'border-gray-300'
-                }`}
+                className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${errors.email ? 'border-red-500' : 'border-gray-300'
+                  }`}
                 placeholder="Enter your email address"
                 style={{ color: '#1e293b' }}
               />
@@ -241,9 +263,8 @@ const DownloadFormContent: React.FC<DownloadFormContentProps> = ({ courseTitle, 
                 value={formData.phone}
                 onChange={handlePhoneChange}
                 onBlur={() => setErrors(prev => ({ ...prev, phone: validatePhoneNumber(formData.phone) }))}
-                className={`phone-input-container ${
-                  errors.phone ? 'border-red-500' : ''
-                }`}
+                className={`phone-input-container ${errors.phone ? 'border-red-500' : ''
+                  }`}
                 placeholder="Enter phone number"
               />
             </div>
@@ -297,6 +318,7 @@ const DownloadFormContent: React.FC<DownloadFormContentProps> = ({ courseTitle, 
 // --- Modal Wrapper Component (Styled like CourseOverviewSection.tsx) ---
 export const DownloadFormButton: React.FC<DownloadFormButtonProps> = ({
   courseTitle,
+  syllabusLink,
   buttonText,
   buttonClassName,
   onSubmit,
@@ -363,6 +385,7 @@ export const DownloadFormButton: React.FC<DownloadFormButtonProps> = ({
             >
               <DownloadFormContent
                 courseTitle={courseTitle}
+                syllabusLink={syllabusLink}
                 onSubmit={handleFormSubmit}
                 onClose={closeModal}
               />
