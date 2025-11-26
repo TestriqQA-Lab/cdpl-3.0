@@ -85,7 +85,7 @@ const MobileFeatureList: React.FC<MobileFeatureListProps> = ({ onOpenBrochure, o
         className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 w-full sm:w-auto cursor-pointer"
       >
         <Download className="h-5 w-5" />
-        Download Syllabus
+        Download Brochure
       </button>
       <Link
         href="/jobs/placements"
@@ -226,7 +226,7 @@ const DesktopHeroContent: React.FC<DesktopHeroContentProps> = ({ onOpenBrochure,
         className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
       >
         <Download className="h-5 w-5" />
-        Download Syllabus
+        Download Brochure
       </button>
 
       {/* Secondary CTA - View Placement Success Stories */}

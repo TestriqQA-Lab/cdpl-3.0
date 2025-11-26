@@ -260,7 +260,7 @@ const BrochureDownloadModal: React.FC<BrochureDownloadModalProps> = ({ isOpen, o
                     <Download className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h2 className="text-xl font-bold text-white">Download Syllabus</h2>
+                    <h2 className="text-xl font-bold text-white">Download Brochure</h2>
                     <p className="text-sm text-white/90 mt-0.5">Get instant access to our course details</p>
                   </div>
                 </div>
@@ -279,7 +279,7 @@ const BrochureDownloadModal: React.FC<BrochureDownloadModalProps> = ({ isOpen, o
                     </div>
                     <h3 className="text-xl font-bold text-gray-900 mb-2">Success!</h3>
                     <p className="text-gray-600 mb-1">
-                      Check your email for the syllabus download link.
+                      Check your email for the brochure download link.
                     </p>
                     <p className="text-sm text-gray-500">
                       Closing in a moment...
@@ -302,8 +302,8 @@ const BrochureDownloadModal: React.FC<BrochureDownloadModalProps> = ({ isOpen, o
                           onChange={handleInputChange}
                           placeholder="Enter your full name"
                           className={`w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${fullNameError
-                              ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                              : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
+                            ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                            : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
                             }`}
                           disabled={isSubmitting}
                         />
@@ -328,8 +328,8 @@ const BrochureDownloadModal: React.FC<BrochureDownloadModalProps> = ({ isOpen, o
                           onChange={handleInputChange}
                           placeholder="Enter your email address"
                           className={`w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${emailError
-                              ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                              : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
+                            ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                            : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
                             }`}
                           disabled={isSubmitting}
                         />
@@ -353,8 +353,8 @@ const BrochureDownloadModal: React.FC<BrochureDownloadModalProps> = ({ isOpen, o
                           onChange={handlePhoneChange}
                           placeholder="Enter your mobile number (e.g., 98765 43210)"
                           className={`w-full [&>input]:pl-4 [&>input]:pr-4 [&>input]:py-3 [&>input]:border-2 [&>input]:rounded-lg [&>input]:text-gray-900 [&>input]:placeholder:text-gray-400 [&>input]:focus:outline-none [&>input]:focus:ring-2 [&>input]:transition-all [&>input]:placeholder-opacity-100 [&>input]:placeholder-shown:text-gray-400 ${phoneError
-                              ? '[&>input]:border-red-300 [&>input]:focus:border-red-500 [&>input]:focus:ring-red-200'
-                              : '[&>input]:border-gray-200 [&>input]:focus:border-[#ff8c00] [&>input]:focus:ring-orange-100'
+                            ? '[&>input]:border-red-300 [&>input]:focus:border-red-500 [&>input]:focus:ring-red-200'
+                            : '[&>input]:border-gray-200 [&>input]:focus:border-[#ff8c00] [&>input]:focus:ring-orange-100'
                             }`}
                           disabled={isSubmitting}
                         />
@@ -378,7 +378,7 @@ const BrochureDownloadModal: React.FC<BrochureDownloadModalProps> = ({ isOpen, o
                       ) : (
                         <>
                           <Download className="w-5 h-5" />
-                          Get Syllabus Now
+                          Get Brochure Now
                         </>
                       )}
                     </button>

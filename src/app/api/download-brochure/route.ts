@@ -73,7 +73,7 @@ export async function POST(request: Request) {
         // but the frontend should provide one.
         const downloadLink = syllabusLink || '#';
 
-        const userHtml = await getTemplatedEmail('brochure-confirmation.html', {
+        const userHtml = await getTemplatedEmail('syllabus-confirmation.html', {
             fullName,
             downloadLink: downloadLink,
             courseName: courseTitle, // Assuming template might use this, or we can add it
