@@ -37,7 +37,7 @@ L.Map.addInitHook(function () {
 function isMapReady(map: L.Map | undefined | null): map is L.Map {
     if (!map) return false;
     // Accessing private fields is okay here for runtime safety; guard with ts-ignore.
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     const m: any = map;
     return !!m._loaded && !!m._mapPane && !!map.getCenter;
 }
@@ -80,7 +80,7 @@ function useThrottledClamp(map: L.Map, bounds: L.LatLngBounds, minZoom: number) 
         };
 
         // Attach after the map has finished loading its first view
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
         const alreadyLoaded = (map as any)._loaded;
         if (alreadyLoaded) {
             attach();
@@ -117,7 +117,7 @@ function EnforceIndia({
         };
 
         // Ensure we only call once the map is ready
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
         if ((map as any)._loaded) apply();
         else map.once("load", apply);
     }, [map, bounds, minZoom]);

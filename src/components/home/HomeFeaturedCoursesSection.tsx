@@ -636,7 +636,7 @@ const CourseCard: React.FC<{ course: Course; index: number; nowMs: number }> = (
             buttonText={
               <span className="flex items-center justify-center gap-2">
                 <Download className="w-5 h-5" />
-                <span>Download Brochure</span>
+                <span>Download Syllabus</span>
               </span>
             }
             buttonClassName="w-full flex items-center justify-center space-x-2 text-slate-700 font-semibold py-3 rounded-xl border-2 border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all duration-300"

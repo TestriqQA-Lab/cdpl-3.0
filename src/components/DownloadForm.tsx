@@ -159,10 +159,10 @@ const DownloadFormContent: React.FC<DownloadFormContentProps> = ({ courseTitle, 
       <div className="mb-6 text-center">
         <Download className="h-8 w-8 text-orange-600 mx-auto mb-2" />
         <h3 className="text-xl font-bold text-slate-900">
-          Download Brochure for <span className="text-blue-600">{courseTitle}</span>
+          Download Syllabus for <span className="text-blue-600">{courseTitle}</span>
         </h3>
         <p className="text-sm text-slate-600 mt-1">
-          Fill the form to get instant access to the detailed course brochure.
+          Fill the form to get instant access to the detailed course syllabus.
         </p>
       </div>
 

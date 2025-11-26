@@ -305,7 +305,7 @@ export default function MentorsImpactSection() {
                 {/* Avatar overlapping */}
                 <div className="absolute -top-3 -left-3">
                   <div className="h-[108px] w-[108px] rounded-2xl bg-zinc-100 shadow-lg ring-1 ring-black/5 overflow-hidden">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
+
                     <img
                       src={m.img}
                       alt={`Mentor portrait — ${m.domain} ${m.company}`}

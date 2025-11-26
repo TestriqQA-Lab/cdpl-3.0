@@ -53,7 +53,7 @@ const BrochureDownloadForm: React.FC<BrochureDownloadFormProps> = ({ onClose }) 
     return true;
   }, []);
 
-    const validatePhoneNumber = useCallback((phone: string | undefined) => {
+  const validatePhoneNumber = useCallback((phone: string | undefined) => {
     if (!phone) {
       setErrors(prev => ({ ...prev, phone: 'Mobile Number is required.' }));
       return false;
@@ -98,7 +98,7 @@ const BrochureDownloadForm: React.FC<BrochureDownloadFormProps> = ({ onClose }) 
   }, [formData, validateFullName, validateEmail, validatePhoneNumber]);
 
   // --- Handlers ---
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
@@ -115,7 +115,7 @@ const BrochureDownloadForm: React.FC<BrochureDownloadFormProps> = ({ onClose }) 
     }
 
     setIsSubmitting(true);
-    
+
     try {
       // NOTE: We send 'type: brochure' to the API
       const response = await fetch('/api/contact', {
@@ -147,7 +147,7 @@ const BrochureDownloadForm: React.FC<BrochureDownloadFormProps> = ({ onClose }) 
   };
 
   // --- Sub-Components ---
-    const handleClose = () => {
+  const handleClose = () => {
     if (timer) clearTimeout(timer);
     onClose();
   };
@@ -161,7 +161,7 @@ const BrochureDownloadForm: React.FC<BrochureDownloadFormProps> = ({ onClose }) 
     >
       <CheckCircle2 className="w-16 h-16 text-green-500 mb-6" />
       <h3 className="text-2xl font-bold text-gray-900 mb-3">
-        Brochure Sent!
+        Syllabus Sent!
       </h3>
       <p className="text-lg text-gray-600 mb-6">
         The download link has been sent to your email address. This window will close automatically in 5 seconds.
@@ -179,9 +179,9 @@ const BrochureDownloadForm: React.FC<BrochureDownloadFormProps> = ({ onClose }) 
   const FormFields = () => (
     <form onSubmit={handleSubmit} className="space-y-4">
       <p className="text-sm text-gray-600 mb-4">
-        Fill out the form below to receive the comprehensive CDPL brochure directly in your inbox.
+        Fill out the form below to receive the comprehensive CDPL syllabus directly in your inbox.
       </p>
-      
+
       {/* Full Name Input */}
       <div>
         <div className="relative">
@@ -193,9 +193,8 @@ const BrochureDownloadForm: React.FC<BrochureDownloadFormProps> = ({ onClose }) 
             onChange={handleChange}
             onBlur={() => validateFullName(formData.fullName)}
             required
-            className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none transition-all duration-300 ${
-              errors.fullName ? 'border-red-500' : 'border-gray-300'
-            }`}
+            className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none transition-all duration-300 ${errors.fullName ? 'border-red-500' : 'border-gray-300'
+              }`}
             placeholder="Full Name *"
             style={{ color: '#1e293b' }}
           />
@@ -216,9 +215,8 @@ const BrochureDownloadForm: React.FC<BrochureDownloadFormProps> = ({ onClose }) 
             onChange={handleChange}
             onBlur={() => validateEmail(formData.email)}
             required
-            className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none transition-all duration-300 ${
-              errors.email ? 'border-red-500' : 'border-gray-300'
-            }`}
+            className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none transition-all duration-300 ${errors.email ? 'border-red-500' : 'border-gray-300'
+              }`}
             placeholder="Email Address *"
             style={{ color: '#1e293b' }}
           />
@@ -237,9 +235,8 @@ const BrochureDownloadForm: React.FC<BrochureDownloadFormProps> = ({ onClose }) 
             value={formData.phone}
             onChange={handlePhoneChange}
             onBlur={() => validatePhoneNumber(formData.phone)}
-            className={`phone-input-container ${
-              errors.phone ? 'border-red-500' : ''
-            }`}
+            className={`phone-input-container ${errors.phone ? 'border-red-500' : ''
+              }`}
             placeholder="Mobile Number *"
           />
         </div>
@@ -261,7 +258,7 @@ const BrochureDownloadForm: React.FC<BrochureDownloadFormProps> = ({ onClose }) 
           </>
         ) : (
           <>
-            <span>Send Brochure Link</span>
+            <span>Send Syllabus Link</span>
             <Download className="w-5 h-5" />
           </>
         )}

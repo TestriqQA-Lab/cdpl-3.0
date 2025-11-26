@@ -16,7 +16,7 @@ function GoogleAnalyticsTracker() {
   useEffect(() => {
     if (GA_MEASUREMENT_ID) {
       const url = pathname + searchParams.toString();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
       (window as any).gtag("config", GA_MEASUREMENT_ID, {
         page_path: url,
       });

@@ -4,16 +4,16 @@ import { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 
 function SectionLoader({ label = "Loading..." }: { label?: string }) {
-    return (
-        <div className="flex items-center justify-center py-16">
-            <p className="text-gray-500 dark:text-gray-400">{label}</p>
-        </div>
-    );
+  return (
+    <div className="flex items-center justify-center py-16">
+      <p className="text-gray-500 dark:text-gray-400">{label}</p>
+    </div>
+  );
 }
 
 const PlacementsCompanyWallSection = dynamic(
-    () => import("@/components/sections/PlacementsCompanyWallSection"),
-    { ssr: true, loading: () => <SectionLoader label="Loading partners…" /> }
+  () => import("@/components/sections/PlacementsCompanyWallSection"),
+  { ssr: true, loading: () => <SectionLoader label="Loading partners…" /> }
 );
 
 type Case = {
@@ -200,7 +200,7 @@ export default function MentorOutcomesSection() {
         {/* Brand strip */}
 
 
-<PlacementsCompanyWallSection />
+        <PlacementsCompanyWallSection />
 
         <p className="mt-4 text-center text-xs text-zinc-700">
           Results vary by effort, background, and market conditions. Your CDPL
@@ -282,7 +282,7 @@ function Orbit({
             {active ? (
               <>
                 <div className="flex items-center gap-3">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
+
                   <img
                     src={active.avatar}
                     alt={`${active.name} avatar`}
@@ -341,7 +341,7 @@ function Orbit({
                 aria-label={`${c.name}, ${c.role} at ${c.company}`}
                 style={{ zIndex: isActive ? 100 : 10 + i }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
+
                 <img
                   src={c.avatar}
                   alt=""
@@ -368,7 +368,7 @@ function Orbit({
               style={{ left: `${cx}%`, top: `${cy}%` }}
               aria-label={`${c.name}, ${c.role} at ${c.company}`}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
+
               <img
                 src={c.avatar}
                 alt=""
