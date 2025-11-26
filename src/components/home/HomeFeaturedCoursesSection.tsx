@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion, Variants } from 'framer-motion';
-import { Clock, Users, ArrowRight, Star, Zap, Download, BookOpen, Gauge, Shield, Smartphone, CheckCircle, Cpu, BarChart3, Code, TrendingUp, Cog, Trophy, Brain } from 'lucide-react';
+import { Clock, Users, ArrowRight, Star, Zap, Download, BookOpen, Gauge, Shield, Smartphone, CheckCircle, Cpu, BarChart3, Code, TrendingUp, Cog, Trophy, Brain, Database } from 'lucide-react';
 import { DownloadFormButton } from '@/components/DownloadForm';
 import Link from 'next/link';
 import { FaChartBar } from 'react-icons/fa6';
@@ -72,6 +72,7 @@ const iconMap = {
   Cog: <Cog className="w-10 h-10" />,
   Trophy: <Trophy className="w-10 h-10" />,
   Brain: <Brain className="w-10 h-10" />,
+  Database: <Database className="w-10 h-10" />,
 
 };
 
@@ -90,7 +91,7 @@ const COURSES: Course[] = [
     link: '/manual-testing-course',
     icon: 'BookOpen',
     features: ['ISTQB Foundation Prep', 'Test Case Design', 'Defect Life Cycle'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/manual-software-testing.pdf',
     // offerEndsAt: '2025-11-15T18:29:59.000Z',
   },
   {
@@ -106,7 +107,7 @@ const COURSES: Course[] = [
     link: '/automation-testing-course',
     icon: 'Code',
     features: ['Selenium WebDriver', 'CI/CD Integration (Jenkins)', 'Advanced Java Concepts'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/advanced-automation-testing.pdf',
   },
   {
     id: 3,
@@ -121,7 +122,7 @@ const COURSES: Course[] = [
     link: '/api-testing',
     icon: 'Zap',
     features: ['Postman & Swagger', 'Rest Assured Framework', 'JSON/XML Validation'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/api-testing-using-postman-and-restapis.pdf',
   },
   {
     id: 4,
@@ -136,7 +137,22 @@ const COURSES: Course[] = [
     link: '/etl-testing',
     icon: 'Shield',
     features: ['Data Warehousing Concepts', 'SQL Testing', 'ETL Tools'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/etl-testing-&-development.pdf',
+  },
+  {
+    id: 25,
+    title: 'Database Management System using MySQL',
+    category: 'Software Testing',
+    description: 'Master SQL queries, database design, and management with MySQL. Learn to build scalable and efficient database solutions.',
+    duration: '40 Hours',
+    students: '500+',
+    rating: 4.8,
+    level: 'Beginner',
+    popular: false,
+    link: '/dbms-course',
+    icon: 'Database',
+    features: ['SQL Fundamentals', 'Database Design', 'Normalization', 'Complex Queries'],
+    syllabusLink: 'https://www.cinutedigital.com/downloads/database-management-system-using-mysql.pdf',
   },
   {
     id: 5,
@@ -151,7 +167,7 @@ const COURSES: Course[] = [
     link: '/advance-software-testing',
     icon: 'ChartBar',
     features: ['Test Strategy & Risk-Based Testing', 'Traceability & Coverage Techniques', 'Test Management & Metrics', 'Performance/Security Test Readiness'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/advanced-software-testing.pdf',
   },
   {
     id: 6,
@@ -166,7 +182,7 @@ const COURSES: Course[] = [
     link: '/java-course',
     icon: 'Cog',
     features: ['Core Java Fundamentals (Variables, OOP, Collections, Exception Handling)', 'Enterprise Java (Spring Boot, REST APIs, Hibernate/JPA)', 'Testing & Build Tools (JUnit/Mockito, Maven/Gradle)', 'CI/CD & Deployment (GitHub Actions, Docker, AWS Basics)', '50+ Hands-on Projects (E-Commerce, Banking System, etc.)', 'Tools: IntelliJ IDEA, Git, Postman'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/java-programming.pdf',
   },
   {
     id: 7,
@@ -178,10 +194,10 @@ const COURSES: Course[] = [
     rating: 4.8,
     level: 'Beginner',
     popular: true,
-    link: '/automation-testing-course',
+    link: '/advance-manual-automation-testing',
     icon: 'Trophy',
     features: ['Risk-Based Strategy & Quality Metrics', 'Advanced Test Design & Bug Advocacy', 'Automation Frameworks (POM/Hybrid, API + UI)', 'CI/CD, Parallel & Cross-Browser at Scale'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/advanced-manual-and-automation-testing-master-program.pdf',
   },
 
   // --- Data Science Courses (Mapped from Header.tsx) ---
@@ -198,7 +214,7 @@ const COURSES: Course[] = [
     link: 'machine-learning-course',
     icon: 'TrendingUp',
     features: ['Machine Learning Python', 'Data Science Hero', 'Python ML Program'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/machine-learning-and-data-science-with-python-hero-program.pdf',
   },
   {
     id: 9,
@@ -213,7 +229,7 @@ const COURSES: Course[] = [
     link: 'generative-ai-course',
     icon: 'TrendingUp',
     features: ['Deep Learning Basics', 'NLP Mastery Course', 'Clustering', 'Generative AI Skills'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/deep-learning-nlp-and-generativeai.pdf',
   },
   {
     id: 10,
@@ -228,7 +244,7 @@ const COURSES: Course[] = [
     link: 'data-science-course',
     icon: 'TrendingUp',
     features: ['Advanced Data Science', 'Machine Learning Masterclass', 'AI Algorithms Pro'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/advanced-data-science-and-machine-learning-masterclass.pdf',
   },
   {
     id: 11,
@@ -243,7 +259,7 @@ const COURSES: Course[] = [
     link: 'ai-course',
     icon: 'TrendingUp',
     features: ['Data Science Mastery', 'AI Master Program', 'Comprehensive ML AI'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/comprehensive-data-science-and-ai-master-program.pdf',
   },
   {
     id: 12,
@@ -258,7 +274,7 @@ const COURSES: Course[] = [
     link: 'python-course',
     icon: 'TrendingUp',
     features: ['Python Basics Guide', 'Advanced Python Coding', 'Learn Python Fast'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/python-programming.pdf',
   },
   {
     id: 13,
@@ -273,7 +289,7 @@ const COURSES: Course[] = [
     link: 'machine-learning-using-python',
     icon: 'TrendingUp',
     features: ['ML Algorithms Python', 'Python ML Coding', 'Scikit-Learn Mastery'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/machine-learning-algorithms-using-python-programming.pdf',
   },
   {
     id: 14,
@@ -288,7 +304,7 @@ const COURSES: Course[] = [
     link: 'data-visualization-in-r-programming',
     icon: 'TrendingUp',
     features: ['R ML Visualization', 'Data Viz R', 'R Programming ML'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/machine-learning-and-data-visualization-using-r-programming.pdf',
   },
 
 
@@ -306,7 +322,7 @@ const COURSES: Course[] = [
     link: '/data-analytics',
     icon: 'BarChart3',
     features: ['Advanced Analytics Hero', 'Data Analytics Mastery', 'Predictive Analytics Pro'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/advanced-data-analytics-hero-program.pdf',
   },
   {
     id: 16,
@@ -321,7 +337,7 @@ const COURSES: Course[] = [
     link: '/data-analytics-python',
     icon: 'BarChart3',
     features: ['Python Data Analytics', 'Advanced Analytics Libraries', 'Pandas NumPy Mastery'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/advanced-data-analytics-with-python-libraries.pdf',
   },
   {
     id: 17,
@@ -336,7 +352,7 @@ const COURSES: Course[] = [
     link: '/data-analytics-and-visualization',
     icon: 'BarChart3',
     features: ['Excel Data Analytics', 'Data Visualization Excel', 'Excel Analytics Mastery'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/advanced-excel-for-data-analytics-&-visualization.pdf',
   },
   {
     id: 18,
@@ -351,7 +367,7 @@ const COURSES: Course[] = [
     link: '/data-analytics-with-tableau',
     icon: 'BarChart3',
     features: ['Tableau Data Analytics', 'Visualization Mastery Tableau', 'Interactive Dashboards Tableau'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/data-analytics-&-visualization-with-tableau.pdf',
   },
   {
     id: 19,
@@ -366,7 +382,7 @@ const COURSES: Course[] = [
     link: '/power-bi-course',
     icon: 'BarChart3',
     features: ['Power BI Analytics', 'Data Visualization Power BI', 'Power BI Mastery'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/data-analytics-&-visualization-with-power-bi.pdf',
   },
   {
     id: 20,
@@ -381,7 +397,7 @@ const COURSES: Course[] = [
     link: '/masters-in-data-engineering',
     icon: 'BarChart3',
     features: ['Power BI/Tableau', 'Big Data Concepts', 'Data Warehousing'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/data-analytics-with-bi-and-big-data-engineering-master-program.pdf',
   },
 
   // --- Artificial Intelligence Courses ---
@@ -398,7 +414,7 @@ const COURSES: Course[] = [
     link: 'prompt-engineering-course',
     icon: 'Brain',
     features: ['AI Foundations & Generative AI', 'Large Language Models & Multimodal AI', 'Prompt Engineering Techniques', 'Responsible AI, Governance & Capstone'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/prompt-engineering-with-gen-ai.pdf',
   },
 
   // --- Digital Marketing Courses ---
@@ -415,7 +431,7 @@ const COURSES: Course[] = [
     link: '/digital-marketing-course',
     icon: 'Smartphone',
     features: ['Holistic Strategy & Planning', 'Advanced Analytics & Attribution', 'Multi-Channel Campaigns', 'Portfolio & Freelance Readiness'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/ai-driven-digital-marketing-&-analytics.pdf',
   },
   {
     id: 23,
@@ -430,7 +446,7 @@ const COURSES: Course[] = [
     link: '/ai-in-digital-marketing',
     icon: 'Smartphone',
     features: ['AI-Powered Market Research & Customer Avatars', 'Automated Content Creation at Scale', 'AI Ads Optimization & Predictive Analytics', 'Build Your Own No-Code AI Marketing Team'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/digital-marketing-and-ai-for-business-owners-digital-marketing-and-ai-for-business-owners.pdf',
   },
   {
     id: 24,
@@ -445,7 +461,7 @@ const COURSES: Course[] = [
     link: '/ai-bootcamp',
     icon: 'Smartphone',
     features: ['Prompt Engineering for Ads & Copywriting', 'AI Tools Mastery (ChatGPT, Claude, Midjourney, ElevenLabs, etc.)', 'Automated Funnels & Omnichannel AI Workflows', 'AI-Driven Performance Marketing & ROAS Optimization'],
-    syllabusLink: '/downloads/cdpl-brochure.pdf',
+    syllabusLink: 'https://www.cinutedigital.com/downloads/digital-marketing-with-ai-bootcamp-digital-marketing-with-ai-bootcamp.pdf',
   },
 ];
 
