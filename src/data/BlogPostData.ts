@@ -811,7 +811,7 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "Next.js 15 SEO Guide: Master React Server Components in 2025",
     description: "A practical, up-to-date SEO playbook for Next.js 15. Learn how React Server Components, the App Router, streaming, caching, ISR, and Edge rendering impact search performance in 2025.",
     excerpt: "Ship lightning-fast, indexable Next.js 15 apps. From React Server Components to ISR and Edge rendering, this 2025 guide shows you how to rank higher and load faster.",
-    featuredImage: "/blog/featured/nextjs15-seo-guide.png",
+    featuredImage: "/blog/featured/nextjs-15-seo-guide-react-server-components-2025.png",
     category: "Web Development",
     categoryId: "web-development",
     author: "Jayesh Mistry",
@@ -857,7 +857,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "A hands-on 2025 playbook for front-end engineers to use LLMs to scaffold React/Next.js components, write TypeScript, generate unit/e2e tests, create Storybook and MDX docs, and wire everything into CI with safety and quality controls.",
     excerpt:
       "Turn AI into a force multiplier for your UI stack. Learn prompt patterns, guardrails, test-first workflows, Storybook automation, and CI integration to ship reliable, documented React and Next.js features faster.",
-    featuredImage: "/blog/featured/ai-frontend-dev.png",
+    featuredImage: "/blog/featured/ai-for-frontend-developers-llms-generate-code-tests-docs-2025.png",
     category: "Web Development",
     categoryId: "web-development",
     author: "Jayesh Mistry",
@@ -904,7 +904,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "A practical 2025 migration guide for teams moving from Gatsby or Create React App to Next.js 15. Learn App Router, React Server Components, ISR, edge rendering, Metadata API, routing, SEO, images, and CI/CD.",
     excerpt:
       "Ship faster with React Server Components, App Router, and ISR. This step-by-step playbook shows how to migrate from Gatsby or CRA to Next.js 15 without losing SEO, performance, or developer velocity.",
-    featuredImage: "/blog/featured/migrate-gatsby-cra-to-next15.png",
+    featuredImage: "/blog/featured/migrating-gatsby-cra-to-nextjs-15-step-by-step.png",
     category: "Web Development",
     categoryId: "web-development",
     author: "Jayesh Mistry",
@@ -949,7 +949,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "A step-by-step 2025 digital marketing playbook covering SEO, content strategy, paid media, email automation, CRO, and attribution. Use proven frameworks to scale qualified traffic, leads, and revenue with first-party data and GA4.",
     excerpt:
       "Build a high-ROI digital marketing engine for 2025. Learn ICP research, topical authority SEO, programmatic content, PPC mix, lifecycle email, CRO experimentation, and GA4 attribution—organized into a 90-day roadmap.",
-    featuredImage: "/blog/featured/2025-digital-marketing-strategy.png",
+    featuredImage: "/blog/featured/2025-digital-marketing-strategy-proven-frameworks-grow-traffic-revenue.png",
     category: "Digital Marketing",
     categoryId: "digital-marketing",
     author: "Sushma Pal",
@@ -1000,7 +1000,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "A 2025 playbook for LinkedIn lead generation. Build a magnetic personal brand, design ethical DM funnels, and scale outreach with Sales Navigator, content pillars, CTAs, and conversion metrics.",
     excerpt:
       "Turn LinkedIn into a predictable pipeline engine. Learn personal branding, content frameworks, DM funnels, Sales Navigator targeting, offer design, and KPI tracking to grow qualified B2B leads.",
-    featuredImage: "/blog/featured/linkedin-lead-gen-2025.png",
+    featuredImage: "/blog/featured/linkedin-lead-generation-personal-branding-dm-funnels-that-scale.png",
     category: "Digital Marketing",
     categoryId: "digital-marketing",
     author: "Sushma Pal",
@@ -1050,7 +1050,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "A 2025 playbook for using AI in digital marketing: prompt engineering, content operations, and 1:1 personalization that scales across SEO, ads, email, and lifecycle—without sacrificing brand safety.",
     excerpt:
       "Turn AI into real pipeline. Learn prompt patterns, editorial workflows, human-in-the-loop QA, AI-driven personalization, and GA4/CRM attribution to grow qualified traffic, leads, and revenue.",
-    featuredImage: "/blog/featured/ai-digital-marketing-2025.png",
+    featuredImage: "/blog/featured/ai-in-digital-marketing-prompting-content-ops-personalization-at-scale.png",
     category: "Digital Marketing",
     categoryId: "digital-marketing",
     author: "Sushma Pal",
@@ -1101,7 +1101,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "An unbiased 2025 comparison of Power BI, Tableau, and Looker (Google Cloud). Evaluate pricing, performance, governance, embedded analytics, AI features, and best-fit scenarios for enterprises and startups.",
     excerpt:
       "Power BI vs Tableau vs Looker in 2025: side-by-side comparison of features, pricing, performance, governance, AI, and use cases—so you can choose the right BI platform for growth.",
-    featuredImage: "/blog/featured/bi-tools-2025.png",
+    featuredImage: "/blog/featured/power-bi-vs-tableau-vs-looker-which-bi-tool-wins-2025.png",
     category: "Business Intelligence",
     categoryId: "business-intelligence",
     author: "Ashish Shetty",
@@ -1152,7 +1152,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "A practical 2025 guide to SQL for BI analysts: SELECT patterns, joins, aggregations, window functions (ROW_NUMBER, RANK, LAG/LEAD), CTEs, and performance tuning with indexes, partitions, and EXPLAIN.",
     excerpt:
       "Level up your BI SQL. Learn high-impact query patterns, master window functions, and tune performance with indexes, partitions, and caching—plus ready-to-use snippets for dashboards and ad-hoc analysis.",
-    featuredImage: "/blog/featured/sql-for-bi-analysts-2025.png",
+    featuredImage: "/blog/featured/sql-for-bi-analysts-queries-window-functions-performance-tuning.png",
     category: "Business Intelligence",
     categoryId: "business-intelligence",
     author: "Ashish Shetty",
