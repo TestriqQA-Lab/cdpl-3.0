@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, User, Mail, Phone, CheckCircle2, Loader2, FileDown } from 'lucide-react';
+import { X, User, Mail, CheckCircle2, Loader2, FileDown } from 'lucide-react';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { isValidPhoneNumber } from 'libphonenumber-js';
@@ -13,8 +13,8 @@ interface SyllabusDownloadModalProps {
   courseName?: string;
 }
 
-const SyllabusDownloadModal: React.FC<SyllabusDownloadModalProps> = ({ 
-  isOpen, 
+const SyllabusDownloadModal: React.FC<SyllabusDownloadModalProps> = ({
+  isOpen,
   onClose,
   courseName = "Course"
 }) => {
@@ -160,7 +160,7 @@ const SyllabusDownloadModal: React.FC<SyllabusDownloadModalProps> = ({
         if (response.ok) {
           console.log('Syllabus request submitted successfully');
           setIsSubmitted(true);
-          
+
           setTimeout(() => {
             setIsSubmitted(false);
             setFormData({
@@ -220,7 +220,7 @@ const SyllabusDownloadModal: React.FC<SyllabusDownloadModalProps> = ({
   return (
 
 
-     <>
+    <>
       {/* Custom CSS for phone input */}
       <style jsx global>{`
 
@@ -233,178 +233,175 @@ const SyllabusDownloadModal: React.FC<SyllabusDownloadModalProps> = ({
 
         }
       `}</style>
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-4"
-          onClick={handleClose}
-        >
+      <AnimatePresence>
+        {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1.0] as const }}
-            className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-4"
+            onClick={handleClose}
           >
-            {/* Modal Header */}
-            <div className="bg-gradient-to-r from-indigo-600 to-indigo-700 px-6 py-5 relative">
-              <button
-                onClick={handleClose}
-                disabled={isSubmitting}
-                className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors disabled:opacity-50"
-                aria-label="Close modal"
-              >
-                <X className="w-6 h-6" />
-              </button>
-              <div className="flex items-center gap-3">
-                <div className="bg-white/20 p-2 rounded-lg">
-                  <FileDown className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h2 className="text-xl font-bold text-white">Download Syllabus</h2>
-                  <p className="text-sm text-white/90 mt-0.5">Get instant access to {courseName} syllabus</p>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1.0] as const }}
+              className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div className="bg-gradient-to-r from-indigo-600 to-indigo-700 px-6 py-5 relative">
+                <button
+                  onClick={handleClose}
+                  disabled={isSubmitting}
+                  className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors disabled:opacity-50"
+                  aria-label="Close modal"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+                <div className="flex items-center gap-3">
+                  <div className="bg-white/20 p-2 rounded-lg">
+                    <FileDown className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold text-white">Download Syllabus</h2>
+                    <p className="text-sm text-white/90 mt-0.5">Get instant access to {courseName} syllabus</p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Modal Body */}
-            <div className="p-6">
-              {isSubmitted ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="text-center py-8"
-                >
-                  <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                    <CheckCircle2 className="w-8 h-8 text-green-600" />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">Success!</h3>
-                  <p className="text-gray-600 mb-1">
-                    Check your email for the syllabus download link.
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    Closing in a moment...
-                  </p>
-                </motion.div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  {/* Full Name Field */}
-                  <div>
-                    <label htmlFor="syllabus-fullName" className="block text-sm font-semibold text-gray-700 mb-2">
-                      Full Name <span className="text-red-500">*</span>
-                    </label>
-                    <div className="relative">
-                      <User className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
-                      <input
-                        type="text"
-                        id="syllabus-fullName"
-                        name="fullName"
-                        value={formData.fullName}
-                        onChange={handleInputChange}
-                        placeholder="Enter your full name"
-                        className={`w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${
-                          fullNameError
-                            ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                            : 'border-gray-200 focus:border-indigo-600 focus:ring-indigo-100'
-                        }`}
-                        disabled={isSubmitting}
-                      />
-                    </div>
-                    {fullNameError && (
-                      <p className="mt-1.5 text-sm text-red-600">{fullNameError}</p>
-                    )}
-                  </div>
-
-                  {/* Email Field */}
-                  <div>
-                    <label htmlFor="syllabus-email" className="block text-sm font-semibold text-gray-700 mb-2">
-                      Email Address <span className="text-red-500">*</span>
-                    </label>
-                    <div className="relative">
-                      <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
-                      <input
-                        type="email"
-                        id="syllabus-email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        placeholder="Enter your email address"
-                        className={`w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${
-                          emailError
-                            ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                            : 'border-gray-200 focus:border-indigo-600 focus:ring-indigo-100'
-                        }`}
-                        disabled={isSubmitting}
-                      />
-                    </div>
-                    {emailError && (
-                      <p className="mt-1.5 text-sm text-red-600">{emailError}</p>
-                    )}
-                  </div>
-
-	                  {/* Phone Field (Mandatory) */}
-	                  <div>
-	                    <label htmlFor="syllabus-phone" className="block text-sm font-semibold text-gray-700 mb-2">
-	                      Mobile Number <span className="text-red-500">*</span>
-	                    </label>
-	                    <div className="relative">
-	                      <PhoneInput
-                        id="syllabus-phone"
-                        international
-                        defaultCountry="IN"
-                        value={formData.phone}
-                        onChange={handlePhoneChange}
-	                        placeholder="Enter your mobile number (e.g., 98765 43210)"
-	                        className={`w-full [&>input]:pl-4 [&>input]:pr-4 [&>input]:py-3 [&>input]:border-2 [&>input]:rounded-lg [&>input]:text-gray-900 [&>input]:placeholder:text-gray-400 [&>input]:focus:outline-none [&>input]:focus:ring-2 [&>input]:transition-all [&>input]:placeholder-opacity-100 [&>input]:placeholder-shown:text-gray-400 ${
-                          phoneError
-                            ? '[&>input]:border-red-300 [&>input]:focus:border-red-500 [&>input]:focus:ring-red-200'
-                            : '[&>input]:border-gray-200 [&>input]:focus:border-indigo-600 [&>input]:focus:ring-indigo-100'
-                        }`}
-                        disabled={isSubmitting}
-                      />
-                    </div>
-                    {phoneError && (
-                      <p className="mt-1.5 text-sm text-red-600">{phoneError}</p>
-                    )}
-                  </div>
-
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-indigo-600 to-indigo-700 text-white font-semibold py-3.5 px-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
+              {/* Modal Body */}
+              <div className="p-6">
+                {isSubmitted ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-center py-8"
                   >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <FileDown className="w-5 h-5" />
-                        Get Syllabus Now
-                      </>
-                    )}
-                  </button>
+                    <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                      <CheckCircle2 className="w-8 h-8 text-green-600" />
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Success!</h3>
+                    <p className="text-gray-600 mb-1">
+                      Check your email for the syllabus download link.
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      Closing in a moment...
+                    </p>
+                  </motion.div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-5">
+                    {/* Full Name Field */}
+                    <div>
+                      <label htmlFor="syllabus-fullName" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Full Name <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <User className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
+                        <input
+                          type="text"
+                          id="syllabus-fullName"
+                          name="fullName"
+                          value={formData.fullName}
+                          onChange={handleInputChange}
+                          placeholder="Enter your full name"
+                          className={`w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${fullNameError
+                              ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                              : 'border-gray-200 focus:border-indigo-600 focus:ring-indigo-100'
+                            }`}
+                          disabled={isSubmitting}
+                        />
+                      </div>
+                      {fullNameError && (
+                        <p className="mt-1.5 text-sm text-red-600">{fullNameError}</p>
+                      )}
+                    </div>
 
-                  {/* Privacy Note */}
-                  <p className="text-xs text-center text-gray-500 mt-3">
-                    By submitting, you agree to receive course information via email.
-                    <br />
-                    We respect your privacy and won&apos;t spam you.
-                  </p>
-                </form>
-              )}
-            </div>
+                    {/* Email Field */}
+                    <div>
+                      <label htmlFor="syllabus-email" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Email Address <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
+                        <input
+                          type="email"
+                          id="syllabus-email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          placeholder="Enter your email address"
+                          className={`w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${emailError
+                              ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                              : 'border-gray-200 focus:border-indigo-600 focus:ring-indigo-100'
+                            }`}
+                          disabled={isSubmitting}
+                        />
+                      </div>
+                      {emailError && (
+                        <p className="mt-1.5 text-sm text-red-600">{emailError}</p>
+                      )}
+                    </div>
+
+                    {/* Phone Field (Mandatory) */}
+                    <div>
+                      <label htmlFor="syllabus-phone" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Mobile Number <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <PhoneInput
+                          id="syllabus-phone"
+                          international
+                          defaultCountry="IN"
+                          value={formData.phone}
+                          onChange={handlePhoneChange}
+                          placeholder="Enter your mobile number (e.g., 98765 43210)"
+                          className={`w-full [&>input]:pl-4 [&>input]:pr-4 [&>input]:py-3 [&>input]:border-2 [&>input]:rounded-lg [&>input]:text-gray-900 [&>input]:placeholder:text-gray-400 [&>input]:focus:outline-none [&>input]:focus:ring-2 [&>input]:transition-all [&>input]:placeholder-opacity-100 [&>input]:placeholder-shown:text-gray-400 ${phoneError
+                              ? '[&>input]:border-red-300 [&>input]:focus:border-red-500 [&>input]:focus:ring-red-200'
+                              : '[&>input]:border-gray-200 [&>input]:focus:border-indigo-600 [&>input]:focus:ring-indigo-100'
+                            }`}
+                          disabled={isSubmitting}
+                        />
+                      </div>
+                      {phoneError && (
+                        <p className="mt-1.5 text-sm text-red-600">{phoneError}</p>
+                      )}
+                    </div>
+
+                    {/* Submit Button */}
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-gradient-to-r from-indigo-600 to-indigo-700 text-white font-semibold py-3.5 px-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-5 h-5 animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <FileDown className="w-5 h-5" />
+                          Get Syllabus Now
+                        </>
+                      )}
+                    </button>
+
+                    {/* Privacy Note */}
+                    <p className="text-xs text-center text-gray-500 mt-3">
+                      By submitting, you agree to receive course information via email.
+                      <br />
+                      We respect your privacy and won&apos;t spam you.
+                    </p>
+                  </form>
+                )}
+              </div>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+        )}
+      </AnimatePresence>
     </>
   );
 };

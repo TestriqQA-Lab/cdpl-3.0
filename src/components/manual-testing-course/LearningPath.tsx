@@ -1,7 +1,6 @@
 "use client";
 /* ==================== LEARNING PATH (Light Theme, SEO-Optimized) ==================== */
 import { CheckCircle2, Clock, Rocket, BookOpen, ClipboardList, Bug, Briefcase, ShieldCheck, Target, Sparkles } from "lucide-react";
-import Link from "next/link";
 import { useState } from "react";
 import CallbackModal from "@/components/CallbackModal";
 import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";

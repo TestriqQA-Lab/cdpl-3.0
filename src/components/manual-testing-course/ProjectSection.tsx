@@ -11,7 +11,6 @@ import {
     Network,
     GraduationCap,
 } from "lucide-react";
-import Link from "next/link";
 import { useState, type JSX } from "react";
 import EnrollModal from "@/components/EnrollModal";
 
