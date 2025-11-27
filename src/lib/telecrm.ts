@@ -40,6 +40,10 @@ export async function pushLeadToTeleCRM(leadData: {
     };
 
     try {
+        console.log('Pushing to TeleCRM:', url);
+        console.log('Token:', apiToken?.substring(0, 10) + '...');
+        console.log('Payload:', JSON.stringify(payload, null, 2));
+
         const response = await axios.post(url, payload, {
             headers: {
                 'Content-Type': 'application/json',
