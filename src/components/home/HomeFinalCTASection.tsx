@@ -25,6 +25,7 @@ export default function HomeFinalCTASection() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   // Validation functions from HomeHeroSection
   const validateFullName = useCallback((fullName: string) => {
@@ -77,33 +78,38 @@ export default function HomeFinalCTASection() {
     }
 
     setIsSubmitting(true);
-    
+
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          source: 'Home Page - Get Started Section',
+        }),
       });
 
       if (response.ok) {
         console.log('Form submitted successfully, emails sent.');
-        alert('Thank you! Your inquiry has been sent. We will contact you shortly.');
+        setIsSubmitted(true);
         // Reset form after successful submission
         setFormData({
           fullName: '',
           email: '',
           phone: ''
         });
+        // Hide success message after 5 seconds
+        setTimeout(() => setIsSubmitted(false), 5000);
       } else {
         const errorData = await response.json();
         console.error('Form submission failed:', errorData.message);
-        alert(`Submission failed: ${errorData.message || 'An unknown error occurred.'}`);
+        // You might want to set an error state here to show inline error
       }
     } catch (error) {
       console.error('Network error during form submission:', error);
-      alert('Network error. Please check your connection and try again.');
+      // You might want to set an error state here to show inline error
     } finally {
       setIsSubmitting(false);
     }
@@ -159,8 +165,8 @@ export default function HomeFinalCTASection() {
                 '100% placement support guaranteed',
                 'Flexible payment options available',
               ].map((benefit, index) => (
-                <motion.div 
-                  key={index} 
+                <motion.div
+                  key={index}
                   className="flex items-center gap-3"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -175,7 +181,7 @@ export default function HomeFinalCTASection() {
               ))}
             </div>
 
-           
+
           </motion.div>
 
           {/* Right Column - Lead Form - Enhanced UI */}
@@ -197,6 +203,23 @@ export default function HomeFinalCTASection() {
                 </p>
               </div>
 
+              {/* Success Message */}
+              {isSubmitted && (
+                <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-green-600" />
+                    <div>
+                      <div className="text-sm font-semibold text-green-900">
+                        Thank You!
+                      </div>
+                      <div className="text-xs text-green-700">
+                        We'll contact you within 2 hours.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {/* Form */}
               <form onSubmit={handleSubmit} className="space-y-5">
                 {/* Full Name Input - TestRiq Style */}
@@ -213,9 +236,8 @@ export default function HomeFinalCTASection() {
                       onChange={handleChange}
                       onBlur={() => validateFullName(formData.fullName)}
                       required
-                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none transition-all duration-300 ${
-                        errors.fullName ? 'border-red-500' : 'border-gray-300'
-                      }`}
+                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none transition-all duration-300 ${errors.fullName ? 'border-red-500' : 'border-gray-300'
+                        }`}
                       placeholder="Enter your full name"
                       style={{ color: '#1e293b' }}
                     />
@@ -239,9 +261,8 @@ export default function HomeFinalCTASection() {
                       onChange={handleChange}
                       onBlur={() => validateEmail(formData.email)}
                       required
-                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none transition-all duration-300 ${
-                        errors.email ? 'border-red-500' : 'border-gray-300'
-                      }`}
+                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none transition-all duration-300 ${errors.email ? 'border-red-500' : 'border-gray-300'
+                        }`}
                       placeholder="Enter your email address"
                       style={{ color: '#1e293b' }}
                     />
@@ -263,9 +284,8 @@ export default function HomeFinalCTASection() {
                       value={formData.phone}
                       onChange={handlePhoneChange}
                       onBlur={() => validatePhoneNumber(formData.phone)}
-                      className={`phone-input-container ${
-                        errors.phone ? 'border-red-500' : ''
-                      }`}
+                      className={`phone-input-container ${errors.phone ? 'border-red-500' : ''
+                        }`}
                       placeholder="Enter phone number"
                     />
                   </div>
@@ -286,8 +306,8 @@ export default function HomeFinalCTASection() {
                     </>
                   ) : (
                     <>
-                  <span>Get Started Now</span>
-                  <ArrowRight className="w-5 h-5" />
+                      <span>Get Started Now</span>
+                      <ArrowRight className="w-5 h-5" />
                     </>
                   )}
                 </button>

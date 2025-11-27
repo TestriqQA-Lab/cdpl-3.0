@@ -117,14 +117,16 @@ const DownloadFormContent: React.FC<DownloadFormContentProps> = ({ courseTitle, 
       setSubmitError(null);
 
       try {
-        const response = await fetch('/api/download-brochure', {
+        const response = await fetch('/api/contact', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             ...formData,
-            courseTitle,
+            type: 'syllabus',
+            source: `Home Page - ${courseTitle} - Download Syllabus Modal Form`,
+            courseName: courseTitle,
             syllabusLink,
           }),
         });

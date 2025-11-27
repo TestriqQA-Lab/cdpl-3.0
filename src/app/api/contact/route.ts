@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import { getTemplatedEmail } from '@/lib/email-utils';
 import { pushLeadToTeleCRM } from '@/lib/telecrm';
+import { appendRowToSheet } from '@/lib/google-sheets';
 
 // --- Configuration ---
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@example.com';
@@ -37,26 +38,43 @@ async function sendEmail(mailOptions: nodemailer.SendMailOptions) {
 
 // --- API Handler ---
 export async function POST(request: Request) {
+  console.log('API Contact Route Hit');
   try {
     const body = await request.json();
-    const { fullName, email, phone, type, source, interest, message } = body; // 'type': 'contact' or 'brochure', 'source': form location
+    const { fullName, email, phone, type, source, interest, message, courseName, syllabusLink } = body; // Added courseName, syllabusLink
+    console.log('Received payload:', { fullName, email, phone, type, source, courseName });
 
     // 1. Basic Validation
     if (!fullName || !email || !phone) {
+      console.warn('Missing required fields');
       return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
     }
 
     // 2. Determine Email Content based on 'type' and available fields
     const isBrochureRequest = type === 'brochure';
-    const formSource = source || (isBrochureRequest ? 'Home Page - Brochure Download Modal' : 'Contact Form');
+    const isSyllabusRequest = type === 'syllabus';
+
+    // Determine Source
+    let formSource = source;
+    if (!formSource) {
+      if (isBrochureRequest) formSource = 'Home Page - Brochure Download Modal';
+      else if (isSyllabusRequest) formSource = `Home Page - ${courseName || 'Unknown Course'} - Download Syllabus Modal Form`;
+      else formSource = 'Contact Form';
+    }
+
     const isHomeHeroForm = formSource.includes('Home Hero') || formSource.includes('Enquiry Form - Home Hero Section') || formSource.includes('Enquiry Form - Home Enquire Now Button');
+    const isGetStartedForm = formSource.includes('Get Started Section');
 
     // Subject Prefix Logic
     let subjectPrefix = '[NEW LEAD]';
     if (isBrochureRequest) {
       subjectPrefix = '[BROCHURE DOWNLOAD - HOME PAGE]';
+    } else if (isSyllabusRequest) {
+      subjectPrefix = '[SYLLABUS REQUEST]';
     } else if (isHomeHeroForm) {
       subjectPrefix = '[Enquiry]';
+    } else if (isGetStartedForm) {
+      subjectPrefix = '[GET STARTED REQUEST]';
     }
 
     // Admin Template Logic
@@ -71,15 +89,20 @@ export async function POST(request: Request) {
     }
 
     // 3. Prepare Admin Notification Email
+    console.log('Preparing admin email...');
+    const currentYear = new Date().getFullYear().toString();
     const adminData: Record<string, string> = {
       fullName,
       email,
       phone,
-      type: isBrochureRequest ? 'Brochure Download' : 'General Inquiry',
-      source: formSource, // Keep the specific source
-      downloadLink: isBrochureRequest ? BROCHURE_DOWNLOAD_LINK : 'N/A',
-      year: new Date().getFullYear().toString(),
+      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isGetStartedForm ? 'Get Started Request' : 'General Inquiry')),
+      source: formSource,
+      downloadLink: isBrochureRequest ? BROCHURE_DOWNLOAD_LINK : (isSyllabusRequest ? (syllabusLink || 'N/A') : 'N/A'),
+      year: currentYear,
+      currentYear: currentYear, // Pass both for compatibility
     };
+
+    if (courseName) adminData.courseName = courseName;
 
     // Only include interest and message if they exist (for detailed template)
     if (hasDetailedFields) {
@@ -88,8 +111,11 @@ export async function POST(request: Request) {
     }
     const adminHtml = await getTemplatedEmail(adminTemplate, adminData);
 
-    // Use the specific formSource in the subject line
-    const adminSubject = `${subjectPrefix} New Lead from ${fullName} - ${formSource}`;
+    // Admin Subject Logic
+    let adminSubject = `${subjectPrefix} New Lead from ${fullName} - ${formSource}`;
+    if (isSyllabusRequest && courseName) {
+      adminSubject = `${subjectPrefix} New Lead for ${courseName} - ${fullName}`;
+    }
 
     const adminMailOptions: nodemailer.SendMailOptions = {
       from: SMTP_FROM_EMAIL,
@@ -107,7 +133,8 @@ export async function POST(request: Request) {
       const userHtml = await getTemplatedEmail('brochure-confirmation.html', {
         fullName,
         downloadLink: BROCHURE_DOWNLOAD_LINK,
-        year: new Date().getFullYear().toString(),
+        year: currentYear,
+        currentYear: currentYear,
       });
 
       userMailOptions = {
@@ -116,13 +143,30 @@ export async function POST(request: Request) {
         subject: 'Your CDPL Brochure is Ready for Download!',
         html: userHtml,
       };
+    } else if (isSyllabusRequest) {
+      // Syllabus Confirmation
+      const userHtml = await getTemplatedEmail('syllabus-confirmation.html', {
+        fullName,
+        courseName: courseName || 'Course',
+        downloadLink: syllabusLink || BROCHURE_DOWNLOAD_LINK, // Fallback if needed
+        year: currentYear,
+        currentYear: currentYear,
+      });
+
+      userMailOptions = {
+        from: SMTP_FROM_EMAIL,
+        to: email,
+        subject: `Your ${courseName || 'Course'} Syllabus is Ready!`,
+        html: userHtml,
+      };
     } else {
-      // General Contact Confirmation
+      // General Contact Confirmation (Includes Get Started)
       const userHtml = await getTemplatedEmail('user-confirmation.html', {
         fullName,
         phone,
         email,
-        year: new Date().getFullYear().toString(),
+        year: currentYear,
+        currentYear: currentYear,
       });
 
       userMailOptions = {
@@ -134,12 +178,15 @@ export async function POST(request: Request) {
     }
 
     // 5. Send Emails
+    console.log('Sending admin email to:', ADMIN_EMAIL);
     const adminSuccess = await sendEmail(adminMailOptions);
+    console.log('Admin email result:', adminSuccess);
+
+    console.log('Sending user email to:', email);
     const userSuccess = await sendEmail(userMailOptions);
+    console.log('User email result:', userSuccess);
 
     // 6. Push to TeleCRM (Async - don't block response)
-    // We only push if it's not a brochure download (or if client wants brochure leads too, usually yes)
-    // Assuming we want all leads in CRM:
     pushLeadToTeleCRM({
       fullName,
       email,
@@ -147,11 +194,21 @@ export async function POST(request: Request) {
       source: formSource,
     }).catch(err => console.error('TeleCRM background push error:', err));
 
+    // 7. Append to Google Sheet (Async)
+    appendRowToSheet({
+      date: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+      fullName,
+      email,
+      phone,
+      source: formSource,
+      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isGetStartedForm ? 'Get Started Request' : 'General Inquiry')),
+      interest: interest || '',
+      message: message || '',
+    }).catch(err => console.error('Google Sheet background update error:', err));
+
     if (adminSuccess && userSuccess) {
       return NextResponse.json({ message: 'Form submitted and emails sent successfully' }, { status: 200 });
     } else {
-      // Even if one fails, we return a success to the user to avoid confusion, 
-      // but log the error on the server.
       console.warn('One or more emails failed to send. Check server logs.');
       return NextResponse.json({ message: 'Form submitted, but there was an issue sending confirmation email.' }, { status: 200 });
     }
