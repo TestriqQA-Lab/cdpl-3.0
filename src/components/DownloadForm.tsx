@@ -375,23 +375,25 @@ export const DownloadFormButton: React.FC<DownloadFormButtonProps> = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[9999] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
+            className="fixed inset-0 z-[9999] bg-black/50 backdrop-blur-sm overflow-y-auto"
           >
-            <motion.div
-              ref={modalRef}
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="relative"
-            >
-              <DownloadFormContent
-                courseTitle={courseTitle}
-                syllabusLink={syllabusLink}
-                onSubmit={handleFormSubmit}
-                onClose={closeModal}
-              />
-            </motion.div>
+            <div className="flex min-h-full items-center justify-center p-4">
+              <motion.div
+                ref={modalRef}
+                initial={{ scale: 0.9, y: 20 }}
+                animate={{ scale: 1, y: 0 }}
+                exit={{ scale: 0.9, y: 20 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                className="relative w-full max-w-md"
+              >
+                <DownloadFormContent
+                  courseTitle={courseTitle}
+                  syllabusLink={syllabusLink}
+                  onSubmit={handleFormSubmit}
+                  onClose={closeModal}
+                />
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -12,6 +12,8 @@ import {
   Trophy,
   MapPin,
   ArrowRight,
+  Home,
+  ChevronRight,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -61,6 +63,12 @@ function FloatingIcon({
 }
 
 export default function PlacementsHeroSection() {
+
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Jobs" },
+    { label: "Placements", href: "/jobs/placements" },
+  ];
   return (
     <section
       className="
@@ -118,21 +126,32 @@ export default function PlacementsHeroSection() {
       </div>
 
       {/* SINGLE CONTAINER (breadcrumb + hero) */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 pt-10 pb-0 sm:px-6 lg:px-8">
-        {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-3">
-          <ol className="flex items-center gap-2 text-sm text-slate-500">
-            <li>
-              <Link href="/" className="hover:text-slate-700">Home</Link>
-            </li>
-            <li aria-hidden className="text-slate-400">/</li>
-            <li>
-              <span className="font-medium text-slate-700">Jobs</span>
-            </li>
-            <li aria-hidden className="text-slate-400">/</li>
-            <li aria-current="page" className="font-semibold text-slate-900">
-              Placements
-            </li>
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pt-10 md:pb-6 sm:px-6 lg:px-8">
+        {/* Breadcrumbs for SEO & UX */}
+        <nav aria-label="Breadcrumb" className="mb-4 -mx-4 px-4 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          <ol className="flex items-center gap-2 text-sm text-slate-600 whitespace-nowrap">
+            {breadcrumbs.map((c, i) => {
+              const isLast = i === breadcrumbs.length - 1;
+              return (
+                <li key={i} className="flex items-center gap-2">
+                  {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                  {c.href ? (
+                    <Link
+                      href={c.href}
+                      className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
+                      aria-current={isLast ? "page" : undefined}
+                      title={c.label}
+                    >
+                      {c.label}
+                    </Link>
+                  ) : (
+                    <span className={`${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}>
+                      {c.label}
+                    </span>
+                  )}
+                </li>
+              );
+            })}
           </ol>
         </nav>
 
@@ -217,7 +236,7 @@ export default function PlacementsHeroSection() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="mt-6 flex items-center justify-center lg:justify-start"
+              className="mt-6 flex items-center justify-center md:justify-start"
             >
               <Link
                 href="#placements-highlights"

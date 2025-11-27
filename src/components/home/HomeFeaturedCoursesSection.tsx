@@ -77,7 +77,7 @@ const iconMap = {
 };
 
 const COURSES: Course[] = [
-  // --- Software Testing Courses (Mapped from Header.tsx) ---
+  // --- Software Testing Courses ---
   {
     id: 1,
     title: 'Manual Software Testing',
@@ -92,7 +92,6 @@ const COURSES: Course[] = [
     icon: 'BookOpen',
     features: ['ISTQB Foundation Prep', 'Test Case Design', 'Defect Life Cycle'],
     syllabusLink: 'https://www.cinutedigital.com/downloads/manual-software-testing.pdf',
-    // offerEndsAt: '2025-11-15T18:29:59.000Z',
   },
   {
     id: 2,
@@ -128,19 +127,19 @@ const COURSES: Course[] = [
     id: 4,
     title: 'ETL Testing Course',
     category: 'Software Testing',
-    description: 'Learn to lead Agile transformations using the SAFe framework.',
+    description: 'Master the art of leading enterprise-wide Agile transformations using the Scaled Agile Framework (SAFe).',
     duration: '100 Hours',
     students: '500+',
     rating: 4.6,
     level: 'Intermediate',
-    popular: false,
+    popular: true,
     link: '/etl-testing',
     icon: 'Shield',
-    features: ['Data Warehousing Concepts', 'SQL Testing', 'ETL Tools'],
+    features: ['Data Warehousing Concepts', 'SQL Testing', 'ETL Tools', 'ETL Testing Lifecycle & Test Planning'],
     syllabusLink: 'https://www.cinutedigital.com/downloads/etl-testing-&-development.pdf',
   },
   {
-    id: 25,
+    id: 5,
     title: 'Database Management System using MySQL',
     category: 'Software Testing',
     description: 'Master SQL queries, database design, and management with MySQL. Learn to build scalable and efficient database solutions.',
@@ -155,7 +154,7 @@ const COURSES: Course[] = [
     syllabusLink: 'https://www.cinutedigital.com/downloads/database-management-system-using-mysql.pdf',
   },
   {
-    id: 5,
+    id: 6,
     title: 'Advanced Software Testing',
     category: 'Software Testing',
     description: 'Go beyond the basics—build strategies, manage risk, and measure quality with actionable metrics.',
@@ -170,7 +169,7 @@ const COURSES: Course[] = [
     syllabusLink: 'https://www.cinutedigital.com/downloads/advanced-software-testing.pdf',
   },
   {
-    id: 6,
+    id: 7,
     title: 'Master Program in Java Programming',
     category: 'Software Testing',
     description: 'Become industry-ready with Core Java, OOP, Collections, JDBC, Spring Boot, REST APIs, unit testing, and deployment. Build portfolio projects and earn a QR-verified certificate.',
@@ -181,11 +180,18 @@ const COURSES: Course[] = [
     popular: true,
     link: '/java-course',
     icon: 'Cog',
-    features: ['Core Java Fundamentals (Variables, OOP, Collections, Exception Handling)', 'Enterprise Java (Spring Boot, REST APIs, Hibernate/JPA)', 'Testing & Build Tools (JUnit/Mockito, Maven/Gradle)', 'CI/CD & Deployment (GitHub Actions, Docker, AWS Basics)', '50+ Hands-on Projects (E-Commerce, Banking System, etc.)', 'Tools: IntelliJ IDEA, Git, Postman'],
+    features: [
+      'Core Java Fundamentals (Variables, OOP, Collections, Exception Handling)',
+      'Enterprise Java (Spring Boot, REST APIs, Hibernate/JPA)',
+      'Testing & Build Tools (JUnit/Mockito, Maven/Gradle)',
+      'CI/CD & Deployment (GitHub Actions, Docker, AWS Basics)',
+      '50+ Hands-on Projects (E-Commerce, Banking System, etc.)',
+      'Tools: IntelliJ IDEA, Git, Postman'
+    ],
     syllabusLink: 'https://www.cinutedigital.com/downloads/java-programming.pdf',
   },
   {
-    id: 7,
+    id: 8,
     title: 'Advanced Manual & Automation Testing — Master Program',
     category: 'Software Testing',
     description: 'End-to-end mastery: advanced test strategy and leadership combined with enterprise-grade automation and CI/CD.',
@@ -196,13 +202,35 @@ const COURSES: Course[] = [
     popular: true,
     link: '/advance-manual-automation-testing',
     icon: 'Trophy',
-    features: ['Risk-Based Strategy & Quality Metrics', 'Advanced Test Design & Bug Advocacy', 'Automation Frameworks (POM/Hybrid, API + UI)', 'CI/CD, Parallel & Cross-Browser at Scale'],
+    features: [
+      'Risk-Based Strategy & Quality Metrics',
+      'Advanced Test Design & Bug Advocacy',
+      'Automation Frameworks (POM/Hybrid, API + UI)',
+      'CI/CD, Parallel & Cross-Browser at Scale'
+    ],
     syllabusLink: 'https://www.cinutedigital.com/downloads/advanced-manual-and-automation-testing-master-program.pdf',
   },
 
-  // --- Data Science Courses (Mapped from Header.tsx) ---
+  // Python Programming — ADDED TO SOFTWARE TESTING (as prerequisite)
   {
-    id: 8,
+    id: 9,
+    title: 'Python Programming',
+    category: 'Software Testing',
+    description: 'Master Python Programming from absolute basics all the way to advanced and professional-level concepts! Dive deep into Python syntax, data structures, object-oriented programming, functional programming, automation scripting, and real-world problem-solving through engaging, hands-on projects that reinforce every concept.',
+    duration: '30 Hours',
+    students: '2,268+',
+    rating: 4.8,
+    level: 'Beginner',
+    popular: true,
+    link: '/python-course',
+    icon: 'TrendingUp',
+    features: ['Python Basics Guide', 'Advanced Python Coding', 'Learn Python Fast', 'Real-World Python Projects & Automation Mastery'],
+    syllabusLink: 'https://www.cinutedigital.com/downloads/python-programming.pdf',
+  },
+
+  // --- Data Science Courses ---
+  {
+    id: 10,
     title: 'Machine Learning and Data Science with Python - Hero Program',
     category: 'Data Science',
     description: 'Master Machine Learning & Data Science with Python in our Hero Program! Hands-on projects, expert mentorship & job-ready skills. Enroll now & launch your tech career!',
@@ -211,14 +239,14 @@ const COURSES: Course[] = [
     rating: 4.8,
     level: 'Beginner',
     popular: true,
-    link: 'machine-learning-course',
+    link: '/machine-learning-course',
     icon: 'TrendingUp',
-    features: ['Machine Learning Python', 'Data Science Hero', 'Python ML Program'],
+    features: ['Machine Learning Python', 'Data Science Hero', 'Python ML Program', 'MLOps & Production-Ready ML Systems'],
     syllabusLink: 'https://www.cinutedigital.com/downloads/machine-learning-and-data-science-with-python-hero-program.pdf',
   },
   {
-    id: 9,
-    title: 'Deep Learning, NLP and GenerativeAI',
+    id: 11,
+    title: 'Deep Learning, NLP and Generative AI',
     category: 'Data Science',
     description: 'Dive into Deep Learning, NLP & Generative AI! Master neural networks, text processing & AI creation with hands-on projects. Enroll now & lead the AI revolution!',
     duration: '55 Hours',
@@ -226,13 +254,13 @@ const COURSES: Course[] = [
     rating: 4.8,
     level: 'Beginner',
     popular: true,
-    link: 'generative-ai-course',
+    link: '/generative-ai-course',
     icon: 'TrendingUp',
     features: ['Deep Learning Basics', 'NLP Mastery Course', 'Clustering', 'Generative AI Skills'],
     syllabusLink: 'https://www.cinutedigital.com/downloads/deep-learning-nlp-and-generativeai.pdf',
   },
   {
-    id: 10,
+    id: 12,
     title: 'Advanced Data Science and Machine Learning Masterclass',
     category: 'Data Science',
     description: 'Elevate your career with Advanced Data Science & Machine Learning Masterclass! Deep-dive into algorithms, big data & AI. Expert-led, project-based. Enroll today!',
@@ -241,13 +269,13 @@ const COURSES: Course[] = [
     rating: 4.8,
     level: 'Beginner',
     popular: false,
-    link: 'data-science-course',
+    link: '/data-science-course',
     icon: 'TrendingUp',
-    features: ['Advanced Data Science', 'Machine Learning Masterclass', 'AI Algorithms Pro'],
+    features: ['Advanced Data Science', 'Machine Learning Masterclass', 'AI Algorithms Pro', 'Generative AI & LLM Engineering in Practice'],
     syllabusLink: 'https://www.cinutedigital.com/downloads/advanced-data-science-and-machine-learning-masterclass.pdf',
   },
   {
-    id: 11,
+    id: 13,
     title: 'Comprehensive Data Science and AI - Master Program',
     category: 'Data Science',
     description: 'Unlock expertise in Comprehensive Data Science & AI Master Program! From ML to deep learning, big data & ethics. Hands-on, industry-aligned. Enroll now & shape the future!',
@@ -256,28 +284,13 @@ const COURSES: Course[] = [
     rating: 4.8,
     level: 'Beginner',
     popular: true,
-    link: 'ai-course',
+    link: '/ai-course',
     icon: 'TrendingUp',
     features: ['Data Science Mastery', 'AI Master Program', 'Comprehensive ML AI'],
     syllabusLink: 'https://www.cinutedigital.com/downloads/comprehensive-data-science-and-ai-master-program.pdf',
   },
   {
-    id: 12,
-    title: 'Python Programming',
-    category: 'Data Science',
-    description: 'Master Python Programming from basics to advanced! Learn syntax, data structures, OOP & automation with hands-on projects. Start coding today & boost your career!',
-    duration: '30 Hours',
-    students: '2,268+',
-    rating: 4.8,
-    level: 'Beginner',
-    popular: true,
-    link: 'python-course',
-    icon: 'TrendingUp',
-    features: ['Python Basics Guide', 'Advanced Python Coding', 'Learn Python Fast'],
-    syllabusLink: 'https://www.cinutedigital.com/downloads/python-programming.pdf',
-  },
-  {
-    id: 13,
+    id: 14,
     title: 'Machine Learning Algorithms using python Programming',
     category: 'Data Science',
     description: 'Master Machine Learning Algorithms using Python Programming! Implement regression, classification, clustering & more with scikit-learn. Hands-on code, real projects. Enroll now!',
@@ -286,13 +299,13 @@ const COURSES: Course[] = [
     rating: 4.8,
     level: 'Beginner',
     popular: true,
-    link: 'machine-learning-using-python',
+    link: '/machine-learning-using-python',
     icon: 'TrendingUp',
     features: ['ML Algorithms Python', 'Python ML Coding', 'Scikit-Learn Mastery'],
     syllabusLink: 'https://www.cinutedigital.com/downloads/machine-learning-algorithms-using-python-programming.pdf',
   },
   {
-    id: 14,
+    id: 15,
     title: 'Machine Learning and Data Visualization using R Programming',
     category: 'Data Science',
     description: 'Master Machine Learning & Data Visualization using R Programming! Explore ggplot2, tidyverse, ML models & interactive dashboards. Hands-on projects. Enroll now & excel in data!',
@@ -301,16 +314,32 @@ const COURSES: Course[] = [
     rating: 4.8,
     level: 'Beginner',
     popular: true,
-    link: 'data-visualization-in-r-programming',
+    link: '/data-visualization-in-r-programming',
     icon: 'TrendingUp',
     features: ['R ML Visualization', 'Data Viz R', 'R Programming ML'],
     syllabusLink: 'https://www.cinutedigital.com/downloads/machine-learning-and-data-visualization-using-r-programming.pdf',
   },
 
+  // Python Programming — MOVED TO LAST IN DATA SCIENCE (as requested)
+  {
+    id: 16,
+    title: 'Python Programming',
+    category: 'Data Science',
+    description: 'Master Python Programming from absolute basics all the way to advanced and professional-level concepts! Dive deep into Python syntax, data structures, object-oriented programming, functional programming, automation scripting, and real-world problem-solving through engaging, hands-on projects that reinforce every concept.',
+    duration: '30 Hours',
+    students: '2,268+',
+    rating: 4.8,
+    level: 'Beginner',
+    popular: true,
+    link: '/python-course',
+    icon: 'TrendingUp',
+    features: ['Python Basics Guide', 'Advanced Python Coding', 'Learn Python Fast', 'Real-World Python Projects & Automation Mastery'],
+    syllabusLink: 'https://www.cinutedigital.com/downloads/python-programming.pdf',
+  },
 
   // --- Business Intelligence Courses ---
   {
-    id: 15,
+    id: 17,
     title: 'Advanced Data Analytics - Hero Program',
     category: 'Business Intelligence',
     description: 'Elevate to pro with Advanced Data Analytics Hero Program! Master SQL, Python, Tableau, predictive modeling & big data. Hands-on, job-focused.',
@@ -325,7 +354,7 @@ const COURSES: Course[] = [
     syllabusLink: 'https://www.cinutedigital.com/downloads/advanced-data-analytics-hero-program.pdf',
   },
   {
-    id: 16,
+    id: 18,
     title: 'Advanced Data Analytics with Python Libraries',
     category: 'Business Intelligence',
     description: 'Master Advanced Data Analytics with Python Libraries! Harness Pandas, NumPy, Matplotlib, Seaborn & Scikit-learn for insights & predictions. Hands-on projects.',
@@ -340,7 +369,7 @@ const COURSES: Course[] = [
     syllabusLink: 'https://www.cinutedigital.com/downloads/advanced-data-analytics-with-python-libraries.pdf',
   },
   {
-    id: 17,
+    id: 19,
     title: 'Advanced Excel for Data Analytics & Visualization',
     category: 'Business Intelligence',
     description: 'Master Excel for Data Analytics & Visualization! Unlock PivotTables, Power Query, charts, dashboards & advanced formulas. Hands-on, real-world projects.',
@@ -355,7 +384,7 @@ const COURSES: Course[] = [
     syllabusLink: 'https://www.cinutedigital.com/downloads/advanced-excel-for-data-analytics-&-visualization.pdf',
   },
   {
-    id: 18,
+    id: 20,
     title: 'Data Analytics & Visualization with Tableau',
     category: 'Business Intelligence',
     description: 'Master Data Analytics & Visualization with Tableau! Build interactive dashboards, explore data with drag-and-drop, uncover insights & tell stories. Hands-on projects.',
@@ -370,7 +399,7 @@ const COURSES: Course[] = [
     syllabusLink: 'https://www.cinutedigital.com/downloads/data-analytics-&-visualization-with-tableau.pdf',
   },
   {
-    id: 19,
+    id: 21,
     title: 'Data Analytics & Visualization with Power BI',
     category: 'Business Intelligence',
     description: 'Master Data Analytics & Visualization with Power BI! Create stunning dashboards, DAX formulas, data modeling & insights. Hands-on projects for business intelligence.',
@@ -385,7 +414,7 @@ const COURSES: Course[] = [
     syllabusLink: 'https://www.cinutedigital.com/downloads/data-analytics-&-visualization-with-power-bi.pdf',
   },
   {
-    id: 20,
+    id: 22,
     title: 'Data Analytics With BI And Big Data Engineering Master Program',
     category: 'Business Intelligence',
     description: 'Master Data Analytics with BI & Big Data Engineering Master Program! Harness Power BI, Tableau, Spark, Hadoop & ETL pipelines for scalable insights. Hands-on, industry-ready.',
@@ -402,7 +431,7 @@ const COURSES: Course[] = [
 
   // --- Artificial Intelligence Courses ---
   {
-    id: 21,
+    id: 23,
     title: 'Prompt Engineering with Gen AI',
     category: 'Artificial Intelligence',
     description: 'Become an AI Expert in Mumbai. Master the fundamentals of AI, deep learning, NLP, and intelligent automation systems with hands-on projects and industry certifications.',
@@ -411,7 +440,7 @@ const COURSES: Course[] = [
     rating: 4.9,
     level: 'Master',
     popular: true,
-    link: 'prompt-engineering-course',
+    link: '/prompt-engineering-course',
     icon: 'Brain',
     features: ['AI Foundations & Generative AI', 'Large Language Models & Multimodal AI', 'Prompt Engineering Techniques', 'Responsible AI, Governance & Capstone'],
     syllabusLink: 'https://www.cinutedigital.com/downloads/prompt-engineering-with-gen-ai.pdf',
@@ -419,8 +448,8 @@ const COURSES: Course[] = [
 
   // --- Digital Marketing Courses ---
   {
-    id: 22,
-    title: 'Digital Marketing and Analytics - Master Program',
+    id: 24,
+    title: 'AI-Driven Digital Marketing & Analytics',
     category: 'Digital Marketing',
     description: 'End-to-end mastery: full-funnel strategies, analytics-driven decisions, and campaign leadership.',
     duration: '80 Hours',
@@ -434,7 +463,7 @@ const COURSES: Course[] = [
     syllabusLink: 'https://www.cinutedigital.com/downloads/ai-driven-digital-marketing-&-analytics.pdf',
   },
   {
-    id: 23,
+    id: 25,
     title: 'Digital Marketing and AI (For Business Owners)',
     category: 'Digital Marketing',
     description: 'Leverage AI to grow your business faster and cheaper – no agency needed. Perfect for founders, CEOs & solopreneurs.',
@@ -449,7 +478,7 @@ const COURSES: Course[] = [
     syllabusLink: 'https://www.cinutedigital.com/downloads/digital-marketing-and-ai-for-business-owners-digital-marketing-and-ai-for-business-owners.pdf',
   },
   {
-    id: 24,
+    id: 26,
     title: 'Digital Marketing With AI Bootcamp',
     category: 'Digital Marketing',
     description: 'Become a future-ready digital marketer: master AI tools, prompt engineering for ads & content, and run hyper-personalized campaigns.',
@@ -464,6 +493,7 @@ const COURSES: Course[] = [
     syllabusLink: 'https://www.cinutedigital.com/downloads/digital-marketing-with-ai-bootcamp-digital-marketing-with-ai-bootcamp.pdf',
   },
 ];
+
 
 // --- Helpers for timer like in ModuleCard ---
 const pad = (n: number) => n.toString().padStart(2, '0');

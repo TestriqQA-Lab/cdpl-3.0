@@ -255,7 +255,7 @@ const ModuleCard: React.FC<{
             <DownloadFormButton
               courseTitle={category.title}
               buttonText={
-                <span className="flex items-center justify-center gap-2">
+                <span className="flex items-center justify-center cursor-pointer gap-2">
                   <Download className="w-5 h-5" />
                   <span>Download Brochure</span>
                 </span> as unknown as string
