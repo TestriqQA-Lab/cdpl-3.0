@@ -59,9 +59,186 @@ export interface PastEvent {
   venueAddress?: string;
   lastModified?: string;
 
+  // New fields for enhanced UI
+  shareLinks?: {
+    facebook?: string;
+    twitter?: string;
+    linkedin?: string;
+    whatsapp?: string;
+  };
 }
 
 export const pastEvents: PastEvent[] = [
+  {
+    id: "industrial-visit-thakur-college",
+    ...CDPL_BASE,
+    slug: "industrial-visit-thakur-college-of-science-commerce",
+    title: "Industrial Visit – Thakur College of Science & Commerce",
+    subtitle: "Bridging the Gap Between Classroom and Industry",
+    date: "October 10, 2024", // Estimated date based on context, update if known
+    location: "Cinute Digital Pvt. Ltd, Mira Road",
+    attendees: 40,
+    category: "Industrial Visit",
+    categoryColor: "bg-blue-600",
+    serviceType: "industrial-visits",
+    purpose: "Industrial visits offer students a unique opportunity to connect classroom theories with industry practices. Cinute Digital Pvt. Ltd. and Testriq QA Lab, LLP hosted an industrial visit for 40 students from Thakur College of Science & Commerce to provide them with a firsthand understanding of the IT sector, specifically focusing on software testing and quality assurance processes.",
+    sessionHighlights: [
+      {
+        title: "Welcome & Introduction",
+        points: ["Journey, achievements, and core services of Cinute Digital Pvt. Ltd. and Testriq QA Lab, LLP."]
+      },
+      {
+        title: "Introduction to Software Testing",
+        points: ["Overview of quality assurance, reliability, performance, and security."]
+      },
+      {
+        title: "Hands-on Demonstration of QA Tools",
+        points: ["Live demos of Selenium WebDriver, JIRA, Postman, and GitHub Copilot."]
+      },
+      {
+        title: "Exploring Career Paths",
+        points: ["Insights into manual testing, automation testing, and AI-driven QA."]
+      },
+      {
+        title: "Real-Time Project Workflow",
+        points: ["Walkthrough of requirement gathering, test case creation, execution, and defect management."]
+      },
+      {
+        title: "Interactive Q&A Session",
+        points: ["Discussion on industry trends, skill requirements, and tips for entering the IT industry."]
+      },
+      {
+        title: "Office Tour",
+        points: ["Guided exploration of the workplace and technologies in action."]
+      }
+    ],
+    keyTakeaways: [
+      "Comprehensive understanding of quality assurance in software development.",
+      "Exposure to real-world testing tools and methodologies.",
+      "Clarity on career paths in IT and QA domains.",
+      "Inspiration and actionable guidance for industry readiness."
+    ],
+    highlights: [
+      "Hands-on QA Tools Demo",
+      "Real-Time Project Workflow",
+      "Career Path Exploration",
+      "Office Tour"
+    ],
+    featured: true,
+    galleryCount: 10, // Placeholder
+    venueTitle: "Cinute Digital Pvt. Ltd.",
+    venueAddress: "Mira Road East, Mumbai",
+    venueDescription: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai.",
+    venueImageUrl: "/cdpl-logo.png", // Fallback
+  },
+  {
+    id: "job-fair-nirmala-college",
+    ...CDPL_BASE,
+    slug: "job-fair",
+    title: "Job Fair at Nirmala College",
+    subtitle: "Connecting Graduates with Opportunities",
+    date: "November 15, 2024", // Estimated
+    location: "Nirmala College, Kandivali East",
+    attendees: 150,
+    category: "Placement Drive",
+    categoryColor: "bg-green-600",
+    serviceType: "placement-drive",
+    purpose: "The Job Fair at Nirmala College was a remarkable initiative to connect B.Sc. students with potential employers, bridging the gap between academia and industry. With 150 participants, the event aimed to provide a platform for graduates to explore exciting career opportunities.",
+    sessionHighlights: [
+      {
+        title: "Inaugural Session",
+        points: ["Welcome address emphasizing the significance of job fairs."]
+      },
+      {
+        title: "Industry Stalls",
+        points: ["Recruitment booths from IT, biotechnology, finance, and healthcare sectors."]
+      },
+      {
+        title: "Resume Building Workshop",
+        points: ["Practical tips from industry experts on crafting professional resumes."]
+      },
+      {
+        title: "Mock Interviews",
+        points: ["On-the-spot interview practice sessions to improve confidence."]
+      },
+      {
+        title: "Career Guidance Talks",
+        points: ["Talks by recruiters on emerging trends and industry expectations."]
+      },
+      {
+        title: "Networking Opportunities",
+        points: ["One-on-one interactions with employers."]
+      }
+    ],
+    keyTakeaways: [
+      "Clarity on career opportunities for B.Sc. graduates.",
+      "Enhanced employability skills (resumes, interviews).",
+      "Networking benefits with recruiters.",
+      "Renewed confidence and motivation."
+    ],
+    highlights: [
+      "Industry Stalls",
+      "Resume Workshop",
+      "Mock Interviews",
+      "Networking"
+    ],
+    featured: true,
+    galleryCount: 15, // Placeholder
+    venueTitle: "Nirmala College",
+    venueAddress: "Kandivali East, Mumbai",
+  },
+  {
+    id: "business-analytics-aldel",
+    ...CDPL_BASE,
+    slug: "business-analytics-course-at-aldel-institute-of-management",
+    title: "Business Analytics Course at Aldel Institute of Management",
+    subtitle: "Empowering Students with Data-Driven Skills",
+    date: "October 15, 2024", // Estimated date
+    location: "Aldel Institute of Management, Palghar",
+    attendees: 60, // Estimated
+    category: "Course Conducted",
+    categoryColor: "bg-purple-600",
+    serviceType: "lecture-series",
+    purpose: "Cinute Digital Pvt. Ltd. (CDPL), the learning and development unit of Testriq QA Lab, successfully conducted a 30-hour Business Analytics Course at Aldel Institute of Management. Led by Ashish Shetty, Assistant Manager – Learning and Development, this course was designed to equip students with industry-relevant business analytics skills, helping them gain practical expertise in data visualization, analytics, and decision-making.",
+    sessionHighlights: [
+      {
+        title: "Introduction to Business Analytics",
+        points: ["Understanding fundamentals, key concepts, and applications across industries."]
+      },
+      {
+        title: "Hands-on Training in Power BI",
+        points: ["Data connection, transformation, report building, and interactive dashboard creation."]
+      },
+      {
+        title: "Tableau for Data Visualization",
+        points: ["Mastering data storytelling, advanced charting techniques, and dashboard design."]
+      },
+      {
+        title: "Real-World Sales Project",
+        points: ["Practical business case study, analyzing sales data and creating dynamic dashboards."]
+      },
+      {
+        title: "Industry Applications & Case Studies",
+        points: ["How business analytics drives decision-making in retail, finance, and supply chain."]
+      }
+    ],
+    keyTakeaways: [
+      "Proficiency in Power BI & Tableau.",
+      "Practical Business Analytics Knowledge.",
+      "Project-Based Learning with real-world challenges.",
+      "Enhanced Career Prospects in business intelligence and consulting."
+    ],
+    highlights: [
+      "Power BI & Tableau Training",
+      "Real-World Sales Project",
+      "Industry Case Studies",
+      "Data Storytelling"
+    ],
+    featured: true,
+    galleryCount: 20, // Placeholder
+    venueTitle: "Aldel Institute of Management",
+    venueAddress: "Palghar, Maharashtra",
+  },
   {
     id: "1",
     ...CDPL_BASE,
