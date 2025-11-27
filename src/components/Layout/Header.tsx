@@ -293,7 +293,7 @@ const courseCategories: Category[] = [
       { name: "Advanced Automation Testing", logo: "/aaa.png" },
     ], courses: [
       {
-        name: "Digital Marketing and Analytics - Master Program",
+        name: "AI-Driven Digital Marketing & Analytics",
         slug: "digital-marketing-course",
         description: "Earn the globally recognized PMP certification.",
         rightColumnImages: [
