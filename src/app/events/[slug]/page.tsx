@@ -2,48 +2,14 @@
 import { getEventBySlug, pastEvents } from "@/data/eventsData";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import dynamic from "next/dynamic";
-import { CorporateRegistrationModal } from "@/components/events";
 import { generateSEO } from "@/lib/seo";
-import { Suspense } from "react";
-import EventDetailPageContent from "./EventDetailPageContent";
+import EventHero from "@/components/events/EventHero";
+import EventContent from "@/components/events/EventContent";
+import EventSidebar from "@/components/events/EventSidebar";
+import EventGallery from "@/components/events/EventGallery";
+import RelatedEvents from "@/components/events/RelatedEvents";
 
 type PageProps = { params: Promise<{ slug: string }> };
-
-// Small loader for dynamic sections
-function SectionLoader({ label = "Loading..." }: { label?: string }) {
-  return (
-    <div className="flex items-center justify-center py-16">
-      <p className="text-gray-500">{label}</p>
-    </div>
-  );
-}
-
-// Sections (SSR enabled by default – OK in Server Components)
-const EventDetailsHeroSection = dynamic(
-  () => import("@/components/sections/EventDetailsHeroSection"),
-  { ssr: true, loading: () => <SectionLoader label="Loading hero..." /> }
-);
-
-const EventDetailsTwoColumnSection = dynamic(
-  () => import("@/components/sections/EventDetailsTwoColumnSection"),
-  { ssr: true, loading: () => <SectionLoader label="Loading details..." /> }
-);
-
-const EventDetailsOrganizerSection = dynamic(
-  () => import("@/components/sections/EventDetailsOrganizerSection"),
-  { ssr: true, loading: () => <SectionLoader label="Loading organizer..." /> }
-);
-
-const EventDetailsVenueSection = dynamic(
-  () => import("@/components/sections/EventDetailsVenueSection"),
-  { ssr: true, loading: () => <SectionLoader label="Loading venue..." /> }
-);
-
-const EventDetailsImageGallerySection = dynamic(
-  () => import("@/components/sections/EventDetailsImageGallerySection"),
-  { ssr: true, loading: () => <SectionLoader label="Loading gallery..." /> }
-);
 
 export async function generateStaticParams() {
   return pastEvents.map((event) => ({ slug: event.slug }));
@@ -73,7 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       ...(event.category.toLowerCase().includes("ai") ? ["artificial intelligence", "machine learning"] : []),
     ],
     url: `/events/${slug}`,
-    image: "/og-images/og-image-events.webp",
+    image: event.heroImageUrl || "/og-images/og-image-events.webp",
     imageAlt: `${event.title} - ${event.category} Event`,
   });
 }
@@ -83,53 +49,63 @@ export default async function EventDetailPage({ params }: PageProps) {
   const event = getEventBySlug(slug);
   if (!event) notFound();
 
-  const totalSessions = event.sessionHighlights?.length ?? 0;
-  const totalBullets =
-    event.sessionHighlights?.reduce(
-      (n: number, s: { points: string[] }) => n + (s.points?.length ?? 0),
-      0
-    ) ?? 0;
-
- 
-
-
-
-
-
   return (
-    <>
-   
-   
+    <div className="bg-slate-50 min-h-screen">
+      {/* JSON-LD Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Event",
+            name: event.title,
+            description: event.purpose || event.subtitle,
+            startDate: event.date,
+            location: {
+              "@type": "Place",
+              name: event.location,
+              address: event.venueAddress,
+            },
+            organizer: {
+              "@type": "Organization",
+              name: event.organization,
+              url: "https://cinutedigital.com",
+            },
+            image: event.heroImageUrl ? [event.heroImageUrl] : undefined,
+          }),
+        }}
+      />
 
-      {/* Main Content */}
-      <div itemScope itemType="https://schema.org/Event">
-        <meta itemProp="name" content={event.title} />
-        <meta itemProp="description" content={event.purpose || event.subtitle} />
-        <meta itemProp="startDate" content={event.date} />
-        <meta itemProp="location" content={event.location} />
+      {/* Hero Section - Full Width */}
+      <EventHero event={event} />
 
-        <EventDetailsHeroSection event={event} />
+      {/* Main Content Area - Contained */}
+      <div className="container mx-auto px-4 py-12 max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Main Content Column (2/3 width on desktop) */}
+          <div className="lg:col-span-2 space-y-8">
+            <EventContent event={event} />
+            
+            {event.gallery && event.gallery.length > 0 && (
+              <div className="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm">
+                <EventGallery event={event} />
+              </div>
+            )}
+          </div>
 
-        <EventDetailsTwoColumnSection
-          event={event}
-          totalSessions={totalSessions}
-          totalBullets={totalBullets}
-          extras={
-            <>
-              <EventDetailsOrganizerSection event={event} />
-              <EventDetailsVenueSection event={event} />
-              <EventDetailsImageGallerySection event={event} />
-            </>
-          }
-        />
+          {/* Sidebar Column (1/3 width on desktop) */}
+          <div className="lg:col-span-1">
+            <EventSidebar event={event} />
+          </div>
+        </div>
+
+        {/* Related Events Section - Full Width within Container */}
+        {pastEvents.length > 1 && (
+          <div className="mt-16">
+            <RelatedEvents currentSlug={slug} />
+          </div>
+        )}
       </div>
-
-      <CorporateRegistrationModal />
-
-      {/* Handle referral tracking on client */}
-      <Suspense fallback={null}>
-        <EventDetailPageContent />
-      </Suspense>
-    </>
+    </div>
   );
 }
