@@ -111,7 +111,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
           animate="visible"
         >
           {/* LEFT: Heading + Form (mobile) + Description + Stats */}
-          <div className="md:col-span-7 xl:col-span-8">
+          <div className="md:col-span-7 lg:col-span-8">
             {/* Location chip */}
             <motion.div
               variants={itemVariants}
@@ -207,7 +207,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
           </div>
 
           {/* RIGHT column form (desktop only) now reusable */}
-          <div className="hidden md:block md:col-span-5 xl:col-span-4 md:-mt-2 lg:-mt-10">
+          <div className="hidden md:block md:col-span-5 lg:col-span-4 md:-mt-2 lg:-mt-10">
             <LeadForm
               variants={itemVariants}
               tracks={data.specializations && data.specializations.length ? data.specializations : undefined}

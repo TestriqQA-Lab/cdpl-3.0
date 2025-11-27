@@ -29,7 +29,7 @@ const AboutHeroSection = dynamic(
 );
 
 const AboutStatsSection = dynamic(
-  () => import("@/components/sections/AboutStats.Section"),
+  () => import("@/components/sections/AboutStatsSection"),
   { ssr: true }
 );
 
@@ -115,7 +115,7 @@ export default function AboutPage(): React.ReactElement {
   // PAGE-SPECIFIC SCHEMAS ONLY
   // (Organization & Website are in layout.tsx)
   // ========================================
-  
+
   // 1. Breadcrumb Schema
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: "/" },
@@ -187,7 +187,7 @@ export default function AboutPage(): React.ReactElement {
       answer: "Yes! We offer flexible learning options including weekend batches, weekday evening batches, fast-track intensive programs, and self-paced learning with recorded sessions. You can choose the format that best fits your schedule.",
     },
   ];
-  
+
   const faqSchema = generateFAQSchema(faqs);
 
   return (

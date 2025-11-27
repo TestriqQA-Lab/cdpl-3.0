@@ -234,7 +234,7 @@ export default function AboutStatsSection() {
                         Explore Placements
                     </Link>
                     <Link
-                        href="/testimonials"
+                        href="/reviews"
                         className="inline-flex items-center justify-center rounded-xl bg-brand px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:translate-y-[-1px] hover:shadow-md hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900"
                     >
                         Read Learner Reviews

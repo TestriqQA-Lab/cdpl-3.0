@@ -195,7 +195,7 @@ export default function MentorsImpactSection() {
         style={{ background: CDPL_GLOW }}
       />
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-6 pb-12 sm:pt-8 sm:pb-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-6 pb-12 md:pt-4 lg:pt-16 xl:pt-0 md:pb-16">
         {/* Header */}
         <header className="mb-5 sm:mb-6">
           <div className="flex flex-wrap items-center gap-2">

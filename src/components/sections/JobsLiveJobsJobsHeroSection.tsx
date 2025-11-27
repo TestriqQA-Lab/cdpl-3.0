@@ -3,32 +3,45 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, Home, ChevronRight } from "lucide-react";
 
 export default function JobsLiveJobsJobsHeroSection() {
 
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Jobs" },
+    { label: "Live Jobs", href: "/jobs/live-jobs" },
+  ];
 
   return (
     <section aria-label="CDPL jobs hero" className="bg-white text-slate-900">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 font-sans">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-3">
-          <ol className="flex items-center gap-2 text-sm text-slate-500">
-            <li>
-              <Link href="/" className="hover:underline">
-                Home
-              </Link>
-            </li>
-            <li className="text-slate-400" aria-hidden="true">
-              /
-            </li>
-            <li>
-              <span className="text-slate-600">Jobs</span>
-            </li>
-            <li className="text-slate-400" aria-hidden="true">
-              /
-            </li>
-            <li className="font-semibold text-slate-700">Live Jobs</li>
+        {/* Breadcrumbs for SEO & UX */}
+        <nav aria-label="Breadcrumb" className="mb-4 -mx-4 px-4 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          <ol className="flex items-center gap-2 text-sm text-slate-600 whitespace-nowrap">
+            {breadcrumbs.map((c, i) => {
+              const isLast = i === breadcrumbs.length - 1;
+              return (
+                <li key={i} className="flex items-center gap-2">
+                  {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                  {c.href ? (
+                    <Link
+                      href={c.href}
+                      className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
+                      aria-current={isLast ? "page" : undefined}
+                      title={c.label}
+                    >
+                      {c.label}
+                    </Link>
+                  ) : (
+                    <span className={`${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}>
+                      {c.label}
+                    </span>
+                  )}
+                </li>
+              );
+            })}
           </ol>
         </nav>
 
@@ -141,17 +154,6 @@ export default function JobsLiveJobsJobsHeroSection() {
                 initial={{ y: 0, opacity: 0.95 }}
                 animate={{ y: [3, -3, 3] }}
                 transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut" }}
-              />
-
-              <motion.div
-                className="absolute -right-8 top-1/2 h-2 w-2 rounded-full"
-                style={{
-                  background: "linear-gradient(180deg, rgba(126,231,255,1), rgba(126,231,255,0.7))",
-                  boxShadow: "0 6px 16px rgba(126,231,255,0.5)",
-                }}
-                initial={{ y: 0, opacity: 0.95 }}
-                animate={{ y: [-2, 2, -2] }}
-                transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
               />
             </div>
           </div>

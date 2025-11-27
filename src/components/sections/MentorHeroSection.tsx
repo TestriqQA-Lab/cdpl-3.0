@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { ChevronRight, Home } from "lucide-react";
 
 export default function MentorHeroSection() {
   // Smooth scroll for "Browse mentors"
@@ -10,6 +11,11 @@ export default function MentorHeroSection() {
     const el = document.querySelector("#mentors-impact"); // ⬅️ target
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
+
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Mentors", href: "/mentors" },
+  ];
 
   return (
     <section className="relative isolate overflow-hidden bg-white text-slate-900">
@@ -88,19 +94,26 @@ export default function MentorHeroSection() {
       </div>
 
       {/* ===== Content container — matches About section spacing & breadcrumb placement ===== */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        {/* Breadcrumbs (same placement & spacing as About) */}
-        <nav aria-label="Breadcrumb" className="mb-3">
-          <ol className="flex items-center gap-2 text-sm text-slate-500">
-            <li>
-              <Link href="/" className="hover:text-slate-700">Home</Link>
-            </li>
-            <li aria-hidden="true" className="text-slate-400">/</li>
-            <li>
-              <Link href="/mentors" className="font-medium text-slate-700 hover:text-slate-900">
-                Mentors
-              </Link>
-            </li>
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pt-10 sm:px-6 lg:px-8">
+        {/* Breadcrumbs for SEO & UX */}
+        <nav aria-label="Breadcrumb" className="mb-4 -mx-4 px-4 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          <ol className="flex items-center gap-2 text-sm text-slate-600 whitespace-nowrap">
+            {breadcrumbs.map((c, i) => {
+              const isLast = i === breadcrumbs.length - 1;
+              return (
+                <li key={i} className="flex items-center gap-2">
+                  {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                  <Link
+                    href={c.href}
+                    className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
+                    aria-current={isLast ? "page" : undefined}
+                    title={c.label}
+                  >
+                    {c.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ol>
         </nav>
 

@@ -111,7 +111,7 @@ type CSSVar = React.CSSProperties & Record<`--${string}`, string | number>;
 function TickerRow({
   items,
   direction,
-  speedSec = 26,
+  speedSec = 10,
 }: TickerRowProps) {
   // Duplicate items exactly twice; track animates -50% (or +50%) for a perfect loop.
   const loopItems = useMemo(() => [...items, ...items], [items]);
@@ -179,7 +179,7 @@ function TickerRow({
           animation-play-state: paused;
         }
         .marquee-track {
-          animation-duration: var(--dur, 26s);
+          animation-duration: var(--dur, 20s);
           animation-timing-function: linear;
           animation-iteration-count: infinite;
           transform: translate3d(0, 0, 0);
@@ -241,11 +241,11 @@ export default function PlacementsCompanyWallSection({ contained = false }: Prop
 
         <div className="mt-5 space-y-4">
           {/* Row 1: right → left */}
-          <TickerRow items={rows[0]} direction="ltr" speedSec={28} />
+          <TickerRow items={rows[0]} direction="ltr" speedSec={8} />
           {/* Row 2: left → right */}
-          <TickerRow items={rows[1]} direction="rtl" speedSec={26} />
+          <TickerRow items={rows[1]} direction="rtl" speedSec={8} />
           {/* Row 3: right → left */}
-          <TickerRow items={rows[2]} direction="ltr" speedSec={30} />
+          <TickerRow items={rows[2]} direction="ltr" speedSec={8} />
         </div>
       </Wrapper>
 

@@ -55,7 +55,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ variants, tracks, onSubmit, 
                         required
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        className="block w-full rounded-lg border border-slate-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full rounded-lg border border-slate-300 text-slate-900 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         placeholder="Enter your name"
                     />
                 </div>
@@ -69,7 +69,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ variants, tracks, onSubmit, 
                         required
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
-                        className="block w-full rounded-lg border border-slate-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full rounded-lg border border-slate-300 text-slate-900 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         placeholder="you@example.com"
                     />
                 </div>
@@ -83,7 +83,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ variants, tracks, onSubmit, 
                         required
                         value={form.phone}
                         onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                        className="block w-full rounded-lg border border-slate-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        className="block w-full rounded-lg border border-slate-300 text-slate-900 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         placeholder="+91 98765 43210"
                     />
                 </div>
@@ -96,7 +96,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ variants, tracks, onSubmit, 
                             id="track"
                             value={form.track}
                             onChange={(e) => setForm({ ...form, track: e.target.value })}
-                            className="block w-full rounded-lg border border-slate-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="block w-full rounded-lg border border-slate-300 text-slate-900 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         >
                             {tracks.map((track) => (
                                 <option key={track} value={track}>

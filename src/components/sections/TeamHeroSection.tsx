@@ -36,10 +36,10 @@ const highlights = [
 ];
 
 const logos = [
-  { src: "/images/Skill-India-Color.svg", alt: "Skill India",title: "Skill India" },
-  { src: "/images/ISO-9001.png", alt: "ISO Certified",title:"ISO Certified" },
-  { src: "/images/ISO-27001.png", alt: "ISO Certified",title:"ISO Certified" },
-  { src: "/images/Testriq-Logo-1.webp", alt: "Testriq",title: "Testriq" },
+  { src: "/images/Skill-India-Color.svg", alt: "Skill India", title: "Skill India" },
+  { src: "/images/ISO-9001.png", alt: "ISO Certified", title: "ISO Certified" },
+  { src: "/images/ISO-27001.png", alt: "ISO Certified", title: "ISO Certified" },
+  { src: "/images/Testriq-Logo-1.webp", alt: "Testriq", title: "Testriq" },
 ];
 
 const VIS = {
@@ -138,13 +138,13 @@ export default function TeamHero() {
             {breadcrumbs.map((c, i) => (
               <li key={i} className="flex items-center gap-2">
                 {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-                <a
+                <Link
                   href={c.href}
                   className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""
                     }`}
                 >
                   {c.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ol>
@@ -212,7 +212,7 @@ export default function TeamHero() {
               and interview-ready skills.
             </p>
 
-            <div className="mt-7 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-sm text-orange-800">
+            <div className="mt-7 hidden md:inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-sm text-orange-800">
               <GraduationCap className="h-4 w-4" />
               <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-600">
                 5,000+
