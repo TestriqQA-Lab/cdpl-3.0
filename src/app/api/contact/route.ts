@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import { getTemplatedEmail } from '@/lib/email-utils';
+import { pushLeadToTeleCRM } from '@/lib/telecrm';
 
 // --- Configuration ---
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@example.com';
@@ -48,7 +49,7 @@ export async function POST(request: Request) {
     // 2. Determine Email Content based on 'type' and available fields
     const isBrochureRequest = type === 'brochure';
     const formSource = source || (isBrochureRequest ? 'Home Page - Brochure Download Modal' : 'Contact Form');
-    const isHomeHeroForm = formSource.includes('Home Hero') || formSource.includes('Enquiry Form - Home Hero Section');
+    const isHomeHeroForm = formSource.includes('Home Hero') || formSource.includes('Enquiry Form - Home Hero Section') || formSource.includes('Enquiry Form - Home Enquire Now Button');
 
     // Subject Prefix Logic
     let subjectPrefix = '[NEW LEAD]';
@@ -136,6 +137,16 @@ export async function POST(request: Request) {
     // 5. Send Emails
     const adminSuccess = await sendEmail(adminMailOptions);
     const userSuccess = await sendEmail(userMailOptions);
+
+    // 6. Push to TeleCRM (Async - don't block response)
+    // We only push if it's not a brochure download (or if client wants brochure leads too, usually yes)
+    // Assuming we want all leads in CRM:
+    pushLeadToTeleCRM({
+      fullName,
+      email,
+      phone,
+      source: isHomeHeroForm ? 'Enquiry Form - Home Hero Section' : formSource,
+    }).catch(err => console.error('TeleCRM background push error:', err));
 
     if (adminSuccess && userSuccess) {
       return NextResponse.json({ message: 'Form submitted and emails sent successfully' }, { status: 200 });

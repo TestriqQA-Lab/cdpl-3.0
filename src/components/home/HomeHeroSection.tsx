@@ -389,7 +389,10 @@ const HomeHeroSection: React.FC = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({
+            ...formData,
+            source: 'Enquiry Form - Home Hero Section'
+          }),
         });
 
         if (response.ok) {

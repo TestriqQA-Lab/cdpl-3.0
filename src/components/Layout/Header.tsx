@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, ChevronRight, Globe } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import EnquireModal from "./EnquireModal";
 
 /* ----------------------- Types ----------------------- */
 type LogoItem = { name: string; logo: string };
@@ -385,6 +386,7 @@ const Header = () => {
   const isCoursesBaseActive = pathname.startsWith("/courses");
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isEnquireModalOpen, setIsEnquireModalOpen] = useState(false);
 
   // Mega menu state (layout unchanged)
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
@@ -849,12 +851,12 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden sm:flex items-center">
-            <Link
-              href="/contact-us"
-              className="hidden lg:block bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white px-4 sm:px-5 py-2 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 text-sm"
+            <button
+              onClick={() => setIsEnquireModalOpen(true)}
+              className="hidden lg:block bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white px-4 sm:px-5 py-2 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 text-sm font-semibold"
             >
               Enquire Now
-            </Link>
+            </button>
           </div>
 
           {/* Mobile/Tablet Menu Button */}
@@ -1068,17 +1070,20 @@ const Header = () => {
               >
                 Contact
               </Link>
-              <Link
-                href="/contact-us"
-                className="block px-4 py-3 bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white rounded-lg text-center text-sm sm:text-base"
-                onClick={toggleMenu}
+              <button
+                onClick={() => {
+                  toggleMenu();
+                  setIsEnquireModalOpen(true);
+                }}
+                className="w-full block px-4 py-3 bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white rounded-lg text-center text-sm sm:text-base font-semibold"
               >
                 Enquire Now
-              </Link>
+              </button>
             </div>
           </div>
         )}
       </div>
+      <EnquireModal isOpen={isEnquireModalOpen} onClose={() => setIsEnquireModalOpen(false)} />
     </header>
   );
 };
