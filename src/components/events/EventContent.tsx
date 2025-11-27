@@ -1,7 +1,8 @@
 import React from "react";
 import { PastEvent } from "@/data/eventsData";
-import { Check, Lightbulb, Target, Building2, MapPin, ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
+import CollapsibleSection from "./CollapsibleSection";
+import { Target, Lightbulb, Star, Building2, MapPin, ExternalLink } from "lucide-react";
 
 interface EventContentProps {
     event: PastEvent;
@@ -9,76 +10,131 @@ interface EventContentProps {
 
 export default function EventContent({ event }: EventContentProps) {
     return (
-        <div className="space-y-20">
-            {/* Purpose Section - Large Typography */}
-            <section>
-                <div className="flex items-center gap-3 mb-6">
-                    <div className="p-2 bg-blue-100 rounded-lg text-blue-600">
-                        <Target className="w-6 h-6" />
-                    </div>
-                    <h2 className="text-2xl font-bold text-slate-900">Event Purpose</h2>
+        <div className="space-y-10">
+            {/* Event Title and Metadata */}
+            <div className="bg-gradient-to-br from-slate-50 to-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm">
+                <div className="flex items-start justify-between gap-4 mb-4">
+                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 leading-tight flex-1">
+                        {event.title}
+                    </h1>
                 </div>
-                <div className="prose prose-xl text-slate-600 max-w-none leading-relaxed">
-                    <p>{event.purpose}</p>
+                
+                <div className="flex flex-wrap items-center gap-4 text-sm">
+                    <span className="text-slate-600">
+                        by <Link href="/" className="text-blue-600 hover:text-blue-700 font-semibold hover:underline transition-colors">{event.organization}</Link>
+                    </span>
+                    <span className="w-1 h-1 rounded-full bg-slate-300"></span>
+                    <span className="flex items-center gap-1.5 text-slate-600">
+                        <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                        <span className="font-medium">{event.attendees || 66} people viewed this event</span>
+                    </span>
+                </div>
+            </div>
+
+            {/* Purpose Section */}
+            <section className="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3 mb-6">
+                    <div className="p-2.5 bg-blue-100 rounded-xl">
+                        <Target className="w-6 h-6 text-blue-600" />
+                    </div>
+                    <h2 className="text-2xl font-bold text-slate-900">Purpose</h2>
+                </div>
+                <div className="prose prose-lg max-w-none text-slate-700 leading-relaxed">
+                    <p className="text-base md:text-lg">{event.purpose}</p>
                 </div>
             </section>
 
-            {/* Session Highlights - Colorful Card Grid */}
+            {/* Content & Session Highlights */}
             {event.sessionHighlights && event.sessionHighlights.length > 0 && (
-                <section>
-                    <div className="flex items-center gap-3 mb-8">
-                        <div className="p-2 bg-amber-100 rounded-lg text-amber-600">
-                            <Lightbulb className="w-6 h-6" />
+                <section className="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                    <div className="flex items-center gap-3 mb-6">
+                        <div className="p-2.5 bg-amber-100 rounded-xl">
+                            <Lightbulb className="w-6 h-6 text-amber-600" />
                         </div>
-                        <h2 className="text-2xl font-bold text-slate-900">Session Highlights</h2>
+                        <h2 className="text-2xl font-bold text-slate-900">Content &amp; Session Highlights</h2>
                     </div>
-                    <div className="grid gap-6 md:grid-cols-2">
-                        {event.sessionHighlights.map((session, idx) => (
-                            <div
-                                key={idx}
-                                className="group bg-white rounded-2xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:border-blue-100 transition-all duration-300 relative overflow-hidden"
-                            >
-                                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-blue-50 to-transparent rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110" />
+                    
+                    {/* Introduction text if available */}
+                    {event.specialSession && (
+                        <div className="mb-6 text-slate-700 bg-slate-50 p-4 rounded-lg border border-slate-100">
+                            <p className="leading-relaxed text-sm md:text-base">
+                                The {event.category.toLowerCase()} was attended by distinguished representatives from both institutions:
+                            </p>
+                        </div>
+                    )}
 
-                                <h3 className="text-xl font-bold text-slate-900 mb-4 relative z-10 group-hover:text-blue-600 transition-colors">
-                                    {session.title}
-                                </h3>
-                                <ul className="space-y-3 relative z-10">
+                    <div className="space-y-5">
+                        {event.sessionHighlights.map((session, idx) => (
+                            <div key={idx} className="bg-gradient-to-br from-slate-50 to-white p-5 rounded-xl border border-slate-100">
+                                {session.title && (
+                                    <h3 className="text-lg font-bold text-slate-900 mb-3">{session.title}</h3>
+                                )}
+                                <ul className="space-y-2.5 list-none">
                                     {session.points.map((point, pIdx) => (
-                                        <li key={pIdx} className="flex items-start text-slate-600">
-                                            <ArrowRight className="w-4 h-4 mr-3 text-blue-400 mt-1 flex-shrink-0" />
-                                            <span className="leading-relaxed">{point}</span>
+                                        <li key={pIdx} className="flex items-start text-slate-700 leading-relaxed group">
+                                            <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-100 text-blue-600 mt-0.5 mr-3 flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                                </svg>
+                                            </span>
+                                            <span className="text-sm md:text-base" dangerouslySetInnerHTML={{ __html: point }} />
                                         </li>
                                     ))}
                                 </ul>
                             </div>
                         ))}
                     </div>
+
+                    {/* Additional highlights if available */}
+                    {event.highlights && event.highlights.length > 0 && (
+                        <div className="mt-6 bg-blue-50 p-5 rounded-xl border border-blue-100">
+                            <p className="text-slate-900 font-semibold mb-4 text-sm md:text-base">
+                                Key highlights of this collaboration include:
+                            </p>
+                            <ul className="space-y-3 list-none">
+                                {event.highlights.map((highlight, idx) => (
+                                    <li key={idx} className="flex items-start text-slate-700 leading-relaxed group">
+                                        <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-600 text-white mt-0.5 mr-3 flex-shrink-0 group-hover:scale-110 transition-transform">
+                                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </span>
+                                        <span className="text-sm md:text-base" dangerouslySetInnerHTML={{ __html: highlight }} />
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                 </section>
             )}
 
-            {/* Key Takeaways - Feature List */}
+            {/* Key Takeaway Section */}
             {event.keyTakeaways && event.keyTakeaways.length > 0 && (
-                <section className="bg-slate-900 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden">
-                    {/* Abstract Background Shapes */}
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl -mr-20 -mt-20" />
-                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-600/20 rounded-full blur-3xl -ml-20 -mb-20" />
-
+                <section className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-6 md:p-8 shadow-lg relative overflow-hidden">
+                    {/* Decorative Elements */}
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-0 left-0 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl"></div>
+                    
                     <div className="relative z-10">
-                        <div className="flex items-center gap-3 mb-8">
-                            <div className="p-2 bg-white/10 rounded-lg text-yellow-400 backdrop-blur-sm">
-                                <Star className="w-6 h-6" />
+                        <div className="flex items-center gap-3 mb-6">
+                            <div className="p-2.5 bg-yellow-500/20 rounded-xl backdrop-blur-sm">
+                                <Star className="w-6 h-6 text-yellow-400" />
                             </div>
                             <h2 className="text-2xl font-bold text-white">Key Takeaways</h2>
                         </div>
-
+                        
                         <div className="grid gap-4 md:grid-cols-2">
                             {event.keyTakeaways.map((takeaway, idx) => (
-                                <div key={idx} className="flex items-start bg-white/5 p-4 rounded-xl border border-white/10 hover:bg-white/10 transition-colors">
-                                    <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 mr-4 flex-shrink-0 mt-0.5">
-                                        <Check className="w-3.5 h-3.5" />
+                                <div key={idx} className="flex items-start bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all group">
+                                    <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 mr-3 flex-shrink-0 mt-0.5 group-hover:bg-green-500 group-hover:text-white transition-colors">
+                                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                        </svg>
                                     </div>
-                                    <span className="text-slate-200 font-medium leading-relaxed">{takeaway}</span>
+                                    <span className="text-slate-200 leading-relaxed text-sm md:text-base" dangerouslySetInnerHTML={{ __html: takeaway }} />
                                 </div>
                             ))}
                         </div>
@@ -86,49 +142,94 @@ export default function EventContent({ event }: EventContentProps) {
                 </section>
             )}
 
-            {/* Organizer & Venue - Split Feature Cards */}
-            <div className="grid md:grid-cols-2 gap-8">
-                {/* Organizer */}
-                <section className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 flex flex-col h-full">
-                    <h2 className="text-xl font-bold text-slate-900 mb-6 flex items-center">
-                        <Building2 className="w-5 h-5 mr-2 text-slate-400" />
-                        Organizer
-                    </h2>
-                    <div className="flex items-start gap-4 mb-4">
-                        <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-white font-bold text-xl shadow-lg">
-                            CDPL
-                        </div>
-                        <div>
-                            <h3 className="text-lg font-bold text-slate-900">{event.organization}</h3>
-                            <Link href="https://cinutedigital.com" className="text-sm text-blue-600 hover:underline font-medium">
-                                Visit Website
-                            </Link>
-                        </div>
-                    </div>
-                    <p className="text-slate-600 text-sm leading-relaxed flex-grow">
-                        {event.organizerDetails || "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing."}
+            {/* Closing Statement if available */}
+            {event.subtitle && (
+                <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 md:p-8 border border-blue-100 shadow-sm">
+                    <p className="text-slate-800 leading-relaxed text-base md:text-lg text-center">
+                        With this {event.category.toLowerCase()}, <strong className="text-blue-700">{event.organization}</strong> reaffirms their shared vision of empowering future engineers with cutting-edge industry knowledge and hands-on expertise.
                     </p>
-                </section>
+                </div>
+            )}
+
+            {/* Organizer & Venue Section */}
+            <div className="grid md:grid-cols-2 gap-6">
+                {/* Organizer */}
+                <CollapsibleSection title="Organizer" icon={<Building2 className="w-5 h-5" />} defaultOpen={true}>
+                    <div className="space-y-4">
+                        <div className="flex items-start gap-4">
+                            <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center flex-shrink-0 shadow-lg">
+                                <span className="text-white font-bold text-xl">cdpl</span>
+                            </div>
+                            <div className="flex-1">
+                                <h4 className="text-lg font-bold text-slate-900 mb-1">{event.organization}</h4>
+                                <div className="flex flex-wrap gap-2">
+                                    <a href="https://cinutedigital.com" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-blue-600 transition-colors" title="Website">
+                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm1 16.057v-3.057h2.994c-.059 1.143-.212 2.24-.456 3.279-.823-.12-1.674-.188-2.538-.222zm1.957 2.162c-.499 1.33-1.159 2.497-1.957 3.456v-3.62c.666.028 1.319.081 1.957.164zm-1.957-7.219v-3.015c.868-.034 1.721-.103 2.548-.224.238 1.027.389 2.111.446 3.239h-2.994zm0-5.014v-3.661c.806.969 1.471 2.15 1.971 3.496-.642.084-1.3.137-1.971.165zm2.703-3.267c1.237.496 2.354 1.228 3.29 2.146-.642.234-1.311.442-2.019.607-.344-.992-.775-1.91-1.271-2.753zm-7.241 13.56c-.244-1.039-.398-2.136-.456-3.279h2.994v3.057c-.865.034-1.714.102-2.538.222zm2.538 1.776v3.62c-.798-.959-1.458-2.126-1.957-3.456.638-.083 1.291-.136 1.957-.164zm-2.994-7.055c.057-1.128.207-2.212.446-3.239.827.121 1.68.19 2.548.224v3.015h-2.994zm1.024-5.179c.5-1.346 1.165-2.527 1.97-3.496v3.661c-.671-.028-1.329-.081-1.97-.165zm-2.005-.35c-.708-.165-1.377-.373-2.018-.607.937-.918 2.053-1.65 3.29-2.146-.496.844-.927 1.762-1.272 2.753zm-.549 1.918c-.264 1.151-.434 2.36-.492 3.611h-3.933c.165-1.658.739-3.197 1.617-4.518.88.361 1.816.67 2.808.907zm.009 9.262c-.988.236-1.92.542-2.797.9-.89-1.328-1.471-2.879-1.637-4.551h3.934c.058 1.265.231 2.488.5 3.651zm.553 1.917c.342.976.768 1.881 1.257 2.712-1.223-.49-2.326-1.211-3.256-2.115.636-.229 1.299-.435 1.999-.597zm9.924 0c.7.163 1.362.367 1.999.597-.931.903-2.034 1.625-3.257 2.116.489-.832.915-1.737 1.258-2.713zm.553-1.917c.27-1.163.442-2.386.501-3.651h3.934c-.167 1.672-.748 3.223-1.638 4.551-.877-.358-1.81-.664-2.797-.9zm.501-5.651c-.058-1.251-.229-2.46-.492-3.611.992-.237 1.929-.546 2.809-.907.877 1.321 1.451 2.86 1.616 4.518h-3.933z"/>
+                                        </svg>
+                                    </a>
+                                    <a href="#" className="text-slate-600 hover:text-blue-600 transition-colors" title="Facebook">
+                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                        </svg>
+                                    </a>
+                                    <a href="#" className="text-slate-600 hover:text-pink-600 transition-colors" title="Instagram">
+                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                        </svg>
+                                    </a>
+                                    <a href="#" className="text-slate-600 hover:text-black transition-colors" title="Twitter">
+                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                        </svg>
+                                    </a>
+                                    <a href="#" className="text-slate-600 hover:text-red-600 transition-colors" title="Youtube">
+                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <p className="text-sm text-slate-700 leading-relaxed">
+                            {event.organizerDetails || "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands."}
+                        </p>
+                        <Link 
+                            href="/about" 
+                            className="inline-flex items-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-blue-700 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                        >
+                            <span>More Info</span>
+                            <ExternalLink className="w-4 h-4" />
+                        </Link>
+                    </div>
+                </CollapsibleSection>
 
                 {/* Venue */}
-                <section className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 flex flex-col h-full">
-                    <h2 className="text-xl font-bold text-slate-900 mb-6 flex items-center">
-                        <MapPin className="w-5 h-5 mr-2 text-slate-400" />
-                        Venue
-                    </h2>
-                    <div className="flex-grow">
-                        <h3 className="text-lg font-bold text-slate-900 mb-2">{event.venueTitle || event.location}</h3>
-                        <p className="text-slate-600 text-sm mb-4 leading-relaxed">
+                <CollapsibleSection title="Venue" icon={<MapPin className="w-5 h-5" />} defaultOpen={true}>
+                    <div className="space-y-4">
+                        {event.venueImageUrl && (
+                            <div className="rounded-lg overflow-hidden bg-slate-50 p-4 border border-slate-200">
+                                <img 
+                                    src={event.venueImageUrl} 
+                                    alt={event.venueTitle || event.location}
+                                    className="w-full h-24 object-contain"
+                                />
+                            </div>
+                        )}
+                        <h4 className="text-lg font-bold text-slate-900">
+                            {event.venueTitle || event.location}
+                        </h4>
+                        <p className="text-sm text-slate-700 leading-relaxed">
                             {event.venueDescription || "A state-of-the-art facility equipped with modern amenities to ensure a seamless learning experience."}
                         </p>
                         {event.venueAddress && (
-                            <div className="flex items-center text-sm text-slate-500 bg-slate-50 p-3 rounded-lg">
-                                <MapPin className="w-4 h-4 mr-2 text-slate-400" />
-                                {event.venueAddress}
+                            <div className="flex items-start gap-2 text-sm text-slate-600 bg-slate-50 p-3 rounded-lg border border-slate-200">
+                                <MapPin className="w-4 h-4 text-slate-400 mt-0.5 flex-shrink-0" />
+                                <span>{event.venueAddress}</span>
                             </div>
                         )}
                     </div>
-                </section>
+                </CollapsibleSection>
             </div>
         </div>
     );

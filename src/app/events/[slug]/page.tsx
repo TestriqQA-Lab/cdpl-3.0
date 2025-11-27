@@ -50,7 +50,7 @@ export default async function EventDetailPage({ params }: PageProps) {
   if (!event) notFound();
 
   return (
-    <div className="bg-white min-h-screen pb-20">
+    <div className="bg-slate-50 min-h-screen">
       {/* JSON-LD Schema */}
       <script
         type="application/ld+json"
@@ -76,22 +76,35 @@ export default async function EventDetailPage({ params }: PageProps) {
         }}
       />
 
+      {/* Hero Section - Full Width */}
       <EventHero event={event} />
 
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          {/* Main Content Column */}
-          <div className="lg:col-span-8">
+      {/* Main Content Area - Contained */}
+      <div className="container mx-auto px-4 py-12 max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Main Content Column (2/3 width on desktop) */}
+          <div className="lg:col-span-2 space-y-8">
             <EventContent event={event} />
-            <EventGallery event={event} />
-            <RelatedEvents currentSlug={slug} />
+            
+            {event.gallery && event.gallery.length > 0 && (
+              <div className="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm">
+                <EventGallery event={event} />
+              </div>
+            )}
           </div>
 
-          {/* Sidebar Column */}
-          <div className="lg:col-span-4">
+          {/* Sidebar Column (1/3 width on desktop) */}
+          <div className="lg:col-span-1">
             <EventSidebar event={event} />
           </div>
         </div>
+
+        {/* Related Events Section - Full Width within Container */}
+        {pastEvents.length > 1 && (
+          <div className="mt-16">
+            <RelatedEvents currentSlug={slug} />
+          </div>
+        )}
       </div>
     </div>
   );
