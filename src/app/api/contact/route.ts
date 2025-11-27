@@ -76,7 +76,7 @@ export async function POST(request: Request) {
       email,
       phone,
       type: isBrochureRequest ? 'Brochure Download' : 'General Inquiry',
-      source: isHomeHeroForm ? 'Enquiry Form - Home Hero Section' : formSource,
+      source: formSource, // Keep the specific source
       downloadLink: isBrochureRequest ? BROCHURE_DOWNLOAD_LINK : 'N/A',
       year: new Date().getFullYear().toString(),
     };
@@ -88,9 +88,8 @@ export async function POST(request: Request) {
     }
     const adminHtml = await getTemplatedEmail(adminTemplate, adminData);
 
-    const adminSubject = isHomeHeroForm
-      ? `${subjectPrefix} New Lead from ${fullName} - Home Page Form`
-      : `${subjectPrefix} New Lead from ${fullName} - ${formSource}`;
+    // Use the specific formSource in the subject line
+    const adminSubject = `${subjectPrefix} New Lead from ${fullName} - ${formSource}`;
 
     const adminMailOptions: nodemailer.SendMailOptions = {
       from: SMTP_FROM_EMAIL,
@@ -145,7 +144,7 @@ export async function POST(request: Request) {
       fullName,
       email,
       phone,
-      source: isHomeHeroForm ? 'Enquiry Form - Home Hero Section' : formSource,
+      source: formSource,
     }).catch(err => console.error('TeleCRM background push error:', err));
 
     if (adminSuccess && userSuccess) {
