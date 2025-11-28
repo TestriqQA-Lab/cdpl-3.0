@@ -50,7 +50,10 @@ export default function EventSidebar({ event }: EventSidebarProps) {
               <MapPin className="w-4 h-4" />
               <span>Location</span>
             </div>
-            <p className="text-slate-900 font-medium pl-6 leading-relaxed">{event.location}</p>
+            <div className="pl-6">
+              <p className="text-slate-900 font-medium leading-relaxed">{event.location}</p>
+              <p className="text-slate-600 text-sm mt-1">Aldel Institute of Management, Palghar</p>
+            </div>
           </div>
 
           <div className="border-t border-slate-100"></div>
