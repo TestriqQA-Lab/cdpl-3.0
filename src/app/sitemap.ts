@@ -246,10 +246,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
+  // Helper to safely parse dates (handles ranges like "01-01-2025 to 08-02-2025")
+  const parseDate = (dateStr: string | undefined): Date => {
+    if (!dateStr) return new Date();
+
+    // Handle ranges: take the first date
+    const cleanDate = dateStr.split(' to ')[0].trim();
+
+    // Try parsing
+    const date = new Date(cleanDate);
+
+    // Check if valid
+    if (isNaN(date.getTime())) {
+      console.warn(`Invalid date found in sitemap generation: ${dateStr}`);
+      return new Date(); // Fallback to current date
+    }
+
+    return date;
+  };
+
   // 2. Events Pages (e.g., /events/ai-conference-nagindas-khandwala)
   const eventPages: MetadataRoute.Sitemap = pastEvents.map((event) => ({
     url: `${siteUrl}/events/${event.slug}`,
-    lastModified: event.lastModified ? new Date(event.lastModified) : new Date(event.date),
+    lastModified: event.lastModified ? parseDate(event.lastModified) : parseDate(event.date),
     changeFrequency: 'weekly',
     priority: 0.7,
   }));
