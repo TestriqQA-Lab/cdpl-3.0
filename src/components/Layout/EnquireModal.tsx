@@ -296,6 +296,7 @@ const EnquireModal: React.FC<EnquireModalProps> = ({ isOpen, onClose }) => {
                                         <div className="relative">
                                             <PhoneInput
                                                 international
+                                                defaultCountry="IN"
                                                 country={country}
                                                 onCountryChange={setCountry}
                                                 value={formData.phone}
