@@ -60,11 +60,11 @@ export function generateOrganizationSchema(): WithContext<Record<string, unknown
     },
     description: 'Leading EdTech company providing industry-focused training in Software Testing, Data Science, AI/ML, and Digital Marketing with 100% placement support.',
     slogan: SITE_CONFIG.tagline,
-    
+
     // Contact Information
     telephone: BUSINESS_INFO.phone,
     email: BUSINESS_INFO.email,
-    
+
     // Address
     address: {
       '@type': 'PostalAddress',
@@ -74,14 +74,14 @@ export function generateOrganizationSchema(): WithContext<Record<string, unknown
       postalCode: BUSINESS_INFO.address.postalCode,
       addressCountry: BUSINESS_INFO.address.addressCountry,
     },
-    
+
     // Geo Location
     geo: {
       '@type': 'GeoCoordinates',
       latitude: BUSINESS_INFO.geo.latitude,
       longitude: BUSINESS_INFO.geo.longitude,
     },
-    
+
     // Contact Points
     contactPoint: [
       {
@@ -110,10 +110,10 @@ export function generateOrganizationSchema(): WithContext<Record<string, unknown
         availableLanguage: ['English', 'Hindi'],
       },
     ],
-    
+
     // Social Media Profiles (Knowledge Graph)
     sameAs: getSocialMediaUrls(),
-    
+
     // Aggregate Rating
     aggregateRating: {
       '@type': 'AggregateRating',
@@ -122,16 +122,16 @@ export function generateOrganizationSchema(): WithContext<Record<string, unknown
       bestRating: STATISTICS.maxRating,
       worstRating: 1,
     },
-    
+
     // Founding Date
     foundingDate: BUSINESS_INFO.foundedYear,
-    
+
     // Number of Employees
     numberOfEmployees: {
       '@type': 'QuantitativeValue',
       value: BUSINESS_INFO.numberOfEmployees,
     },
-    
+
     // Opening Hours
     openingHoursSpecification: BUSINESS_INFO.openingHours.map((hours) => {
       const [day, timeRange] = hours.split(' ');
@@ -143,13 +143,13 @@ export function generateOrganizationSchema(): WithContext<Record<string, unknown
         closes,
       };
     }),
-    
+
     // Area Served
     areaServed: {
       '@type': 'Country',
       name: 'India',
     },
-    
+
     // Credentials
     hasCredential: CERTIFICATIONS.map((cert) => ({
       '@type': 'EducationalOccupationalCredential',
@@ -160,8 +160,8 @@ export function generateOrganizationSchema(): WithContext<Record<string, unknown
       },
       name: cert.name,
     })),
-    
-    
+
+
   };
 }
 // ============================================================================
@@ -173,6 +173,7 @@ interface ItemListElement {
   url?: string;
   description?: string;
   type?: string;
+  itemSchema?: Record<string, unknown>; // New optional property for full schema
 }
 
 /**
@@ -193,7 +194,10 @@ export function generateItemListSchema(items: ItemListElement[], name: string): 
 
       // Fix: Ensure 'item' or 'url' is present for a nested ListItem.
       // We will use the 'item' property with a nested object containing name and url.
-      if (item.url) {
+      if (item.itemSchema) {
+        // Use the provided full schema
+        listItem.item = item.itemSchema;
+      } else if (item.url) {
         listItem.item = {
           '@type': item.type || 'Thing', // Default to Thing if type is missing
           name: item.name,
@@ -228,7 +232,7 @@ export function generateWebsiteSchema(): WithContext<Record<string, unknown>> {
       '@id': getOrganizationId(),
     },
     inLanguage: 'en-IN',
-    
+
     // Search Action (enables Google Search Box)
     potentialAction: {
       '@type': 'SearchAction',
@@ -320,10 +324,10 @@ interface CourseSchemaInput {
  */
 export function generateCourseSchema(course: CourseSchemaInput): WithContext<Record<string, unknown>> {
   const fullUrl = getFullUrl(course.url);
-  
+
   // Fix: Ensure description is not empty, which is a critical requirement for Course schema.
-  const courseDescription = course.description && course.description.trim() !== '' 
-    ? course.description 
+  const courseDescription = course.description && course.description.trim() !== ''
+    ? course.description
     : `Comprehensive training program: ${course.name}`;
 
   // Default CourseInstance
@@ -355,7 +359,7 @@ export function generateCourseSchema(course: CourseSchemaInput): WithContext<Rec
     name: course.name,
     description: courseDescription, // Description is required and comes from input
     url: fullUrl,
-    
+
     // Provider (Required)
     provider: {
       '@type': 'EducationalOrganization',
@@ -363,15 +367,15 @@ export function generateCourseSchema(course: CourseSchemaInput): WithContext<Rec
       name: SITE_CONFIG.name,
       url: SITE_CONFIG.url,
     },
-    
+
     // Image
     ...(course.image && {
       image: getImageUrl(course.image),
     }),
-    
+
     // Course Instance (Required)
     hasCourseInstance: [defaultCourseInstance],
-    
+
     // Offers (Required)
     offers: defaultOffer,
 
@@ -482,7 +486,7 @@ interface ArticleSchemaInput {
  */
 export function generateArticleSchema(article: ArticleSchemaInput): WithContext<Record<string, unknown>> {
   const fullUrl = getFullUrl(article.url);
-  
+
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -490,7 +494,7 @@ export function generateArticleSchema(article: ArticleSchemaInput): WithContext<
     headline: article.title,
     description: article.description,
     url: fullUrl,
-    
+
     // Image
     ...(article.image && {
       image: {
@@ -500,13 +504,13 @@ export function generateArticleSchema(article: ArticleSchemaInput): WithContext<
         height: 630,
       },
     }),
-    
+
     // Author
     author: {
       '@type': 'Person',
       name: article.author,
     },
-    
+
     // Publisher
     publisher: {
       '@type': 'Organization',
@@ -517,32 +521,32 @@ export function generateArticleSchema(article: ArticleSchemaInput): WithContext<
         url: getImageUrl(SITE_CONFIG.logo),
       },
     },
-    
+
     // Dates
     datePublished: article.publishedDate,
     dateModified: article.modifiedDate || article.publishedDate,
-    
+
     // Keywords
     ...(article.keywords && article.keywords.length > 0 && {
       keywords: article.keywords.join(', '),
     }),
-    
+
     // Word Count
     ...(article.wordCount && {
       wordCount: article.wordCount,
     }),
-    
+
     // Category
     ...(article.category && {
       articleSection: article.category,
     }),
-    
+
     // Main Entity
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': fullUrl,
     },
-    
+
     // Language
     inLanguage: 'en-IN',
   };
@@ -669,13 +673,13 @@ export function generateEventSchema(event: EventSchemaInput): WithContext<Record
     description: event.description,
     startDate: event.startDate,
     ...(event.endDate && { endDate: event.endDate }),
-    
+
     // Event attendance mode
     eventAttendanceMode: `https://schema.org/${event.eventAttendanceMode || 'OnlineEventAttendanceMode'}`,
-    
+
     // Event status
     eventStatus: `https://schema.org/${event.eventStatus || 'EventScheduled'}`,
-    
+
     // Location
     ...(event.location && {
       location: {
@@ -689,12 +693,12 @@ export function generateEventSchema(event: EventSchemaInput): WithContext<Record
         }),
       },
     }),
-    
+
     // Image
     ...(event.image && {
       image: getImageUrl(event.image),
     }),
-    
+
     // Organizer
     organizer: {
       '@type': 'Organization',
@@ -702,10 +706,10 @@ export function generateEventSchema(event: EventSchemaInput): WithContext<Record
       name: SITE_CONFIG.name,
       url: SITE_CONFIG.url,
     },
-    
+
     // Free or Paid
     isAccessibleForFree: event.isAccessibleForFree !== undefined ? event.isAccessibleForFree : true,
-   };
+  };
 }
 
 // ============================================================================
@@ -742,72 +746,85 @@ export function generatePersonSchema(person: PersonSchemaInput): WithContext<Rec
       url: SITE_CONFIG.url,
     },
     ...(person.sameAs && person.sameAs.length > 0 && { sameAs: person.sameAs }),
-   };
+  };
 }
 
-	// ============================================================================
-	// HOME PAGE SCHEMA CONSOLIDATION
-	// ============================================================================
-	
-	/**
-	 * Generate a consolidated array of schemas for the Home Page.
-	 * This includes LocalBusiness, ItemList (for featured courses), FAQPage, and VideoObject.
-	 */
-	export function generateHomePageSchema(): WithContext<Record<string, unknown>>[] {
-	  // 1. Local Business Schema
-	  const localBusinessSchema = generateLocalBusinessSchema();
-	
-	  // 2. ItemList Schema for Featured Courses
-	  const featuredCoursesForSchema = FEATURED_COURSES.map(course => ({
-	    name: course.name,
-	    url: `/${course.slug}`,
-	    description: course.description,
-	    type: 'Course',
-	  }));
-	  const itemListSchema = generateItemListSchema(featuredCoursesForSchema, 'Featured Courses');
-	
-	  // 3. FAQ Schema (Hardcoded data for now, should ideally come from a data source)
-	  const faqs = [
-	    {
-	      question: 'What courses does CDPL offer?',
-	      answer: 'We offer comprehensive training in Software Testing (Manual & Automation), Data Science & AI/ML, API Testing, Performance Testing, Mobile Testing, and Full Stack Development. All courses include hands-on projects, industry certifications, and 100% placement support.',
-	    },
-	    {
-	      question: 'Do you provide placement assistance?',
-	      answer: 'Yes! We provide 100% placement support including resume building, mock interviews, interview preparation, and guaranteed interview opportunities with our 50+ hiring partners. Our dedicated placement cell works with you until you land your dream job.',
-	    },
-	    {
-	      question: 'What is the duration of the courses?',
-	      answer: 'Course duration varies from 8 to 24 weeks depending on the program. We offer flexible batch timings including weekday, weekend, and fast-track options to fit your schedule. You also get lifetime access to all course materials.',
-	    },
-	    {
-	      question: 'Are the classes online or offline?',
-	      answer: 'We offer both online and offline training options. Our live online classes are interactive with real-time doubt resolution, just like classroom training. You can also attend our classroom sessions at our Pune center.',
-	    },
-	  ];
-	  const faqSchema = generateFAQSchema(faqs);
-	
-	  // 4. Video Schema (assuming a video exists on the page)
-	  const videoSchema = generateVideoSchema({
-	    name: 'Why Choose CDPL for Your Tech Career?',
-	    description: 'Discover how CDPL can transform your career with industry-ready skills, expert mentorship, and 100% placement support.',
-	    thumbnailUrl: '/video-thumbnail.jpg', // TODO: Update with actual thumbnail
-	    uploadDate: '2025-10-20T08:00:00+05:30',
-	    duration: 'PT2M30S', // 2 minutes 30 seconds
-	    embedUrl: 'https://www.youtube.com/embed/your-video-id', // TODO: Update with actual video ID
-	  });
-	
-	  return [
-	    localBusinessSchema,
-	    itemListSchema,
-	    faqSchema,
-	    videoSchema,
-	  ];
-	}
-	
-	// ============================================================================
-	// CONTACT PAGE SCHEMAA
-	// ============================================================================
+// ============================================================================
+// HOME PAGE SCHEMA CONSOLIDATION
+// ============================================================================
+
+/**
+ * Generate a consolidated array of schemas for the Home Page.
+ * This includes LocalBusiness, ItemList (for featured courses), FAQPage, and VideoObject.
+ */
+export function generateHomePageSchema(): WithContext<Record<string, unknown>>[] {
+  // 1. Local Business Schema
+  const localBusinessSchema = generateLocalBusinessSchema();
+
+  // 2. ItemList Schema for Featured Courses
+  const featuredCoursesForSchema = FEATURED_COURSES.map(course => ({
+    name: course.name,
+    url: `/${course.slug}`,
+    description: course.description,
+    type: 'Course',
+    itemSchema: generateCourseSchema({
+      name: course.name,
+      description: course.description,
+      url: `/${course.slug}`,
+      slug: course.slug,
+      price: course.price,
+      currency: course.currency,
+      duration: course.duration,
+      level: course.level,
+      rating: course.rating,
+      reviewCount: 50, // Default review count for featured items if not in config
+      enrollmentCount: course.enrollmentCount,
+    })
+  }));
+  const itemListSchema = generateItemListSchema(featuredCoursesForSchema, 'Featured Courses');
+
+  // 3. FAQ Schema (Hardcoded data for now, should ideally come from a data source)
+  const faqs = [
+    {
+      question: 'What courses does CDPL offer?',
+      answer: 'We offer comprehensive training in Software Testing (Manual & Automation), Data Science & AI/ML, API Testing, Performance Testing, Mobile Testing, and Full Stack Development. All courses include hands-on projects, industry certifications, and 100% placement support.',
+    },
+    {
+      question: 'Do you provide placement assistance?',
+      answer: 'Yes! We provide 100% placement support including resume building, mock interviews, interview preparation, and guaranteed interview opportunities with our 50+ hiring partners. Our dedicated placement cell works with you until you land your dream job.',
+    },
+    {
+      question: 'What is the duration of the courses?',
+      answer: 'Course duration varies from 8 to 24 weeks depending on the program. We offer flexible batch timings including weekday, weekend, and fast-track options to fit your schedule. You also get lifetime access to all course materials.',
+    },
+    {
+      question: 'Are the classes online or offline?',
+      answer: 'We offer both online and offline training options. Our live online classes are interactive with real-time doubt resolution, just like classroom training. You can also attend our classroom sessions at our Pune center.',
+    },
+  ];
+  const faqSchema = generateFAQSchema(faqs);
+
+  // 4. Video Schema (assuming a video exists on the page)
+  const videoSchema = generateVideoSchema({
+    name: 'Why Choose CDPL for Your Tech Career?',
+    description: 'Discover how CDPL can transform your career with industry-ready skills, expert mentorship, and 100% placement support.',
+    thumbnailUrl: '/video-thumbnail.jpg', // TODO: Update with actual thumbnail
+    uploadDate: '2025-10-20T08:00:00+05:30',
+    duration: 'PT2M30S', // 2 minutes 30 seconds
+    embedUrl: 'https://www.youtube.com/embed/your-video-id', // TODO: Update with actual video ID
+  });
+
+  return [
+    localBusinessSchema,
+    itemListSchema,
+    faqSchema,
+    videoSchema,
+  ];
+}
+
+// ============================================================================
+// CONTACT PAGE SCHEMAA
+// ============================================================================
 
 /**
  * Generate ContactPage schema
