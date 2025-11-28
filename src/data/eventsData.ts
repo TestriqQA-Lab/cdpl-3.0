@@ -382,6 +382,145 @@ export const pastEvents: PastEvent[] = [
     venueAddress: "Vasai West, Vasai-Virar, Maharashtra 401202",
     venueDescription: "Vidyavardhini’s College of Engineering and Technology (VCET) in Vasai, Maharashtra, is a well-regarded engineering institution affiliated with the University of Mumbai. Established in 1994, VCET offers undergraduate programs in fields like Computer Science, Mechanical, Civil, and Electronics Engineering. Known for its quality education and modern facilities, the college provides a supportive learning environment with advanced labs and experienced faculty. Its active placement cell helps students secure roles in leading companies, making VCET a solid choice for engineering education in the Mumbai region.",
     venueImageUrl: "/events/mou-signing-between-vidyavardhini-college-of-engineering-and-testriq-qa-lab/Vidyavardhini-college.png"
+  },
+  {
+    id: "ismail-yusuf-college-site-visit-seminar",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "ismail-yusuf-college-site-visit-seminar-careers-in-software-testing-and-data-science",
+    title: "Ismail Yusuf College Site Visit & Seminar: Careers in Software Testing and Data Science – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2025-02-18 to 2025-02-18",
+    location: "Ismail Yusuf College Arts, Science and Commerce",
+    attendees: 62,
+    category: "MoU Signing",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "Partnership",
+    purpose: "Cinute Digital Pvt. Ltd. (CDPL) had the privilege of hosting students from the Department of Statistics, B.Sc., Government of Maharashtra’s Ismail Yusuf College, for a site visit and an insightful seminar on Careers in Software Testing and Data Science. The visit aimed to bridge the gap between academic learning and industry expectations, offering students a deeper understanding of career opportunities in the IT sector. Guided by their faculty, students explored the dynamic world of software testing and data science, gaining valuable industry insights.",
+    trainingDuration: "The seminar was structured to provide a comprehensive overview of software testing and data science, covering",
+    sessionHighlights: [
+      {
+        title: "Introduction to Software Testing",
+        points: ["Fundamentals of manual and automation testing, career paths, and industry demand."]
+      },
+      {
+        title: "Quality Assurance in IT",
+        points: ["The role of QA professionals, software development life cycle (SDLC), and modern testing tools."]
+      },
+      {
+        title: "Data Science & Its Applications",
+        points: ["Basics of data science, real-world use cases, and its significance in decision-making."]
+      },
+      {
+        title: "Career Pathways & Growth Opportunities",
+        points: ["Skills required, certifications, and industry expectations for aspiring professionals."]
+      },
+      {
+        title: "Live Demonstrations & Industry Insights",
+        points: ["Practical exposure to testing tools and data science applications, enhancing learning beyond textbooks."]
+      },
+    ],
+    keyTakeaways: [
+      {
+        title: "Practical Knowledge",
+        description: "Students gained hands-on insights into software testing and data science, understanding their real-world applications.",
+      },
+      {
+        title: "Career Guidance",
+        description: "The session provided clarity on career prospects, essential skills, and industry demands in these growing fields.",
+      },
+      {
+        title: "Industry Exposure",
+        description: "First-hand experience of how professional training institutes like CDPL prepare individuals for IT careers.",
+      },
+      {
+        title: "Networking Opportunity",
+        description: "Students interacted with industry experts, broadening their perspective on the evolving tech landscape.",
+      }
+    ],
+    highlights: [
+      "The interactive session allowed students to engage with industry experts, ask questions, and explore how software testing and data science are shaping the future of technology.",
+    ],
+    heroImageUrl: "/events/ismail-yusuf-college-site-visit-seminar-careers-in-software-testing-and-data-science/Ismil-Yusuf-Bsc.png",
+    success: "This event reinforced Cinute Digital Pvt. Ltd.'s commitment to empowering future professionals with the knowledge and skills required to excel in the IT industry.",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "Ismail Yusuf College Arts, Science and Commerce – Cinute Digital Pvt. Ltd",
+    venueAddress: "Jogeshwari, Maharashtra",
+    venueDescription: "Ismail Yusuf College, is the fourth oldest college of Mumbai, India. “I Y college”, as it is popularly known, is managed by the Government of Maharashtra. It is the oldest college in North Mumbai. It was established in 1930 with a large donation from Sir Mohammed Yusuf Ismail, K.T. on Jogeshwari Hill. The foundation stone was laid by Sir Leslie Orme Wilson, Governor of Bombay in 1924.",
+    venueImageUrl: "/events/ismail-yusuf-college-site-visit-seminar-careers-in-software-testing-and-data-science/ismail-yusuf-college.png"
+  },
+  {
+    id: "future-ready-careers-bhavans-college-andheri",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "faculty-development-program-fdp-on-power-bi-tableau-unlocking-future-ready-careers-bhavans-college-andheri",
+    title: "Faculty Development Program (FDP) on Power BI & Tableau – Unlocking Future-Ready Careers: Bhavan’s College Andheri – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2025-02-24 to 2025-02-24",
+    location: "Bhavan’s College Andheri",
+    attendees: 111,
+    category: "Career Guidance Seminar",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "Business Intelligence",
+    purpose: "In the evolving digital landscape, data analytics and visualization are no longer just technical skills-they are essential competencies for professionals across industries. The Faculty Development Program (FDP) on Power BI & Tableau, organized by Bhavan’s College, Andheri (West), Department of Computer Science in collaboration with IQAC and CDPL, aimed to equip educators and professionals with cutting-edge knowledge of Business Intelligence (BI) tools to enhance their teaching and research capabilities.",
+    trainingDuration: "The FDP provided an interactive and hands-on learning experience, covering",
+    sessionHighlights: [
+      {
+        title: "Introduction to Business Intelligence & Its Growing Importance",
+        points: ["How BI is transforming industries like finance, healthcare, marketing, and education", "The role of data-driven decision-making in research and academic projects"]
+      },
+      {
+        title: "Deep Dive into Power BI & Tableau",
+        points: ["Creating interactive dashboards and data visualizations", "Hands-on training on DAX (Data Analysis Expressions) and Power Query for advanced data manipulation", "Exploring real-world applications of BI in academia and industry"]
+      },
+      {
+        title: "Preparing Students for Future-Ready Careers",
+        points: ["Understanding industry expectations for data analysts and BI professionals", "Strategies for integrating BI tools into coursework and research", "Career pathways in data analytics, visualization, and AI-driven decision-making"]
+      },
+
+    ],
+    keyTakeaways: [
+      {
+        title: "Data analytics is the future",
+        description: "Equipping students and professionals with BI skills is critical for career success.",
+      },
+      {
+        title: "Power BI & Tableau",
+        description: "Educators must integrate Power BI & Tableau into their curriculum to prepare students for data-driven job roles.",
+      },
+      {
+        title: "Real-world datasets",
+        description: "Hands-on experience with real-world datasets is essential to bridge the gap between theory and industry demands.",
+      },
+    ],
+    highlights: [
+      "Empowering faculty members with practical BI skills to integrate into academic curriculum",
+      "Introducing Power BI & Tableau as essential tools for data-driven decision-making",
+      "Exploring career opportunities in data analytics and how educators can prepare students for the future job market"
+    ],
+    heroImageUrl: "/events/faculty-development-program-fdp-on-power-bi-tableau-unlocking-future-ready-careers-bhavans-college-andheri/bhavan-college-program.webp",
+    success: "This FDP reinforced the importance of continuous learning and upskilling in BI tools, ensuring that educators and professionals stay ahead in an increasingly data-centric world.",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "Bhavans College Andheri – Cinute Digital Pvt. Ltd",
+    venueAddress: "Andheri, Maharashtra",
+    venueDescription: "Bhavan’s College is a college located nearby Azad Nagar Metro Station in Andheri West, a neighborhood in western Mumbai, India. It primarily offers higher secondary (junior college) and undergraduate (bachelor’s) courses. There a few postgraduate and PhD programs too. It also include various types of fest, games, curricular activity etc.",
+    venueImageUrl: "/events/faculty-development-program-fdp-on-power-bi-tableau-unlocking-future-ready-careers-bhavans-college-andheri/bhavan-college-logo.webp"
   }
 ];
 
