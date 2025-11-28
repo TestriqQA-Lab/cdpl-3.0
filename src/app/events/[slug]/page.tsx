@@ -1,4 +1,3 @@
-// src/app/events/[slug]/page.tsx
 import { getEventBySlug, pastEvents } from "@/data/eventsData";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -7,6 +6,8 @@ import EventHero from "@/components/events/EventHero";
 import EventContent from "@/components/events/EventContent";
 import EventSidebar from "@/components/events/EventSidebar";
 import EventGallery from "@/components/events/EventGallery";
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 import RelatedEvents from "@/components/events/RelatedEvents";
 
 type PageProps = { params: Promise<{ slug: string }> };
@@ -76,16 +77,35 @@ export default async function EventDetailPage({ params }: PageProps) {
         }}
       />
 
-      {/* Hero Section - Full Width */}
-      <EventHero event={event} />
-
       {/* Main Content Area - Contained */}
-      <div className="container mx-auto px-4 py-12 max-w-7xl">
+      <div className="container mx-auto px-4 py-8 md:py-12 max-w-7xl">
+        {/* Breadcrumbs */}
+        <nav aria-label="Breadcrumb" className="mb-6">
+          <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+            <li className="flex items-center gap-2">
+              <Link href="/" className="hover:text-blue-600 transition-colors">Home</Link>
+            </li>
+            <li className="flex items-center gap-2">
+              <ChevronRight className="h-4 w-4 text-slate-400" />
+              <Link href="/events" className="hover:text-blue-600 transition-colors">Events</Link>
+            </li>
+            <li className="flex items-center gap-2">
+              <ChevronRight className="h-4 w-4 text-slate-400" />
+              <span className="font-semibold text-slate-900 truncate max-w-[200px] md:max-w-md">{event.title}</span>
+            </li>
+          </ol>
+        </nav>
+
+        {/* Hero Section - Now Contained */}
+        <div className="mb-8">
+          <EventHero event={event} />
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content Column (2/3 width on desktop) */}
           <div className="lg:col-span-2 space-y-8">
             <EventContent event={event} />
-            
+
             {event.gallery && event.gallery.length > 0 && (
               <div className="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm">
                 <EventGallery event={event} />

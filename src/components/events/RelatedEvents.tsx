@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Calendar, MapPin, ArrowRight } from "lucide-react";
-import { PastEvent, getFeaturedEvents } from "@/data/eventsData";
+import { getFeaturedEvents } from "@/data/eventsData";
 
 interface RelatedEventsProps {
     currentSlug: string;
