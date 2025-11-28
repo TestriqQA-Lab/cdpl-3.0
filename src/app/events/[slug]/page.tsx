@@ -1,7 +1,9 @@
 import { getEventBySlug, pastEvents } from "@/data/eventsData";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { generateSEO } from "@/lib/seo";
+import { generateEventMetadata } from "@/lib/metadata-generator";
+import { generateEventSchema, generateBreadcrumbSchema } from "@/lib/schema-generators";
+import JsonLd from "@/components/JsonLd";
 import EventHero from "@/components/events/EventHero";
 import EventContent from "@/components/events/EventContent";
 import EventSidebar from "@/components/events/EventSidebar";
@@ -18,64 +20,58 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const event = getEventBySlug(slug);
+  if (!slug) return { title: "Event Not Found" };
+  const event = getEventBySlug(slug as string);
   if (!event) return { title: "Event Not Found" };
 
-  return generateSEO({
-    title: `${event.title} - ${event.category} Event | CDPL`,
+  return generateEventMetadata({
+    title: event.title,
     description: `${event.purpose || event.subtitle} - ${event.category} event organized by ${event.organization || "CDPL"} at ${event.location}. ${event.attendees ? `Attended by ${event.attendees}+ participants.` : ""} View highlights, sessions, and key takeaways.`,
+    slug: event.slug,
+    category: event.category,
+    organizer: event.organization,
+    location: event.location,
+    image: event.heroImageUrl,
     keywords: [
-      event.category,
-      event.title,
-      "CDPL event",
-      "corporate training",
-      "workshop",
-      event.organization || "CDPL",
-      event.location,
-      "technical training",
-      "professional development",
-      "industry event",
       ...(event.category.toLowerCase().includes("testing") ? ["software testing", "QA training"] : []),
       ...(event.category.toLowerCase().includes("data") ? ["data science", "analytics"] : []),
       ...(event.category.toLowerCase().includes("ai") ? ["artificial intelligence", "machine learning"] : []),
     ],
-    url: `/events/${slug}`,
-    image: event.heroImageUrl || "/og-images/og-image-events.webp",
-    imageAlt: `${event.title} - ${event.category} Event`,
   });
 }
 
 export default async function EventDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const event = getEventBySlug(slug);
+  if (!slug) notFound();
+  const event = getEventBySlug(slug as string);
   if (!event) notFound();
+
+  // Generate Schemas
+  const eventSchema = generateEventSchema({
+    name: event.title,
+    description: event.purpose || event.subtitle || "",
+    startDate: event.date,
+    endDate: event.date,
+    location: {
+      name: event.location,
+      address: event.venueAddress || event.location,
+    },
+    image: event.heroImageUrl,
+    eventStatus: "EventScheduled",
+    eventAttendanceMode: "OfflineEventAttendanceMode",
+  });
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Events", url: "/events" },
+    { name: event.title, url: `/events/${event.slug}` },
+  ]);
 
   return (
     <div className="bg-slate-50 min-h-screen">
-      {/* JSON-LD Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Event",
-            name: event.title,
-            description: event.purpose || event.subtitle,
-            startDate: event.date,
-            location: {
-              "@type": "Place",
-              name: event.location,
-              address: event.venueAddress,
-            },
-            organizer: {
-              "@type": "Organization",
-              name: event.organization,
-              url: "https://cinutedigital.com",
-            },
-            image: event.heroImageUrl ? [event.heroImageUrl] : undefined,
-          }),
-        }}
-      />
+      {/* JSON-LD Schemas */}
+      <JsonLd id="event-schema" schema={eventSchema} />
+      <JsonLd id="breadcrumb-schema" schema={breadcrumbSchema} />
 
       {/* Main Content Area - Contained */}
       <div className="container mx-auto px-4 py-8 md:py-12 max-w-7xl">
