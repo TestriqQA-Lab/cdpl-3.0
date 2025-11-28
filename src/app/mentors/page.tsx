@@ -1,12 +1,12 @@
 // app/mentors/page.tsx
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { generateSEO } from "@/lib/seo";
+import { generateStaticPageMetadata } from "@/lib/metadata-generator";
 
 // ============================================================================
 // SEO METADATA - Optimized for Mentors Page
 // ============================================================================
-export const metadata: Metadata = generateSEO({
+export const metadata: Metadata = generateStaticPageMetadata({
   title: "Mentors - 1:1 Career Mentorship & Guidance | CDPL",
   description: "Get personalized 1:1 mentorship from industry experts at CDPL. Our mentors guide learners in QA, Data Science, Product Management, and Engineering with resume reviews, interview prep, and career support. 20+ years combined experience from top companies.",
   keywords: [
@@ -25,7 +25,6 @@ export const metadata: Metadata = generateSEO({
   ],
   url: "/mentors",
   image: "og-images/og-image-mentors.webp",
-  imageAlt: "CDPL Mentors - 1:1 Career Mentorship & Guidance",
 });
 
 // ---------- Small, reusable loading UI ----------
@@ -92,9 +91,9 @@ export default function MentorsPage() {
 
 
       {/* Main Content - Semantic HTML Structure */}
-      <main 
+      <main
         className="relative bg-white text-slate-900"
-        itemScope 
+        itemScope
         itemType="https://schema.org/CollectionPage"
       >
         {/* Hidden metadata for schema.org */}

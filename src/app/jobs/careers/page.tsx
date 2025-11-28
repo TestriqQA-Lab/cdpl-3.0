@@ -1,11 +1,11 @@
 import dynamic from "next/dynamic";
 import type { Metadata } from "next";
-import { generateSEO } from "@/lib/seo";
+import { generateStaticPageMetadata } from "@/lib/metadata-generator";
 
 
 // SEO METADATA - Enhanced for Careers Page
 // ============================================================================
-export const metadata: Metadata = generateSEO({
+export const metadata: Metadata = generateStaticPageMetadata({
     title: "CDPL Careers | Join Our EdTech Team: Software, Data, Product",
     description: "Explore career opportunities at Cinute Digital (CDPL) across Engineering, Data Science, Product Management, Growth, and Student Success. Work on high-impact EdTech products, ship fast, learn faster. Join our product-led team building the future of tech education.",
     keywords: [
@@ -23,7 +23,6 @@ export const metadata: Metadata = generateSEO({
     ],
     url: "/jobs/careers",
     image: "/og-images/cdpl-careers-images.webp",
-    imageAlt: "Careers at CDPL - Build the future of outcomes-first EdTech",
 });
 
 

@@ -1,12 +1,12 @@
 // app/services/page.tsx
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { generateSEO } from "@/lib/seo";
+import { generateStaticPageMetadata } from "@/lib/metadata-generator";
 
 // ============================================================================
 // SEO METADATA - Optimized for Services Page
 // ============================================================================
-export const metadata: Metadata = generateSEO({
+export const metadata: Metadata = generateStaticPageMetadata({
   title: "Our Services | Training, Consulting & Custom Solutions – CDPL",
   description: "CDPL offers comprehensive corporate training, software testing consulting, custom automation solutions, and technical workshops for enterprises. Upskill your team with industry-expert trainers in Software Testing, Data Science, AI/ML, and DevOps.",
   keywords: [
@@ -26,7 +26,6 @@ export const metadata: Metadata = generateSEO({
   ],
   url: "/services",
   image: "/og-images/og-image-services.webp",
-  imageAlt: "CDPL Services - Corporate Training, Consulting & Custom Solutions",
 });
 
 // Simple loading UI used by all sections
@@ -66,12 +65,12 @@ export default function TrainingServicesPage() {
 
   return (
     <>
-  
+
 
       {/* Main Content - Semantic HTML Structure */}
-      <div 
+      <div
         className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50"
-        itemScope 
+        itemScope
         itemType="https://schema.org/CollectionPage"
       >
         {/* Hidden metadata for schema.org */}

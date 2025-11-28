@@ -30,29 +30,29 @@ export interface MetadataGeneratorInput {
   title: string;
   description: string;
   keywords?: string[];
-  
+
   // URL & Canonical
   url?: string;
   canonical?: string;
-  
+
   // Open Graph
   type?: 'website' | 'article';
   image?: string;
   imageAlt?: string;
   imageWidth?: number;
   imageHeight?: number;
-  
+
   // Article-specific (for blog posts)
   publishedTime?: string;
   modifiedTime?: string;
   author?: string;
   section?: string;
   tags?: string[];
-  
+
   // Robots
   noindex?: boolean;
   nofollow?: boolean;
-  
+
   // Additional
   locale?: string;
   alternateLocales?: string[];
@@ -105,7 +105,7 @@ export function generateMetadata(input: MetadataGeneratorInput): Metadata {
   const canonicalUrl = canonical ? getFullUrl(canonical) : fullUrl;
   const ogImage = image ? getImageUrl(image) : getImageUrl(SITE_CONFIG.defaultOgImage);
   const ogImageAlt = imageAlt || title;
-  
+
   // Merge keywords with defaults
   const allKeywords = [...new Set([...keywords, ...SEO_DEFAULTS.defaultKeywords])];
 
@@ -114,19 +114,19 @@ export function generateMetadata(input: MetadataGeneratorInput): Metadata {
     title,
     description,
     keywords: allKeywords,
-    
+
     // Authors
     ...(author && {
       authors: [{ name: author }],
     }),
-    
+
     // Creator & Publisher
     creator: SITE_CONFIG.name,
     publisher: SITE_CONFIG.name,
-    
+
     // Category
     category: 'education',
-    
+
     // Canonical URL & Hreflang
     alternates: {
       canonical: canonicalUrl,
@@ -138,7 +138,7 @@ export function generateMetadata(input: MetadataGeneratorInput): Metadata {
         'en-GB': fullUrl,
       },
     },
-    
+
     // Open Graph
     openGraph: {
       type,
@@ -156,7 +156,7 @@ export function generateMetadata(input: MetadataGeneratorInput): Metadata {
           alt: ogImageAlt,
         },
       ],
-      
+
       // Article-specific fields
       ...(type === 'article' && {
         publishedTime,
@@ -166,7 +166,7 @@ export function generateMetadata(input: MetadataGeneratorInput): Metadata {
         authors: author ? [author] : undefined,
       }),
     },
-    
+
     // Twitter Card
     twitter: {
       card: 'summary_large_image',
@@ -176,7 +176,7 @@ export function generateMetadata(input: MetadataGeneratorInput): Metadata {
       description,
       images: [ogImage],
     },
-    
+
     // Robots
     robots: {
       index: !noindex,
@@ -189,14 +189,14 @@ export function generateMetadata(input: MetadataGeneratorInput): Metadata {
         'max-snippet': -1,
       },
     },
-    
+
     // Format Detection
     formatDetection: {
       email: false,
       address: false,
       telephone: false,
     },
-    
+
     // Verification
     verification: {
       google: VERIFICATION.google,
@@ -224,7 +224,7 @@ export function generateCourseMetadata(input: {
 }): Metadata {
   const title = `${input.courseName} - Online Training Course | CDPL`;
   const description = input.description;
-  
+
   const keywords = [
     input.courseName.toLowerCase(),
     `${input.courseName.toLowerCase()} course`,
@@ -311,7 +311,7 @@ export function generateCategoryMetadata(input: {
   itemCount?: number;
 }): Metadata {
   const title = `${input.categoryName} Courses - ${input.itemCount ? `${input.itemCount}+ ` : ''}Training Programs | CDPL`;
-  
+
   const keywords = [
     `${input.categoryName.toLowerCase()} courses`,
     `${input.categoryName.toLowerCase()} training`,
@@ -325,6 +325,45 @@ export function generateCategoryMetadata(input: {
     description: input.description,
     keywords,
     url: `/courses/${input.slug}`,
+    type: 'website',
+  });
+}
+
+/**
+ * Generate metadata for event pages
+ */
+export function generateEventMetadata(input: {
+  title: string;
+  description: string;
+  slug: string;
+  category: string;
+  organizer?: string;
+  location?: string;
+  image?: string;
+  keywords?: string[];
+}): Metadata {
+  const title = `${input.title} - ${input.category} Event | CDPL`;
+
+  const keywords = [
+    ...(input.keywords || []),
+    input.category,
+    input.title,
+    "CDPL event",
+    "corporate training",
+    "workshop",
+    input.organizer || "CDPL",
+    input.location || "",
+    "technical training",
+    "professional development",
+    "industry event",
+  ];
+
+  return generateMetadata({
+    title,
+    description: input.description,
+    keywords: keywords.filter(Boolean),
+    url: `/events/${input.slug}`,
+    image: input.image,
     type: 'website',
   });
 }
@@ -389,11 +428,11 @@ export function extractKeywords(text: string, maxKeywords: number = 10): string[
 export function generateMetaDescription(content: string, maxLength: number = 160): string {
   // Remove HTML tags if any
   const cleanContent = content.replace(/<[^>]*>/g, ' ');
-  
+
   // Get first sentence or paragraph
   const sentences = cleanContent.split(/[.!?]+/);
   let description = sentences[0].trim();
-  
+
   // If too short, add more sentences
   let i = 1;
   while (description.length < maxLength && i < sentences.length) {
@@ -405,12 +444,12 @@ export function generateMetaDescription(content: string, maxLength: number = 160
       break;
     }
   }
-  
+
   // Truncate if too long
   if (description.length > maxLength) {
     description = description.substring(0, maxLength - 3) + '...';
   }
-  
+
   return description;
 }
 
@@ -422,31 +461,31 @@ export function validateMetadata(metadata: MetadataGeneratorInput): {
   warnings: string[];
 } {
   const warnings: string[] = [];
-  
+
   // Title length check (50-60 characters is ideal)
   if (metadata.title.length < 30) {
     warnings.push('Title is too short. Aim for 50-60 characters.');
   } else if (metadata.title.length > 60) {
     warnings.push('Title is too long. Keep it under 60 characters.');
   }
-  
+
   // Description length check (150-160 characters is ideal)
   if (metadata.description.length < 120) {
     warnings.push('Description is too short. Aim for 150-160 characters.');
   } else if (metadata.description.length > 160) {
     warnings.push('Description is too long. Keep it under 160 characters.');
   }
-  
+
   // Keywords check
   if (!metadata.keywords || metadata.keywords.length === 0) {
     warnings.push('No keywords provided. Add relevant keywords for better SEO.');
   }
-  
+
   // Image check
   if (!metadata.image) {
     warnings.push('No custom image provided. Using default OG image.');
   }
-  
+
   return {
     isValid: warnings.length === 0,
     warnings,

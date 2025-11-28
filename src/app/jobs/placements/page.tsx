@@ -2,12 +2,12 @@
 import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import Script from "next/script";
-import { generateSEO } from "@/lib/seo";
+import { generateStaticPageMetadata } from "@/lib/metadata-generator";
 
 // ============================================================================
 // SEO METADATA - Enhanced for Placements Page
 // ============================================================================
-export const metadata: Metadata = generateSEO({
+export const metadata: Metadata = generateStaticPageMetadata({
     title: "Student Placements & Success Stories|Real Hiring Outcomes|CDPL",
     description: "Explore CDPL student placements across top companies like TCS, Infosys, Wipro, Accenture, and startups. See roles, packages (3-12 LPA), locations, partner companies, and success stories driven by our product-led, mentor-first training in QA, Data Science, Full-Stack, and DevOps.",
     keywords: [
@@ -27,7 +27,6 @@ export const metadata: Metadata = generateSEO({
     ],
     url: "/jobs/placements",
     image: "/og-images/our-placements-image.webp",
-    imageAlt: "CDPL Student Placements & Hiring Partners",
 });
 
 /** =====================================
@@ -89,9 +88,9 @@ export default function PlacementsPage() {
         <>
 
             {/* Main Content - Semantic HTML Structure */}
-            <main 
+            <main
                 className="relative min-h-screen overflow-hidden"
-                itemScope 
+                itemScope
                 itemType="https://schema.org/CollectionPage"
             >
                 {/* Hidden metadata for schema.org */}

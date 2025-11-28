@@ -5,12 +5,12 @@ import { ContactOfficeMapSection } from '@/components/sections/ContactOfficeMapS
 import { ContactBookCallSection } from '@/components/sections/ContactBookCall';
 import { ContactFAQSection } from '@/components/sections/ContactFAQSection';
 import ContactReviewSection from '@/components/sections/ContactReviewSection';
-import { generateSEO} from '@/lib/seo';
+import { generateStaticPageMetadata } from "@/lib/metadata-generator";
 
 // ============================================================================
 // SEO METADATA - Optimized for Contact Page
 // ============================================================================
-export const metadata: Metadata = generateSEO({
+export const metadata: Metadata = generateStaticPageMetadata({
   title: 'Contact us Cinute Digital | Get in Touch Today',
   description: 'Contact CDPL (Cinute Digital) for course inquiries, admissions support, and career guidance. Reach us via phone, email, WhatsApp, or visit our office in Mumbai. Expert advisors available to help with Software Testing, Data Science, and AI/ML courses.',
   keywords: [
@@ -29,7 +29,6 @@ export const metadata: Metadata = generateSEO({
   ],
   url: '/contact-us',
   image: '/og-images/cdpl-og-image-contact.webp',
-  imageAlt: 'Contact CDPL - Cinute Digital for Course Inquiries and Admissions Support',
 });
 
 // ============================================================================
@@ -43,7 +42,7 @@ export default function ContactPage() {
 
       {/* Main Content - Semantic HTML Structure */}
       <main className="relative min-h-[220vh]" >
-       
+
 
         <ContactHeroSection />
         <ContactMethodsSection />

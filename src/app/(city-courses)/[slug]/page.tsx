@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import { courseData, type CourseData } from "@/types/courseData";
-import { generateSEO } from "@/lib/seo";
+import { generateMetadata as generateSEOMetadata } from "@/lib/metadata-generator";
 
 import HeroSection from "@/components/city-courses/HeroSection";
 import CourseOverviewSection from "@/components/city-courses/CourseOverviewSection";
@@ -29,7 +29,7 @@ function getByInternalSlug(slug: string): CourseData | undefined {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const data = getByInternalSlug(slug);
-  
+
   if (!data) {
     return {
       title: "Course Not Found | 404 - CDPL",
@@ -43,12 +43,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   // Extract city from location
   const city = data.location || "";
-  
+
   // Build keywords array from metadata.keywords string
-  const baseKeywords = data.metadata.keywords 
+  const baseKeywords = data.metadata.keywords
     ? data.metadata.keywords.split(',').map(k => k.trim())
     : [];
-  
+
   // Add additional keywords
   const additionalKeywords = [
     data.courseName,
@@ -65,9 +65,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   ].filter(Boolean);
 
   const allKeywords = [...baseKeywords, ...additionalKeywords];
-  
+
   // Enhanced metadata using generateSEO
-  return generateSEO({
+  return generateSEOMetadata({
     title: data.metadata.title,
     description: data.metadata.description,
     keywords: allKeywords,
@@ -88,7 +88,7 @@ export async function generateStaticParams() {
 export default async function CoursePage({ params }: PageProps) {
   const { slug } = await params;
   const data = getByInternalSlug(slug);
-  
+
   // Show custom 404 page if course not found
   if (!data) {
     return <NotFoundPage />;
@@ -99,8 +99,8 @@ export default async function CoursePage({ params }: PageProps) {
 
 
       {/* Semantic HTML Structure */}
-      <main 
-        className="overflow-hidden" 
+      <main
+        className="overflow-hidden"
       >
         <HeroSection data={data} />
         <CourseOverviewSection data={data} />

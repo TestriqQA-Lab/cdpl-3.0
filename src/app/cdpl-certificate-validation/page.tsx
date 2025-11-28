@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { generateSEO } from "@/lib/seo";
+import { generateStaticPageMetadata } from "@/lib/metadata-generator";
 
 /* ---------- Small, reusable loading UI ---------- */
 function SectionLoader({ label = "Loading..." }: { label?: string }) {
@@ -23,7 +23,7 @@ const CertificationValidatorSection = dynamic(
 );
 
 /* ---------- SEO ---------- */
-export const metadata: Metadata = generateSEO({
+export const metadata: Metadata = generateStaticPageMetadata({
   title: "CDPL Certificate Validation - Verify AAA & ACTD Certificates Online",
   description:
     "Instantly validate and verify CDPL certificates online. Check authenticity of AAA, ACTD, and other CDPL certification courses. Enter certificate ID for instant verification. Trusted by employers worldwide.",
@@ -46,7 +46,6 @@ export const metadata: Metadata = generateSEO({
   ],
   url: "/cdpl-certificate-validation",
   image: "/og-image-certificate-validation.jpg",
-  imageAlt: "CDPL Certificate Validation - Verify Certificates Online",
 });
 
 
@@ -54,14 +53,14 @@ export const metadata: Metadata = generateSEO({
 /* ---------- Page (server component) ---------- */
 export default function CertificateValidationPage() {
   return (
-    <main 
+    <main
 
     >
       <meta itemProp="name" content="CDPL Certificate Validation Tool" />
       <meta itemProp="description" content="Verify CDPL certificate authenticity online" />
       <meta itemProp="url" content="https://www.cinutedigital.com/cdpl-certificate-validation" />
       <meta itemProp="applicationCategory" content="BusinessApplication" />
-      
+
       <CertificationValidationHeroSection />
       <CertificationValidatorSection />
     </main>

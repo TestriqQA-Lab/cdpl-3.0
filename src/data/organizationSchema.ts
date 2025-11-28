@@ -1,15 +1,15 @@
 // cdpl3_project/src/data/organizationSchema.ts
 
-import { SITE_URL, SITE_NAME } from "@/lib/seo";
+import { SITE_CONFIG } from "@/lib/seo-config";
 
 // This is the primary Organization schema for the entire website.
 // It uses EducationalOrganization as the primary type, which is appropriate for a training institute.
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "EducationalOrganization",
-  "name": SITE_NAME,
-  "url": SITE_URL,
-  "logo": `${SITE_URL}/logo.png`, // Assuming the logo is at the root of the public folder
+  "name": SITE_CONFIG.name,
+  "url": SITE_CONFIG.url,
+  "logo": `${SITE_CONFIG.url}/logo.png`, // Assuming the logo is at the root of the public folder
   "description": "CDPL - Cinute Digital is a leading training institute in India offering industry-focused courses in Software Testing, Data Science, and AI/ML with 100% placement support.",
   "sameAs": [
     "https://www.facebook.com/cinutedigital",
@@ -48,11 +48,11 @@ export const organizationSchema = {
 export const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "url": SITE_URL,
-  "name": SITE_NAME,
+  "url": SITE_CONFIG.url,
+  "name": SITE_CONFIG.name,
   "potentialAction": {
     "@type": "SearchAction",
-    "target": `${SITE_URL}/search?q={search_term_string}`, // Assuming a search page exists
+    "target": `${SITE_CONFIG.url}/search?q={search_term_string}`, // Assuming a search page exists
     "query-input": "required name=search_term_string"
   }
 };

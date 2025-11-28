@@ -4,12 +4,13 @@ import { getAllPosts, getAllCategories } from "@/data/BlogPostData";
 import Link from "next/link";
 import Image from "next/image";
 import { Calendar, Clock, User, ArrowRight } from "lucide-react";
-import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
+import { generateStaticPageMetadata } from "@/lib/metadata-generator";
+import { generateBreadcrumbSchema } from "@/lib/schema-generators";
 
 // ============================================================================
 // SEO METADATA - ENHANCED
 // ============================================================================
-export const metadata: Metadata = generateSEO({
+export const metadata: Metadata = generateStaticPageMetadata({
   title: "All Blog Posts | 100+ Software Testing & Development Resources - CDPL",
   description: "Explore CDPL's complete collection of 100+ expert articles on software testing, data science, web development, AI & machine learning, DevOps, and more. In-depth tutorials, best practices, and actionable insights from industry professionals. Updated weekly with fresh content.",
   keywords: [
@@ -35,7 +36,6 @@ export const metadata: Metadata = generateSEO({
   ],
   url: "/blog/all-posts",
   image: "/blog/og-image.jpg",
-  type: "website"
 });
 
 // ============================================================================
@@ -101,7 +101,7 @@ export default function AllPostsPage() {
             "image": post.featuredImage,
             "url": `https://www.cinutedigital.com/blog/${post.slug}`,
             "datePublished": new Date(post.publishDate).toISOString(),
-            "dateModified": post.lastModified 
+            "dateModified": post.lastModified
               ? new Date(post.lastModified).toISOString()
               : new Date(post.publishDate).toISOString(),
             "author": {
@@ -175,7 +175,7 @@ export default function AllPostsPage() {
               <p className="text-lg text-gray-600 leading-relaxed">
                 Whether you&apos;re looking to master test automation, learn the latest web frameworks, dive into machine learning, or optimize your DevOps workflow, our curated content provides actionable insights and best practices from CDPL industry experts. Browse by category below or use the search feature to find exactly what you need.
               </p>
-              
+
               {/* Stats Section for SEO */}
               <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="bg-white rounded-lg p-4 shadow-sm">
