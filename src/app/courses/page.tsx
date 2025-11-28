@@ -11,7 +11,7 @@ import FilterableCourseSections from "@/components/courses/FilterableCourseSecti
 // import FilterableCourseSections from "@/components/courses/FilterableCourseSections";
 
 import { generateStaticPageMetadata } from "@/lib/metadata-generator";
-import { generateItemListSchema, generateBreadcrumbSchema } from "@/lib/schema-generators";
+import { generateItemListSchema, generateBreadcrumbSchema, generateCourseSchema } from "@/lib/schema-generators";
 import JsonLd from "@/components/JsonLd";
 import { FEATURED_COURSES } from "@/lib/seo-config";
 import type { Metadata } from "next";
@@ -30,6 +30,19 @@ export default function CoursesPage() {
             url: `/${course.slug}`,
             description: course.description,
             type: "Course",
+            itemSchema: generateCourseSchema({
+                name: course.name,
+                description: course.description,
+                url: `/${course.slug}`,
+                slug: course.slug,
+                price: course.price,
+                currency: course.currency,
+                duration: course.duration,
+                level: course.level,
+                rating: course.rating,
+                reviewCount: 50, // Default review count
+                enrollmentCount: course.enrollmentCount,
+            })
         })),
         "All Courses"
     );
