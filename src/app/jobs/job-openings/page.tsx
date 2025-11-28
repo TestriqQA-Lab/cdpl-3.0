@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { generateSEO } from "@/lib/seo";
+import { generateStaticPageMetadata } from "@/lib/metadata-generator";
 
 // ---- Types ---------------------------------------------------------------
 export type Skill = { skill_name: string; years?: string | number | null; level?: string | null };
@@ -52,6 +52,7 @@ export type CandidatePayload = {
   mobile: string;
   mobile_country_code: number | string;
   email: string;
+  email_verified?: boolean;
 };
 
 export type VerifyPayload = { email: string; mobile: string; mobile_country_code: number | string };
@@ -213,7 +214,7 @@ async function verifyCandidateServer(payload: VerifyPayload) {
 // ============================================================================
 // SEO METADATA - Enhanced for Job Openings Page
 // ============================================================================
-export const metadata: Metadata = generateSEO({
+export const metadata: Metadata = generateStaticPageMetadata({
   title: "Job Openings - Apply to Latest Tech Jobs | CDPL Partner Jobs",
   description: "Browse and apply to latest job openings curated by CDPL through OptimHire. QA, Automation, Data Science, Full-Stack, and DevOps roles from top companies. Filter by skills and experience, then apply directly with resume upload.",
   keywords: [
@@ -235,7 +236,6 @@ export const metadata: Metadata = generateSEO({
   ],
   url: "/jobs/job-openings",
   image: "/og-image-job-openings.jpg",
-  imageAlt: "CDPL Job Openings - Apply to Latest Tech Jobs",
 });
 
 // ---- Loader for dynamic sections ----------------------------------------
@@ -269,18 +269,12 @@ const JobOpeningsJobBrowser = dynamic(
 export default async function JobSharePage() {
   const initial = await getJobsServer({ page: 1, size: 20 });
 
-
-
-
-
   return (
     <>
-    
-
       {/* Main Content - Semantic HTML Structure */}
-      <main 
+      <main
         className="min-h-screen bg-slate-50 text-slate-800"
-        itemScope 
+        itemScope
         itemType="https://schema.org/CollectionPage"
       >
         {/* Hidden metadata for schema.org */}

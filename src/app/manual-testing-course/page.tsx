@@ -1,43 +1,36 @@
-"use client";
+import type { Metadata } from "next";
+import { generateCourseMetadata } from "@/lib/metadata-generator";
+import { generateCourseSchema, generateBreadcrumbSchema } from "@/lib/schema-generators";
+import JsonLd from "@/components/JsonLd";
+import ManualTestingPageContent from "./ManualTestingPageContent";
 
-import StickyNav from "@/components/manual-testing-course/StickyNav";
+export const metadata: Metadata = generateCourseMetadata({
+  courseName: "Manual Testing Course",
+  description: "Master Manual Testing with our comprehensive course. Learn test cases, bug reporting, Agile, and Jira. 100% placement support. Enroll now!",
+  slug: "manual-testing-course",
+});
 
-import CareerSection from "@/components/manual-testing-course/CareerSection";
-import ComparisonSection from "@/components/manual-testing-course/ComparisonSection";
-import CurriculumSection from "@/components/manual-testing-course/CurriculumSection";
-import FaqSection from "@/components/manual-testing-course/FaqSection";
-import HeroManualTesting from "@/components/manual-testing-course/HeroManualTesting";
-import InstructorSection from "@/components/manual-testing-course/InstructorSection";
-import LearningPath from "@/components/manual-testing-course/LearningPath";
-import OtherCoursesSection from "@/components/manual-testing-course/OtherCourseSection";
-import ProjectsSection from "@/components/manual-testing-course/ProjectSection";
-import ToolsSection from "@/components/manual-testing-course/ToolsSection";
-import TrustSection from "@/components/manual-testing-course/TrustSection";
-import WhyLearnSection from "@/components/manual-testing-course/WhyLearnSection";
+export default function ManualTestingPage() {
+  const courseSchema = generateCourseSchema({
+    name: "Manual Testing Course",
+    description: "Master Manual Testing with our comprehensive course. Learn test cases, bug reporting, Agile, and Jira. 100% placement support.",
+    url: "/manual-testing-course",
+    slug: "manual-testing-course",
+    instructor: "CDPL Expert Mentors",
+    duration: "P3M", // 3 months
+  });
 
-export default function ContactPage() {
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Courses", url: "/courses" },
+    { name: "Manual Testing", url: "/manual-testing-course" },
+  ]);
+
   return (
-    <main className="relative">
-      {/* HERO (with additional padding-top to prevent overlap with sticky nav) */}
-      <HeroManualTesting />
-
-      {/* Sticky nav must appear right after hero */}
-      <div className="hidden md:block sticky top-0 z-20">
-        <StickyNav />
-      </div>
-
-      {/* Ensure each subsequent section wrapper has the correct id */}
-      <section id="why-learn"><WhyLearnSection /></section>
-      <section id="curriculum"><CurriculumSection /></section>
-      <section id="tools"><ToolsSection /></section>
-      <section id="projects"><ProjectsSection /></section>
-      <section id="learning-path"><LearningPath /></section>
-      <section id="instructor"><InstructorSection /></section>
-      <section id="career"><CareerSection /></section>
-      <section id="trust"><TrustSection /></section>
-      <section id="comparison"><ComparisonSection /></section>
-      <section id="other-courses"><OtherCoursesSection /></section>
-      <section id="faq"><FaqSection /></section>
-    </main>
+    <>
+      <JsonLd id="course-schema" schema={courseSchema} />
+      <JsonLd id="breadcrumb-schema" schema={breadcrumbSchema} />
+      <ManualTestingPageContent />
+    </>
   );
 }

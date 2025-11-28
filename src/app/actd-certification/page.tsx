@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
+import { generateStaticPageMetadata } from "@/lib/metadata-generator";
+import { generateBreadcrumbSchema } from "@/lib/schema-generators";
 
 /* ---------- Small, reusable loading UI ---------- */
 function SectionLoader({ label = "Loading..." }: { label?: string }) {
@@ -28,7 +29,7 @@ const ACTDCertificationProgressFaqSection = dynamic(
 );
 
 /* ---------- SEO ---------- */
-export const metadata: Metadata = generateSEO({
+export const metadata: Metadata = generateStaticPageMetadata({
   title: "ACTD Certification Training - Agile, Cloud & Test-Driven Development | CDPL",
   description:
     "Master Agile methodologies, Cloud technologies, and Test-Driven Development with CDPL's ACTD certification program. Comprehensive training with hands-on projects, industry mentors, and recognized certification.",
@@ -51,7 +52,6 @@ export const metadata: Metadata = generateSEO({
   ],
   url: "/actd-certification-training",
   image: "/og-image-actd-certification.jpg",
-  imageAlt: "ACTD Certification Training - Agile, Cloud & TDD by CDPL",
 });
 
 /* ---------- JSON-LD ---------- */
@@ -219,7 +219,7 @@ function StructuredData() {
 /* ---------- Page (server component) ---------- */
 export default function ACTDCertificationTrainingPage() {
   return (
-    <main 
+    <main
       className="bg-white text-slate-900"
       itemScope
       itemType="https://schema.org/Course"
@@ -228,7 +228,7 @@ export default function ACTDCertificationTrainingPage() {
       <meta itemProp="name" content="ACTD Certification Training" />
       <meta itemProp="description" content="Agile, Cloud & Test-Driven Development certification" />
       <meta itemProp="url" content="https://www.cinutedigital.com/actd-certification-training" />
-      
+
       <ACTDCertificationHeroSection />
       <ACTDCertificationTracksSection />
       <ACTDCertificationProgressFaqSection />

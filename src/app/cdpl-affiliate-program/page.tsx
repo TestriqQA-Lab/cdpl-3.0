@@ -1,10 +1,11 @@
 // app/cdpl-affiliate-program/page.tsx
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
+import { generateStaticPageMetadata } from "@/lib/metadata-generator";
+import { generateBreadcrumbSchema } from "@/lib/schema-generators";
 
 // ---------- SEO ----------
-export const metadata: Metadata = generateSEO({
+export const metadata: Metadata = generateStaticPageMetadata({
   title: "CDPL Affiliate Program - Earn Commission Promoting Training & Services",
   description:
     "Join the CDPL Affiliate Program and earn recurring commissions by promoting world-class IT training, certification courses, events, and services. Get transparent tracking, fast payouts, and dedicated support. Start earning 15-25% commission today!",
@@ -27,7 +28,6 @@ export const metadata: Metadata = generateSEO({
   ],
   url: "/cdpl-affiliate-program",
   image: "/og-image-affiliate.jpg",
-  imageAlt: "CDPL Affiliate Program - Earn Commission Promoting Training",
 });
 
 // ---------- Inline Loader ----------

@@ -206,7 +206,7 @@ export default function PastEventsPage() {
         });
 
         // Remove @context for nested item
-        const { '@context': _, ...eventSchemaNoContext } = eventSchema as any;
+        const { '@context': eventSchemaNoContext } = eventSchema as any;
 
         return {
           "@type": "ListItem",

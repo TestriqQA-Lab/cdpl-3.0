@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
+import { generateStaticPageMetadata } from "@/lib/metadata-generator";
+import { generateBreadcrumbSchema } from "@/lib/schema-generators";
 
 /* ---------- Small, reusable loading UI ---------- */
 function SectionLoader({ label = "Loading..." }: { label?: string }) {
@@ -33,7 +34,7 @@ const AAACertificationOutcomesCtaSection = dynamic(
 );
 
 /* ---------- SEO ---------- */
-export const metadata: Metadata = generateSEO({
+export const metadata: Metadata = generateStaticPageMetadata({
   title: "AAA Certification Course - Advanced Automation Architecture | CDPL",
   description:
     "Master Advanced Automation Architecture (AAA) with CDPL's comprehensive certification course. Learn test automation frameworks, CI/CD, cloud testing, and API automation. Includes hands-on labs, capstone project, and industry-recognized certificate.",
@@ -56,7 +57,6 @@ export const metadata: Metadata = generateSEO({
   ],
   url: "/aaa-certification-course",
   image: "/og-image-aaa-certification.jpg",
-  imageAlt: "AAA Certification Course - Advanced Automation Architecture by CDPL",
 });
 
 /* ---------- JSON-LD ---------- */
@@ -239,7 +239,7 @@ function StructuredData() {
 /* ---------- Page (server component) ---------- */
 export default function AAACertificationCoursePage() {
   return (
-    <main 
+    <main
       className="bg-white text-slate-900"
       itemScope
       itemType="https://schema.org/Course"
@@ -248,7 +248,7 @@ export default function AAACertificationCoursePage() {
       <meta itemProp="name" content="AAA Certification Course" />
       <meta itemProp="description" content="Advanced Automation Architecture certification" />
       <meta itemProp="url" content="https://www.cinutedigital.com/aaa-certification-course" />
-      
+
       <AAACerticationHeroSection />
       <AAACertificationWhySection />
       <AAACertificationCurriculumSection />
