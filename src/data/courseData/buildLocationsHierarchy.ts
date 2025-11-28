@@ -80,7 +80,7 @@ const COUNTRY_BY_STATE: Record<string, "India" | "UAE"> = {
 /** Extract course type from slug */
 function getCourseType(slug: string): string | undefined {
   const lower = slug.toLowerCase();
-  if (lower.includes("data-science") || lower.includes("ai-ml-bi")) return "data-science";
+  if (lower.includes("data-science") || lower.includes("ai-ml-bi") || lower.includes("business-intelligence") || lower.includes("data-analytics")) return "data-science";
   if (lower.includes("software-testing")) return "software-testing";
   if (lower.includes("digital-marketing") || lower.includes("general")) return "digital-marketing";
   // Changed: map new "web-development" slug, and keep legacy "programming" slugs compatible

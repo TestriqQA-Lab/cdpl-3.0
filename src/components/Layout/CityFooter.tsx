@@ -212,7 +212,7 @@ const CityFooter = () => {
                     </div>
                 </div>
                 <Link
-                    href="/location-we-serve"
+                    href="/locations-we-serve"
                     className="mt-2 inline-block px-6 py-2 border-2 border-orange-400 text-orange-400 rounded-md hover:bg-orange-400 hover:text-white transition-all duration-300 ease-in-out text-md font-semibold"
                 >
                     View All
