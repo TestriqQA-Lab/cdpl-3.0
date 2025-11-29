@@ -4,8 +4,11 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Sparkles, Home, ChevronRight } from "lucide-react";
+import { useState } from "react";
+import AdvisorModal from "@/components/ui/AdvisorModal";
 
 export default function JobsLiveJobsJobsHeroSection() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const breadcrumbs = [
     { label: "Home", href: "/" },
@@ -99,14 +102,14 @@ export default function JobsLiveJobsJobsHeroSection() {
               transition={{ duration: 0.5, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
               className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
             >
-              <Link
-                href="/contact-us"
-                className="inline-flex items-center justify-center rounded-2xl px-5 py-3 text-sm font-semibold text-white shadow-sm transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="inline-flex items-center justify-center rounded-2xl px-5 py-3 text-sm font-semibold text-white shadow-sm transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 cursor-pointer"
                 style={{ backgroundColor: "#ff8c00" }}
               >
-                Contact us
+                Talk to a Career Advisor
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </Link>
+              </button>
             </motion.div>
           </div>
 
@@ -160,6 +163,11 @@ export default function JobsLiveJobsJobsHeroSection() {
         </div>
       </div>
 
+      <AdvisorModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        source="Live Jobs Page - Hero Section"
+      />
     </section>
   );
 }

@@ -62,9 +62,11 @@ export async function POST(request: Request) {
       else formSource = 'Contact Form';
     }
 
-    const isHomeHeroForm = formSource.includes('Home Hero') || formSource.includes('Enquiry Form - Home Hero Section') || formSource.includes('Enquiry Form - Home Enquire Now Button');
+    const isHomeHeroForm = formSource.includes('Home Hero') || formSource.includes('Enquiry Form - Home Hero Section') || formSource.includes('Enquiry Form - Home Enquire Now Button') || formSource.includes('About Us - Hero Section Modal') || formSource.includes('About Us - CTA Section') || formSource.includes('About Us - FAQ Section');
     const isGetStartedForm = formSource.includes('Get Started Section');
     const isManualTestingHeroForm = formSource === 'Manual Software Testing Course Page - Hero Section';
+    const isMentorRequest = formSource.includes('Team Page - Mentor Section');
+    const isLiveJobsRequest = formSource.includes('Live Jobs Page - Hero Section');
 
     // Subject Prefix Logic
     let subjectPrefix = '[ENQUIRY]';
@@ -78,6 +80,10 @@ export async function POST(request: Request) {
       subjectPrefix = '[GET STARTED REQUEST]';
     } else if (isManualTestingHeroForm) {
       subjectPrefix = '[ENQUIRY]';
+    } else if (isMentorRequest) {
+      subjectPrefix = '[MENTOR REQUEST]';
+    } else if (isLiveJobsRequest) {
+      subjectPrefix = '[LIVE JOBS ENQUIRY]';
     }
 
     // Admin Template Logic
@@ -89,6 +95,10 @@ export async function POST(request: Request) {
       adminTemplate = 'admin-notification.html';
     } else if (isHomeHeroForm) {
       adminTemplate = 'admin-notification-home-hero.html';
+    } else if (isMentorRequest) {
+      adminTemplate = 'admin-notification-mentor.html';
+    } else if (isLiveJobsRequest) {
+      adminTemplate = 'admin-notification-live-jobs.html';
     }
 
     // 3. Prepare Admin Notification Email
@@ -98,7 +108,7 @@ export async function POST(request: Request) {
       fullName,
       email,
       phone,
-      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isGetStartedForm ? 'Get Started Request' : (isManualTestingHeroForm ? 'Course Page Enquiry' : 'General Inquiry'))),
+      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isGetStartedForm ? 'Get Started Request' : (isManualTestingHeroForm ? 'Course Page Enquiry' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : 'General Inquiry'))))),
       source: formSource,
       downloadLink: isBrochureRequest ? BROCHURE_DOWNLOAD_LINK : (isSyllabusRequest ? (syllabusLink || 'N/A') : 'N/A'),
       year: currentYear,
@@ -120,6 +130,10 @@ export async function POST(request: Request) {
       adminSubject = `${subjectPrefix} New Lead for ${courseName} - ${fullName}`;
     } else if (isManualTestingHeroForm) {
       adminSubject = `${subjectPrefix} New Lead from ${fullName} - Course Page`;
+    } else if (isMentorRequest) {
+      adminSubject = `${subjectPrefix} New Mentor Request from ${fullName}`;
+    } else if (isLiveJobsRequest) {
+      adminSubject = `${subjectPrefix} New Job Enquiry from ${fullName}`;
     }
 
     const adminMailOptions: nodemailer.SendMailOptions = {
@@ -206,7 +220,7 @@ export async function POST(request: Request) {
       email,
       phone,
       source: formSource,
-      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isGetStartedForm ? 'Get Started Request' : 'General Inquiry')),
+      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isGetStartedForm ? 'Get Started Request' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : 'General Inquiry')))),
       interest: interest || '',
       message: message || '',
     }).catch(err => console.error('Google Sheet background update error:', err));
