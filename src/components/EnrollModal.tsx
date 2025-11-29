@@ -11,12 +11,14 @@ interface EnrollModalProps {
     isOpen: boolean;
     onClose: () => void;
     courseName?: string;
+    source?: string;
 }
 
 const EnrollModal: React.FC<EnrollModalProps> = ({
     isOpen,
     onClose,
-    courseName = "Course"
+    courseName = "Course",
+    source
 }) => {
     // Form state
     const [formData, setFormData] = useState({
@@ -153,7 +155,7 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
                         ...formData,
                         phone: formData.phone || 'Not provided',
                         type: 'enrollment',
-                        source: `${courseName} Course Page - Enroll Now`,
+                        source: source || `${courseName} Course Page - Enroll Now`,
                         courseName
                     }),
                 });
