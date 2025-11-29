@@ -70,6 +70,7 @@ export async function POST(request: Request) {
     const isMentorRequest = formSource.includes('Team Page - Mentor Section');
     const isLiveJobsRequest = formSource.includes('Live Jobs Page - Hero Section');
     const isPlacementRequest = formSource.includes('Placements Page');
+    const isMentorsPageRequest = formSource.includes('Mentors Page');
     const isSessionEnquiry = formSource.includes('Session Enquiry') || formSource.includes('Other Courses Section');
 
     // Subject Prefix Logic
@@ -92,6 +93,8 @@ export async function POST(request: Request) {
       subjectPrefix = '[LIVE JOBS ENQUIRY]';
     } else if (isPlacementRequest) {
       subjectPrefix = '[PLACEMENT ENQUIRY]';
+    } else if (isMentorsPageRequest) {
+      subjectPrefix = '[MENTOR PAGE ENQUIRY]';
     } else if (isSessionEnquiry) {
       subjectPrefix = '[SESSION ENQUIRY]';
     }
@@ -111,6 +114,8 @@ export async function POST(request: Request) {
       adminTemplate = 'admin-notification-live-jobs.html';
     } else if (isPlacementRequest) {
       adminTemplate = 'admin-notification-placement.html';
+    } else if (isMentorsPageRequest) {
+      adminTemplate = 'admin-notification-mentors.html';
     }
 
     // 3. Prepare Admin Notification Email
@@ -120,7 +125,7 @@ export async function POST(request: Request) {
       fullName,
       email,
       phone,
-      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isGetStartedForm ? 'Get Started Request' : (isManualTestingHeroForm ? 'Course Page Enquiry' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : 'General Inquiry')))))),
+      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isGetStartedForm ? 'Get Started Request' : (isManualTestingHeroForm ? 'Course Page Enquiry' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : (isMentorsPageRequest ? 'Mentorship Enquiry' : 'General Inquiry'))))))),
 
       source: formSource,
       downloadLink: isBrochureRequest ? BROCHURE_DOWNLOAD_LINK : (isSyllabusRequest ? (syllabusLink || 'N/A') : 'N/A'),
@@ -153,6 +158,8 @@ export async function POST(request: Request) {
       adminSubject = `${subjectPrefix} New Job Enquiry from ${fullName}`;
     } else if (isPlacementRequest) {
       adminSubject = `${subjectPrefix} New Placement Enquiry from ${fullName}`;
+    } else if (isMentorsPageRequest) {
+      adminSubject = `${subjectPrefix} New Mentorship Enquiry from ${fullName}`;
     } else if (isEnrollmentRequest) {
       // Expected: [ENROLL NOW] New Lead from Prakash Testing - Manual Testing Course Page
       adminSubject = `${subjectPrefix} New Lead from ${fullName} - ${courseName || 'Course'} Page`;
@@ -248,8 +255,8 @@ export async function POST(request: Request) {
       email,
       phone,
       source: formSource,
-      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isGetStartedForm ? 'Get Started Request' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : 'General Inquiry'))))),
-    
+      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isGetStartedForm ? 'Get Started Request' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : (isMentorsPageRequest ? 'Mentorship Enquiry' : 'General Inquiry')))))),
+
       interest: interest || '',
       message: message || '',
     }).catch(err => console.error('Google Sheet background update error:', err));
