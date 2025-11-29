@@ -8,9 +8,10 @@ import LeadForm from "./forms/ManualCourseLeadForm";
 interface CareerSessionModalProps {
     isOpen: boolean;
     onClose: () => void;
+    source?: string;
 }
 
-export default function CareerSessionModal({ isOpen, onClose }: CareerSessionModalProps) {
+export default function CareerSessionModal({ isOpen, onClose, source }: CareerSessionModalProps) {
     // Close on escape key
     useEffect(() => {
         const handleEscape = (e: KeyboardEvent) => {
@@ -67,6 +68,7 @@ export default function CareerSessionModal({ isOpen, onClose }: CareerSessionMod
                                 className="shadow-2xl border-0"
                                 title="Get a Free Career Session"
                                 subtitle="Speak with our career counselors to plan your QA journey."
+                                source={source}
                             />
                         </motion.div>
                     </div>

@@ -153,6 +153,7 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
                         ...formData,
                         phone: formData.phone || 'Not provided',
                         type: 'enrollment',
+                        source: `${courseName} Course Page - Enroll Now`,
                         courseName
                     }),
                 });

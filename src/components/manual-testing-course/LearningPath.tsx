@@ -296,11 +296,13 @@ export default function LearningPath() {
       <CallbackModal
         isOpen={isCallbackModalOpen}
         onClose={() => setIsCallbackModalOpen(false)}
+        source="Manual Software Testing Course Page - Learning Path"
       />
       <SyllabusDownloadModal
         isOpen={isSyllabusModalOpen}
         onClose={() => setIsSyllabusModalOpen(false)}
         courseName="Manual Testing"
+        source="Manual Software Testing Course Page - Learning Path - Syllabus Download"
       />
       <EnrollModal
         isOpen={isEnrollModalOpen}

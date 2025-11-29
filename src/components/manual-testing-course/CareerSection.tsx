@@ -353,6 +353,7 @@ export default function CareerSection() {
       <CareerSessionModal
         isOpen={isCareerModalOpen}
         onClose={() => setIsCareerModalOpen(false)}
+        source="Manual Software Testing Course Page - Session Enquiry"
       />
       <SyllabusDownloadModal
         isOpen={isSyllabusModalOpen}
