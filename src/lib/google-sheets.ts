@@ -2,6 +2,26 @@ import { google } from 'googleapis';
 
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 
+const formatPrivateKey = (key: string) => {
+    // 1. Remove any surrounding quotes if they somehow got included
+    let cleanKey = key.replace(/^"|"$/g, '');
+
+    // 2. Handle escaped newlines (common in .env files)
+    if (cleanKey.includes('\\n')) {
+        cleanKey = cleanKey.replace(/\\n/g, '\n');
+    }
+
+    // 3. Check if it's a one-liner without proper newlines for headers
+    // If it has spaces instead of newlines between header/footer and body
+    if (!cleanKey.includes('\n') && cleanKey.includes('-----BEGIN PRIVATE KEY-----')) {
+        cleanKey = cleanKey
+            .replace('-----BEGIN PRIVATE KEY-----', '-----BEGIN PRIVATE KEY-----\n')
+            .replace('-----END PRIVATE KEY-----', '\n-----END PRIVATE KEY-----');
+    }
+
+    return cleanKey;
+};
+
 export async function appendRowToSheet(data: {
     date: string;
     fullName: string;
@@ -15,12 +35,14 @@ export async function appendRowToSheet(data: {
     try {
         const sheetId = process.env.GOOGLE_SHEET_ID;
         const clientEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-        const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+        const rawPrivateKey = process.env.GOOGLE_PRIVATE_KEY;
 
-        if (!sheetId || !clientEmail || !privateKey) {
+        if (!sheetId || !clientEmail || !rawPrivateKey) {
             console.warn('Google Sheets credentials missing. Skipping sheet update.');
             return;
         }
+
+        const privateKey = formatPrivateKey(rawPrivateKey);
 
         const auth = new google.auth.GoogleAuth({
             credentials: {
