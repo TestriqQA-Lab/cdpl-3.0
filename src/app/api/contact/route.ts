@@ -67,6 +67,7 @@ export async function POST(request: Request) {
     const isHomeHeroForm = formSource.includes('Home Hero') || formSource.includes('Enquiry Form - Home Hero Section') || formSource.includes('Enquiry Form - Home Enquire Now Button') || formSource.includes('About Us - Hero Section Modal') || formSource.includes('About Us - CTA Section') || formSource.includes('About Us - FAQ Section');
     const isGetStartedForm = formSource.includes('Get Started Section');
     const isManualTestingHeroForm = formSource === 'Manual Software Testing Course Page - Hero Section';
+    const isApiTestingHeroForm = formSource === 'API Testing Course Page - Hero Section';
     const isMentorRequest = formSource.includes('Team Page - Mentor Section');
     const isLiveJobsRequest = formSource.includes('Live Jobs Page - Hero Section');
     const isPlacementRequest = formSource.includes('Placements Page');
@@ -84,7 +85,7 @@ export async function POST(request: Request) {
       subjectPrefix = '[Enquiry]';
     } else if (isGetStartedForm) {
       subjectPrefix = '[GET STARTED REQUEST]';
-    } else if (isManualTestingHeroForm) {
+    } else if (isManualTestingHeroForm || isApiTestingHeroForm) {
       subjectPrefix = '[ENQUIRY]';
     } else if (isMentorRequest) {
       subjectPrefix = '[MENTOR REQUEST]';
@@ -120,8 +121,7 @@ export async function POST(request: Request) {
       fullName,
       email,
       phone,
-      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isGetStartedForm ? 'Get Started Request' : (isManualTestingHeroForm ? 'Course Page Enquiry' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : 'General Inquiry')))))),
-
+      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isEnrollmentRequest ? 'Enroll Now Inquiry' : (isGetStartedForm ? 'Get Started Request' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : (isSessionEnquiry ? 'Session Enquiry' : (isManualTestingHeroForm || isApiTestingHeroForm ? 'Course Page Enquiry' : 'General Inquiry')))))))),
       source: formSource,
       downloadLink: isBrochureRequest ? BROCHURE_DOWNLOAD_LINK : (isSyllabusRequest ? (syllabusLink || 'N/A') : 'N/A'),
       year: currentYear,
@@ -142,11 +142,15 @@ export async function POST(request: Request) {
     if (isSyllabusRequest && courseName) {
       if (formSource === 'Manual Software Testing Course Page - Learning Path - Syllabus Download') {
         adminSubject = `${subjectPrefix} New Lead from ${fullName} - Manual Testing Page (Syllabus)`;
+      } else if (formSource === 'API Testing Course Page - Hero Section - Syllabus Download') {
+        adminSubject = `${subjectPrefix} New Lead from ${fullName} - API Testing Page (Syllabus)`;
       } else {
         adminSubject = `${subjectPrefix} New Lead for ${courseName} - ${fullName}`;
       }
     } else if (isManualTestingHeroForm) {
       adminSubject = `${subjectPrefix} New Lead from ${fullName} - Course Page`;
+    } else if (isApiTestingHeroForm) {
+      adminSubject = `${subjectPrefix} New Lead from ${fullName} - API Testing Course Page`;
     } else if (isMentorRequest) {
       adminSubject = `${subjectPrefix} New Mentor Request from ${fullName}`;
     } else if (isLiveJobsRequest) {
@@ -248,8 +252,8 @@ export async function POST(request: Request) {
       email,
       phone,
       source: formSource,
-      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isGetStartedForm ? 'Get Started Request' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : 'General Inquiry'))))),
-    
+      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isEnrollmentRequest ? 'Enroll Now Inquiry' : (isGetStartedForm ? 'Get Started Request' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : (isSessionEnquiry ? 'Session Enquiry' : (isManualTestingHeroForm || isApiTestingHeroForm ? 'Course Page Enquiry' : 'General Inquiry')))))))),
+
       interest: interest || '',
       message: message || '',
     }).catch(err => console.error('Google Sheet background update error:', err));

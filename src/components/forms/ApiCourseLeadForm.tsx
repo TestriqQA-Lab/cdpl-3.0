@@ -11,9 +11,11 @@ import { isValidPhoneNumber } from 'libphonenumber-js';
 export default function LeadForm({
   className = '',
   variant = 'elevated',
+  source = 'API Testing Course Page - Hero Section'
 }: {
   className?: string;
   variant?: 'default' | 'elevated';
+  source?: string;
 }) {
   // Form state
   const [formData, setFormData] = useState({
@@ -122,7 +124,10 @@ export default function LeadForm({
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({
+            ...formData,
+            source: source
+          }),
         });
 
         if (response.ok) {
@@ -245,9 +250,8 @@ export default function LeadForm({
                 onChange={handleInputChange}
                 onBlur={() => validateFullName(formData.fullName)}
                 required
-                className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${
-                  fullNameError ? 'border-red-500' : 'border-gray-300'
-                }`}
+                className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${fullNameError ? 'border-red-500' : 'border-gray-300'
+                  }`}
                 placeholder="Enter your full name"
                 style={{ color: '#1e293b' }}
               />
@@ -271,9 +275,8 @@ export default function LeadForm({
                 onChange={handleInputChange}
                 onBlur={() => validateEmail(formData.email)}
                 required
-                className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${
-                  emailError ? 'border-red-500' : 'border-gray-300'
-                }`}
+                className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${emailError ? 'border-red-500' : 'border-gray-300'
+                  }`}
                 placeholder="Enter your email address"
                 style={{ color: '#1e293b' }}
               />
@@ -295,9 +298,8 @@ export default function LeadForm({
                 value={formData.phone}
                 onChange={handlePhoneChange}
                 onBlur={() => validatePhoneNumber(formData.phone)}
-                className={`phone-input-container ${
-                  phoneError ? 'border-red-500' : ''
-                }`}
+                className={`phone-input-container ${phoneError ? 'border-red-500' : ''
+                  }`}
                 placeholder="Enter phone number"
               />
             </div>
@@ -325,10 +327,10 @@ export default function LeadForm({
             )}
           </button>
 
-<p className="text-xs text-slate-500">
-          By submitting, you agree to our <a href="https://cinutedigital.com/privacy-policy">Privacy Policy</a>.
-        </p>
-         
+          <p className="text-xs text-slate-500">
+            By submitting, you agree to our <a href="https://cinutedigital.com/privacy-policy">Privacy Policy</a>.
+          </p>
+
         </div>
       </form>
     </>
