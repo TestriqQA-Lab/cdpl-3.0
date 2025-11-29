@@ -12,7 +12,7 @@ import {
     ArrowDownNarrowWide,
 } from "lucide-react";
 
-import React, { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -393,14 +393,3 @@ export default function HeroManualTesting() {
         </section>
     );
 }
-
-/* ---------- Reusable components in the same file ---------- */
-function Field({ label, children }: { label: string; children: ReactNode }) {
-    return (
-        <div>
-            <label className="mb-1 block text-sm font-medium text-slate-700">{label}</label>
-            {children}
-        </div>
-    );
-}
-

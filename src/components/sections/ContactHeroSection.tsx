@@ -396,8 +396,8 @@ export function ContactHeroSection() {
                             onChange={handleInputChange}
                             placeholder="Enter your full name"
                             className={`bg-white w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${fullNameError
-                                ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                                : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
+                              ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                              : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
                               }`}
                           />
                         </div>
@@ -420,8 +420,8 @@ export function ContactHeroSection() {
                             onChange={handleInputChange}
                             placeholder="Enter your email address"
                             className={`bg-white w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${emailError
-                                ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                                : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
+                              ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                              : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
                               }`}
                           />
                         </div>
@@ -489,8 +489,8 @@ export function ContactHeroSection() {
                           rows={3}
                           placeholder="Tell us how we can help..."
                           className={`bg-white w-full px-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${messageError
-                              ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                              : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
+                            ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                            : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
                             }`}
                         />
                         {messageError && (
@@ -594,6 +594,7 @@ export function ContactHeroSection() {
                   {/* Schedule Meeting */}
                   <Link
                     href="https://calendar.app.google/tvh9dsXZsX9BujRR8"
+                    target="_blank"
                     aria-label="Schedule a Meeting"
                     className="group inline-flex w-full items-center gap-4 lg:gap-3 xl:gap-4 rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 shadow-sm transition hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 overflow-hidden"
                   >
@@ -666,8 +667,8 @@ export function ContactHeroSection() {
                           onChange={handleInputChange}
                           placeholder="Enter your full name"
                           className={`w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all bg-white ${fullNameError
-                              ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                              : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
+                            ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                            : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
                             }`}
                         />
                       </div>
@@ -690,8 +691,8 @@ export function ContactHeroSection() {
                           onChange={handleInputChange}
                           placeholder="Enter your email address"
                           className={`bg-white w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${emailError
-                              ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                              : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
+                            ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                            : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
                             }`}
                         />
                       </div>
@@ -759,8 +760,8 @@ export function ContactHeroSection() {
                         rows={3}
                         placeholder="Tell us how we can help..."
                         className={`bg-white w-full px-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${messageError
-                            ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                            : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
+                          ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                          : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
                           }`}
                       />
                       {messageError && (
