@@ -101,7 +101,7 @@ export default function LearningPath() {
   ];
 
   return (
-    <section className="relative md:py-20 bg-white overflow-hidden" id="learning-path" aria-labelledby="learning-path-title">
+    <section className="relative py-12 md:py-20 bg-white overflow-hidden" id="learning-path" aria-labelledby="learning-path-title">
       {/* Subtle futuristic accents */}
       <div className="pointer-events-none absolute inset-0 [mask-image:radial-gradient(50%_50%_at_50%_50%,black,transparent)]">
         <div className="absolute -top-10 -left-10 h-56 w-56 rounded-full border border-cyan-200/60"></div>
@@ -185,14 +185,14 @@ export default function LearningPath() {
                 </div>
 
                 {/* Footer */}
-                <div className="mt-6 flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-gray-600 text-sm">
+                <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0">
+                  <div className="flex items-center gap-2 text-gray-600 text-sm w-full sm:w-auto">
                     <Clock className="w-4 h-4" aria-hidden="true" />
                     <span>{p.title.split("•")[1]?.trim() ?? "Weeks"}</span>
                   </div>
                   <button
                     onClick={() => setIsCallbackModalOpen(true)}
-                    className={`cursor-pointer inline-flex items-center gap-2 text-sm font-medium text-white hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg px-3 py-2 ${p.accent === "cyan" ? "bg-cyan-600 focus:ring-cyan-500" : p.accent === "indigo" ? "bg-indigo-600 focus:ring-indigo-500" : p.accent === "emerald" ? "bg-emerald-600 focus:ring-emerald-500" : "bg-rose-600 focus:ring-rose-500"}`}
+                    className={`w-full sm:w-auto justify-center cursor-pointer inline-flex items-center gap-2 text-sm font-medium text-white hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg px-3 py-2 ${p.accent === "cyan" ? "bg-cyan-600 focus:ring-cyan-500" : p.accent === "indigo" ? "bg-indigo-600 focus:ring-indigo-500" : p.accent === "emerald" ? "bg-emerald-600 focus:ring-emerald-500" : "bg-rose-600 focus:ring-rose-500"}`}
                     aria-label={`Request callback for ${p.title}`}
                   >
                     Explore <Target className="w-4 h-4" aria-hidden="true" />
@@ -264,7 +264,7 @@ export default function LearningPath() {
             </ul>
             <button
               onClick={() => setIsSyllabusModalOpen(true)}
-              className="cursor-pointer mt-4 inline-flex items-center gap-2 text-sm font-medium bg-blue-800 text-white hover:bg-emerald-900 transition focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 rounded-lg px-3 py-2 border border-emerald-200"
+              className="w-full md:w-auto justify-center cursor-pointer mt-4 inline-flex items-center gap-2 text-sm font-medium bg-blue-800 text-white hover:bg-emerald-900 transition focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 rounded-lg px-3 py-2 border border-emerald-200"
             >
               Download Syllabus
             </button>
@@ -273,12 +273,20 @@ export default function LearningPath() {
 
         {/* Soft CTA */}
         <div className="mt-10 text-center">
-          <button
-            onClick={() => setIsEnrollModalOpen(true)}
-            className="cursor-pointer inline-flex items-center gap-2 rounded-xl border border-gray-300 bg-indigo-700 px-6 py-3 text-base font-semibold text-white hover:bg-indigo-800 transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
-          >
-            Start Your QA Journey <ArrowRightTiny />
-          </button>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button
+              onClick={() => document.getElementById('curriculum')?.scrollIntoView({ behavior: 'smooth' })}
+              className="w-full sm:w-auto cursor-pointer inline-flex items-center justify-center gap-2 rounded-xl border border-gray-300 bg-white px-6 py-3 text-base font-semibold text-gray-700 hover:bg-gray-50 transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+            >
+              View Curriculum
+            </button>
+            <button
+              onClick={() => setIsEnrollModalOpen(true)}
+              className="w-full sm:w-auto cursor-pointer inline-flex items-center justify-center gap-2 rounded-xl border border-gray-300 bg-indigo-700 px-6 py-3 text-base font-semibold text-white hover:bg-indigo-800 transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+            >
+              Start Your QA Journey <ArrowRightTiny />
+            </button>
+          </div>
           <p className="mt-3 text-sm text-gray-600">
             Cohort starts monthly • Live sessions + recorded classes • Certificates on completion
           </p>
