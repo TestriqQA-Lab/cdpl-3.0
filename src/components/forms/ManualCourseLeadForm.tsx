@@ -126,7 +126,10 @@ export default function LeadForm({
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({
+            ...formData,
+            source: 'Manual Software Testing Course Page - Hero Section'
+          }),
         });
 
         if (response.ok) {

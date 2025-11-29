@@ -64,6 +64,7 @@ export async function POST(request: Request) {
 
     const isHomeHeroForm = formSource.includes('Home Hero') || formSource.includes('Enquiry Form - Home Hero Section') || formSource.includes('Enquiry Form - Home Enquire Now Button');
     const isGetStartedForm = formSource.includes('Get Started Section');
+    const isManualTestingHeroForm = formSource === 'Manual Software Testing Course Page - Hero Section';
 
     // Subject Prefix Logic
     let subjectPrefix = '[NEW LEAD]';
@@ -75,6 +76,8 @@ export async function POST(request: Request) {
       subjectPrefix = '[Enquiry]';
     } else if (isGetStartedForm) {
       subjectPrefix = '[GET STARTED REQUEST]';
+    } else if (isManualTestingHeroForm) {
+      subjectPrefix = '[ENQUIRY]';
     }
 
     // Admin Template Logic
@@ -95,7 +98,7 @@ export async function POST(request: Request) {
       fullName,
       email,
       phone,
-      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isGetStartedForm ? 'Get Started Request' : 'General Inquiry')),
+      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isGetStartedForm ? 'Get Started Request' : (isManualTestingHeroForm ? 'Course Page Enquiry' : 'General Inquiry'))),
       source: formSource,
       downloadLink: isBrochureRequest ? BROCHURE_DOWNLOAD_LINK : (isSyllabusRequest ? (syllabusLink || 'N/A') : 'N/A'),
       year: currentYear,
@@ -115,6 +118,8 @@ export async function POST(request: Request) {
     let adminSubject = `${subjectPrefix} New Lead from ${fullName} - ${formSource}`;
     if (isSyllabusRequest && courseName) {
       adminSubject = `${subjectPrefix} New Lead for ${courseName} - ${fullName}`;
+    } else if (isManualTestingHeroForm) {
+      adminSubject = `${subjectPrefix} New Lead from ${fullName} - Course Page`;
     }
 
     const adminMailOptions: nodemailer.SendMailOptions = {
