@@ -66,7 +66,7 @@ export async function POST(request: Request) {
     const isGetStartedForm = formSource.includes('Get Started Section');
 
     // Subject Prefix Logic
-    let subjectPrefix = '[NEW LEAD]';
+    let subjectPrefix = '[ENQUIRY]';
     if (isBrochureRequest) {
       subjectPrefix = '[BROCHURE DOWNLOAD - HOME PAGE]';
     } else if (isSyllabusRequest) {
