@@ -120,7 +120,7 @@ export default function EventContent({ event }: EventContentProps) {
                                         </svg>
                                     </div>
                                     <div className="flex flex-col">
-                                        <p className="text-slate-200 leading-relaxed font-semibold text-lg">{takeaway.title} :</p>
+                                        <p className="text-slate-200 leading-relaxed font-semibold text-lg">{takeaway.title}</p>
                                         <p className="mt-1 text-slate-200 leading-relaxed text-sm md:text-base">{takeaway.description}</p>
                                     </div>
                                 </div>
@@ -232,7 +232,7 @@ export default function EventContent({ event }: EventContentProps) {
                             {event.venueTitle || event.location}
                         </h4>
                         <p className="text-md text-slate-700 leading-relaxed">
-                            {event.venueDescription || "A state-of-the-art facility equipped with modern amenities to ensure a seamless learning experience."}
+                            {event.venueDescription}
                         </p>
                         {event.venueAddress && (
                             <div className="flex items-start gap-2 text-sm text-slate-600 bg-slate-50 p-3 rounded-lg border border-slate-200">

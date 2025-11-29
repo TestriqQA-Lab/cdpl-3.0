@@ -521,7 +521,1431 @@ export const pastEvents: PastEvent[] = [
     venueAddress: "Andheri, Maharashtra",
     venueDescription: "Bhavan’s College is a college located nearby Azad Nagar Metro Station in Andheri West, a neighborhood in western Mumbai, India. It primarily offers higher secondary (junior college) and undergraduate (bachelor’s) courses. There a few postgraduate and PhD programs too. It also include various types of fest, games, curricular activity etc.",
     venueImageUrl: "/events/faculty-development-program-fdp-on-power-bi-tableau-unlocking-future-ready-careers-bhavans-college-andheri/bhavan-college-logo.webp"
-  }
+  },
+  {
+    id: "national-conference-mkes-trust-nagindas-khandwala-college",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "national-conference-on-applications-of-ai-promises-perils-and-sustainability-mkes-trust-nagindas-khandwala-college",
+    title: "National Conference on Applications of AI: Promises, Perils, and Sustainability: MKES Trust Nagindas Khandwala College – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2025-02-14 to 2025-02-14",
+    location: "MKES Trust Nagindas Khandwala College",
+    attendees: 85,
+    category: "Career Guidance Seminar",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "Artificial Intelligence and Machine Learning (AI-ML)",
+    purpose: "Artificial Intelligence (AI) is no longer just a futuristic concept—it is transforming industries, businesses, and human interactions in real time. However, with rapid advancements in AI, new challenges arise, including ethical concerns, bias, and governance issues.",
+    trainingDuration: "The session covered a comprehensive overview of AI and its industrial impact",
+    sessionHighlights: [
+      {
+        title: "Introduction to Generative AI and Large Language Models (LLMs)",
+        points: ["How AI models learn from data and generate human-like responses", "The potential of LLMs in automating content creation, customer support, and data analysis", "Limitations of LLMs: Bias, misinformation, and ethical concerns"]
+      },
+      {
+        title: "Applications of AI-Driven Business Intelligence (BI) for Decision-Making",
+        points: ["AI-powered predictive analytics for market trends and customer behavior", "AI in fraud detection and cybersecurity", "Real-world case studies of companies leveraging AI for competitive advantage"]
+      },
+      {
+        title: "The Ethical and Governance Challenges in AI Adoption",
+        points: ["How AI bias and misinformation can lead to flawed decision-making", "The role of government policies and regulations in AI governance", "Discussing AI ethics and responsible AI development"]
+      },
+      {
+        title: "Case Studies on AI-Driven Automation in Industry",
+        points: ["How AI is being used in healthcare, finance, and manufacturing", "The role of AI in automating supply chains and logistics", "How businesses are balancing AI-driven automation with human oversight"]
+      },
+    ],
+    keyTakeaways: [
+      {
+        title: "Replacement for human intelligence",
+        description: "✔ AI is not a replacement for human intelligence but an amplifier of it",
+      },
+      {
+        title: "Adopt AI responsibly",
+        description: "Businesses that adopt AI responsibly will gain a competitive edge",
+      },
+      {
+        title: "Critical for sustainability and trust",
+        description: "Ethical AI development is critical for sustainability and trust",
+      },
+      {
+        title: "Right balance of AI",
+        description: "The right balance of AI and human expertise is the key to long-term AI adoption",
+      },
+    ],
+    highlights: [
+      "How AI is reshaping industries with automation and predictive analytics",
+      "The opportunities and risks of integrating AI into business operations",
+      "The impact of LLMs like ChatGPT and Bard on productivity, creativity, and decision-making",
+      "Ethical dilemmas and governance challenges in AI adoption"
+    ],
+    heroImageUrl: "/events/national-conference-on-applications-of-ai-promises-perils-and-sustainability-mkes-trust-nagindas-khandwala-college/mkes-nagindas-program.webp",
+    success: "AI is here to stay. The question is: How will we use it? The answer lies in responsible AI adoption, continuous learning, and a commitment to ethical AI practices.",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "Nagindas Khandwala College – Cinute Digital Pvt. Ltd",
+    venueAddress: "Mumbai, Maharashtra",
+    venueDescription: "Nagindas Khandwala College is conferred with autonomous status by the UGC from the year 2016-17. To its credit the college has secured A grade by NAAC(4th Cycle) and recieved Empowered Autonomous Status and is the first state Cluster Universuty approved. The college is fourth under Arts, Science and Commerce Colleges to be autonomous under the University of Mumbai. The college has 27 UG, 15 PG and 4 Ph.D. programmes. 40 % of the faculty members are Ph.D. of which 25% are Research Guides.",
+    venueImageUrl: "/events/national-conference-on-applications-of-ai-promises-perils-and-sustainability-mkes-trust-nagindas-khandwala-college/mkes-nagindas.png"
+  },
+  {
+    id: "5-days-faculty-development-program-software-of-civil-engineering",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "5-days-faculty-development-program-on-management-software-of-civil-engineering",
+    title: "5-Day Faculty Development Program on Management Software of Civil Engineering – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2025-02-11 to 2025-02-15",
+    location: "Online Event",
+    attendees: 87,
+    category: "Career Guidance Seminar",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "Artificial Intelligence and Machine Learning (AI-ML)",
+    purpose: "Civil engineering projects generate vast amounts of data, from site surveys to material procurement and project timelines. Yet, this data often remains underutilized due to the lack of proper analytical tools. The session aimed to introduce Business Intelligence (BI) in Civil Engineering, focusing on how data visualization and analytics can help professionals make better decisions.",
+    trainingDuration: "The session covered several key aspects of BI in Civil Engineering",
+    sessionHighlights: [
+      {
+        title: "Introduction to Business Intelligence (BI) and its Role in Civil Engineering",
+        points: ["The importance of data analytics in construction and infrastructure projects", "Challenges in traditional project monitoring and decision-making", "How BI tools can transform data into actionable insights"]
+      },
+      {
+        title: "Live Demonstration of Tableau for Civil Engineering Applications",
+        points: ["Visualizing construction project timelines", "Identifying potential delays and risks in ongoing projects", "Forecasting budget overruns and resource allocation"]
+      },
+      {
+        title: "Case Studies on Business Intelligence in Construction Projects",
+        points: ["A real-world example of how BI helped prevent cost overruns in a large-scale infrastructure project", "How predictive analytics improved safety measures on construction sites", "The impact of BI dashboards in improving project reporting and compliance"]
+      },
+      {
+        title: "Discussion on Integrating BI with IoT, GIS, and AI for Smarter Infrastructure Management",
+        points: ["How smart sensors (IoT) can feed real-time construction data into BI tools", "Using GIS (Geographic Information Systems) to analyze site conditions", "Leveraging AI-powered analytics for predictive maintenance of infrastructure"]
+      },
+      {
+        title: "Q&A and Industry-Academia Collaboration",
+        points: ["Open discussion with faculty and researchers on implementing BI in academic research and real-world projects", "Exploring the need for BI training programs in civil engineering education"]
+      },
+    ],
+    keyTakeaways: [
+      {
+        title: "Project efficiency",
+        description: "Improve project efficiency through better tracking",
+      },
+      {
+        title: "Identifying potential failures early",
+        description: "Reduce risks by identifying potential failures early",
+      },
+      {
+        title: "Material usage and resource allocation",
+        description: "Optimize material usage and resource allocation",
+      },
+      {
+        title: "Data-driven decisions",
+        description: "Make data-driven decisions that improve sustainability",
+      },
+    ],
+    highlights: [
+      "Better project tracking",
+      "Risk identification and mitigation",
+      "Optimization of resources and cost management",
+      "Data-driven decision-making for infrastructure planning",
+      "By integrating BI tools with civil engineering, professionals can improve accuracy, efficiency, and sustainability in their projects."
+    ],
+    heroImageUrl: "/events/5-days-faculty-development-program-on-management-software-of-civil-engineering/National-Conference-PRP-2025.jpg",
+    success: "The future of civil engineering is digital, and data analytics is at its core. BI tools will play a crucial role in shaping the next generation of smart infrastructure and more efficient project management.",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "Pravin Patil College of Diploma Engineering and Technology – Cinute Digital Pvt. Ltd",
+    venueAddress: "Bhayandar, Maharashtra",
+    venueDescription: "The Pravin Patil Polytechnic is affiliated to the Maharashtra State Board of Technical Education, Recognised by DTE Maharashtra State and approved by A.I.C.T.E. New Delhi, provides Diploma Courses in Information Technology, Computer Engineering, Electronics & Tele-Communication, Civil Engineering, Electrical Engineering, Mechanical Engineering leading to certificate in Diploma by the Maharashtra State Board of Technical Education Mumbai.",
+    venueImageUrl: "/events/5-days-faculty-development-program-on-management-software-of-civil-engineering/logo-prp-college.webp"
+  },
+  {
+    id: "navigating-the-world-of-data-science",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "navigating-the-world-of-data-science-and-emerging-career-paths",
+    title: "Navigating the World of Data Science and Emerging Career Paths – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2023-08-25",
+    location: "Lords Universal College - Goregaon, Mumbai",
+    attendees: 50,
+    category: "Career Guidance Seminar",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "Data Science",
+    purpose: "The Navigating the World of Data Science session provided a comprehensive overview of the rapidly growing field of data science and its potential for transformative career opportunities. This one-day event aimed to demystify data science concepts, showcase emerging trends, and guide participants in building a robust career roadmap in this exciting domain.",
+    trainingDuration: "The event featured an engaging mix of expert-led discussions, interactive activities, and real-world case studies",
+    sessionHighlights: [
+      {
+        title: "Introduction to Data Science",
+        points: ["A deep dive into the fundamentals of data science, its impact across industries, and the growing demand for skilled professionals."]
+      },
+      {
+        title: "Emerging Trends",
+        points: ["Insights into cutting-edge technologies, including machine learning, AI, big data analytics, and their applications in fields like healthcare, finance, and retail."]
+      },
+      {
+        title: "Skill-Building Workshop",
+        points: ["Hands-on exercises focusing on essential tools and programming languages, such as Python, R, and SQL, with real-world data manipulation tasks."]
+      },
+      {
+        title: "Career Guidance",
+        points: ["Exploring diverse roles like data analyst, machine learning engineer, business intelligence developer, and strategies to upskill and stay ahead in the industry."]
+      },
+      {
+        title: "Industry Case Studies",
+        points: ["A showcase of successful data science projects that solved complex challenges and created significant value for organizations."]
+      },
+      {
+        title: "Networking and Q&A",
+        points: ["An open forum for participants to interact with experts, resolve doubts, and seek advice tailored to their career goals."]
+      },
+    ],
+    keyTakeaways: [
+      {
+        title: "Understanding of Data Science Fundamentals",
+        description: "A clear picture of the role data science plays in shaping decisions and driving innovation.",
+      },
+      {
+        title: "Career Path Awareness",
+        description: "Clarity on various roles, required skills, and certification paths to excel in data science.",
+      },
+      {
+        title: "Practical Experience",
+        description: "Exposure to tools, techniques, and the application of data science through hands-on exercises.",
+      },
+      {
+        title: "Networking Opportunities",
+        description: "Connections with industry professionals and like-minded peers to foster collaboration and mentorship.",
+      },
+      {
+        title: "Career Path Awareness",
+        description: "The 65 participants left inspired and ready to embark on their data science journey with confidence and determination.",
+      },
+    ],
+    highlights: [],
+    heroImageUrl: "/events/navigating-the-world-of-data-science-and-emerging-career-paths/Navigating-the-World-of-Data-Universal-College.png",
+    success: "Step into the World of Data Science with Cinute Digital Pvt. Ltd.! Enroll in our certification courses for in-demand skills like Python programming, machine learning, and big data analytics. Attend our workshops and training programs to gain practical expertise and industry exposure. Visit Cinute Digital Pvt. Ltd. to explore how we empower individuals to excel in the data-driven world. Your data science career begins here—unlock endless possibilities with us!",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "Lords Universal College – Cinute Digital Pvt. Ltd",
+    venueAddress: "Goregaon, Mumbai",
+    venueDescription: "Lords Universal College, established in 2004 in Goregaon (West), Mumbai, is a Gujarati Linguistic Minority Institution affiliated with the University of Mumbai. It offers undergraduate programs in commerce, management, IT, microbiology, and mass communication, focusing on quality education and holistic development.",
+    venueImageUrl: "/events/navigating-the-world-of-data-science-and-emerging-career-paths/Universal-college-logo.jpg"
+  },
+  {
+    id: "navigating-the-world-of-data-science",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "internship-program-dj-sanghvi-college",
+    title: "Internship Program - DJ Sanghvi College – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2023-04-15",
+    location: "SVKM’s Dwarkadas J. Sanghvi College of Engineering (DJSCE) - Vile Parle, Mumbai",
+    attendees: 34,
+    category: "Internship Program",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "Data Science",
+    purpose: "The Internship Program at DJ Sanghvi College of Engineering was designed to bridge the gap between theoretical education and real-world industry practices. With 105 participants, this initiative aimed to equip students with the skills, knowledge, and confidence required to excel in the dynamic IT and engineering sectors. The program provided a comprehensive overview of industry demands while fostering hands-on learning experiences to prepare students for future careers.",
+    trainingDuration: "The program was crafted to ensure a balance of technical knowledge, practical exposure, and career readiness",
+    sessionHighlights: [
+      {
+        title: "Introduction to Internship Opportunities",
+        points: ["An overview of internship programs available in leading industries, their structure, and benefits in terms of career growth and skill development."]
+      },
+      {
+        title: "Technical Skills Development",
+        points: ["Sessions on automation testing, software development lifecycle (SDLC), and emerging tools like Selenium and Postman for hands-on application."]
+      },
+      {
+        title: "Industry Insights",
+        points: ["Interactive discussions with professionals on current trends in AI, IoT, and cybersecurity, helping students align their skills with industry needs."]
+      },
+      {
+        title: "Career Guidance Workshop",
+        points: ["A focused segment on building strong resumes, mastering interviews, and understanding what recruiters look for in potential interns."]
+      },
+      {
+        title: "Case Studies and Live Projects",
+        points: ["Practical demonstrations of real-world projects, allowing students to visualize the application of their learning."]
+      },
+      {
+        title: "Q&A and Networking",
+        points: ["Open forums where students engaged directly with industry experts, clearing doubts and gaining insights into their professional journey."]
+      },
+    ],
+    keyTakeaways: [
+      {
+        title: "Practical Knowledge",
+        description: "A deeper understanding of tools and techniques essential for today’s IT and engineering roles.",
+      },
+      {
+        title: "Career Clarity",
+        description: "Awareness of how internships can pave the way for full-time job opportunities and career progression.",
+      },
+      {
+        title: "Enhanced Employability Skills",
+        description: "Improved resumes, interview readiness, and industry-aligned technical expertise.",
+      },
+      {
+        title: "Professional Connections",
+        description: "Valuable relationships with industry mentors, peers, and recruiters for long-term career growth.",
+      },
+      {
+        title: "Career Path Awareness",
+        description: "The 65 participants left inspired and ready to embark on their data science journey with confidence and determination.",
+      },
+    ],
+    highlights: ["The enthusiastic involvement of 105 students and the active participation of industry professionals marked the program as a significant step toward fostering career readiness and innovation among budding engineers."],
+    heroImageUrl: "/events/internship-program-dj-sanghvi-college/Internship-Program-DJ-Sanghvi-College.png",
+    success: "Get industry-ready with Cinute Digital Pvt. Ltd.! Enroll in our certification programs to master tools like Selenium, Postman, and more. Participate in our workshops and webinars to stay updated with the latest industry trends and technologies. Visit Cinute Digital Pvt. Ltd. to learn more about our initiatives and how we can help you succeed. Your future starts here—prepare to lead the IT and engineering world with confidence!",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "SVKM's Dwarkadas J. Sanghvi College of Engineering – Cinute Digital Pvt. Ltd",
+    venueAddress: "Vile Parle, Mumbai",
+    venueDescription: "SVKM’s Dwarkadas J. Sanghvi College of Engineering (DJSCE) in Vile Parle, Mumbai, is a leading institution offering undergraduate and postgraduate engineering programs. Established in 1994 and affiliated with the University of Mumbai, the college is known for its excellent infrastructure, experienced faculty, and strong focus on research. DJSCE has been granted autonomy and maintains a top-tier placement record with collaborations from leading companies. With a focus on holistic development, the college prepares students for successful careers in the engineering field.",
+    venueImageUrl: "/events/internship-program-dj-sanghvi-college/DJ-Sanghvi-logo.png"
+  },
+  {
+    id: "job-fair",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "job-fair",
+    title: "Job Fair – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2023-03-18",
+    location: "Nirmala Memorial Foundation College of Commerce and Science (NMFC) - Kandivali (East), Mumbai",
+    attendees: 45,
+    category: "Placement Drive",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "Placement",
+    purpose: "The Job Fair at Nirmala College was a remarkable initiative to connect B.Sc. students with potential employers, bridging the gap between academia and industry. With 150 participants, the event aimed to provide a platform for graduates to explore exciting career opportunities, understand industry requirements, and secure their first step toward a successful professional journey.",
+    trainingDuration: "The job fair was meticulously organized to provide students with valuable insights, direct interactions with employers, and hands-on learning opportunities",
+    sessionHighlights: [
+      {
+        title: "Inaugural Session",
+        points: ["A warm welcome by the organizers, emphasizing the significance of job fairs in enhancing career prospects and connecting graduates with industry needs."]
+      },
+      {
+        title: "Industry Stalls",
+        points: ["Leading companies from sectors like IT, biotechnology, finance, and healthcare set up recruitment booths, offering information about job openings, required skills, and career paths."]
+      },
+      {
+        title: "Resume Building Workshop",
+        points: ["A dedicated session on crafting a professional resume that stands out, with practical tips from industry experts."]
+      },
+      {
+        title: "Mock Interviews",
+        points: ["On-the-spot interview practice sessions, giving students a taste of real-world recruitment processes and improving their confidence."]
+      },
+      {
+        title: "Career Guidance Talks",
+        points: ["Engaging talks by recruiters and professionals on emerging trends, industry expectations, and how to stay ahead in a competitive job market."]
+      },
+      {
+        title: "Networking Opportunities",
+        points: ["One-on-one interactions with employers, enabling students to make meaningful connections and leave lasting impressions."]
+      },
+    ],
+    keyTakeaways: [
+      {
+        title: "Clarity on Career Opportunities",
+        description: "A comprehensive understanding of roles available for B.Sc. graduates across various industries.",
+      },
+      {
+        title: "Enhanced Employability Skills",
+        description: "Improved resumes, interview techniques, and professional presentation skills.",
+      },
+      {
+        title: "Networking Benefits",
+        description: "Connections with recruiters and industry leaders, opening doors to internships and job offers.",
+      },
+      {
+        title: "Confidence and Motivation",
+        description: "Renewed enthusiasm to pursue their career goals with actionable insights from the event.",
+      },
+      {
+        title: "Career Path Awareness",
+        description: "The 65 participants left inspired and ready to embark on their data science journey with confidence and determination.",
+      },
+    ],
+    highlights: ["The overwhelming participation of 150 students and the active involvement of recruiters highlighted the event's success, setting a benchmark for future job fairs."],
+    heroImageUrl: "/events/job-fair/Job-Fair-nirmala-college.png",
+    success: "Empower your career with Cinute Digital Pvt. Ltd.! Explore our certification programs designed to prepare you for industry demands in software testing, data analytics, and more. Join our workshops and webinars to gain insights into emerging trends and in-demand skills. Visit Cinute Digital Pvt. Ltd. to discover how we help graduates transform their aspirations into reality. Take charge of your career today—success starts with the right opportunities!",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "Nirmala Memorial Foundation College of Commerce and Science - Cinute Digital Pvt. Ltd",
+    venueAddress: "Kandivali (East), Mumbai",
+    venueDescription: "Nirmala Memorial Foundation College of Commerce and Science (NMFC), located in Kandivali (East), Mumbai, is affiliated with the University of Mumbai. Established in 2003, it offers undergraduate programs in commerce, management, IT, and mass communication, fostering quality education and holistic development.",
+    venueImageUrl: "/events/job-fair/nirmala-college-logo.png"
+  },
+  {
+    id: "techoutsav",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "techoutsav",
+    title: "Techoutsav",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2023-01-30",
+    location: "Nirmala Memorial Foundation College of Commerce and Science (NMFC) - Kandivali (East), Mumbai",
+    attendees: 48,
+    category: "Placement Drive",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "Placement",
+    purpose: "TechoUtsav, the highly anticipated technical fest of Nirmala College, brought together a diverse group of students and tech enthusiasts to celebrate the spirit of innovation and technology. The event aimed to ignite curiosity, foster creativity, and provide participants with opportunities to explore the latest trends in technology. With 717 participants, the fest served as a platform for knowledge sharing, hands-on learning, and showcasing talent in the evolving tech landscape.",
+    trainingDuration: "TechoUtsav was packed with engaging activities, expert sessions, and interactive experiences tailored to fuel the technological aspirations of students",
+    sessionHighlights: [
+      {
+        title: "Keynote Sessions by Industry Experts",
+        points: ["Renowned speakers shared insights on emerging technologies, such as AI and Machine Learning, Blockchain, IoT, and Cybersecurity."]
+      },
+      {
+        title: "Workshops and Hands-On Training",
+        points: ["Participants engaged in practical sessions, including app development, software testing basics, and data analysis with Python, gaining valuable skills for real-world applications."]
+      },
+      {
+        title: "Hackathon Challenge",
+        points: ["A high-energy coding competition where teams worked collaboratively to develop innovative solutions to real-world problems within a limited timeframe."]
+      },
+      {
+        title: "Tech Exhibitions",
+        points: ["Displays of groundbreaking projects, prototypes, and innovations by students, providing inspiration and a platform for knowledge exchange."]
+      },
+      {
+        title: "Panel Discussion",
+        points: ["Industry leaders and educators discussed career prospects in the IT sector, offering insights on the skills and mindset required to excel in the fast-paced tech industry."]
+      },
+      {
+        title: "Interactive Q&A and Networking",
+        points: ["An opportunity for students to interact with experts, clarify doubts, and network with peers and professionals."]
+      },
+      {
+        title: "Cultural and Entertainment Programs",
+        points: ["A perfect blend of technology and entertainment, showcasing talent through cultural performances and fun-filled activities."]
+      },
+    ],
+    keyTakeaways: [
+      {
+        title: "IT trends",
+        description: "A solid understanding of IT trends and how to adapt to the rapidly changing technological environment.",
+      },
+      {
+        title: "Hands-on experience",
+        description: "Hands-on experience in emerging tech areas, boosting confidence in applying their skills.",
+      },
+      {
+        title: "Inspiration to innovate",
+        description: "Inspiration to innovate and a roadmap to pursue successful careers in the IT industry.",
+      },
+      {
+        title: "Connections",
+        description: "Connections with like-minded peers and industry experts, fostering a community of tech enthusiasts.",
+      },
+    ],
+    highlights: ["The event’s success was evident from the enthusiastic participation and positive feedback from the 717 attendees, making it a milestone in Nirmala College’s journey to promote technical excellence."],
+    heroImageUrl: "/events/techoutsav/webinar-2-Nirmala-college.png",
+    success: "Ready to embrace the future of technology? Stay ahead by attending workshops, webinars, and tech events organized by Cinute Digital Pvt. Ltd. Gain industry-ready skills through our certification programs in software testing, automation, and more. Visit Cinute Digital Pvt. Ltd. to explore opportunities to shape your career in the IT sector. Be part of a revolution that’s driving innovation and shaping the future—start your journey today!",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "Nirmala Memorial Foundation College of Commerce and Science - Cinute Digital Pvt. Ltd",
+    venueAddress: "Kandivali (East), Mumbai",
+    venueDescription: "Nirmala Memorial Foundation College of Commerce and Science (NMFC), located in Kandivali (East), Mumbai, is affiliated with the University of Mumbai. Established in 2003, it offers undergraduate programs in commerce, management, IT, and mass communication, fostering quality education and holistic development.",
+    venueImageUrl: "/events/techoutsav/nirmala-college-logo.png"
+  },
+  {
+    id: "career-guidance-session-sn-college",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "career-guidance-session-addressing-post-graduates-to-secure-opportunities-in-it",
+    title: "Career Guidance Session – Addressing Postgraduates to Secure Opportunities in IT – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2022-09-10",
+    location: "Shankar Narayan College of Arts and Commerce - Bhayandar (East), Mumbai",
+    attendees: 32,
+    category: "Career Guidance",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "Seminar",
+    purpose: "The leap from postgraduate education to a thriving career in IT can be challenging without the right guidance and resources. Cinute Digital Pvt. Ltd. conducted a Career Guidance Session at S N College, Bhayander East, to equip postgraduates with actionable insights and strategies to secure rewarding opportunities in the ever-evolving IT industry. This session aimed to demystify the transition from academia to industry by providing personalized career advice and introducing participants to the skills most in demand today.",
+    trainingDuration: "The session was tailored to address the unique needs of postgraduate students, offering a mix of insights, strategies, and practical takeaways",
+    sessionHighlights: [
+      {
+        title: "Industry Overview & Trends",
+        points: ["Exploration of emerging IT domains, such as AI, data analytics, cloud computing, and software testing."]
+      },
+      {
+        title: "In-Demand Skills & Certifications",
+        points: ["Guidance on technical proficiencies like automation testing, Python programming, and certifications like ISTQB and AWS to enhance employability."]
+      },
+      {
+        title: "Resume & Interview Preparation",
+        points: ["Strategies to craft standout resumes and ace interviews with confidence."]
+      },
+      {
+        title: "Opportunities for Postgraduates",
+        points: ["Insights into entry-level roles, internships, and how to navigate hiring processes for fresh talent."]
+      },
+      {
+        title: "Real-World Case Studies",
+        points: ["Success stories of IT professionals who transitioned smoothly from postgraduate programs to thriving careers."]
+      },
+      {
+        title: "Interactive Panel Discussion",
+        points: ["Experts shared practical advice and answered career-related queries during an engaging Q&A session."]
+      },
+    ],
+    keyTakeaways: [
+      {
+        title: "IT trends",
+        description: "A clear understanding of current IT industry demands and how to align their skills with these opportunities.",
+      },
+      {
+        title: "Roadmap",
+        description: "A roadmap to secure entry-level roles in high-demand fields like automation testing, cybersecurity, and IoT development.",
+      },
+      {
+        title: "Confidence to excel",
+        description: "Confidence to excel in interviews, along with tips to craft impactful resumes and LinkedIn profiles.",
+      },
+      {
+        title: "Inspiration to invest",
+        description: "Inspiration to invest in skill-building through certifications and practical training programs.",
+      },
+      {
+        title: "Session",
+        description: "The session was lauded by all 86 participants, who left with actionable plans to confidently pursue IT careers and contribute meaningfully to the industry.",
+      },
+    ],
+    highlights: ["This dynamic and interactive session resonated with participants, helping them align their academic achievements with real-world IT opportunities."],
+    heroImageUrl: "/events/career-guidance-session-sn-college/webinar-1-sn-college.png",
+    success: "Ready to jumpstart your career in IT? Join our certification programs in software testing, automation, and other cutting-edge technologies. Attend our webinars and workshops to learn from industry experts and gain hands-on experience. Explore exclusive training opportunities designed for postgraduate students on our website at Cinute Digital Pvt. Ltd. Start building your future today! Visit Cinute Digital Pvt. Ltd. for more details and updates on upcoming sessions.",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "S N College - Cinute Digital Pvt. Ltd",
+    venueAddress: "Bhayandar (East), Mumbai",
+    venueDescription: "Shankar Narayan College of Arts and Commerce, established in 1994, is located in Bhayandar East, Thane, Maharashtra. Affiliated with the University of Mumbai, it offers undergraduate and postgraduate programs in Arts, Commerce, and Science. The college is accredited with an ‘A’ grade by NAAC, reflecting its commitment to quality education. It has modern infrastructure, including labs, a library, and facilities for extracurricular activities. The college also boasts a strong placement cell, helping students secure jobs with top companies. Conveniently located, it is easily accessible by road and rail.",
+    venueImageUrl: "/events/career-guidance-session-sn-college/SN-College-logo.png"
+  },
+  {
+    id: "online-career-guidance-session",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "online-career-guidance-session",
+    title: "Online Career Guidance Session – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2022-08-20",
+    location: "Online event",
+    attendees: 46,
+    category: "Seminar",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "",
+    purpose: "Navigating career choices in today’s fast-paced world can be daunting, especially with the evolving demands of the IT industry. To address this, Cinute Digital Pvt. Ltd. organized an Online Career Guidance Session to help participants explore their career options, identify strengths, and chart a successful professional roadmap. This webinar aimed to provide clarity, actionable advice, and valuable resources for career planning, empowering individuals to take confident steps toward achieving their goals.",
+    trainingDuration: "The session was carefully curated to offer participants a comprehensive career-planning experience, focusing on",
+    sessionHighlights: [
+      {
+        title: "Understanding Industry Trends",
+        points: ["Insights into emerging fields such as AI and Machine Learning, software testing, cloud computing, and cybersecurity."]
+      },
+      {
+        title: "Skill Development Strategies",
+        points: ["Tips on acquiring in-demand skills like automation testing, programming, and data analytics to enhance employability."]
+      },
+      {
+        title: "Crafting a Career Roadmap",
+        points: ["Step-by-step guidance on defining goals, identifying key milestones, and building a strong professional portfolio."]
+      },
+      {
+        title: "Interview Readiness",
+        points: ["Practical advice on creating impactful resumes, acing interviews, and navigating corporate expectations."]
+      },
+      {
+        title: "Live Q&A with Industry Experts",
+        points: ["An engaging interaction where participants could address their career concerns and receive tailored advice."]
+      },
+    ],
+    keyTakeaways: [
+      {
+        title: "Understanding of industry trends",
+        description: "A deeper understanding of industry trends and their relevance to different career paths.",
+      },
+      {
+        title: "Personalized action plan",
+        description: "A personalized action plan to acquire skills aligned with industry demands.",
+      },
+      {
+        title: "Professional certifications",
+        description: "Knowledge about professional certifications like ISTQB and practical tools like Selenium to boost career prospects.",
+      },
+      {
+        title: "Confidence to approach",
+        description: "Confidence to approach job markets with a well-prepared resume, strong skills, and clarity of purpose.",
+      },
+      {
+        title: "Overwhelming participation",
+        description: "The overwhelming participation of 120 attendees underscored the relevance and success of the session, making it a stepping stone for their career aspirations.",
+      },
+      {
+        title: "Online Career Guidance Session",
+        description: "Shaping Your Path to Success",
+      },
+      {
+        title: "Venue",
+        description: "Online Webinar hosted on the Cinute Digital Pvt. Ltd. (CDPL) website",
+      },
+      {
+        title: "Participants",
+        description: "120 aspiring professionals from diverse backgrounds",
+      },
+    ],
+    highlights: ["Interactive sessions, case studies, and real-world examples kept the audience motivated and engaged throughout the webinar."],
+    heroImageUrl: "/events/online-career-guidance-session/webinar-cdpl.png",
+    success: "Looking for more career guidance and skill-building opportunities? Explore our certification programs in software testing, QA, and other IT domains. Join our expert-led webinars and workshops to stay ahead in the competitive job market. Visit the CDPL website to discover upcoming sessions and exclusive training programs. Start your career journey today! Sign up for our webinars and training programs at Cinute Digital Pvt. Ltd.",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "Online Webinar",
+    venueAddress: "",
+    venueDescription: "",
+    venueImageUrl: ""
+  },
+  {
+    id: "unlocking-it-trends-and-opportunities-a-one-day-strategy-session",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "unlocking-it-trends-and-opportunities-a-one-day-strategy-session",
+    title: "Unlocking IT Trends and Opportunities: A One-Day Strategy Session – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2023-08-22",
+    location: "Universal MSG-SGKM College of Arts, Science & Commerce - Naigaon East",
+    attendees: 32,
+    category: "Career Guidance",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "Seminar",
+    purpose: "This One-Day Strategy Session aimed to enlighten participants about the ever-evolving IT landscape and equip them with actionable strategies to navigate and excel in the industry. The session focused on identifying key trends, exploring career opportunities, and understanding the skills required to thrive in today’s competitive IT sector. Through an engaging and interactive agenda, the program empowered 65 participants to envision a future aligned with industry demands and emerging technologies.",
+    trainingDuration: "The strategy session featured dynamic discussions, expert insights, and hands-on learning experiences",
+    sessionHighlights: [
+      {
+        title: "Welcome Note",
+        points: ["The event kicked off with an inspiring introduction emphasising the critical role of IT in shaping industries and individual careers."]
+      },
+      {
+        title: "Keynote Address",
+        points: ["An industry leader delivered an insightful keynote on emerging IT trends such as AI, cloud computing, blockchain, and IoT."]
+      },
+      {
+        title: "Exploring Career Pathways",
+        points: ["A deep dive into lucrative roles in IT, including data science, cybersecurity, software testing, and full-stack development, with real-life examples of success stories."]
+      },
+      {
+        title: "Skill Mapping Workshop",
+        points: ["Interactive activities to help participants identify their strengths and align them with industry needs, focusing on in-demand technical and soft skills."]
+      },
+      {
+        title: "Industry Case Studies",
+        points: ["A showcase of practical applications and innovative IT projects that have revolutionised various sectors."]
+      },
+      {
+        title: "Q&A and Networking",
+        points: ["Participants engaged directly with experts, clarifying doubts, and building meaningful connections for future growth."]
+      }
+    ],
+    keyTakeaways: [
+      {
+        title: "Knowledge of IT Trends",
+        description: "A comprehensive understanding of how technology advancements are shaping industries and creating new opportunities.",
+      },
+      {
+        title: "Career Insights",
+        description: "Clarity on career options, industry expectations, and pathways to build a successful IT career.",
+      },
+      {
+        title: "Actionable Strategies",
+        description: "A personalised roadmap to align their skills with emerging trends and stand out in the competitive job market.",
+      },
+      {
+        title: "Networking Benefits",
+        description: "Stronger connections with industry professionals and peers, laying the foundation for collaboration and mentorship.",
+      },
+      {
+        title: "Overwhelming participation",
+        description: "The overwhelming participation of 120 attendees underscored the relevance and success of the session, making it a stepping stone for their career aspirations.",
+      },
+      {
+        title: "Online Career Guidance Session",
+        description: "Shaping Your Path to Success",
+      },
+      {
+        title: "Venue",
+        description: "Online Webinar hosted on the Cinute Digital Pvt. Ltd. (CDPL) website",
+      },
+      {
+        title: "Participants",
+        description: "120 aspiring professionals from diverse backgrounds",
+      },
+    ],
+    highlights: ["The active participation of 65 students and the dynamic agenda ensured the session’s success, leaving attendees motivated and prepared to capitalise on IT opportunities."],
+    heroImageUrl: "/events/unlocking-it-trends-and-opportunities-a-one-day-strategy-session/Universal-college-webinar.jpg",
+    success: "Empower Your IT Career with Cinute Digital Pvt. Ltd.! Join our certification programs to master in-demand IT skills like data analytics, automation testing, and more. Participate in webinars, workshops, and training programs tailored to emerging industry trends. Visit Cinute Digital Pvt. Ltd. to explore how we help individuals and institutions unlock their potential in the ever-evolving IT world. Stay ahead of the curve—your IT career starts here!",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "Universal MSG-SGKM College of Arts, Science & Commerce – Cinute Digital Pvt. Ltd",
+    venueAddress: "Naigaon East",
+    venueDescription: "Universal College of Engineering is approved by the All India Council for Technical Education (AICTE), New Delhi; recognized by the Directorate of Technical Education (DTE), Government of Maharashtra; affiliated to Mumbai University. The college is also associated with professional bodies like IEEE, IETE, ISA and CSI to update the revolutionary technological advancements. It offers 4 years full-time Bachelor of Technology in Computer Engineering, Civil Engineering, Information Technology Engineering, Data Science, and Artificial Intelligence & Machine Learning.",
+    venueImageUrl: "/events/unlocking-it-trends-and-opportunities-a-one-day-strategy-session/Universal-college-logo.jpg"
+  },
+  {
+    id: "corporate-institute-meet-andhra-loyola",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "corporate-institute-meet-andhra-loyola-institute-of-engineering-and-technology-aliet-nirmala-memorial-foundation-college-of-commerce-science",
+    title: "Corporate & Institute Meet – Andhra Loyola Institute of Engineering and Technology (ALIET) & Nirmala Memorial Foundation College of Commerce & Science – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2023-04-29",
+    location: "MiraRoad East",
+    attendees: 27,
+    category: "Corporate Workshop",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "",
+    purpose: "The Corporate & Institute Meet brought together representatives from Andhra Loyola Institute of Engineering and Technology (ALIET) and Nirmala Memorial Foundation College of Commerce & Science to foster collaboration between academia and the corporate world. The event aimed to explore avenues for mutual growth, enhance student employability, and discuss strategies to align academic curricula with industry standards. By creating a platform for dialogue and exchange, the meet set the stage for meaningful partnerships that empower students and strengthen institutional networks.",
+    trainingDuration: "The meet featured engaging discussions, presentations, and activities to achieve its objectives",
+    sessionHighlights: [
+      {
+        title: "Welcome & Inauguration",
+        points: ["A warm welcome by Nirmala College, emphasizing the importance of collaboration between academia and industry in today’s dynamic job market."]
+      },
+      {
+        title: "Panel Discussion",
+        points: ["An insightful dialogue on current IT industry trends, skill gaps, and strategies to bridge them through tailored educational initiatives."]
+      },
+      {
+        title: "Presentation on Internship Programs",
+        points: ["Detailed insights into internship opportunities provided by industry leaders, focusing on hands-on learning and real-world applications."]
+      },
+      {
+        title: "Institutional Collaboration Opportunities",
+        points: ["Brainstorming sessions to explore joint initiatives like guest lectures, corporate training programs, and industry-academia projects."]
+      },
+      {
+        title: "Industry Case Studies",
+        points: ["A showcase of successful collaborations between institutes and corporates, highlighting the transformative impact on student careers."]
+      },
+      {
+        title: "Q&A and Networking",
+        points: ["Participants engaged in open discussions, sharing experiences, insights, and plans for future collaborations."]
+      }
+    ],
+    keyTakeaways: [
+      {
+        title: "Strategic Insights",
+        description: "A clearer understanding of how academic institutions can align their programs with industry needs.",
+      },
+      {
+        title: "Collaborative Plans",
+        description: "A roadmap for launching joint initiatives, internships, and specialized training programs.",
+      },
+      {
+        title: "Enhanced Networks",
+        description: "Stronger connections between faculty, corporate representatives, and other academic institutions."
+      },
+      {
+        title: "Student-Centric Focus",
+        description: "Actionable strategies to empower students with the skills and experiences required to excel in their careers.",
+      },
+    ],
+    highlights: ["The event successfully brought together 40 participants, fostering relationships that promise to benefit students, educators, and the corporate world alike."],
+    heroImageUrl: "/events/corporate-institute-meet-andhra-loyola-institute-of-engineering-and-technology-aliet-nirmala-memorial-foundation-college-of-commerce-science/cdpl-andhra-loyla.jpg",
+    success: "Transform education with Cinute Digital Pvt. Ltd.! Partner with us to deliver cutting-edge training programs, industry-relevant certifications, and career guidance seminars for your students. Explore our corporate and institutional collaboration opportunities to build a workforce ready for the future. Visit Cinute Digital Pvt. Ltd. to learn more about how we empower institutions and students alike. Together, let’s shape the future of education and careers—start your journey with us today!",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "Cinute Digital Pvt. Ltd",
+    venueAddress: "",
+    venueDescription: "",
+    venueImageUrl: ""
+  },
+  {
+    id: "one-day-program-mastering-automation",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "one-day-program-mastering-automation-testing-and-crafting-your-path-to-proficiency",
+    title: "One-Day Program: Mastering Automation Testing and Crafting Your Path to Proficiency – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2023-02-16",
+    location: "MiraRoad East",
+    attendees: 39,
+    category: "Workshop",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "Automation Testing",
+    purpose: "The One-Day Program on Mastering Automation Testing was designed to equip participants with the knowledge and practical skills needed to excel in the rapidly growing field of automation testing. With 25 participants from Royal College, this focused program provided an in-depth understanding of automation tools, industry practices, and career opportunities in the QA domain. The session aimed to bridge the gap between theoretical knowledge and real-world application, enabling attendees to craft a strong path toward proficiency in software testing.",
+    trainingDuration: "The program was meticulously structured to deliver both conceptual clarity and hands-on experience",
+    sessionHighlights: [
+      {
+        title: "Introduction to Automation Testing",
+        points: ["An engaging session on the significance of automation testing, its role in modern software development, and its advantages over manual testing."]
+      },
+      {
+        title: "Panel Discussion",
+        points: ["An insightful dialogue on current IT industry trends, skill gaps, and strategies to bridge them through tailored educational initiatives."]
+      },
+      {
+        title: "Hands-on with Selenium WebDriver",
+        points: ["A practical demonstration of Selenium WebDriver, showcasing its capabilities for automating web application testing."]
+      },
+      {
+        title: "Framework Implementation",
+        points: ["Insights into building and implementing test automation frameworks to enhance efficiency and scalability in QA processes."]
+      },
+      {
+        title: "Exploring Real-World Scenarios",
+        points: ["Case studies on automation in industries such as e-commerce, banking, and healthcare, demonstrating how quality assurance impacts business success."]
+      },
+      {
+        title: "Career Roadmap in Automation Testing",
+        points: ["Detailed guidance on the skills, certifications, and tools essential for a successful career in automation testing."]
+      },
+      {
+        title: "Interactive Q&A Session",
+        points: ["Participants engaged with industry experts to clarify doubts, discuss challenges, and understand the latest trends in automation testing."]
+      }
+    ],
+    keyTakeaways: [
+      {
+        title: "Strong Foundation",
+        description: "A strong foundation in automation testing concepts and their practical applications.",
+      },
+      {
+        title: "Hands-on experience",
+        description: "Hands-on experience with industry-standard tools like Selenium WebDriver, preparing them for real-world projects.",
+      },
+      {
+        title: "Roadmap",
+        description: "A roadmap to pursue a successful career in automation testing, including guidance on certifications and skill-building."
+      },
+      {
+        title: "Inspiration to innovate",
+        description: "Inspiration to innovate and apply testing techniques to ensure high-quality software development.",
+      },
+    ],
+    highlights: ["The session's success was reflected in the enthusiastic participation and positive feedback from the 25 attendees, who left the event equipped with actionable skills and knowledge."],
+    heroImageUrl: "/events/one-day-program-mastering-automation-testing-and-crafting-your-path-to-proficiency/Royal-college-program.jpg",
+    success: "Unlock your potential in automation testing with Cinute Digital Pvt. Ltd.! Enroll in our certification courses to gain expertise in software testing and automation tools. Stay updated with our workshops, webinars, and career guidance programs to stay ahead in the IT industry. Visit Cinute Digital Pvt. Ltd. to explore training programs that bridge the gap between academics and industry demands. Take the first step toward mastering automation testing—your career in IT starts here!",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "Royal College",
+    venueAddress: "Mira Road, Mumbai",
+    venueDescription: "Royal College of Arts, Science, and Commerce, located in Mira Road, Mumbai, is a prestigious institution dedicated to academic excellence and holistic development. Offering a wide range of undergraduate and postgraduate programs, the college emphasizes quality education, ethical values, and skill development. With modern facilities, experienced faculty, and a student-centric approach, Royal College nurtures individuals to excel in their chosen fields and contribute positively to society.",
+    venueImageUrl: "/events/one-day-program-mastering-automation-testing-and-crafting-your-path-to-proficiency/Royal-college-logo.png"
+  },
+  {
+    id: "industrial-visit-viva-institute-of-technology",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "industrial-visit-viva-institute-of-technology",
+    title: "Industrial Visit by VIVA Institute of Technology, Virar – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2023-02-04",
+    location: "MiraRoad East",
+    attendees: 36,
+    category: "Corporate Workshop",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "Software Testing",
+    purpose: "Industrial visits bridge the gap between theoretical knowledge and practical experience. Cinute Digital Pvt. Ltd. and Testriq QA Lab, LLP hosted an industrial visit for 52 students from VIVA Institute of Technology, aiming to provide a real-world understanding of software testing, quality assurance, and their significance in the IT industry. This visit was designed to inspire innovation, enhance career readiness, and empower students with insights into the ever-evolving IT landscape.",
+    trainingDuration: "The visit featured a blend of knowledge-sharing and interactive experiences, offering students an immersive learning opportunity",
+    sessionHighlights: [
+      {
+        title: "Welcome Session",
+        points: ["A cordial introduction to the mission and vision of Cinute Digital Pvt. Ltd. and Testriq QA Lab, LLP, highlighting our expertise in software testing and QA solutions."]
+      },
+      {
+        title: "Understanding QA Practices",
+        points: ["A detailed overview of software testing methodologies, including manual testing, automation testing, and API testing."]
+      },
+      {
+        title: "Live Demonstrations",
+        points: ["Hands-on sessions with industry tools like Selenium WebDriver, JIRA, Postman, and other cutting-edge platforms used in real-world QA workflows."]
+      },
+      {
+        title: "Career Guidance in IT",
+        points: ["Insights into various roles in software testing, career growth opportunities, and skills required for positions such as QA engineers and automation testers."]
+      },
+      {
+        title: "Behind-the-Scenes Office Tour",
+        points: ["A guided walk through the CDPL and Testriq QA Lab offices, showcasing the tools, technologies, and collaborative work culture that drive excellence."]
+      },
+      {
+        title: "Interactive Q&A",
+        points: ["An engaging discussion where students addressed their career queries, gained clarity on industry expectations, and received valuable tips from experienced professionals."]
+      },
+    ],
+    keyTakeaways: [
+      {
+        title: "Practical understanding",
+        description: "A practical understanding of how quality assurance ensures the success of IT projects.",
+      },
+      {
+        title: "Tools and methodologies",
+        description: "Exposure to testing tools and methodologies directly relevant to industry practices.",
+      },
+      {
+        title: "Career opportunities",
+        description: "A deeper appreciation for career opportunities in the QA and software testing domains, along with tips for skill development."
+      },
+      {
+        title: "Confidence to pursue",
+        description: "Confidence to pursue a successful career in IT, backed by actionable insights from experts.",
+      },
+    ],
+    highlights: ["The visit was a resounding success, with all 52 participants leaving inspired and equipped with knowledge to shape their future in the IT sector."],
+    heroImageUrl: "/events/industrial-visit-viva-institute-of-technology/viva-program.jpg",
+    success: "Empower your career in IT with Cinute Digital Pvt. Ltd.! Enroll in our certification courses for in-depth learning in software testing and automation tools. Join our industry workshops and career-oriented webinars to stay ahead in the tech world. Discover how you can bridge the gap between academics and industry by visiting Cinute Digital Pvt. Ltd. Step into the world of IT with confidence. Let’s build your future together!",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "TESTRIQ QA LAB LLP",
+    venueAddress: "Mira Road, Mumbai",
+    venueDescription: "Testriq QA Lab LLP is a leading software testing and quality assurance company based in Mumbai, India. With over a decade of experience, Testriq offers a comprehensive suite of services, including LaunchFast QA, exploratory testing, web and mobile application testing, API testing, IoT device testing, AI application testing, robotics testing, smart device testing, ETL testing, data analysis, security testing, manual testing, regression testing, performance testing, QA documentation, and automation testing. Their team of ISTQB-certified experts collaborates with clients ranging from startups to established industry leaders, ensuring the delivery of high-quality, reliable software products. Testriq’s commitment to excellence is evident in their state-of-the-art testing infrastructure and up-to-date environments, which adhere to international standards. By focusing on minimizing risks and maximizing quality, Testriq has played a pivotal role in the success of numerous award-winning applications across diverse industries.",
+    venueImageUrl: "/events/industrial-visit-viva-institute-of-technology/Testriq-event.png"
+  },
+  {
+    id: "industrial-visit-thakur-college-of-science-commerce",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "industrial-visit-thakur-college-of-science-commerce",
+    title: "Industrial Visit – Thakur College of Science & Commerce – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2023-01-20",
+    location: "MiraRoad East",
+    attendees: 37,
+    category: "Corporate Workshop",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "Software Testing",
+    purpose: "Industrial visits offer students a unique opportunity to connect classroom theories with industry practices. Cinute Digital Pvt. Ltd. and Testriq QA Lab, LLP hosted an industrial visit for 40 students from Thakur College of Science & Commerce to provide them with a firsthand understanding of the IT sector, specifically focusing on software testing and quality assurance processes. This visit aimed to ignite curiosity, encourage innovation, and help students explore career opportunities in the thriving IT industry.",
+    trainingDuration: "The visit was structured to combine education and engagement, allowing students to gain a holistic view of the IT and QA industries",
+    sessionHighlights: [
+      {
+        title: "Welcome & Introduction",
+        points: ["A warm welcome followed by an engaging session on the journey, achievements, and core services of Cinute Digital Pvt. Ltd. and Testriq QA Lab, LLP."]
+      },
+      {
+        title: "Introduction to Software Testing",
+        points: ["An overview of the importance of quality assurance, explaining how testing ensures the reliability, performance, and security of applications."]
+      },
+      {
+        title: "Hands-on Demonstration of QA Tools",
+        points: ["Live demos of industry-standard tools like Selenium WebDriver, JIRA, Postman, and GitHub Copilot, showcasing real-world testing processes."]
+      },
+      {
+        title: "Exploring Career Paths",
+        points: ["Insights into career opportunities in manual testing, automation testing, and emerging fields such as AI-driven QA."]
+      },
+      {
+        title: "Real-Time Project Workflow",
+        points: ["A walkthrough of our project lifecycle, including requirement gathering, test case creation, execution, and defect management."]
+      },
+      {
+        title: "Interactive Q&A Session",
+        points: ["Students actively engaged with our experienced professionals, discussing industry trends, skill requirements, and tips for entering the IT industry."]
+      },
+      {
+        title: "Office Tour",
+        points: ["A guided exploration of our workplace, offering students a glimpse into the professional environment and cutting-edge technologies in action."]
+      }
+    ],
+    keyTakeaways: [
+      {
+        title: "",
+        description: "A comprehensive understanding of how quality assurance plays a pivotal role in software development.",
+      },
+      {
+        title: "",
+        description: "Exposure to real-world testing tools and methodologies, along with insights into practical workflows.",
+      },
+      {
+        title: "",
+        description: "Clarity on career paths in the IT and QA domains, including the qualifications and skills required to succeed."
+      },
+      {
+        title: "",
+        description: "Inspiration and actionable guidance to bridge the gap between academic learning and industry readiness.",
+      },
+    ],
+    highlights: ["The students left motivated and equipped with the knowledge to pursue careers in the fast-growing IT sector. The event’s success was evident in the feedback and engagement of all 40 participants."],
+    heroImageUrl: "/events/industrial-visit-thakur-college-of-science-commerce/thakur-college-program.jpg",
+    success: "Discover the world of IT and software testing with Cinute Digital Pvt. Ltd.! Explore our training programs in software testing, automation, and industry-standard certifications. Join our interactive workshops and career-focused webinars to gain hands-on expertise. Stay updated on our upcoming events and career guidance sessions by visiting Cinute Digital Pvt. Ltd. Take the first step towards an exciting IT career today!",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "TESTRIQ QA LAB LLP",
+    venueAddress: "Mira Road, Mumbai",
+    venueDescription: "Testriq QA Lab LLP is a leading software testing and quality assurance company based in Mumbai, India. With over a decade of experience, Testriq offers a comprehensive suite of services, including LaunchFast QA, exploratory testing, web and mobile application testing, API testing, IoT device testing, AI application testing, robotics testing, smart device testing, ETL testing, data analysis, security testing, manual testing, regression testing, performance testing, QA documentation, and automation testing. Their team of ISTQB-certified experts collaborates with clients ranging from startups to established industry leaders, ensuring the delivery of high-quality, reliable software products. Testriq’s commitment to excellence is evident in their state-of-the-art testing infrastructure and up-to-date environments, which adhere to international standards. By focusing on minimizing risks and maximizing quality, Testriq has played a pivotal role in the success of numerous award-winning applications across diverse industries.",
+    venueImageUrl: "/events/industrial-visit-viva-institute-of-technology/Testriq-event.png"
+  },
+  {
+    id: "industrial-visit-sdsm-college-palghar",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "industrial-visit-sdsm-college-palghar",
+    title: "Industrial Visit - SDSM College, Palghar – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2022-09-24",
+    location: "MiraRoad East",
+    attendees: 41,
+    category: "Corporate Workshop",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "Software Testing",
+    purpose: "An industrial visit provides students with valuable exposure to real-world operations, bridging the gap between academic learning and industry practices. Cinute Digital Pvt. Ltd. and Testriq QA Lab, LLP were delighted to host 40 students from SDSM College, Palghar at our office in Miraroad East. The visit aimed to offer students firsthand insights into software testing and quality assurance processes, along with an overview of the daily operations and career opportunities in the tech and IT industries.",
+    trainingDuration: "The visit was a blend of informative sessions and live demonstrations, offering a comprehensive look at our operations and services",
+    sessionHighlights: [
+      {
+        title: "Introduction to CDPL and Testriq QA Lab, LLP",
+        points: ["A warm welcome and an overview of both companies, their mission, and vision, highlighting their roles in the IT and software testing industry."]
+      },
+      {
+        title: "Overview of Software Testing and Quality Assurance",
+        points: ["Students were introduced to the importance of QA, the various types of testing, and the methodologies employed, such as manual testing, automation testing, and API testing."]
+      },
+      {
+        title: "Live Demonstration of Testing Tools",
+        points: ["Hands-on demonstrations of popular tools like Selenium WebDriver, JIRA, and Postman, showing how we conduct real-world tests and manage test cases."]
+      },
+      {
+        title: "Career Opportunities in QA and Software Testing",
+        points: ["Insights into various career paths within the software testing industry, including roles such as test engineers, test analysts, automation engineers, and QA leads."]
+      },
+      {
+        title: "Interactive Q&A Session",
+        points: ["Students interacted with experienced professionals, discussing career queries, industry expectations, and the skills required to excel in the tech field."]
+      },
+      {
+        title: "Office Tour",
+        points: ["A guided tour of the CDPL and Testriq QA Lab facilities, offering students a glimpse into the workplace environment and the latest technologies in use."]
+      }
+    ],
+    keyTakeaways: [
+      {
+        title: "",
+        description: "A real-world perspective on software testing and quality assurance practices in a corporate setting.",
+      },
+      {
+        title: "",
+        description: "Exposure to industry tools and technologies used in testing applications and ensuring software quality.",
+      },
+      {
+        title: "",
+        description: "A clearer understanding of career opportunities in the tech industry, particularly in QA and software testing roles."
+      },
+      {
+        title: "",
+        description: "A strong foundation in the practical aspects of manual and automation testing, boosting their confidence to pursue these areas professionally.",
+      },
+    ],
+    highlights: ["The visit was a great success, with all 40 participants gaining valuable insights that will help them make informed career decisions and shape their future in the IT and testing sectors."],
+    heroImageUrl: "/events/industrial-visit-sdsm-college-palghar/sdsm-IV.jpg",
+    success: "Are you ready to explore a career in software testing and quality assurance? Join our certification programs in software testing and automation to enhance your skills. Attend our workshops and training sessions to gain hands-on experience with industry-standard tools. Keep up with the latest trends and opportunities in software testing by visiting Cinute Digital Pvt. Ltd. Don’t miss out on your chance to start a successful career in IT and testing!",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "TESTRIQ QA LAB LLP",
+    venueAddress: "Mira Road, Mumbai",
+    venueDescription: "Testriq QA Lab LLP is a leading software testing and quality assurance company based in Mumbai, India. With over a decade of experience, Testriq offers a comprehensive suite of services, including LaunchFast QA, exploratory testing, web and mobile application testing, API testing, IoT device testing, AI application testing, robotics testing, smart device testing, ETL testing, data analysis, security testing, manual testing, regression testing, performance testing, QA documentation, and automation testing. Their team of ISTQB-certified experts collaborates with clients ranging from startups to established industry leaders, ensuring the delivery of high-quality, reliable software products. Testriq’s commitment to excellence is evident in their state-of-the-art testing infrastructure and up-to-date environments, which adhere to international standards. By focusing on minimizing risks and maximizing quality, Testriq has played a pivotal role in the success of numerous award-winning applications across diverse industries.",
+    venueImageUrl: "/events/industrial-visit-viva-institute-of-technology/Testriq-event.png"
+  },
+  {
+    id: "engineering-day-guiding-the-next-generation",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "engineering-day-guiding-the-next-generation-of-engineers-with-insights-into-the-it-world",
+    title: "Engineering Day: Guiding the Next Generation of Engineers with Insights into the IT World – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2022-09-15",
+    location: "Malad West",
+    attendees: 35,
+    category: "Career Guidance",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "Seminar",
+    purpose: "Celebrating the spirit of innovation and technical excellence, Cinute Digital Pvt. Ltd. organized a special Engineering Day event at Atharva College of Engineering. This initiative aimed to inspire the next generation of engineers by providing a comprehensive understanding of the IT industry, emerging trends, and actionable career guidance. The session encouraged students to embrace innovation, build industry-relevant skills, and seize opportunities in the dynamic world of information technology.",
+    trainingDuration: "The event was carefully structured to enlighten and empower participants through engaging discussions and activities, including",
+    sessionHighlights: [
+      {
+        title: "Emerging IT Trends",
+        points: ["Exploring how Artificial Intelligence (AI), Blockchain, Automation Testing, and IoT are reshaping the global IT landscape."]
+      },
+      {
+        title: "Opportunities in Software Testing",
+        points: ["A deep dive into manual and automation testing, including tools like Selenium WebDriver and the growing demand for QA engineers."]
+      },
+      {
+        title: "Engineering and IT Synergy",
+        points: ["Highlighting how engineering principles are foundational to innovations in IT, with real-world examples of cross-disciplinary applications."]
+      },
+      {
+        title: "Skill Development for Engineers",
+        points: ["Practical advice on mastering essential programming languages, adopting tools for automation, and pursuing certifications such as ISTQB and AWS Certified Developer."]
+      },
+      {
+        title: "Interactive Activities",
+        points: ["Live demonstrations of testing workflows, brainstorming sessions, and case studies to provide hands-on exposure to IT tools and methodologies."]
+      },
+      {
+        title: "Panel Discussion with Experts",
+        points: ["Industry professionals shared their experiences, success stories, and insights into career pathways in IT."]
+      }
+    ],
+    keyTakeaways: [
+      {
+        title: "",
+        description: "A clear understanding of IT trends and their relevance to future innovations.",
+      },
+      {
+        title: "",
+        description: "Insights into career opportunities in high-demand fields like software testing, cloud computing, and AI-driven development.",
+      },
+      {
+        title: "",
+        description: "An actionable plan for skill development, including recommendations for certifications and training programs."
+      },
+      {
+        title: "",
+        description: "Confidence and inspiration to contribute meaningfully to the ever-evolving IT industry as future-ready engineers.",
+      },
+
+    ],
+    highlights: ["The event concluded with a vibrant Q&A session where participants engaged in meaningful conversations with the experts."],
+    heroImageUrl: "/events/engineering-day-guiding-the-next-generation-of-engineers-with-insights-into-the-it-world/engineering-day-guide.jpg",
+    success: "The event’s success was evident in the enthusiasm and feedback from all 127 participants, who gained valuable knowledge to help shape their careers in IT.",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "Atharva College of Engineering",
+    venueAddress: "Mumbai",
+    venueDescription: "Atharva College of Engineering, located in Mumbai, India, is a premier institution offering state-of-the-art facilities and a dynamic academic environment. Known for its emphasis on innovation and excellence, the college provides undergraduate engineering programs in various disciplines, fostering technical expertise and holistic development. It is dedicated to shaping future-ready professionals through a blend of quality education, industry exposure, and co-curricular activities.",
+    venueImageUrl: "/events/engineering-day-guiding-the-next-generation-of-engineers-with-insights-into-the-it-world/atharva-logo.png"
+  },
+  {
+    id: "one-day-seminar-on-it-industry-trends",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "one-day-seminar-on-it-industry-trends-and-capitalizing-on-new-opportunities",
+    title: "One-Day Seminar on IT Industry Trends and Capitalizing on New Opportunities – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2022-09-14",
+    location: "Virar East",
+    attendees: 46,
+    category: "Seminar",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "",
+    purpose: "In today’s dynamic IT landscape, staying updated on emerging trends is essential for professionals and students alike. Cinute Digital Pvt. Ltd. hosted a One-Day Seminar at VIVA College of Engineering to provide an in-depth understanding of current IT industry trends and strategies to seize new opportunities. The seminar aimed to bridge the knowledge gap between academic learning and industry requirements, empowering participants to make informed career decisions and stay ahead in the competitive IT sector.",
+    trainingDuration: "This immersive seminar covered a range of topics, offering a perfect blend of knowledge-sharing, skill-building, and actionable insights, including",
+    sessionHighlights: [
+      {
+        title: "IT Industry Trends",
+        points: ["Detailed discussions on cutting-edge technologies like Artificial Intelligence (AI), Machine Learning (ML), Blockchain, and Cybersecurity reshaping the IT industry."]
+      },
+      {
+        title: "Opportunities in Software Testing",
+        points: ["Insights into manual and automation testing, tools like Selenium WebDriver, and the rising demand for QA professionals."]
+      },
+      {
+        title: "The Future of Cloud Computing and IoT",
+        points: ["Exploring the integration of cloud services and IoT in transforming industries."]
+      },
+      {
+        title: "Skill Development Roadmap",
+        points: ["Identifying in-demand skills such as data analytics, programming languages, and key certifications like ISTQB and AWS Certified Solutions Architect."]
+      },
+      {
+        title: "Live Interactive Panel Discussion",
+        points: ["A Q&A session with industry experts addressing career-related queries and sharing success stories."]
+      },
+      {
+        title: "Panel Discussion with Experts",
+        points: ["Industry professionals shared their experiences, success stories, and insights into career pathways in IT."]
+      }
+    ],
+    keyTakeaways: [
+      {
+        title: "",
+        description: "A comprehensive understanding of the latest IT trends and their impact on various industries.",
+      },
+      {
+        title: "",
+        description: "Clear guidance on how to capitalize on emerging opportunities in fields like software testing, AI, and cloud computing.",
+      },
+      {
+        title: "",
+        description: "Actionable tips for career growth, including skill acquisition, certification paths, and networking strategies."
+      },
+      {
+        title: "",
+        description: "Confidence to align their academic knowledge with industry expectations, preparing for roles like software test engineer, data analyst, and cloud specialist.",
+      },
+      {
+        title: "",
+        description: "The overwhelming participation of 92 attendees reflected the success and relevance of this seminar in addressing the career aspirations of budding tech professionals.",
+      }
+
+    ],
+    highlights: ["Real-world examples, case studies, and interactive activities kept participants engaged throughout the day."],
+    heroImageUrl: "/events/one-day-seminar-on-it-industry-trends-and-capitalizing-on-new-opportunities/one-day-seminar-viva.jpg",
+    success: "Shape your career with Cinute Digital Pvt. Ltd.! Explore our training programs in trending IT domains like software testing, automation, and cybersecurity. Join our hands-on workshops and certification courses to stay job-ready in a competitive market. Visit the Cinute Digital Pvt. Ltd. website for updates on upcoming seminars and training opportunities tailored to your needs. Don’t wait to secure your future. Start your journey with us today!",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "VIVA Institute of Technology",
+    venueAddress: "Virar, Maharashtra",
+    venueDescription: "VIVA Institute of Technology (VIT), established in 2009, is located in Virar, Maharashtra. Affiliated with the University of Mumbai, it offers undergraduate and postgraduate programs in engineering disciplines like Mechanical, Civil, and Computer Science. The institute provides modern infrastructure, well-equipped labs, and a strong focus on practical skills. VIT has a dedicated placement cell, ensuring students secure positions in top companies. Its accessible location makes it a popular choice for students in the Mumbai region.",
+    venueImageUrl: "/events/one-day-seminar-on-it-industry-trends-and-capitalizing-on-new-opportunities/Viva-College-LOGO.png"
+  },
+  {
+    id: "exploring-career-opportunities-as-a-software-test-engineer",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "exploring-career-opportunities-as-a-software-test-engineer-a-roadmap-for-success",
+    title: "Exploring Career Opportunities as a Software Test Engineer: A Roadmap for Success – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2022-08-25",
+    location: "Malad West",
+    attendees: 32,
+    category: "Career Guidance Seminar",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "Software Testing",
+    purpose: "With software quality assurance becoming an indispensable part of the IT industry, the demand for skilled software test engineers has skyrocketed. Cinute Digital Pvt. Ltd. conducted a transformative session, 'Exploring Career Opportunities as a Software Test Engineer: A Roadmap for Success,' at Atharva College of Engineering. The session aimed to guide students toward building a successful career in software testing by providing them with the tools, knowledge, and insights needed to thrive in this rewarding field.",
+    trainingDuration: "The session was meticulously designed to give participants a 360-degree view of the software testing profession, covering",
+    sessionHighlights: [
+      {
+        title: "Role of a Software Test Engineer",
+        points: ["Responsibilities, skillsets, and the critical role testing plays in ensuring software quality."]
+      },
+      {
+        title: "Manual vs. Automation Testing",
+        points: ["Comparative analysis of manual testing techniques and the growing demand for automation tools like Selenium."]
+      },
+      {
+        title: "Emerging Trends in Testing",
+        points: ["Insights into AI-driven testing, IoT testing, and mobile app testing as future game-changers."]
+      },
+      {
+        title: "Career Pathways & Certifications",
+        points: ["Steps to kickstart a career, certifications like ISTQB, and opportunities for professional growth."]
+      },
+      {
+        title: "Hands-on Demo",
+        points: ["Live demonstration of test case creation and automation scripts, giving participants practical exposure to testing tools."]
+      },
+    ],
+    keyTakeaways: [
+      {
+        title: "",
+        description: "A comprehensive understanding of the software testing domain and its lucrative career potential.",
+      },
+      {
+        title: "",
+        description: "Awareness of essential tools and technologies, including Selenium WebDriver and JIRA.",
+      },
+      {
+        title: "",
+        description: "A clear roadmap for professional development, from certifications to advanced testing methodologies."
+      },
+      {
+        title: "",
+        description: "Inspiration to pursue excellence in a field that values precision, problem-solving, and innovation.",
+      },
+
+    ],
+    highlights: ["The interactive Q&A session at the end allowed participants to clear doubts and gain personalized advice from industry experts."],
+    heroImageUrl: "/events/exploring-career-opportunities-as-a-software-test-engineer-a-roadmap-for-success/exploring-career-opportunities-roadmap.jpg",
+    success: "Explore our certification programs designed to make you job-ready. Join our career-oriented training sessions for real-world insights into testing tools like Selenium, JIRA, and Postman. Stay ahead of the curve with Cinute Digital Pvt. Ltd.'s cutting-edge courses in software testing and quality assurance.",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "Atharva College of Engineering",
+    venueAddress: "Mumbai",
+    venueDescription: "Atharva College of Engineering, located in Mumbai, India, is a premier institution offering state-of-the-art facilities and a dynamic academic environment. Known for its emphasis on innovation and excellence, the college provides undergraduate engineering programs in various disciplines, fostering technical expertise and holistic development. It is dedicated to shaping future-ready professionals through a blend of quality education, industry exposure, and co-curricular activities.",
+    venueImageUrl: "/events/exploring-career-opportunities-as-a-software-test-engineer-a-roadmap-for-success/atharva-logo.png"
+  },
+  {
+    id: "1-day-program-at-universal-college",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "1-day-program-at-universal-college-of-engineering-on-it-trends-and-opportunities",
+    title: "1-Day Program at Universal College of Engineering on IT Trends and Opportunities – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2022-08-01",
+    location: "Naigaon East",
+    attendees: 32,
+    category: "Career Guidance Seminar",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "",
+    purpose: "The IT industry evolves at lightning speed, making it crucial for students to stay updated on emerging trends and opportunities. Cinute Digital Pvt. Ltd. organized an insightful session on 'IT Trends and Opportunities' to equip the next generation of professionals with the knowledge and skills required to excel in this dynamic domain. This event aimed to bridge the gap between academic learning and real-world industry demands, ensuring students are prepared to seize opportunities in the ever-changing IT landscape.",
+    trainingDuration: "The session brought together industry experts to share their invaluable insights on the latest IT trends, including",
+    sessionHighlights: [
+      {
+        title: "Artificial Intelligence (AI) & Machine Learning (ML)",
+        points: ["An overview of AI's transformative potential and ML's application in automation and predictive analytics."]
+      },
+      {
+        title: "Cloud Computing & Cybersecurity",
+        points: ["A discussion on secure cloud solutions and the growing need for skilled cybersecurity professionals."]
+      },
+      {
+        title: "Big Data & Analytics",
+        points: ["How data drives decision-making and the opportunities in data analytics and visualization."]
+      },
+      {
+        title: "IoT and Edge Computing",
+        points: ["Exploring the future of connected devices and their role in revolutionizing industries."]
+      },
+      {
+        title: "Career Pathways",
+        points: ["Actionable advice on roles like software testing, web development, and IT management."]
+      },
+
+    ],
+    keyTakeaways: [
+      {
+        title: "",
+        description: "A clear understanding of the top IT trends shaping the industry.",
+      },
+      {
+        title: "",
+        description: "Practical advice on building a career in IT, including emerging roles and skills in demand.",
+      },
+      {
+        title: "",
+        description: "Insights into the tools and technologies driving innovation, from AI frameworks to cloud platforms."
+      },
+      {
+        title: "",
+        description: "Renewed motivation to leverage industry trends for personal and professional growth.",
+      },
+
+    ],
+    highlights: ["Interactive activities, real-world examples, and success stories were woven into the presentation to keep participants engaged and inspired."],
+    heroImageUrl: "/events/1-day-program-at-universal-college-of-engineering-on-it-trends-and-opportunities/1-day-program-universal-college.jpg",
+    success: "This session served as a springboard for students at Universal College of Engineering to align their aspirations with industry expectations and prepare for a thriving career in the IT world. Ready to kickstart your career in software testing? Explore our certification programs designed to make you job-ready. Join our career-oriented training sessions for real-world insights into testing tools like Selenium, JIRA, and Postman. Stay ahead of the curve with Cinute Digital Pvt. Ltd.'s cutting-edge courses in software testing and quality assurance.",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "Universal MSG-SGKM College of Arts, Science & Commerce – Cinute Digital Pvt. Ltd",
+    venueAddress: "Mumbai",
+    venueDescription: "Universal College of Engineering is approved by the All India Council for Technical Education (AICTE), New Delhi; recognized by the Directorate of Technical Education (DTE), Government of Maharashtra; affiliated to Mumbai University. The college is also associated with professional bodies like IEEE, IETE, ISA and CSI to update the revolutionary technological advancements. It offers 4 years full-time Bachelor of Technology in Computer Engineering, Civil Engineering, Information Technology Engineering, Data Science, and Artificial Intelligence & Machine Learning.",
+    venueImageUrl: "/events/1-day-program-at-universal-college-of-engineering-on-it-trends-and-opportunities/Universal-college-logo.jpg"
+  },
 ];
 
 // Helper function to get event by slug
