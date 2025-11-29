@@ -150,8 +150,9 @@ export default function MentorHeroSection() {
             {/* CTAs */}
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center lg:justify-start">
               <Link
-                href="/contact-us"
-                className="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
+                href="https://calendar.app.google/tvh9dsXZsX9BujRR8"
+                target="_blank"
+                className="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:opacity-90 cursor-pointer"
                 style={{ backgroundColor: "var(--color-brand, #ff8c00)" }}
                 aria-label="Book a free mentorship session"
               >

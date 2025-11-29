@@ -13,12 +13,16 @@ import {
     Globe2,
     Home,
     ChevronRight,
+    ArrowDownNarrowWide,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import IconCard from '@/components/ui/IconCard';
 // import LeadForm from '../CourseLeadForm';
 import LeadForm from '../forms/ApiCourseLeadForm';
 import Link from 'next/link';
+import { useState } from 'react';
+import EnrollModal from '@/components/EnrollModal';
+import SyllabusDownloadModal from '@/components/SyllabusDownloadModal';
 
 /** -----------------------------
  *  Feature cards (unchanged data)
@@ -34,7 +38,8 @@ const features = [
 ];
 
 export default function HeroSection() {
-
+    const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+    const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
 
     const breadcrumbs = [
         { label: "Home", href: "/" },
@@ -49,8 +54,6 @@ export default function HeroSection() {
                 <div className="absolute inset-0 [background-image:radial-gradient(circle_at_20%_10%,rgba(15,23,42,0.05),transparent_40%),radial-gradient(circle_at_80%_10%,rgba(59,130,246,0.06),transparent_35%),linear-gradient(180deg,#fafafa,white)]" />
                 <div className="absolute inset-0 [mask-image:radial-gradient(1200px_600px_at_50%_-10%,black,transparent)]" />
             </div>
-
-
 
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 pb-14">
                 {/* Breadcrumbs for SEO & UX */}
@@ -107,7 +110,7 @@ export default function HeroSection() {
 
                         {/* FORM — mobile : shown right below H1 */}
                         <div className="mt-6 block md:hidden">
-                            <LeadForm variant="elevated" />
+                            <LeadForm variant="elevated" source="API Testing Course Page - Hero Section" />
                         </div>
 
                         {/* Supporting copy */}
@@ -121,19 +124,26 @@ export default function HeroSection() {
                         </p>
 
                         {/* CTAs */}
-                        <div className="mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+                        <div className="mt-8 flex flex-col sm:flex-row gap-4">
                             <button
-                                className="group inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
-                                aria-label="Enroll now in API Testing program"
+                                onClick={() => setIsEnrollModalOpen(true)}
+                                className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
                             >
                                 Enroll Now
-                                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                                <ArrowRight className="ml-2 h-5 w-5" />
+                            </button>
+
+                            <button
+                                onClick={() => setIsSyllabusModalOpen(true)}
+                                className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 hover:border-slate-300 transition-all shadow-sm hover:shadow-md"
+                            >
+                                <ArrowDownNarrowWide className="mr-2 h-5 w-5 text-indigo-600" />
+                                Download Syllabus
                             </button>
 
                             <Link
                                 href="#curriculum"
-                                className="inline-flex items-center justify-center rounded-xl border border-sky-300 bg-white px-6 py-3 text-base font-semibold text-sky-700 shadow-sm transition hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-200"
-                                aria-label="View full API testing curriculum"
+                                className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-indigo-600 bg-indigo-50 border border-indigo-100 rounded-xl hover:bg-indigo-100 transition-all"
                             >
                                 View Curriculum
                             </Link>
@@ -189,12 +199,25 @@ export default function HeroSection() {
                         transition={{ duration: 0.6, delay: 0.12, ease: 'easeOut' }}
                         className="hidden md:col-span-5 lg:col-span-4 md:block"
                     >
-                        <LeadForm variant="elevated" />
+                        <LeadForm variant="elevated" source="API Testing Course Page - Hero Section" />
 
                     </motion.aside>
                 </div>
             </div>
 
+            <EnrollModal
+                isOpen={isEnrollModalOpen}
+                onClose={() => setIsEnrollModalOpen(false)}
+                courseName="API Testing"
+                source="API Testing Course Page - Enroll Now- Hero Section"
+            />
+
+            <SyllabusDownloadModal
+                isOpen={isSyllabusModalOpen}
+                onClose={() => setIsSyllabusModalOpen(false)}
+                courseName="API Testing"
+                source="API Testing Course Page - Hero Section - Syllabus Download"
+            />
         </section>
     );
 }
