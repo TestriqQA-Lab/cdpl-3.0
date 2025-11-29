@@ -1946,6 +1946,243 @@ export const pastEvents: PastEvent[] = [
     venueDescription: "Universal College of Engineering is approved by the All India Council for Technical Education (AICTE), New Delhi; recognized by the Directorate of Technical Education (DTE), Government of Maharashtra; affiliated to Mumbai University. The college is also associated with professional bodies like IEEE, IETE, ISA and CSI to update the revolutionary technological advancements. It offers 4 years full-time Bachelor of Technology in Computer Engineering, Civil Engineering, Information Technology Engineering, Data Science, and Artificial Intelligence & Machine Learning.",
     venueImageUrl: "/events/1-day-program-at-universal-college-of-engineering-on-it-trends-and-opportunities/Universal-college-logo.jpg"
   },
+  {
+    id: "6-days-workshop-on-machine-learning",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "6-days-workshop-on-machine-learning-with-hands-on-training-on-industry-projects-2",
+    title: "6-Days Workshop on Machine Learning with Hands-on Training on Industry Projects – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2024-12-16 @ 10:00 AM to 2024-12-21 @ 04:00 PM",
+    location: "St. John Institute of Management and Research",
+    attendees: 79,
+    category: "Workshop",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "Machine Learning",
+    purpose: "Equip participants with practical experience in data preparation, analysis, and machine learning modeling for predicting material strength in engineering contexts. Emphasize the significance of understanding factors that influence compressive strength in cement, a core material in construction.",
+    trainingDuration: "The session brought together industry experts to share their invaluable insights on the latest IT trends, including",
+    sessionHighlights: [
+      {
+        title: "Data Preparation and Exploration",
+        points: ["Import essential libraries: Pandas, NumPy, Matplotlib, and Seaborn.", "Perform descriptive statistics (mean, median, mode, standard deviation) to assess feature distribution and variability."]
+      },
+      {
+        title: "Feature Analysis",
+        points: ["Create a correlation heatmap using Matplotlib and Seaborn to identify relationships between features and their impact on cement strength."]
+      },
+      {
+        title: "Data Scaling",
+        points: ["Normalize dataset values between -1 and 1 to standardize features, addressing the disparity in magnitude among features (e.g., water vs. plasticizers)."]
+      },
+      {
+        title: "Data Splitting",
+        points: ["Perform a train-test split to allow the model to learn relationships in the training data and test its predictive accuracy on unseen data."]
+      },
+      {
+        title: "Model Training and Evaluation",
+        points: ["Use Linear Regression to train the model on the training data.", "Predict and evaluate model accuracy against actual values, with an expected accuracy of around 82%."]
+      },
+
+    ],
+    keyTakeaways: [
+      {
+        title: "Insightful Analysis",
+        description: "Gain a clear understanding of influential factors impacting cement compressive strength.",
+      },
+      {
+        title: "Model Accuracy",
+        description: "Develop a functional linear regression model with approximately 62% accuracy, forming a foundation for model refinement and future improvements.",
+      },
+    ],
+    highlights: [],
+    heroImageUrl: "/events/6-days-workshop-on-machine-learning-with-hands-on-training-on-industry-projects-2/6-days-workshop-on-machine-learning.png",
+    success: "Participants successfully learned practical data preparation, exploratory analysis, feature correlation visualization, data normalization, train-test splitting, and linear regression modeling while gaining a clear understanding of the key factors influencing cement compressive strength.",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "St. John Institute of Management and Research – Cinute Digital Pvt. Ltd",
+    venueAddress: "Palghar, Mumbai",
+    venueDescription: "St. John Institute of Management and Research (SJIMR), established in 2007, is located in Palghar, Maharashtra. Affiliated with the University of Mumbai, it offers undergraduate and postgraduate programs, including BE and MMS. The college provides modern infrastructure, skilled faculty, and focuses on practical skills and industry readiness. SJIMR emphasizes holistic development and has a strong placement record, making it a great choice for students aiming to excel in their careers.",
+    venueImageUrl: "/events/6-days-workshop-on-machine-learning-with-hands-on-training-on-industry-projects-2/ST-John-College.png"
+  },
+  {
+    id: "placement-drive-at-cinute-digital",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "placement-drive-at-cinute-digital-pvt-ltd-for-tech-mahindra-and-transunion-cibil",
+    title: "Tech Mahindra and TransUnion CIBIL Placement Drive at Cinute Digital Pvt. Ltd – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2024-06-13 @ 10:00 AM",
+    location: "MiraRoad East",
+    attendees: 88,
+    category: "Placement Drive",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "Placement",
+    purpose: "Cinute Digital Pvt. Ltd. recently hosted a highly successful placement drive in collaboration with Tech Mahindra and TransUnion Cibil. This event was a significant milestone in our commitment to connecting top talent with leading companies in the tech industry.",
+    trainingDuration: "The session brought together industry experts to share their invaluable insights on the latest IT trends, including",
+    sessionHighlights: [
+      {
+        title: "Overview of the Placement Drive",
+        points: ["The placement drive attracted an impressive turnout, with over 250 candidates vying for opportunities with Tech Mahindra and TransUnion Cibil.", "The event was meticulously organized to ensure a smooth and efficient process, allowing candidates to showcase their skills and potential to two of the industry's most respected companies."]
+      },
+      {
+        title: "Selection Process and Criteria",
+        points: ["Throughout the day, candidates underwent a rigorous selection process that included multiple rounds of assessments, interviews, and technical evaluations.", "Both Tech Mahindra and TransUnion Cibil were looking for candidates with a strong technical foundation, problem-solving abilities, and a passion for innovation."]
+      },
+      {
+        title: "Successful Shortlisting of Candidates",
+        points: ["At the end of the drive, 16 candidates were successfully shortlisted for various roles across Tech Mahindra and TransUnion Cibil.", "These individuals demonstrated exceptional aptitude and enthusiasm, making them the perfect fit for the dynamic and challenging environments of these leading organizations."]
+      },
+      {
+        title: "Insights from Recruiters",
+        points: ["Recruiters from both Tech Mahindra and TransUnion Cibil shared positive feedback about the quality of candidates and the seamless organization of the event.", "They appreciated the opportunity to interact with a diverse pool of talent and were impressed by the readiness and professionalism of the candidates."]
+      },
+      {
+        title: "Future Placement Drives and Opportunities",
+        points: ["Building on the success of this event, Cinute Digital Pvt. Ltd. is committed to organizing more placement drives in the future.", "We aim to continue facilitating connections between talented professionals and top-tier companies, fostering growth and development for all parties involved."]
+      },
+
+    ],
+    keyTakeaways: [],
+    highlights: [],
+    heroImageUrl: "/events/placement-drive-at-cinute-digital-pvt-ltd-for-tech-mahindra-and-transunion-cibil/Tech-Mahindra-and-TransUnion-CIBIL-scaled.jpg",
+    success: "The placement drive was a resounding success, and we are proud to have played a pivotal role in advancing the careers of 16 promising candidates. Cinute Digital Pvt. Ltd. looks forward to sustaining our partnerships with Tech Mahindra and TransUnion Cibil and to hosting more such impactful events in the near future.",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "Cinute Digital Pvt. Ltd",
+    venueAddress: "",
+    venueDescription: "",
+    venueImageUrl: ""
+  },
+  {
+    id: "industrial-visit-by-viva-institute-of-technology-virar",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "industrial-visit-by-viva-institute-of-technology-virar",
+    title: "Industrial Visit by VIVA Institute of Technology, Virar – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2024-03-28 @ 10:00 AM",
+    location: "MiraRoad East",
+    attendees: 50,
+    category: "Workshop",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "Software Testing",
+    purpose: "Cinute Digital Pvt. Ltd., in collaboration with Testriq QA Lab, hosted an inspiring industrial visit for students from the Computer Engineering department of VIVA Institute of Technology, Virar. This event was a fantastic opportunity to bridge the gap between academia and industry, providing students with real-world insights into the field of software testing.",
+    trainingDuration: "The session brought together industry experts to share their invaluable insights on the latest IT trends, including",
+    sessionHighlights: [
+      {
+        title: "Introduction to Software Testing",
+        points: ["The event kicked off with an introduction to the fundamentals of software testing, highlighting its importance in the software development lifecycle. Students learned about various testing methodologies and the role of a quality assurance team in ensuring the delivery of robust and reliable software products."]
+      },
+      {
+        title: "Hands-On Experience with Testing Tools",
+        points: ["Participants were given a hands-on demonstration of the latest testing tools used in the industry. The session provided practical exposure to automated testing tools and techniques, equipping students with the skills needed to perform functional and performance testing."]
+      },
+      {
+        title: "Interactive Q&A Session",
+        points: ["The visit concluded with an interactive Q&A session where students engaged in insightful discussions with industry experts. This session allowed them to clarify their doubts, explore career opportunities in software testing, and gain valuable advice from seasoned professionals."]
+      },
+      {
+        title: "Tour of the Testriq Facility",
+        points: ["Students were given a guided tour of the Testriq QA Lab, where they witnessed firsthand how a professional testing environment operates. They observed the workflows, processes, and tools used in real-world software testing projects."]
+      },
+
+    ],
+    keyTakeaways: [],
+    highlights: [],
+    heroImageUrl: "/events/industrial-visit-by-viva-institute-of-technology-virar/Industrial-Visit-by-VIVA-Institute-of-Technology-scaled.jpg",
+    success: "This industrial visit was a refreshing experience for both the students and our team at Cinute Digital Pvt. Ltd. It was a day filled with knowledge-sharing, inspiration, and a glimpse into the exciting world of software testing. We look forward to continuing our engagement with educational institutions to inspire and nurture the next generation of technology professionals.",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "TESTRIQ QA LAB LLP",
+    venueAddress: "Mira Road, Mumbai",
+    venueDescription: "Testriq QA Lab LLP is a leading software testing and quality assurance company based in Mumbai, India. With over a decade of experience, Testriq offers a comprehensive suite of services, including LaunchFast QA, exploratory testing, web and mobile application testing, API testing, IoT device testing, AI application testing, robotics testing, smart device testing, ETL testing, data analysis, security testing, manual testing, regression testing, performance testing, QA documentation, and automation testing. Their team of ISTQB-certified experts collaborates with clients ranging from startups to established industry leaders, ensuring the delivery of high-quality, reliable software products. Testriq’s commitment to excellence is evident in their state-of-the-art testing infrastructure and up-to-date environments, which adhere to international standards. By focusing on minimizing risks and maximizing quality, Testriq has played a pivotal role in the success of numerous award-winning applications across diverse industries.",
+    venueImageUrl: "/events/industrial-visit-by-viva-institute-of-technology-virar/Testriq-event.png"
+  },
+  {
+    id: "6-days-workshop-on-machine-learning-1",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "6-days-workshop-on-machine-learning-with-hands-on-training-on-industry-projects",
+    title: "6-Days Workshop on Machine Learning with Hands-on Training on Industry Projects – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2024-12-02 @ 10:00 AM to 2024-12-07 @ 04:00 PM",
+    location: "St. John Institute of Management and Research",
+    attendees: 120,
+    category: "Workshop",
+    categoryColor: "bg-green-600",  // Green for partnership/collaboration theme
+    serviceType: "Machine Learning",
+    purpose: "Equip participants with practical experience in data preparation, analysis, and machine learning modeling for predicting material strength in engineering contexts. Emphasize the significance of understanding factors that influence compressive strength in cement, a core material in construction.",
+    trainingDuration: "The session brought together industry experts to share their invaluable insights on the latest IT trends, including",
+    sessionHighlights: [
+      {
+        title: "Data Preparation and Exploration",
+        points: ["Import essential libraries: Pandas, NumPy, Matplotlib, and Seaborn.", "Perform descriptive statistics (mean, median, mode, standard deviation) to assess feature distribution and variability."]
+      },
+      {
+        title: "Feature Analysis",
+        points: ["Create a correlation heatmap using Matplotlib and Seaborn to identify relationships between features and their impact on cement strength."]
+      },
+      {
+        title: "Data Scaling",
+        points: ["Normalize dataset values between -1 and 1 to standardize features, addressing the disparity in magnitude among features (e.g., water vs. plasticizers)."]
+      },
+      {
+        title: "Data Splitting",
+        points: ["Perform a train-test split to allow the model to learn relationships in the training data and test its predictive accuracy on unseen data."]
+      },
+      {
+        title: "Model Training and Evaluation",
+        points: ["Use Linear Regression to train the model on the training data.", "Predict and evaluate model accuracy against actual values, with an expected accuracy of around 82%."]
+      },
+    ],
+    keyTakeaways: [
+      {
+        title: "Insightful Analysis",
+        description: "Gain a clear understanding of influential factors impacting cement compressive strength."
+      },
+      {
+        title: "Model Accuracy",
+        description: "Develop a functional linear regression model with approximately 62% accuracy, forming a foundation for model refinement and future improvements."
+      }
+    ],
+    highlights: [],
+    heroImageUrl: "/events/6-days-workshop-on-machine-learning/6-days-workshop-on-machine-learning-2.png",
+    success: "Participants successfully mastered hands-on data preparation, exploratory analysis, feature correlation visualization, data normalization, train-test splitting, and linear regression modeling, while gaining a deep understanding of the key factors that influence cement compressive strength.",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "St. John Institute of Management and Research",
+    venueAddress: "Palghar, Maharashtra",
+    venueDescription: "St. John Institute of Management and Research (SJIMR), established in 2007, is located in Palghar, Maharashtra. Affiliated with the University of Mumbai, it offers undergraduate and postgraduate programs, including BE and MMS. The college provides modern infrastructure, skilled faculty, and focuses on practical skills and industry readiness. SJIMR emphasizes holistic development and has a strong placement record, making it a great choice for students aiming to excel in their careers.",
+    venueImageUrl: "/events/6-days-workshop-on-machine-learning/ST-John-College.png"
+  },
 ];
 
 // Helper function to get event by slug
