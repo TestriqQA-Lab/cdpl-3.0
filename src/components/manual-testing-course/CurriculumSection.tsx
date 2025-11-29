@@ -246,7 +246,7 @@ function CurriculumCard({ mod }: { mod: Module }) {
         >
             <AccentBar accent={mod.accent} />
             <div className="mx-auto p-2 md:p-7">
-                <div className="mb-3 flex items-center justify-between gap-3">
+                <div className="mb-3 flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2 text-gray-900">
                         {IconFor(mod.title, mod.accent)}
                         <h3 className="text-lg md:text-xl font-semibold text-gray-900">{mod.title}</h3>

@@ -11,12 +11,14 @@ interface SyllabusDownloadModalProps {
   isOpen: boolean;
   onClose: () => void;
   courseName?: string;
+  source?: string;
 }
 
 const SyllabusDownloadModal: React.FC<SyllabusDownloadModalProps> = ({
   isOpen,
   onClose,
-  courseName = "Course"
+  courseName = "Course",
+  source
 }) => {
   // Form state
   const [formData, setFormData] = useState({
@@ -153,7 +155,8 @@ const SyllabusDownloadModal: React.FC<SyllabusDownloadModalProps> = ({
             ...formData,
             phone: formData.phone || 'Not provided',
             type: 'syllabus',
-            courseName
+            courseName,
+            source
           }),
         });
 
@@ -308,8 +311,8 @@ const SyllabusDownloadModal: React.FC<SyllabusDownloadModalProps> = ({
                           onChange={handleInputChange}
                           placeholder="Enter your full name"
                           className={`w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${fullNameError
-                              ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                              : 'border-gray-200 focus:border-indigo-600 focus:ring-indigo-100'
+                            ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                            : 'border-gray-200 focus:border-indigo-600 focus:ring-indigo-100'
                             }`}
                           disabled={isSubmitting}
                         />
@@ -334,8 +337,8 @@ const SyllabusDownloadModal: React.FC<SyllabusDownloadModalProps> = ({
                           onChange={handleInputChange}
                           placeholder="Enter your email address"
                           className={`w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${emailError
-                              ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                              : 'border-gray-200 focus:border-indigo-600 focus:ring-indigo-100'
+                            ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                            : 'border-gray-200 focus:border-indigo-600 focus:ring-indigo-100'
                             }`}
                           disabled={isSubmitting}
                         />
@@ -359,8 +362,8 @@ const SyllabusDownloadModal: React.FC<SyllabusDownloadModalProps> = ({
                           onChange={handlePhoneChange}
                           placeholder="Enter your mobile number (e.g., 98765 43210)"
                           className={`w-full [&>input]:pl-4 [&>input]:pr-4 [&>input]:py-3 [&>input]:border-2 [&>input]:rounded-lg [&>input]:text-gray-900 [&>input]:placeholder:text-gray-400 [&>input]:focus:outline-none [&>input]:focus:ring-2 [&>input]:transition-all [&>input]:placeholder-opacity-100 [&>input]:placeholder-shown:text-gray-400 ${phoneError
-                              ? '[&>input]:border-red-300 [&>input]:focus:border-red-500 [&>input]:focus:ring-red-200'
-                              : '[&>input]:border-gray-200 [&>input]:focus:border-indigo-600 [&>input]:focus:ring-indigo-100'
+                            ? '[&>input]:border-red-300 [&>input]:focus:border-red-500 [&>input]:focus:ring-red-200'
+                            : '[&>input]:border-gray-200 [&>input]:focus:border-indigo-600 [&>input]:focus:ring-indigo-100'
                             }`}
                           disabled={isSubmitting}
                         />
