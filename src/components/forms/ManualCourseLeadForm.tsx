@@ -12,12 +12,14 @@ export default function LeadForm({
   className = '',
   variant = 'elevated',
   title = 'Request a Callback',
-  subtitle = 'Want to know exactly how much it costs & when the next batch starts? Tell us where to call you!'
+  subtitle = 'Want to know exactly how much it costs & when the next batch starts? Tell us where to call you!',
+  source = 'Manual Software Testing Course Page - Hero Section'
 }: {
   className?: string;
   variant?: 'default' | 'elevated';
   title?: string;
   subtitle?: string;
+  source?: string;
 }) {
   // Form state
   const [formData, setFormData] = useState({
@@ -126,7 +128,10 @@ export default function LeadForm({
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({
+            ...formData,
+            source: source
+          }),
         });
 
         if (response.ok) {

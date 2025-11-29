@@ -1,22 +1,22 @@
 'use client';
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, User, Mail, CheckCircle2, Loader2, GraduationCap } from 'lucide-react';
+import { X, User, Mail, TrendingUp, CheckCircle2, Loader2 } from 'lucide-react';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { isValidPhoneNumber } from 'libphonenumber-js';
 
-interface EnrollModalProps {
+interface AdvisorModalProps {
     isOpen: boolean;
     onClose: () => void;
-    courseName?: string;
+    source?: string;
 }
 
-const EnrollModal: React.FC<EnrollModalProps> = ({
+const AdvisorModal: React.FC<AdvisorModalProps> = ({
     isOpen,
     onClose,
-    courseName = "Course"
+    source = 'About Us - Hero Section Modal'
 }) => {
     // Form state
     const [formData, setFormData] = useState({
@@ -62,7 +62,6 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
     };
 
     const validatePhoneNumber = (phone: string | undefined) => {
-        // Phone is now mandatory for enrollment
         if (!phone || phone.trim() === '') {
             setPhoneError('Mobile Number is required.');
             return false;
@@ -152,14 +151,13 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
                     body: JSON.stringify({
                         ...formData,
                         phone: formData.phone || 'Not provided',
-                        type: 'enrollment',
-                        source: `${courseName} Course Page - Enroll Now`,
-                        courseName
+                        source: source,
+                        type: 'General Inquiry'
                     }),
                 });
 
                 if (response.ok) {
-                    console.log('Enrollment request submitted successfully');
+                    console.log('Advisor request submitted successfully');
                     setIsSubmitted(true);
 
                     setTimeout(() => {
@@ -199,8 +197,8 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
         }
     }, [isSubmitting, onClose]);
 
-    // Handle escape key - Now stable with memoized handleClose
-    React.useEffect(() => {
+    // Handle escape key
+    useEffect(() => {
         const handleEscape = (e: KeyboardEvent) => {
             if (e.key === 'Escape' && !isSubmitting) {
                 handleClose();
@@ -220,9 +218,7 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
 
     return (
         <>
-            {/* Custom CSS for phone input */}
             <style jsx global>{`
-        /* Country dropdown styling */
         .PhoneInputCountrySelect {
           color: #1e293b !important;
           font-weight: 500 !important;
@@ -247,7 +243,7 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Modal Header */}
-                            <div className="bg-gradient-to-r from-indigo-600 to-indigo-700 px-6 py-5 relative">
+                            <div className="bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] px-6 py-5 relative">
                                 <button
                                     onClick={handleClose}
                                     disabled={isSubmitting}
@@ -258,11 +254,11 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
                                 </button>
                                 <div className="flex items-center gap-3">
                                     <div className="bg-white/20 p-2 rounded-lg">
-                                        <GraduationCap className="w-6 h-6 text-white" />
+                                        <TrendingUp className="w-6 h-6 text-white" />
                                     </div>
                                     <div>
-                                        <h2 className="text-xl font-bold text-white">Enroll Now</h2>
-                                        <p className="text-sm text-white/90 mt-0.5">Start your journey in {courseName}</p>
+                                        <h2 className="text-xl font-bold text-white">Talk to an Advisor</h2>
+                                        <p className="text-sm text-white/90 mt-0.5">Get FREE Demo Class Instantly!</p>
                                     </div>
                                 </div>
                             </div>
@@ -278,33 +274,33 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
                                         <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
                                             <CheckCircle2 className="w-8 h-8 text-green-600" />
                                         </div>
-                                        <h3 className="text-xl font-bold text-gray-900 mb-2">Enrollment Received!</h3>
+                                        <h3 className="text-xl font-bold text-gray-900 mb-2">Success!</h3>
                                         <p className="text-gray-600 mb-1">
-                                            Thank you for enrolling in {courseName}.
+                                            We'll contact you within 2 hours.
                                         </p>
                                         <p className="text-sm text-gray-500">
-                                            Our team will contact you shortly.
+                                            Closing in a moment...
                                         </p>
                                     </motion.div>
                                 ) : (
                                     <form onSubmit={handleSubmit} className="space-y-5">
                                         {/* Full Name Field */}
                                         <div>
-                                            <label htmlFor="enroll-fullName" className="block text-sm font-semibold text-gray-700 mb-2">
+                                            <label htmlFor="advisor-fullName" className="block text-sm font-semibold text-gray-700 mb-2">
                                                 Full Name <span className="text-red-500">*</span>
                                             </label>
                                             <div className="relative">
                                                 <User className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
                                                 <input
                                                     type="text"
-                                                    id="enroll-fullName"
+                                                    id="advisor-fullName"
                                                     name="fullName"
                                                     value={formData.fullName}
                                                     onChange={handleInputChange}
                                                     placeholder="Enter your full name"
                                                     className={`w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${fullNameError
                                                         ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                                                        : 'border-gray-200 focus:border-indigo-600 focus:ring-indigo-100'
+                                                        : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
                                                         }`}
                                                     disabled={isSubmitting}
                                                 />
@@ -316,21 +312,21 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
 
                                         {/* Email Field */}
                                         <div>
-                                            <label htmlFor="enroll-email" className="block text-sm font-semibold text-gray-700 mb-2">
+                                            <label htmlFor="advisor-email" className="block text-sm font-semibold text-gray-700 mb-2">
                                                 Email Address <span className="text-red-500">*</span>
                                             </label>
                                             <div className="relative">
                                                 <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
                                                 <input
                                                     type="email"
-                                                    id="enroll-email"
+                                                    id="advisor-email"
                                                     name="email"
                                                     value={formData.email}
                                                     onChange={handleInputChange}
                                                     placeholder="Enter your email address"
                                                     className={`w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${emailError
                                                         ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                                                        : 'border-gray-200 focus:border-indigo-600 focus:ring-indigo-100'
+                                                        : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
                                                         }`}
                                                     disabled={isSubmitting}
                                                 />
@@ -342,20 +338,20 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
 
                                         {/* Phone Field (Mandatory) */}
                                         <div>
-                                            <label htmlFor="enroll-phone" className="block text-sm font-semibold text-gray-700 mb-2">
+                                            <label htmlFor="advisor-phone" className="block text-sm font-semibold text-gray-700 mb-2">
                                                 Mobile Number <span className="text-red-500">*</span>
                                             </label>
                                             <div className="relative">
                                                 <PhoneInput
-                                                    id="enroll-phone"
+                                                    id="advisor-phone"
                                                     international
                                                     defaultCountry="IN"
                                                     value={formData.phone}
                                                     onChange={handlePhoneChange}
-                                                    placeholder="Enter your mobile number (e.g., 98765 43210)"
+                                                    placeholder="Enter your mobile number"
                                                     className={`w-full [&>input]:pl-4 [&>input]:pr-4 [&>input]:py-3 [&>input]:border-2 [&>input]:rounded-lg [&>input]:text-gray-900 [&>input]:placeholder:text-gray-400 [&>input]:focus:outline-none [&>input]:focus:ring-2 [&>input]:transition-all [&>input]:placeholder-opacity-100 [&>input]:placeholder-shown:text-gray-400 ${phoneError
                                                         ? '[&>input]:border-red-300 [&>input]:focus:border-red-500 [&>input]:focus:ring-red-200'
-                                                        : '[&>input]:border-gray-200 [&>input]:focus:border-indigo-600 [&>input]:focus:ring-indigo-100'
+                                                        : '[&>input]:border-gray-200 [&>input]:focus:border-[#ff8c00] [&>input]:focus:ring-orange-100'
                                                         }`}
                                                     disabled={isSubmitting}
                                                 />
@@ -369,27 +365,36 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
                                         <button
                                             type="submit"
                                             disabled={isSubmitting}
-                                            className="w-full bg-gradient-to-r from-indigo-600 to-indigo-700 text-white font-semibold py-3.5 px-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
+                                            className="w-full bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white font-semibold py-3.5 px-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
                                         >
                                             {isSubmitting ? (
                                                 <>
                                                     <Loader2 className="w-5 h-5 animate-spin" />
-                                                    Submitting...
+                                                    Sending...
                                                 </>
                                             ) : (
                                                 <>
-                                                    <GraduationCap className="w-5 h-5" />
-                                                    Enroll Now
+                                                    <TrendingUp className="w-5 h-5" />
+                                                    Get Started Now
                                                 </>
                                             )}
                                         </button>
 
-                                        {/* Privacy Note */}
-                                        <p className="text-xs text-center text-gray-500 mt-3">
-                                            By enrolling, you agree to receive course information via email and phone.
-                                            <br />
-                                            We respect your privacy and won&apos;t spam you.
-                                        </p>
+                                        {/* Trust Badges */}
+                                        <div className="flex items-center justify-center gap-4 text-xs text-slate-600 pt-2">
+                                            <div className="flex items-center gap-1">
+                                                <CheckCircle2 className="h-3.5 w-3.5 text-green-600" />
+                                                <span>Instant Access</span>
+                                            </div>
+                                            <div className="flex items-center gap-1">
+                                                <CheckCircle2 className="h-3.5 w-3.5 text-green-600" />
+                                                <span>No Spam</span>
+                                            </div>
+                                            <div className="flex items-center gap-1">
+                                                <CheckCircle2 className="h-3.5 w-3.5 text-green-600" />
+                                                <span>100% Secure</span>
+                                            </div>
+                                        </div>
                                     </form>
                                 )}
                             </div>
@@ -401,4 +406,4 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
     );
 };
 
-export default EnrollModal;
+export default AdvisorModal;

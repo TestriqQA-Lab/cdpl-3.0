@@ -395,11 +395,10 @@ export function ContactHeroSection() {
                             value={formData.fullName}
                             onChange={handleInputChange}
                             placeholder="Enter your full name"
-                            className={`bg-white w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${
-                              fullNameError
-                                ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                                : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
-                            }`}
+                            className={`bg-white w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${fullNameError
+                              ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                              : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
+                              }`}
                           />
                         </div>
                         {fullNameError && (
@@ -420,11 +419,10 @@ export function ContactHeroSection() {
                             value={formData.email}
                             onChange={handleInputChange}
                             placeholder="Enter your email address"
-                            className={`bg-white w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${
-                              emailError
-                                ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                                : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
-                            }`}
+                            className={`bg-white w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${emailError
+                              ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                              : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
+                              }`}
                           />
                         </div>
                         {emailError && (
@@ -438,8 +436,7 @@ export function ContactHeroSection() {
                           Mobile Number *
                         </label>
                         <div className="bg-white relative">
-                          <div className={`phone-input-container ${
-                              phoneError ? 'border-red-500' : ''
+                          <div className={`phone-input-container ${phoneError ? 'border-red-500' : ''
                             }`}>
                             <Phone className="phone-icon h-5 w-5" />
                             <PhoneInput
@@ -469,9 +466,14 @@ export function ContactHeroSection() {
                         >
                           <option value="">Select…</option>
                           <option value="Software Testing">Software Testing</option>
-                          <option value="Data Science & AI">Data Science & AI</option>
+                          <option value="Data Science">Data Science</option>
+                          <option value="Business Intelligence (BI)">Business Intelligence (BI)</option>
+                          <option value="Artificial Intelligence (AI)">Artificial Intelligence (AI)</option>
+                          <option value="Digital Marketing">Digital Marketing</option>
                           <option value="Full Stack Development">Full Stack Development</option>
                           <option value="Corporate Training">Corporate Training</option>
+                          <option value="Training & Event Services">Training & Event Services</option>
+                          <option value="Others">Others</option>
                         </select>
                       </div>
 
@@ -486,11 +488,10 @@ export function ContactHeroSection() {
                           onChange={handleInputChange}
                           rows={3}
                           placeholder="Tell us how we can help..."
-                          className={`bg-white w-full px-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${
-                            messageError
-                              ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                              : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
-                          }`}
+                          className={`bg-white w-full px-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${messageError
+                            ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                            : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
+                            }`}
                         />
                         {messageError && (
                           <p className="mt-1.5 text-sm text-red-600">{messageError}</p>
@@ -593,6 +594,7 @@ export function ContactHeroSection() {
                   {/* Schedule Meeting */}
                   <Link
                     href="https://calendar.app.google/tvh9dsXZsX9BujRR8"
+                    target="_blank"
                     aria-label="Schedule a Meeting"
                     className="group inline-flex w-full items-center gap-4 lg:gap-3 xl:gap-4 rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 shadow-sm transition hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 overflow-hidden"
                   >
@@ -664,11 +666,10 @@ export function ContactHeroSection() {
                           value={formData.fullName}
                           onChange={handleInputChange}
                           placeholder="Enter your full name"
-                          className={`w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all bg-white ${
-                            fullNameError
-                              ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                              : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
-                          }`}
+                          className={`w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all bg-white ${fullNameError
+                            ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                            : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
+                            }`}
                         />
                       </div>
                       {fullNameError && (
@@ -689,11 +690,10 @@ export function ContactHeroSection() {
                           value={formData.email}
                           onChange={handleInputChange}
                           placeholder="Enter your email address"
-                          className={`bg-white w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${
-                            emailError
-                              ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                              : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
-                          }`}
+                          className={`bg-white w-full pl-11 pr-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${emailError
+                            ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                            : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
+                            }`}
                         />
                       </div>
                       {emailError && (
@@ -707,8 +707,7 @@ export function ContactHeroSection() {
                         Mobile Number *
                       </label>
                       <div className="relative bg-white">
-                        <div className={`phone-input-container bg-white ${
-                            phoneError ? 'border-red-500' : ''
+                        <div className={`phone-input-container bg-white ${phoneError ? 'border-red-500' : ''
                           }`}>
                           <Phone className="bg-white phone-icon h-5 w-5" />
                           <PhoneInput
@@ -738,9 +737,14 @@ export function ContactHeroSection() {
                       >
                         <option value="">Select…</option>
                         <option value="Software Testing">Software Testing</option>
-                        <option value="Data Science & AI">Data Science & AI</option>
+                        <option value="Data Science">Data Science</option>
+                        <option value="Business Intelligence (BI)">Business Intelligence (BI)</option>
+                        <option value="Artificial Intelligence (AI)">Artificial Intelligence (AI)</option>
+                        <option value="Digital Marketing">Digital Marketing</option>
                         <option value="Full Stack Development">Full Stack Development</option>
                         <option value="Corporate Training">Corporate Training</option>
+                        <option value="Training & Event Services">Training & Event Services</option>
+                        <option value="Others">Others</option>
                       </select>
                     </div>
 
@@ -755,11 +759,10 @@ export function ContactHeroSection() {
                         onChange={handleInputChange}
                         rows={3}
                         placeholder="Tell us how we can help..."
-                        className={`bg-white w-full px-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${
-                          messageError
-                            ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                            : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
-                        }`}
+                        className={`bg-white w-full px-4 py-3 border-2 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 transition-all ${messageError
+                          ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
+                          : 'border-gray-200 focus:border-[#ff8c00] focus:ring-orange-100'
+                          }`}
                       />
                       {messageError && (
                         <p className="mt-1.5 text-sm text-red-600">{messageError}</p>

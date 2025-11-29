@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { motion, type Transition } from "framer-motion";
 import Image from "next/image";
 import { Sparkles, Star, ShieldCheck, ArrowRight, Check, Home, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import AdvisorModal from "@/components/ui/AdvisorModal";
 
 const gradientText =
     "bg-clip-text text-transparent bg-[linear-gradient(90deg,#0ea5e9,#2563eb,#22c55e)]";
@@ -22,6 +24,8 @@ const breadcrumbs = [
 
 
 export default function AboutHeroSection() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     return (
         <section
             aria-labelledby="about-heading"
@@ -124,20 +128,12 @@ export default function AboutHeroSection() {
                         >
                             Explore Courses <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                         </Link>
-                        <Link
-                            href="contact-us"
-                            className="inline-flex w-full items-center justify-center rounded-2xl border border-slate-300 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 dark:border-slate-200/70 dark:bg-white/90 sm:w-auto"
+                        <button
+                            onClick={() => setIsModalOpen(true)}
+                            className="inline-flex w-full items-center justify-center rounded-2xl border border-slate-300 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 dark:border-slate-200/70 dark:bg-white/90 sm:w-auto cursor-pointer"
                         >
                             Talk to an Advisor
-                        </Link>
-                        {/* <button
-                            type="button"
-                            className="group inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white/90 px-4 py-2.5 text-sm font-medium text-slate-900 shadow-sm transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-slate-200 focus:ring-offset-2 dark:border-slate-200/70 dark:bg-white/90 sm:w-auto"
-                            aria-label="Watch 60-second overview video"
-                        >
-                            <Play className="h-4 w-4 transition group-hover:scale-110" aria-hidden="true" />
-                            60-sec Overview
-                        </button> */}
+                        </button>
                     </motion.div>
 
                     <motion.div
@@ -209,6 +205,8 @@ export default function AboutHeroSection() {
             <span className="sr-only">
                 Cinute Digital — industry-ready courses, live projects, mentorship, and career support.
             </span>
+
+            <AdvisorModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </section>
     );
 }

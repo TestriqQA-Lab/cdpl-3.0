@@ -41,7 +41,7 @@ export async function POST(request: Request) {
   console.log('API Contact Route Hit');
   try {
     const body = await request.json();
-    const { fullName, email, phone, type, source, interest, message, courseName, syllabusLink } = body; // Added courseName, syllabusLink
+    const { fullName, email, phone, type, source, interest, message, courseName, syllabusLink } = body;
     console.log('Received payload:', { fullName, email, phone, type, source, courseName });
 
     // 1. Basic Validation
@@ -53,28 +53,47 @@ export async function POST(request: Request) {
     // 2. Determine Email Content based on 'type' and available fields
     const isBrochureRequest = type === 'brochure';
     const isSyllabusRequest = type === 'syllabus';
+    const isEnrollmentRequest = type === 'enrollment';
 
     // Determine Source
     let formSource = source;
     if (!formSource) {
       if (isBrochureRequest) formSource = 'Home Page - Brochure Download Modal';
       else if (isSyllabusRequest) formSource = `Home Page - ${courseName || 'Unknown Course'} - Download Syllabus Modal Form`;
+      else if (isEnrollmentRequest) formSource = `${courseName || 'Course'} Page - Enroll Now`;
       else formSource = 'Contact Form';
     }
 
-    const isHomeHeroForm = formSource.includes('Home Hero') || formSource.includes('Enquiry Form - Home Hero Section') || formSource.includes('Enquiry Form - Home Enquire Now Button');
+    const isHomeHeroForm = formSource.includes('Home Hero') || formSource.includes('Enquiry Form - Home Hero Section') || formSource.includes('Enquiry Form - Home Enquire Now Button') || formSource.includes('About Us - Hero Section Modal') || formSource.includes('About Us - CTA Section') || formSource.includes('About Us - FAQ Section');
     const isGetStartedForm = formSource.includes('Get Started Section');
+    const isManualTestingHeroForm = formSource === 'Manual Software Testing Course Page - Hero Section';
+    const isMentorRequest = formSource.includes('Team Page - Mentor Section');
+    const isLiveJobsRequest = formSource.includes('Live Jobs Page - Hero Section');
+    const isPlacementRequest = formSource.includes('Placements Page');
+    const isSessionEnquiry = formSource.includes('Session Enquiry') || formSource.includes('Other Courses Section');
 
     // Subject Prefix Logic
-    let subjectPrefix = '[NEW LEAD]';
+    let subjectPrefix = '[ENQUIRY]';
     if (isBrochureRequest) {
       subjectPrefix = '[BROCHURE DOWNLOAD - HOME PAGE]';
     } else if (isSyllabusRequest) {
-      subjectPrefix = '[SYLLABUS REQUEST]';
+      subjectPrefix = '[SYLLABUS DOWNLOAD]';
+    } else if (isEnrollmentRequest) {
+      subjectPrefix = '[ENROLL NOW]';
     } else if (isHomeHeroForm) {
       subjectPrefix = '[Enquiry]';
     } else if (isGetStartedForm) {
       subjectPrefix = '[GET STARTED REQUEST]';
+    } else if (isManualTestingHeroForm) {
+      subjectPrefix = '[ENQUIRY]';
+    } else if (isMentorRequest) {
+      subjectPrefix = '[MENTOR REQUEST]';
+    } else if (isLiveJobsRequest) {
+      subjectPrefix = '[LIVE JOBS ENQUIRY]';
+    } else if (isPlacementRequest) {
+      subjectPrefix = '[PLACEMENT ENQUIRY]';
+    } else if (isSessionEnquiry) {
+      subjectPrefix = '[SESSION ENQUIRY]';
     }
 
     // Admin Template Logic
@@ -86,6 +105,12 @@ export async function POST(request: Request) {
       adminTemplate = 'admin-notification.html';
     } else if (isHomeHeroForm) {
       adminTemplate = 'admin-notification-home-hero.html';
+    } else if (isMentorRequest) {
+      adminTemplate = 'admin-notification-mentor.html';
+    } else if (isLiveJobsRequest) {
+      adminTemplate = 'admin-notification-live-jobs.html';
+    } else if (isPlacementRequest) {
+      adminTemplate = 'admin-notification-placement.html';
     }
 
     // 3. Prepare Admin Notification Email
@@ -95,7 +120,8 @@ export async function POST(request: Request) {
       fullName,
       email,
       phone,
-      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isGetStartedForm ? 'Get Started Request' : 'General Inquiry')),
+      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isGetStartedForm ? 'Get Started Request' : (isManualTestingHeroForm ? 'Course Page Enquiry' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : 'General Inquiry')))))),
+
       source: formSource,
       downloadLink: isBrochureRequest ? BROCHURE_DOWNLOAD_LINK : (isSyllabusRequest ? (syllabusLink || 'N/A') : 'N/A'),
       year: currentYear,
@@ -114,7 +140,28 @@ export async function POST(request: Request) {
     // Admin Subject Logic
     let adminSubject = `${subjectPrefix} New Lead from ${fullName} - ${formSource}`;
     if (isSyllabusRequest && courseName) {
-      adminSubject = `${subjectPrefix} New Lead for ${courseName} - ${fullName}`;
+      if (formSource === 'Manual Software Testing Course Page - Learning Path - Syllabus Download') {
+        adminSubject = `${subjectPrefix} New Lead from ${fullName} - Manual Testing Page (Syllabus)`;
+      } else {
+        adminSubject = `${subjectPrefix} New Lead for ${courseName} - ${fullName}`;
+      }
+    } else if (isManualTestingHeroForm) {
+      adminSubject = `${subjectPrefix} New Lead from ${fullName} - Course Page`;
+    } else if (isMentorRequest) {
+      adminSubject = `${subjectPrefix} New Mentor Request from ${fullName}`;
+    } else if (isLiveJobsRequest) {
+      adminSubject = `${subjectPrefix} New Job Enquiry from ${fullName}`;
+    } else if (isPlacementRequest) {
+      adminSubject = `${subjectPrefix} New Placement Enquiry from ${fullName}`;
+    } else if (isEnrollmentRequest) {
+      // Expected: [ENROLL NOW] New Lead from Prakash Testing - Manual Testing Course Page
+      adminSubject = `${subjectPrefix} New Lead from ${fullName} - ${courseName || 'Course'} Page`;
+    } else if (formSource === 'Manual Software Testing Course Page - Learning Path') {
+      adminSubject = `${subjectPrefix} New Lead from ${fullName} - Manual Testing Page`;
+    } else if (formSource === 'Manual Software Testing Course Page - Session Enquiry') {
+      adminSubject = `[SESSION ENQUIRY] New Lead from ${fullName} - Manual Software Testing Course Page`;
+    } else if (formSource === 'Manual Software Testing Course Page - Other Courses Section') {
+      adminSubject = `[SESSION ENQUIRY] New Lead from ${fullName} - Manual Software Testing Page`;
     }
 
     const adminMailOptions: nodemailer.SendMailOptions = {
@@ -201,7 +248,8 @@ export async function POST(request: Request) {
       email,
       phone,
       source: formSource,
-      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isGetStartedForm ? 'Get Started Request' : 'General Inquiry')),
+      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isGetStartedForm ? 'Get Started Request' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : 'General Inquiry'))))),
+    
       interest: interest || '',
       message: message || '',
     }).catch(err => console.error('Google Sheet background update error:', err));

@@ -1,12 +1,18 @@
 // =============================
 // components/our-team/TeamCTA.tsx
 // =============================
+"use client";
+
 import Link from "next/link";
 import Script from "next/script";
 import { Check, ShieldCheck, Clock, Star } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
+import AdvisorModal from "@/components/ui/AdvisorModal";
 
 export default function TeamCTASection() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <section
       aria-labelledby="team-cta-heading"
@@ -94,13 +100,13 @@ export default function TeamCTASection() {
               >
                 Talk to Admissions
               </Link>
-              <Link
-                href="/mentors"
-                className="inline-flex items-center justify-center rounded-2xl border border-orange-200 bg-orange-50 px-4 py-2 text-sm font-semibold text-orange-700 ring-1 ring-inset ring-orange-200 transition hover:-translate-y-0.5 hover:bg-orange-100 active:translate-y-0"
-                aria-label="Meet our mentors"
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="inline-flex items-center justify-center rounded-2xl border border-orange-200 bg-orange-50 px-4 py-2 text-sm font-semibold text-orange-700 ring-1 ring-inset ring-orange-200 transition hover:-translate-y-0.5 hover:bg-orange-100 active:translate-y-0 cursor-pointer"
+                aria-label="Talk to a mentor"
               >
-                Meet the Mentors
-              </Link>
+                Talk to a mentor
+              </button>
             </div>
 
             {/* Social proof mini */}
@@ -202,6 +208,12 @@ export default function TeamCTASection() {
           ],
         })}
       </Script>
+
+      <AdvisorModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        source="Team Page - Mentor Section"
+      />
     </section>
   );
 }
