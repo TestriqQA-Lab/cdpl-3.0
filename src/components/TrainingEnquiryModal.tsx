@@ -36,7 +36,7 @@ export default function TrainingEnquiryModal({ isOpen, onClose }: TrainingEnquir
                 setSuccess(false);
                 onClose();
             }, 3000);
-        } catch (err) {
+        } catch {
             setError("Something went wrong. Please try again.");
         } finally {
             setIsSubmitting(false);
