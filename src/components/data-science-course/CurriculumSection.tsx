@@ -1,7 +1,7 @@
 "use client";
 import { ChevronDown, BookOpen } from "lucide-react";
 import { useState } from "react";
-import Link from "next/link";
+
 import SyllabusDownloadModal from "../SyllabusDownloadModal";
 import EnrollModal from "../EnrollModal";
 

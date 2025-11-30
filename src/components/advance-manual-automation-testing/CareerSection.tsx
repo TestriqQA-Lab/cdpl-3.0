@@ -1,7 +1,6 @@
 'use client';
 
 import { Briefcase, Building2, ArrowRight, Sparkles } from 'lucide-react';
-import Link from 'next/link';
 import React, { useState } from 'react';
 import type { JSX } from 'react';
 import CareerSessionModal from '@/components/CareerSessionModal';

@@ -4,7 +4,7 @@
 
 "use client";
 
-import Link from "next/link";
+
 import { CheckCircle } from 'lucide-react';
 import { useState } from "react";
 import SyllabusDownloadModal from "../SyllabusDownloadModal";

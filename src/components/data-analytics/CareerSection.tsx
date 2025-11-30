@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import CareerSessionModal from "../CareerSessionModal";
-import EnrollModal from "../EnrollModal";
 import SyllabusDownloadModal from "../SyllabusDownloadModal";
 
 type Company = {

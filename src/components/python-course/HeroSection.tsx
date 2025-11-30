@@ -21,7 +21,7 @@ import LeadForm from "../forms/ApiCourseLeadForm";
 import Link from "next/link";
 import { useState } from "react";
 import EnrollModal from "@/components/EnrollModal";
-import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
+
 
 const features = [
     {
@@ -60,7 +60,7 @@ const features = [
 
 export default function HeroSection() {
     const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
-    const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
+
 
     const breadcrumbs = [
         { label: "Home", href: "/" },

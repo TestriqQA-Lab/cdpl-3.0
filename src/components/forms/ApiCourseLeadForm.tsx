@@ -12,7 +12,7 @@ export default function LeadForm({
   className = '',
   variant = 'elevated',
   source = 'API Testing Course Page - Hero Section',
-  courseName
+
 }: {
   className?: string;
   variant?: 'default' | 'elevated';
