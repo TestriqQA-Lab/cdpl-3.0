@@ -1,7 +1,6 @@
 'use client';
 import { Briefcase, ArrowRight, Building2, TrendingUp, BadgeCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import { useState } from 'react';
 import CareerSessionModal from '@/components/CareerSessionModal';
 

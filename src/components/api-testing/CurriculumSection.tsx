@@ -1,6 +1,5 @@
 'use client';
 import { CheckCircle } from 'lucide-react';
-import Link from 'next/link';
 
 type Module = { title: string; topics: string[] };
 
