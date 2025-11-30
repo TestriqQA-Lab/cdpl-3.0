@@ -53,27 +53,33 @@ export async function POST(request: Request) {
             return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
         }
 
-        // 2. Handle File Upload
-        let resumeLink = '';
+        // 2. Handle File Upload & Attachment Preparation
+        let resumeLink = 'Attached in Email (Storage not configured)';
+        let fileBuffer: Buffer | null = null;
+
         if (resumeFile) {
-            const buffer = Buffer.from(await resumeFile.arrayBuffer());
+            fileBuffer = Buffer.from(await resumeFile.arrayBuffer());
             const filename = `${Date.now()}-${resumeFile.name.replace(/\s+/g, '_')}`;
 
-            // Ensure directory exists
-            const uploadDir = path.join(process.cwd(), 'public', 'resume');
-            if (!fs.existsSync(uploadDir)) {
-                await mkdir(uploadDir, { recursive: true });
+            // Try to save locally (works in dev, might fail on Vercel)
+            try {
+                const uploadDir = path.join(process.cwd(), 'public', 'resume');
+                if (!fs.existsSync(uploadDir)) {
+                    await mkdir(uploadDir, { recursive: true });
+                }
+
+                const filePath = path.join(uploadDir, filename);
+                await writeFile(filePath, fileBuffer);
+
+                // Construct public URL if save successful
+                const protocol = request.headers.get('x-forwarded-proto') || 'http';
+                const host = request.headers.get('host');
+                const baseUrl = `${protocol}://${host}`;
+                resumeLink = `${baseUrl}/resume/${filename}`;
+            } catch (fsError) {
+                console.warn('Could not save resume to disk (likely read-only FS on Vercel). Proceeding with email attachment only.', fsError);
+                resumeLink = 'Attached in Email (Serverless Storage)';
             }
-
-            const filePath = path.join(uploadDir, filename);
-            await writeFile(filePath, buffer);
-
-            // Construct public URL (assuming standard Next.js public folder serving)
-            // In production, this should ideally be S3 or similar, but local FS requested.
-            const protocol = request.headers.get('x-forwarded-proto') || 'http';
-            const host = request.headers.get('host');
-            const baseUrl = `${protocol}://${host}`;
-            resumeLink = `${baseUrl}/resume/${filename}`;
         }
 
         // 3. Prepare HR Notification Email
@@ -98,12 +104,12 @@ export async function POST(request: Request) {
             to: HR_EMAIL,
             subject: `[NEW APPLICATION] ${position} - ${fullName}`,
             html: hrHtml,
-            attachments: [
+            attachments: fileBuffer ? [
                 {
                     filename: resumeFile.name,
-                    path: path.join(process.cwd(), 'public', 'resume', path.basename(resumeLink)),
+                    content: fileBuffer, // Use buffer directly
                 }
-            ]
+            ] : [],
         };
 
         // 4. Send Email
