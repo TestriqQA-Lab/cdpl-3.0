@@ -3,7 +3,6 @@ import { Users, GraduationCap, Briefcase, Target, BadgeCheck } from 'lucide-reac
 import IconCard from '@/components/ui/IconCard';
 import { motion } from 'framer-motion';
 import { JSX } from 'react';
-import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import EnrollModal from '@/components/EnrollModal';
