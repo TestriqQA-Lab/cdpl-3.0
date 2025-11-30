@@ -1,4 +1,8 @@
-import { CheckCircle} from "lucide-react";
+"use client";
+import { CheckCircle, ArrowRight, Download } from "lucide-react";
+import { useState } from "react";
+import EnrollModal from "../EnrollModal";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
 
 interface AudienceSegment {
     title: string;
@@ -8,6 +12,11 @@ interface AudienceSegment {
 }
 
 export default function WhoShouldEnroll() {
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+
+    const courseName = "Advanced Data Analytics with Python";
+
     const audiences: AudienceSegment[] = [
         {
             title: "Beginners with Basic Python",
@@ -155,7 +164,7 @@ export default function WhoShouldEnroll() {
                 </div>
 
                 {/* Success Factors */}
-                <div className="bg-gradient-to-r from-orange-50 to-blue-50 rounded-2xl p-8 md:p-12 border-2 border-orange-200">
+                <div className="bg-gradient-to-r from-orange-50 to-blue-50 rounded-2xl p-8 md:p-12 border-2 border-orange-200 mb-12">
                     <h3 className="text-2xl font-bold text-slate-900 mb-6">Keys to Success</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {[
@@ -188,7 +197,39 @@ export default function WhoShouldEnroll() {
                         ))}
                     </div>
                 </div>
+
+                {/* CTA Buttons */}
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <button
+                        onClick={() => setIsEnrollOpen(true)}
+                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-orange-600 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:bg-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300"
+                    >
+                        Enroll Now
+                        <ArrowRight className="h-5 w-5" />
+                    </button>
+                    <button
+                        onClick={() => setIsSyllabusOpen(true)}
+                        className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-orange-200 bg-white px-8 py-4 text-base font-semibold text-orange-700 shadow-sm transition-all hover:border-orange-300 hover:bg-orange-50 focus:outline-none focus:ring-2 focus:ring-orange-200"
+                    >
+                        <Download className="h-5 w-5" />
+                        Download Syllabus
+                    </button>
+                </div>
             </div>
+
+            {/* Modals */}
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="Data Analytics Python Course Page - Who Should Enroll - Enroll Now"
+                courseName={courseName}
+            />
+            <SyllabusDownloadModal
+                isOpen={isSyllabusOpen}
+                onClose={() => setIsSyllabusOpen(false)}
+                source="Data Analytics Python Course Page - Who Should Enroll - Download Syllabus"
+                courseName={courseName}
+            />
         </section>
     );
 }

@@ -12,8 +12,9 @@ import {
   Rocket,
   Users,
 } from "lucide-react";
-import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import EnrollModal from "@/components/EnrollModal";
+import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
 
 type Audience = {
   title: string;
@@ -70,6 +71,9 @@ const AUDIENCES: Audience[] = [
 ];
 
 export default function WhoShouldEnroll() {
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+  const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
+
   const title = "Who is this Java course for?";
   const subtitle =
     "Beginner-friendly yet industry-focused: whether you’re starting out or upskilling, our Java program gets you job-ready with Spring Boot, REST APIs, Microservices, and Cloud fundamentals.";
@@ -175,13 +179,14 @@ export default function WhoShouldEnroll() {
 
         {/* CTA */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 text-center sm:flex-row sm:gap-4">
-          <Link
-            href="contact-us"
+          <button
+            onClick={() => setIsEnrollModalOpen(true)}
             className="inline-flex items-center justify-center rounded-xl border border-gray-200 bg-gray-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
           >
             Check Your Eligibility
-          </Link>
+          </button>
           <button
+            onClick={() => setIsSyllabusModalOpen(true)}
             className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-50"
           >
             Download Syllabus (PDF)
@@ -189,6 +194,19 @@ export default function WhoShouldEnroll() {
         </div>
       </div>
 
+      <EnrollModal
+        isOpen={isEnrollModalOpen}
+        onClose={() => setIsEnrollModalOpen(false)}
+        courseName="Java Programming"
+        source="Java Course Page - Who Should Enroll Section - Check Eligibility"
+      />
+
+      <SyllabusDownloadModal
+        isOpen={isSyllabusModalOpen}
+        onClose={() => setIsSyllabusModalOpen(false)}
+        courseName="Java Programming"
+        source="Java Course Page - Who Should Enroll Section - Syllabus Download"
+      />
 
       {/* Accessible helpers */}
       <h1 className="sr-only">{title}</h1>

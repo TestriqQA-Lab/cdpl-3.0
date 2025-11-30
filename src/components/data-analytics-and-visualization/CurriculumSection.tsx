@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
-import { ChevronDown, BookOpen } from "lucide-react";
+import { ChevronDown, BookOpen, Download, Phone } from "lucide-react";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
+import CareerSessionModal from "../CareerSessionModal";
 
 
 export const curriculum = [
@@ -133,6 +135,10 @@ export const curriculum = [
 
 export default function CurriculumSection() {
     const [expandedModule, setExpandedModule] = useState<number | null>(0);
+    const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+    const [isCareerSessionOpen, setIsCareerSessionOpen] = useState(false);
+
+    const courseName = "Advanced Excel for Data Analytics & Visualization";
 
     return (
         <section className="relative py-20 bg-white overflow-hidden">
@@ -281,7 +287,39 @@ export default function CurriculumSection() {
                         </div>
                     </div>
                 </div>
+
+                {/* CTA Buttons */}
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
+                    <button
+                        onClick={() => setIsSyllabusOpen(true)}
+                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-orange-600 px-6 py-3 text-base font-semibold text-white shadow-lg transition-all hover:bg-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300"
+                    >
+                        <Download className="h-5 w-5" />
+                        Download Full Syllabus
+                    </button>
+                    <button
+                        onClick={() => setIsCareerSessionOpen(true)}
+                        className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-orange-200 bg-white px-6 py-3 text-base font-semibold text-orange-700 shadow-sm transition-all hover:border-orange-300 hover:bg-orange-50 focus:outline-none focus:ring-2 focus:ring-orange-200"
+                    >
+                        <Phone className="h-5 w-5" />
+                        Book a Career Session
+                    </button>
+                </div>
             </div>
+
+            {/* Modals */}
+            <SyllabusDownloadModal
+                isOpen={isSyllabusOpen}
+                onClose={() => setIsSyllabusOpen(false)}
+                source="Data Analytics & Visualization Course Page - Curriculum Section - Download Syllabus"
+                courseName={courseName}
+            />
+            <CareerSessionModal
+                isOpen={isCareerSessionOpen}
+                onClose={() => setIsCareerSessionOpen(false)}
+                source="Data Analytics & Visualization Course Page - Curriculum Section - Career Session"
+                courseName={courseName}
+            />
         </section>
     );
 }

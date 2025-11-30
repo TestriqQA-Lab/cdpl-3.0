@@ -1,8 +1,8 @@
-// components/sections/CareerSection.tsx
-// Server component — sleek, SEO-optimized, slightly futuristic, fully responsive.
-// Unique accent colors per logo card (no repeats). Accessible labels & JSON-LD.
+"use client";
 
-import Link from "next/link";
+import { useState } from "react";
+import CareerSessionModal from "../CareerSessionModal";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
 
 type Company = {
   name: string;
@@ -72,6 +72,8 @@ const COMPANIES: Company[] = [
 ];
 
 export default function CareerSection() {
+  const [isSessionOpen, setIsSessionOpen] = useState(false);
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
 
   const subKpi = "101,000+ Job Vacancies in India";
   const subtext =
@@ -126,13 +128,6 @@ export default function CareerSection() {
                   c.accent.ring,
                 ].join(" ")}
               >
-                
-                {/* <Image
-                  src={c.logo}
-                  alt={c.alt}
-                  className="mx-auto h-10 w-auto select-none grayscale opacity-80 transition-all duration-200 group-hover:grayscale-0 group-hover:opacity-100"
-                  loading="lazy"
-                /> */}
                 <p className={["mt-3 text-xs font-semibold", c.accent.text].join(" ")}>{c.name}</p>
               </button>
             </li>
@@ -150,14 +145,15 @@ export default function CareerSection() {
 
         {/* CTA row */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 sm:flex-row">
-          <Link
-            href="contact-us"
+          <button
+            onClick={() => setIsSessionOpen(true)}
             className="inline-flex items-center justify-center rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
             aria-label="Apply for placement assistance in analytics roles"
           >
             Apply for Placement Assistance
-          </Link>
+          </button>
           <button
+            onClick={() => setIsSyllabusOpen(true)}
             className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-orange-200"
             aria-label="Download the job-ready analytics syllabus"
           >
@@ -171,6 +167,18 @@ export default function CareerSection() {
         </p>
       </div>
 
+      <CareerSessionModal
+        isOpen={isSessionOpen}
+        onClose={() => setIsSessionOpen(false)}
+        source="Data Analytics Course Page - Career Section - Placement Assistance"
+        courseName="Advanced Data Analytics Hero Program"
+      />
+      <SyllabusDownloadModal
+        isOpen={isSyllabusOpen}
+        onClose={() => setIsSyllabusOpen(false)}
+        source="Data Analytics Course Page - Career Section - Syllabus Download"
+        courseName="Advanced Data Analytics Hero Program"
+      />
     </section>
   );
 }

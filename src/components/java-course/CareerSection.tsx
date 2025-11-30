@@ -15,8 +15,9 @@ import {
   Settings2,
   ChevronRight,
 } from "lucide-react";
-import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import EnrollModal from "@/components/EnrollModal";
+import CareerSessionModal from "@/components/CareerSessionModal";
 
 type Role = {
   title: string;
@@ -95,6 +96,15 @@ const ROLES: Role[] = [
 ];
 
 export default function CareerSection() {
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+  const [isCareerModalOpen, setIsCareerModalOpen] = useState(false);
+  const [enrollSource, setEnrollSource] = useState("Java Course Page - Career Section");
+
+  const handleApplyClick = (roleTitle: string) => {
+    setEnrollSource(`Java Course Page - Career Section - Apply for ${roleTitle}`);
+    setIsEnrollModalOpen(true);
+  };
+
   const title = "500K+ Java Jobs in India";
   const subtitle =
     "High-demand Java careers across startups and enterprises. Become job-ready for roles in Spring Boot, Microservices, Cloud, DevOps, and scalable backend engineering.";
@@ -178,16 +188,16 @@ export default function CareerSection() {
                   Hire-ready skills
                 </p>
               </div>
-              <Link
-                href="contact-us"
+              <button
+                onClick={() => handleApplyClick(r.title)}
                 className={[
-                  "ml-auto hidden rounded-md bg-white px-2 py-1 text-[10px] text-slate-900 font-semibold ring-1 ring-black/5 sm:inline-flex",
+                  "ml-auto hidden rounded-md bg-white px-2 py-1 text-[10px] text-slate-900 font-semibold ring-1 ring-black/5 sm:inline-flex hover:bg-gray-50",
                   r.text.replace("text-", ""),
                 ].join(" ")}
-                aria-hidden="true"
+                aria-label={`Apply for ${r.title}`}
               >
                 Apply
-              </Link>
+              </button>
             </article>
           ))}
         </div>
@@ -207,20 +217,37 @@ export default function CareerSection() {
 
         {/* Actions */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 text-center sm:flex-row sm:gap-4">
-          <Link
-            href="contact-us"
+          <button
+            onClick={() => setIsCareerModalOpen(true)}
             className="inline-flex items-center justify-center rounded-xl border border-gray-200 bg-gray-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
           >
             Browse Open Roles
             <ChevronRight className="ml-1 h-4 w-4" />
-          </Link>
+          </button>
           <button
+            onClick={() => {
+              setEnrollSource("Java Course Page - Career Section - Download Resume Template");
+              setIsEnrollModalOpen(true);
+            }}
             className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-50"
           >
             Download Resume Template
           </button>
         </div>
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollModalOpen}
+        onClose={() => setIsEnrollModalOpen(false)}
+        courseName="Java Programming"
+        source={enrollSource}
+      />
+
+      <CareerSessionModal
+        isOpen={isCareerModalOpen}
+        onClose={() => setIsCareerModalOpen(false)}
+        source="Java Course Page - Career Section - Browse Open Roles"
+      />
 
       {/* Accessible helpers for crawlers & screen readers */}
       <h1 className="sr-only">{title}</h1>

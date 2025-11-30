@@ -1,6 +1,9 @@
 "use client";
 import { CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
+import CareerSessionModal from "@/components/CareerSessionModal";
 
 type Module = {
   title: string;
@@ -75,7 +78,8 @@ const accents = [
 ];
 
 export default function CurriculumSection() {
-
+  const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
+  const [isCareerModalOpen, setIsCareerModalOpen] = useState(false);
 
   return (
     <section id="curriculum" className="relative py-8 md:py-10 bg-white">
@@ -165,9 +169,36 @@ export default function CurriculumSection() {
           Each module blends concise theory with <strong>hands-on labs</strong>, real defect triage, and
           <strong> CI/CD-ready automation</strong> so you can demonstrate <em>UI, API, Mobile, and DB</em> skills for QA/SDET roles.
         </p>
+
+        {/* Bottom mini-CTAs */}
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <button
+            onClick={() => setIsCareerModalOpen(true)}
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl bg-sky-700 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-sky-800 focus:outline-none focus:ring-4 focus:ring-sky-200"
+          >
+            Book a Free Demo
+          </button>
+          <button
+            onClick={() => setIsSyllabusModalOpen(true)}
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl border-2 border-emerald-700 bg-white px-4 py-2 text-sm font-semibold text-emerald-800 shadow-sm transition hover:bg-emerald-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-emerald-200"
+          >
+            Get Syllabus PDF
+          </button>
+        </div>
       </div>
 
-      {/* JSON-LD */}
+      <SyllabusDownloadModal
+        isOpen={isSyllabusModalOpen}
+        onClose={() => setIsSyllabusModalOpen(false)}
+        courseName="Advanced Manual and Automation Testing Master Program"
+        source="Master Program Course Page - Curriculum Section - Syllabus Download"
+      />
+
+      <CareerSessionModal
+        isOpen={isCareerModalOpen}
+        onClose={() => setIsCareerModalOpen(false)}
+        source="Master Program Course Page - Curriculum Section - Book Free Demo"
+      />
 
     </section>
   );

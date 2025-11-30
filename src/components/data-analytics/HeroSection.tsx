@@ -2,17 +2,33 @@
 // Server component — sleek, SEO-optimized, slightly futuristic, fully responsive.
 // Assumes you have a client LeadForm at "../CourseLeadForm" (same API-testing style).
 
+"use client";
+
 import Link from "next/link";
-import LeadForm from "../CourseLeadForm";
+import ApiCourseLeadForm from "../forms/ApiCourseLeadForm";
+import EnrollModal from "../EnrollModal";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
+import CareerSessionModal from "../CareerSessionModal";
 import { ChevronRight, Home } from "lucide-react";
+import { useState } from "react";
 
 export default function HeroSection() {
-
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+    const [isCareerSessionOpen, setIsCareerSessionOpen] = useState(false);
 
     const breadcrumbs = [
         { label: "Home", href: "/" },
         { label: "Advanced Data Analytics", href: "/data-analytics" },
     ];
+
+    const handleScrollToCurriculum = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        const element = document.getElementById('curriculum');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
 
     return (
         <section id="hero" aria-labelledby="analytics-hero" className="relative overflow-hidden">
@@ -24,8 +40,8 @@ export default function HeroSection() {
 
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 pb-12 md:pt-12 md:pb-16">
                 {/* Breadcrumbs */}
-                <nav aria-label="Breadcrumb" className="mb-8">
-                    <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+                <nav aria-label="Breadcrumb" className="mb-8 overflow-x-auto">
+                    <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600 min-w-max">
                         {breadcrumbs.map((c, i) => (
                             <li key={i} className="flex items-center gap-2">
                                 {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
@@ -61,7 +77,7 @@ export default function HeroSection() {
 
                         {/* Mobile form directly under headline */}
                         <div className="mt-5 block md:hidden">
-                            <LeadForm variant="elevated" />
+                            <ApiCourseLeadForm source="Data Analytics Course Page - Hero Section" />
                         </div>
 
                         <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-700 sm:text-lg">
@@ -76,6 +92,7 @@ export default function HeroSection() {
                         {/* CTAs */}
                         <div className="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
                             <button
+                                onClick={() => setIsEnrollOpen(true)}
                                 className="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-orange-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-orange-200"
                                 aria-label="Enroll now in Advanced Data Analytics course"
                             >
@@ -84,13 +101,14 @@ export default function HeroSection() {
                                     <path d="M12.293 4.293a1 1 0 011.414 0l4 4a1 1 0 01.083 1.32l-.083.094-4 4a1 1 0 01-1.497-1.32l.083-.094L14.585 10H3a1 1 0 01-.117-1.993L3 8h11.585l-2.292-2.293a1 1 0 010-1.414z" />
                                 </svg>
                             </button>
-                            <Link
+                            <a
                                 href="#curriculum"
+                                onClick={handleScrollToCurriculum}
                                 className="inline-flex items-center justify-center rounded-xl border border-sky-300 bg-white px-6 py-3 text-base font-semibold text-sky-700 shadow-sm transition hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-200"
                                 aria-label="View full analytics curriculum"
                             >
                                 View Curriculum
-                            </Link>
+                            </a>
                         </div>
 
                         {/* Quick highlights (distinct accent colors) */}
@@ -123,15 +141,32 @@ export default function HeroSection() {
                     {/* Right column: Desktop form & visual */}
                     <aside className="md:col-span-5 lg:col-span-4 hidden md:block">
                         <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg">
-
                             <div className="p-4 sm:p-5">
-                                <LeadForm variant="elevated" />
+                                <ApiCourseLeadForm source="Data Analytics Course Page - Hero Section" />
                             </div>
                         </div>
                     </aside>
                 </div>
             </div>
 
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="Data Analytics Course Page - Enroll Now - Hero Section"
+                courseName="Advanced Data Analytics Hero Program"
+            />
+            <SyllabusDownloadModal
+                isOpen={isSyllabusOpen}
+                onClose={() => setIsSyllabusOpen(false)}
+                source="Data Analytics Course Page - Hero Section - Syllabus Download"
+                courseName="Advanced Data Analytics Hero Program"
+            />
+            <CareerSessionModal
+                isOpen={isCareerSessionOpen}
+                onClose={() => setIsCareerSessionOpen(false)}
+                source="Data Analytics Course Page - Hero Section - Career Session"
+                courseName="Advanced Data Analytics Hero Program"
+            />
         </section>
     );
 }

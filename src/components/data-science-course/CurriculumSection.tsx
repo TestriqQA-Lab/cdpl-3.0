@@ -1,7 +1,9 @@
 "use client";
 import { ChevronDown, BookOpen } from "lucide-react";
 import { useState } from "react";
-import Link from "next/link";
+
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
+import EnrollModal from "../EnrollModal";
 
 interface Module {
   id: number;
@@ -15,6 +17,10 @@ interface Module {
 
 export default function CurriculumSection() {
   const [expandedModule, setExpandedModule] = useState<number | null>(null);
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+
+  const courseName = "Advanced Data Science and Machine Learning Masterclass";
 
   const subtitle =
     "A 200+ hour, industry-aligned journey from SQL and Excel to BI (Power BI/Tableau), Python foundations, Statistics, ML with Python, R, and domain projects.";
@@ -306,18 +312,19 @@ export default function CurriculumSection() {
           <div className="flex flex-col items-center justify-center gap-3 text-center">
             <div className="flex flex-col items-center gap-3 sm:flex-row">
               <button
+                onClick={() => setIsSyllabusOpen(true)}
                 className="inline-flex items-center justify-center cursor-pointer rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
                 aria-label="Download the detailed Advanced Data Science & Machine Learning syllabus"
               >
                 Download Detailed Syllabus (PDF)
               </button>
-              <Link
-                href="contact-us"
+              <button
+                onClick={() => setIsEnrollOpen(true)}
                 className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-orange-200"
                 aria-label="Apply for the Advanced Data Science & Machine Learning program"
               >
                 Apply Now
-              </Link>
+              </button>
             </div>
             <p className="mx-auto mt-3 max-w-3xl text-center text-[11px] text-slate-500">
               *Module order may vary slightly by cohort and instructor discretion to maximize learning outcomes.
@@ -325,6 +332,19 @@ export default function CurriculumSection() {
           </div>
         </div>
       </div>
+
+      <SyllabusDownloadModal
+        isOpen={isSyllabusOpen}
+        onClose={() => setIsSyllabusOpen(false)}
+        source="Data Science Course Page - Curriculum Section - Syllabus Download"
+        courseName={courseName}
+      />
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="Data Science Course Page - Curriculum Section - Apply Now"
+        courseName={courseName}
+      />
     </section>
   );
 }
