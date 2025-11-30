@@ -82,3 +82,73 @@ export async function appendRowToSheet(data: {
         // Don't throw, so we don't block the main response
     }
 }
+
+export async function appendJobApplicationToSheet(data: {
+    date: string;
+    position: string;
+    fullName: string;
+    email: string;
+    phone: string;
+    location: string;
+    skills: string;
+    experienceLevel: string;
+    currentCtc: string;
+    expectedCtc: string;
+    noticePeriod: string;
+    resumeLink: string;
+}) {
+    try {
+        // Use a specific sheet ID for jobs if available, otherwise fall back to the main one (or fail if strict)
+        // User requested a separate Google Sheet.
+        const sheetId = process.env.GOOGLE_SHEET_ID_JOBS || process.env.GOOGLE_SHEET_ID;
+        const clientEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+        const rawPrivateKey = process.env.GOOGLE_PRIVATE_KEY;
+
+        if (!sheetId || !clientEmail || !rawPrivateKey) {
+            console.warn('Google Sheets credentials missing for Job Application. Skipping sheet update.');
+            return;
+        }
+
+        const privateKey = formatPrivateKey(rawPrivateKey);
+
+        const auth = new google.auth.GoogleAuth({
+            credentials: {
+                client_email: clientEmail,
+                private_key: privateKey,
+            },
+            scopes: SCOPES,
+        });
+
+        const sheets = google.sheets({ version: 'v4', auth });
+
+        const values = [
+            [
+                data.date,
+                data.position,
+                data.fullName,
+                data.email,
+                data.phone,
+                data.location,
+                data.skills,
+                data.experienceLevel,
+                data.currentCtc,
+                data.expectedCtc,
+                data.noticePeriod,
+                data.resumeLink,
+            ],
+        ];
+
+        await sheets.spreadsheets.values.append({
+            spreadsheetId: sheetId,
+            range: 'Sheet1!A:L', // Columns A-L (Removed one column)
+            valueInputOption: 'USER_ENTERED',
+            requestBody: {
+                values,
+            },
+        });
+
+        console.log('Job Application Google Sheet updated successfully.');
+    } catch (error) {
+        console.error('Error updating Job Application Google Sheet:', error);
+    }
+}
