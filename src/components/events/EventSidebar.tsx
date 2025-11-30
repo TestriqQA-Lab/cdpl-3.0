@@ -1,6 +1,6 @@
 import React from "react";
 import { PastEvent } from "@/data/eventsData";
-import { Calendar, MapPin, Clock, Tag, Share2 } from "lucide-react";
+import { Calendar, MapPin, Tag, Share2 } from "lucide-react";
 import Link from "next/link";
 
 interface EventSidebarProps {
@@ -35,10 +35,6 @@ export default function EventSidebar({ event }: EventSidebarProps) {
             </div>
             <div className="pl-6">
               <p className="text-slate-900 font-semibold">{event.date}</p>
-              <p className="text-slate-600 text-sm flex items-center gap-1.5 mt-1">
-                <Clock className="w-3.5 h-3.5" />
-                <span>10:00 AM - 05:00 PM (IST)</span>
-              </p>
             </div>
           </div>
 
@@ -52,7 +48,6 @@ export default function EventSidebar({ event }: EventSidebarProps) {
             </div>
             <div className="pl-6">
               <p className="text-slate-900 font-medium leading-relaxed">{event.location}</p>
-              <p className="text-slate-600 text-sm mt-1">Aldel Institute of Management, Palghar</p>
             </div>
           </div>
 

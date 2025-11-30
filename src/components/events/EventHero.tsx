@@ -1,5 +1,6 @@
 import React from "react";
 import { PastEvent } from "@/data/eventsData";
+import Image from "next/image";
 
 
 
@@ -14,10 +15,12 @@ export default function EventHero({ event }: EventHeroProps) {
             {/* Hero Image Section - Top Banner */}
             <div className="relative w-full h-[300px] md:h-[400px] bg-slate-100">
                 {event.heroImageUrl ? (
-                    <img
+                    <Image
                         src={event.heroImageUrl}
                         alt={event.title}
-                        className="absolute inset-0 w-full h-full object-cover"
+                        className="absolute inset-0 w-full h-full"
+                        width={1000}
+                        height={1000}
                     />
                 ) : (
                     <div className="absolute inset-0 flex items-center justify-center text-slate-400">

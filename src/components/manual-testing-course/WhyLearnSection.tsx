@@ -106,8 +106,8 @@ export default function WhyLearnSection() {
                 </div>
 
                 {/* KPI Row */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-10">
-                    <div className="rounded-xl border-2 border-emerald-600 bg-white p-4 text-center">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 mb-10">
+                    <div className="rounded-xl border-2 border-emerald-600 bg-white p-3 md:p-4 text-center">
                         <div className="flex items-center justify-center gap-2 text-gray-800">
                             <TrendingUp className="h-5 w-5 text-emerald-600" />
                             <span className="text-sm font-semibold">Hiring Demand</span>
@@ -115,7 +115,7 @@ export default function WhyLearnSection() {
                         <p className="mt-1 text-2xl font-bold text-gray-900">10k+/mo</p>
                         <p className="text-xs text-gray-500">QA/Test Engineer roles</p>
                     </div>
-                    <div className="rounded-xl border-2 border-indigo-600 bg-white p-4 text-center">
+                    <div className="rounded-xl border-2 border-indigo-600 bg-white p-3 md:p-4 text-center">
                         <div className="flex items-center justify-center gap-2 text-gray-800">
                             <Clock className="h-5 w-5 text-indigo-600" />
                             <span className="text-sm font-semibold">Time to Job</span>
@@ -123,7 +123,7 @@ export default function WhyLearnSection() {
                         <p className="mt-1 text-2xl font-bold text-gray-900">8–12 weeks</p>
                         <p className="text-xs text-gray-500">structured learning track</p>
                     </div>
-                    <div className="rounded-xl border-2 border-amber-600 bg-white p-4 text-center">
+                    <div className="rounded-xl border-2 border-amber-600 bg-white p-3 md:p-4 text-center">
                         <div className="flex items-center justify-center gap-2 text-gray-800">
                             <Briefcase className="h-5 w-5 text-amber-600" />
                             <span className="text-sm font-semibold">Starter CTC</span>
@@ -131,7 +131,7 @@ export default function WhyLearnSection() {
                         <p className="mt-1 text-2xl font-bold text-gray-900">₹3.5–6 LPA</p>
                         <p className="text-xs text-gray-500">India, fresher QA roles</p>
                     </div>
-                    <div className="rounded-xl border-2 border-rose-600 bg-white p-4 text-center">
+                    <div className="rounded-xl border-2 border-rose-600 bg-white p-3 md:p-4 text-center">
                         <div className="flex items-center justify-center gap-2 text-gray-800">
                             <Users className="h-5 w-5 text-rose-600" />
                             <span className="text-sm font-semibold">Beginner-Friendly</span>
@@ -143,7 +143,7 @@ export default function WhyLearnSection() {
 
                 {/* Benefits Grid */}
                 <div
-                    className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8"
                     role="list"
                     aria-label="Key benefits of learning Manual Testing"
                 >

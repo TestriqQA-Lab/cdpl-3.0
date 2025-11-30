@@ -12,7 +12,7 @@ import {
     ArrowDownNarrowWide,
 } from "lucide-react";
 
-import React, { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -135,14 +135,14 @@ const StatsBar: React.FC = () => {
     return (
         <div ref={wrapRef} className="mt-8">
             {/* Primary big cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-3">
                 {primary.map((s) => (
                     <div
                         key={s.label}
-                        className={`rounded-2xl border ${s.color.border} ${s.color.bg} p-4 shadow-sm hover:shadow-md transition`}
+                        className={`rounded-2xl border ${s.color.border} ${s.color.bg} p-3 md:p-4 shadow-sm hover:shadow-md transition`}
                     >
-                        <div className={`text-xs font-semibold uppercase tracking-wide ${s.color.chip}`}>{s.label}</div>
-                        <div className={`mt-1 text-3xl font-extrabold ${s.color.text}`}>
+                        <div className={`text-[10px] md:text-xs font-semibold uppercase tracking-wide ${s.color.chip}`}>{s.label}</div>
+                        <div className={`mt-1 text-xl md:text-3xl font-extrabold ${s.color.text}`}>
                             {s.prefix ?? ""}
                             {visible ? <CountUp value={s.value} /> : 0}
                             {s.suffix ?? ""}
@@ -156,11 +156,11 @@ const StatsBar: React.FC = () => {
                 {secondary.map((s) => (
                     <div
                         key={s.label}
-                        className={`flex items-center justify-between rounded-2xl border ${s.color.border} bg-white px-4 py-3 shadow-sm`}
+                        className={`flex flex-col md:flex-row items-start md:items-center justify-between rounded-2xl border ${s.color.border} bg-white p-3 md:px-4 md:py-3 shadow-sm`}
                         title={s.label}
                     >
-                        <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{s.label}</span>
-                        <span className={`text-lg font-bold ${s.color.text}`}>
+                        <span className="text-[10px] md:text-[11px] font-semibold uppercase tracking-wide text-slate-500">{s.label}</span>
+                        <span className={`text-base md:text-lg font-bold ${s.color.text}`}>
                             {s.prefix ?? ""}
                             {visible ? <CountUp value={s.value} /> : 0}
                             {s.suffix ?? ""}
@@ -198,7 +198,7 @@ export default function HeroManualTesting() {
 
             <div className="relative overflow-hidden mx-auto max-w-full xl:max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* Breadcrumbs for SEO & UX */}
-                <nav aria-label="Breadcrumb" className="mb-4 -mx-4 px-4 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                <nav aria-label="Breadcrumb" className="mb-4 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
                     <ol className="flex items-center gap-2 text-sm text-slate-600 whitespace-nowrap">
                         {breadcrumbs.map((c, i) => {
                             const isLast = i === breadcrumbs.length - 1;
@@ -222,14 +222,14 @@ export default function HeroManualTesting() {
                 <div className="grid items-start gap-10 lg:gap-16 lg:grid-cols-12 grid-cols-1">
                     {/* LEFT */}
                     <div className="lg:col-span-8">
-                        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-0.5 md:py-1.5 text-xs font-semibold text-slate-700 shadow-sm">
+                        <div className="hidden md:inline-flex mb-4 items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-0.5 md:py-1.5 text-xs font-semibold text-slate-700 shadow-sm">
                             <Sparkles className="h-4 w-4 text-amber-500" />
                             <span>ISTQB Foundation Aligned • Job-Oriented</span>
                         </div>
 
                         <h1
                             id="manual-testing-hero"
-                            className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900"
+                            className="mt-3 md:mt-0 text-2xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900"
                         >
                             Best <span className='text-ST'>Manual Testing Course</span>{" "}
                             with 100% Placement <br className="md:hidden" /> Support
@@ -241,63 +241,8 @@ export default function HeroManualTesting() {
                         </p>
 
                         {/* Lead Form For Mobile Screens and Tab Screens */}
-                        <div className="lg:hidden border mt-10 border-slate-300 p-5 shadow-md shadow-purple-300 rounded-2xl">
-                            <h2 className="text-slate-800 text-2xl font-bold">
-                                Start Your <span className="text-brand">QA</span> Journey
-                            </h2>
-
-                            {/* Lead Form */}
-                            <form id="apply" className="mt-6 space-y-3" aria-label="Apply for Manual Testing course">
-                                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                                    <Field label="Full Name">
-                                        <input
-                                            type="text"
-                                            name="fullName"
-                                            required
-                                            placeholder="Enter your name"
-                                            className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 outline-none ring-0 transition placeholder:text-slate-400 focus:ring-2 focus:ring-indigo-600"
-                                        />
-                                    </Field>
-                                    <Field label="Mobile Number">
-                                        <input
-                                            type="tel"
-                                            name="phone"
-                                            required
-                                            placeholder="+91-XXXXXXXXXX"
-                                            className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 outline-none ring-0 transition placeholder:text-slate-400 focus:ring-2 focus:ring-emerald-600"
-                                        />
-                                    </Field>
-                                </div>
-                                <Field label="Email">
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        required
-                                        placeholder="you@example.com"
-                                        className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 outline-none ring-0 transition placeholder:text-slate-400 focus:ring-2 focus:ring-sky-600"
-                                    />
-                                </Field>
-
-                                <button
-                                    type="submit"
-                                    className="group mt-2 inline-flex w-full items-center justify-center rounded-xl bg-indigo-600 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-green-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
-                                >
-                                    Get Call Back
-                                    <ChevronRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
-                                </button>
-                                <p className="mt-2 text-center text-xs text-slate-500">
-                                    By submitting, you agree to our{" "}
-                                    <Link href="/terms-of-service" className="underline underline-offset-2 text-slate-700">
-                                        Terms
-                                    </Link>{" "}
-                                    and{" "}
-                                    <Link href="/privacy-policy" className="underline underline-offset-2 text-slate-700">
-                                        Privacy Policy
-                                    </Link>
-                                    .
-                                </p>
-                            </form>
-                        </div>
+                        {/* Lead Form For Mobile Screens */}
+                        <LeadForm variant="elevated" className="lg:hidden mt-8" />
 
                         {/* Trust Bar */}
                         <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm">
@@ -410,7 +355,7 @@ export default function HeroManualTesting() {
                     {/* RIGHT */}
                     <div className="relative lg:col-span-4">
 
-                        <LeadForm variant="elevated" />
+                        <LeadForm variant="elevated" className="hidden lg:block" />
 
 
                     </div>
@@ -448,14 +393,3 @@ export default function HeroManualTesting() {
         </section>
     );
 }
-
-/* ---------- Reusable components in the same file ---------- */
-function Field({ label, children }: { label: string; children: ReactNode }) {
-    return (
-        <div>
-            <label className="mb-1 block text-sm font-medium text-slate-700">{label}</label>
-            {children}
-        </div>
-    );
-}
-

@@ -237,7 +237,7 @@ export default function CareerSection() {
 
           <div className="rounded-2xl border border-gray-200 bg-white p-6 md:p-8">
             <h3 className="text-2xl font-bold text-gray-900 mb-4">Hiring Partners</h3>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {companies.map((c) => (
                 <CompanyBadge key={c.name} name={c.name} logoSrc={c.logoSrc} />
               ))}
@@ -353,6 +353,7 @@ export default function CareerSection() {
       <CareerSessionModal
         isOpen={isCareerModalOpen}
         onClose={() => setIsCareerModalOpen(false)}
+        source="Manual Software Testing Course Page - Session Enquiry"
       />
       <SyllabusDownloadModal
         isOpen={isSyllabusModalOpen}

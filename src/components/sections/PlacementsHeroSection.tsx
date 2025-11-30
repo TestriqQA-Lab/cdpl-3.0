@@ -17,6 +17,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
+import AdvisorModal from "@/components/ui/AdvisorModal";
 
 const BRAND_ORANGE_GRAD =
   "linear-gradient(90deg,#ff8c00 0%,#ffb558 50%,#ffd19e 100%)";
@@ -63,6 +65,7 @@ function FloatingIcon({
 }
 
 export default function PlacementsHeroSection() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const breadcrumbs = [
     { label: "Home", href: "/" },
@@ -238,32 +241,14 @@ export default function PlacementsHeroSection() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="mt-6 flex items-center justify-center md:justify-start"
             >
-              <Link
-                href="#placements-highlights"
-                className="group inline-flex items-center gap-2 rounded-xl px-5 py-3 font-semibold text-white shadow-sm ring-1 ring-black/5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-500 active:translate-y-[1px]"
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="group inline-flex items-center gap-2 rounded-xl px-5 py-3 font-semibold text-white shadow-sm ring-1 ring-black/5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-500 active:translate-y-[1px] cursor-pointer"
                 style={{ backgroundColor: "var(--color-brand, #ff8c00)" }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  // @ts-expect-error CDPLscrollTo is injected globally at runtime
-                  if (typeof window !== "undefined" && window.CDPLscrollTo) {
-                    // @ts-expect-error CDPLscrollTo is injected globally at runtime
-                    window.CDPLscrollTo("placements-highlights");
-                    history.replaceState(null, "", "#placements-highlights");
-                  } else {
-                    const el = document.querySelector(
-                      '[data-scroll-target="placements-highlights"]'
-                    );
-                    if (el)
-                      (el as HTMLElement).scrollIntoView({
-                        behavior: "smooth",
-                        block: "start",
-                      });
-                  }
-                }}
               >
-                Explore Placements
+                Talk to a Placement Advisor
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </Link>
+              </button>
             </motion.div>
           </div>
 
@@ -284,6 +269,12 @@ export default function PlacementsHeroSection() {
           </div>
         </div>
       </div>
+
+      <AdvisorModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        source="Placements Page - Hero Section"
+      />
     </section>
   );
 }

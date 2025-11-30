@@ -5,12 +5,12 @@ import TeamDirectory from "@/components/sections/TeamDirectorySection";
 import TeamHeroSection from "@/components/sections/TeamHeroSection";
 import TeamLeadershipSpotlight from "@/components/sections/TeamLeadershipSpotlight";
 import TeamTrainersSection from "@/components/sections/TeamTrainersSection";
-import { generateSEO } from "@/lib/seo";
+import { generateStaticPageMetadata } from "@/lib/metadata-generator";
 
 // ============================================================================
 // SEO METADATA - Optimized for Our Team Page
 // ============================================================================
-export const metadata: Metadata = generateSEO({
+export const metadata: Metadata = generateStaticPageMetadata({
   title: "Our Team - Expert Trainers & Mentors at CDPL | Industry Leaders in Tech Training",
   description: "Meet CDPL's team of expert trainers and mentors with 10+ years of industry experience in Software Testing, Data Science, AI/ML, and Automation. Learn from professionals who have worked at top companies and trained 5000+ students.",
   keywords: [
@@ -29,7 +29,6 @@ export const metadata: Metadata = generateSEO({
   ],
   url: "/our-team",
   image: "/og-images/og-image-team.webp",
-  imageAlt: "Our Team - Expert Trainers and Mentors at CDPL Cinute Digital",
 });
 
 // ============================================================================
@@ -38,7 +37,7 @@ export const metadata: Metadata = generateSEO({
 export default function Page() {
 
   return (
-    <>   
+    <>
 
 
       {/* Main Content - Semantic HTML Structure */}

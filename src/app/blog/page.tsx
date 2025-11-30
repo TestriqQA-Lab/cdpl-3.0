@@ -2,7 +2,8 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 import { BlogCategoryMenu, BlogHero, BlogSidebar } from '@/components/blog';
 import type { Metadata } from 'next';
-import { generateSEO, generateBreadcrumbSchema } from '@/lib/seo';
+import { generateStaticPageMetadata } from "@/lib/metadata-generator";
+import { generateBreadcrumbSchema } from "@/lib/schema-generators";
 
 // Dynamically import BlogArticleList for better performance
 const BlogArticleList = dynamic(
@@ -20,7 +21,7 @@ const BlogArticleList = dynamic(
 // ============================================================================
 // SEO METADATA - Enhanced with generateSEO utility
 // ============================================================================
-export const metadata: Metadata = generateSEO({
+export const metadata: Metadata = generateStaticPageMetadata({
     title: 'Tech Blog - Latest Insights, Tutorials & Industry Trends | CDPL',
     description: 'Discover expert-written articles on AI/ML, web development, React, Next.js, software testing, and DevOps. Get actionable tutorials, best practices, and industry insights to level up your tech skills. Updated daily with fresh content from CDPL experts.',
     keywords: [
@@ -42,7 +43,6 @@ export const metadata: Metadata = generateSEO({
     ],
     url: '/blog',
     image: '/blog/og-image.jpg',
-    imageAlt: 'CDPL Tech Blog - Expert Articles and Tutorials on Modern Technology',
 });
 
 // ============================================================================
@@ -221,7 +221,7 @@ export default function BlogPage() {
                         <h1 className="sr-only">
                             CDPL Tech Blog - Latest Articles on Web Development, AI/ML, React, Software Testing, and DevOps
                         </h1>
-                        
+
                         <div className="grid lg:grid-cols-3 gap-8">
                             {/* Article List - 2 columns */}
                             <main className="lg:col-span-2" role="main" aria-label="Blog articles">

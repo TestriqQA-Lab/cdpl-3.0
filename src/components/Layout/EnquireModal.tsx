@@ -29,6 +29,9 @@ const EnquireModal: React.FC<EnquireModalProps> = ({ isOpen, onClose }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
+    // Country state for PhoneInput to allow placeholder visibility
+    const [country, setCountry] = useState<any>('IN');
+
     // Validation functions
     const validateFullName = (name: string) => {
         if (!name) {
@@ -294,6 +297,8 @@ const EnquireModal: React.FC<EnquireModalProps> = ({ isOpen, onClose }) => {
                                             <PhoneInput
                                                 international
                                                 defaultCountry="IN"
+                                                country={country}
+                                                onCountryChange={setCountry}
                                                 value={formData.phone}
                                                 onChange={handlePhoneChange}
                                                 onBlur={() => validatePhoneNumber(formData.phone)}
@@ -347,6 +352,86 @@ const EnquireModal: React.FC<EnquireModalProps> = ({ isOpen, onClose }) => {
                             )}
                         </div>
                     </motion.div>
+                    {/* Custom CSS for phone input */}
+                    <style jsx global>{`
+                        /* Phone input styling */
+                        .phone-input-container .PhoneInputInput {
+                            width: 100%;
+                            padding: 0.75rem 1rem;
+                            border: 1px solid #d1d5db;
+                            border-radius: 0.5rem;
+                            font-size: 0.875rem;
+                            color: #1e293b;
+                            outline: none;
+                            transition: all 0.3s;
+                        }
+
+                        .phone-input-container .PhoneInputInput::placeholder {
+                            color: #64748b;
+                            opacity: 1;
+                        }
+
+                        .phone-input-container .PhoneInputInput:focus {
+                            border-color: #ff8c00;
+                            ring: 2px;
+                            ring-color: #ff8c00;
+                            box-shadow: 0 0 0 2px rgba(255, 140, 0, 0.2);
+                        }
+
+                        .phone-input-container.border-red-500 .PhoneInputInput {
+                            border-color: #ef4444;
+                        }
+
+                        .phone-input-container .PhoneInputCountry {
+                            margin-right: 0.5rem;
+                        }
+
+                        /* Country dropdown styling */
+                        .phone-input-container .PhoneInputCountrySelect {
+                            color: #1e293b;
+                            font-weight: 500;
+                        }
+
+                        .phone-input-container .PhoneInputCountrySelectArrow {
+                            color: #64748b;
+                        }
+
+                        /* Fix placeholder visibility for all inputs with vendor prefixes */
+                        .phone-input-container .PhoneInputInput::-webkit-input-placeholder {
+                            color: #64748b !important;
+                            opacity: 1 !important;
+                        }
+                        .phone-input-container .PhoneInputInput::-moz-placeholder {
+                            color: #64748b !important;
+                            opacity: 1 !important;
+                        }
+                        .phone-input-container .PhoneInputInput:-ms-input-placeholder {
+                            color: #64748b !important;
+                            opacity: 1 !important;
+                        }
+                        .phone-input-container .PhoneInputInput:-moz-placeholder {
+                            color: #64748b !important;
+                            opacity: 1 !important;
+                        }
+
+                        input::placeholder {
+                            color: #64748b !important;
+                            opacity: 1 !important;
+                        }
+                        
+                        input::-webkit-input-placeholder {
+                            color: #64748b !important;
+                            opacity: 1 !important;
+                        }
+                        input::-moz-placeholder {
+                            color: #64748b !important;
+                            opacity: 1 !important;
+                        }
+                        input:-ms-input-placeholder {
+                            color: #64748b !important;
+                            opacity: 1 !important;
+                        }
+                    `}</style>
                 </>
             )}
         </AnimatePresence>

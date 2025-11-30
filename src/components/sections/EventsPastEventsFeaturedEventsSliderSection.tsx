@@ -1,6 +1,5 @@
 // src/components/sections/EventsPastEventsFeaturedEventsSliderSection.tsx
 "use client";
-
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import {
@@ -13,6 +12,7 @@ import {
   Crown,
 } from "lucide-react";
 import type React from "react";
+import Image from "next/image";
 
 export type FeaturedEvent = {
   id: string | number;
@@ -28,6 +28,7 @@ export type FeaturedEvent = {
   category: string;
   categoryColor: string;
   featured?: boolean;
+  heroImageUrl?: string;
 };
 
 type StyleWithVars = React.CSSProperties & Record<string, string | number>;
@@ -201,7 +202,17 @@ export default function EventsPastEventsFeaturedEventsSliderSection({
                         {/* Header */}
                         <div className="relative h-48 bg-gradient-to-br from-purple-100 to-blue-100 pt-10 md:pt-0">
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <Calendar className="h-16 w-16 text-purple-300" />
+                            {event.heroImageUrl ? (
+                              <Image
+                                src={event.heroImageUrl}
+                                alt={event.title}
+                                width={500}
+                                height={500}
+                                className="w-full h-full object-cover"
+                              />
+                            ) : (
+                              <Calendar className="h-16 w-16 text-purple-300" />
+                            )}
                           </div>
                           <div className="absolute left-3 top-3 z-10">
                             <span className={`${cs.badgeBg} text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md`}>
@@ -242,7 +253,7 @@ export default function EventsPastEventsFeaturedEventsSliderSection({
                           <div className="mt-auto shrink-0">
                             <Link href={`/events/${event.slug}`}>
                               <button
-                                className={`w-full text-white px-4 py-2.5 rounded-xl font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 text-sm ${cs.btnBg}`}
+                                className={`w-full text-white px-4 py-2.5 rounded-xl font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 text-sm cursor-pointer ${cs.btnBg}`}
                               >
                                 View Details
                                 <ArrowRight className="w-4 h-4" />

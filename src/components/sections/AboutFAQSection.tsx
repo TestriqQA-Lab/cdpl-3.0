@@ -1,8 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
+
 import { ChevronDown } from "lucide-react";
+import AdvisorModal from "@/components/ui/AdvisorModal";
 
 /**
  * AboutFAQSection — sleek, light-themed, and slightly futuristic FAQ
@@ -85,6 +86,7 @@ const faqs: FAQ[] = [
 export default function AboutFAQSection() {
     const [open, setOpen] = useState<number | null>(0);
     const [query] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const filteredFaqs = useMemo(() => {
         const q = query.trim().toLowerCase();
@@ -246,14 +248,20 @@ export default function AboutFAQSection() {
                         <span className="font-medium">Admissions & Career</span> team for a
                         personalized roadmap.
                     </p>
-                    <Link
-                        href="/contact-us"
-                        className="inline-flex items-center justify-center rounded-xl bg-[#ff8c00] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#ff8c00]/40"
+                    <button
+                        onClick={() => setIsModalOpen(true)}
+                        className="inline-flex items-center justify-center rounded-xl bg-[#ff8c00] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#ff8c00]/40 cursor-pointer"
                     >
                         Get Counseling
-                    </Link>
+                    </button>
                 </div>
             </div>
+
+            <AdvisorModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                source="About Us - FAQ Section"
+            />
         </section>
     );
 }

@@ -1,16 +1,19 @@
-// app/services/[slug]/page.tsx
-import { getServiceBySlug } from '@/data/servicesData';
-import { getEventsByService } from '@/data/eventsData';
+import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
-import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import type { ServiceClient } from '@/types/service';
-import { generateSEO} from '@/lib/seo';
+import { trainingServices, type TrainingService } from '@/data/servicesData';
+import { pastEvents } from '@/data/eventsData';
+import { type ServiceClient } from '@/types/service';
+import { generateMetadata as generateSEOMetadata } from '@/lib/metadata-generator';
 
-// --- infer the concrete service type from your data function ---
-type TrainingService = ReturnType<typeof getServiceBySlug> extends infer T
-  ? NonNullable<T>
-  : never;
+// Helper functions
+function getServiceBySlug(slug: string): TrainingService | undefined {
+  return trainingServices.find(s => s.slug === slug);
+}
+
+function getEventsByService(slug: string) {
+  return pastEvents.filter(e => e.serviceType === slug);
+}
 
 // --- map server model -> serializable client model (no React components) ---
 function toClientService(s: TrainingService): ServiceClient {
@@ -96,14 +99,14 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { slug } = await params;
   const service = getServiceBySlug(slug);
-  
+
   if (!service) {
-    return { 
+    return {
       title: 'Service Not Found | 404 - CDPL',
       description: 'The requested service page could not be found. Browse our available training services and corporate programs.',
-      robots: { 
+      robots: {
         index: false,
-        follow: true 
+        follow: true
       }
     };
   }
@@ -133,7 +136,7 @@ export async function generateMetadata(
   ];
 
   // Generate enhanced metadata using SEO utility
-  return generateSEO({
+  return generateSEOMetadata({
     title: `${service.title} Training & Corporate Programs | CDPL`,
     description: `${service.tagline} — ${service.shortDescription} Learn ${service.title} with industry projects, mentor-led classes, and job-ready skills at CDPL.`,
     keywords,
@@ -155,15 +158,15 @@ export default async function ServiceDetailPage(
   // map to client-safe shape (no Record<string, unknown> cast; no destructuring of icon)
   const serviceForClient = toClientService(service);
 
-;
+  ;
 
 
   return (
     <>
 
       {/* Semantic HTML Structure */}
-      <main 
-        className="overflow-hidden" 
+      <main
+        className="overflow-hidden"
       >
 
         <ServiceDetailHeroSection service={serviceForClient} />

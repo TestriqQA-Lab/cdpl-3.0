@@ -246,7 +246,7 @@ function CurriculumCard({ mod }: { mod: Module }) {
         >
             <AccentBar accent={mod.accent} />
             <div className="mx-auto p-2 md:p-7">
-                <div className="mb-3 flex items-center justify-between gap-3">
+                <div className="mb-3 flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2 text-gray-900">
                         {IconFor(mod.title, mod.accent)}
                         <h3 className="text-lg md:text-xl font-semibold text-gray-900">{mod.title}</h3>
@@ -371,7 +371,7 @@ export default function CurriculumSection() {
                 </div>
 
                 {/* Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-8 items-start">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 md:gap-8 items-start">
                     {filtered.map((m) => (
                         <CurriculumCard key={m.id} mod={m} />
                     ))}

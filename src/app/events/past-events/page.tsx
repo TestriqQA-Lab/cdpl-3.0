@@ -3,7 +3,9 @@ import type { Metadata } from "next";
 import type { ComponentProps } from "react";
 import dynamic from "next/dynamic";
 import { pastEvents } from "@/data/eventsData";
-import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
+import { generateMetadata } from "@/lib/metadata-generator";
+import { generateBreadcrumbSchema, generateFAQSchema, generateEventSchema } from "@/lib/schema-generators";
+import JsonLd from "@/components/JsonLd";
 
 // Type-only imports so we can still infer props and event shape
 import type {
@@ -14,7 +16,7 @@ import type { FeaturedEvent } from "@/components/sections/EventsPastEventsFeatur
 // ============================================================================
 // SEO METADATA - Enhanced for Past Events Page
 // ============================================================================
-export const metadata: Metadata = generateSEO({
+export const metadata: Metadata = generateMetadata({
   title: "Past Events - Workshops, Webinars & Training Sessions | CDPL",
   description: "Explore CDPL's past events including corporate training workshops, technical webinars, industry conferences, and hands-on training sessions on Software Testing, Data Science, AI/ML, and Automation. See highlights, attendees, and success stories from our events.",
   keywords: [
@@ -62,14 +64,6 @@ const EventsPastEventsFeaturedEventsSliderSection = dynamic(
   {
     ssr: true,
     loading: () => <SectionLoader label="Loading featured events..." />,
-  }
-);
-
-const EventsPastEventsFeatureEventsRequestTrainingButton = dynamic(
-  () => import("@/components/sections/EventsPastEventsFeatureEventsRequestTrainingButton"),
-  {
-    ssr: true,
-    loading: () => <SectionLoader label="Preparing CTA..." />,
   }
 );
 
@@ -166,6 +160,7 @@ export default function PastEventsPage() {
       category: e.category,
       categoryColor: (CATEGORY_STYLES[e.category] ?? FALLBACK).badgeBg,
       featured: e.featured,
+      heroImageUrl: e.heroImageUrl,
     }));
 
   // Type this exactly as the AllEvents section expects
@@ -191,131 +186,62 @@ export default function PastEventsPage() {
     inLanguage: "en-IN",
     mainEntity: {
       "@type": "ItemList",
-      itemListElement: pastEvents.slice(0, 10).map((event, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        item: {
-          "@type": "Event",
+      itemListElement: pastEvents.slice(0, 10).map((event, index) => {
+        // Generate base event schema
+        const eventSchema = generateEventSchema({
           name: event.title,
           description: event.subtitle || event.purpose,
           startDate: event.date,
-          eventStatus: "https://schema.org/EventScheduled",
-          eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-          location: {
-            "@type": "Place",
-            name: event.location,
-          },
-          organizer: {
-            "@type": "Organization",
-            name: event.organization || "CDPL - Cinute Digital",
-          },
-          ...(event.attendees && {
-            attendee: {
-              "@type": "AudienceCount",
-              audienceSize: event.attendees,
-            },
-          }),
-        },
-      })),
+          location: { name: event.location },
+          image: event.heroImageUrl,
+          eventStatus: "EventScheduled",
+          eventAttendanceMode: "OfflineEventAttendanceMode",
+        });
+
+        // Remove @context for nested item
+        const { '@context': eventSchemaNoContext } = eventSchema as any;
+
+        return {
+          "@type": "ListItem",
+          position: index + 1,
+          item: eventSchemaNoContext
+        };
+      }),
     },
   };
 
-  // Organization Schema
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
-    "@id": "https://www.cinutedigital.com/#organization",
-    name: "CDPL - Cinute Digital Pvt. Ltd.",
-    url: "https://www.cinutedigital.com",
-    event: pastEvents.slice(0, 5).map((event) => ({
-      "@type": "Event",
-      name: event.title,
-      description: event.subtitle || event.purpose,
-      startDate: event.date,
-      eventStatus: "https://schema.org/EventScheduled",
-      location: {
-        "@type": "Place",
-        name: event.location,
-      },
-      organizer: {
-        "@type": "Organization",
-        name: "CDPL - Cinute Digital",
-      },
-    })),
-  };
-
-  // FAQ Schema - NEW!
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "@id": "https://www.cinutedigital.com/events/past-events#faq",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "What types of events does CDPL organize?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "CDPL organizes various events including corporate training workshops, technical webinars, hands-on training sessions, industry conferences, and developer meetups covering Software Testing, Data Science, AI/ML, Automation, Cloud Computing, and DevOps.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Can I attend CDPL events online?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes, CDPL offers both online and offline events. Many of our webinars and training sessions are available online, while workshops and corporate training can be conducted both onsite and remotely.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "How can I register for upcoming CDPL events?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "You can register for upcoming CDPL events through our events page or by contacting our team directly. We announce new events through our website, social media, and email newsletters.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Are CDPL events free or paid?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "CDPL offers both free and paid events. Webinars and community meetups are often free, while comprehensive training workshops and certification programs are paid events with certificates of completion.",
-        },
-      },
-    ],
-  };
+  // FAQ Schema
+  const faqs = [
+    {
+      question: "What types of events does CDPL organize?",
+      answer: "CDPL organizes various events including corporate training workshops, technical webinars, hands-on training sessions, industry conferences, and developer meetups covering Software Testing, Data Science, AI/ML, Automation, Cloud Computing, and DevOps.",
+    },
+    {
+      question: "Can I attend CDPL events online?",
+      answer: "Yes, CDPL offers both online and offline events. Many of our webinars and training sessions are available online, while workshops and corporate training can be conducted both onsite and remotely.",
+    },
+    {
+      question: "How can I register for upcoming CDPL events?",
+      answer: "You can register for upcoming CDPL events through our events page or by contacting our team directly. We announce new events through our website, social media, and email newsletters.",
+    },
+    {
+      question: "Are CDPL events free or paid?",
+      answer: "CDPL offers both free and paid events. Webinars and community meetups are often free, while comprehensive training workshops and certification programs are paid events with certificates of completion.",
+    },
+  ];
+  const faqSchema = generateFAQSchema(faqs);
 
   return (
     <>
-      {/* Structured Data - Multiple Schemas */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionPageSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+      {/* Structured Data */}
+      <JsonLd id="breadcrumb-schema" schema={breadcrumbSchema} />
+      <JsonLd id="collection-page-schema" schema={collectionPageSchema} />
+      <JsonLd id="faq-schema" schema={faqSchema} />
 
-      {/* Main Content - Semantic HTML Structure */}
-      <div 
+      {/* Main Content */}
+      <div
         className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50"
-        itemScope 
-        itemType="https://schema.org/CollectionPage"
       >
-        {/* Hidden metadata for schema.org */}
-        <meta itemProp="name" content="CDPL Past Events" />
-        <meta itemProp="description" content="Browse our past workshops, webinars, and training events" />
-        <meta itemProp="url" content="https://www.cinutedigital.com/events/past-events" />
-
         {/* HERO (separate component) */}
         <EventsPastEventsHeroSection />
 
@@ -350,9 +276,7 @@ export default function PastEventsPage() {
         </section>
 
         {/* CTA (separate component) */}
-        <EventsPastEventsCTASection>
-          <EventsPastEventsFeatureEventsRequestTrainingButton />
-        </EventsPastEventsCTASection>
+        <EventsPastEventsCTASection events={pastEvents as any} />
       </div>
     </>
   );
