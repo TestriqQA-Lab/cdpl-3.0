@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import { Calendar, Users, ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 export type AllEvent = {
   id: string | number;
@@ -16,6 +17,7 @@ export type AllEvent = {
   purpose: string;
   highlights: string[];
   category: string;
+  heroImageUrl?: string;
 };
 
 const CATEGORY_STYLES: Record<string, { badgeBg: string; btnBg: string; text: string }> = {
@@ -48,7 +50,17 @@ export default function EventsPastEventsAllEventsSection({
           >
             <div className="relative h-48 bg-gradient-to-br from-purple-100 to-blue-100">
               <div className="absolute inset-0 flex items-center justify-center">
-                <Calendar className="w-16 h-16 text-purple-300" />
+                {event.heroImageUrl ? (
+                  <Image
+                    src={event.heroImageUrl}
+                    alt={event.title}
+                    width={500}
+                    height={500}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <Calendar className="w-16 h-16 text-purple-300" />
+                )}
               </div>
               <div className="absolute top-4 left-4">
                 <span className={`${cs.badgeBg} text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md`}>
@@ -86,7 +98,7 @@ export default function EventsPastEventsAllEventsSection({
               <div className="mt-auto">
                 <Link href={`/events/${event.slug}`}>
                   <button
-                    className={`w-full text-white px-4 py-2.5 rounded-xl font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 text-sm ${cs.btnBg}`}
+                    className={`w-full text-white px-4 py-2.5 rounded-xl font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 text-sm cursor-pointer ${cs.btnBg}`}
                   >
                     View Details
                     <ArrowRight className="w-4 h-4" />

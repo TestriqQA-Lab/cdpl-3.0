@@ -67,14 +67,6 @@ const EventsPastEventsFeaturedEventsSliderSection = dynamic(
   }
 );
 
-const EventsPastEventsFeatureEventsRequestTrainingButton = dynamic(
-  () => import("@/components/sections/EventsPastEventsFeatureEventsRequestTrainingButton"),
-  {
-    ssr: true,
-    loading: () => <SectionLoader label="Preparing CTA..." />,
-  }
-);
-
 const EventsPastEventsHeroSection = dynamic(
   () => import("@/components/sections/EventsPastEventsHeroSection"),
   {
@@ -168,6 +160,7 @@ export default function PastEventsPage() {
       category: e.category,
       categoryColor: (CATEGORY_STYLES[e.category] ?? FALLBACK).badgeBg,
       featured: e.featured,
+      heroImageUrl: e.heroImageUrl,
     }));
 
   // Type this exactly as the AllEvents section expects
@@ -283,9 +276,7 @@ export default function PastEventsPage() {
         </section>
 
         {/* CTA (separate component) */}
-        <EventsPastEventsCTASection>
-          <EventsPastEventsFeatureEventsRequestTrainingButton />
-        </EventsPastEventsCTASection>
+        <EventsPastEventsCTASection events={pastEvents as any} />
       </div>
     </>
   );
