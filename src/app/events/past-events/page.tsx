@@ -146,6 +146,7 @@ const FALLBACK = {
 export default function PastEventsPage() {
   const featuredEvents: FeaturedEvent[] = pastEvents
     .filter((e) => e.featured)
+    .slice(0, 10)
     .map((e) => ({
       id: e.id,
       slug: e.slug,
@@ -164,9 +165,39 @@ export default function PastEventsPage() {
     }));
 
   // Type this exactly as the AllEvents section expects
-  const regularEvents: AllEventsProps["events"] = pastEvents.filter(
-    (e) => !e.featured
-  ) as AllEventsProps["events"];
+  const regularEvents: AllEventsProps["events"] = pastEvents
+    .map((e) => ({
+      id: e.id,
+      slug: e.slug,
+      title: e.title,
+      subtitle: e.subtitle,
+      date: e.date,
+      location: e.location,
+      attendees: e.attendees,
+      organization: e.organization,
+      purpose: e.purpose,
+      highlights: e.highlights,
+      category: e.category,
+      heroImageUrl: e.heroImageUrl,
+    }));
+
+  // Create a sanitized list of recent events (all of them) for the CTA section
+  // We use pastEvents directly to ensure we always show something, regardless of 'featured' status
+  const recentEvents: AllEventsProps["events"] = pastEvents
+    .map((e) => ({
+      id: e.id,
+      slug: e.slug,
+      title: e.title,
+      subtitle: e.subtitle,
+      date: e.date,
+      location: e.location,
+      attendees: e.attendees,
+      organization: e.organization,
+      purpose: e.purpose,
+      highlights: e.highlights,
+      category: e.category,
+      heroImageUrl: e.heroImageUrl,
+    }));
 
   // Breadcrumb Schema
   const breadcrumbSchema = generateBreadcrumbSchema([
@@ -265,8 +296,9 @@ export default function PastEventsPage() {
         {/* All Past Events */}
         <section id="all-past-events" className="py-10 w-full">
           <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              All Past Events
+            <h2 className="mb-6 text-4xl font-bold">
+              <span style={{ color: "rgb(0, 105, 168)" }}>All</span>{" "}
+              <span style={{ color: "rgb(255, 140, 0)" }}>Events</span>
             </h2>
             <EventsPastEventsAllEventsSection
               events={regularEvents}
@@ -276,7 +308,7 @@ export default function PastEventsPage() {
         </section>
 
         {/* CTA (separate component) */}
-        <EventsPastEventsCTASection events={pastEvents as any} />
+        <EventsPastEventsCTASection events={recentEvents} />
       </div>
     </>
   );

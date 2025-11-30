@@ -1,6 +1,7 @@
 // src/components/sections/EventsPastEventsAllEventsSection.tsx
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { Calendar, Users, ArrowRight } from "lucide-react";
 import Image from "next/image";
@@ -39,76 +40,99 @@ export default function EventsPastEventsAllEventsSection({
   events: AllEvent[];
   cardMinHClass?: string;
 }) {
+  const [visibleCount, setVisibleCount] = useState(6); // Initial: 2 rows * 3 cols = 6
+
+  const visibleEvents = events.slice(0, visibleCount);
+  const hasMore = visibleCount < events.length;
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + 6); // Load 2 more rows
+  };
+
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {events.map((event) => {
-        const cs = CATEGORY_STYLES[event.category] ?? FALLBACK;
-        return (
-          <article
-            key={event.id}
-            className={`bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 ${cardMinHClass}`}
-          >
-            <div className="relative h-48 bg-gradient-to-br from-purple-100 to-blue-100">
-              <div className="absolute inset-0 flex items-center justify-center">
-                {event.heroImageUrl ? (
-                  <Image
-                    src={event.heroImageUrl}
-                    alt={event.title}
-                    width={500}
-                    height={500}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <Calendar className="w-16 h-16 text-purple-300" />
-                )}
+    <div className="space-y-12">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {visibleEvents.map((event) => {
+          const cs = CATEGORY_STYLES[event.category] ?? FALLBACK;
+          return (
+            <article
+              key={event.id}
+              className={`bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 ${cardMinHClass}`}
+            >
+              <div className="relative h-48 bg-gradient-to-br from-purple-100 to-blue-100">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  {event.heroImageUrl ? (
+                    <Image
+                      src={event.heroImageUrl}
+                      alt={event.title}
+                      width={500}
+                      height={500}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <Calendar className="w-16 h-16 text-purple-300" />
+                  )}
+                </div>
+                <div className="absolute top-4 left-4">
+                  <span className={`${cs.badgeBg} text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md`}>
+                    {event.category}
+                  </span>
+                </div>
               </div>
-              <div className="absolute top-4 left-4">
-                <span className={`${cs.badgeBg} text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md`}>
-                  {event.category}
-                </span>
-              </div>
-            </div>
 
-            <div className="p-6 flex flex-col h-[calc(100%-12rem)]">
-              <h3 className="text-xl font-bold text-gray-900 mb-1 line-clamp-2">
-                {event.title}
-              </h3>
+              <div className="p-6 flex flex-col h-[calc(100%-12rem)]">
+                <h3 className="text-xl font-bold text-gray-900 mb-1 line-clamp-2">
+                  {event.title}
+                </h3>
 
-              {event.subtitle ? (
-                <p className={`mb-3 text-sm font-semibold ${cs.text}`}>
-                  {event.subtitle}
+                {event.subtitle ? (
+                  <p className={`mb-3 text-sm font-semibold ${cs.text}`}>
+                    {event.subtitle}
+                  </p>
+                ) : null}
+
+                <div className="space-y-2 mb-4 text-sm text-gray-600">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4 text-purple-600" />
+                    <span>{event.date}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Users className="w-4 h-4 text-blue-600" />
+                    <span>{event.attendees} participants</span>
+                  </div>
+                </div>
+
+                <p className="text-gray-700 text-sm mb-4 line-clamp-3">
+                  {event.purpose}
                 </p>
-              ) : null}
 
-              <div className="space-y-2 mb-4 text-sm text-gray-600">
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-purple-600" />
-                  <span>{event.date}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Users className="w-4 h-4 text-blue-600" />
-                  <span>{event.attendees} participants</span>
+                <div className="mt-auto">
+                  <Link href={`/events/${event.slug}`}>
+                    <button
+                      className={`w-full text-white px-4 py-2.5 rounded-xl font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 text-sm cursor-pointer ${cs.btnBg}`}
+                    >
+                      View Details
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </Link>
                 </div>
               </div>
+            </article>
+          );
+        })}
+      </div>
 
-              <p className="text-gray-700 text-sm mb-4 line-clamp-3">
-                {event.purpose}
-              </p>
-
-              <div className="mt-auto">
-                <Link href={`/events/${event.slug}`}>
-                  <button
-                    className={`w-full text-white px-4 py-2.5 rounded-xl font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 text-sm cursor-pointer ${cs.btnBg}`}
-                  >
-                    View Details
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </article>
-        );
-      })}
+      {hasMore && (
+        <div className="flex justify-center pt-4">
+          <button
+            onClick={handleLoadMore}
+            className="group inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 text-sm font-semibold text-slate-700 shadow-md ring-1 ring-slate-200 transition hover:bg-slate-50 hover:text-blue-600 hover:ring-blue-200"
+          >
+            Load More Events
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </button>
+        </div>
+      )}
     </div>
   );
 }
