@@ -1,8 +1,9 @@
 'use client';
 import { motion } from 'framer-motion';
-import { Users, GraduationCap, Briefcase, Target, BadgeCheck } from 'lucide-react';
+import { Users, GraduationCap, Briefcase, Target, BadgeCheck, ArrowRight } from 'lucide-react';
 import IconCard from '../ui/IconCard';
-import { JSX } from 'react';
+import { JSX, useState } from 'react';
+import EnrollModal from '@/components/EnrollModal';
 
 type Audience = {
   icon: JSX.Element;
@@ -14,14 +15,15 @@ type Audience = {
 };
 
 const audience: Audience[] = [
-  { icon: <Users />,          title: 'Career Switchers', description: 'Non-tech professionals transitioning to database & SQL roles', bg: 'bg-sky-50',     iconColor: 'text-sky-700',     border: 'border-sky-200' },
-  { icon: <GraduationCap />,  title: 'Fresh Graduates',  description: 'BSc, BTech, BCA students seeking job-ready MySQL skills',     bg: 'bg-emerald-50', iconColor: 'text-emerald-700', border: 'border-emerald-200' },
-  { icon: <Briefcase />,      title: 'Job Seekers',      description: 'Upskill from low-growth roles to in-demand SQL careers',      bg: 'bg-amber-50',   iconColor: 'text-amber-700',   border: 'border-amber-200' },
-  { icon: <Target />,         title: 'Developers',       description: 'Add database design, indexing & optimization to your stack',  bg: 'bg-violet-50',  iconColor: 'text-violet-700',  border: 'border-violet-200' },
+  { icon: <Users />, title: 'Career Switchers', description: 'Non-tech professionals transitioning to database & SQL roles', bg: 'bg-sky-50', iconColor: 'text-sky-700', border: 'border-sky-200' },
+  { icon: <GraduationCap />, title: 'Fresh Graduates', description: 'BSc, BTech, BCA students seeking job-ready MySQL skills', bg: 'bg-emerald-50', iconColor: 'text-emerald-700', border: 'border-emerald-200' },
+  { icon: <Briefcase />, title: 'Job Seekers', description: 'Upskill from low-growth roles to in-demand SQL careers', bg: 'bg-amber-50', iconColor: 'text-amber-700', border: 'border-amber-200' },
+  { icon: <Target />, title: 'Developers', description: 'Add database design, indexing & optimization to your stack', bg: 'bg-violet-50', iconColor: 'text-violet-700', border: 'border-violet-200' },
 ];
 
 export default function WhoShouldEnroll() {
 
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
 
   return (
     <section id="who-should-enroll" aria-labelledby="who-heading" className="relative py-8 md:py-10 bg-white">
@@ -77,7 +79,31 @@ export default function WhoShouldEnroll() {
           <strong>query optimization</strong>—to stand out for <strong>SQL Developer</strong>, <strong>Database Administrator</strong>,
           and <strong>Data Analyst</strong> roles.
         </p>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45, ease: 'easeOut' }}
+          className="mt-12 text-center"
+        >
+          <button
+            onClick={() => setIsEnrollModalOpen(true)}
+            className="cursor-pointer inline-flex items-center gap-2 rounded-xl border border-indigo-600 bg-indigo-600 px-7 py-3 text-sm font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
+            aria-label="Start Your QA Journey"
+          >
+            Enroll Now<ArrowRight className="h-5 w-5" />
+          </button>
+        </motion.div>
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollModalOpen}
+        onClose={() => setIsEnrollModalOpen(false)}
+        courseName="MySQL DBMS"
+        source="DBMS Course Page - Who Should Enroll Section - Enroll Now"
+      />
 
     </section>
   );

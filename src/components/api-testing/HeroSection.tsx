@@ -13,6 +13,7 @@ import {
     Globe2,
     Home,
     ChevronRight,
+    CloudDownload,
     ArrowDownNarrowWide,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -124,30 +125,40 @@ export default function HeroSection() {
                         </p>
 
                         {/* CTAs */}
-                        <div className="mt-8 flex flex-col sm:flex-row gap-4">
+
+                        <div className="mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
                             <button
                                 onClick={() => setIsEnrollModalOpen(true)}
-                                className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                                className="cursor-pointer group inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
+                                aria-label="Enroll now in API Testing program"
                             >
                                 Enroll Now
-                                <ArrowRight className="ml-2 h-5 w-5" />
+                                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                             </button>
 
                             <button
                                 onClick={() => setIsSyllabusModalOpen(true)}
-                                className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 hover:border-slate-300 transition-all shadow-sm hover:shadow-md"
+                                className="cursor-pointer group inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
+                                aria-label="Download API Testing Syllabus"
                             >
-                                <ArrowDownNarrowWide className="mr-2 h-5 w-5 text-indigo-600" />
                                 Download Syllabus
+                                <CloudDownload className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
                             </button>
 
-                            <Link
-                                href="#curriculum"
-                                className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-indigo-600 bg-indigo-50 border border-indigo-100 rounded-xl hover:bg-indigo-100 transition-all"
+                            <button
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    document.getElementById('curriculum')?.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                                className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-emerald-300 bg-white px-6 py-3 text-base font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-4 focus:ring-emerald-200"
+                                aria-label="View full API testing curriculum"
                             >
                                 View Curriculum
-                            </Link>
+                                <ArrowDownNarrowWide className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
+                            </button>
+
                         </div>
+
 
                         {/* Quick highlights */}
                         <ul className="mt-7 grid max-w-3xl grid-cols-1 gap-3 text-sm text-slate-700 sm:grid-cols-2">

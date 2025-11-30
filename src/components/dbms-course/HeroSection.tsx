@@ -10,12 +10,15 @@ import {
     Globe2,
     Home,
     ChevronRight,
+    CloudDownload,
+    ArrowDownNarrowWide,
     CheckCircle2,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import IconCard from '@/components/ui/IconCard';
-import LeadForm from '../CourseLeadForm';
+import LeadForm from '../forms/ApiCourseLeadForm';
 import Link from 'next/link';
+import { useState } from 'react';
 
 /** -----------------------------
  * Feature tiles
@@ -27,8 +30,12 @@ const features = [
     { icon: <Briefcase />, title: '100% Placement', description: 'Resume + Interview Prep', bg: 'bg-rose-50', iconColor: 'text-rose-700', border: 'border-rose-200' },
 ];
 
-export default function HeroSection() {
+import EnrollModal from '@/components/EnrollModal';
+import SyllabusDownloadModal from '@/components/SyllabusDownloadModal';
 
+export default function HeroSection() {
+    const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+    const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
 
     const breadcrumbs = [
         { label: 'Home', href: '/' },
@@ -98,7 +105,7 @@ export default function HeroSection() {
 
                         {/* Mobile form just below H1 */}
                         <div className="mt-6 block md:hidden">
-                            <LeadForm variant="elevated" />
+                            <LeadForm variant="elevated" source="DBMS Course Page - Hero Section" />
                         </div>
 
                         {/* Supporting copy */}
@@ -114,19 +121,35 @@ export default function HeroSection() {
                         {/* CTAs */}
                         <div className="mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
                             <button
-                                className="group inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
-                                aria-label="Enroll now in MySQL course"
+                                onClick={() => setIsEnrollModalOpen(true)}
+                                className="cursor-pointer group inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
+                                aria-label="Enroll now in API Testing program"
                             >
                                 Enroll Now
                                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                             </button>
-                            <Link
-                                href="#curriculum"
-                                className="inline-flex items-center justify-center rounded-xl border border-sky-300 bg-white px-6 py-3 text-base font-semibold text-sky-700 shadow-sm transition hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-200"
-                                aria-label="View full MySQL curriculum"
+
+                            <button
+                                onClick={() => setIsSyllabusModalOpen(true)}
+                                className="cursor-pointer group inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
+                                aria-label="Download API Testing Syllabus"
+                            >
+                                Download Syllabus
+                                <CloudDownload className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
+                            </button>
+
+                            <button
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    document.getElementById('curriculum')?.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                                className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-emerald-300 bg-white px-6 py-3 text-base font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-4 focus:ring-emerald-200"
+                                aria-label="View full API testing curriculum"
                             >
                                 View Curriculum
-                            </Link>
+                                <ArrowDownNarrowWide className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
+                            </button>
+
                         </div>
 
                         {/* Quick highlights */}
@@ -167,12 +190,25 @@ export default function HeroSection() {
                         transition={{ duration: 0.6, delay: 0.12, ease: 'easeOut' }}
                         className="hidden md:col-span-5 lg:col-span-4 md:block"
                     >
-                        <LeadForm variant="elevated" />
+                        <LeadForm variant="elevated" source="DBMS Course Page - Hero Section" />
 
                     </motion.aside>
                 </div>
             </div>
 
+            <EnrollModal
+                isOpen={isEnrollModalOpen}
+                onClose={() => setIsEnrollModalOpen(false)}
+                courseName="MySQL DBMS"
+                source="DBMS Course Page - Hero Section - Enroll Now"
+            />
+
+            <SyllabusDownloadModal
+                isOpen={isSyllabusModalOpen}
+                onClose={() => setIsSyllabusModalOpen(false)}
+                courseName="MySQL DBMS"
+                source="DBMS Course Page - Hero Section - Download Syllabus"
+            />
         </section>
     );
 }

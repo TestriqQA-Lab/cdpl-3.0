@@ -1,6 +1,9 @@
 'use client';
 import { CheckCircle } from 'lucide-react';
 import Link from 'next/link';
+import { useState } from 'react';
+import SyllabusDownloadModal from '@/components/SyllabusDownloadModal';
+import CareerSessionModal from '@/components/CareerSessionModal';
 
 type Module = { title: string; topics: string[] };
 
@@ -103,7 +106,8 @@ const accents = [
 ];
 
 export default function CurriculumSection() {
-
+  const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
   return (
     <section id="curriculum" aria-labelledby="curriculum-heading" className="relative py-8 md:py-10 bg-white">
@@ -172,19 +176,33 @@ export default function CurriculumSection() {
 
         {/* Inline CTAs */}
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-          <Link
-            href="contact-us"
-            className="inline-flex items-center justify-center rounded-xl bg-indigo-700 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-200"
+          <button
+            onClick={() => setIsDemoModalOpen(true)}
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl bg-indigo-700 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-200"
           >
             Book a Free Demo
-          </Link>
+          </button>
           <button
-            className="inline-flex items-center justify-center rounded-xl border-2 border-emerald-700 bg-white px-4 py-2 text-sm font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-emerald-200"
+            onClick={() => setIsSyllabusModalOpen(true)}
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl border-2 border-emerald-700 bg-white px-4 py-2 text-sm font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-emerald-200"
           >
             Get Syllabus PDF
           </button>
         </div>
       </div>
+
+      <SyllabusDownloadModal
+        isOpen={isSyllabusModalOpen}
+        onClose={() => setIsSyllabusModalOpen(false)}
+        courseName="MySQL DBMS"
+        source="DBMS Course Page - Curriculum Section - Syllabus Download"
+      />
+
+      <CareerSessionModal
+        isOpen={isDemoModalOpen}
+        onClose={() => setIsDemoModalOpen(false)}
+        source="DBMS Course Page - Curriculum Section - Book Free Demo"
+      />
 
     </section>
   );

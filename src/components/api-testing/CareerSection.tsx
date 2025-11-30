@@ -2,6 +2,8 @@
 import { Briefcase, ArrowRight, Building2, TrendingUp, BadgeCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useState } from 'react';
+import CareerSessionModal from '@/components/CareerSessionModal';
 
 const roles = [
     'API Tester', 'QA Engineer', 'Automation Tester', 'Security Tester',
@@ -15,7 +17,7 @@ const roleAccents = ['sky', 'amber', 'emerald', 'violet', 'rose', 'cyan', 'lime'
 const companyAccents = ['slate', 'sky', 'amber', 'emerald', 'violet', 'rose', 'cyan', 'lime', 'indigo', 'orange'] as const;
 
 export default function CareerSection() {
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <section id="career" aria-labelledby="career-heading" className="relative py-8 sm:py-10 bg-white">
@@ -138,15 +140,21 @@ export default function CareerSection() {
                     transition={{ duration: 0.45, ease: 'easeOut' }}
                     className="mt-12 text-center"
                 >
-                    <Link
-                        href="contact-us"
-                        className="inline-flex items-center gap-2 rounded-xl border border-indigo-600 bg-indigo-600 px-7 py-3 text-sm font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
-                        aria-label="Get placed in 30 days"
+                    <button
+                        onClick={() => setIsModalOpen(true)}
+                        className="cursor-pointer inline-flex items-center gap-2 rounded-xl border border-indigo-600 bg-indigo-600 px-7 py-3 text-sm font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
+                        aria-label="Start Your QA Journey"
                     >
-                        Get Placed in 30 Days <ArrowRight className="h-5 w-5" />
-                    </Link>
+                        Start Your QA Journey <ArrowRight className="h-5 w-5" />
+                    </button>
                 </motion.div>
             </div>
+
+            <CareerSessionModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                source="API Testing Course Page - Career Section - Start Your QA Journey"
+            />
         </section>
     );
 }

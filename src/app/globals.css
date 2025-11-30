@@ -22,6 +22,11 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
 body {
   color: var(--foreground);
   background: #f8fafc; /* Equivalent to bg-gray-50 from reference page */

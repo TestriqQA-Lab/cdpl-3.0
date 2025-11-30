@@ -14,6 +14,34 @@ const SMTP_FROM_EMAIL = process.env.SMTP_FROM_EMAIL || 'noreply@example.com';
 // NOTE: User must replace this with the actual public URL to the brochure file.
 const BROCHURE_DOWNLOAD_LINK = 'https://www.cinutedigital.com/downloads/cdpl-brochure.pdf';
 
+const SYLLABUS_LINKS: Record<string, string> = {
+  'Manual Testing': 'https://www.cinutedigital.com/downloads/manual-software-testing.pdf',
+  'API Testing': 'https://www.cinutedigital.com/downloads/api-testing-using-postman-and-restapis.pdf',
+  'MySQL DBMS': 'https://www.cinutedigital.com/downloads/database-management-system-using-mysql.pdf',
+  'Advanced Automation Testing': 'https://www.cinutedigital.com/downloads/advanced-automation-testing.pdf',
+  'Advanced Data Analytics Hero Program': 'https://www.cinutedigital.com/downloads/advanced-data-analytics-hero-program.pdf',
+  'Advanced Data Analytics with Python': 'https://www.cinutedigital.com/downloads/advanced-data-analytics-with-python-libraries.pdf',
+  'Advanced Data Science and ML': 'https://www.cinutedigital.com/downloads/advanced-data-science-and-machine-learning-masterclass.pdf',
+  'Advanced Excel for Data Analytics': 'https://www.cinutedigital.com/downloads/advanced-excel-for-Data-analytics-&-visualization.pdf',
+  'Advanced Manual and Automation Testing': 'https://www.cinutedigital.com/downloads/advanced-manual-and-automation-testing-master-program.pdf',
+  'Advanced Software Testing': 'https://www.cinutedigital.com/downloads/advanced-software-testing.pdf',
+  'AI Driven Digital Marketing': 'https://www.cinutedigital.com/downloads/ai-driven-digital-marketing-&-analytics.pdf',
+  'Comprehensive Data Science and AI': 'https://www.cinutedigital.com/downloads/comprehensive-data-science-and-ai-master-program.pdf',
+  'Power BI Data Analytics': 'https://www.cinutedigital.com/downloads/data-analytics-&-visualization-with-power-bi.pdf',
+  'Tableau Data Analytics': 'https://www.cinutedigital.com/downloads/data-analytics-&-visualization-with-tableau.pdf',
+  'Data Analytics with BI and Big Data': 'https://www.cinutedigital.com/downloads/data-analytics-with-bi-and-big-data-engineering-master-program.pdf',
+  'Deep Learning NLP and GenAI': 'https://www.cinutedigital.com/downloads/deep-learning-nlp-and-generativeai.pdf',
+  'Digital Marketing and AI for Business': 'https://www.cinutedigital.com/downloads/digital-marketing-and-ai-for-business-owners-digital-marketing-and-ai-for-business-owners. Digital Marketing and AI (For Business Owners)',
+  'Digital Marketing with AI Bootcamp': 'https://www.cinutedigital.com/downloads/digital-marketing-with-ai-bootcamp-digital-marketing-with-ai-bootcamp. Digital Marketing With AI Bootcamp',
+  'ETL Testing': 'https://www.cinutedigital.com/downloads/etl-testing-&-development.pdf',
+  'Java Programming': 'https://www.cinutedigital.com/downloads/java-programming.pdf',
+  'ML Algorithms using Python': 'https://www.cinutedigital.com/downloads/machine-learning-algorithms-using-python-programming.pdf',
+  'ML and Data Science with Python': 'https://www.cinutedigital.com/downloads/machine-learning-and-data-science-with-python-hero-program.pdf',
+  'ML and Data Visualization using R': 'https://www.cinutedigital.com/downloads/machine-learning-and-data-visualization-using-r-programming.pdf',
+  'Prompt Engineering with Gen AI': 'https://www.cinutedigital.com/downloads/prompt-engineering-with-gen-ai.pdf',
+  'Python Programming': 'https://www.cinutedigital.com/downloads/python-programming.pdf',
+};
+
 // --- Nodemailer Transporter ---
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
@@ -68,11 +96,12 @@ export async function POST(request: Request) {
     const isGetStartedForm = formSource.includes('Get Started Section');
     const isManualTestingHeroForm = formSource === 'Manual Software Testing Course Page - Hero Section';
     const isApiTestingHeroForm = formSource === 'API Testing Course Page - Hero Section';
+    const isDbmsHeroForm = formSource === 'DBMS Course Page - Hero Section';
     const isMentorRequest = formSource.includes('Team Page - Mentor Section');
     const isLiveJobsRequest = formSource.includes('Live Jobs Page - Hero Section');
     const isPlacementRequest = formSource.includes('Placements Page');
     const isMentorsPageRequest = formSource.includes('Mentors Page');
-    const isSessionEnquiry = formSource.includes('Session Enquiry') || formSource.includes('Other Courses Section');
+    const isSessionEnquiry = formSource.includes('Session Enquiry') || formSource.includes('Other Courses Section') || formSource.includes('Book Free Demo') || formSource.includes('Start Your QA Journey') || formSource.includes('Get Placement Support');
 
     // Subject Prefix Logic
     let subjectPrefix = '[ENQUIRY]';
@@ -86,7 +115,7 @@ export async function POST(request: Request) {
       subjectPrefix = '[Enquiry]';
     } else if (isGetStartedForm) {
       subjectPrefix = '[GET STARTED REQUEST]';
-    } else if (isManualTestingHeroForm || isApiTestingHeroForm) {
+    } else if (isManualTestingHeroForm || isApiTestingHeroForm || isDbmsHeroForm) {
       subjectPrefix = '[ENQUIRY]';
     } else if (isMentorRequest) {
       subjectPrefix = '[MENTOR REQUEST]';
@@ -126,7 +155,7 @@ export async function POST(request: Request) {
       fullName,
       email,
       phone,
-      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isEnrollmentRequest ? 'Enroll Now Inquiry' : (isGetStartedForm ? 'Get Started Request' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : (isSessionEnquiry ? 'Session Enquiry' : (isManualTestingHeroForm || isApiTestingHeroForm ? 'Course Page Enquiry' : 'General Inquiry')))))))),
+      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isEnrollmentRequest ? 'Enroll Now Inquiry' : (isGetStartedForm ? 'Get Started Request' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : (isSessionEnquiry ? 'Session Enquiry' : (isManualTestingHeroForm || isApiTestingHeroForm || isDbmsHeroForm ? 'Course Page Enquiry' : 'General Inquiry')))))))),
       source: formSource,
       downloadLink: isBrochureRequest ? BROCHURE_DOWNLOAD_LINK : (isSyllabusRequest ? (syllabusLink || 'N/A') : 'N/A'),
       year: currentYear,
@@ -149,6 +178,8 @@ export async function POST(request: Request) {
         adminSubject = `${subjectPrefix} New Lead from ${fullName} - Manual Testing Page (Syllabus)`;
       } else if (formSource === 'API Testing Course Page - Hero Section - Syllabus Download') {
         adminSubject = `${subjectPrefix} New Lead from ${fullName} - API Testing Page (Syllabus)`;
+      } else if (formSource === 'DBMS Course Page - Hero Section - Download Syllabus') {
+        adminSubject = `${subjectPrefix} New Lead from ${fullName} - DBMS Page (Syllabus)`;
       } else {
         adminSubject = `${subjectPrefix} New Lead for ${courseName} - ${fullName}`;
       }
@@ -156,6 +187,8 @@ export async function POST(request: Request) {
       adminSubject = `${subjectPrefix} New Lead from ${fullName} - Course Page`;
     } else if (isApiTestingHeroForm) {
       adminSubject = `${subjectPrefix} New Lead from ${fullName} - API Testing Course Page`;
+    } else if (isDbmsHeroForm) {
+      adminSubject = `${subjectPrefix} New Lead from ${fullName} - DBMS Course Page`;
     } else if (isMentorRequest) {
       adminSubject = `${subjectPrefix} New Mentor Request from ${fullName}`;
     } else if (isLiveJobsRequest) {
@@ -173,6 +206,14 @@ export async function POST(request: Request) {
       adminSubject = `[SESSION ENQUIRY] New Lead from ${fullName} - Manual Software Testing Course Page`;
     } else if (formSource === 'Manual Software Testing Course Page - Other Courses Section') {
       adminSubject = `[SESSION ENQUIRY] New Lead from ${fullName} - Manual Software Testing Page`;
+    } else if (formSource === 'API Testing Course Page - Curriculum Section - Book Free Demo') {
+      adminSubject = `[SESSION ENQUIRY] New Lead from ${fullName} - API Testing Page`;
+    } else if (formSource === 'API Testing Course Page - Career Section - Start Your QA Journey') {
+      adminSubject = `[SESSION ENQUIRY] New Lead from ${fullName} - API Testing Page (Career Section)`;
+    } else if (formSource === 'DBMS Course Page - Curriculum Section - Book Free Demo') {
+      adminSubject = `[SESSION ENQUIRY] New Lead from ${fullName} - DBMS Page`;
+    } else if (formSource === 'DBMS Course Page - Career Section - Get Placement Support') {
+      adminSubject = `[PLACEMENT ENQUIRY] New Lead from ${fullName} - DBMS Page (Career Section)`;
     }
 
     const adminMailOptions: nodemailer.SendMailOptions = {
@@ -203,10 +244,13 @@ export async function POST(request: Request) {
       };
     } else if (isSyllabusRequest) {
       // Syllabus Confirmation
+      const specificSyllabusLink = courseName ? SYLLABUS_LINKS[courseName] : null;
+      const finalDownloadLink = specificSyllabusLink || syllabusLink || BROCHURE_DOWNLOAD_LINK;
+
       const userHtml = await getTemplatedEmail('syllabus-confirmation.html', {
         fullName,
         courseName: courseName || 'Course',
-        downloadLink: syllabusLink || BROCHURE_DOWNLOAD_LINK, // Fallback if needed
+        downloadLink: finalDownloadLink,
         year: currentYear,
         currentYear: currentYear,
       });
@@ -259,7 +303,7 @@ export async function POST(request: Request) {
       email,
       phone,
       source: formSource,
-      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isEnrollmentRequest ? 'Enroll Now Inquiry' : (isGetStartedForm ? 'Get Started Request' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : (isSessionEnquiry ? 'Session Enquiry' : (isManualTestingHeroForm || isApiTestingHeroForm ? 'Course Page Enquiry' : 'General Inquiry')))))))),
+      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isEnrollmentRequest ? 'Enroll Now Inquiry' : (isGetStartedForm ? 'Get Started Request' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : (isSessionEnquiry ? 'Session Enquiry' : (isManualTestingHeroForm || isApiTestingHeroForm || isDbmsHeroForm ? 'Course Page Enquiry' : 'General Inquiry')))))))),
 
       interest: interest || '',
       message: message || '',
