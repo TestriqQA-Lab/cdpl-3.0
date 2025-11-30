@@ -2,6 +2,7 @@
 // Server component: matches the same layout pattern as your API-Testing hero
 // – left copy + right LeadForm, badges, CTAs, highlights, and a small feature grid.
 
+'use client';
 import {
     Code2,
     Users,
@@ -16,8 +17,11 @@ import {
     ChevronRight,
 } from "lucide-react";
 import IconCard from "@/components/ui/IconCard";
-import LeadForm from "../CourseLeadForm";
+import LeadForm from "../forms/ApiCourseLeadForm";
 import Link from "next/link";
+import { useState } from "react";
+import EnrollModal from "@/components/EnrollModal";
+import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
 
 const features = [
     {
@@ -55,6 +59,8 @@ const features = [
 ];
 
 export default function HeroSection() {
+    const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+    const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
 
     const breadcrumbs = [
         { label: "Home", href: "/" },
@@ -117,7 +123,7 @@ export default function HeroSection() {
 
                         {/* Mobile form just under H1 (like API-Testing) */}
                         <div className="mt-6 block md:hidden">
-                            <LeadForm variant="elevated" />
+                            <LeadForm variant="elevated" source="Python Course Page - Hero Section" />
                         </div>
 
                         <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-700 sm:text-lg">
@@ -135,19 +141,23 @@ export default function HeroSection() {
                         {/* CTAs (same structure) */}
                         <div className="mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
                             <button
+                                onClick={() => setIsEnrollModalOpen(true)}
                                 className="group inline-flex items-center justify-center rounded-xl border border-teal-600 bg-teal-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-teal-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-teal-200"
                                 aria-label="Enroll now in Python program"
                             >
                                 Enroll Now
                                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                             </button>
-                            <Link
-                                href="#curriculum"
+                            <button
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    document.getElementById('curriculum')?.scrollIntoView({ behavior: 'smooth' });
+                                }}
                                 className="inline-flex items-center justify-center rounded-xl border border-sky-300 bg-white px-6 py-3 text-base font-semibold text-sky-700 shadow-sm transition hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-200"
                                 aria-label="View full Python curriculum"
                             >
                                 View Curriculum
-                            </Link>
+                            </button>
                         </div>
 
                         {/* Highlights (two columns on sm+, distinct dot colors) */}
@@ -185,7 +195,7 @@ export default function HeroSection() {
                     {/* Right column: Desktop form (sticky) */}
                     <aside className="hidden md:col-span-5 lg:col-span-4 md:block">
                         <div className="sticky top-20">
-                            <LeadForm variant="elevated" />
+                            <LeadForm variant="elevated" source="Python Course Page - Hero Section" />
                         </div>
                     </aside>
                 </div>
@@ -200,6 +210,13 @@ export default function HeroSection() {
                     </div>
                 </div>
             </div>
+
+            <EnrollModal
+                isOpen={isEnrollModalOpen}
+                onClose={() => setIsEnrollModalOpen(false)}
+                courseName="Python Programming"
+                source="Python Course Page - Hero Section - Enroll Now"
+            />
 
         </section>
     );

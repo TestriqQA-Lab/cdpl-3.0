@@ -1,8 +1,10 @@
 'use client';
-import { Users, GraduationCap, Briefcase, Target } from 'lucide-react';
+import { Users, GraduationCap, Briefcase, Target, ArrowRight } from 'lucide-react';
 import IconCard from '../ui/IconCard';
 import { motion } from 'framer-motion';
 import type { JSX } from 'react';
+import { useState } from 'react';
+import EnrollModal from '@/components/EnrollModal';
 
 type Audience = {
   icon: JSX.Element;
@@ -49,7 +51,7 @@ const audience: Audience[] = [
 ];
 
 export default function WhoShouldEnroll() {
-
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
 
   return (
     <section
@@ -125,14 +127,33 @@ export default function WhoShouldEnroll() {
           ))}
         </div>
 
-        {/* Supporting SEO text */}
+        {/* SEO supportive copy */}
         <p className="mx-auto mt-8 max-w-4xl text-center text-sm sm:text-base text-slate-600">
           Gain hands-on experience with <strong>Selenium/Appium</strong>,{' '}
           <strong>REST Assured</strong>, <strong>Cypress/Playwright</strong>, Git, and{' '}
           <strong>CI/CD pipelines</strong>. Graduate with a portfolio that showcases
           <strong> real-world QA impact</strong>.
         </p>
+
+        {/* CTA */}
+        <div className="mt-10 text-center">
+          <button
+            onClick={() => setIsEnrollModalOpen(true)}
+            className="group inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-8 py-3.5 text-base font-semibold text-white shadow-sm transition hover:bg-indigo-700 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-indigo-200"
+          >
+            Enroll Now
+            <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+          </button>
+        </div>
+
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollModalOpen}
+        onClose={() => setIsEnrollModalOpen(false)}
+        courseName="Advanced Manual and Automation Testing Master Program"
+        source="Master Program Course Page - Who Should Enroll Section - Enroll Now"
+      />
 
     </section>
   );

@@ -17,8 +17,9 @@ import {
   Briefcase,
   ChevronRight,
 } from "lucide-react";
-import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import EnrollModal from "@/components/EnrollModal";
+import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
 
 type Module = {
   num: string;
@@ -212,6 +213,9 @@ const MODULES: Module[] = [
 ];
 
 export default function CurriculumSection() {
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+  const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
+
   const title = "Java Programming Curriculum";
   const subtitle =
     "A 30-hour, job-ready path: essentials → control flow → data structures → OOP → collections → regex → exceptions, finishing with a hands-on capstone.";
@@ -321,14 +325,14 @@ export default function CurriculumSection() {
                   <span className={["text-xs font-semibold", m.text].join(" ")}>
                     Outcome-Focused
                   </span>
-                  <Link
-                    href="contact-us"
+                  <button
+                    onClick={() => setIsSyllabusModalOpen(true)}
                     className="inline-flex items-center text-sm font-semibold text-gray-900 hover:opacity-80"
                     aria-label={`See topics in Module ${m.num}`}
                   >
                     See topics
                     <ChevronRight className="ml-1 h-4 w-4" />
-                  </Link>
+                  </button>
                 </div>
               </article>
 
@@ -361,14 +365,15 @@ export default function CurriculumSection() {
 
         {/* Actions */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 text-center sm:flex-row sm:gap-4">
-          <Link
-            href="contact-us"
+          <button
+            onClick={() => setIsEnrollModalOpen(true)}
             className="inline-flex items-center justify-center rounded-xl border border-gray-200 bg-gray-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
             aria-label="Apply to the Java curriculum"
           >
             Apply Now
-          </Link>
+          </button>
           <button
+            onClick={() => setIsSyllabusModalOpen(true)}
             className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-50"
             aria-label="Download full Java syllabus PDF"
           >
@@ -377,6 +382,19 @@ export default function CurriculumSection() {
         </div>
       </div>
 
+      <EnrollModal
+        isOpen={isEnrollModalOpen}
+        onClose={() => setIsEnrollModalOpen(false)}
+        courseName="Java Programming"
+        source="Java Course Page - Curriculum Section - Apply Now"
+      />
+
+      <SyllabusDownloadModal
+        isOpen={isSyllabusModalOpen}
+        onClose={() => setIsSyllabusModalOpen(false)}
+        courseName="Java Programming"
+        source="Java Course Page - Curriculum Section - Syllabus Download"
+      />
 
       {/* Assist crawlers & screen readers */}
       <h1 className="sr-only">{title}</h1>

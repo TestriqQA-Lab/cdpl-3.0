@@ -2,6 +2,10 @@
 // Sleek, slightly futuristic curriculum with distinct non-repeating accents, SEO JSON-LD, fully responsive.
 // Source: “Copy of Course 4P Python Programming .pdf” (Modules on pp.16–19; Capstone on p.19)
 
+'use client';
+import { useState } from "react";
+import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
+
 type Module = {
   num: string;
   title: string;
@@ -134,7 +138,7 @@ const ACCENTS = [
 ];
 
 export default function CurriculumSection() {
-
+  const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
 
   return (
     <section id="curriculum" aria-labelledby="curriculum-heading" className="relative py-12 sm:py-16 md:py-20 bg-gray-50">
@@ -216,6 +220,7 @@ export default function CurriculumSection() {
         {/* CTA */}
         <div className="mt-10 text-center">
           <button
+            onClick={() => setIsSyllabusModalOpen(true)}
             className="inline-flex items-center gap-2 rounded-xl cursor-pointer border border-slate-900 bg-slate-900 px-4 md:px-6 py-3 text-base font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:translate-y-[-1px] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
             aria-label="Download detailed Python curriculum"
           >
@@ -227,6 +232,13 @@ export default function CurriculumSection() {
           <p className="mt-3 text-xs sm:text-sm text-slate-600">Includes topics, outcomes, tools, and project checklist.</p>
         </div>
       </div>
+
+      <SyllabusDownloadModal
+        isOpen={isSyllabusModalOpen}
+        onClose={() => setIsSyllabusModalOpen(false)}
+        courseName="Python Programming"
+        source="Python Course Page - Curriculum Section - Syllabus Download"
+      />
 
     </section>
   );

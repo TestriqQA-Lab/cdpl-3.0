@@ -22,8 +22,8 @@ const SYLLABUS_LINKS: Record<string, string> = {
   'Advanced Data Analytics Hero Program': 'https://www.cinutedigital.com/downloads/advanced-data-analytics-hero-program.pdf',
   'Advanced Data Analytics with Python': 'https://www.cinutedigital.com/downloads/advanced-data-analytics-with-python-libraries.pdf',
   'Advanced Data Science and ML': 'https://www.cinutedigital.com/downloads/advanced-data-science-and-machine-learning-masterclass.pdf',
-  'Advanced Excel for Data Analytics': 'https://www.cinutedigital.com/downloads/advanced-excel-for-Data-analytics-&-visualization.pdf',
-  'Advanced Manual and Automation Testing': 'https://www.cinutedigital.com/downloads/advanced-manual-and-automation-testing-master-program.pdf',
+  'Advanced Excel for Data Analytics & Visualization': 'https://www.cinutedigital.com/downloads/advanced-excel-for-Data-analytics-&-visualization.pdf',
+  'Advanced Manual and Automation Testing Master Program': 'https://www.cinutedigital.com/downloads/advanced-manual-and-automation-testing-master-program.pdf',
   'Advanced Software Testing': 'https://www.cinutedigital.com/downloads/advanced-software-testing.pdf',
   'AI Driven Digital Marketing': 'https://www.cinutedigital.com/downloads/ai-driven-digital-marketing-&-analytics.pdf',
   'Comprehensive Data Science and AI': 'https://www.cinutedigital.com/downloads/comprehensive-data-science-and-ai-master-program.pdf',
@@ -97,11 +97,31 @@ export async function POST(request: Request) {
     const isManualTestingHeroForm = formSource === 'Manual Software Testing Course Page - Hero Section';
     const isApiTestingHeroForm = formSource === 'API Testing Course Page - Hero Section';
     const isDbmsHeroForm = formSource === 'DBMS Course Page - Hero Section';
+    const isEtlHeroForm = formSource === 'ETL Testing Course Page - Hero Section';
+    const isAdvancedSoftwareTestingHeroForm = formSource === 'Advanced Software Testing Course Page - Hero Section';
+    const isMasterProgramHeroForm = formSource === 'Master Program Course Page - Hero Section';
+    const isPythonHeroForm = formSource === 'Python Course Page - Hero Section';
+    const isJavaHeroForm = formSource === 'Java Course Page - Hero Section';
+    const isDataAnalyticsHeroForm = formSource === 'Data Analytics Course Page - Hero Section';
+    const isDataAnalyticsPythonHeroForm = formSource === 'Data Analytics with Python Course Page - Hero Section';
+    const isDataAnalyticsVizHeroForm = formSource === 'Data Analytics & Visualization Course Page - Hero Section';
+    const isPowerBiHeroForm = formSource === 'Power BI Course Page - Hero Section';
+    const isTableauHeroForm = formSource === 'Tableau Course Page - Hero Section';
+    const isDataScienceHeroForm = formSource === 'Data Science Course Page - Hero Section';
+    const isMlHeroForm = formSource === 'Machine Learning Course Page - Hero Section';
+    const isMlPythonHeroForm = formSource === 'Machine Learning with Python Course Page - Hero Section';
+    const isRProgrammingHeroForm = formSource === 'R Programming Course Page - Hero Section';
+    const isDataEngineeringHeroForm = formSource === 'Data Engineering Course Page - Hero Section';
+    const isGenAiHeroForm = formSource === 'Generative AI Course Page - Hero Section';
+    const isPromptEngHeroForm = formSource === 'Prompt Engineering Course Page - Hero Section';
+    const isAiMarketingHeroForm = formSource === 'AI in Digital Marketing Course Page - Hero Section';
+    const isAiBootcampHeroForm = formSource === 'AI Bootcamp Course Page - Hero Section';
+
     const isMentorRequest = formSource.includes('Team Page - Mentor Section');
     const isLiveJobsRequest = formSource.includes('Live Jobs Page - Hero Section');
     const isPlacementRequest = formSource.includes('Placements Page');
     const isMentorsPageRequest = formSource.includes('Mentors Page');
-    const isSessionEnquiry = formSource.includes('Session Enquiry') || formSource.includes('Other Courses Section') || formSource.includes('Book Free Demo') || formSource.includes('Start Your QA Journey') || formSource.includes('Get Placement Support');
+    const isSessionEnquiry = formSource.includes('Session Enquiry') || formSource.includes('Other Courses Section') || formSource.includes('Book Free Demo') || formSource.includes('Start Your QA Journey') || formSource.includes('Get Placement Support') || formSource.includes('Become SDET in 30 Days') || formSource.includes('Start Your QA Career') || formSource.includes('Talk to Advisor') || formSource.includes('Browse Open Roles');
 
     // Subject Prefix Logic
     let subjectPrefix = '[ENQUIRY]';
@@ -115,7 +135,7 @@ export async function POST(request: Request) {
       subjectPrefix = '[Enquiry]';
     } else if (isGetStartedForm) {
       subjectPrefix = '[GET STARTED REQUEST]';
-    } else if (isManualTestingHeroForm || isApiTestingHeroForm || isDbmsHeroForm) {
+    } else if (isManualTestingHeroForm || isApiTestingHeroForm || isDbmsHeroForm || isEtlHeroForm || isAdvancedSoftwareTestingHeroForm || isMasterProgramHeroForm || isPythonHeroForm || isJavaHeroForm || isDataAnalyticsHeroForm || isDataAnalyticsPythonHeroForm || isDataAnalyticsVizHeroForm || isPowerBiHeroForm || isTableauHeroForm || isDataScienceHeroForm || isMlHeroForm || isMlPythonHeroForm || isRProgrammingHeroForm || isDataEngineeringHeroForm || isGenAiHeroForm || isPromptEngHeroForm || isAiMarketingHeroForm || isAiBootcampHeroForm) {
       subjectPrefix = '[ENQUIRY]';
     } else if (isMentorRequest) {
       subjectPrefix = '[MENTOR REQUEST]';
@@ -155,7 +175,7 @@ export async function POST(request: Request) {
       fullName,
       email,
       phone,
-      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isEnrollmentRequest ? 'Enroll Now Inquiry' : (isGetStartedForm ? 'Get Started Request' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : (isSessionEnquiry ? 'Session Enquiry' : (isManualTestingHeroForm || isApiTestingHeroForm || isDbmsHeroForm ? 'Course Page Enquiry' : 'General Inquiry')))))))),
+      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isEnrollmentRequest ? 'Enroll Now Inquiry' : (isGetStartedForm ? 'Get Started Request' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : (isSessionEnquiry ? 'Session Enquiry' : (isManualTestingHeroForm || isApiTestingHeroForm || isDbmsHeroForm || isEtlHeroForm || isAdvancedSoftwareTestingHeroForm || isMasterProgramHeroForm || isPythonHeroForm || isJavaHeroForm || isDataAnalyticsHeroForm || isDataAnalyticsPythonHeroForm || isDataAnalyticsVizHeroForm || isPowerBiHeroForm || isTableauHeroForm || isDataScienceHeroForm || isMlHeroForm || isMlPythonHeroForm || isRProgrammingHeroForm || isDataEngineeringHeroForm || isGenAiHeroForm || isPromptEngHeroForm || isAiMarketingHeroForm || isAiBootcampHeroForm ? 'Course Page Enquiry' : 'General Inquiry')))))))),
       source: formSource,
       downloadLink: isBrochureRequest ? BROCHURE_DOWNLOAD_LINK : (isSyllabusRequest ? (syllabusLink || 'N/A') : 'N/A'),
       year: currentYear,
@@ -180,6 +200,20 @@ export async function POST(request: Request) {
         adminSubject = `${subjectPrefix} New Lead from ${fullName} - API Testing Page (Syllabus)`;
       } else if (formSource === 'DBMS Course Page - Hero Section - Download Syllabus') {
         adminSubject = `${subjectPrefix} New Lead from ${fullName} - DBMS Page (Syllabus)`;
+      } else if (formSource === 'ETL Testing Course Page - Hero Section - Syllabus Download') {
+        adminSubject = `${subjectPrefix} New Lead from ${fullName} - ETL Testing Page (Syllabus)`;
+      } else if (formSource === 'Advanced Software Testing Course Page - Hero Section - Syllabus Download') {
+        adminSubject = `${subjectPrefix} New Lead from ${fullName} - Advanced Software Testing Page (Syllabus)`;
+      } else if (formSource === 'Master Program Course Page - Curriculum Section - Syllabus Download') {
+        adminSubject = `${subjectPrefix} New Lead from ${fullName} - Master Program Page (Syllabus)`;
+      } else if (formSource === 'Python Course Page - Curriculum Section - Syllabus Download') {
+        adminSubject = `${subjectPrefix} New Lead from ${fullName} - Python Page (Syllabus)`;
+      } else if (formSource === 'Java Course Page - Curriculum Section - Syllabus Download' || formSource === 'Java Course Page - Who Should Enroll Section - Syllabus Download') {
+        adminSubject = `${subjectPrefix} New Lead from ${fullName} - Java Page (Syllabus)`;
+      } else if (formSource === 'Data Analytics & Visualization Course Page - Hero Section - Download Syllabus' || formSource === 'Data Analytics & Visualization Course Page - Curriculum Section - Syllabus Download' || formSource === 'Data Analytics & Visualization Course Page - Career Section - Download Report' || formSource === 'Data Analytics & Visualization Course Page - Who Should Enroll - Download Syllabus') {
+        adminSubject = `${subjectPrefix} New Lead from ${fullName} - Advanced Excel Page (Syllabus)`;
+      } else if (formSource === 'Data Science Course Page - Hero Section - Syllabus Download' || formSource === 'Data Science Course Page - Curriculum Section - Syllabus Download' || formSource === 'Data Science Course Page - Career Section - Download Portfolio Guide' || formSource === 'Data Science Course Page - Who Should Enroll - Download Syllabus') {
+        adminSubject = `${subjectPrefix} New Lead from ${fullName} - Data Science Page (Syllabus)`;
       } else {
         adminSubject = `${subjectPrefix} New Lead for ${courseName} - ${fullName}`;
       }
@@ -189,16 +223,13 @@ export async function POST(request: Request) {
       adminSubject = `${subjectPrefix} New Lead from ${fullName} - API Testing Course Page`;
     } else if (isDbmsHeroForm) {
       adminSubject = `${subjectPrefix} New Lead from ${fullName} - DBMS Course Page`;
-    } else if (isMentorRequest) {
-      adminSubject = `${subjectPrefix} New Mentor Request from ${fullName}`;
-    } else if (isLiveJobsRequest) {
-      adminSubject = `${subjectPrefix} New Job Enquiry from ${fullName}`;
-    } else if (isPlacementRequest) {
-      adminSubject = `${subjectPrefix} New Placement Enquiry from ${fullName}`;
+    } else if (isEtlHeroForm) {
+      adminSubject = `${subjectPrefix} New Lead from ${fullName} - ETL Testing Course Page`;
+    } else if (isAdvancedSoftwareTestingHeroForm) {
+      adminSubject = `${subjectPrefix} New Lead from ${fullName} - Advanced Software Testing Course Page`;
     } else if (isMentorsPageRequest) {
       adminSubject = `${subjectPrefix} New Mentorship Enquiry from ${fullName}`;
     } else if (isEnrollmentRequest) {
-      // Expected: [ENROLL NOW] New Lead from Prakash Testing - Manual Testing Course Page
       adminSubject = `${subjectPrefix} New Lead from ${fullName} - ${courseName || 'Course'} Page`;
     } else if (formSource === 'Manual Software Testing Course Page - Learning Path') {
       adminSubject = `${subjectPrefix} New Lead from ${fullName} - Manual Testing Page`;
@@ -214,6 +245,22 @@ export async function POST(request: Request) {
       adminSubject = `[SESSION ENQUIRY] New Lead from ${fullName} - DBMS Page`;
     } else if (formSource === 'DBMS Course Page - Career Section - Get Placement Support') {
       adminSubject = `[PLACEMENT ENQUIRY] New Lead from ${fullName} - DBMS Page (Career Section)`;
+    } else if (formSource === 'ETL Testing Course Page - Curriculum Section - Book Free Demo') {
+      adminSubject = `[SESSION ENQUIRY] New Lead from ${fullName} - ETL Testing Page`;
+    } else if (formSource === 'ETL Testing Course Page - Career Section - Get Placement Support') {
+      adminSubject = `[PLACEMENT ENQUIRY] New Lead from ${fullName} - ETL Testing Page (Career Section)`;
+    } else if (formSource === 'Advanced Software Testing Course Page - Curriculum Section - Book Free Demo') {
+      adminSubject = `[SESSION ENQUIRY] New Lead from ${fullName} - Advanced Software Testing Page`;
+    } else if (formSource === 'Advanced Software Testing Course Page - Career Section - Become SDET in 30 Days') {
+      adminSubject = `[PLACEMENT ENQUIRY] New Lead from ${fullName} - Advanced Software Testing Page (Career Section)`;
+    } else if (formSource === 'Master Program Course Page - Curriculum Section - Book Free Demo') {
+      adminSubject = `[SESSION ENQUIRY] New Lead from ${fullName} - Master Program Page`;
+    } else if (formSource === 'Master Program Course Page - Career Section - Start Your QA Career') {
+      adminSubject = `[PLACEMENT ENQUIRY] New Lead from ${fullName} - Master Program Page (Career Section)`;
+    } else if (formSource === 'Python Course Page - Career Section - Talk to Advisor') {
+      adminSubject = `[SESSION ENQUIRY] New Lead from ${fullName} - Python Page (Career Section)`;
+    } else if (formSource === 'Java Course Page - Career Section - Browse Open Roles') {
+      adminSubject = `[SESSION ENQUIRY] New Lead from ${fullName} - Java Page (Career Section)`;
     }
 
     const adminMailOptions: nodemailer.SendMailOptions = {
@@ -303,7 +350,7 @@ export async function POST(request: Request) {
       email,
       phone,
       source: formSource,
-      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isEnrollmentRequest ? 'Enroll Now Inquiry' : (isGetStartedForm ? 'Get Started Request' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : (isSessionEnquiry ? 'Session Enquiry' : (isManualTestingHeroForm || isApiTestingHeroForm || isDbmsHeroForm ? 'Course Page Enquiry' : 'General Inquiry')))))))),
+      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isEnrollmentRequest ? 'Enroll Now Inquiry' : (isGetStartedForm ? 'Get Started Request' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : (isSessionEnquiry ? 'Session Enquiry' : (isManualTestingHeroForm || isApiTestingHeroForm || isDbmsHeroForm || isEtlHeroForm || isAdvancedSoftwareTestingHeroForm || isMasterProgramHeroForm || isPythonHeroForm || isJavaHeroForm || isDataAnalyticsHeroForm || isDataAnalyticsPythonHeroForm || isDataAnalyticsVizHeroForm || isPowerBiHeroForm || isTableauHeroForm || isDataScienceHeroForm || isMlHeroForm || isMlPythonHeroForm || isRProgrammingHeroForm || isDataEngineeringHeroForm || isGenAiHeroForm || isPromptEngHeroForm || isAiMarketingHeroForm || isAiBootcampHeroForm ? 'Course Page Enquiry' : 'General Inquiry')))))))),
 
       interest: interest || '',
       message: message || '',

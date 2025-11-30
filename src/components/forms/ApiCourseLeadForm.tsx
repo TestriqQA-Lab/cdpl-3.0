@@ -11,11 +11,13 @@ import { isValidPhoneNumber } from 'libphonenumber-js';
 export default function LeadForm({
   className = '',
   variant = 'elevated',
-  source = 'API Testing Course Page - Hero Section'
+  source = 'API Testing Course Page - Hero Section',
+  courseName
 }: {
   className?: string;
   variant?: 'default' | 'elevated';
   source?: string;
+  courseName?: string;
 }) {
   // Form state
   const [formData, setFormData] = useState({

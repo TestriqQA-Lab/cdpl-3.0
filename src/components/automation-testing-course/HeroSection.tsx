@@ -7,11 +7,16 @@ import {
     ArrowRight,
     Home,
     ChevronRight,
+    CloudDownload,
+    ArrowDownNarrowWide,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import IconCard from '../ui/IconCard';
-import LeadForm from '../CourseLeadForm';
+import LeadForm from '../forms/ApiCourseLeadForm';
 import Link from 'next/link';
+import { useState } from 'react';
+import EnrollModal from '@/components/EnrollModal';
+import SyllabusDownloadModal from '@/components/SyllabusDownloadModal';
 
 
 /* ---------------------------------------
@@ -28,7 +33,8 @@ const features = [
    HERO
 ---------------------------------------- */
 export default function HeroSection() {
-
+    const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+    const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
 
     const breadcrumbs = [
         { label: "Home", href: "/" },
@@ -98,7 +104,7 @@ export default function HeroSection() {
 
                         {/* FORM — mobile: directly under H1 */}
                         <div className="mt-6 block md:hidden">
-                            <LeadForm />
+                            <LeadForm variant="elevated" source="Advanced Automation Testing Course Page - Hero Section" />
                         </div>
 
                         <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-700 sm:text-lg">
@@ -114,18 +120,34 @@ export default function HeroSection() {
                         {/* CTAs */}
                         <div className="mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
                             <button
+                                onClick={() => setIsEnrollModalOpen(true)}
                                 className="group inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
+                                aria-label="Enroll now in Advanced Automation Testing"
                             >
                                 Enroll Now
                                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                             </button>
 
-                            <Link
-                                href="#curriculum"
+                            <button
+                                onClick={() => setIsSyllabusModalOpen(true)}
+                                className="group inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
+                                aria-label="Download Advanced Automation Testing Syllabus"
+                            >
+                                Download Syllabus
+                                <CloudDownload className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
+                            </button>
+
+                            <button
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    document.getElementById('curriculum')?.scrollIntoView({ behavior: 'smooth' });
+                                }}
                                 className="inline-flex items-center justify-center rounded-xl border-2 border-sky-300 bg-white px-6 py-3 text-base font-semibold text-sky-700 shadow-sm transition hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-200"
+                                aria-label="View full Advanced Automation Testing curriculum"
                             >
                                 View Curriculum
-                            </Link>
+                                <ArrowDownNarrowWide className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
+                            </button>
                         </div>
 
                         {/* Quick highlights — unique color markers per line */}
@@ -167,11 +189,25 @@ export default function HeroSection() {
                         transition={{ duration: 0.6, delay: 0.12, ease: 'easeOut' }}
                         className="hidden md:col-span-5 lg:col-span-4 md:block"
                     >
-                        <LeadForm />
+                        <LeadForm variant="elevated" source="Advanced Automation Testing Course Page - Hero Section" />
 
                     </motion.aside>
                 </div>
             </div>
+
+            <EnrollModal
+                isOpen={isEnrollModalOpen}
+                onClose={() => setIsEnrollModalOpen(false)}
+                courseName="Advanced Automation Testing"
+                source="Advanced Automation Testing Course Page - Hero Section - Enroll Now"
+            />
+
+            <SyllabusDownloadModal
+                isOpen={isSyllabusModalOpen}
+                onClose={() => setIsSyllabusModalOpen(false)}
+                courseName="Advanced Automation Testing"
+                source="Advanced Automation Testing Course Page - Hero Section - Syllabus Download"
+            />
 
         </section>
     );

@@ -2,6 +2,8 @@
 import { Briefcase, Building2, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useState } from 'react';
+import CareerSessionModal from '@/components/CareerSessionModal';
 
 const ROLES = [
   'SDET',
@@ -40,7 +42,7 @@ const companyAccents = [
 ];
 
 export default function CareerSection() {
-
+  const [isCareerModalOpen, setIsCareerModalOpen] = useState(false);
 
   return (
     <section id="career" aria-labelledby="career-heading" className="relative py-8 md:py-10 bg-white">
@@ -145,19 +147,25 @@ export default function CareerSection() {
           transition={{ duration: 0.45, ease: 'easeOut' }}
           className="mt-12 text-center"
         >
-          <Link
-            href="contact-us"
+          <button
+            onClick={() => setIsCareerModalOpen(true)}
             className="inline-flex items-center gap-2 rounded-xl border border-[#00758F] bg-[#00758F] px-7 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-[#016a82] focus:outline-none focus:ring-4 focus:ring-cyan-200"
             aria-label="Become SDET in 30 Days"
           >
             Become SDET in 30 Days
             <ArrowRight className="h-5 w-5" />
-          </Link>
+          </button>
           <p className="mt-3 text-xs text-slate-500">
             Mentor-led, project-based training with resume building and mock interviews.
           </p>
         </motion.div>
       </div>
+
+      <CareerSessionModal
+        isOpen={isCareerModalOpen}
+        onClose={() => setIsCareerModalOpen(false)}
+        source="Advanced Software Testing Course Page - Career Section - Become SDET in 30 Days"
+      />
 
     </section>
   );

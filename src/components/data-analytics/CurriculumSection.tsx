@@ -2,8 +2,14 @@
 // Server component — sleek, SEO-optimized, slightly futuristic, fully responsive.
 // Unique accent colors per module (no repeats). Explicit top-bar classes (no dynamic Tailwind).
 
+"use client";
+
 import Link from "next/link";
 import { CheckCircle } from 'lucide-react';
+import { useState } from "react";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
+import EnrollModal from "../EnrollModal";
+import CareerSessionModal from "../CareerSessionModal";
 
 type Module = {
   num: string;
@@ -87,6 +93,9 @@ const MODULES: Module[] = [
 ];
 
 export default function CurriculumSection() {
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const [isCareerSessionOpen, setIsCareerSessionOpen] = useState(false);
 
   const subtitle =
     "An industry-aligned data analytics pathway from clean data and statistics to dashboards, predictive modeling, and BI decisioning.";
@@ -170,19 +179,44 @@ export default function CurriculumSection() {
         {/* CTAs */}
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <button
+            onClick={() => setIsSyllabusOpen(true)}
             className="inline-flex items-center justify-center rounded-xl border-2 border-green-700 bg-white px-4 py-2 text-sm font-semibold text-green-800 shadow-sm transition hover:bg-green-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-emerald-200"
           >
             Download Detailed Syllabus (PDF)
           </button>
-          <Link
-            href="contact-us"
+          <button
+            onClick={() => setIsCareerSessionOpen(true)}
+            className="inline-flex items-center justify-center rounded-xl border-2 border-purple-700 bg-white px-4 py-2 text-sm font-semibold text-purple-800 shadow-sm transition hover:bg-purple-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-purple-200"
+          >
+            Book a Career Session
+          </button>
+          <button
+            onClick={() => setIsEnrollOpen(true)}
             className="inline-flex items-center justify-center rounded-xl bg-indigo-700 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-200"
           >
             Apply Now
-          </Link>
+          </button>
         </div>
       </div>
 
+      <SyllabusDownloadModal
+        isOpen={isSyllabusOpen}
+        onClose={() => setIsSyllabusOpen(false)}
+        source="Data Analytics Course Page - Curriculum Section - Syllabus Download"
+        courseName="Advanced Data Analytics Hero Program"
+      />
+      <CareerSessionModal
+        isOpen={isCareerSessionOpen}
+        onClose={() => setIsCareerSessionOpen(false)}
+        source="Data Analytics Course Page - Curriculum Section - Career Session"
+        courseName="Advanced Data Analytics Hero Program"
+      />
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="Data Analytics Course Page - Curriculum Section - Apply Now"
+        courseName="Advanced Data Analytics Hero Program"
+      />
     </section>
   );
 }

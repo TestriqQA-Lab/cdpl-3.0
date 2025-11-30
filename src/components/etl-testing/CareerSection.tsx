@@ -2,6 +2,8 @@
 import { motion } from 'framer-motion';
 import { Briefcase, Building2, ArrowRight, BadgeCheck, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
+import { useState } from 'react';
+import CareerSessionModal from '@/components/CareerSessionModal';
 
 const roles = [
   'ETL Tester',
@@ -40,7 +42,7 @@ const companyAccents = [
 ];
 
 export default function CareerSection() {
-
+  const [isCareerModalOpen, setIsCareerModalOpen] = useState(false);
 
   return (
     <section
@@ -163,16 +165,22 @@ export default function CareerSection() {
           transition={{ duration: 0.45, ease: 'easeOut' }}
           className="mt-10 sm:mt-12 text-center"
         >
-          <Link
-            href="contact-us"
+          <button
+            onClick={() => setIsCareerModalOpen(true)}
             className="inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-7 py-3 text-sm sm:text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
             aria-label="Get placed in 30 days"
           >
-            Get Placed in 30 Days
+            Get Placement Support
             <ArrowRight className="ml-2 h-5 w-5" />
-          </Link>
+          </button>
         </motion.div>
       </div>
+
+      <CareerSessionModal
+        isOpen={isCareerModalOpen}
+        onClose={() => setIsCareerModalOpen(false)}
+        source="ETL Testing Course Page - Career Section - Get Placement Support"
+      />
 
     </section>
   );

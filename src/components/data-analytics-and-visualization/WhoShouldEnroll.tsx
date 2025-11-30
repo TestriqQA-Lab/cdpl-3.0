@@ -1,5 +1,9 @@
-import { Users, GraduationCap, Briefcase, TrendingUp, BarChart3, Target } from "lucide-react";
+"use client";
+import { useState } from "react";
+import { Users, GraduationCap, Briefcase, TrendingUp, BarChart3, Target, ArrowRight, Download } from "lucide-react";
 import Link from "next/link";
+import EnrollModal from "../EnrollModal";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
 
 
 const whoShouldEnroll = [
@@ -39,6 +43,11 @@ const colorClasses = [
 ];
 
 export default function WhoShouldEnroll() {
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+
+    const courseName = "Advanced Excel for Data Analytics & Visualization";
+
     return (
         <section className="relative py-10 md:py-20 bg-white overflow-hidden">
             {/* Decorative background */}
@@ -195,28 +204,38 @@ export default function WhoShouldEnroll() {
                     <p className="text-lg text-slate-700 mb-6">
                         Ready to start your Excel mastery journey?
                     </p>
-                    <Link
-                        href="/contact-us"
-                        className="
-    inline-flex items-center justify-center
-    w-full sm:w-auto
-    px-4 py-3 sm:px-6 sm:py-3 md:px-10 md:py-4
-    text-sm sm:text-base md:text-lg
-    bg-gradient-to-r from-blue-600 to-indigo-600
-    hover:from-blue-700 hover:to-indigo-700
-    text-white font-semibold
-    rounded-lg
-    text-center
-    shadow-lg hover:shadow-xl
-    transition-all duration-300
-    break-words
-  "
-                    >
-                        Enroll Now and Transform Your Career
-                    </Link>
-
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <button
+                            onClick={() => setIsEnrollOpen(true)}
+                            className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all hover:bg-blue-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-300"
+                        >
+                            Enroll Now
+                            <ArrowRight className="h-5 w-5" />
+                        </button>
+                        <button
+                            onClick={() => setIsSyllabusOpen(true)}
+                            className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-slate-200 bg-white px-8 py-4 text-lg font-semibold text-slate-700 shadow-sm transition-all hover:border-blue-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-200"
+                        >
+                            <Download className="h-5 w-5" />
+                            Download Syllabus
+                        </button>
+                    </div>
                 </div>
             </div>
+
+            {/* Modals */}
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="Data Analytics & Visualization Course Page - Who Should Enroll - Enroll Now"
+                courseName={courseName}
+            />
+            <SyllabusDownloadModal
+                isOpen={isSyllabusOpen}
+                onClose={() => setIsSyllabusOpen(false)}
+                source="Data Analytics & Visualization Course Page - Who Should Enroll - Download Syllabus"
+                courseName={courseName}
+            />
         </section>
     );
 }
