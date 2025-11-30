@@ -2183,6 +2183,416 @@ export const pastEvents: PastEvent[] = [
     venueDescription: "St. John Institute of Management and Research (SJIMR), established in 2007, is located in Palghar, Maharashtra. Affiliated with the University of Mumbai, it offers undergraduate and postgraduate programs, including BE and MMS. The college provides modern infrastructure, skilled faculty, and focuses on practical skills and industry readiness. SJIMR emphasizes holistic development and has a strong placement record, making it a great choice for students aiming to excel in their careers.",
     venueImageUrl: "/events/6-days-workshop-on-machine-learning/ST-John-College.png"
   },
+  {
+    id: "power-load-forecasting-using-machine-learning",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "power-load-forecasting-using-machine-learning-short-term-training-program",
+    title: "Power Load Forecasting Using Machine Learning (STTP) – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2024-11-07 @ 10:00 AM to 2024-11-08 @ 03:00 PM",
+    location: "VIVA Institute of Technology",
+    attendees: 90,
+    category: "Short Term Training Program",
+    categoryColor: "bg-blue-600",  // Green for partnership/collaboration theme
+    serviceType: "Machine Learning",
+    purpose: "Equip faculty with practical knowledge on building machine learning models for load demand forecasting. Emphasize the significance of accurate forecasting in the power industry for improved efficiency and reliability.",
+    trainingDuration: "The session brought together industry experts to share their invaluable insights on the latest IT trends, including",
+    sessionHighlights: [
+      {
+        title: "",
+        points: ["Data Collection and Preprocessing"]
+      },
+      {
+        title: "",
+        points: ["Exploratory Data Analysis (EDA) for understanding patterns and correlations"]
+      },
+      {
+        title: "",
+        points: ["Feature Engineering for enhanced model accuracy"]
+      },
+      {
+        title: "",
+        points: ["Model Selection and Evaluation, focusing on regression-based approaches"]
+      },
+      {
+        title: "",
+        points: ["Hyperparameter Tuning for optimizing model performance"]
+      },
+      {
+        title: "",
+        points: ["Model Deployment with Flask/Django for integration with utility systems"]
+      },
+      {
+        title: "",
+        points: ["Visualization and Reporting for effective presentation of forecasted results"]
+      },
+    ],
+    keyTakeaways: [
+      {
+        title: "",
+        description: "Practical experience in developing, evaluating, and deploying machine learning models for power load forecasting."
+      },
+      {
+        title: "",
+        description: "Understanding of time series forecasting techniques and their applications in the power sector."
+      },
+      {
+        title: "",
+        description: "Insight into data visualization and reporting for effective decision-making."
+      }
+    ],
+    highlights: [],
+    heroImageUrl: "/events/power-load-forecasting-using-machine-learning-short-term-training-program/power-load-forecasting.jpeg",
+    success: "Faculty members successfully gained hands-on expertise in building, evaluating, and deploying machine learning models for accurate power load demand forecasting, empowering them to drive greater efficiency and reliability in the power sector.",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "VIVA Institute of Technology",
+    venueAddress: "Virar, Maharashtra",
+    venueDescription: "VIVA Institute of Technology (VIT), established in 2009, is located in Virar, Maharashtra. Affiliated with the University of Mumbai, it offers undergraduate and postgraduate programs in engineering disciplines like Mechanical, Civil, and Computer Science. The institute provides modern infrastructure, well-equipped labs, and a strong focus on practical skills. VIT has a dedicated placement cell, ensuring students secure positions in top companies. Its accessible location makes it a popular choice for students in the Mumbai region.",
+    venueImageUrl: "/events/power-load-forecasting-using-machine-learning-short-term-training-program/Viva-College-LOGO.png"
+  },
+  {
+    id: "machine-learning-algorithm-in-civil-engineering",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "seminar-on-application-of-machine-learning-algorithm-in-civil-engineering",
+    title: "Seminar on Application of Machine Learning Algorithm in Civil Engineering – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2024-10-01 @ 10:00 AM",
+    location: "Thane",
+    attendees: 67,
+    category: "Seminar",
+    categoryColor: "bg-blue-600",  // Green for partnership/collaboration theme
+    serviceType: "Artificial Intelligence and Machine Learning (AI-ML)",
+    purpose: "Introduced students to the application of machine learning (ML) algorithms in civil engineering. Focused on the prediction of compressive strength, a critical factor in material performance and construction quality.",
+    trainingDuration: "The session brought together industry experts to share their invaluable insights on the latest IT trends, including",
+    sessionHighlights: [
+      {
+        title: "",
+        points: ["Ashish provided insights into the growing significance of AI and ML technologies within civil engineering, especially in material analysis and project optimization."]
+      },
+      {
+        title: "",
+        points: ["Cezzane demonstrated the use of Multiple Linear Regression as the selected algorithm, guiding students through the data science process for predicting compressive strength."]
+      },
+
+    ],
+    keyTakeaways: [
+      {
+        title: "",
+        description: "Understanding of ML's role in civil engineering, particularly for predictive analysis."
+      },
+      {
+        title: "",
+        description: "Hands-on demonstration of multiple linear regression, showing its application to compressive strength prediction."
+      },
+      {
+        title: "",
+        description: "Practical exposure to data science concepts that enhance engineering practices through ML."
+      }
+    ],
+    highlights: [],
+    heroImageUrl: "/events/seminar-on-application-of-machine-learning-algorithm-in-civil-engineering/machine-learning-algorithm-in-civil-engineering.jpeg",
+    success: "The session successfully introduced students to the power of machine learning in civil engineering, delivering a clear, hands-on demonstration of multiple linear regression for accurate prediction of concrete compressive strength and its real-world impact on construction quality.",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "A. P. Shah College of Engineering, Thane",
+    venueAddress: "Thane, Maharashtra",
+    venueDescription: "A. P. Shah Institute of Technology (APSIT), established in 2014, is located in Thane, Maharashtra. Affiliated with the University of Mumbai, it offers undergraduate programs in various engineering disciplines like Computer Science, Mechanical, and Civil Engineering. The college is known for its modern infrastructure, experienced faculty, and a strong emphasis on research. APSIT maintains a robust placement record, with students securing positions in top companies. The college also encourages extracurricular activities to foster holistic development. Its location in Thane provides excellent industry exposure for students.",
+    venueImageUrl: "/events/seminar-on-application-of-machine-learning-algorithm-in-civil-engineering/AP-Shah-college.png"
+  },
+  {
+    id: "seminar-on-data-visualization-by-powerbi",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "seminar-on-data-visualization-by-powerbi",
+    title: "Seminar on Data Visualization by PowerBI – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2024-09-18 @ 10:00 AM",
+    location: "Bhayandar East",
+    attendees: 50,
+    category: "Seminar",
+    categoryColor: "bg-blue-600",  // Green for partnership/collaboration theme
+    serviceType: "Data Science",
+    purpose: "Introduced students to the fundamentals of data visualization, focusing on the finance and accounting sectors. Emphasized the importance of visualizing data to improve decision-making and understand business trends.",
+    trainingDuration: "The session brought together industry experts to share their invaluable insights on the latest IT trends, including",
+    sessionHighlights: [
+      {
+        title: "",
+        points: ["Session tailored specifically for accounting and finance students."]
+      },
+      {
+        title: "Dataset used",
+        points: ["Sales data to mirror real-world finance applications."]
+      },
+
+    ],
+    keyTakeaways: [
+      {
+        title: "",
+        description: "Understanding Power BI as a visualization tool and its impact on financial data analysis."
+      },
+      {
+        title: "",
+        description: "Hands-on practice with sales data to create relevant financial visualizations."
+      },
+      {
+        title: "",
+        description: "Enhanced skills in identifying key financial metrics and interpreting business performance through visuals."
+      }
+    ],
+    highlights: ["Ashish Shetty, introduced the fundamentals of Power BI, including its importance in presenting and interpreting financial data. Cezzane Khan, a seasoned data science expert, guided the students through practical exercises using Power BI, demonstrating how to transform raw data into insightful visuals."],
+    heroImageUrl: "/events/seminar-on-data-visualization-by-powerbi/seminar-on-data-visualization.jpeg",
+    success: "The session successfully equipped accounting and finance students with practical Power BI skills, enabling them to transform raw sales data into powerful, insightful visualizations that drive better financial decision-making and reveal critical business trends.",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "S N College",
+    venueAddress: "Bhayandar East, Thane, Maharashtra",
+    venueDescription: "Shankar Narayan College of Arts and Commerce, established in 1994, is located in Bhayandar East, Thane, Maharashtra. Affiliated with the University of Mumbai, it offers undergraduate and postgraduate programs in Arts, Commerce, and Science. The college is accredited with an ‘A’ grade by NAAC, reflecting its commitment to quality education. It has modern infrastructure, including labs, a library, and facilities for extracurricular activities. The college also boasts a strong placement cell, helping students secure jobs with top companies. Conveniently located, it is easily accessible by road and rail.",
+    venueImageUrl: "/events/seminar-on-data-visualization-by-powerbi/SN-College-logo.png"
+  },
+  {
+    id: "placement-drive-at-msg-sgkm-college",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "placement-drive-at-msg-sgkm-college-of-arts-science-and-commerce",
+    title: "Placement Drive at MSG-SGKM College of Arts, Science and Commerce – Cinute Digital Pvt. Ltd",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2024-03-23 @ 10:00 AM",
+    location: "Ghatkophar",
+    attendees: 49,
+    category: "Placement Drive",
+    categoryColor: "bg-blue-600",  // Green for partnership/collaboration theme
+    serviceType: "Placement",
+    purpose: "Cinute Digital Pvt. Ltd., in association with Testriq QA Lab, proudly participated in a successful placement drive at MSG-SGKM College of Arts, Science, and Commerce. This event marked a significant milestone in our ongoing efforts to connect with talented individuals and facilitate their entry into the professional world.",
+    trainingDuration: "The session brought together industry experts to share their invaluable insights on the latest IT trends, including",
+    sessionHighlights: [
+      {
+        title: "Overview of Career Opportunities in Software Testing",
+        points: ["The placement drive commenced with an insightful presentation on the myriad career opportunities available in the field of software testing.", "Students were introduced to the various roles within the testing domain, including manual testing, automation testing, and quality assurance, with a focus on how these roles contribute to the overall success of software projects."]
+      },
+      {
+        title: "Resume Building and Interview Preparation Workshop",
+        points: ["Our team conducted a dedicated workshop on resume building and interview preparation, tailored specifically for aspiring software testers.", "Participants received tips on crafting a standout resume and learned key strategies for acing technical and HR interviews, ensuring they were well-prepared to showcase their skills and knowledge to potential employers."]
+      },
+      {
+        title: "Mock Interviews and Skill Assessments",
+        points: ["As part of the placement drive, we organized mock interviews and skill assessments to give students a real-world experience of the recruitment process.", "This interactive session provided valuable feedback and helped candidates identify areas of improvement, boosting their confidence for future job interviews."]
+      },
+      {
+        title: "Networking and Future Collaborations",
+        points: ["The event concluded with a networking session, where students had the opportunity to interact with industry professionals and recruiters.", "This session not only fostered connections but also laid the groundwork for future collaborations between Cinute Digital Pvt. Ltd., Testriq QA Lab, and MSG-SGKM College."]
+      },
+
+    ],
+    keyTakeaways: [],
+    highlights: ["We are thrilled to have been a part of this placement drive and to have witnessed so many talented individuals finding their perfect fit.", "The event was a resounding success, and we look forward to nurturing these new relationships and collaborating on future initiatives that support the growth and development of emerging professionals."],
+    heroImageUrl: "/events/placement-drive-at-msg-sgkm-college-of-arts-science-and-commerce/placement-drive-at-msg-sgkm-college.jpg",
+    success: "Cinute Digital Pvt. Ltd., in association with Testriq QA Lab, successfully conducted a high-impact placement drive at MSG-SGKM College, empowering students with in-depth insights into software testing careers, expert resume-building and interview preparation guidance, real-time mock interviews, and valuable industry connections that paved the way for their professional journeys.",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "Universal MSG-SGKM College of Arts, Science & Commerce",
+    venueAddress: "Ghatkopar East, Maharashtra",
+    venueDescription: "Universal MSG-SGKM College of Arts, Science & Commerce, located in Ghatkopar East, Mumbai, is a distinguished institution offering undergraduate programs in Management Studies (BMS), Accounting & Finance (BAF), Information Technology (B.Sc. IT), and Computer Science (B.Sc. CS). Established in 2009, the college has evolved into a hub for academic excellence, emphasizing a curriculum that balances theoretical knowledge with practical application. The institution boasts air-conditioned lecture rooms, well-equipped laboratories, and a gymkhana, providing a conducive learning environment. Collaborations with industry leaders like IBM and TCS offer students access to over 8,000 certification courses and opportunities to participate in digital job fairs, enhancing their employability. With a strong focus on holistic development, Universal MSG-SGKM College prepares students to excel in their chosen fields and contribute meaningfully to society.",
+    venueImageUrl: "/events/placement-drive-at-msg-sgkm-college-of-arts-science-and-commerce/Universal-college-logo.jpg"
+  },
+  {
+    id: "the-application-of-power-bi-at-vidyavardhinis",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "the-application-of-power-bi-at-vidyavardhinis-college-of-engineering-and-technology",
+    title: "The Application of Power BI at Vidyavardhini's College of Engineering and Technology",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2024-03-05 @ 11:00 AM",
+    location: "Vasai West",
+    attendees: 56,
+    category: "Seminar",
+    categoryColor: "bg-blue-600",  // Green for partnership/collaboration theme
+    serviceType: "Business Intelligence",
+    purpose: "Cinute Digital Pvt. Ltd. is excited to share the success of our recent guest session on 'The Application of Power BI' held at Vidyavardhini's College of Engineering and Technology. This event was a significant opportunity to engage with the next generation of engineers and equip them with essential data visualization and analytics skills.",
+    trainingDuration: "The session brought together industry experts to share their invaluable insights on the latest IT trends, including",
+    sessionHighlights: [
+      {
+        title: "Introduction to Power BI",
+        points: ["The session began with an introduction to Power BI, covering its importance in the data analytics landscape.", "Esha Prakash, our esteemed Head of Data Science Domain, guided students through the core functionalities of Power BI, emphasizing its role in transforming raw data into meaningful insights."]
+      },
+      {
+        title: "Data Visualization Techniques",
+        points: ["Students were introduced to various data visualization techniques using Power BI.", "Esha demonstrated how to create dynamic dashboards, customize visual elements, and interpret data patterns.", "This hands-on segment provided participants with the practical skills needed to visualize complex datasets effectively."]
+      },
+      {
+        title: "Real-World Applications of Power BI",
+        points: ["Esha shared real-world case studies showcasing how Power BI is used across different industries to drive decision-making processes.", "This segment highlighted the versatility of Power BI and inspired students to think creatively about applying these tools in their future careers."]
+      },
+      {
+        title: "Interactive Q&A and Hands-On Practice",
+        points: ["The session was designed to be highly interactive, with students actively participating in discussions and practical exercises.", "They had the opportunity to work on sample datasets, create their own visualizations, and receive immediate feedback from Esha.", "This approach ensured that students not only learned the concepts but also gained confidence in using Power BI."]
+      },
+      {
+        title: "Collaboration and Networking",
+        points: ["We extended our deepest thanks to Prof. Tatwadarshi Sir, the HOD of AI-DS, for his warm welcome and for facilitating this session.", "The event concluded with a networking opportunity, allowing students to connect with our team and explore potential career paths in data science and analytics."]
+      },
+
+    ],
+    keyTakeaways: [],
+    highlights: ["This guest session is a testament to Testriq QA Lab's commitment to nurturing future-ready skills and empowering students with the knowledge required to excel in the ever-evolving field of data science. We look forward to continuing our collaboration with Vidyavardhini's College of Engineering and Technology and inspiring future generations to harness the power of data."],
+    heroImageUrl: "/events/the-application-of-power-bi-at-vidyavardhinis-college-of-engineering-and-technology/the-application-of-power-bi-at-vidyavardhinis.jpg",
+    success: "Let's keep the momentum going, sharing knowledge, and shaping the leaders of tomorrow!",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "Vidyavardhini's College of Engineering and Technology – Cinute Digital Pvt. Ltd",
+    venueAddress: "Vasai, Maharashtra",
+    venueDescription: "Vidyavardhini’s College of Engineering and Technology (VCET) in Vasai, Maharashtra, is a well-regarded engineering institution affiliated with the University of Mumbai. Established in 1994, VCET offers undergraduate programs in fields like Computer Science, Mechanical, Civil, and Electronics Engineering. Known for its quality education and modern facilities, the college provides a supportive learning environment with advanced labs and experienced faculty. Its active placement cell helps students secure roles in leading companies, making VCET a solid choice for engineering education in the Mumbai region.",
+    venueImageUrl: "/events/the-application-of-power-bi-at-vidyavardhinis-college-of-engineering-and-technology/Vidyavardhini-college.png"
+  },
+  {
+    id: "cmpl-expo-at-bkc-for-collaborations",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "cmpl-expo-at-bkc-for-collaborations",
+    title: "CMPL Expo at BKC for Collaborations",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2024-05-17",
+    location: "Jio World Convention Centre",
+    attendees: 80,
+    category: "Workshop",
+    categoryColor: "bg-blue-600",  // Green for partnership/collaboration theme
+    serviceType: "",
+    purpose: "Cinute Digital Pvt. Ltd. in association with Testriq QA Lab recently participated in the prestigious Cmpl Expo held at BKC's Jio World Center in Mumbai. This event was a remarkable opportunity for us to connect with industry peers, explore new collaborations, and uncover exciting opportunities for growth and innovation.",
+    trainingDuration: "The session brought together industry experts to share their invaluable insights on the latest IT trends, including",
+    sessionHighlights: [
+      {
+        title: "Networking with Industry Leaders",
+        points: ["The expo provided an invaluable platform for networking with some of the brightest minds and leading companies in the tech industry.", "Our team engaged in meaningful conversations with industry leaders, sharing insights, discussing trends, and exploring potential partnerships that align with our vision and goals."]
+      },
+      {
+        title: "Showcasing Testriq’s Expertise",
+        points: ["At our booth, we showcased Testriq QA Lab's expertise in software testing and quality assurance.", "We highlighted our latest projects, cutting-edge solutions, and the value we bring to our clients.", "This presentation was aimed at positioning Testriq as a leader in the QA industry and attracting potential collaborators interested in our services."]
+      },
+      {
+        title: "Exploring Collaboration Opportunities",
+        points: ["Throughout the event, we focused on identifying and exploring new collaboration opportunities.", "Whether it was joint ventures, technology partnerships, or expanding our service offerings, the expo was a fertile ground for discussing how we can work together with other industry players to push the boundaries of what’s possible in the world of technology."]
+      },
+      {
+        title: "Discovering Emerging Trends and Innovations",
+        points: ["The expo also served as a hub for discovering the latest trends and innovations in the tech industry.", "Our team attended various sessions and presentations, gaining insights into emerging technologies and strategies that could be leveraged to enhance our offerings and stay ahead in the competitive landscape."]
+      },
+      {
+        title: "Building Long-Term Relationships",
+        points: ["Beyond the immediate business discussions, the event was about building long-term relationships with potential partners.", "We believe that these connections will not only lead to fruitful collaborations but also contribute to the overall growth of the tech ecosystem."]
+      },
+
+    ],
+    keyTakeaways: [],
+    highlights: [],
+    heroImageUrl: "/events/cmpl-expo-at-bkc-for-collaborations/CMPL-EXPO-thumb.jfif",
+    success: "Our experience at the Cmpl Expo at BKC was both inspiring and productive. Testriq QA Lab is excited about the new possibilities that have emerged from this event, and we are eager to turn these opportunities into successful collaborations that drive innovation and success for all parties involved.",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "TESTRIQ QA LAB LLP",
+    venueAddress: "Mira road, mumbai, Maharashtra",
+    venueDescription: "Testriq QA Lab LLP is a leading software testing and quality assurance company based in Mumbai, India. With over a decade of experience, Testriq offers a comprehensive suite of services, including LaunchFast QA, exploratory testing, web and mobile application testing, API testing, IoT device testing, AI application testing, robotics testing, smart device testing, ETL testing, data analysis, security testing, manual testing, regression testing, performance testing, QA documentation, and automation testing. Their team of ISTQB-certified experts collaborates with clients ranging from startups to established industry leaders, ensuring the delivery of high-quality, reliable software products. Testriq’s commitment to excellence is evident in their state-of-the-art testing infrastructure and up-to-date environments, which adhere to international standards. By focusing on minimizing risks and maximizing quality, Testriq has played a pivotal role in the success of numerous award-winning applications across diverse industries.",
+    venueImageUrl: "/events/cmpl-expo-at-bkc-for-collaborations/Testriq-event.png"
+  },
+  {
+    id: "job-fair-at-dj-sanghavi-college-of-engineering",
+    ...CDPL_BASE,  // Assuming this spreads shared base properties from the original template
+    slug: "job-fair-at-dj-sanghavi-college-of-engineering",
+    title: "CMPL Expo at BKC for Collaborations",
+    subtitle: "by Cinute Digital Pvt. Ltd",
+    date: "2024-05-06",
+    location: "Juhu, Mumbai",
+    attendees: 80,
+    category: "Career Counselling",
+    categoryColor: "bg-blue-600",  // Green for partnership/collaboration theme
+    serviceType: "Seminar",
+    purpose: "Testriq QA Lab recently had the pleasure of participating in a vibrant job fair at DJ Sanghavi College of Engineering. The event was an incredible opportunity for us to connect with the talented and ambitious students from one of the premier engineering institutions in the country.",
+    trainingDuration: "The session brought together industry experts to share their invaluable insights on the latest IT trends, including",
+    sessionHighlights: [
+      {
+        title: "Overview of Career Opportunities at Testriq QA Lab",
+        points: ["The event began with a presentation on the various career opportunities available at Testriq QA Lab.", "We provided students with insights into our work culture, the roles we are recruiting for, and how they can grow their careers within our organization.", "The session was aimed at helping students understand what it’s like to be part of a cutting-edge QA and software testing company."]
+      },
+      {
+        title: "Interactive Booth and Networking",
+        points: ["Our booth at the job fair was abuzz with activity as students eagerly visited to learn more about Testriq QA Lab.", "We engaged in one-on-one discussions, answered questions about our projects, and offered guidance on the skills and qualifications we seek in potential candidates.", "This direct interaction allowed us to gauge the enthusiasm and readiness of the students for careers in software testing and quality assurance."]
+      },
+      {
+        title: "Resume Collection and Preliminary Interviews",
+        points: ["Throughout the day, we collected resumes and conducted preliminary interviews on-site.", "This gave students a chance to showcase their skills and make a strong first impression.", "Our recruitment team was impressed by the caliber of talent, and several promising candidates were shortlisted for further evaluation."]
+      },
+      {
+        title: "Capturing the Spirit of the Event",
+        points: ["The energy of the job fair was truly infectious, and we made sure to capture the behind-the-scenes moments that highlighted the excitement of meeting future tech talent.", "From the hustle of setting up our booth to the engaging conversations with students, the day was filled with enthusiasm and potential."]
+      },
+      {
+        title: "Future Collaborations and Opportunities",
+        points: ["The event concluded with a commitment to continue fostering strong ties with DJ Sanghavi College of Engineering.", "We are excited about the possibilities of future collaborations, including internships, guest lectures, and further recruitment drives, to keep nurturing the next generation of tech professionals."]
+      },
+
+    ],
+    keyTakeaways: [],
+    highlights: [],
+    heroImageUrl: "/events/job-fair-at-dj-sanghavi-college-of-engineering/job-fair-dj-sanghavi.jfif",
+    success: "The job fair was an exhilarating experience, and we are thrilled with the connections we made. Testriq QA Lab looks forward to welcoming fresh talent into our team and helping them embark on successful careers in the dynamic field of software testing and quality assurance.",
+    featured: true,  // Assumed prominent as a partnership milestone
+    organizationImage: "/cdpl-logo.png",
+    organizationWebsite: new URL("https://cinutedigital.com"),
+    organizationFacebook: new URL("https://www.facebook.com/cinutedigital"),
+    organizationInstagram: new URL("https://www.instagram.com/cinutedigital/"),
+    organizationTwitter: new URL("https://x.com/cinutedigital"),
+    organizationYoutube: new URL("https://www.youtube.com/@cinutedigital"),
+    galleryCount: 5,  // Placeholder estimate for ceremony photos
+    organizerDetails: "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+    organizationAbout: new URL("https://cinutedigital.com/about-us"),
+    venueTitle: "TESTRIQ QA LAB LLP",
+    venueAddress: "Mira road, mumbai, Maharashtra",
+    venueDescription: "Testriq QA Lab LLP is a leading software testing and quality assurance company based in Mumbai, India. With over a decade of experience, Testriq offers a comprehensive suite of services, including LaunchFast QA, exploratory testing, web and mobile application testing, API testing, IoT device testing, AI application testing, robotics testing, smart device testing, ETL testing, data analysis, security testing, manual testing, regression testing, performance testing, QA documentation, and automation testing. Their team of ISTQB-certified experts collaborates with clients ranging from startups to established industry leaders, ensuring the delivery of high-quality, reliable software products. Testriq’s commitment to excellence is evident in their state-of-the-art testing infrastructure and up-to-date environments, which adhere to international standards. By focusing on minimizing risks and maximizing quality, Testriq has played a pivotal role in the success of numerous award-winning applications across diverse industries.",
+    venueImageUrl: "/events/cmpl-expo-at-bkc-for-collaborations/Testriq-event.png"
+  },
 ];
 
 // Helper function to get event by slug
