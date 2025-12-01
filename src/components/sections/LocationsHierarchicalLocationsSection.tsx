@@ -225,7 +225,7 @@ export default function LocationsHierarchicalLocationsSection({
   };
 
   return (
-    <section className={`w-full bg-white ${sectionClassName}`}>
+    <section id="locations-directory" className={`w-full bg-white ${sectionClassName}`}>
       <div className={`mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 ${containerClassName}`}>
         <div className="space-y-8">
           {/* Title */}

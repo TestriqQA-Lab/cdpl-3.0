@@ -8,9 +8,188 @@ import {
     Award,
     Users,
     TrendingUp,
+    ChevronDown,
+    Check,
 } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+
+/** Accessible custom select (keyboard + mouse + click-outside) */
+function FancySelect({
+    value,
+    onChange,
+    options,
+    placeholder = "Select country",
+    className = "",
+    buttonClassName = "",
+    optionHeight = 36,
+    maxHeight = 280,
+    leadingIcon,
+}: {
+    value: string;
+    onChange: (v: string) => void;
+    options: Array<{ label: string; value: string }>;
+    placeholder?: string;
+    className?: string;
+    buttonClassName?: string;
+    optionHeight?: number;
+    maxHeight?: number;
+    leadingIcon?: React.ReactNode;
+}) {
+    const [open, setOpen] = useState(false);
+    const [activeIdx, setActiveIdx] = useState<number>(-1);
+    const wrapRef = useRef<HTMLDivElement | null>(null);
+    const btnRef = useRef<HTMLButtonElement | null>(null);
+
+    const label =
+        options.find((o) => (value ?? "") === o.value)?.label ||
+        (value || placeholder);
+
+    // Close on outside click / Esc
+    useEffect(() => {
+        function onDoc(e: MouseEvent) {
+            if (!wrapRef.current) return;
+            if (!wrapRef.current.contains(e.target as Node)) setOpen(false);
+        }
+        function onKey(e: KeyboardEvent) {
+            if (e.key === "Escape") setOpen(false);
+        }
+        document.addEventListener("mousedown", onDoc);
+        document.addEventListener("keydown", onKey);
+        return () => {
+            document.removeEventListener("mousedown", onDoc);
+            document.removeEventListener("keydown", onKey);
+        };
+    }, []);
+
+    const toggle = () => {
+        setOpen((o) => !o);
+        setActiveIdx(Math.max(0, options.findIndex((o) => o.value === value)));
+    };
+
+    function onKeyDown(e: React.KeyboardEvent) {
+        if (!open && (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ")) {
+            e.preventDefault();
+            setOpen(true);
+            setActiveIdx(Math.max(0, options.findIndex((o) => o.value === value)));
+            return;
+        }
+        if (!open) return;
+
+        if (e.key === "ArrowDown") {
+            e.preventDefault();
+            setActiveIdx((i) => Math.min(options.length - 1, (i < 0 ? -1 : i) + 1));
+        } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            setActiveIdx((i) => Math.max(0, (i < 0 ? 0 : i) - 1));
+        } else if (e.key === "Enter") {
+            e.preventDefault();
+            const pick = options[Math.max(0, activeIdx)];
+            if (pick) {
+                onChange(pick.value);
+                setOpen(false);
+                btnRef.current?.focus();
+            }
+        } else if (e.key === "Escape") {
+            setOpen(false);
+            btnRef.current?.focus();
+        }
+    }
+
+    return (
+        <div ref={wrapRef} className={`relative ${className}`}>
+            <button
+                ref={btnRef}
+                type="button"
+                aria-haspopup="listbox"
+                aria-expanded={open}
+                onClick={toggle}
+                onKeyDown={onKeyDown}
+                className={`flex w-full items-center justify-between rounded-xl border border-slate-300 bg-white/90 px-3 py-2 text-left text-sm text-slate-900 shadow-sm backdrop-blur focus:outline-none focus:ring-2 focus:ring-teal-300 ${buttonClassName}`}
+                title={label}
+            >
+                <span className="flex min-w-0 items-center gap-2">
+                    {leadingIcon}
+                    <span className="truncate">{label}</span>
+                </span>
+                <ChevronDown
+                    className={`ml-2 h-4 w-4 shrink-0 text-slate-500 transition ${open ? "rotate-180" : ""
+                        }`}
+                />
+            </button>
+
+            {open && (
+                <div
+                    role="listbox"
+                    tabIndex={-1}
+                    aria-activedescendant={activeIdx >= 0 ? `opt-${activeIdx}` : undefined}
+                    className="custom-options absolute left-0 z-30 mt-2 overflow-auto rounded-xl border border-slate-200 bg-white shadow-lg w-max"
+                    style={{ maxHeight }}
+                    onKeyDown={onKeyDown}
+                >
+                    {options.map((opt, i) => {
+                        const active = i === activeIdx;
+                        const selected = value === opt.value;
+                        return (
+                            <button
+                                id={`opt-${i}`}
+                                key={opt.value || opt.label}
+                                role="option"
+                                aria-selected={selected}
+                                type="button"
+                                onMouseEnter={() => setActiveIdx(i)}
+                                onClick={() => {
+                                    onChange(opt.value);
+                                    setOpen(false);
+                                    btnRef.current?.focus();
+                                }}
+                                className={`flex w-full items-center justify-between px-3 text-left text-sm transition ${active ? "bg-teal-50/60" : "bg-white"
+                                    } ${selected ? "font-semibold text-slate-900" : "text-slate-800"}`}
+                                style={{ height: optionHeight }}
+                                title={opt.label}
+                            >
+                                <span className="whitespace-nowrap">{opt.label}</span>
+                                {selected ? (
+                                    <Check className="ml-2 h-4 w-4 text-teal-500" />
+                                ) : (
+                                    <span className="ml-2 h-4 w-4" />
+                                )}
+                            </button>
+                        );
+                    })}
+                </div>
+            )}
+
+            {/* dropdown scrollbar & outline polish */}
+            <style jsx global>{`
+        .custom-options {
+          scrollbar-width: thin;
+          scrollbar-color: rgba(20,184,166,0.6) transparent;
+        }
+        .custom-options::-webkit-scrollbar {
+          width: 10px;
+        }
+        .custom-options::-webkit-scrollbar-thumb {
+          background: linear-gradient(
+            180deg,
+            rgba(20,184,166,0.6),
+            rgba(13,148,136,0.6)
+          );
+          border-radius: 9999px;
+          border: 3px solid transparent;
+          background-clip: padding-box;
+        }
+        .custom-options::-webkit-scrollbar-thumb:hover {
+          background: linear-gradient(
+            180deg,
+            rgba(20,184,166,0.8),
+            rgba(13,148,136,0.8)
+          );
+        }
+      `}</style>
+        </div>
+    );
+}
 
 /** --- Reusable Form --- */
 function LeadForm({ className = "" }: { className?: string }) {
@@ -22,6 +201,13 @@ function LeadForm({ className = "" }: { className?: string }) {
         { code: "SG", dial: "+65", label: "Singapore", flag: "🇸🇬" },
         { code: "AU", dial: "+61", label: "Australia", flag: "🇦🇺" },
     ];
+
+    const options = countries.map((c) => ({
+        value: c.code,
+        label: `${c.flag} ${c.label} (${c.dial})`,
+    }));
+
+    const [country, setCountry] = useState("IN");
 
     return (
         <form
@@ -81,20 +267,13 @@ function LeadForm({ className = "" }: { className?: string }) {
                         Mobile Number
                     </label>
                     <div className="mt-1 flex items-stretch gap-2">
-                        <div className="flex min-w-[7.5rem] items-center rounded-lg border border-slate-300 bg-white px-2">
-                            <select
-                                name="country"
-                                aria-label="Country code"
-                                defaultValue="IN"
-                                className="w-full bg-transparent py-2 text-slate-900 focus:outline-none"
-                            >
-                                {countries.map((c) => (
-                                    <option key={c.code} value={c.code}>
-                                        {c.flag} {c.label} ({c.dial})
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
+                        <FancySelect
+                            value={country}
+                            onChange={setCountry}
+                            options={options}
+                            className="min-w-[7.5rem]"
+                            buttonClassName="rounded-lg px-2 py-2 text-sm"
+                        />
                         <input
                             id="phone"
                             name="phone"
@@ -110,6 +289,8 @@ function LeadForm({ className = "" }: { className?: string }) {
                         We’ll never share your number. Standard rates may apply.
                     </p>
                 </div>
+
+                <input type="hidden" name="country" value={country} />
 
                 <button
                     type="submit"
@@ -134,6 +315,7 @@ function LeadForm({ className = "" }: { className?: string }) {
 export default function HeroSection() {
     const breadcrumbs = [
         { label: "Home", href: "/" },
+        { label: "Digital Marketing", href: null },
         { label: "Digital Marketing with AI Bootcamp", href: "/ai-bootcamp" },
     ];
 
@@ -154,13 +336,19 @@ export default function HeroSection() {
                         {breadcrumbs.map((c, i) => (
                             <li key={i} className="flex items-center gap-2">
                                 {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-                                <Link
-                                    href={c.href}
-                                    className={`hover:text-orange-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""
-                                        }`}
-                                >
-                                    {c.label}
-                                </Link>
+                                {c.href ? (
+                                    <Link
+                                        href={c.href}
+                                        className={`hover:text-orange-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""
+                                            }`}
+                                    >
+                                        {c.label}
+                                    </Link>
+                                ) : (
+                                    <span className="text-slate-700 font-medium cursor-default">
+                                        {c.label}
+                                    </span>
+                                )}
                             </li>
                         ))}
                     </ol>

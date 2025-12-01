@@ -128,12 +128,16 @@ export default function AffiliateHeroSection() {
           <ol className="flex items-center gap-1 text-sm text-slate-500">
             <li className="flex items-center gap-1">
               <Home className="h-4 w-4" />
-              <Link href="/" className="hover:underline">Home</Link>
+              <Link href="/" className="hover:text-indigo-700">Home</Link>
             </li>
             <li aria-hidden className="mx-1 text-slate-400">
               <ChevronRight className="h-4 w-4" />
             </li>
-            <li className="text-slate-700 font-medium">Affiliate Program</li>
+            <li>
+              <Link href="/cdpl-affiliate-program" className="font-semibold text-slate-900 hover:text-indigo-700">
+                Affiliate Program
+              </Link>
+            </li>
           </ol>
         </nav>
 

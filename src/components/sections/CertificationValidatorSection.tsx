@@ -83,11 +83,9 @@ function CertificationValidatorContent() {
   }, []);
 
   const shareUrl =
-    result && typeof window !== "undefined"
-      ? `${window.location.origin}${pathname}?id=${encodeURIComponent(result.id)}`
-      : result
-        ? `${pathname}?id=${encodeURIComponent(result.id)}`
-        : null;
+    result
+      ? `https://cinutedigital.com${pathname}?id=${encodeURIComponent(result.id)}`
+      : null;
 
   const copyShare = async () => {
     if (!shareUrl) return;
@@ -127,7 +125,7 @@ function CertificationValidatorContent() {
           />
 
           {/* ===== Form ===== */}
-          <form onSubmit={onSubmit} className="relative grid gap-3 sm:grid-cols-[1fr_auto]">
+          <form onSubmit={onSubmit} className="relative z-10 grid gap-3 sm:grid-cols-[1fr_auto]">
             <label htmlFor="certId" className="sr-only">
               Certificate ID
             </label>
@@ -136,7 +134,7 @@ function CertificationValidatorContent() {
               {/* input icon */}
               <svg
                 aria-hidden
-                className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400"
+                className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500"
                 viewBox="0 0 24 24"
                 fill="none"
               >
@@ -148,7 +146,8 @@ function CertificationValidatorContent() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Try: CDPL-AAA-2025-8Q7K2 or CDPL-ACTD-2025-3M8Q1"
-                className="w-full rounded-xl border border-slate-200 bg-white pl-9 pr-10 py-2.5 text-sm outline-none ring-0 placeholder:text-slate-400 focus:border-orange-300"
+                style={{ color: "black", opacity: 1, colorScheme: "light" }}
+                className="w-full rounded-xl border border-slate-200 bg-white pl-9 pr-10 py-2.5 text-sm font-medium !text-black opacity-100 outline-none ring-0 placeholder:text-slate-400 focus:border-orange-300"
                 aria-describedby="certHelp"
               />
 
@@ -233,7 +232,7 @@ function CertificationValidatorContent() {
 
                 <div className="relative sm:col-span-3">
                   <div className="flex items-center gap-2">
-                    <h3 className="text-lg font-extrabold">
+                    <h3 className="relative z-10 text-lg font-extrabold text-slate-900">
                       {result.program} Certificate — {result.status}
                     </h3>
                     {result.status?.toLowerCase() === "verified" ? (
@@ -244,7 +243,7 @@ function CertificationValidatorContent() {
                     ) : null}
                   </div>
 
-                  <dl className="mt-3 grid grid-cols-1 gap-1 text-sm text-slate-800 sm:grid-cols-2">
+                  <dl className="mt-3 grid grid-cols-1 gap-1 text-sm text-slate-900 sm:grid-cols-2">
                     <div>
                       <dt className="font-semibold">Certificate ID</dt>
                       <dd className="break-all">{result.id}</dd>

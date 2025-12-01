@@ -61,6 +61,7 @@ export default function HeroSection() {
 
   const breadcrumbs = [
     { label: 'Home', href: '/' },
+    { label: 'Digital Marketing', href: null },
     { label: 'AI Digital Marketing', href: '/digital-marketing-course' },
   ];
 
@@ -79,12 +80,18 @@ export default function HeroSection() {
             {breadcrumbs.map((c, i) => (
               <li key={i} className="flex items-center gap-2">
                 {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-                <Link
-                  href={c.href}
-                  className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? 'font-semibold text-slate-900' : ''}`}
-                >
-                  {c.label}
-                </Link>
+                {c.href ? (
+                  <Link
+                    href={c.href}
+                    className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? 'font-semibold text-slate-900' : ''}`}
+                  >
+                    {c.label}
+                  </Link>
+                ) : (
+                  <span className="text-slate-700 font-medium cursor-default">
+                    {c.label}
+                  </span>
+                )}
               </li>
             ))}
           </ol>

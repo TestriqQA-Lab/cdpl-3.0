@@ -30,7 +30,7 @@ export function CertificationPreviewSection({ cert }: { cert: Certificate }) {
     <div className="w-full rounded-xl border border-slate-200 bg-white p-4">
       <div className="rounded-lg border border-slate-200 bg-gradient-to-br from-orange-50/70 to-white p-4">
         <div className="flex items-center justify-between">
-          <h4 className="text-base font-extrabold tracking-tight">
+          <h4 className="text-base font-extrabold tracking-tight text-slate-900">
             {cert.program} Certificate — {cert.status}
           </h4>
           <span className="rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-xs font-semibold">
