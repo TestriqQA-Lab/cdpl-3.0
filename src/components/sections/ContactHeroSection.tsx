@@ -350,7 +350,7 @@ export function ContactHeroSection() {
               </span>
 
               <h1 className="mt-4 text-4xl md:text-5xl font-extrabold leading-tight text-slate-700">
-                Contact <span className="text-brand">Cinute Digital</span>
+                Contact <span className="text-brand">CDPL (Cinute Digital)</span> - Start Your Tech Career
               </h1>
 
               {/* Form: Display below h1 on mobile only */}
@@ -361,7 +361,7 @@ export function ContactHeroSection() {
                   <div className="rounded-[calc(1.5rem-1px)] backdrop-blur p-6 sm:p-8">
                     <h2 className="text-2xl font-bold text-slate-900">Get in Touch</h2>
                     <p className="mt-1.5 text-slate-600">
-                      Share your goals — we&apos;ll help you find the perfect course or training plan.
+                      Have questions about our courses or placements? Our expert counselors are here to help you.
                     </p>
 
                     {/* Success Message */}

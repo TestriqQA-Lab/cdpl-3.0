@@ -6,13 +6,15 @@ import { ContactBookCallSection } from '@/components/sections/ContactBookCall';
 import { ContactFAQSection } from '@/components/sections/ContactFAQSection';
 import ContactReviewSection from '@/components/sections/ContactReviewSection';
 import { generateStaticPageMetadata } from "@/lib/metadata-generator";
+import { generateContactPageSchema } from "@/lib/schema-generators";
+import JsonLd from "@/components/JsonLd";
 
 // ============================================================================
 // SEO METADATA - Optimized for Contact Page
 // ============================================================================
 export const metadata: Metadata = generateStaticPageMetadata({
-  title: 'Contact us Cinute Digital | Get in Touch Today',
-  description: 'Contact CDPL (Cinute Digital) for course inquiries, admissions support, and career guidance. Reach us via phone, email, WhatsApp, or visit our office in Mumbai. Expert advisors available to help with Software Testing, Data Science, and AI/ML courses.',
+  title: 'Contact Us | Software Testing & Data Science Training',
+  description: 'Get in touch with CDPL (Cinute Digital) for course inquiries, admissions, and career guidance. Call us, email, or visit our Mumbai office. 100% Placement Support.',
   keywords: [
     'contact CDPL',
     'Cinute Digital contact',
@@ -26,6 +28,8 @@ export const metadata: Metadata = generateStaticPageMetadata({
     'admissions support',
     'career guidance',
     'training institute contact',
+    'software testing institute mumbai',
+    'data science course mumbai'
   ],
   url: '/contact-us',
   image: '/og-images/cdpl-og-image-contact.webp',
@@ -35,10 +39,13 @@ export const metadata: Metadata = generateStaticPageMetadata({
 // CONTACT PAGE COMPONENT
 // ============================================================================
 export default function ContactPage() {
+  // Generate Schema
+  const contactSchema = generateContactPageSchema();
 
   return (
     <>
-
+      {/* Schema Injection */}
+      <JsonLd id="contact-page-schema" schema={contactSchema} />
 
       {/* Main Content - Semantic HTML Structure */}
       <main className="relative min-h-[220vh]" >
