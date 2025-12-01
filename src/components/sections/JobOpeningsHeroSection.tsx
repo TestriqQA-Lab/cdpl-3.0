@@ -52,7 +52,7 @@ export default function JobOpeningsHeroSection({
             </li>
             <li className="flex items-center gap-2">
               <ChevronRight className="h-4 w-4" aria-hidden="true" />
-              <span className="font-semibold text-slate-900">Job openings</span>
+              <Link href="/jobs/job-openings" className="font-semibold text-slate-900">Job openings</Link>
             </li>
           </ol>
         </nav>

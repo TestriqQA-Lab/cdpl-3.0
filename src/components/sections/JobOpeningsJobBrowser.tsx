@@ -104,7 +104,6 @@ export default function JobOpeningsJobBrowser({
     pageSize,
     className,
     emptyState,
-    getJobsAction,
     getJobByIdAction,
     verifyCandidateAction,
     createCandidateAction,
@@ -136,13 +135,23 @@ export default function JobOpeningsJobBrowser({
         }
     }, []);
 
-    async function loadPage(newPage: number) {
-        const res = await getJobsAction({ page: newPage, size: pageSize });
-        setJobs(res?.data?.job ?? []);
-        setCount(res?.data?.total_count ?? 0);
+    function loadPage(newPage: number) {
         setPage(newPage);
         window.scrollTo({ top: 0, behavior: "smooth" });
     }
+
+    // Debounce search and reset page
+    React.useEffect(() => {
+        const timer = setTimeout(() => {
+            setPage(1);
+        }, 500);
+        return () => clearTimeout(timer);
+    }, [q]);
+
+    // Reset page on other filters
+    React.useEffect(() => {
+        setPage(1);
+    }, [locType, exp]);
 
     const decodeAndStrip = (raw?: string) => {
         if (!raw) return "";
@@ -171,7 +180,8 @@ export default function JobOpeningsJobBrowser({
         return list;
     }, [jobs, q, locType, exp]);
 
-    const totalPages = Math.max(1, Math.ceil(count / pageSize));
+    const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+    const paginatedJobs = filtered.slice((page - 1) * pageSize, page * pageSize);
 
     const Chip = ({ children }: { children: React.ReactNode }) => (
         <span className="rounded-md bg-slate-50 px-2 py-1 text-[11px] text-slate-700 ring-1 ring-slate-200">
@@ -222,8 +232,8 @@ export default function JobOpeningsJobBrowser({
                 {/* toolbar */}
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                     <p className="text-sm text-slate-600">
-                        Showing <span className="font-medium text-slate-900">{filtered.length}</span> of{" "}
-                        <span className="font-medium text-slate-900">{count}</span> jobs
+                        Showing <span className="font-medium text-slate-900">{(page - 1) * pageSize + 1}-{Math.min(page * pageSize, filtered.length)}</span> of{" "}
+                        <span className="font-medium text-slate-900">{filtered.length}</span> jobs
                     </p>
                     <div className="flex flex-wrap items-center gap-2 text-xs">
                         <button
@@ -323,7 +333,7 @@ export default function JobOpeningsJobBrowser({
                     <section className="min-w-0 flex-1">
                         <ul className="space-y-4">
                             <AnimatePresence mode="popLayout">
-                                {filtered.map((job) => {
+                                {paginatedJobs.map((job) => {
                                     const desc = decodeAndStrip(job.description).slice(0, 350);
                                     return (
                                         <motion.li
@@ -416,7 +426,7 @@ export default function JobOpeningsJobBrowser({
                                 {page} / {totalPages}
                             </span>
                             <button
-                                disabled={page * pageSize >= count}
+                                disabled={page * pageSize >= filtered.length}
                                 onClick={() => loadPage(page + 1)}
                                 className="rounded-md border border-slate-300 bg-white px-3 py-1.5 text-slate-700 disabled:opacity-50"
                             >

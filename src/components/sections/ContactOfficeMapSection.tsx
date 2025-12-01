@@ -90,7 +90,7 @@ export function ContactOfficeMapSection() {
                     <div className="font-bold text-lg text-slate-900">
                       Head Office (<span className="text-brand">CDPL</span>)
                     </div>
-                    <div className="mt-1 text-base text-slate-800">{active.headOffice}</div>
+                    <Link href="https://www.google.com/maps/place/Cinute+Digital+Pvt.+Ltd.+A+Premier+Software+Training+Institute+(CDPL)/@19.29342,72.8685471,17z/data=!3m1!4b1!4m6!3m5!1s0x3be7b1af2b2c5fed:0x7104f80b9fec8b9d!8m2!3d19.293415!4d72.871122!16s%2Fg%2F11t5q_mt87?entry=ttu&g_ep=EgoyMDI1MTAyMi4wIKXMDSoASAFQAw%3D%3D" className="text-base text-slate-800 hover:text-brand transition">{active.headOffice}</Link>
                   </div>
 
                   <div className="mt-4">
@@ -152,11 +152,11 @@ export function ContactOfficeMapSection() {
 
                 <div className="mt-4 flex flex-wrap gap-2">
                   {[
-                    {title: "Software Testing Training", bgColor: "bg-blue-50", textColor: "text-blue-500"},
-                    {title: "Data Science & AI Courses", bgColor: "bg-red-50", textColor: "text-red-500"},
-                    {title: "Full-Stack Developer Program", bgColor: "bg-green-50", textColor: "text-green-500"},
-                    {title: "Placement Assistance", bgColor: "bg-purple-50", textColor: "text-purple-500"},
-                    {title: "Corporate Upskilling", bgColor: "bg-indigo-50", textColor: "text-indigo-600"},
+                    { title: "Software Testing Training", bgColor: "bg-blue-50", textColor: "text-blue-500" },
+                    { title: "Data Science & AI Courses", bgColor: "bg-red-50", textColor: "text-red-500" },
+                    { title: "Full-Stack Developer Program", bgColor: "bg-green-50", textColor: "text-green-500" },
+                    { title: "Placement Assistance", bgColor: "bg-purple-50", textColor: "text-purple-500" },
+                    { title: "Corporate Upskilling", bgColor: "bg-indigo-50", textColor: "text-indigo-600" },
                   ].map((chip) => (
                     <span
                       key={chip.title}

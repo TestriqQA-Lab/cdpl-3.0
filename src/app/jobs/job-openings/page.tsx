@@ -158,8 +158,10 @@ export type FetchJobsArgs = { page?: number; size?: number; q?: string };
 
 async function getJobsServer(args: FetchJobsArgs = { page: 1, size: 10 }) {
   "use server";
-  const { page = 1, size = 10 } = args;
-  const query = new URLSearchParams({ page: String(page), size: String(size) }).toString();
+  const { page = 1, size = 10, q } = args;
+  const params = new URLSearchParams({ page: String(page), size: String(size) });
+  if (q) params.set("q", q);
+  const query = params.toString();
 
   const res = await ohFetch<JobListResponse>(`/job-list/?${query}`);
 
@@ -169,7 +171,7 @@ async function getJobsServer(args: FetchJobsArgs = { page: 1, size: 10 }) {
       ...res.data,
       job: (res.data?.job ?? []).map((j) => ({
         ...j,
-        description: cleanHTML(j.description),
+        description: cleanHTML(j.description).slice(0, 500),
       })),
     },
   };
@@ -267,7 +269,7 @@ const JobOpeningsJobBrowser = dynamic(
 
 // ---- Page ----------------------------------------------------------------
 export default async function JobSharePage() {
-  const initial = await getJobsServer({ page: 1, size: 20 });
+  const initial = await getJobsServer({ page: 1, size: 2000 });
 
   return (
     <>
