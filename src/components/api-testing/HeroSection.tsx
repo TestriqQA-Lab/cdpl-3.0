@@ -43,8 +43,8 @@ export default function HeroSection() {
 
     const breadcrumbs = [
         { label: "Home", href: "/" },
-        { label: "Software Testing", href: "#" },
-        { label: "API Testing with Postman, REST & GraphQL", href: "api-testing" },
+        { label: "Courses", href: "/courses" },
+        { label: "API Testing with Postman, REST & GraphQL" },
     ]
 
     return (
@@ -59,17 +59,28 @@ export default function HeroSection() {
                 {/* Breadcrumbs for SEO & UX */}
                 <nav aria-label="Breadcrumb" className="mb-8">
                     <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
-                        {breadcrumbs.map((c, i) => (
-                            <li key={i} className="flex items-center gap-2">
-                                {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-                                <Link
-                                    href={c.href}
-                                    className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
-                                >
-                                    {c.label}
-                                </Link>
-                            </li>
-                        ))}
+                        {breadcrumbs.map((c, i) => {
+                            const isLast = i === breadcrumbs.length - 1;
+                            return (
+                                <li key={i} className="flex items-center gap-2">
+                                    {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                                    {c.href ? (
+                                        <Link
+                                            href={c.href}
+                                            className={`hover:text-indigo-700 ${isLast ? "font-semibold text-slate-900" : ""}`}
+                                        >
+                                            {c.label}
+                                        </Link>
+                                    ) : (
+                                        <span
+                                            className={`hover:text-indigo-700 ${isLast ? "font-semibold text-slate-900" : ""}`}
+                                        >
+                                            {c.label}
+                                        </span>
+                                    )}
+                                </li>
+                            );
+                        })}
                     </ol>
                 </nav>
                 <div className="grid items-start gap-10 md:grid-cols-12">

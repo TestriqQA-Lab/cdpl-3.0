@@ -178,8 +178,8 @@ const StatsBar: React.FC = () => {
 
 const breadcrumbs = [
     { label: "Home", href: "/" },
-    { label: "Software Testing", href: "#" },
-    { label: "Manual Testing", href: "/about-us" },
+    { label: "Courses", href: "/courses" },
+    { label: "Manual Testing" },
 ];
 
 export default function HeroManualTesting() {
@@ -205,14 +205,24 @@ export default function HeroManualTesting() {
                             return (
                                 <li key={i} className="flex items-center gap-2">
                                     {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-                                    <Link
-                                        href={c.href}
-                                        className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
-                                        aria-current={isLast ? "page" : undefined}
-                                        title={c.label}
-                                    >
-                                        {c.label}
-                                    </Link>
+                                    {c.href ? (
+                                        <Link
+                                            href={c.href}
+                                            className={`hover:text-indigo-700 ${isLast ? "font-semibold text-slate-900" : ""}`}
+                                            aria-current={isLast ? "page" : undefined}
+                                            title={c.label}
+                                        >
+                                            {c.label}
+                                        </Link>
+                                    ) : (
+                                        <span
+                                            className={`hover:text-indigo-700 ${isLast ? "font-semibold text-slate-900" : ""}`}
+                                            aria-current={isLast ? "page" : undefined}
+                                            title={c.label}
+                                        >
+                                            {c.label}
+                                        </span>
+                                    )}
                                 </li>
                             );
                         })}

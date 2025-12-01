@@ -11,8 +11,8 @@ export default function HeroSection() {
 
   const breadcrumbs = [
     { label: "Home", href: "/" },
-    { label: "Data • AI", href: "#" },
-    { label: "Advanced DS & ML Masterclass", href: "/data-science-course" },
+    { label: "Courses", href: "/courses" },
+    { label: "Advanced DS & ML Masterclass" },
   ];
 
   return (
@@ -27,17 +27,28 @@ export default function HeroSection() {
         {/* Breadcrumbs */}
         <nav aria-label="Breadcrumb" className="mb-8">
           <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
-            {breadcrumbs.map((c, i) => (
-              <li key={i} className="flex items-center gap-2">
-                {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-                <Link
-                  href={c.href}
-                  className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
-                >
-                  {c.label}
-                </Link>
-              </li>
-            ))}
+            {breadcrumbs.map((c, i) => {
+              const isLast = i === breadcrumbs.length - 1;
+              return (
+                <li key={i} className="flex items-center gap-2">
+                  {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                  {c.href ? (
+                    <Link
+                      href={c.href}
+                      className={`hover:text-indigo-700 ${isLast ? "font-semibold text-slate-900" : ""}`}
+                    >
+                      {c.label}
+                    </Link>
+                  ) : (
+                    <span
+                      className={`hover:text-indigo-700 ${isLast ? "font-semibold text-slate-900" : ""}`}
+                    >
+                      {c.label}
+                    </span>
+                  )}
+                </li>
+              );
+            })}
           </ol>
         </nav>
 
@@ -132,7 +143,7 @@ export default function HeroSection() {
           {/* Right column: Desktop form & visual (FORM 2) */}
           <aside className="md:col-span-5 lg:col-span-4 hidden md:block">
             <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg">
-              
+
               <div className="p-4 sm:p-5">
                 <LeadForm variant="elevated" />
               </div>
