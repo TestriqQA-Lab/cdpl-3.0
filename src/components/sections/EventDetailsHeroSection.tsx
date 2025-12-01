@@ -74,7 +74,7 @@ export default function EventDetailsHeroSection({ event }: Props) {
             <li aria-hidden className="text-slate-400">
               ›
             </li>
-            <li className="truncate max-w-[45ch] text-slate-700">{event.slug}</li>
+            <Link href={`/events/past-events/${event.slug}`} className="truncate max-w-[45ch] text-slate-700">{event.slug}</Link>
           </ol>
         </nav>
 

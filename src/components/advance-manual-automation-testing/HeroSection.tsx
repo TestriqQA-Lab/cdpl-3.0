@@ -1,13 +1,13 @@
 'use client';
 import {
-  Bug,
-  Bot,
-  Users,
-  Award,
-  Briefcase,
-  ArrowRight,
-  Home,
-  ChevronRight,
+    Bug,
+    Bot,
+    Users,
+    Award,
+    Briefcase,
+    ArrowRight,
+    Home,
+    ChevronRight,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import IconCard from '../ui/IconCard';
@@ -22,11 +22,11 @@ import CareerSessionModal from '@/components/CareerSessionModal';
  * Feature cards (distinct accents)
  * =========================== */
 const features = [
-  { icon: <Bug />, title: '70% Manual + 30% Auto', description: 'Best of both worlds', bg: 'bg-emerald-50', iconColor: 'text-emerald-700', border: 'border-emerald-300' },
-  { icon: <Bot />, title: '85% Hands-On', description: 'Real apps + frameworks', bg: 'bg-indigo-50', iconColor: 'text-indigo-700', border: 'border-indigo-300' },
-  { icon: <Users />, title: 'ISTQB Faculty', description: '15+ yrs in QA', bg: 'bg-amber-50', iconColor: 'text-amber-700', border: 'border-amber-300' },
-  { icon: <Award />, title: 'Dual Certification', description: 'Manual + Automation', bg: 'bg-sky-50', iconColor: 'text-sky-700', border: 'border-sky-300' },
-  { icon: <Briefcase />, title: '100% Placement', description: 'Resume + Mock Interviews', bg: 'bg-rose-50', iconColor: 'text-rose-700', border: 'border-rose-300' },
+    { icon: <Bug />, title: '70% Manual + 30% Auto', description: 'Best of both worlds', bg: 'bg-emerald-50', iconColor: 'text-emerald-700', border: 'border-emerald-300' },
+    { icon: <Bot />, title: '85% Hands-On', description: 'Real apps + frameworks', bg: 'bg-indigo-50', iconColor: 'text-indigo-700', border: 'border-indigo-300' },
+    { icon: <Users />, title: 'ISTQB Faculty', description: '15+ yrs in QA', bg: 'bg-amber-50', iconColor: 'text-amber-700', border: 'border-amber-300' },
+    { icon: <Award />, title: 'Dual Certification', description: 'Manual + Automation', bg: 'bg-sky-50', iconColor: 'text-sky-700', border: 'border-sky-300' },
+    { icon: <Briefcase />, title: '100% Placement', description: 'Resume + Mock Interviews', bg: 'bg-rose-50', iconColor: 'text-rose-700', border: 'border-rose-300' },
 ];
 
 export default function HeroSection() {
@@ -87,12 +87,34 @@ export default function HeroSection() {
               </span>
             </div>
 
-            <h1
-              id="qa-hero"
-              className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900"
-            >
-              Advanced <span className='text-ST'>Manual</span> & <span className='text-ST'>Automation Testing</span>
-            </h1>
+            <div className="mx-auto max-w-7xl px-4 pb-14 pt-10 sm:px-6 lg:px-8">
+                {/* Breadcrumbs */}
+                <nav aria-label="Breadcrumb" className="mb-8">
+                    <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+                        {breadcrumbs.map((c, i) => {
+                            const isLast = i === breadcrumbs.length - 1;
+                            return (
+                                <li key={i} className="flex items-center gap-2">
+                                    {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                                    {c.href ? (
+                                        <Link
+                                            href={c.href}
+                                            className={`hover:text-indigo-700 ${isLast ? 'font-semibold text-slate-900' : ''}`}
+                                        >
+                                            {c.label}
+                                        </Link>
+                                    ) : (
+                                        <span
+                                            className={`hover:text-indigo-700 ${isLast ? 'font-semibold text-slate-900' : ''}`}
+                                        >
+                                            {c.label}
+                                        </span>
+                                    )}
+                                </li>
+                            );
+                        })}
+                    </ol>
+                </nav>
 
             {/* Mobile form below H1 */}
             <div className="mt-6 block md:hidden">

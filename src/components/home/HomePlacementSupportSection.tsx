@@ -110,8 +110,8 @@ export default function HomePlacementSupportSection() {
           className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
         >
           {placementStats.map((stat, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className={`bg-gradient-to-br ${stat.gradient} rounded-2xl p-6 text-center text-white shadow-xl transform hover:scale-105 transition-all duration-300`}
             >
               <div className="text-4xl mb-2">{stat.icon}</div>
@@ -151,7 +151,7 @@ export default function HomePlacementSupportSection() {
             ))}
           </div>
         </motion.div>
-        
+
         {/* View All CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -160,7 +160,7 @@ export default function HomePlacementSupportSection() {
           className="text-center mt-16"
         >
           <Link
-            href="/placements" // Assuming a placements page exists
+            href="/jobs/placements" // Assuming a placements page exists
             className="inline-flex items-center gap-2 px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
           >
             <span>View All Success Stories</span>
