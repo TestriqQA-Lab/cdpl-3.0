@@ -147,7 +147,7 @@ const EnquireModal: React.FC<EnquireModalProps> = ({ isOpen, onClose }) => {
                     },
                     body: JSON.stringify({
                         ...formData,
-                        source: 'Enquiry Form - Home Enquire Now Button'
+                        source: 'Book Free Demo - Header Button'
                     }),
                 });
 
@@ -209,14 +209,14 @@ const EnquireModal: React.FC<EnquireModalProps> = ({ isOpen, onClose }) => {
                             <div className="mb-6">
                                 <div className="flex items-center justify-between mb-2">
                                     <h3 className="text-xl font-bold text-slate-900">
-                                        Enquire Now
+                                        Book a Free Demo
                                     </h3>
                                 </div>
                                 <p className="text-sm font-semibold text-orange-600">
-                                    Connect with our experts
+                                    Schedule a session with our experts
                                 </p>
                                 <p className="text-xs text-slate-600 mt-1">
-                                    Fill the form below and we will get back to you.
+                                    Fill the form below to schedule your free demo.
                                 </p>
                             </div>
 
