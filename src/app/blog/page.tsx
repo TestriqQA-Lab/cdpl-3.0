@@ -3,7 +3,13 @@ import React from 'react';
 import { BlogCategoryMenu, BlogHero, BlogSidebar } from '@/components/blog';
 import type { Metadata } from 'next';
 import { generateStaticPageMetadata } from "@/lib/metadata-generator";
-import { generateBreadcrumbSchema } from "@/lib/schema-generators";
+import {
+    generateBreadcrumbSchema,
+    generateWebsiteSchema,
+    generateBlogSchema,
+    generateFAQSchema
+} from "@/lib/schema-generators";
+import JsonLd from "@/components/JsonLd";
 
 // Dynamically import BlogArticleList for better performance
 const BlogArticleList = dynamic(
@@ -21,29 +27,34 @@ const BlogArticleList = dynamic(
 // ============================================================================
 // SEO METADATA - Enhanced with generateSEO utility
 // ============================================================================
-export const metadata: Metadata = generateStaticPageMetadata({
-    title: 'Tech Blog - Latest Insights, Tutorials & Industry Trends | CDPL',
-    description: 'Discover expert-written articles on AI/ML, web development, React, Next.js, software testing, and DevOps. Get actionable tutorials, best practices, and industry insights to level up your tech skills. Updated daily with fresh content from CDPL experts.',
-    keywords: [
-        'tech blog',
-        'technology blog',
-        'web development tutorials',
-        'AI machine learning articles',
-        'React tutorials',
-        'Next.js guides',
-        'software testing blog',
-        'DevOps best practices',
-        'programming guides',
-        'coding tutorials',
-        'software development blog',
-        'tech industry insights',
-        'developer resources',
-        'software engineering blog',
-        'full stack development',
-    ],
-    url: '/blog',
-    image: '/blog/og-image.jpg',
-});
+export const metadata: Metadata = {
+    ...generateStaticPageMetadata({
+        title: 'Tech Blog - Insights, Tutorials & Trends',
+        description: 'Discover expert-written articles on AI/ML, web development, React, Next.js, software testing, and DevOps. Get actionable tutorials, best practices, and industry insights to level up your tech skills. Updated daily with fresh content from CDPL experts.',
+        keywords: [
+            'tech blog',
+            'technology blog',
+            'web development tutorials',
+            'AI machine learning articles',
+            'React tutorials',
+            'Next.js guides',
+            'software testing blog',
+            'DevOps best practices',
+            'programming guides',
+            'coding tutorials',
+            'software development blog',
+            'tech industry insights',
+            'developer resources',
+            'software engineering blog',
+            'full stack development',
+        ],
+        url: '/blog',
+        image: '/blog/og-image.jpg',
+    }),
+    title: {
+        absolute: 'Tech Blog - Insights, Tutorials & Trends | CDPL',
+    },
+};
 
 // ============================================================================
 // MAIN BLOG PAGE COMPONENT
@@ -55,147 +66,47 @@ export default function BlogPage() {
         { name: 'Blog', url: '/blog' },
     ]);
 
-    // Organization Schema
-    const organizationSchema = {
-        '@type': 'Organization',
-        '@id': 'https://www.cinutedigital.com/#organization',
-        name: 'CDPL - Cinute Digital Pvt. Ltd.',
-        url: 'https://www.cinutedigital.com',
-        logo: {
-            '@type': 'ImageObject',
-            url: 'https://www.cinutedigital.com/logo.png',
-            width: 250,
-            height: 60
-        },
-        sameAs: [
-            'https://twitter.com/cinutedigital',
-            'https://linkedin.com/company/cinute-digital',
-            'https://github.com/cinutedigital'
-        ]
-    };
+    // Website Schema
+    const websiteSchema = generateWebsiteSchema();
 
     // Blog Schema
-    const blogSchema = {
-        '@context': 'https://schema.org',
-        '@type': 'Blog',
-        '@id': 'https://www.cinutedigital.com/blog/#blog',
-        url: 'https://www.cinutedigital.com/blog',
+    const blogSchema = generateBlogSchema({
         name: 'CDPL Tech Blog',
         description: 'Expert articles on AI/ML, web development, React, Next.js, DevOps, software testing, and modern technology from CDPL industry experts',
-        publisher: organizationSchema,
-        inLanguage: 'en-IN',
-        about: [
-            {
-                '@type': 'Thing',
-                name: 'Software Testing',
-                description: 'Articles about QA, automation testing, and testing best practices'
-            },
-            {
-                '@type': 'Thing',
-                name: 'Web Development',
-                description: 'Tutorials on React, Next.js, and modern web technologies'
-            },
-            {
-                '@type': 'Thing',
-                name: 'AI & Machine Learning',
-                description: 'Insights on artificial intelligence and machine learning'
-            },
-            {
-                '@type': 'Thing',
-                name: 'DevOps',
-                description: 'Best practices for DevOps, CI/CD, and cloud computing'
-            }
-        ]
-    };
+        url: '/blog',
+    });
 
-    // WebSite Schema with SearchAction
-    const websiteSchema = {
-        '@context': 'https://schema.org',
-        '@type': 'WebSite',
-        '@id': 'https://www.cinutedigital.com/#website',
-        url: 'https://www.cinutedigital.com',
-        name: 'CDPL - Cinute Digital',
-        description: 'Expert technology training and blog with tutorials, insights, and best practices',
-        publisher: organizationSchema,
-        potentialAction: {
-            '@type': 'SearchAction',
-            target: {
-                '@type': 'EntryPoint',
-                urlTemplate: 'https://www.cinutedigital.com/blog/search?q={search_term_string}'
-            },
-            'query-input': 'required name=search_term_string'
+    // FAQ Schema
+    const faqSchema = generateFAQSchema([
+        {
+            question: 'What topics does the CDPL blog cover?',
+            answer: 'The CDPL blog covers a wide range of technology topics including Software Testing, Web Development (React, Next.js), AI/ML, Data Science, DevOps, Automation, Cloud Computing, and software engineering best practices. All articles are written by industry experts with practical experience.'
         },
-        inLanguage: 'en-IN'
-    };
-
-    // FAQ Schema - NEW!
-    const faqSchema = {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        '@id': 'https://www.cinutedigital.com/blog/#faq',
-        mainEntity: [
-            {
-                '@type': 'Question',
-                name: 'What topics does the CDPL blog cover?',
-                acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'The CDPL blog covers a wide range of technology topics including Software Testing, Web Development (React, Next.js), AI/ML, Data Science, DevOps, Automation, Cloud Computing, and software engineering best practices. All articles are written by industry experts with practical experience.'
-                }
-            },
-            {
-                '@type': 'Question',
-                name: 'How often is the CDPL blog updated?',
-                acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'The CDPL blog is updated regularly with fresh content, tutorials, and industry insights. New articles are published multiple times per week covering the latest trends and technologies.'
-                }
-            },
-            {
-                '@type': 'Question',
-                name: 'Are the blog tutorials suitable for beginners?',
-                acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'Yes! The CDPL blog features content for all skill levels - from beginner tutorials to advanced technical guides. Each article clearly indicates the difficulty level and prerequisites.'
-                }
-            },
-            {
-                '@type': 'Question',
-                name: 'Can I search for specific topics on the blog?',
-                acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'Yes, the CDPL blog includes a search function and category filters to help you find articles on specific topics. You can browse by category, search by keywords, or filter by tags.'
-                }
-            },
-            {
-                '@type': 'Question',
-                name: 'Who writes the CDPL blog articles?',
-                acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'CDPL blog articles are written by experienced technology professionals, trainers, and industry experts who specialize in software testing, web development, AI/ML, and DevOps. All authors have real-world experience in their respective fields.'
-                }
-            }
-        ]
-    };
+        {
+            question: 'How often is the CDPL blog updated?',
+            answer: 'The CDPL blog is updated regularly with fresh content, tutorials, and industry insights. New articles are published multiple times per week covering the latest trends and technologies.'
+        },
+        {
+            question: 'Are the blog tutorials suitable for beginners?',
+            answer: 'Yes! The CDPL blog features content for all skill levels - from beginner tutorials to advanced technical guides. Each article clearly indicates the difficulty level and prerequisites.'
+        },
+        {
+            question: 'Can I search for specific topics on the blog?',
+            answer: 'Yes, the CDPL blog includes a search function and category filters to help you find articles on specific topics. You can browse by category, search by keywords, or filter by tags.'
+        },
+        {
+            question: 'Who writes the CDPL blog articles?',
+            answer: 'CDPL blog articles are written by experienced technology professionals, trainers, and industry experts who specialize in software testing, web development, AI/ML, and DevOps. All authors have real-world experience in their respective fields.'
+        }
+    ]);
 
     return (
         <>
             {/* Structured Data (JSON-LD) - Multiple Schemas */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-            />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-            />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
-            />
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-            />
+            <JsonLd id="blog-breadcrumb" schema={breadcrumbSchema} />
+            <JsonLd id="blog-website" schema={websiteSchema} />
+            <JsonLd id="blog-main" schema={blogSchema} />
+            <JsonLd id="blog-faq" schema={faqSchema} />
 
             {/* Semantic HTML with proper structure */}
             <article itemScope itemType="https://schema.org/Blog">

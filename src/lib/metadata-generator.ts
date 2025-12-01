@@ -11,6 +11,7 @@
  */
 
 import type { Metadata } from 'next';
+import type { TemplateString } from 'next/dist/lib/metadata/types/metadata-types';
 import {
   SITE_CONFIG,
   SEO_DEFAULTS,
@@ -21,13 +22,9 @@ import {
   getImageUrl,
 } from './seo-config';
 
-// ============================================================================
-// METADATA GENERATOR INTERFACE
-// ============================================================================
-
 export interface MetadataGeneratorInput {
   // Basic SEO
-  title: string;
+  title: string | TemplateString;
   description: string;
   keywords?: string[];
 
@@ -58,25 +55,6 @@ export interface MetadataGeneratorInput {
   alternateLocales?: string[];
 }
 
-// ============================================================================
-// MAIN METADATA GENERATOR
-// ============================================================================
-
-/**
- * Generate comprehensive Next.js metadata for any page
- * 
- * @param input - Metadata configuration
- * @returns Next.js Metadata object
- * 
- * @example
- * ```ts
- * export const metadata = generateMetadata({
- *   title: 'Software Testing Course',
- *   description: 'Learn software testing...',
- *   url: '/software-testing-course',
- * });
- * ```
- */
 export function generateMetadata(input: MetadataGeneratorInput): Metadata {
   const {
     title,
@@ -104,7 +82,13 @@ export function generateMetadata(input: MetadataGeneratorInput): Metadata {
   const fullUrl = getFullUrl(url);
   const canonicalUrl = canonical ? getFullUrl(canonical) : fullUrl;
   const ogImage = image ? getImageUrl(image) : getImageUrl(SITE_CONFIG.defaultOgImage);
-  const ogImageAlt = imageAlt || title;
+
+  // Helper to get string title for OG/Twitter
+  const titleString = typeof title === 'string'
+    ? title
+    : (title as { absolute: string }).absolute || (title as { default: string }).default || '';
+
+  const ogImageAlt = imageAlt || titleString;
 
   // Merge keywords with defaults
   const allKeywords = [...new Set([...keywords, ...SEO_DEFAULTS.defaultKeywords])];
@@ -146,7 +130,7 @@ export function generateMetadata(input: MetadataGeneratorInput): Metadata {
       alternateLocale: alternateLocales,
       url: fullUrl,
       siteName: SITE_CONFIG.name,
-      title,
+      title: titleString,
       description,
       images: [
         {
@@ -172,7 +156,7 @@ export function generateMetadata(input: MetadataGeneratorInput): Metadata {
       card: 'summary_large_image',
       site: SOCIAL_PROFILES.twitterHandle,
       creator: SOCIAL_PROFILES.twitterHandle,
-      title,
+      title: titleString,
       description,
       images: [ogImage],
     },
@@ -205,94 +189,21 @@ export function generateMetadata(input: MetadataGeneratorInput): Metadata {
   };
 }
 
-// ============================================================================
-// SPECIALIZED METADATA GENERATORS
-// ============================================================================
+// ...
 
-/**
- * Generate metadata for course pages
- */
-export function generateCourseMetadata(input: {
-  courseName: string;
-  description: string;
-  slug: string;
-  price?: number;
-  duration?: string;
-  image?: string;
-  rating?: number;
-  enrollmentCount?: number;
-}): Metadata {
-  const title = `${input.courseName} - Online Training Course | CDPL`;
-  const description = input.description;
-
-  const keywords = [
-    input.courseName.toLowerCase(),
-    `${input.courseName.toLowerCase()} course`,
-    `${input.courseName.toLowerCase()} training`,
-    `${input.courseName.toLowerCase()} online`,
-    'placement support',
-    'industry experts',
-    'hands-on projects',
-  ];
-
-  return generateMetadata({
-    title,
-    description,
-    keywords,
-    url: `/${input.slug}`,
-    image: input.image,
-    type: 'website',
-  });
-}
-
-/**
- * Generate metadata for blog posts
- */
-export function generateBlogMetadata(input: {
-  title: string;
-  description: string;
-  slug: string;
-  author: string;
-  publishedDate: string;
-  modifiedDate?: string;
-  category?: string;
-  tags?: string[];
-  image?: string;
-}): Metadata {
-  const keywords = [
-    ...(input.tags || []),
-    input.category || 'blog',
-    'tech blog',
-    'career advice',
-  ];
-
-  return generateMetadata({
-    title: `${input.title} | CDPL Blog`,
-    description: input.description,
-    keywords,
-    url: `/blog/${input.slug}`,
-    type: 'article',
-    image: input.image,
-    author: input.author,
-    publishedTime: input.publishedDate,
-    modifiedTime: input.modifiedDate,
-    section: input.category,
-    tags: input.tags,
-  });
-}
-
-/**
- * Generate metadata for static pages (About, Contact, etc.)
- */
 export function generateStaticPageMetadata(input: {
-  title: string;
+  title: string | { absolute: string };
   description: string;
   url: string;
   keywords?: string[];
   image?: string;
 }): Metadata {
+  const title = typeof input.title === 'string'
+    ? `${input.title} | CDPL`
+    : input.title;
+
   return generateMetadata({
-    title: `${input.title} | CDPL`,
+    title,
     description: input.description,
     keywords: input.keywords,
     url: input.url,
@@ -463,9 +374,13 @@ export function validateMetadata(metadata: MetadataGeneratorInput): {
   const warnings: string[] = [];
 
   // Title length check (50-60 characters is ideal)
-  if (metadata.title.length < 30) {
+  const titleLength = typeof metadata.title === 'string'
+    ? metadata.title.length
+    : (metadata.title as { absolute: string }).absolute?.length || 0;
+
+  if (titleLength < 30) {
     warnings.push('Title is too short. Aim for 50-60 characters.');
-  } else if (metadata.title.length > 60) {
+  } else if (titleLength > 60) {
     warnings.push('Title is too long. Keep it under 60 characters.');
   }
 
