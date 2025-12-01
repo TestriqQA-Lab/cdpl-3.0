@@ -16,6 +16,7 @@ import type { Metadata } from "next";
 import { generateMetadata } from "@/lib/metadata-generator";
 import { generateHomePageSchema } from "@/lib/schema-generators";
 import JsonLd from "@/components/JsonLd";
+import { HOME_FAQS } from "@/components/home/HomeFAQSection";
 
 // ============================================================================
 // DYNAMIC IMPORTS (for performance)
@@ -37,8 +38,8 @@ const HomeFinalCTASection = dynamic(() => import('@/components/home/HomeFinalCTA
 // ============================================================================
 
 export const metadata: Metadata = generateMetadata({
-  title: "Best Software Testing, Data Science & AI/ML Courses | CDPL - Cinute Digital",
-  description: "CDPL offers industry-leading training in Software Testing, Data Science, and AI/ML with 100% placement support. Start your high-paying tech career with expert-led courses and hands-on projects.",
+  title: "Best Software Testing & Data Science Course in Mumbai | 100% Placement - CDPL",
+  description: "Launch your tech career with CDPL's industry-leading courses in Software Testing, Data Science, and AI/ML. 100% Placement Support, Live Projects & Expert Mentors. Book a Free Demo!",
   keywords: [
     "software testing course",
     "data science course",
@@ -68,7 +69,7 @@ export default function HomePage(): React.ReactElement {
 
   // The generateHomePageSchema function combines LocalBusiness, ItemList, FAQPage, and VideoObject
   // into a single, optimized array of schemas for the Home Page.
-  const homePageSchemas = generateHomePageSchema();
+  const homePageSchemas = generateHomePageSchema(HOME_FAQS);
 
   return (
     <>

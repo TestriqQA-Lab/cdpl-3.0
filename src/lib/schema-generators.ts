@@ -757,7 +757,7 @@ export function generatePersonSchema(person: PersonSchemaInput): WithContext<Rec
  * Generate a consolidated array of schemas for the Home Page.
  * This includes LocalBusiness, ItemList (for featured courses), FAQPage, and VideoObject.
  */
-export function generateHomePageSchema(): WithContext<Record<string, unknown>>[] {
+export function generateHomePageSchema(faqs?: { question: string; answer: string }[]): WithContext<Record<string, unknown>>[] {
   // 1. Local Business Schema
   const localBusinessSchema = generateLocalBusinessSchema();
 
@@ -783,44 +783,30 @@ export function generateHomePageSchema(): WithContext<Record<string, unknown>>[]
   }));
   const itemListSchema = generateItemListSchema(featuredCoursesForSchema, 'Featured Courses');
 
-  // 3. FAQ Schema (Hardcoded data for now, should ideally come from a data source)
-  const faqs = [
-    {
-      question: 'What courses does CDPL offer?',
-      answer: 'We offer comprehensive training in Software Testing (Manual & Automation), Data Science & AI/ML, API Testing, Performance Testing, Mobile Testing, and Full Stack Development. All courses include hands-on projects, industry certifications, and 100% placement support.',
-    },
-    {
-      question: 'Do you provide placement assistance?',
-      answer: 'Yes! We provide 100% placement support including resume building, mock interviews, interview preparation, and guaranteed interview opportunities with our 50+ hiring partners. Our dedicated placement cell works with you until you land your dream job.',
-    },
-    {
-      question: 'What is the duration of the courses?',
-      answer: 'Course duration varies from 8 to 24 weeks depending on the program. We offer flexible batch timings including weekday, weekend, and fast-track options to fit your schedule. You also get lifetime access to all course materials.',
-    },
-    {
-      question: 'Are the classes online or offline?',
-      answer: 'We offer both online and offline training options. Our live online classes are interactive with real-time doubt resolution, just like classroom training. You can also attend our classroom sessions at our Pune center.',
-    },
-  ];
-  const faqSchema = generateFAQSchema(faqs);
+  // 3. FAQ Schema
+  // Use passed FAQs or fallback to empty array (or default if we had one in config)
+  const faqSchema = faqs && faqs.length > 0 ? generateFAQSchema(faqs) : undefined;
 
-  // 4. Video Schema (assuming a video exists on the page)
+  // 4. VideoObject Schema (for the "Watch CDPL" video)
+  // This is a placeholder/example. Ideally, pass this data dynamically too.
   const videoSchema = generateVideoSchema({
-    name: 'Why Choose CDPL for Your Tech Career?',
-    description: 'Discover how CDPL can transform your career with industry-ready skills, expert mentorship, and 100% placement support.',
-    thumbnailUrl: '/video-thumbnail.jpg', // TODO: Update with actual thumbnail
-    uploadDate: '2025-10-20T08:00:00+05:30',
-    duration: 'PT2M30S', // 2 minutes 30 seconds
-    embedUrl: 'https://www.youtube.com/embed/your-video-id', // TODO: Update with actual video ID
+    name: 'Transform Your Career with CDPL',
+    description: 'Discover how CDPL helps you master Software Testing, Data Science, and AI/ML with 100% placement support.',
+    thumbnailUrl: '/images/video-thumbnail.jpg', // Ensure this image exists or use a valid URL
+    uploadDate: '2024-01-01', // Update with actual upload date
+    contentUrl: 'https://www.youtube.com/watch?v=8kB2wESj1n8',
+    embedUrl: 'https://www.youtube.com/embed/8kB2wESj1n8',
   });
 
+  // Filter out undefined schemas
   return [
     localBusinessSchema,
     itemListSchema,
     faqSchema,
-    videoSchema,
-  ];
+    videoSchema
+  ].filter((schema): schema is WithContext<Record<string, unknown>> => schema !== undefined);
 }
+
 
 // ============================================================================
 // CONTACT PAGE SCHEMAA

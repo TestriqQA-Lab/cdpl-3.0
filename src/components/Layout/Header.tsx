@@ -853,9 +853,9 @@ const Header = () => {
           <div className="hidden sm:flex items-center">
             <button
               onClick={() => setIsEnquireModalOpen(true)}
-              className="cursor-pointer hidden lg:block bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white px-4 sm:px-5 py-2 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 text-sm font-semibold"
+              className="cursor-pointer hidden lg:block bg-gradient-to-r from-green-500 to-green-700 text-white px-4 sm:px-5 py-2 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 text-sm font-semibold"
             >
-              Enquire Now
+              Free Demo
             </button>
           </div>
 
@@ -1075,9 +1075,9 @@ const Header = () => {
                   toggleMenu();
                   setIsEnquireModalOpen(true);
                 }}
-                className="w-full block px-4 py-3 bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white rounded-lg text-center text-sm sm:text-base font-semibold"
+                className="w-full block px-4 py-3 bg-gradient-to-r from-green-500 to-green-700 text-white rounded-lg text-center text-sm sm:text-base font-semibold"
               >
-                Enquire Now
+                Free Demo
               </button>
             </div>
           </div>

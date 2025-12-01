@@ -138,8 +138,7 @@ const DesktopHeroContent: React.FC<DesktopHeroContentProps> = ({ onOpenBrochure,
       transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.06 }}
       className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900"
     >
-      Transform Your Career with{' '}
-      <span className="block lg:mt-2 md:mt-2 mt-1 text-brand">Industry-Ready Skills</span>
+      Master <span className="text-brand">Software Testing</span> & <span className="text-brand">Data Science</span> with <span className="text-brand">100% Placement</span>
     </motion.h1>
 
     {/* Enhanced Subheadline */}
@@ -148,8 +147,7 @@ const DesktopHeroContent: React.FC<DesktopHeroContentProps> = ({ onOpenBrochure,
       transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.12 }}
       className="mt-5 text-[15px] sm:text-base md:text-lg leading-7 text-slate-700"
     >
-      Master Software Testing, Data Science, AI/ML, and Full Stack Development through expert-led
-      classroom and online live training programs.
+      Launch your tech career with industry-leading courses, live projects, and guaranteed job interviews. Join 5000+ successful graduates today.
     </motion.p>
 
     {/* Trust Indicators - 3 Cards */}
@@ -695,8 +693,7 @@ const HomeHeroSection: React.FC = () => {
               transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.06 }}
               className="mt-2 py-1 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl"
             >
-              Transform Your Career with{' '}
-              <span className="block mt-1 text-brand">Industry-Ready Skills</span>
+              Master <span className="block mt-1 text-brand">Software Testing</span> & <span className="text-brand">Data Science</span>
             </motion.h1>
 
             {/* 3. Description */}
@@ -705,14 +702,13 @@ const HomeHeroSection: React.FC = () => {
               transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.12 }}
               className="mt-1 mb-1.5 text-[15px] sm:text-base leading-7 text-slate-700"
             >
-              Master Software Testing, Data Science, AI/ML, and Full Stack Development through expert-led
-              classroom and online live training programs.
+              Launch your tech career with industry-leading courses, live projects, and guaranteed job interviews. Join 5000+ successful graduates today.
             </motion.p>
 
             {/* 4. Form Card */}
             {LeadForm}
 
-            {/* 5. Mobile Feature List (The long list of stats/CTAs) */}
+            {/* 5. Mobile Feature List */}
             <MobileFeatureList
               onOpenBrochure={openBrochure}
               onOpenVideo={openVideo}
@@ -733,7 +729,9 @@ const HomeHeroSection: React.FC = () => {
               </div>
 
               {/* Right Form - 4 columns (33.33% width) */}
-              {LeadForm}
+              <div className="order-2 lg:order-2 lg:col-span-5">
+                {LeadForm}
+              </div>
             </div>
           </div>
         </div>
