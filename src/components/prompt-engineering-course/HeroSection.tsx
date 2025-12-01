@@ -11,6 +11,7 @@ export default function HeroSection() {
 
   const breadcrumbs = [
     { label: "Home", href: "/" },
+    { label: "Artificial Intelligence", href: null },
     { label: "Prompt Engineering with Generative AI", href: "/prompt-engineering-course" },
   ];
 
@@ -29,12 +30,18 @@ export default function HeroSection() {
             {breadcrumbs.map((c, i) => (
               <li key={i} className="flex items-center gap-2">
                 {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-                <Link
-                  href={c.href}
-                  className={`hover:text-green-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
-                >
-                  {c.label}
-                </Link>
+                {c.href ? (
+                  <Link
+                    href={c.href}
+                    className={`hover:text-green-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
+                  >
+                    {c.label}
+                  </Link>
+                ) : (
+                  <span className="text-slate-700 font-medium cursor-default">
+                    {c.label}
+                  </span>
+                )}
               </li>
             ))}
           </ol>
@@ -130,7 +137,7 @@ export default function HeroSection() {
           {/* Right column: Desktop form & visual */}
           <aside className="md:col-span-5 lg:col-span-4 hidden md:block">
             <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg">
-              
+
               <div className="p-4 sm:p-5">
                 <LeadForm variant="elevated" />
               </div>

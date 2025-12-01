@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { Home } from "lucide-react";
 
 const BRAND_ORANGE = "rgb(255, 140, 0)";
 const BRAND_BLUE = "#0069A8";
@@ -13,8 +14,9 @@ export default function ACTDCertificationHeroSection() {
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <nav aria-label="Breadcrumb" className="mb-3">
           <ol className="flex items-center gap-2 text-sm text-slate-500">
-            <li>
-              <Link href="/" className="hover:text-slate-700">Home</Link>
+            <li className="flex items-center gap-2">
+              <Home className="h-4 w-4" />
+              <Link href="/" className="hover:text-indigo-700">Home</Link>
             </li>
             <li aria-hidden className="text-slate-400">/</li>
             <li className="font-medium text-slate-700">ACTD Certification</li>

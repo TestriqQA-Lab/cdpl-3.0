@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { Star } from "lucide-react";
+import { Star, Home } from "lucide-react";
 import { useMemo } from "react";
 import type { CSSProperties } from "react";
 
@@ -42,7 +42,10 @@ export default function TestimonialHeroSection() {
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-3">
           <ol className="flex items-center gap-2 text-sm text-slate-500">
-            <li><Link href="/" className="hover:text-slate-700">Home</Link></li>
+            <li className="flex items-center gap-2">
+              <Home className="h-4 w-4" />
+              <Link href="/" className="hover:text-slate-700">Home</Link>
+            </li>
             <li aria-hidden="true" className="text-slate-400">/</li>
             <li><Link href="/reviews" className="font-medium text-slate-700 hover:text-slate-900">Reviews</Link></li>
           </ol>

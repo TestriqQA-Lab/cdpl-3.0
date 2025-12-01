@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { Home } from "lucide-react";
 
 export default function CertificationValidationHeroSection() {
   return (
@@ -10,8 +11,9 @@ export default function CertificationValidationHeroSection() {
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <nav aria-label="Breadcrumb" className="mb-3">
           <ol className="flex items-center gap-2 text-sm text-slate-500">
-            <li>
-              <Link href="/" className="hover:text-slate-700">Home</Link>
+            <li className="flex items-center gap-2">
+              <Home className="h-4 w-4" />
+              <Link href="/" className="hover:text-indigo-700">Home</Link>
             </li>
             <li aria-hidden className="text-slate-400">/</li>
             <li className="font-medium text-slate-700">Certificate Validation</li>
@@ -35,13 +37,13 @@ export default function CertificationValidationHeroSection() {
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
               <Link
-                href="/aaa-certification-course"
+                href="/aaa-certification"
                 className="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 ring-1 ring-slate-200 transition hover:bg-slate-50"
               >
                 AAA Course
               </Link>
               <Link
-                href="/actd-certification-training"
+                href="/actd-certification"
                 className="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 ring-1 ring-slate-200 transition hover:bg-slate-50"
               >
                 ACTD Training

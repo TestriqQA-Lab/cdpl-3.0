@@ -1,0 +1,24 @@
+Location: "Bhayandar"
+Context: ,         address: "Naigaon, Maharashtra, India"       }     }   },   "software-testing-bhayandar": {     slug: "software-testing-course-in-bhayandar",     courseName: "Software Testing",     location: "Bhayandar",     state: "Maharashtra",     specializations: [       "Manual Testing",       "Automation Testing",       "API Testing",       "Performance Testing",       "Mobile App T
+
+Location: "Bhayandar"
+Context: al.com",         address: "India"       }     }   },   "business-intelligence-bhayandar": {     slug: "business-intelligence-course-in-bhayandar",     courseName: "Business Intelligence",     location: "Bhayandar",     state: "Maharashtra",     specializations: [       "Power BI",       "Tableau",       "Data Warehousing",       "BI Consulting"     ],     breadcrumbs: [       {  
+
+Location: "Central Line Stations (Main Line)"
+Context:      }   },   "business-intelligence-central-line-stations-main-line": {     slug: "business-intelligence-course-in-central-line-stations-main-line",     courseName: "Business Intelligence",     location: "Central Line Stations (Main Line)",     state: "Maharashtra",     specializations: [       "Power BI",       "Tableau",       "Data Warehousing",       "BI Consulting"     ],     br
+
+Location: "Chhatrapati Shivaji Maharaj Terminus (CSMT)"
+Context: iness-intelligence-chhatrapati-shivaji-maharaj-terminus-csmt": {     slug: "business-intelligence-course-in-chhatrapati-shivaji-maharaj-terminus-csmt",     courseName: "Business Intelligence",     location: "Chhatrapati Shivaji Maharaj Terminus (CSMT)",     state: "Maharashtra",     specializations: [       "Power BI",       "Tableau",       "Data Warehousing",       "BI Consulting"     
+
+Location: "Harbour Line Stations (CSMT to Panvel/Goregaon)"
+Context: intelligence-harbour-line-stations-csmt-to-panvelgoregaon": {     slug: "business-intelligence-course-in-harbour-line-stations-csmt-to-panvelgoregaon",     courseName: "Business Intelligence",     location: "Harbour Line Stations (CSMT to Panvel/Goregaon)",     state: "Maharashtra",     specializations: [       "Power BI",       "Tableau",       "Data Warehousing",       "BI Consulting" 
+
+Location: "Bhayandar"
+Context:       address: "Mira Road, Maharashtra, India"       }     }   },   "digital-marketing-bhayandar": {     slug: "digital-marketing-course-in-bhayandar",     courseName: "Digital Marketing",     location: "Bhayandar",     state: "Maharashtra",     specializations: [       "SEO",       "Social Media Marketing",       "PPC Advertising",       "Content Marketing",       "Email Marketing",
+
+Location: "Chhatrapati Shivaji Maharaj Terminus (CSMT)"
+Context:       }     }   },    // Mumbai Stations Central Line digital marketing    "digital-marketing-csmt": {     slug: "digital-marketing-courses-in-csmt",     courseName: "Digital Marketing",     location: "Chhatrapati Shivaji Maharaj Terminus (CSMT)",     state: "Maharashtra",     specializations: [       "SEO",       "Social Media Marketing",       "PPC Advertising",       "Content Mar
+
+Location: "Bhayandar"
+Context:      address: "Mira Road, Maharashtra, India",       },     },   },   "web-development-bhayandar": {     slug: "web-development-course-in-bhayandar",     courseName: "Programming Courses",     location: "Bhayandar",     state: "Maharashtra",     specializations: [       "Python Basics",       "Advanced Python",       "Java Fundamentals",       "Advanced Java",       "Web Development 
+
