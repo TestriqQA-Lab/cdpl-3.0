@@ -1,10 +1,10 @@
 // components/sections/EventsPastEventsCTASection.tsx
 "use client";
 
-import { PropsWithChildren, useState } from "react";
-import { Check, Building2, Sparkles, ArrowRight, ChevronDown } from "lucide-react";
+import { PropsWithChildren } from "react";
+import { Check, Building2, Sparkles, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import EventsPastEventsAllEventsSection, { AllEvent } from "./EventsPastEventsAllEventsSection";
+import { AllEvent } from "./EventsPastEventsAllEventsSection";
 
 type Bullet = { label: string; sub?: string };
 
@@ -32,7 +32,6 @@ export default function EventsPastEventsCTASection({
   ],
   badges = ["On-site", "Virtual", "Hybrid"],
   children,
-  events = [],
 }: PropsWithChildren<{
   title?: string;
   subtitle?: string;
@@ -40,10 +39,6 @@ export default function EventsPastEventsCTASection({
   badges?: string[];
   events?: AllEvent[];
 }>) {
-  const [showAll, setShowAll] = useState(false);
-
-  // Determine which events to show
-  const displayEvents = showAll ? events : events.slice(0, 3);
 
   return (
     <section className="w-full overflow-x-hidden">
@@ -201,25 +196,6 @@ export default function EventsPastEventsCTASection({
               </aside>
             </div>
 
-            {/* Event Cards Section */}
-            {events.length > 0 && (
-              <div className="border-t border-slate-200 bg-slate-50/50 px-4 py-8 sm:px-6 lg:px-12">
-                <h3 className="text-2xl font-bold text-slate-900 mb-6">Recent Training Events</h3>
-                <EventsPastEventsAllEventsSection events={displayEvents} />
-
-                {!showAll && events.length > 3 && (
-                  <div className="mt-8 flex justify-center">
-                    <button
-                      onClick={() => setShowAll(true)}
-                      className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-700 shadow-md ring-1 ring-slate-200 transition hover:bg-slate-50 hover:text-blue-600 hover:ring-blue-200"
-                    >
-                      Load More Events
-                      <ChevronDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
           </div>
         </div>
       </div>

@@ -10,13 +10,15 @@ type Job = {
   id: string;
   title: string;
   team:
-    | "Engineering"
-    | "Data"
-    | "Product"
-    | "Growth"
-    | "Student Success"
-    | "Operations";
-  location: "Bengaluru" | "Pune" | "Remote (India)" | "Hybrid (Bengaluru)";
+  | "Engineering"
+  | "Data"
+  | "Product"
+  | "Growth"
+  | "Student Success"
+  | "Operations"
+  | "Sales"
+  | "Training";
+  location: "Bengaluru" | "Pune" | "Remote (India)" | "Hybrid (Bengaluru)" | "Mumbai";
   type: "Full-time" | "Contract" | "Internship";
   experience: "0–1 yrs" | "1–3 yrs" | "3–5 yrs" | "5–8 yrs" | "8+ yrs";
   summary: string;

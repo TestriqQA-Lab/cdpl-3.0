@@ -9,9 +9,10 @@ interface CareerSessionModalProps {
     isOpen: boolean;
     onClose: () => void;
     source?: string;
+    courseName?: string;
 }
 
-export default function CareerSessionModal({ isOpen, onClose, source }: CareerSessionModalProps) {
+export default function CareerSessionModal({ isOpen, onClose, source, courseName = "QA" }: CareerSessionModalProps) {
     // Close on escape key
     useEffect(() => {
         const handleEscape = (e: KeyboardEvent) => {
@@ -67,7 +68,7 @@ export default function CareerSessionModal({ isOpen, onClose, source }: CareerSe
                                 variant="default"
                                 className="shadow-2xl border-0"
                                 title="Get a Free Career Session"
-                                subtitle="Speak with our career counselors to plan your QA journey."
+                                subtitle={`Speak with our career counselors to plan your ${courseName} journey.`}
                                 source={source}
                             />
                         </motion.div>

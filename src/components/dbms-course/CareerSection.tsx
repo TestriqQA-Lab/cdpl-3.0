@@ -1,7 +1,8 @@
 'use client';
 import { motion } from 'framer-motion';
 import { Briefcase, Building2, ArrowRight, BadgeCheck } from 'lucide-react';
-import Link from 'next/link';
+import { useState } from 'react';
+import CareerSessionModal from '@/components/CareerSessionModal';
 
 const roles = [
     'Database Administrator',
@@ -32,7 +33,7 @@ const companyAccents = [
 ];
 
 export default function CareerSection() {
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <section id="career" aria-labelledby="career-heading" className="relative py-10 md:py-10 bg-white">
@@ -149,17 +150,22 @@ export default function CareerSection() {
                     transition={{ duration: 0.45, ease: 'easeOut' }}
                     className="mt-10 sm:mt-12 text-center"
                 >
-                    <Link
-                        href="contact-us"
-                        className="inline-flex items-center gap-2 rounded-xl border border-indigo-600 bg-indigo-600 px-7 py-3 text-sm sm:text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
+                    <button
+                        onClick={() => setIsModalOpen(true)}
+                        className="cursor-pointer inline-flex items-center gap-2 rounded-xl border border-indigo-600 bg-indigo-600 px-7 py-3 text-sm sm:text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
                         aria-label="Get placed with MySQL skills"
                     >
                         Get Placement Support
                         <ArrowRight className="h-5 w-5" />
-                    </Link>
+                    </button>
                 </motion.div>
             </div>
 
+            <CareerSessionModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                source="DBMS Course Page - Career Section - Get Placement Support"
+            />
         </section>
     );
 }

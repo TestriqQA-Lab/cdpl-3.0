@@ -1,6 +1,12 @@
 // components/sections/WhoShouldEnroll.tsx
 // Server component — clean, modern audience section with subtle futuristic accents + SEO.
 
+"use client";
+
+import { useState } from "react";
+import EnrollModal from "../EnrollModal";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
+
 type Persona = {
   title: string;
   blurb: string;
@@ -70,6 +76,9 @@ const PERSONAS: Persona[] = [
 ];
 
 export default function WhoShouldEnroll() {
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+
   const seoKeywords =
     "who should enroll advanced data analytics course, analytics for students, working professionals upskill, business analyst training, career switch to data analytics, python sql power bi course, job ready analytics program";
 
@@ -172,8 +181,36 @@ export default function WhoShouldEnroll() {
           </p>
           <p className="mt-2 text-[11px] text-slate-500">*Learning paths adapt by background and pace.</p>
         </div>
+
+        {/* CTA Buttons */}
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <button
+            onClick={() => setIsEnrollOpen(true)}
+            className="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-8 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200"
+          >
+            Enroll Now
+          </button>
+          <button
+            onClick={() => setIsSyllabusOpen(true)}
+            className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-8 py-3 text-base font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200"
+          >
+            Download Syllabus
+          </button>
+        </div>
       </div>
 
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="Data Analytics Course Page - Who Should Enroll Section - Enroll Now"
+        courseName="Advanced Data Analytics Hero Program"
+      />
+      <SyllabusDownloadModal
+        isOpen={isSyllabusOpen}
+        onClose={() => setIsSyllabusOpen(false)}
+        source="Data Analytics Course Page - Who Should Enroll Section - Syllabus Download"
+        courseName="Advanced Data Analytics Hero Program"
+      />
     </section>
   );
 }

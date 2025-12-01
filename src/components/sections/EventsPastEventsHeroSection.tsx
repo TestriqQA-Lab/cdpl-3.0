@@ -1,16 +1,24 @@
-// src/components/sections/EventsPastEventsHeroSection.tsx
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { Home, ChevronRight, Sparkles, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import TrainingEnquiryModal from "@/components/TrainingEnquiryModal";
 
 export default function EventsPastEventsHeroSection() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const handleScrollDown = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const featured = document.getElementById("featured-events");
     const all = document.getElementById("all-past-events");
     (featured ?? all)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const handleEnquireClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsModalOpen(true);
   };
 
   return (
@@ -86,8 +94,8 @@ export default function EventsPastEventsHeroSection() {
           </div>
         </div>
 
-        {/* ✅ Breadcrumb (kept) */}
-        <nav aria-label="Breadcrumb" className="relative z-10 mb-4">
+        {/* ✅ Breadcrumb (Matched to About Us) */}
+        <nav aria-label="Breadcrumb" className="mb-6 relative z-10">
           <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
             <li className="flex items-center gap-2">
               <Home className="h-4 w-4" />
@@ -108,47 +116,52 @@ export default function EventsPastEventsHeroSection() {
         <div className="relative z-10 grid grid-cols-1 items-center gap-6 sm:gap-8 lg:grid-cols-2">
           {/* LEFT — content */}
           <div className="order-1 lg:order-1">
-            <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-[11px] font-medium text-slate-700 shadow-sm backdrop-blur sm:text-xs">
+            <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-[11px] font-medium text-slate-700 shadow-sm backdrop-blur dark:border-slate-200/60 dark:bg-white/85 sm:text-xs">
               <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
               Our Training Portfolio
             </span>
 
-            <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-              <span className="text-[#0069A8]">Past Events</span>{" "}
+            <h1 className="mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+              <span className="text-[#0069A8]">Corporate Training</span>{" "}
               <span className="text-slate-900">&amp;</span>{" "}
-              <span className="text-[#FF8C00]">Training Programs</span>
+              <span className="text-[#FF8C00]">Workshops</span>
             </h1>
 
-            <p className="mt-3 max-w-2xl text-[15px] leading-7 text-slate-700 sm:text-base md:text-lg">
-              Explore our portfolio of successfully conducted training events, workshops, and corporate programs across India.
+            <p className="mt-4 max-w-2xl text-[15px] leading-7 text-slate-700 sm:text-base md:text-lg">
+              Explore our portfolio of successfully conducted <strong>corporate training programs</strong>, <strong>technical workshops</strong>, and <strong>industry seminars</strong>. From <strong>Software Testing</strong> and <strong>Data Science</strong> to <strong>AI/ML</strong>, we empower organizations and professionals with job-ready skills and hands-on expertise.
             </p>
 
-            {/* scroll button */}
-            <div className="mt-5">
+            {/* Buttons */}
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+              <button
+                onClick={handleEnquireClick}
+                className="inline-flex w-full items-center justify-center rounded-2xl bg-[#FF8C00] px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-slate-900/10 transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 sm:w-auto"
+              >
+                Enquire for Training <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+              </button>
+
               <button
                 onClick={handleScrollDown}
-                className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
-                style={{ backgroundColor: "#FF8C00" }}
-                aria-label="Scroll to events"
+                className="inline-flex w-full items-center justify-center rounded-2xl border border-slate-300 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 dark:border-slate-200/70 dark:bg-white/90 sm:w-auto"
               >
-                Browse events
-                <ArrowRight className="h-4 w-4" />
+                Browse Past Events
               </button>
             </div>
           </div>
 
           {/* RIGHT — image */}
           <div className="order-2 lg:order-2 mt-4 lg:mt-0">
-            <Image
-              src="/events/services_past-events-hero.png"
-              alt="CDPL training events collage"
-              title="CDPL training events collage"
-              width={1280}
-              height={960}
-              className="w-full h-auto object-contain"
-              style={{ filter: "none", mixBlendMode: "normal" }}
-              priority
-            />
+            <div className="relative h-64 w-full overflow-hidden rounded-3xl bg-white/92 ring-1 ring-slate-200 shadow-[0_20px_45px_-20px_rgba(2,6,23,0.25)] backdrop-blur sm:h-72 md:h-80 lg:h-[26rem] dark:bg-white/92">
+              <Image
+                src="/events/past-events-hero-illustration.png"
+                alt="Corporate training workshop illustration showing professionals learning software testing and data science"
+                title="CDPL Corporate Training Workshop"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-contain p-4"
+                priority
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -163,6 +176,8 @@ export default function EventsPastEventsHeroSection() {
         .animate-float-slow { animation: floatY 7.5s ease-in-out infinite; }
         .animate-float-slower { animation: floatY 9s ease-in-out infinite; }
       `}</style>
+
+      <TrainingEnquiryModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }

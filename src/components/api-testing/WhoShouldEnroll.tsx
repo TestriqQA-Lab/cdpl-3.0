@@ -3,6 +3,9 @@ import { Users, GraduationCap, Briefcase, Target, BadgeCheck } from 'lucide-reac
 import IconCard from '@/components/ui/IconCard';
 import { motion } from 'framer-motion';
 import { JSX } from 'react';
+import { ArrowRight } from 'lucide-react';
+import { useState } from 'react';
+import EnrollModal from '@/components/EnrollModal';
 
 type Audience = {
   icon: JSX.Element;
@@ -41,7 +44,7 @@ const audience: Audience[] = [
 ];
 
 export default function WhoShouldEnroll() {
-
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
 
   return (
     <section id="who-should-enroll" aria-labelledby="enroll-heading" className="relative py-8 sm:py-10 bg-white">
@@ -99,7 +102,30 @@ export default function WhoShouldEnroll() {
             and Automation roles.
           </p>
         </div>
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45, ease: 'easeOut' }}
+          className="mt-12 text-center"
+        >
+          <button
+            onClick={() => setIsEnrollModalOpen(true)}
+            className="cursor-pointer inline-flex items-center gap-2 rounded-xl border border-indigo-600 bg-indigo-600 px-7 py-3 text-sm font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
+            aria-label="Start Your QA Journey"
+          >
+            Enroll Now - Become a QA Tester <ArrowRight className="h-5 w-5" />
+          </button>
+        </motion.div>
+
       </div>
+      <EnrollModal
+        isOpen={isEnrollModalOpen}
+        onClose={() => setIsEnrollModalOpen(false)}
+        courseName="API Testing"
+        source="API Testing Course Page - Who Should Enroll Section - Enroll Now"
+      />
     </section>
   );
 }

@@ -1,8 +1,9 @@
 'use client';
 import { motion } from 'framer-motion';
-import { Users, GraduationCap, Briefcase, Target, BadgeCheck } from 'lucide-react';
+import { Users, GraduationCap, Briefcase, Target, BadgeCheck, ArrowRight } from 'lucide-react';
 import IconCard from '../ui/IconCard';
-import { JSX } from 'react';
+import { JSX, useState } from 'react';
+import EnrollModal from '@/components/EnrollModal';
 
 type Audience = {
   icon: JSX.Element;
@@ -14,14 +15,14 @@ type Audience = {
 };
 
 const audience: Audience[] = [
-  { icon: <Users />,          title: 'Career Switchers',  description: 'Non-tech professionals moving into high-growth Data QA roles', bg: 'bg-sky-50',     iconColor: 'text-sky-700',     border: 'border-sky-200' },
-  { icon: <GraduationCap />,  title: 'Fresh Graduates',   description: 'BSc, BTech, BCA students seeking job-ready ETL testing skills', bg: 'bg-emerald-50', iconColor: 'text-emerald-700', border: 'border-emerald-200' },
-  { icon: <Briefcase />,      title: 'Manual Testers',    description: 'Upskill from UI/functional testing to data quality & DWH testing', bg: 'bg-amber-50',  iconColor: 'text-amber-700',   border: 'border-amber-200' },
-  { icon: <Target />,         title: 'SQL Learners',      description: 'Apply SQL to real ETL/ELT pipelines, reconciliation & reporting', bg: 'bg-violet-50', iconColor: 'text-violet-700',  border: 'border-violet-200' },
+  { icon: <Users />, title: 'Career Switchers', description: 'Non-tech professionals moving into high-growth Data QA roles', bg: 'bg-sky-50', iconColor: 'text-sky-700', border: 'border-sky-200' },
+  { icon: <GraduationCap />, title: 'Fresh Graduates', description: 'BSc, BTech, BCA students seeking job-ready ETL testing skills', bg: 'bg-emerald-50', iconColor: 'text-emerald-700', border: 'border-emerald-200' },
+  { icon: <Briefcase />, title: 'Manual Testers', description: 'Upskill from UI/functional testing to data quality & DWH testing', bg: 'bg-amber-50', iconColor: 'text-amber-700', border: 'border-amber-200' },
+  { icon: <Target />, title: 'SQL Learners', description: 'Apply SQL to real ETL/ELT pipelines, reconciliation & reporting', bg: 'bg-violet-50', iconColor: 'text-violet-700', border: 'border-violet-200' },
 ];
 
 export default function WhoShouldEnroll() {
-
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
 
   return (
     <section
@@ -85,7 +86,25 @@ export default function WhoShouldEnroll() {
           Build confidence with <strong>real ETL/ELT scenarios</strong>, <strong>SQL reconciliation</strong>, and{' '}
           <strong>audit-ready reporting</strong>—skills that hiring managers value for Data QA and DWH roles.
         </p>
+
+        {/* CTA Button */}
+        <div className="mt-10 flex justify-center">
+          <button
+            onClick={() => setIsEnrollModalOpen(true)}
+            className="group inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
+          >
+            Enroll Now
+            <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+          </button>
+        </div>
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollModalOpen}
+        onClose={() => setIsEnrollModalOpen(false)}
+        courseName="ETL Testing"
+        source="ETL Testing Course Page - Who Should Enroll Section - Enroll Now"
+      />
 
     </section>
   );

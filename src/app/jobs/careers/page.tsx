@@ -37,8 +37,10 @@ export type Job = {
     | "Product"
     | "Growth"
     | "Student Success"
-    | "Operations";
-    location: "Bengaluru" | "Pune" | "Remote (India)" | "Hybrid (Bengaluru)";
+    | "Operations"
+    | "Sales"
+    | "Training";
+    location: "Bengaluru" | "Pune" | "Remote (India)" | "Hybrid (Bengaluru)" | "Mumbai";
     type: "Full-time" | "Contract" | "Internship";
     experience: "0–1 yrs" | "1–3 yrs" | "3–5 yrs" | "5–8 yrs" | "8+ yrs";
     summary: string;
@@ -50,109 +52,171 @@ export type Job = {
 
 const JOBS: Job[] = [
     {
-        id: "se-fe-1",
-        title: "Frontend Engineer (React/Next.js)",
-        team: "Engineering",
-        location: "Hybrid (Bengaluru)",
+        id: "sales-executive-intern-1",
+        title: "Sales Executive Intern",
+        team: "Sales",
+        location: "Mumbai",
+        type: "Internship",
+        experience: "0–1 yrs",
+        summary:
+            "Kickstart your career in EdTech sales. Learn to drive growth, build relationships, and close deals in a fast-paced environment.",
+        responsibilities: [
+            "Qualify leads and schedule meetings for the sales team",
+            "Assist in managing the sales pipeline and CRM",
+            "Conduct market research to identify new opportunities",
+            "Support the sales team in daily operations and reporting",
+        ],
+        requirements: [
+            "Strong communication and interpersonal skills",
+            "Eagerness to learn and adapt in a sales environment",
+            "Basic understanding of sales processes (preferred)",
+            "Good organizational and time-management skills",
+        ],
+        applyEmail: "careers@cinutedigital.com",
+    },
+    {
+        id: "data-science-trainer-1",
+        title: "Data Science Trainer",
+        team: "Training",
+        location: "Mumbai",
         type: "Full-time",
         experience: "1–3 yrs",
         summary:
-            "Build fast, accessible, SEO-friendly product surfaces used by learners and mentors every day.",
+            "Teach Python, ML, AI, and SQL. Develop engaging curriculum and mentor students to launch their data science careers.",
         responsibilities: [
-            "Ship pixel-perfect UI with React/Next.js and Tailwind",
-            "Own SSR, routing, and performance budgets (Core Web Vitals)",
-            "Collaborate with Design on design systems & accessibility",
+            "Teach Python Programming, Machine Learning, AI, and SQL",
+            "Develop and deliver engaging course curriculum for various levels",
+            "Conduct training sessions (in-person and online)",
+            "Evaluate student performance through assessments and projects",
+            "Provide support and mentorship to students",
+            "Stay updated with latest data science trends and technologies",
         ],
         requirements: [
-            "Solid TypeScript, React, Next.js app router",
-            "Good grasp of a11y, SEO, and testing (Vitest/RTL/Playwright)",
-            "Understanding of API integration and caching",
+            "1+ year experience as a Data Science Trainer",
+            "Hands-on knowledge in Python, ML, PowerBI, and Tableau",
+            "Well-versed with MySQL query writing",
+            "Expertise in Data Visualization using Python and Excel",
+            "BSc/MSc/B.E/M.E in CS, IT, or related fields",
         ],
         applyEmail: "careers@cinutedigital.com",
     },
     {
-        id: "se-be-1",
-        title: "Backend Engineer (Node/Express)",
-        team: "Engineering",
-        location: "Bengaluru",
-        type: "Full-time",
-        experience: "3–5 yrs",
-        summary:
-            "Design resilient APIs and data pipelines powering placements and live-learning experiences.",
-        responsibilities: [
-            "Own services in Node/Express with Postgres",
-            "Improve reliability, tracing, and error budgets",
-            "Partner with Data team for reporting and analytics",
-        ],
-        requirements: [
-            "Strong SQL schema design and query tuning",
-            "Observability (logs/metrics/traces) and cloud fundamentals",
-            "Security mindset and clean code practices",
-        ],
-        applyLink: "https://forms.gle/abcd-careers-backend",
-    },
-    {
-        id: "ds-analyst-1",
-        title: "Data Analyst (Product Insights)",
-        team: "Data",
-        location: "Remote (India)",
+        id: "java-automation-trainer-1",
+        title: "Java Automation Trainer",
+        team: "Training",
+        location: "Mumbai",
         type: "Full-time",
         experience: "1–3 yrs",
         summary:
-            "Turn learner telemetry into actionable product insights and placement outcomes.",
+            "Train students in Java, Selenium, TestNG, and Maven. Design curriculum and ensure effective training delivery.",
         responsibilities: [
-            "Define KPIs and build Looker/Metabase dashboards",
-            "Run funnels, cohorts, and A/B tests with Product",
-            "Maintain data quality and documentation",
+            "Teach design and development of automation frameworks",
+            "Cover Java, Selenium WebDriver, TestNG, and Maven",
+            "Design and develop course curriculum",
+            "Conduct training sessions and evaluate performance",
         ],
         requirements: [
-            "SQL fluency and data viz best practices",
-            "Strong communication and stakeholder alignment",
-            "Experiment design basics",
+            "2+ years experience in software testing with Java expertise",
+            "Experience with Selenium WebDriver, TestNG, and Maven",
+            "Prior experience as a Java Automation Trainer (preferred)",
+            "Excellent communication and presentation skills",
+            "Bachelor's or Master's degree in CS, IT, or related field",
         ],
         applyEmail: "careers@cinutedigital.com",
     },
     {
-        id: "pm-1",
-        title: "Product Manager (Outcomes)",
-        team: "Product",
-        location: "Hybrid (Bengaluru)",
-        type: "Full-time",
-        experience: "5–8 yrs",
-        summary:
-            "Own learner outcomes, define roadmap, validate bets, and ship value every sprint.",
-        responsibilities: [
-            "Craft PRDs, align cross-functional teams, and ship",
-            "Measure impact and iterate ruthlessly",
-            "Partner with Growth & Student Success",
-        ],
-        requirements: [
-            "Demonstrated 0→1 and 1→n product wins",
-            "Strong qualitative + quantitative decision making",
-            "Great writing and storytelling",
-        ],
-        applyEmail: "careers@cinutedigital.com",
-    },
-    {
-        id: "mentor-ops-1",
-        title: "Student Success Specialist",
-        team: "Student Success",
-        location: "Pune",
+        id: "telesales-representative-1",
+        title: "Telesales Representative",
+        team: "Sales",
+        location: "Mumbai",
         type: "Full-time",
         experience: "0–1 yrs",
         summary:
-            "Coach learners, track progress, and unlock referrals to help them get placed.",
+            "Handle end-to-end sales for IT certification courses. Communicate, support, and close deals with learners.",
         responsibilities: [
-            "Own learner progress reviews & follow-ups",
-            "Coordinate interview prep & mock interviews",
-            "Work with Hiring Partners for referrals",
+            "Explain IT certification courses to clients/learners",
+            "Handle end-to-end sales process from lead to closure",
+            "Provide customer service and support",
+            "Meet and exceed sales targets",
         ],
         requirements: [
-            "Empathy, ownership, and ops discipline",
-            "Comfort with spreadsheets/CRMs",
-            "Excellent written & spoken English",
+            "0.5 - 2 years experience in Telesales/Sales",
+            "Excellent Communication and Customer Service skills",
+            "Experience in Selling Technical Courses",
+            "Strong problem-solving and negotiation skills",
+            "Experience in software training industry is a plus",
         ],
-        applyLink: "https://forms.gle/abcd-careers-success",
+        applyEmail: "careers@cinutedigital.com",
+    },
+    {
+        id: "digital-marketing-trainer-1",
+        title: "Digital Marketing Trainer",
+        team: "Training",
+        location: "Mumbai",
+        type: "Full-time",
+        experience: "1–3 yrs",
+        summary:
+            "Educate and mentor students in Digital Marketing. Cover SEO, SEM, Social Media, and more with practical assignments.",
+        responsibilities: [
+            "Conduct training on SEO, SEM, SMM, Google Ads, etc.",
+            "Develop course materials and hands-on projects",
+            "Assist students with live projects and certifications",
+            "Evaluate performance and provide one-on-one mentoring",
+        ],
+        requirements: [
+            "2+ years industry experience in digital marketing",
+            "Proficiency in Google Ads, Analytics, FB Ads, SEMrush, Canva",
+            "Strong understanding of SEO, PPC, Email Marketing, Content Strategy",
+            "Excellent communication and presentation skills",
+        ],
+        applyEmail: "careers@cinutedigital.com",
+    },
+    {
+        id: "career-counsellor-intern-1",
+        title: "Career Counsellor Intern",
+        team: "Sales",
+        location: "Mumbai",
+        type: "Internship",
+        experience: "0–1 yrs",
+        summary:
+            "Training + Internship Program. Gain hands-on experience in outreach, lead engagement, and career guidance.",
+        responsibilities: [
+            "Undergo structured training in Sales & Marketing",
+            "Engage with leads and provide career guidance",
+            "Develop real-world sales and CRM skills",
+            "Assist in outreach and lead generation",
+        ],
+        requirements: [
+            "Strong desire to grow in Sales & Marketing domain",
+            "Passion for IT and tech education industry",
+            "Fluent verbal and written communication skills",
+            "Good interpersonal and convincing skills",
+            "Fluency in English (regional languages is a plus)",
+        ],
+        applyEmail: "careers@cinutedigital.com",
+    },
+    {
+        id: "sales-executive-1",
+        title: "Sales Executive",
+        team: "Sales",
+        location: "Mumbai",
+        type: "Full-time",
+        experience: "1–3 yrs",
+        summary:
+            "Drive end-to-end sales for IT certification courses. Generate leads, nurture relationships, and close deals.",
+        responsibilities: [
+            "Generate leads and close deals (telecalls & in-person)",
+            "Maintain and update CRM (e.g., LeadSquared)",
+            "Conduct webinars and online meetings to engage leads",
+            "Meet monthly targets (10x business value of salary)",
+        ],
+        requirements: [
+            "1-3 years proven experience in EdTech sales",
+            "Strong negotiation and objection-handling abilities",
+            "Ability to build relationships with clients/learners",
+            "Bachelor's degree in Sales, Marketing, or related field",
+        ],
+        applyEmail: "careers@cinutedigital.com",
     },
 ];
 

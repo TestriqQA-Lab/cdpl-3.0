@@ -1,130 +1,19 @@
 "use client";
 
-import { ArrowRight, ChevronRight, Home, Play } from "lucide-react";
+import { ArrowRight, ChevronRight, Home, Download } from "lucide-react";
 import Link from "next/link";
-import React from "react";
-
-/** --- Reusable Form (unchanged) --- */
-function LeadForm({ className = "" }: { className?: string }) {
-    const countries = [
-        { code: "IN", dial: "+91", label: "India", flag: "🇮🇳" },
-        { code: "US", dial: "+1", label: "United States", flag: "🇺🇸" },
-        { code: "GB", dial: "+44", label: "United Kingdom", flag: "🇬🇧" },
-        { code: "AE", dial: "+971", label: "United Arab Emirates", flag: "🇦🇪" },
-        { code: "SG", dial: "+65", label: "Singapore", flag: "🇸🇬" },
-        { code: "AU", dial: "+61", label: "Australia", flag: "🇦🇺" },
-    ];
-
-    return (
-        <form
-            className={[
-                "w-full rounded-2xl border border-slate-200 bg-white/90 backdrop-blur-sm shadow-lg",
-                "p-5 sm:p-6",
-                className,
-            ].join(" ")}
-            onSubmit={(e) => {
-                e.preventDefault();
-                // handle submit
-            }}
-            aria-label="Request Syllabus & Free Consultation"
-        >
-            <h2 className="text-xl font-semibold text-slate-900">
-                Request Syllabus & Free Consultation
-            </h2>
-            <p className="mt-1 text-sm text-slate-600">
-                Get the detailed curriculum, career guidance, and upcoming batch info.
-            </p>
-
-            <div className="mt-4 grid grid-cols-1 gap-4">
-                {/* Name */}
-                <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-slate-700">
-                        Full Name
-                    </label>
-                    <input
-                        id="name"
-                        name="name"
-                        required
-                        autoComplete="name"
-                        placeholder="Your full name"
-                        className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-300"
-                    />
-                </div>
-
-                {/* Email */}
-                <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-slate-700">
-                        Email
-                    </label>
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        required
-                        autoComplete="email"
-                        placeholder="you@example.com"
-                        className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-300"
-                    />
-                </div>
-
-                {/* Phone */}
-                <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-slate-700">
-                        Mobile Number
-                    </label>
-                    <div className="mt-1 flex items-stretch gap-2">
-                        <div className="flex min-w-[7.5rem] items-center rounded-lg border border-slate-300 bg-white px-2">
-                            <select
-                                name="country"
-                                aria-label="Country code"
-                                defaultValue="IN"
-                                className="w-full bg-transparent py-2 text-slate-900 focus:outline-none"
-                            >
-                                {countries.map((c) => (
-                                    <option key={c.code} value={c.code}>
-                                        {c.flag} {c.label} ({c.dial})
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <input
-                            id="phone"
-                            name="phone"
-                            type="tel"
-                            inputMode="tel"
-                            required
-                            placeholder="98765 43210"
-                            pattern="^[0-9\\s\\-()+]{7,20}$"
-                            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-300"
-                        />
-                    </div>
-                    <p className="mt-1 text-xs text-slate-500">
-                        We’ll never share your number. Standard rates may apply.
-                    </p>
-                </div>
-
-                <button
-                    type="submit"
-                    className="group inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 px-5 py-3 font-semibold text-white shadow-lg transition-all hover:from-orange-600 hover:to-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300"
-                >
-                    Get Syllabus & Pricing
-                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
-                </button>
-
-                <p className="text-xs text-slate-500">
-                    By submitting, you agree to our{" "}
-                    <Link href="/privacy" className="underline hover:text-slate-700">
-                        Privacy Policy
-                    </Link>
-                    .
-                </p>
-            </div>
-        </form>
-    );
-}
+import React, { useState } from "react";
+import ApiCourseLeadForm from "../forms/ApiCourseLeadForm";
+import EnrollModal from "../EnrollModal";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
 
 /** --- Updated SEO-optimized Hero --- */
 export default function HeroSection() {
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+
+    const courseName = "Advanced Excel for Data Analytics & Visualization";
+
     const courseInfo = {
         title: "Advanced Excel for Data Analytics & Visualization",
         duration: "20 Hours",
@@ -193,7 +82,9 @@ export default function HeroSection() {
                                 </span>
                             </h1>
 
-                            <LeadForm className="md:hidden" />
+                            <div className="md:hidden">
+                                <ApiCourseLeadForm source="Data Analytics & Visualization Course Page - Hero Section (Mobile)" courseName={courseName} />
+                            </div>
 
                             {/* SEO-optimized description */}
                             <p className="mt-2 max-w-3xl text-base leading-relaxed text-slate-600 md:text-lg">
@@ -241,13 +132,19 @@ export default function HeroSection() {
 
                         {/* CTAs */}
                         <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                            <button className="inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
+                            <button
+                                onClick={() => setIsEnrollOpen(true)}
+                                className="inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                            >
                                 Enroll Now
                                 <ArrowRight className="w-5 h-5" />
                             </button>
-                            <button className="inline-flex items-center gap-2 px-5 py-3 border-2 border-slate-300 hover:border-blue-600 text-slate-900 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-300">
-                                <Play className="w-5 h-5" />
-                                Watch Demo
+                            <button
+                                onClick={() => setIsSyllabusOpen(true)}
+                                className="inline-flex items-center gap-2 px-5 py-3 border-2 border-slate-300 hover:border-blue-600 text-slate-900 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-300"
+                            >
+                                <Download className="w-5 h-5" />
+                                Download Syllabus
                             </button>
                         </div>
 
@@ -287,7 +184,7 @@ export default function HeroSection() {
                             {/* Form card */}
                             <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100">
                                 <div className="w-full bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
-                                    <LeadForm />
+                                    <ApiCourseLeadForm source="Data Analytics & Visualization Course Page - Hero Section (Desktop)" courseName={courseName} />
                                 </div>
                             </div>
 
@@ -320,6 +217,20 @@ export default function HeroSection() {
                     {/* /Right section */}
                 </div>
             </div>
+
+            {/* Modals */}
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="Data Analytics & Visualization Course Page - Hero Section - Enroll Now"
+                courseName={courseName}
+            />
+            <SyllabusDownloadModal
+                isOpen={isSyllabusOpen}
+                onClose={() => setIsSyllabusOpen(false)}
+                source="Data Analytics & Visualization Course Page - Hero Section - Download Syllabus"
+                courseName={courseName}
+            />
         </section>
     );
 }
