@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { generateStaticPageMetadata } from "@/lib/metadata-generator";
+import { generateBreadcrumbSchema, generateWebPageSchema } from "@/lib/schema-generators";
+import JsonLd from "@/components/JsonLd";
 
 /* ---------- Small, reusable loading UI ---------- */
 function SectionLoader({ label = "Loading..." }: { label?: string }) {
@@ -48,14 +50,29 @@ export const metadata: Metadata = generateStaticPageMetadata({
   image: "/og-image-certificate-validation.jpg",
 });
 
-
-
 /* ---------- Page (server component) ---------- */
 export default function CertificateValidationPage() {
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Certificate Validation", url: "/cdpl-certificate-validation" },
+  ]);
+
+  const webPageSchema = generateWebPageSchema({
+    name: "CDPL Certificate Validation - Verify AAA & ACTD Certificates Online",
+    description: "Instantly validate and verify CDPL certificates online. Check authenticity of AAA, ACTD, and other CDPL certification courses.",
+    url: "/cdpl-certificate-validation",
+    isPartOf: {
+      "@id": "https://www.cinutedigital.com/#website"
+    }
+  });
+
   return (
     <main
-
+      className="bg-white text-slate-900"
     >
+      <JsonLd id="validation-breadcrumb" schema={breadcrumbSchema} />
+      <JsonLd id="validation-webpage" schema={webPageSchema} />
+
       <meta itemProp="name" content="CDPL Certificate Validation Tool" />
       <meta itemProp="description" content="Verify CDPL certificate authenticity online" />
       <meta itemProp="url" content="https://www.cinutedigital.com/cdpl-certificate-validation" />

@@ -1,12 +1,16 @@
 import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import { generateStaticPageMetadata } from "@/lib/metadata-generator";
+import { generateCollectionPageSchema, generateJobPostingSchema, generateBreadcrumbSchema } from "@/lib/schema-generators";
+import JsonLd from "@/components/JsonLd";
 
 
 // SEO METADATA - Enhanced for Careers Page
 // ============================================================================
 export const metadata: Metadata = generateStaticPageMetadata({
-    title: "CDPL Careers | Join Our EdTech Team: Software, Data, Product",
+    title: {
+        absolute: "Careers at CDPL - Join Our Team | CDPL",
+    },
     description: "Explore career opportunities at Cinute Digital (CDPL) across Engineering, Data Science, Product Management, Growth, and Student Success. Work on high-impact EdTech products, ship fast, learn faster. Join our product-led team building the future of tech education.",
     keywords: [
         "CDPL careers",
@@ -270,9 +274,46 @@ const JobsCareersCTASection = dynamic(
 // ====== Page =====
 export default function Page() {
 
+    // 1. Breadcrumb Schema
+    const breadcrumbSchema = generateBreadcrumbSchema([
+        { name: "Home", url: "/" },
+        { name: "Jobs", url: "/jobs" },
+        { name: "Careers", url: "/jobs/careers" },
+    ]);
+
+    // 2. CollectionPage Schema
+    const collectionPageSchema = generateCollectionPageSchema({
+        name: "Careers at CDPL - Join Our Team | CDPL",
+        description: "Explore career opportunities at Cinute Digital (CDPL).",
+        url: "/jobs/careers",
+    });
+
+    // 3. JobPosting Schemas
+    const jobSchemas = JOBS.map((job) => generateJobPostingSchema({
+        title: job.title,
+        description: `${job.summary} \n\nResponsibilities:\n${job.responsibilities.join('\n')}\n\nRequirements:\n${job.requirements.join('\n')}`,
+        datePosted: new Date().toISOString().split('T')[0], // Using current date as placeholder since data is static
+        employmentType: job.type === "Full-time" ? "FULL_TIME" : job.type === "Internship" ? "INTERN" : job.type === "Contract" ? "CONTRACTOR" : "OTHER",
+        hiringOrganization: {
+            name: "Cinute Digital",
+            sameAs: "https://cinutedigital.com",
+            logo: "https://cinutedigital.com/logo.png"
+        },
+        jobLocation: {
+            addressLocality: job.location,
+            addressCountry: "IN",
+        },
+        url: `/jobs/careers#${job.id}`,
+    }));
 
     return (
         <>
+            {/* Structured Data */}
+            <JsonLd id="careers-breadcrumb" schema={breadcrumbSchema} />
+            <JsonLd id="careers-collection" schema={collectionPageSchema} />
+            {jobSchemas.map((schema, index) => (
+                <JsonLd key={index} id={`job-posting-${index}`} schema={schema} />
+            ))}
 
             <main className="w-full bg-white text-neutral-900 dark:bg-white dark:text-neutral-900">
                 {/* Sections now manage their own inner container (max-w-7xl px-4 py-12 sm:px-6 lg:px-8) */}

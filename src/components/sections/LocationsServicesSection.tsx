@@ -1,6 +1,5 @@
 // src/components/sections/LocationsServicesSection.tsx
 import { ShieldCheck, Database, BarChart3, Brain, Code2, Megaphone } from "lucide-react";
-import Link from "next/link";
 
 /**
  * LocationsServicesSection

@@ -16,6 +16,7 @@ import { generateStaticPageMetadata } from "@/lib/metadata-generator";
 import {
   generateBreadcrumbSchema,
   generateFAQSchema,
+  generateAboutPageSchema,
 } from "@/lib/schema-generators";
 import JsonLd from "@/components/JsonLd";
 
@@ -73,7 +74,7 @@ const AboutAccreditations = dynamic(
 // ============================================================================
 
 export const metadata: Metadata = generateStaticPageMetadata({
-  title: "About CDPL - Leading EdTech for Software Testing, Data Science & AI Training",
+  title: "About CDPL - Leading EdTech for Tech Training",
   description: "CDPL (Cinute Digital) is India's premier EdTech institute delivering industry-ready training in Software Testing, Automation, Data Science, and AI/ML. Founded in 2020, we've empowered 5000+ professionals with live projects, expert mentorship, and 100% placement support.",
   url: "/about-us",
   keywords: [
@@ -123,18 +124,11 @@ export default function AboutPage(): React.ReactElement {
   ]);
 
   // 2. AboutPage Schema
-  const aboutPageSchema = {
-    "@context": "https://schema.org",
-    "@type": "AboutPage",
-    "@id": "https://www.cinutedigital.com/about-us#aboutpage",
-    url: "https://www.cinutedigital.com/about-us",
+  const aboutPageSchema = generateAboutPageSchema({
     name: "About CDPL - Cinute Digital",
     description: "Learn about CDPL's mission to empower professionals with industry-ready skills through hands-on training in Software Testing, Automation, Data Science, and AI/ML.",
-    mainEntity: {
-      "@id": "https://www.cinutedigital.com/#organization",
-    },
-    inLanguage: "en-IN",
-  };
+    url: "/about-us",
+  });
 
   // 3. FAQ Schema
   const faqs = [

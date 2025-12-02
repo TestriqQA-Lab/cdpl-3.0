@@ -1,9 +1,11 @@
-// /app/testimonials/page.tsx
-
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { generateStaticPageMetadata } from "@/lib/metadata-generator";
-import { generateReviewSchema } from "@/lib/schema-generators";
+import {
+  generateReviewSchema,
+  generateBreadcrumbSchema,
+  generateWebPageSchema
+} from "@/lib/schema-generators";
 import { STATISTICS } from "@/lib/seo-config";
 import { getAllReviews } from "src/data/reviews/reviewsData";
 import JsonLd from "@/components/JsonLd";
@@ -83,13 +85,29 @@ export default function Page() {
     })),
   };
 
-  // 3. Generate the schema
+  // 3. Generate the schemas
   const reviewSchema = generateReviewSchema(reviewSchemaData);
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Reviews", url: "/reviews" },
+  ]);
+
+  const webPageSchema = generateWebPageSchema({
+    name: "Authentic Student Reviews & Testimonials | CDPL",
+    description: "Read 5000+ authentic student reviews and success stories for CDPL's Software Testing, Data Science, and AI/ML courses.",
+    url: "/reviews",
+    isPartOf: {
+      "@id": "https://www.cinutedigital.com/#website"
+    }
+  });
 
   return (
     <div className="bg-white text-neutral-900">
       {/* JSON-LD SCHEMA INJECTION */}
       <JsonLd id="review-schema" schema={reviewSchema} />
+      <JsonLd id="reviews-breadcrumb" schema={breadcrumbSchema} />
+      <JsonLd id="reviews-webpage" schema={webPageSchema} />
 
       {/* Sections (unchanged) */}
       <ReviewsHeroSection />

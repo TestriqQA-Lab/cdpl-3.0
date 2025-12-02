@@ -1,17 +1,23 @@
-// src/app/blog/categories/page.tsx
 import { Metadata } from "next";
 import { BlogCategoryMenu } from "@/components/blog";
 import { getAllCategories, getAllPosts } from "@/data/BlogPostData";
 import Link from "next/link";
 import { FolderOpen, ArrowRight, FileText, TrendingUp } from "lucide-react";
 import BlogCategoriesClient from "./BlogCategoriesClient";
+import {
+  generateCollectionPageSchema,
+  generateItemListSchema,
+  generateBreadcrumbSchema
+} from "@/lib/schema-generators";
+import JsonLd from "@/components/JsonLd";
 
 // ============================================================================
 // SEO METADATA - ENHANCED
 // ============================================================================
 export const metadata: Metadata = {
-  title:
-    "Blog Categories | Software Testing, Web Development, AI & Machine Learning - Expert Tech Resources",
+  title: {
+    absolute: "Blog Categories - Explore Tech Topics | CDPL",
+  },
   description:
     "Browse our comprehensive blog by category. Discover 100+ expert articles organized by topic: software testing, web development, AI & machine learning, data science, DevOps, cloud computing, and more. Find the perfect resource for your learning journey.",
   keywords: [
@@ -105,99 +111,41 @@ export default function CategoriesPage() {
   const totalCategories = categoriesWithCounts.length;
 
   // ============================================================================
-  // ENHANCED STRUCTURED DATA (JSON-LD) – FULLY CLOSED
+  // ENHANCED STRUCTURED DATA (JSON-LD)
   // ============================================================================
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      // CollectionPage Schema
-      {
-        "@type": "CollectionPage",
-        "@id": "https://www.cinutedigital.com/blog/categories#collectionpage",
-        url: "https://www.cinutedigital.com/blog/categories",
-        name: "Blog Categories - Technology Topics",
-        description:
-          "Browse expert articles by category across software testing, web development, AI, data science, and more",
-        isPartOf: {
-          "@id": "https://www.cinutedigital.com/blog#blog",
-        },
-        mainEntity: {
-          "@id": "https://www.cinutedigital.com/blog/categories#itemlist",
-        },
-        breadcrumb: {
-          "@id": "https://www.cinutedigital.com/blog/categories#breadcrumb",
-        },
-      },
-      // ItemList Schema - All Categories
-      {
-        "@type": "ItemList",
-        "@id": "https://www.cinutedigital.com/blog/categories#itemlist",
-        name: "Blog Categories",
-        description: `${totalCategories} categories with ${totalPosts} articles`,
-        numberOfItems: totalCategories,
-        itemListElement: categoriesWithCounts.map((category, index) => ({
-          "@type": "ListItem",
-          position: index + 1,
-          item: {
-            "@type": "Thing",
-            "@id": `https://www.cinutedigital.com/blog/category/${category.slug}`,
-            name: category.name,
-            description: category.description,
-            url: `https://www.cinutedigital.com/blog/category/${category.slug}`,
-            image: category.latestPost?.featuredImage,
-          },
-        })),
-      },
-      // BreadcrumbList Schema
-      {
-        "@type": "BreadcrumbList",
-        "@id": "https://www.cinutedigital.com/blog/categories#breadcrumb",
-        itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "Home",
-            item: "https://www.cinutedigital.com",
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "Blog",
-            item: "https://www.cinutedigital.com/blog",
-          },
-          {
-            "@type": "ListItem",
-            position: 3,
-            name: "Categories",
-            item: "https://www.cinutedigital.com/blog/categories",
-          },
-        ],
-      },
-      // WebPage Schema
-      {
-        "@type": "WebPage",
-        "@id": "https://www.cinutedigital.com/blog/categories",
-        url: "https://www.cinutedigital.com/blog/categories",
-        name: "Blog Categories",
-        description: "Browse articles by category",
-        isPartOf: {
-          "@id": "https://www.cinutedigital.com/#website",
-        },
-        breadcrumb: {
-          "@id": "https://www.cinutedigital.com/blog/categories#breadcrumb",
-        },
-        inLanguage: "en-US",
-      },
-    ],
-  };
+
+  // ItemList Schema
+  const itemListSchema = generateItemListSchema(
+    categoriesWithCounts.map((category) => ({
+      name: category.name,
+      url: `/blog/category/${category.slug}`,
+      description: category.description,
+      image: category.latestPost?.featuredImage,
+      type: 'Thing'
+    })),
+    'Blog Categories'
+  );
+
+  // CollectionPage Schema
+  const collectionPageSchema = generateCollectionPageSchema({
+    name: 'Blog Categories - Technology Topics',
+    description: 'Browse expert articles by category across software testing, web development, AI, data science, and more',
+    url: '/blog/categories',
+  });
+
+  // Breadcrumb Schema
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Blog', url: '/blog' },
+    { name: 'Categories', url: '/blog/categories' },
+  ]);
 
   return (
     <>
       {/* Enhanced JSON-LD Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd id="categories-breadcrumb" schema={breadcrumbSchema} />
+      <JsonLd id="categories-collection" schema={collectionPageSchema} />
+      <JsonLd id="categories-itemlist" schema={itemListSchema} />
 
       {/* Semantic HTML Structure */}
       <div itemScope itemType="https://schema.org/CollectionPage">

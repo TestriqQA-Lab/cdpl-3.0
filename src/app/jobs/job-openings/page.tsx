@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { generateStaticPageMetadata } from "@/lib/metadata-generator";
+import { generateCollectionPageSchema, generateJobPostingSchema, generateBreadcrumbSchema } from "@/lib/schema-generators";
+import JsonLd from "@/components/JsonLd";
 
 // ---- Types ---------------------------------------------------------------
 export type Skill = { skill_name: string; years?: string | number | null; level?: string | null };
@@ -217,7 +219,9 @@ async function verifyCandidateServer(payload: VerifyPayload) {
 // SEO METADATA - Enhanced for Job Openings Page
 // ============================================================================
 export const metadata: Metadata = generateStaticPageMetadata({
-  title: "Job Openings - Apply to Latest Tech Jobs | CDPL Partner Jobs",
+  title: {
+    absolute: "Job Openings - Apply to Latest Tech Jobs | CDPL",
+  },
   description: "Browse and apply to latest job openings curated by CDPL through OptimHire. QA, Automation, Data Science, Full-Stack, and DevOps roles from top companies. Filter by skills and experience, then apply directly with resume upload.",
   keywords: [
     "job openings",
@@ -269,21 +273,62 @@ const JobOpeningsJobBrowser = dynamic(
 
 // ---- Page ----------------------------------------------------------------
 export default async function JobSharePage() {
-  const initial = await getJobsServer({ page: 1, size: 2000 });
+  const initial = await getJobsServer({ page: 1, size: 20 });
+  const jobs = initial?.data?.job ?? [];
+
+  // 1. Breadcrumb Schema
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Jobs", url: "/jobs" },
+    { name: "Job Openings", url: "/jobs/job-openings" },
+  ]);
+
+  // 2. CollectionPage Schema
+  const collectionPageSchema = generateCollectionPageSchema({
+    name: "Job Openings - Apply to Latest Tech Jobs | CDPL",
+    description: "Browse and apply to latest job openings curated by CDPL through OptimHire.",
+    url: "/jobs/job-openings",
+  });
+
+  // 3. JobPosting Schemas
+  const jobSchemas = jobs.map((job) => generateJobPostingSchema({
+    title: job.job_title,
+    description: job.description || job.job_title,
+    datePosted: job.job_created_at || new Date().toISOString(),
+    employmentType: job.job_type === "Full Time" ? "FULL_TIME" : job.job_type === "Contract" ? "CONTRACTOR" : "OTHER",
+    hiringOrganization: {
+      name: "Hiring Partner", // Company name not explicitly available in summary
+      sameAs: "https://optimhire.com",
+    },
+    jobLocation: {
+      addressLocality: job.location || "Remote",
+      addressCountry: "IN",
+      streetAddress: job.location_type === "remote" ? "Remote" : undefined,
+    },
+    baseSalary: (job.min_charge && job.max_charge) ? {
+      currency: job.currency || "INR",
+      value: {
+        minValue: Number(job.min_charge),
+        maxValue: Number(job.max_charge),
+        unitText: "YEAR" // Assuming annual, adjust if needed
+      }
+    } : undefined,
+    url: `/jobs/job-openings?jobId=${job.job_id}`,
+  }));
 
   return (
     <>
+      {/* Structured Data */}
+      <JsonLd id="job-openings-breadcrumb" schema={breadcrumbSchema} />
+      <JsonLd id="job-openings-collection" schema={collectionPageSchema} />
+      {jobSchemas.map((schema, index) => (
+        <JsonLd key={index} id={`job-posting-${index}`} schema={schema} />
+      ))}
+
       {/* Main Content - Semantic HTML Structure */}
       <main
         className="min-h-screen bg-slate-50 text-slate-800"
-        itemScope
-        itemType="https://schema.org/CollectionPage"
       >
-        {/* Hidden metadata for schema.org */}
-        <meta itemProp="name" content="Job Openings" />
-        <meta itemProp="description" content="Browse and apply to latest job openings" />
-        <meta itemProp="url" content="https://www.cinutedigital.com/jobs/job-openings" />
-
         {/* Keep hero as-is; it can manage its own inner width */}
         <section className="w-full">
           <JobOpeningsHeroSection
@@ -297,7 +342,7 @@ export default async function JobSharePage() {
         {/* 100% width section; inner component handles max-w-7xl + padding */}
         <section id="job-browser" className="w-full">
           <JobOpeningsJobBrowser
-            initialJobs={initial?.data?.job ?? []}
+            initialJobs={jobs}
             totalCount={initial?.data?.total_count ?? 0}
             pageSize={20}
             getJobsAction={getJobsServer}

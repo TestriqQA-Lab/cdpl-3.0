@@ -22,6 +22,7 @@ import {
   getImageUrl,
   getOrganizationId,
   getWebsiteId,
+  SEO_DEFAULTS,
 } from './seo-config';
 
 // Type definitions for schema.org structured data
@@ -809,7 +810,7 @@ export function generateHomePageSchema(faqs?: { question: string; answer: string
 
 
 // ============================================================================
-// CONTACT PAGE SCHEMAA
+// CONTACT PAGE SCHEMA
 // ============================================================================
 
 /**
@@ -836,5 +837,243 @@ export function generateContactPageSchema(): WithContext<Record<string, unknown>
       },
     },
   };
+}
 
+// ============================================================================
+// ABOUT PAGE SCHEMA
+// ============================================================================
+
+/**
+ * Generate AboutPage Schema
+ */
+export function generateAboutPageSchema(data: {
+  name: string;
+  description: string;
+  url: string;
+  mainEntityId?: string;
+}): WithContext<Record<string, unknown>> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    '@id': `${getFullUrl(data.url)}#aboutpage`,
+    url: getFullUrl(data.url),
+    name: data.name,
+    description: data.description,
+    mainEntity: {
+      '@id': data.mainEntityId || getOrganizationId(),
+    },
+    inLanguage: SEO_DEFAULTS.locale,
+  };
+}
+
+// ============================================================================
+// JOB POSTING SCHEMA
+// ============================================================================
+
+interface JobPostingInput {
+  title: string;
+  description: string;
+  datePosted: string;
+  validThrough?: string;
+  employmentType?: string | string[];
+  hiringOrganization: {
+    name: string;
+    sameAs?: string;
+    logo?: string;
+  };
+  jobLocation: {
+    streetAddress?: string;
+    addressLocality: string;
+    addressRegion?: string;
+    postalCode?: string;
+    addressCountry: string;
+  };
+  baseSalary?: {
+    currency: string;
+    value: number | { minValue: number; maxValue: number; unitText: string };
+  };
+  url?: string;
+}
+
+/**
+ * Generate JobPosting Schema
+ */
+export function generateJobPostingSchema(job: JobPostingInput): WithContext<Record<string, unknown>> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'JobPosting',
+    title: job.title,
+    description: job.description,
+    datePosted: job.datePosted,
+    validThrough: job.validThrough,
+    employmentType: job.employmentType,
+    hiringOrganization: {
+      '@type': 'Organization',
+      name: job.hiringOrganization.name,
+      sameAs: job.hiringOrganization.sameAs,
+      logo: job.hiringOrganization.logo,
+    },
+    jobLocation: {
+      '@type': 'Place',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: job.jobLocation.streetAddress,
+        addressLocality: job.jobLocation.addressLocality,
+        addressRegion: job.jobLocation.addressRegion,
+        postalCode: job.jobLocation.postalCode,
+        addressCountry: job.jobLocation.addressCountry,
+      },
+    },
+    baseSalary: job.baseSalary
+      ? {
+        '@type': 'MonetaryAmount',
+        currency: job.baseSalary.currency,
+        value:
+          typeof job.baseSalary.value === 'number'
+            ? {
+              '@type': 'QuantitativeValue',
+              value: job.baseSalary.value,
+              unitText: 'YEAR',
+            }
+            : {
+              '@type': 'QuantitativeValue',
+              minValue: job.baseSalary.value.minValue,
+              maxValue: job.baseSalary.value.maxValue,
+              unitText: job.baseSalary.value.unitText,
+            },
+      }
+      : undefined,
+    url: job.url ? getFullUrl(job.url) : undefined,
+  };
+}
+
+// ============================================================================
+// BLOG SCHEMA
+// ============================================================================
+
+/**
+ * Generate Blog schema for the main blog page
+ */
+export function generateBlogSchema(input: {
+  name: string;
+  description: string;
+  url: string;
+}): WithContext<Record<string, unknown>> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    '@id': `${getFullUrl(input.url)}#blog`,
+    url: getFullUrl(input.url),
+    name: input.name,
+    description: input.description,
+    publisher: {
+      '@type': 'Organization',
+      '@id': getOrganizationId(),
+      name: SITE_CONFIG.name,
+      logo: {
+        '@type': 'ImageObject',
+        url: getImageUrl(SITE_CONFIG.logo),
+      },
+    },
+    inLanguage: 'en-IN',
+  };
+}
+
+// ============================================================================
+// COLLECTION PAGE SCHEMA (for Categories)
+// ============================================================================
+
+/**
+ * Generate CollectionPage schema for category pages
+ */
+export function generateCollectionPageSchema(input: {
+  name: string;
+  description: string;
+  url: string;
+  hasPart?: Record<string, unknown>[]; // For ItemList
+}): WithContext<Record<string, unknown>> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': `${getFullUrl(input.url)}#collectionpage`,
+    url: getFullUrl(input.url),
+    name: input.name,
+    description: input.description,
+    isPartOf: {
+      '@id': getWebsiteId(),
+    },
+    ...(input.hasPart && { hasPart: input.hasPart }),
+    inLanguage: 'en-IN',
+  };
+}
+
+
+// ============================================================================
+// HOW TO SCHEMA
+// ============================================================================
+
+interface HowToStepInput {
+  name: string;
+  text: string;
+  url?: string;
+  image?: string;
+}
+
+interface HowToSchemaInput {
+  name: string;
+  description: string;
+  totalTime?: string; // ISO 8601 duration
+  steps: HowToStepInput[];
+  image?: string;
+}
+
+/**
+ * Generate HowTo schema
+ */
+export function generateHowToSchema(howto: HowToSchemaInput): WithContext<Record<string, unknown>> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: howto.name,
+    description: howto.description,
+    ...(howto.totalTime && { totalTime: howto.totalTime }),
+    ...(howto.image && { image: getImageUrl(howto.image) }),
+    step: howto.steps.map((step, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      name: step.name,
+      text: step.text,
+      ...(step.url && { url: getFullUrl(step.url) }),
+      ...(step.image && { image: getImageUrl(step.image) }),
+    })),
+  };
+}
+
+// ============================================================================
+// WEB PAGE SCHEMA
+// ============================================================================
+
+interface WebPageSchemaInput {
+  name: string;
+  description: string;
+  url: string;
+  isPartOf?: Record<string, unknown>;
+  about?: Record<string, unknown>;
+}
+
+/**
+ * Generate WebPage schema
+ */
+export function generateWebPageSchema(page: WebPageSchemaInput): WithContext<Record<string, unknown>> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${getFullUrl(page.url)}#webpage`,
+    url: getFullUrl(page.url),
+    name: page.name,
+    description: page.description,
+    ...(page.isPartOf && { isPartOf: page.isPartOf }),
+    ...(page.about && { about: page.about }),
+    inLanguage: 'en-IN',
+  };
 }

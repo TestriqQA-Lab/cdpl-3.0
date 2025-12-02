@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { generateCourseMetadata } from "@/lib/metadata-generator";
+import { generateMetadata } from "@/lib/metadata-generator";
 import { generateCourseSchema, generateBreadcrumbSchema } from "@/lib/schema-generators";
 import JsonLd from "@/components/JsonLd";
 import ManualTestingPageContent from "./ManualTestingPageContent";
 
-export const metadata: Metadata = generateCourseMetadata({
-  courseName: "Manual Testing Course",
+export const metadata: Metadata = generateMetadata({
+  title: "Manual Testing Course",
   description: "Master Manual Testing with our comprehensive course. Learn test cases, bug reporting, Agile, and Jira. 100% placement support. Enroll now!",
-  slug: "manual-testing-course",
+  url: "/manual-testing-course",
 });
 
 export default function ManualTestingPage() {

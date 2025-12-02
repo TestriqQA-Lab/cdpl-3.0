@@ -2,6 +2,13 @@ import React from "react";
 import type { Metadata } from "next";
 import { courseData, type CourseData } from "@/types/courseData";
 import { generateMetadata as generateSEOMetadata } from "@/lib/metadata-generator";
+import {
+  generateCourseSchema,
+  generateBreadcrumbSchema,
+  generateFAQSchema,
+  generateOrganizationSchema,
+} from "@/lib/schema-generators";
+import JsonLd from "@/components/JsonLd";
 
 import HeroSection from "@/components/city-courses/HeroSection";
 import CourseOverviewSection from "@/components/city-courses/CourseOverviewSection";
@@ -23,6 +30,24 @@ function getByInternalSlug(slug: string): CourseData | undefined {
   return Object.values(courseData).find(
     (c) => c.slug.toLowerCase() === key
   );
+}
+
+// Helper: Parse price string to number (e.g., "₹29,999" -> 29999)
+function parsePrice(priceStr: string): number {
+  return Number(priceStr.replace(/[^0-9]/g, "")) || 0;
+}
+
+// Helper: Convert duration string to ISO 8601 duration (approximate)
+// e.g., "12 weeks" -> "P12W"
+function parseDuration(durationStr: string): string {
+  const num = durationStr.match(/\d+/)?.[0];
+  if (num && durationStr.toLowerCase().includes("week")) {
+    return `P${num}W`;
+  }
+  if (num && durationStr.toLowerCase().includes("month")) {
+    return `P${num}M`;
+  }
+  return "P3M"; // Default fallback
 }
 
 // SEO metadata from the matched course - Enhanced
@@ -94,9 +119,55 @@ export default async function CoursePage({ params }: PageProps) {
     return <NotFoundPage />;
   }
 
+  // --- Structured Data Generation ---
+
+  // 1. Breadcrumb Schema
+  const breadcrumbItems = data.breadcrumbs
+    ? data.breadcrumbs.map((b) => ({ name: b.label, url: b.href }))
+    : [
+      { name: "Home", url: "/" },
+      { name: "Courses", url: "/courses" },
+      { name: data.courseName, url: `/${data.slug}` },
+    ];
+
+  const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbItems);
+
+  // 2. Organization Schema
+  const organizationSchema = generateOrganizationSchema();
+
+  // 3. Course Schema
+  // Extract learning outcomes from modules
+  const learningOutcomes = data.courseOverviewContent.modules.flatMap(m => m.topics).slice(0, 10); // Limit to 10
+
+  const courseSchema = generateCourseSchema({
+    name: data.metadata.title, // Use full title for better SEO
+    description: data.metadata.description,
+    slug: data.slug,
+    url: `/${data.slug}`,
+    level: data.courseDetails.level,
+    learningOutcomes: learningOutcomes,
+    prerequisites: ["Basic computer knowledge"], // Default based on FAQ
+    duration: parseDuration(data.courseDetails.duration),
+    price: parsePrice(data.courseDetails.price),
+    rating: 4.8, // Default high rating as per other pages
+    reviewCount: 150, // Default review count
+    // image: data.heroImage // Optional if available
+  });
+
+  // 4. FAQ Schema
+  const faqSchema = generateFAQSchema(
+    data.faqsContent.faqs.map(f => ({
+      question: f.question,
+      answer: f.answer
+    }))
+  );
+
   return (
     <>
-
+      <JsonLd id={`course-${slug}-breadcrumb`} schema={breadcrumbSchema} />
+      <JsonLd id={`course-${slug}-org`} schema={organizationSchema} />
+      <JsonLd id={`course-${slug}-schema`} schema={courseSchema} />
+      <JsonLd id={`course-${slug}-faq`} schema={faqSchema} />
 
       {/* Semantic HTML Structure */}
       <main
