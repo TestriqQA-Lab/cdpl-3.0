@@ -1,4 +1,3 @@
-// components/sections/WhyGenAIProgram.tsx
 "use client";
 
 import {
@@ -13,9 +12,13 @@ import {
   LineChart,
 } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
+import EnrollModal from "@/components/EnrollModal";
+import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
 
 export default function WhyGenAIProgram() {
-
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+  const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
 
   const featureChips = [
     { label: "55 Hours", color: "bg-indigo-600 text-white" },
@@ -223,17 +226,24 @@ export default function WhyGenAIProgram() {
               </div>
             </dl>
 
-            <div className="mt-6 border-t border-gray-200 pt-6">
-              <Link
-                href="contact-us"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold shadow-sm
-                           bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            <div className="mt-6 border-t border-gray-200 pt-6 flex flex-col gap-3">
+              <button
+                onClick={() => setIsEnrollModalOpen(true)}
+                className="inline-flex w-full items-center justify-center cursor-pointer gap-2 rounded-xl px-5 py-3 text-sm font-semibold shadow-sm
+                           bg-[#7E22CE] text-white hover:bg-[#6b21a8] focus:outline-none focus:ring-2 focus:ring-purple-500"
                 aria-label="Apply now for Deep Learning, NLP & Generative AI with Python"
               >
                 Apply Now
                 <Rocket className="w-4 h-4 text-white" aria-hidden="true" />
-              </Link>
-              <p className="mt-3 text-xs text-gray-600">
+              </button>
+              <button
+                onClick={() => setIsSyllabusModalOpen(true)}
+                className="inline-flex w-full items-center justify-center cursor-pointer gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-indigo-200"
+                aria-label="Download detailed syllabus"
+              >
+                Download Syllabus (PDF)
+              </button>
+              <p className="mt-3 text-xs text-gray-600 text-center">
                 You’ll receive a detailed syllabus and a readiness checklist to ensure
                 the best learning path for your background.
               </p>
@@ -241,6 +251,20 @@ export default function WhyGenAIProgram() {
           </aside>
         </div>
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollModalOpen}
+        onClose={() => setIsEnrollModalOpen(false)}
+        courseName="Master Program in Deep Learning, NLP & Generative AI"
+        source="Generative AI Course Page - Why GenAI Section - Apply Now"
+      />
+
+      <SyllabusDownloadModal
+        isOpen={isSyllabusModalOpen}
+        onClose={() => setIsSyllabusModalOpen(false)}
+        courseName="Master Program in Deep Learning, NLP & Generative AI"
+        source="Generative AI Course Page - Why GenAI Section - Download Syllabus"
+      />
 
     </section>
   );

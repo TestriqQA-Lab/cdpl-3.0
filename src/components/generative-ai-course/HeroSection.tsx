@@ -1,13 +1,15 @@
-// components/sections/HeroSection.tsx
-// Server component — sleek, SEO-optimized, slightly futuristic, fully responsive.
-// Assumes you have a client LeadForm at "../CourseLeadForm" (same API-testing style).
+"use client";
 
 import Link from "next/link";
-import LeadForm from "../CourseLeadForm";
+import { useState } from "react";
+import GenerativeAICourseLeadForm from "@/components/forms/GenerativeAICourseLeadForm";
 import { ChevronRight, Home } from "lucide-react";
+import EnrollModal from "@/components/EnrollModal";
+import CareerSessionModal from "@/components/CareerSessionModal";
 
 export default function HeroSection() {
-
+    const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+    const [isCareerModalOpen, setIsCareerModalOpen] = useState(false);
 
     const breadcrumbs = [
         { label: "Home", href: "/" },
@@ -72,7 +74,7 @@ export default function HeroSection() {
 
                         {/* Mobile form directly under headline */}
                         <div className="mt-5 block md:hidden">
-                            <LeadForm variant="elevated" />
+                            <GenerativeAICourseLeadForm variant="elevated" />
                         </div>
 
                         <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-700 sm:text-lg">
@@ -87,7 +89,8 @@ export default function HeroSection() {
                         {/* CTAs */}
                         <div className="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
                             <button
-                                className="inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
+                                onClick={() => setIsEnrollModalOpen(true)}
+                                className="inline-flex items-center justify-center cursor-pointer rounded-xl border border-[#7E22CE] bg-[#7E22CE] px-6 py-3 text-base font-semibold text-white transition hover:bg-[#6b21a8] hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-purple-200"
                                 aria-label="Enroll now in Generative AI course"
                             >
                                 Enroll Now
@@ -103,7 +106,8 @@ export default function HeroSection() {
                                 View Curriculum
                             </Link>
                             <button
-                                className="inline-flex items-center justify-center rounded-xl border border-emerald-300 bg-white px-6 py-3 text-base font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-4 focus:ring-emerald-200"
+                                onClick={() => setIsCareerModalOpen(true)}
+                                className="inline-flex items-center justify-center cursor-pointer rounded-xl border border-emerald-300 bg-white px-6 py-3 text-base font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-4 focus:ring-emerald-200"
                                 aria-label="Book a free demo for Generative AI"
                             >
                                 Free Demo
@@ -142,12 +146,25 @@ export default function HeroSection() {
                         <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg">
 
                             <div className="p-4 sm:p-5">
-                                <LeadForm variant="elevated" />
+                                <GenerativeAICourseLeadForm variant="elevated" />
                             </div>
                         </div>
                     </aside>
                 </div>
             </div>
+
+            <EnrollModal
+                isOpen={isEnrollModalOpen}
+                onClose={() => setIsEnrollModalOpen(false)}
+                courseName="Master Program in Deep Learning, NLP & Generative AI"
+                source="Generative AI Course Page - Hero Section - Enroll Now"
+            />
+
+            <CareerSessionModal
+                isOpen={isCareerModalOpen}
+                onClose={() => setIsCareerModalOpen(false)}
+                source="Generative AI Course Page - Hero Section - Free Demo"
+            />
 
         </section>
     );

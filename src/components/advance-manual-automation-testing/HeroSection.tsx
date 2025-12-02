@@ -77,7 +77,7 @@ export default function HeroSection() {
             {/* Top badges with different colors (no repeats) */}
             <div className="mb-4 hidden lg:flex flex-wrap items-center gap-2 text-[11px] font-semibold">
               <span className="inline-flex items-center gap-1 rounded-full border border-cyan-200 bg-cyan-50 px-3 py-1 text-cyan-800">
-                40-Hour Master Program
+                180-Hour Master Program
               </span>
               <span className="inline-flex items-center gap-1 rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-amber-800">
                 Live Online & Classroom
