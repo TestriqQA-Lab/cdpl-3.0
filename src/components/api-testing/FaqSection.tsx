@@ -2,15 +2,9 @@
 import { useState, useId } from 'react';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 import Link from 'next/link';
+import { API_TESTING_FAQS } from '@/data/apiTestingData';
 
-type Faq = { q: string; a: string };
-
-const faqs: Faq[] = [
-    { q: 'Is prior coding knowledge required?', a: 'No. The course starts from basics and is beginner-friendly for non-technical learners.' },
-    { q: 'Will I get a certificate?', a: 'Yes. You receive a globally recognized digital certificate with QR verification.' },
-    { q: 'What is the course duration?', a: '15 hours of focused live training with lifetime access to session recordings.' },
-    { q: 'Is placement guaranteed?', a: 'We offer 100% job assistance—resume help, mock interviews, and referrals. (No guaranteed job placement.)' },
-];
+// Distinct, non-repeating accent tokens
 
 // Distinct, non-repeating accent tokens
 const accents = [
@@ -50,14 +44,14 @@ export default function FaqSection() {
                 </p>
 
                 <ul className="space-y-4">
-                    {faqs.map((faq, i) => {
+                    {API_TESTING_FAQS.map((faq, i) => {
                         const isOpen = open === i;
                         const a = accents[i % accents.length];
                         const buttonId = `${sectionId}-q-${i}`;
                         const panelId = `${sectionId}-a-${i}`;
 
                         return (
-                            <li key={faq.q}>
+                            <li key={faq.question}>
                                 <div
                                     className={[
                                         'rounded-2xl border border-slate-200 bg-white transition shadow-[0_1px_0_0_rgba(15,23,42,0.04)]',
@@ -82,7 +76,7 @@ export default function FaqSection() {
                                     >
                                         <span className="flex items-center gap-2 text-slate-900 font-semibold">
                                             <HelpCircle className="h-5 w-5 text-slate-400" aria-hidden="true" />
-                                            {faq.q}
+                                            {faq.question}
                                         </span>
 
                                         <span className="inline-flex items-center gap-2">
@@ -116,7 +110,7 @@ export default function FaqSection() {
                                     >
                                         <div className="overflow-hidden">
                                             <div className="px-5 sm:px-6 pb-5 text-sm sm:text-base leading-relaxed text-slate-700">
-                                                {faq.a}
+                                                {faq.answer}
                                             </div>
                                         </div>
                                     </div>
@@ -132,7 +126,7 @@ export default function FaqSection() {
                 </p>
             </div>
 
-     
+
         </section>
     );
 }

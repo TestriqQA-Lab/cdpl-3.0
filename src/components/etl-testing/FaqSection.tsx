@@ -2,22 +2,14 @@
 import { useState } from 'react';
 import { ChevronDown, HelpCircle, ShieldCheck, Clock, Award } from 'lucide-react';
 import Link from 'next/link';
-
-type Faq = { q: string; a: string };
-
-const faqs: Faq[] = [
-  { q: 'Do I need ETL tool knowledge?', a: 'No. We start from the basics of data pipelines. Knowing SQL helps but is not mandatory.' },
-  { q: 'Will I get a certificate?',     a: 'Yes. You’ll receive a globally recognized ETL Testing certificate with QR verification.' },
-  { q: 'What is the duration?',         a: '18 hours of live, mentor-led training with lifetime access to recordings and updates.' },
-  { q: 'Is placement guaranteed?',      a: 'We provide 100% job assistance: resume support, mock interviews, and referral guidance.' },
-];
+import { ETL_TESTING_FAQS } from '@/data/etlTestingData';
 
 // Distinct, non-repeating light accents (no heavy gradients)
 const accents = [
-  { ring: 'ring-sky-200',     border: 'border-sky-200',     chip: 'bg-sky-50 text-sky-800',       icon: <HelpCircle className="h-5 w-5 text-sky-700" /> },
+  { ring: 'ring-sky-200', border: 'border-sky-200', chip: 'bg-sky-50 text-sky-800', icon: <HelpCircle className="h-5 w-5 text-sky-700" /> },
   { ring: 'ring-emerald-200', border: 'border-emerald-200', chip: 'bg-emerald-50 text-emerald-800', icon: <ShieldCheck className="h-5 w-5 text-emerald-700" /> },
-  { ring: 'ring-amber-200',   border: 'border-amber-200',   chip: 'bg-amber-50 text-amber-900',     icon: <Clock className="h-5 w-5 text-amber-700" /> },
-  { ring: 'ring-violet-200',  border: 'border-violet-200',  chip: 'bg-violet-50 text-violet-800',   icon: <Award className="h-5 w-5 text-violet-700" /> },
+  { ring: 'ring-amber-200', border: 'border-amber-200', chip: 'bg-amber-50 text-amber-900', icon: <Clock className="h-5 w-5 text-amber-700" /> },
+  { ring: 'ring-violet-200', border: 'border-violet-200', chip: 'bg-violet-50 text-violet-800', icon: <Award className="h-5 w-5 text-violet-700" /> },
 ];
 
 export default function FaqSection() {
@@ -34,8 +26,8 @@ export default function FaqSection() {
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl md:text-4xl text-ST text-center font-bold mb-4">
-        Frequently Asked Questions
-      </h2>
+          Frequently Asked Questions
+        </h2>
 
         {/* SEO-supportive microcopy */}
         <p className="mx-auto mt-2 mb-10 max-w-2xl text-center text-sm sm:text-base text-slate-600">
@@ -44,7 +36,7 @@ export default function FaqSection() {
         </p>
 
         <div className="space-y-3 sm:space-y-4">
-          {faqs.map((faq, i) => {
+          {ETL_TESTING_FAQS.map((faq, i) => {
             const isOpen = open === i;
             const a = accents[i % accents.length];
             const panelId = `faq-panel-${i}`;
@@ -52,7 +44,7 @@ export default function FaqSection() {
 
             return (
               <div
-                key={faq.q}
+                key={faq.question}
                 className={[
                   'rounded-2xl border bg-white',
                   a.border,
@@ -73,7 +65,7 @@ export default function FaqSection() {
                       FAQ {i + 1}
                     </span>
                     <span className="text-sm sm:text-base font-semibold text-slate-900">
-                      {faq.q}
+                      {faq.question}
                     </span>
                   </span>
 
@@ -97,7 +89,7 @@ export default function FaqSection() {
                 >
                   <div className="overflow-hidden">
                     <div className="px-5 sm:px-6 pb-4 sm:pb-5 text-slate-700 text-sm sm:text-base">
-                      {faq.a}
+                      {faq.answer}
                     </div>
                   </div>
                 </div>
