@@ -1081,3 +1081,42 @@ export function generateWebPageSchema(page: WebPageSchemaInput): WithContext<Rec
     inLanguage: 'en-IN',
   };
 }
+// ============================================================================
+// SERVICE SCHEMA
+// ============================================================================
+
+interface ServiceSchemaInput {
+  name: string;
+  description: string;
+  url: string;
+  serviceType: string;
+  providerName?: string;
+  areaServed?: string;
+  image?: string;
+}
+
+/**
+ * Generate Service schema
+ */
+export function generateServiceSchema(service: ServiceSchemaInput): WithContext<Record<string, unknown>> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${getFullUrl(service.url)}#service`,
+    url: getFullUrl(service.url),
+    name: service.name,
+    description: service.description,
+    serviceType: service.serviceType,
+    provider: {
+      '@type': 'Organization',
+      '@id': getOrganizationId(),
+      name: service.providerName || SITE_CONFIG.name,
+    },
+    areaServed: {
+      '@type': 'Country',
+      name: service.areaServed || 'India',
+    },
+    ...(service.image && { image: getImageUrl(service.image) }),
+    inLanguage: 'en-IN',
+  };
+}
