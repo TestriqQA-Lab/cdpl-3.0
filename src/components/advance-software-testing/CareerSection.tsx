@@ -149,9 +149,9 @@ export default function CareerSection() {
           <button
             onClick={() => setIsCareerModalOpen(true)}
             className="inline-flex items-center gap-2 rounded-xl border border-[#00758F] bg-[#00758F] px-7 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-[#016a82] focus:outline-none focus:ring-4 focus:ring-cyan-200"
-            aria-label="Become SDET in 30 Days"
+            aria-label="Become SDET"
           >
-            Become SDET in 30 Days
+            Become SDET
             <ArrowRight className="h-5 w-5" />
           </button>
           <p className="mt-3 text-xs text-slate-500">
@@ -163,7 +163,7 @@ export default function CareerSection() {
       <CareerSessionModal
         isOpen={isCareerModalOpen}
         onClose={() => setIsCareerModalOpen(false)}
-        source="Advanced Software Testing Course Page - Career Section - Become SDET in 30 Days"
+        source="Advanced Software Testing Course Page - Career Section - Become SDET"
       />
 
     </section>

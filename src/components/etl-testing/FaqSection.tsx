@@ -108,7 +108,7 @@ export default function FaqSection() {
 
         {/* Contact hint */}
         <p className="mt-6 text-center text-xs sm:text-sm text-slate-600">
-          Still have questions? <Link href="contact-us" className="font-semibold text-sky-700 hover:underline">Talk to an advisor</Link>.
+          Still have questions? <Link href="https://calendar.app.google/tvh9dsXZsX9BujRR8" target="_blank" className="font-semibold text-sky-700 hover:underline">Book Free Demo</Link>.
         </p>
       </div>
 
