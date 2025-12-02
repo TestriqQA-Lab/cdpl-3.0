@@ -1007,3 +1007,73 @@ export function generateCollectionPageSchema(input: {
   };
 }
 
+
+// ============================================================================
+// HOW TO SCHEMA
+// ============================================================================
+
+interface HowToStepInput {
+  name: string;
+  text: string;
+  url?: string;
+  image?: string;
+}
+
+interface HowToSchemaInput {
+  name: string;
+  description: string;
+  totalTime?: string; // ISO 8601 duration
+  steps: HowToStepInput[];
+  image?: string;
+}
+
+/**
+ * Generate HowTo schema
+ */
+export function generateHowToSchema(howto: HowToSchemaInput): WithContext<Record<string, unknown>> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: howto.name,
+    description: howto.description,
+    ...(howto.totalTime && { totalTime: howto.totalTime }),
+    ...(howto.image && { image: getImageUrl(howto.image) }),
+    step: howto.steps.map((step, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      name: step.name,
+      text: step.text,
+      ...(step.url && { url: getFullUrl(step.url) }),
+      ...(step.image && { image: getImageUrl(step.image) }),
+    })),
+  };
+}
+
+// ============================================================================
+// WEB PAGE SCHEMA
+// ============================================================================
+
+interface WebPageSchemaInput {
+  name: string;
+  description: string;
+  url: string;
+  isPartOf?: Record<string, unknown>;
+  about?: Record<string, unknown>;
+}
+
+/**
+ * Generate WebPage schema
+ */
+export function generateWebPageSchema(page: WebPageSchemaInput): WithContext<Record<string, unknown>> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${getFullUrl(page.url)}#webpage`,
+    url: getFullUrl(page.url),
+    name: page.name,
+    description: page.description,
+    ...(page.isPartOf && { isPartOf: page.isPartOf }),
+    ...(page.about && { about: page.about }),
+    inLanguage: 'en-IN',
+  };
+}
