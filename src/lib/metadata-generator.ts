@@ -6,8 +6,8 @@
  * This file provides a unified function to generate Next.js metadata objects
  * for all pages, ensuring consistency and following Next.js 15 best practices.
  * 
- * @version 2.0.0
- * @updated 2025-11-12
+ * @version 2.0.1
+ * @updated 2025-12-02
  */
 
 import type { Metadata } from 'next';
@@ -189,7 +189,9 @@ export function generateMetadata(input: MetadataGeneratorInput): Metadata {
   };
 }
 
-// ...
+// ============================================================================
+// CONVENIENCE WRAPPERS
+// ============================================================================
 
 export function generateStaticPageMetadata(input: {
   title: string | { absolute: string };
@@ -212,9 +214,6 @@ export function generateStaticPageMetadata(input: {
   });
 }
 
-/**
- * Generate metadata for category/listing pages
- */
 export function generateCategoryMetadata(input: {
   categoryName: string;
   description: string;
@@ -240,9 +239,6 @@ export function generateCategoryMetadata(input: {
   });
 }
 
-/**
- * Generate metadata for event pages
- */
 export function generateEventMetadata(input: {
   title: string;
   description: string;
@@ -279,14 +275,38 @@ export function generateEventMetadata(input: {
   });
 }
 
+export function generateBlogMetadata(input: {
+  title: string;
+  description: string;
+  slug: string;
+  author?: string;
+  publishedDate?: string;
+  modifiedDate?: string;
+  category?: string;
+  tags?: string[];
+  image?: string;
+}): Metadata {
+  const title = `${input.title} | CDPL Blog`;
+
+  return generateMetadata({
+    title,
+    description: input.description,
+    keywords: input.tags,
+    url: `/blog/${input.slug}`,
+    image: input.image,
+    type: 'article',
+    author: input.author,
+    publishedTime: input.publishedDate,
+    modifiedTime: input.modifiedDate,
+    section: input.category,
+    tags: input.tags,
+  });
+}
+
 // ============================================================================
 // AI CRAWLER META TAGS
 // ============================================================================
 
-/**
- * Generate AI-specific meta tags for better AI crawler understanding
- * These should be added to the <head> section
- */
 export function generateAIMetaTags(customSummary?: string, customKeyPoints?: string[]): Record<string, string> {
   return {
     'ai:summary': customSummary || AI_OPTIMIZATION.summary,
@@ -300,11 +320,7 @@ export function generateAIMetaTags(customSummary?: string, customKeyPoints?: str
 // HELPER FUNCTIONS
 // ============================================================================
 
-/**
- * Extract keywords from text content
- */
 export function extractKeywords(text: string, maxKeywords: number = 10): string[] {
-  // Remove common stop words
   const stopWords = new Set([
     'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for',
     'of', 'with', 'by', 'from', 'as', 'is', 'was', 'are', 'were', 'be',
@@ -313,38 +329,28 @@ export function extractKeywords(text: string, maxKeywords: number = 10): string[
     'that', 'these', 'those', 'i', 'you', 'he', 'she', 'it', 'we', 'they',
   ]);
 
-  // Extract words
   const words = text
     .toLowerCase()
     .replace(/[^\w\s]/g, ' ')
     .split(/\s+/)
     .filter(word => word.length > 3 && !stopWords.has(word));
 
-  // Count frequency
   const frequency: Record<string, number> = {};
   words.forEach(word => {
     frequency[word] = (frequency[word] || 0) + 1;
   });
 
-  // Sort by frequency and return top keywords
   return Object.entries(frequency)
     .sort((a, b) => b[1] - a[1])
     .slice(0, maxKeywords)
     .map(([word]) => word);
 }
 
-/**
- * Generate meta description from content
- */
 export function generateMetaDescription(content: string, maxLength: number = 160): string {
-  // Remove HTML tags if any
   const cleanContent = content.replace(/<[^>]*>/g, ' ');
-
-  // Get first sentence or paragraph
   const sentences = cleanContent.split(/[.!?]+/);
   let description = sentences[0].trim();
 
-  // If too short, add more sentences
   let i = 1;
   while (description.length < maxLength && i < sentences.length) {
     const nextSentence = sentences[i].trim();
@@ -356,7 +362,6 @@ export function generateMetaDescription(content: string, maxLength: number = 160
     }
   }
 
-  // Truncate if too long
   if (description.length > maxLength) {
     description = description.substring(0, maxLength - 3) + '...';
   }
@@ -364,39 +369,26 @@ export function generateMetaDescription(content: string, maxLength: number = 160
   return description;
 }
 
-/**
- * Validate metadata for SEO best practices
- */
 export function validateMetadata(metadata: MetadataGeneratorInput): {
   isValid: boolean;
   warnings: string[];
 } {
   const warnings: string[] = [];
 
-  // Title length check (50-60 characters is ideal)
   const titleLength = typeof metadata.title === 'string'
     ? metadata.title.length
     : (metadata.title as { absolute: string }).absolute?.length || 0;
 
-  if (titleLength < 30) {
-    warnings.push('Title is too short. Aim for 50-60 characters.');
-  } else if (titleLength > 60) {
-    warnings.push('Title is too long. Keep it under 60 characters.');
-  }
+  if (titleLength < 30) warnings.push('Title is too short. Aim for 50-60 characters.');
+  else if (titleLength > 60) warnings.push('Title is too long. Keep it under 60 characters.');
 
-  // Description length check (150-160 characters is ideal)
-  if (metadata.description.length < 120) {
-    warnings.push('Description is too short. Aim for 150-160 characters.');
-  } else if (metadata.description.length > 160) {
-    warnings.push('Description is too long. Keep it under 160 characters.');
-  }
+  if (metadata.description.length < 120) warnings.push('Description is too short. Aim for 150-160 characters.');
+  else if (metadata.description.length > 160) warnings.push('Description is too long. Keep it under 160 characters.');
 
-  // Keywords check
   if (!metadata.keywords || metadata.keywords.length === 0) {
     warnings.push('No keywords provided. Add relevant keywords for better SEO.');
   }
 
-  // Image check
   if (!metadata.image) {
     warnings.push('No custom image provided. Using default OG image.');
   }
@@ -406,3 +398,16 @@ export function validateMetadata(metadata: MetadataGeneratorInput): {
     warnings,
   };
 }
+
+// ============================================================================
+// LEGACY / BACKWARD-COMPATIBILITY ALIASES
+// ============================================================================
+
+/**
+ * LEGACY ALIAS — DO NOT REMOVE
+ * 
+ * Used by 50+ existing course pages (e.g. manual-testing-course, selenium, python, etc.)
+ * All new pages should use `generateMetadata` directly.
+ * This alias ensures zero breaking changes during migration.
+ */
+export const generateCourseMetadata = generateMetadata;

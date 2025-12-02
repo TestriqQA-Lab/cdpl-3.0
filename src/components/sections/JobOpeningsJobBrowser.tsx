@@ -108,8 +108,19 @@ export default function JobOpeningsJobBrowser({
     verifyCandidateAction,
     createCandidateAction,
 }: Props) {
-    const [jobs, setJobs] = React.useState<JobSummary[]>(initialJobs);
-    const [count, setCount] = React.useState<number>(totalCount);
+    const [jobs] = React.useState<JobSummary[]>(initialJobs);
+    // count is not used in state, only initial value is used for pagination logic if needed, but here it seems we can just use totalCount prop directly or keep it if needed for future.
+    // Actually, looking at the code, 'count' state is never used, only 'setCount'. 'totalCount' prop is used.
+    // Let's remove 'count' state if it's truly unused.
+    // Wait, 'page * pageSize >= count' is used in the Next button.
+    // But 'count' is initialized to 'totalCount'.
+    // If 'setCount' is never used, 'count' will always be 'totalCount'.
+    // So we can just use 'totalCount' prop directly?
+    // Let's check if 'count' is used.
+    // Yes, line 250: disabled={page * pageSize >= count}
+    // So we need 'count'. But we don't need 'setCount'.
+    // React.useState returns [value, setValue]. We can omit the setter.
+    const [count] = React.useState<number>(totalCount);
     const [page, setPage] = React.useState(1);
 
     // UI filters
