@@ -799,8 +799,12 @@ export function generateHomePageSchema(faqs?: { question: string; answer: string
     embedUrl: 'https://www.youtube.com/embed/8kB2wESj1n8',
   });
 
+  // 5. Website Schema (Sitelinks Search Box)
+  const websiteSchema = generateWebsiteSchema();
+
   // Filter out undefined schemas
   return [
+    websiteSchema,
     localBusinessSchema,
     itemListSchema,
     faqSchema,
@@ -1007,3 +1011,112 @@ export function generateCollectionPageSchema(input: {
   };
 }
 
+
+// ============================================================================
+// HOW TO SCHEMA
+// ============================================================================
+
+interface HowToStepInput {
+  name: string;
+  text: string;
+  url?: string;
+  image?: string;
+}
+
+interface HowToSchemaInput {
+  name: string;
+  description: string;
+  totalTime?: string; // ISO 8601 duration
+  steps: HowToStepInput[];
+  image?: string;
+}
+
+/**
+ * Generate HowTo schema
+ */
+export function generateHowToSchema(howto: HowToSchemaInput): WithContext<Record<string, unknown>> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: howto.name,
+    description: howto.description,
+    ...(howto.totalTime && { totalTime: howto.totalTime }),
+    ...(howto.image && { image: getImageUrl(howto.image) }),
+    step: howto.steps.map((step, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      name: step.name,
+      text: step.text,
+      ...(step.url && { url: getFullUrl(step.url) }),
+      ...(step.image && { image: getImageUrl(step.image) }),
+    })),
+  };
+}
+
+// ============================================================================
+// WEB PAGE SCHEMA
+// ============================================================================
+
+interface WebPageSchemaInput {
+  name: string;
+  description: string;
+  url: string;
+  isPartOf?: Record<string, unknown>;
+  about?: Record<string, unknown>;
+}
+
+/**
+ * Generate WebPage schema
+ */
+export function generateWebPageSchema(page: WebPageSchemaInput): WithContext<Record<string, unknown>> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${getFullUrl(page.url)}#webpage`,
+    url: getFullUrl(page.url),
+    name: page.name,
+    description: page.description,
+    ...(page.isPartOf && { isPartOf: page.isPartOf }),
+    ...(page.about && { about: page.about }),
+    inLanguage: 'en-IN',
+  };
+}
+// ============================================================================
+// SERVICE SCHEMA
+// ============================================================================
+
+interface ServiceSchemaInput {
+  name: string;
+  description: string;
+  url: string;
+  serviceType: string;
+  providerName?: string;
+  areaServed?: string;
+  image?: string;
+}
+
+/**
+ * Generate Service schema
+ */
+export function generateServiceSchema(service: ServiceSchemaInput): WithContext<Record<string, unknown>> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${getFullUrl(service.url)}#service`,
+    url: getFullUrl(service.url),
+    name: service.name,
+    description: service.description,
+    serviceType: service.serviceType,
+    provider: {
+      '@type': 'Organization',
+      '@id': getOrganizationId(),
+      name: service.providerName || SITE_CONFIG.name,
+    },
+    areaServed: {
+      '@type': 'Country',
+      name: service.areaServed || 'India',
+    },
+    ...(service.image && { image: getImageUrl(service.image) }),
+    inLanguage: 'en-IN',
+  };
+}
