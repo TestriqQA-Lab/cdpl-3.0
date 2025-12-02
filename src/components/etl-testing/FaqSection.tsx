@@ -7,17 +7,17 @@ type Faq = { q: string; a: string };
 
 const faqs: Faq[] = [
   { q: 'Do I need ETL tool knowledge?', a: 'No. We start from the basics of data pipelines. Knowing SQL helps but is not mandatory.' },
-  { q: 'Will I get a certificate?',     a: 'Yes. You’ll receive a globally recognized ETL Testing certificate with QR verification.' },
-  { q: 'What is the duration?',         a: '18 hours of live, mentor-led training with lifetime access to recordings and updates.' },
-  { q: 'Is placement guaranteed?',      a: 'We provide 100% job assistance: resume support, mock interviews, and referral guidance.' },
+  { q: 'Will I get a certificate?', a: 'Yes. You’ll receive a globally recognized ETL Testing certificate with QR verification.' },
+  { q: 'What is the duration?', a: '18 hours of live, mentor-led training with lifetime access to recordings and updates.' },
+  { q: 'Is placement guaranteed?', a: 'We provide 100% job assistance: resume support, mock interviews, and referral guidance.' },
 ];
 
 // Distinct, non-repeating light accents (no heavy gradients)
 const accents = [
-  { ring: 'ring-sky-200',     border: 'border-sky-200',     chip: 'bg-sky-50 text-sky-800',       icon: <HelpCircle className="h-5 w-5 text-sky-700" /> },
+  { ring: 'ring-sky-200', border: 'border-sky-200', chip: 'bg-sky-50 text-sky-800', icon: <HelpCircle className="h-5 w-5 text-sky-700" /> },
   { ring: 'ring-emerald-200', border: 'border-emerald-200', chip: 'bg-emerald-50 text-emerald-800', icon: <ShieldCheck className="h-5 w-5 text-emerald-700" /> },
-  { ring: 'ring-amber-200',   border: 'border-amber-200',   chip: 'bg-amber-50 text-amber-900',     icon: <Clock className="h-5 w-5 text-amber-700" /> },
-  { ring: 'ring-violet-200',  border: 'border-violet-200',  chip: 'bg-violet-50 text-violet-800',   icon: <Award className="h-5 w-5 text-violet-700" /> },
+  { ring: 'ring-amber-200', border: 'border-amber-200', chip: 'bg-amber-50 text-amber-900', icon: <Clock className="h-5 w-5 text-amber-700" /> },
+  { ring: 'ring-violet-200', border: 'border-violet-200', chip: 'bg-violet-50 text-violet-800', icon: <Award className="h-5 w-5 text-violet-700" /> },
 ];
 
 export default function FaqSection() {
@@ -34,8 +34,8 @@ export default function FaqSection() {
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl md:text-4xl text-ST text-center font-bold mb-4">
-        Frequently Asked Questions
-      </h2>
+          Frequently Asked Questions
+        </h2>
 
         {/* SEO-supportive microcopy */}
         <p className="mx-auto mt-2 mb-10 max-w-2xl text-center text-sm sm:text-base text-slate-600">
@@ -106,10 +106,6 @@ export default function FaqSection() {
           })}
         </div>
 
-        {/* Contact hint */}
-        <p className="mt-6 text-center text-xs sm:text-sm text-slate-600">
-          Still have questions? <Link href="https://calendar.app.google/tvh9dsXZsX9BujRR8" target="_blank" className="font-semibold text-sky-700 hover:underline">Book Free Demo</Link>.
-        </p>
       </div>
 
     </section>

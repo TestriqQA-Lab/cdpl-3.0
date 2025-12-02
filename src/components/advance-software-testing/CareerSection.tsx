@@ -148,7 +148,7 @@ export default function CareerSection() {
         >
           <button
             onClick={() => setIsCareerModalOpen(true)}
-            className="inline-flex items-center gap-2 rounded-xl border border-[#00758F] bg-[#00758F] px-7 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-[#016a82] focus:outline-none focus:ring-4 focus:ring-cyan-200"
+            className="cursor-pointer inline-flex items-center gap-2 rounded-xl border border-[#00758F] bg-[#00758F] px-7 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-[#016a82] focus:outline-none focus:ring-4 focus:ring-cyan-200"
             aria-label="Become SDET"
           >
             Become SDET
