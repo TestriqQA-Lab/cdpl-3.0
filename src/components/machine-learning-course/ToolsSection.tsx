@@ -1,9 +1,8 @@
-// components/sections/ToolsSection.tsx
-// Server component — sleek, SEO-optimized, slightly futuristic, fully responsive.
-// Unique accent colors per tool (no repeats), minimal/non-distracting visuals.
-// Includes accessible keyboard focus states and JSON-LD (ItemList) for search engines.
+"use client";
 
 import Link from "next/link";
+import { useState } from "react";
+import CareerSessionModal from "@/components/CareerSessionModal";
 
 type Tool = {
   name: string;
@@ -103,6 +102,8 @@ const TOOLS: Tool[] = [
 ];
 
 export default function ToolsSection() {
+  const [isCareerModalOpen, setIsCareerModalOpen] = useState(false);
+
   const subtitle =
     "Master the essential Python data stack for analytics and machine learning — from data wrangling to model training and visualization.";
   const keywords =
@@ -183,13 +184,13 @@ export default function ToolsSection() {
           >
             See Modules Using These Tools
           </Link>
-          <Link
-            href="contact-us"
-            className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-purple-200"
+          <button
+            onClick={() => setIsCareerModalOpen(true)}
+            className="inline-flex items-center justify-center cursor-pointer rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-purple-200"
             aria-label="Book a free demo to experience the toolchain"
           >
             Book a Free Demo
-          </Link>
+          </button>
         </div>
 
         {/* Footnote */}
@@ -197,6 +198,12 @@ export default function ToolsSection() {
           *Tooling may be extended with Plotly, FastAPI, Docker, or cloud notebooks based on cohort needs.
         </p>
       </div>
+
+      <CareerSessionModal
+        isOpen={isCareerModalOpen}
+        onClose={() => setIsCareerModalOpen(false)}
+        source="Machine Learning Course Page - Tools Section - Book Free Demo"
+      />
 
     </section>
   );

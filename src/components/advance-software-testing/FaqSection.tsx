@@ -12,8 +12,13 @@ const accents = [
   { cardBg: 'bg-violet-50', cardBorder: 'border-violet-200', title: 'text-violet-800', bullet: 'bg-violet-300' },
 ];
 
+import CareerSessionModal from '@/components/CareerSessionModal';
+import SyllabusDownloadModal from '@/components/SyllabusDownloadModal';
+
 export default function FaqSection() {
   const [open, setOpen] = useState<number | null>(0); // open the first by default for engagement
+  const [isCareerModalOpen, setIsCareerModalOpen] = useState(false);
+  const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
 
   const onKeyToggle = (e: KeyboardEvent<HTMLButtonElement>, idx: number) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -107,19 +112,33 @@ export default function FaqSection() {
 
         {/* Supportive CTA row (optional anchors) */}
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <Link
-            href="contact-us"
-            className="inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200"
+          <button
+            onClick={() => setIsCareerModalOpen(true)}
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200"
           >
             Talk to a Mentor
-          </Link>
+          </button>
           <button
-            className="inline-flex items-center justify-center rounded-xl border-2 border-emerald-600 bg-white px-4 py-2 text-sm font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-600 hover:text-white focus:outline-none focus:ring-4 focus:ring-emerald-200"
+            onClick={() => setIsSyllabusModalOpen(true)}
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl border-2 border-emerald-600 bg-white px-4 py-2 text-sm font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-600 hover:text-white focus:outline-none focus:ring-4 focus:ring-emerald-200"
           >
             Download Syllabus
           </button>
         </div>
       </div>
+
+      <CareerSessionModal
+        isOpen={isCareerModalOpen}
+        onClose={() => setIsCareerModalOpen(false)}
+        source="Advanced Software Testing Course Page - FAQ Section - Talk to a Mentor"
+      />
+
+      <SyllabusDownloadModal
+        isOpen={isSyllabusModalOpen}
+        onClose={() => setIsSyllabusModalOpen(false)}
+        courseName="Advanced Software Testing"
+        source="Advanced Software Testing Course Page - FAQ Section - Syllabus Download"
+      />
 
     </section>
   );

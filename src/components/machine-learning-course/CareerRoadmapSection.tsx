@@ -1,7 +1,7 @@
-// components/sections/CareerRoadmapSection.tsx
-// Server component — sleek, slightly futuristic, responsive, and SEO-friendly (Data Science edition).
+"use client";
 
-import Link from "next/link";
+import { useState } from "react";
+import CareerSessionModal from "@/components/CareerSessionModal";
 
 type Step = {
   n: number;
@@ -67,7 +67,7 @@ const STEPS: Step[] = [
 ];
 
 export default function CareerRoadmapSection() {
-
+  const [isCareerModalOpen, setIsCareerModalOpen] = useState(false);
 
   return (
     <section
@@ -174,22 +174,28 @@ export default function CareerRoadmapSection() {
 
         {/* CTA */}
         <div className="mt-12 text-center">
-          <Link
-            href="contact-us"
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-900 bg-slate-900 px-4 md:px-6 py-2 md:py-3 text-base font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:translate-y-[-1px] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
+          <button
+            onClick={() => setIsCareerModalOpen(true)}
+            className="inline-flex items-center gap-2 cursor-pointer rounded-xl border border-[#7E22CE] bg-[#7E22CE] px-4 md:px-6 py-2 md:py-3 text-base font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:translate-y-[-1px] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-purple-300"
             aria-label="Get personalized Data Science roadmap guidance"
           >
             Get Personalized Roadmap
             <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
               <path d="M12.293 4.293a1 1 0 011.414 0l4 4a1 1 0 01.083 1.32l-.083.094-4 4a1 1 0 01-1.497-1.32l.083-.094L14.585 10H3a1 1 0 01-.117-1.993L3 8h11.585l-2.292-2.293a1 1 0 010-1.414z" />
             </svg>
-          </Link>
+          </button>
           <p className="mt-3 text-xs sm:text-sm text-slate-600">
             Learn from anywhere.{" "}
             <span className="font-semibold text-slate-800">Your journey to a Data Science career starts here.</span>
           </p>
         </div>
       </div>
+
+      <CareerSessionModal
+        isOpen={isCareerModalOpen}
+        onClose={() => setIsCareerModalOpen(false)}
+        source="Machine Learning Course Page - Career Roadmap Section - Get Personalized Roadmap"
+      />
 
     </section>
   );

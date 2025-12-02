@@ -1,9 +1,9 @@
-// components/sections/FaqSection.tsx
-// Server component — sleek, SEO-optimized, slightly futuristic, fully responsive.
-// Accessible accordion (keyboard + screen readers), unique accents per item (no repeats),
-// and JSON-LD (FAQPage) for rich results. No dynamic Tailwind class generation.
+"use client";
 
 import Link from "next/link";
+import { useState } from "react";
+import EnrollModal from "@/components/EnrollModal";
+import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
 
 type FAQ = {
   q: string;
@@ -82,6 +82,9 @@ const FAQS: FAQ[] = [
 ];
 
 export default function FaqSection() {
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+  const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
+
   const subtitle =
     "All the essentials about our Deep Learning, NLP & Generative AI program—entry requirements, duration, tools, certification, and placements.";
   const keywords =
@@ -145,14 +148,15 @@ export default function FaqSection() {
 
         {/* CTA below FAQs */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 text-center sm:flex-row">
-          <Link
-            href="contact-us"
-            className="inline-flex items-center justify-center rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
+          <button
+            onClick={() => setIsEnrollModalOpen(true)}
+            className="inline-flex items-center justify-center cursor-pointer rounded-xl border border-[#7E22CE] bg-[#7E22CE] px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-purple-300"
             aria-label="Still have questions? Contact admissions"
           >
             Still have questions? Contact us
-          </Link>
+          </button>
           <button
+            onClick={() => setIsSyllabusModalOpen(true)}
             className="inline-flex items-center justify-center cursor-pointer rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-indigo-200"
             aria-label="Download detailed syllabus"
           >
@@ -160,6 +164,20 @@ export default function FaqSection() {
           </button>
         </div>
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollModalOpen}
+        onClose={() => setIsEnrollModalOpen(false)}
+        courseName="Master Program in Deep Learning, NLP & Generative AI"
+        source="Generative AI Course Page - FAQ Section - Contact Us"
+      />
+
+      <SyllabusDownloadModal
+        isOpen={isSyllabusModalOpen}
+        onClose={() => setIsSyllabusModalOpen(false)}
+        courseName="Master Program in Deep Learning, NLP & Generative AI"
+        source="Generative AI Course Page - FAQ Section - Download Syllabus"
+      />
 
     </section>
   );

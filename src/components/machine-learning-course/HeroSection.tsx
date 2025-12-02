@@ -2,12 +2,18 @@
 // Server component — sleek, SEO-optimized, slightly futuristic, fully responsive.
 // Assumes you have a client LeadForm at "../CourseLeadForm"
 
+"use client";
+
 import Link from "next/link";
-import LeadForm from "../CourseLeadForm";
-import { ChevronRight, Home } from "lucide-react";
+import LeadForm from "@/components/forms/MachineLearningCourseLeadForm";
+import { ChevronRight, Home, ArrowRight, CloudDownload, ArrowDownNarrowWide } from "lucide-react";
+import { useState } from "react";
+import EnrollModal from "@/components/EnrollModal";
+import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
 
 export default function HeroSection() {
-
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
 
     const breadcrumbs = [
         { label: "Home", href: "/" },
@@ -74,7 +80,7 @@ export default function HeroSection() {
 
                         {/* Mobile form directly under headline */}
                         <div className="mt-5 block md:hidden">
-                            <LeadForm variant="elevated" />
+                            <LeadForm variant="elevated" source="Machine Learning Course Page - Hero Section (Mobile)" />
                         </div>
 
                         <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-700 sm:text-lg">
@@ -91,32 +97,31 @@ export default function HeroSection() {
                         {/* CTAs */}
                         <div className="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
                             <button
-                                className="inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
+                                onClick={() => setIsPopupOpen(true)}
+                                className="cursor-pointer group inline-flex items-center justify-center rounded-xl border border-[#7E22CE] bg-[#7E22CE] px-6 py-3 text-base font-semibold text-white transition hover:bg-[#6b21a8] hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-purple-200"
                                 aria-label="Enroll now in ML & DS course"
                             >
                                 Enroll Now
-                                <svg
-                                    className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                    aria-hidden
-                                >
-                                    <path d="M12.293 4.293a1 1 0 011.414 0l4 4a1 1 0 01.083 1.32l-.083.094-4 4a1 1 0 01-1.497-1.32l.083-.094L14.585 10H3a1 1 0 01-.117-1.993L3 8h11.585l-2.292-2.293a1 1 0 010-1.414z" />
-                                </svg>
+                                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                             </button>
+
+                            <button
+                                onClick={() => setIsSyllabusModalOpen(true)}
+                                className="cursor-pointer group inline-flex items-center justify-center rounded-xl border border-[#7E22CE] bg-[#7E22CE] px-6 py-3 text-base font-semibold text-white transition hover:bg-[#6b21a8] hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-purple-200"
+                                aria-label="Download ML & DS Syllabus"
+                            >
+                                Download Syllabus
+                                <CloudDownload className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
+                            </button>
+
                             <Link
                                 href="#curriculum"
-                                className="inline-flex items-center justify-center rounded-xl border border-sky-300 bg-white px-6 py-3 text-base font-semibold text-sky-700 shadow-sm transition hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-200"
+                                className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-emerald-300 bg-white px-6 py-3 text-base font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-4 focus:ring-emerald-200"
                                 aria-label="View full ML & DS curriculum"
                             >
                                 View Curriculum
+                                <ArrowDownNarrowWide className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
                             </Link>
-                            <button
-                                className="inline-flex items-center justify-center rounded-xl border border-emerald-300 bg-white px-6 py-3 text-base font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-4 focus:ring-emerald-200"
-                                aria-label="Book a free demo for ML & DS"
-                            >
-                                Free Demo
-                            </button>
                         </div>
 
                         {/* Quick highlights (distinct accent colors) */}
@@ -161,13 +166,9 @@ export default function HeroSection() {
                     </div>
 
                     {/* Right column: Desktop form */}
-                    <aside className="md:col-span-5 lg:col-span-4 hidden md:block">
-                        <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg">
-                            <div className="p-4 sm:p-5">
-                                <LeadForm variant="elevated" />
-                            </div>
-                        </div>
-                    </aside>
+                    <div className="relative lg:col-span-4 hidden md:block">
+                        <LeadForm variant="elevated" className="hidden lg:block" source="Machine Learning Course Page - Hero Section" />
+                    </div>
                 </div>
 
                 {/* Trust strip under the grid */}
@@ -178,6 +179,18 @@ export default function HeroSection() {
                     </div>
                 </div>
             </div>
+
+            <EnrollModal
+                isOpen={isPopupOpen}
+                onClose={() => setIsPopupOpen(false)}
+                courseName="Machine Learning and Data Science with Python"
+            />
+
+            <SyllabusDownloadModal
+                isOpen={isSyllabusModalOpen}
+                onClose={() => setIsSyllabusModalOpen(false)}
+                courseName="Machine Learning and Data Science with Python"
+            />
 
         </section>
     );
