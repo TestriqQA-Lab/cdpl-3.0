@@ -799,8 +799,12 @@ export function generateHomePageSchema(faqs?: { question: string; answer: string
     embedUrl: 'https://www.youtube.com/embed/8kB2wESj1n8',
   });
 
+  // 5. Website Schema (Sitelinks Search Box)
+  const websiteSchema = generateWebsiteSchema();
+
   // Filter out undefined schemas
   return [
+    websiteSchema,
     localBusinessSchema,
     itemListSchema,
     faqSchema,

@@ -54,6 +54,10 @@ export const metadata: Metadata = generateMetadata({
     "job guarantee",
     "automation testing",
     "machine learning training",
+    "software testing course in Mumbai",
+    "data science course in Mumbai",
+    "IT courses with placement",
+    "best software testing institute",
   ],
   url: '/',
 });
