@@ -3,39 +3,13 @@ import { useState, type KeyboardEvent } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import { ADVANCED_TESTING_FAQS } from '@/data/advancedTestingData';
 
-type Faq = {
-  q: string;
-  a: string;
-  accent: {
-    cardBg: string;
-    cardBorder: string;
-    title: string;
-    bullet: string;
-  };
-};
-
-const faqs: Faq[] = [
-  {
-    q: 'Do I need coding experience?',
-    a: 'Basic Java/Python helps, but we start from scratch with hands-on exercises, cheat sheets, and mentor guidance.',
-    accent: { cardBg: 'bg-sky-50', cardBorder: 'border-sky-200', title: 'text-sky-800', bullet: 'bg-sky-300' },
-  },
-  {
-    q: 'Will I get ISTQB certification?',
-    a: 'Yes. We cover ISTQB Foundation + Advanced preparation with mock tests, exam tips, and downloadable study notes.',
-    accent: { cardBg: 'bg-emerald-50', cardBorder: 'border-emerald-200', title: 'text-emerald-800', bullet: 'bg-emerald-300' },
-  },
-  {
-    q: 'What is the duration?',
-    a: '25 hours of live, mentor-led training with lifetime access to recordings, projects, and updates.',
-    accent: { cardBg: 'bg-amber-50', cardBorder: 'border-amber-200', title: 'text-amber-800', bullet: 'bg-amber-300' },
-  },
-  {
-    q: 'Is placement guaranteed?',
-    a: 'We provide 100% job assistance—resume polishing, interview practice, referrals, and portfolio review.',
-    accent: { cardBg: 'bg-violet-50', cardBorder: 'border-violet-200', title: 'text-violet-800', bullet: 'bg-violet-300' },
-  },
+const accents = [
+  { cardBg: 'bg-sky-50', cardBorder: 'border-sky-200', title: 'text-sky-800', bullet: 'bg-sky-300' },
+  { cardBg: 'bg-emerald-50', cardBorder: 'border-emerald-200', title: 'text-emerald-800', bullet: 'bg-emerald-300' },
+  { cardBg: 'bg-amber-50', cardBorder: 'border-amber-200', title: 'text-amber-800', bullet: 'bg-amber-300' },
+  { cardBg: 'bg-violet-50', cardBorder: 'border-violet-200', title: 'text-violet-800', bullet: 'bg-violet-300' },
 ];
 
 import CareerSessionModal from '@/components/CareerSessionModal';
@@ -73,64 +47,67 @@ export default function FaqSection() {
         </p>
 
         <ul role="list" className="mt-10 space-y-4">
-          {faqs.map((faq, i) => (
-            <li
-              key={faq.q}
-              className={[
-                'rounded-2xl border transition',
-                faq.accent.cardBg,
-                faq.accent.cardBorder,
-                'shadow-[0_1px_0_0_rgba(15,23,42,0.04)]',
-              ].join(' ')}
-            >
-              <button
-                type="button"
-                onClick={() => setOpen(open === i ? null : i)}
-                onKeyDown={(e) => onKeyToggle(e, i)}
-                aria-expanded={open === i}
-                aria-controls={`faq-panel-${i}`}
-                id={`faq-trigger-${i}`}
-                className="w-full px-5 sm:px-6 py-4 sm:py-5 flex items-center justify-between gap-3 text-left focus:outline-none focus-visible:ring-4 focus-visible:ring-slate-200 rounded-2xl"
+          {ADVANCED_TESTING_FAQS.map((faq, i) => {
+            const accent = accents[i % accents.length];
+            return (
+              <li
+                key={faq.question}
+                className={[
+                  'rounded-2xl border transition',
+                  accent.cardBg,
+                  accent.cardBorder,
+                  'shadow-[0_1px_0_0_rgba(15,23,42,0.04)]',
+                ].join(' ')}
               >
-                <span className={['font-semibold', 'text-sm sm:text-base md:text-lg', faq.accent.title].join(' ')}>
-                  {faq.q}
-                </span>
-                <ChevronDown
-                  className={[
-                    'h-5 w-5 shrink-0 transition-transform duration-300',
-                    open === i ? 'rotate-180' : 'rotate-0',
-                  ].join(' ')}
-                />
-              </button>
+                <button
+                  type="button"
+                  onClick={() => setOpen(open === i ? null : i)}
+                  onKeyDown={(e) => onKeyToggle(e, i)}
+                  aria-expanded={open === i}
+                  aria-controls={`faq-panel-${i}`}
+                  id={`faq-trigger-${i}`}
+                  className="w-full px-5 sm:px-6 py-4 sm:py-5 flex items-center justify-between gap-3 text-left focus:outline-none focus-visible:ring-4 focus-visible:ring-slate-200 rounded-2xl"
+                >
+                  <span className={['font-semibold', 'text-sm sm:text-base md:text-lg', accent.title].join(' ')}>
+                    {faq.question}
+                  </span>
+                  <ChevronDown
+                    className={[
+                      'h-5 w-5 shrink-0 transition-transform duration-300',
+                      open === i ? 'rotate-180' : 'rotate-0',
+                    ].join(' ')}
+                  />
+                </button>
 
-              <AnimatePresence initial={false}>
-                {open === i && (
-                  <motion.div
-                    id={`faq-panel-${i}`}
-                    role="region"
-                    aria-labelledby={`faq-trigger-${i}`}
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.28, ease: 'easeOut' }}
-                    className="overflow-hidden"
-                  >
-                    <div className="px-5 sm:px-6 pb-5 sm:pb-6 pt-0">
-                      <div className="flex gap-3 text-slate-600">
-                        <span className={['mt-2 h-2 w-2 rounded-full', faq.accent.bullet].join(' ')} />
-                        <p className="text-sm sm:text-base leading-relaxed">{faq.a}</p>
+                <AnimatePresence initial={false}>
+                  {open === i && (
+                    <motion.div
+                      id={`faq-panel-${i}`}
+                      role="region"
+                      aria-labelledby={`faq-trigger-${i}`}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.28, ease: 'easeOut' }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-5 sm:px-6 pb-5 sm:pb-6 pt-0">
+                        <div className="flex gap-3 text-slate-600">
+                          <span className={['mt-2 h-2 w-2 rounded-full', accent.bullet].join(' ')} />
+                          <p className="text-sm sm:text-base leading-relaxed">{faq.answer}</p>
+                        </div>
+                        {/* micro copy for SEO */}
+                        <p className="mt-3 pl-5 sm:pl-6 text-xs sm:text-sm text-slate-500">
+                          Still curious? Explore details on <em>course curriculum</em>, <em>live projects</em>,{' '}
+                          <em>ISTQB prep</em>, and <em>job assistance</em> in our program brochure.
+                        </p>
                       </div>
-                      {/* micro copy for SEO */}
-                      <p className="mt-3 pl-5 sm:pl-6 text-xs sm:text-sm text-slate-500">
-                        Still curious? Explore details on <em>course curriculum</em>, <em>live projects</em>,{' '}
-                        <em>ISTQB prep</em>, and <em>job assistance</em> in our program brochure.
-                      </p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </li>
-          ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </li>
+            );
+          })}
         </ul>
 
         {/* Supportive CTA row (optional anchors) */}

@@ -62,7 +62,7 @@ export default function CtaSection() {
               <div className="flex items-start gap-3">
                 <Clock className="h-6 w-6 text-cyan-300" />
                 <div>
-                  <div className="font-semibold">40-Hour Live Training</div>
+                  <div className="font-semibold">180-Hour Live Training</div>
                   <div className="text-sm text-slate-200/80">Weekend Batches • Mentor-led</div>
                 </div>
               </div>

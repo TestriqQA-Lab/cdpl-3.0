@@ -4,7 +4,7 @@ import type { ComponentProps } from "react";
 import dynamic from "next/dynamic";
 import { pastEvents } from "@/data/eventsData";
 import { generateMetadata } from "@/lib/metadata-generator";
-import { generateBreadcrumbSchema, generateFAQSchema, generateEventSchema } from "@/lib/schema-generators";
+import { generateBreadcrumbSchema, generateFAQSchema, generateCollectionPageSchema, generateEventSchema } from "@/lib/schema-generators";
 import JsonLd from "@/components/JsonLd";
 
 // Type-only imports so we can still infer props and event shape
@@ -12,34 +12,6 @@ import type {
   default as EventsPastEventsAllEventsSectionType,
 } from "@/components/sections/EventsPastEventsAllEventsSection";
 import type { FeaturedEvent } from "@/components/sections/EventsPastEventsFeaturedEventsSliderSection";
-
-// ============================================================================
-// SEO METADATA - Enhanced for Past Events Page
-// ============================================================================
-export const metadata: Metadata = generateMetadata({
-  title: "Past Events - Workshops, Webinars & Training Sessions | CDPL",
-  description: "Explore CDPL's past events including corporate training workshops, technical webinars, industry conferences, and hands-on training sessions on Software Testing, Data Science, AI/ML, and Automation. See highlights, attendees, and success stories from our events.",
-  keywords: [
-    "CDPL past events",
-    "software testing workshops",
-    "data science webinars",
-    "technical training sessions",
-    "corporate training events",
-    "AI ML workshops",
-    "automation testing events",
-    "industry conferences",
-    "CDPL events gallery",
-    "training highlights",
-    "tech events India",
-    "developer workshops",
-    "QA training events",
-    "cloud computing workshops",
-    "DevOps training sessions",
-  ],
-  url: "/events/past-events",
-  image: "/og-images/og-image-events.webp",
-  imageAlt: "CDPL Past Events - Workshops, Webinars & Training Sessions",
-});
 
 // Small inline loader for dynamic sections
 function SectionLoader({ label = "Loading..." }: { label?: string }) {
@@ -141,6 +113,36 @@ const FALLBACK = {
 };
 
 // ============================================================================
+// SEO METADATA - Enhanced for Past Events Page
+// ============================================================================
+export const metadata: Metadata = generateMetadata({
+  title: "Past Events - Workshops, Webinars & Training Sessions | CDPL",
+  description: "Explore CDPL's past events including corporate training workshops, technical webinars, industry conferences, and hands-on training sessions on Software Testing, Data Science, AI/ML, and Automation. See highlights, attendees, and success stories from our events.",
+  keywords: [
+    "CDPL past events",
+    "software testing workshops",
+    "data science webinars",
+    "technical training sessions",
+    "corporate training events",
+    "AI ML workshops",
+    "automation testing events",
+    "industry conferences",
+    "CDPL events gallery",
+    "training highlights",
+    "tech events India",
+    "developer workshops",
+    "QA training events",
+    "cloud computing workshops",
+    "DevOps training sessions",
+  ],
+  url: "/events/past-events",
+  image: "/og-images/og-image-events.webp",
+  imageAlt: "CDPL Past Events - Workshops, Webinars & Training Sessions",
+});
+
+
+
+// ============================================================================
 // PAST EVENTS PAGE COMPONENT
 // ============================================================================
 export default function PastEventsPage() {
@@ -207,39 +209,24 @@ export default function PastEventsPage() {
   ]);
 
   // CollectionPage Schema with Events
-  const collectionPageSchema = {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "@id": "https://www.cinutedigital.com/events/past-events#collectionpage",
-    url: "https://www.cinutedigital.com/events/past-events",
+  const collectionPageSchema = generateCollectionPageSchema({
     name: "CDPL Past Events",
     description: "Browse our past workshops, webinars, and training events",
-    inLanguage: "en-IN",
-    mainEntity: {
-      "@type": "ItemList",
-      itemListElement: pastEvents.slice(0, 10).map((event, index) => {
-        // Generate base event schema
-        const eventSchema = generateEventSchema({
-          name: event.title,
-          description: event.subtitle || event.purpose,
-          startDate: event.date,
-          location: { name: event.location },
-          image: event.heroImageUrl,
-          eventStatus: "EventScheduled",
-          eventAttendanceMode: "OfflineEventAttendanceMode",
-        });
-
-        // Remove @context for nested item
-        const { '@context': eventSchemaNoContext } = eventSchema as any;
-
-        return {
-          "@type": "ListItem",
-          position: index + 1,
-          item: eventSchemaNoContext
-        };
-      }),
-    },
-  };
+    url: "/events/past-events",
+    hasPart: pastEvents.slice(0, 10).map((event, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: generateEventSchema({
+        name: event.title,
+        description: event.subtitle || event.purpose,
+        startDate: event.date,
+        location: { name: event.location },
+        image: event.heroImageUrl,
+        eventStatus: "EventScheduled",
+        eventAttendanceMode: "OfflineEventAttendanceMode",
+      })
+    }))
+  });
 
   // FAQ Schema
   const faqs = [

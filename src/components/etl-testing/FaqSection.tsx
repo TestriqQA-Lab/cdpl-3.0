@@ -2,15 +2,7 @@
 import { useState } from 'react';
 import { ChevronDown, HelpCircle, ShieldCheck, Clock, Award } from 'lucide-react';
 import Link from 'next/link';
-
-type Faq = { q: string; a: string };
-
-const faqs: Faq[] = [
-  { q: 'Do I need ETL tool knowledge?', a: 'No. We start from the basics of data pipelines. Knowing SQL helps but is not mandatory.' },
-  { q: 'Will I get a certificate?', a: 'Yes. You’ll receive a globally recognized ETL Testing certificate with QR verification.' },
-  { q: 'What is the duration?', a: '18 hours of live, mentor-led training with lifetime access to recordings and updates.' },
-  { q: 'Is placement guaranteed?', a: 'We provide 100% job assistance: resume support, mock interviews, and referral guidance.' },
-];
+import { ETL_TESTING_FAQS } from '@/data/etlTestingData';
 
 // Distinct, non-repeating light accents (no heavy gradients)
 const accents = [
@@ -44,7 +36,7 @@ export default function FaqSection() {
         </p>
 
         <div className="space-y-3 sm:space-y-4">
-          {faqs.map((faq, i) => {
+          {ETL_TESTING_FAQS.map((faq, i) => {
             const isOpen = open === i;
             const a = accents[i % accents.length];
             const panelId = `faq-panel-${i}`;
@@ -52,7 +44,7 @@ export default function FaqSection() {
 
             return (
               <div
-                key={faq.q}
+                key={faq.question}
                 className={[
                   'rounded-2xl border bg-white',
                   a.border,
@@ -73,7 +65,7 @@ export default function FaqSection() {
                       FAQ {i + 1}
                     </span>
                     <span className="text-sm sm:text-base font-semibold text-slate-900">
-                      {faq.q}
+                      {faq.question}
                     </span>
                   </span>
 
@@ -97,7 +89,7 @@ export default function FaqSection() {
                 >
                   <div className="overflow-hidden">
                     <div className="px-5 sm:px-6 pb-4 sm:pb-5 text-slate-700 text-sm sm:text-base">
-                      {faq.a}
+                      {faq.answer}
                     </div>
                   </div>
                 </div>

@@ -5,6 +5,8 @@ import { trainingServices, type TrainingService } from '@/data/servicesData';
 import { pastEvents } from '@/data/eventsData';
 import { type ServiceClient } from '@/types/service';
 import { generateMetadata as generateSEOMetadata } from '@/lib/metadata-generator';
+import { generateServiceSchema, generateBreadcrumbSchema } from '@/lib/schema-generators';
+import JsonLd from '@/components/JsonLd';
 
 // Helper functions
 function getServiceBySlug(slug: string): TrainingService | undefined {
@@ -158,11 +160,26 @@ export default async function ServiceDetailPage(
   // map to client-safe shape (no Record<string, unknown> cast; no destructuring of icon)
   const serviceForClient = toClientService(service);
 
-  ;
+  // 1. Breadcrumb Schema
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Services", url: "/services" },
+    { name: service.title, url: `/services/${service.slug}` },
+  ]);
 
+  // 2. Service Schema
+  const serviceSchema = generateServiceSchema({
+    name: service.title,
+    description: service.shortDescription,
+    url: `/services/${service.slug}`,
+    serviceType: "Corporate Training",
+    image: `/og-images/og-service-${service.slug}.webp`
+  });
 
   return (
     <>
+      <JsonLd id={`service-${slug}-breadcrumb`} schema={breadcrumbSchema} />
+      <JsonLd id={`service-${slug}-schema`} schema={serviceSchema} />
 
       {/* Semantic HTML Structure */}
       <main

@@ -799,8 +799,12 @@ export function generateHomePageSchema(faqs?: { question: string; answer: string
     embedUrl: 'https://www.youtube.com/embed/8kB2wESj1n8',
   });
 
+  // 5. Website Schema (Sitelinks Search Box)
+  const websiteSchema = generateWebsiteSchema();
+
   // Filter out undefined schemas
   return [
+    websiteSchema,
     localBusinessSchema,
     itemListSchema,
     faqSchema,
@@ -1074,6 +1078,45 @@ export function generateWebPageSchema(page: WebPageSchemaInput): WithContext<Rec
     description: page.description,
     ...(page.isPartOf && { isPartOf: page.isPartOf }),
     ...(page.about && { about: page.about }),
+    inLanguage: 'en-IN',
+  };
+}
+// ============================================================================
+// SERVICE SCHEMA
+// ============================================================================
+
+interface ServiceSchemaInput {
+  name: string;
+  description: string;
+  url: string;
+  serviceType: string;
+  providerName?: string;
+  areaServed?: string;
+  image?: string;
+}
+
+/**
+ * Generate Service schema
+ */
+export function generateServiceSchema(service: ServiceSchemaInput): WithContext<Record<string, unknown>> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${getFullUrl(service.url)}#service`,
+    url: getFullUrl(service.url),
+    name: service.name,
+    description: service.description,
+    serviceType: service.serviceType,
+    provider: {
+      '@type': 'Organization',
+      '@id': getOrganizationId(),
+      name: service.providerName || SITE_CONFIG.name,
+    },
+    areaServed: {
+      '@type': 'Country',
+      name: service.areaServed || 'India',
+    },
+    ...(service.image && { image: getImageUrl(service.image) }),
     inLanguage: 'en-IN',
   };
 }
