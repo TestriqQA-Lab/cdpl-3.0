@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import CareerSessionModal from "@/components/CareerSessionModal";
 
 /** ---------------- Count-up on scroll ---------------- */
 function useInView<T extends HTMLElement>(options?: IntersectionObserverInit) {
@@ -173,6 +174,7 @@ const STATS: Stat[] = [
 ];
 
 export default function StatsSection() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const title =
     "Why Java Leads Enterprise Development in 2025: Performance, Security & Scalability";
   const description =
@@ -294,18 +296,27 @@ export default function StatsSection() {
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 text-center sm:flex-row sm:gap-4">
           <Link
             href="#java-curriculum"
-            className="inline-flex items-center justify-center rounded-xl border border-gray-200 bg-gray-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-gray-200 bg-gray-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
           >
             Explore Java Curriculum
           </Link>
-          <Link
-            href="contact-us"
-            className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-50"
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-50"
           >
             Talk to a Mentor
-          </Link>
+          </button>
         </div>
       </div>
+
+      <CareerSessionModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        courseName="Java Programming"
+        source="Java Course Page - Stats Section - Talk to a Mentor"
+        title="Talk to a Mentor"
+        subtitle="Get expert guidance on your Java career path."
+      />
 
       {/* JSON-LD for SEO (FAQ) */}
       <script

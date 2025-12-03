@@ -1,8 +1,13 @@
 // components/sections/JavaTestimonialsSection.tsx
-// Server component (no client-side JS) – sleek, simple, and unique
+// Client component (no client-side JS) – sleek, simple, and unique
+
+'use client';
 
 import Link from "next/link";
 import ReviewsMarquee from "../sections/ReviewMarque";
+import { useState } from "react";
+import EnrollModal from "@/components/EnrollModal";
+import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
 
 // ---------- Types ----------
 type Testimonial = {
@@ -30,7 +35,8 @@ export default function TestimonialsSection({
   id = "testimonials",
   title = DEFAULT_TITLE,
 }: Props) {
-
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+  const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
 
   return (
     <section id={id} aria-labelledby={`${id}-heading`} className="relative py-12 sm:py-16 md:py-20">
@@ -63,24 +69,36 @@ export default function TestimonialsSection({
 
         {/* CTAs */}
         <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3">
-          <Link
-            href="contact-us"
-            className="rounded-xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200"
+          <button
+            onClick={() => setIsEnrollModalOpen(true)}
+            className="cursor-pointer rounded-xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200"
           >
             Enroll now
-          </Link>
+          </button>
 
           <button
-            className="rounded-xl border border-slate-300 bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition focus:outline-none focus:ring-4 focus:ring-slate-200"
+            onClick={() => setIsSyllabusModalOpen(true)}
+            className="cursor-pointer rounded-xl border border-slate-300 bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition focus:outline-none focus:ring-4 focus:ring-slate-200"
           >
             Download Syllabus
           </button>
         </div>
       </div>
 
+      <EnrollModal
+        isOpen={isEnrollModalOpen}
+        onClose={() => setIsEnrollModalOpen(false)}
+        courseName="Java Programming"
+        source="Java Course Page - Testimonials Section - Enroll Now"
+      />
+
+      <SyllabusDownloadModal
+        isOpen={isSyllabusModalOpen}
+        onClose={() => setIsSyllabusModalOpen(false)}
+        courseName="Java Programming"
+        source="Java Course Page - Testimonials Section - Syllabus Download"
+      />
+
     </section>
   );
 }
-
-
-

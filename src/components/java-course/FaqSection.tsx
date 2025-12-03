@@ -4,7 +4,7 @@
 
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   GraduationCap,
   Briefcase,
@@ -15,6 +15,8 @@ import {
   ChevronDown,
 } from "lucide-react";
 import Link from "next/link";
+import CareerSessionModal from "@/components/CareerSessionModal";
+import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
 
 type QA = {
   q: string;
@@ -89,7 +91,7 @@ const FAQS: QA[] = [
     a: (
       <>
         You’ll work with <strong>Java, IntelliJ IDEA, Spring Boot, JPA/Hibernate,
-        Maven, Git/GitHub, Docker</strong> and <strong>AWS</strong>. We also use
+          Maven, Git/GitHub, Docker</strong> and <strong>AWS</strong>. We also use
         Postman for API testing and basic CI/CD flows.
       </>
     ),
@@ -103,7 +105,7 @@ const FAQS: QA[] = [
     a: (
       <>
         Yes. The curriculum emphasizes <strong>clean architecture, security best
-        practices,</strong> environment configs, and <strong>observability</strong>{" "}
+          practices,</strong> environment configs, and <strong>observability</strong>{" "}
         so your apps are ready for real-world deployments.
       </>
     ),
@@ -115,13 +117,14 @@ const FAQS: QA[] = [
 ];
 
 export default function FaqSection() {
+  const [isCareerModalOpen, setIsCareerModalOpen] = useState(false);
+  const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
+
   const title = "Frequently Asked Questions";
   const subtitle =
     "Everything you need to know about our Java program—admissions, outcomes, tools, certificates, and weekly schedule.";
   const keywords =
     "Java course FAQ, Spring Boot FAQ, Java certification, placement assistance, Java developer tools, microservices training questions";
-
-
 
   return (
     <section
@@ -186,7 +189,7 @@ export default function FaqSection() {
               <div className="mt-4 h-1 w-full rounded-full bg-white/70" aria-hidden="true">
                 <div
                   className={["h-1 rounded-full", item.text.replace("text-", "bg-")].join(" ")}
-                  style={{ width: ["82%","74%","76%","70%","78%","72%"][i] }}
+                  style={{ width: ["82%", "74%", "76%", "70%", "78%", "72%"][i] }}
                 />
               </div>
             </details>
@@ -211,20 +214,36 @@ export default function FaqSection() {
 
         {/* CTA */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 text-center sm:flex-row sm:gap-4">
-          <Link
-            href="contact-us"
-            className="inline-flex items-center justify-center rounded-xl border border-gray-200 bg-gray-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
+          <button
+            onClick={() => setIsCareerModalOpen(true)}
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-gray-200 bg-gray-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
           >
             Still have questions? Talk to a Mentor
-          </Link>
+          </button>
           <button
-            className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-50"
+            onClick={() => setIsSyllabusModalOpen(true)}
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-50"
           >
             Download Full Syllabus (PDF)
           </button>
         </div>
       </div>
 
+      <CareerSessionModal
+        isOpen={isCareerModalOpen}
+        onClose={() => setIsCareerModalOpen(false)}
+        courseName="Java Programming"
+        source="Java Course Page - FAQ Section - Talk to a Mentor"
+        title="Talk to a Mentor"
+        subtitle="Get answers to all your questions about our Java program."
+      />
+
+      <SyllabusDownloadModal
+        isOpen={isSyllabusModalOpen}
+        onClose={() => setIsSyllabusModalOpen(false)}
+        courseName="Java Programming"
+        source="Java Course Page - FAQ Section - Syllabus Download"
+      />
 
       {/* Accessible helpers */}
       <h1 className="sr-only">{title}</h1>
