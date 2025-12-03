@@ -3,13 +3,15 @@
 import Link from "next/link";
 import { useState } from "react";
 import GenerativeAICourseLeadForm from "@/components/forms/GenerativeAICourseLeadForm";
-import { ChevronRight, Home } from "lucide-react";
+import { ChevronRight, Home, ArrowRight, CloudDownload, ArrowDownNarrowWide } from "lucide-react";
 import EnrollModal from "@/components/EnrollModal";
 import CareerSessionModal from "@/components/CareerSessionModal";
+import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
 
 export default function HeroSection() {
     const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
     const [isCareerModalOpen, setIsCareerModalOpen] = useState(false);
+    const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
 
     const breadcrumbs = [
         { label: "Home", href: "/" },
@@ -94,24 +96,26 @@ export default function HeroSection() {
                                 aria-label="Enroll now in Generative AI course"
                             >
                                 Enroll Now
-                                <svg className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
-                                    <path d="M12.293 4.293a1 1 0 011.414 0l4 4a1 1 0 01.083 1.32l-.083.094-4 4a1 1 0 01-1.497-1.32l.083-.094L14.585 10H3a1 1 0 01-.117-1.993L3 8h11.585l-2.292-2.293a1 1 0 010-1.414z" />
-                                </svg>
+                                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                             </button>
+
+                            <button
+                                onClick={() => setIsSyllabusModalOpen(true)}
+                                className="inline-flex items-center justify-center cursor-pointer rounded-xl border border-[#7E22CE] bg-[#7E22CE] px-6 py-3 text-base font-semibold text-white transition hover:bg-[#6b21a8] hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-purple-200"
+                                aria-label="Download Generative AI Syllabus"
+                            >
+                                Download Syllabus
+                                <CloudDownload className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
+                            </button>
+
                             <Link
                                 href="#curriculum"
                                 className="inline-flex items-center justify-center rounded-xl border border-sky-300 bg-white px-6 py-3 text-base font-semibold text-sky-700 shadow-sm transition hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-200"
                                 aria-label="View full Generative AI curriculum"
                             >
                                 View Curriculum
+                                <ArrowDownNarrowWide className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
                             </Link>
-                            <button
-                                onClick={() => setIsCareerModalOpen(true)}
-                                className="inline-flex items-center justify-center cursor-pointer rounded-xl border border-emerald-300 bg-white px-6 py-3 text-base font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-4 focus:ring-emerald-200"
-                                aria-label="Book a free demo for Generative AI"
-                            >
-                                Free Demo
-                            </button>
                         </div>
 
                         {/* Highlights */}
@@ -164,6 +168,13 @@ export default function HeroSection() {
                 isOpen={isCareerModalOpen}
                 onClose={() => setIsCareerModalOpen(false)}
                 source="Generative AI Course Page - Hero Section - Free Demo"
+            />
+
+            <SyllabusDownloadModal
+                isOpen={isSyllabusModalOpen}
+                onClose={() => setIsSyllabusModalOpen(false)}
+                courseName="Master Program in Deep Learning, NLP & Generative AI"
+                source="Generative AI Course Page - Hero Section - Download Syllabus"
             />
 
         </section>

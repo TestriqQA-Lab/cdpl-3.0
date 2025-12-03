@@ -1,7 +1,8 @@
 "use client";
 import { ChevronDown, BookOpen } from "lucide-react";
 import { useState } from "react";
-import Link from "next/link";
+import EnrollModal from "../EnrollModal";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
 
 interface Module {
   id: number;
@@ -15,6 +16,10 @@ interface Module {
 
 export default function CurriculumSection() {
   const [expandedModule, setExpandedModule] = useState<number | null>(null);
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+
+  const courseName = "Comprehensive Data Science and AI - Master Program";
 
   const subtitle =
     "An industry-aligned path spanning SQL & BI to Python, Statistics, ML, R, and modern GenAI-with real projects that recruiters can run and trust.";
@@ -326,18 +331,19 @@ export default function CurriculumSection() {
           <div className="flex flex-col items-center justify-center gap-3 text-center">
             <div className="flex flex-col items-center gap-3 sm:flex-row">
               <button
+                onClick={() => setIsEnrollOpen(true)}
                 className="inline-flex items-center justify-center cursor-pointer rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
+                aria-label="Apply for the Comprehensive DS & AI program"
+              >
+                Apply Now
+              </button>
+              <button
+                onClick={() => setIsSyllabusOpen(true)}
+                className="inline-flex items-center justify-center cursor-pointer rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-orange-200"
                 aria-label="Download detailed DS & AI syllabus"
               >
                 Download Detailed Syllabus (PDF)
               </button>
-              <Link
-                href="contact-us"
-                className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-orange-200"
-                aria-label="Apply for the Comprehensive DS & AI program"
-              >
-                Apply Now
-              </Link>
             </div>
             <p className="mx-auto mt-3 max-w-3xl text-center text-[11px] text-slate-500">
               *Module order may vary slightly by cohort to maximize outcomes.
@@ -345,6 +351,19 @@ export default function CurriculumSection() {
           </div>
         </div>
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="Comprehensive Data Science & AI - Curriculum Section - Apply Now"
+        courseName={courseName}
+      />
+      <SyllabusDownloadModal
+        isOpen={isSyllabusOpen}
+        onClose={() => setIsSyllabusOpen(false)}
+        source="Comprehensive Data Science & AI - Curriculum Section - Download Syllabus"
+        courseName={courseName}
+      />
     </section>
   );
 }

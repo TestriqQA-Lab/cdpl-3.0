@@ -3,10 +3,12 @@ import { Briefcase, TrendingUp, Users, Award } from "lucide-react";
 import { useState } from "react";
 import CareerSessionModal from "../CareerSessionModal";
 import SyllabusDownloadModal from "../SyllabusDownloadModal";
+import EnrollModal from "../EnrollModal";
 
 export default function CareerSection() {
   const [isCareerSessionOpen, setIsCareerSessionOpen] = useState(false);
   const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
 
   const courseName = "Advanced Data Science and Machine Learning Masterclass";
 
@@ -66,16 +68,16 @@ export default function CareerSection() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <button
-                onClick={() => setIsCareerSessionOpen(true)}
-                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-semibold rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 transition-all shadow-lg hover:shadow-indigo-200"
+                onClick={() => setIsEnrollOpen(true)}
+                className="inline-flex items-center justify-center cursor-pointer px-6 py-3 border border-transparent text-base font-semibold rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 transition-all shadow-lg hover:shadow-indigo-200"
               >
                 Apply for Placement Assistance
               </button>
               <button
                 onClick={() => setIsSyllabusOpen(true)}
-                className="inline-flex items-center justify-center px-6 py-3 border border-slate-200 text-base font-semibold rounded-xl text-slate-700 bg-white hover:bg-slate-50 transition-all"
+                className="inline-flex items-center justify-center cursor-pointer px-6 py-3 border border-slate-200 text-base font-semibold rounded-xl text-slate-700 bg-white hover:bg-slate-50 transition-all"
               >
-                Download Portfolio Guide
+                Download Syllabus
               </button>
             </div>
           </div>
@@ -165,7 +167,13 @@ export default function CareerSection() {
       <SyllabusDownloadModal
         isOpen={isSyllabusOpen}
         onClose={() => setIsSyllabusOpen(false)}
-        source="Data Science Course Page - Career Section - Download Portfolio Guide"
+        source="Data Science Course Page - Career Section - Download Syllabus"
+        courseName={courseName}
+      />
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="Data Science Course Page - Career Section - Apply for Placement"
         courseName={courseName}
       />
     </section>

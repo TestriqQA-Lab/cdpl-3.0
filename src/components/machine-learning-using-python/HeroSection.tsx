@@ -11,130 +11,18 @@ import {
     Zap,
 } from "lucide-react";
 import Link from "next/link";
-import React from "react";
-
-/** --- Reusable Form --- */
-function LeadForm({ className = "" }: { className?: string }) {
-    const countries = [
-        { code: "IN", dial: "+91", label: "India", flag: "🇮🇳" },
-        { code: "US", dial: "+1", label: "United States", flag: "🇺🇸" },
-        { code: "GB", dial: "+44", label: "United Kingdom", flag: "🇬🇧" },
-        { code: "AE", dial: "+971", label: "United Arab Emirates", flag: "🇦🇪" },
-        { code: "SG", dial: "+65", label: "Singapore", flag: "🇸🇬" },
-        { code: "AU", dial: "+61", label: "Australia", flag: "🇦🇺" },
-    ];
-
-    return (
-        <form
-            id="enrollment-form"
-            className={[
-                "w-full rounded-2xl border border-slate-200 bg-white/90 backdrop-blur-sm shadow-lg",
-                "p-5 sm:p-6",
-                className,
-            ].join(" ")}
-            onSubmit={(e) => {
-                e.preventDefault();
-                // submit handling here
-            }}
-            aria-label="Enroll for Machine Learning with Python"
-        >
-            <h2 className="text-xl font-semibold text-slate-900">
-                Request Syllabus & Free Consultation
-            </h2>
-            <p className="mt-1 text-sm text-slate-600">
-                Get the detailed curriculum, career roadmap, and upcoming batch details
-                for Machine Learning with Python.
-            </p>
-
-            <div className="mt-4 grid grid-cols-1 gap-4">
-                {/* Name */}
-                <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-slate-700">
-                        Full Name
-                    </label>
-                    <input
-                        id="name"
-                        name="name"
-                        required
-                        autoComplete="name"
-                        placeholder="Your full name"
-                        className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-300"
-                    />
-                </div>
-
-                {/* Email */}
-                <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-slate-700">
-                        Email
-                    </label>
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        required
-                        autoComplete="email"
-                        placeholder="you@example.com"
-                        className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-300"
-                    />
-                </div>
-
-                {/* Phone with country code + flag */}
-                <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-slate-700">
-                        Mobile Number
-                    </label>
-                    <div className="mt-1 flex items-stretch gap-2">
-                        <div className="flex min-w-[7.5rem] items-center rounded-lg border border-slate-300 bg-white px-2">
-                            <select
-                                name="country"
-                                aria-label="Country code"
-                                defaultValue="IN"
-                                className="w-full bg-transparent py-2 text-slate-900 focus:outline-none"
-                            >
-                                {countries.map((c) => (
-                                    <option key={c.code} value={c.code}>
-                                        {c.flag} {c.label} ({c.dial})
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <input
-                            id="phone"
-                            name="phone"
-                            type="tel"
-                            inputMode="tel"
-                            required
-                            placeholder="98765 43210"
-                            pattern="^[0-9\\s\\-()+]{7,20}$"
-                            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-300"
-                        />
-                    </div>
-                    <p className="mt-1 text-xs text-slate-500">
-                        We’ll never share your number. Standard rates may apply.
-                    </p>
-                </div>
-
-                <button
-                    type="submit"
-                    className="group inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 px-5 py-3 font-semibold text-white shadow-lg transition-all hover:from-orange-600 hover:to-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300"
-                >
-                    Get Syllabus & Pricing
-                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
-                </button>
-
-                <p className="text-xs text-slate-500">
-                    By submitting, you agree to our{" "}
-                    <Link href="/privacy-policy" className="underline hover:text-slate-700">
-                        Privacy Policy
-                    </Link>
-                    .
-                </p>
-            </div>
-        </form>
-    );
-}
+import React, { useState } from "react";
+import MachineLearningCourseLeadForm from "../forms/MachineLearningCourseLeadForm";
+import EnrollModal from "../EnrollModal";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
+import CareerSessionModal from "../CareerSessionModal";
 
 export default function HeroSection() {
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+    const [isCareerOpen, setIsCareerOpen] = useState(false);
+    const courseName = "Machine Learning Algorithms using python Programming";
+
     const scrollToForm = () => {
         const formSection = document.getElementById("enrollment-form");
         formSection?.scrollIntoView({ behavior: "smooth" });
@@ -220,7 +108,9 @@ export default function HeroSection() {
                         </h1>
 
                         {/* Mobile form under H1 */}
-                        <LeadForm className="mt-3 md:hidden" />
+                        <div className="mt-3 md:hidden">
+                            <MachineLearningCourseLeadForm />
+                        </div>
 
                         {/* Subheading */}
                         <p className="mt-4 max-w-3xl text-center text-base leading-relaxed text-slate-600 md:text-left md:text-lg">
@@ -280,15 +170,15 @@ export default function HeroSection() {
                         {/* CTAs */}
                         <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row md:justify-start">
                             <button
-                                onClick={scrollToForm}
-                                className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:from-orange-600 hover:to-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300"
+                                onClick={() => setIsEnrollOpen(true)}
+                                className="inline-flex items-center justify-center cursor-pointer rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:from-orange-600 hover:to-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300"
                             >
                                 Enroll Now
                                 <ArrowRight className="ml-2 h-5 w-5" />
                             </button>
                             <button
-                                onClick={scrollToForm}
-                                className="rounded-lg border-2 border-slate-300 px-8 py-4 text-base font-semibold text-slate-700 transition-all hover:border-orange-400 hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-300"
+                                onClick={() => setIsSyllabusOpen(true)}
+                                className="inline-flex items-center justify-center cursor-pointer rounded-lg border-2 border-slate-300 px-8 py-4 text-base font-semibold text-slate-700 transition-all hover:border-orange-400 hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-300"
                             >
                                 Download Syllabus
                             </button>
@@ -333,10 +223,29 @@ export default function HeroSection() {
 
                     {/* Right: Desktop form (top-aligned) */}
                     <div className="hidden md:block md:col-span-5 lg:col-span-4 md:top-8">
-                        <LeadForm />
+                        <MachineLearningCourseLeadForm />
                     </div>
                 </div>
             </div>
+
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="Machine Learning with Python - Hero Section - Enroll Now"
+                courseName={courseName}
+            />
+            <SyllabusDownloadModal
+                isOpen={isSyllabusOpen}
+                onClose={() => setIsSyllabusOpen(false)}
+                source="Machine Learning with Python - Hero Section - Download Syllabus"
+                courseName={courseName}
+            />
+            <CareerSessionModal
+                isOpen={isCareerOpen}
+                onClose={() => setIsCareerOpen(false)}
+                source="Machine Learning with Python - Hero Section - Free Demo"
+                courseName={courseName}
+            />
         </section>
     );
 }

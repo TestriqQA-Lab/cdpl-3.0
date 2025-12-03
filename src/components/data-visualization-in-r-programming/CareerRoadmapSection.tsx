@@ -1,5 +1,7 @@
+"use client";
+
 // src/components/CareerRoadmapSection.tsx
-import React from "react";
+import React, { useState } from "react";
 import { content } from "@/components/data-visualization-in-r-programming/data/content";
 import {
   ChevronRight,
@@ -9,6 +11,7 @@ import {
   User,
   Zap,
 } from "lucide-react";
+import CareerSessionModal from "../CareerSessionModal";
 
 interface Step {
   step: number;
@@ -39,6 +42,8 @@ const phaseColors: string[] = [
 export const CareerRoadmapSection: React.FC = () => {
   const { career_roadmap_section } = content;
   const steps = career_roadmap_section.steps as Step[];
+  const [isCareerOpen, setIsCareerOpen] = useState(false);
+  const courseName = "Machine Learning and Data Visualization using R Programming";
 
   return (
     <section className="py-16 md:py-20 bg-gradient-to-b from-white to-slate-50">
@@ -340,7 +345,24 @@ export const CareerRoadmapSection: React.FC = () => {
             <strong>high-paying, future-proof data careers</strong>.
           </p>
         </div>
+
+        {/* Get Personalized Roadmap Button */}
+        <div className="flex justify-center mt-12">
+          <button
+            onClick={() => setIsCareerOpen(true)}
+            className="inline-flex items-center justify-center cursor-pointer rounded-lg bg-orange-600 px-8 py-4 text-base font-bold text-white shadow-lg transition-all hover:bg-orange-700 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-200"
+          >
+            Get Personalized Roadmap
+          </button>
+        </div>
       </div>
+
+      <CareerSessionModal
+        isOpen={isCareerOpen}
+        onClose={() => setIsCareerOpen(false)}
+        source="R Programming Course Page - Career Roadmap Section - Get Roadmap"
+        courseName={courseName}
+      />
     </section>
   );
 };

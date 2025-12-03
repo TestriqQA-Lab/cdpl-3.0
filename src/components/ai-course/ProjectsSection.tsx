@@ -1,5 +1,8 @@
-// components/sections/ProjectsSection.tsx
-// Server component — modern, accessible projects grid with subtle futuristic accents (DS & AI edition).
+"use client";
+
+import { useState } from "react";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
+import { Download } from "lucide-react";
 
 type Project = {
   title: string;
@@ -61,6 +64,9 @@ const PROJECTS: Project[] = [
 ];
 
 export default function ProjectsSection() {
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+  const courseName = "Comprehensive Data Science and AI - Master Program";
+
   const seoKeywords =
     "data science projects, ai portfolio projects, healthcare ai diagnostic, fraud detection ml, recommendation engine, mlops pipeline deployment, rag question answering, time series forecasting";
 
@@ -152,10 +158,25 @@ export default function ProjectsSection() {
             These <strong>industry-aligned projects</strong> emphasize reproducibility, evaluation, and clean architecture-ideal for{" "}
             <strong>Data Scientist</strong>, <strong>ML Engineer</strong>, and <strong>Applied AI</strong> roles.
           </p>
+          <div className="mt-4 flex justify-center">
+            <button
+              onClick={() => setIsSyllabusOpen(true)}
+              className="inline-flex items-center justify-center cursor-pointer rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition-all hover:bg-slate-50 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+            >
+              <Download className="mr-2 h-4 w-4" />
+              Download Full Project List
+            </button>
+          </div>
           <p className="mt-2 text-[11px] text-slate-500">*Scope varies by dataset, domain, and pace.</p>
         </div>
       </div>
 
+      <SyllabusDownloadModal
+        isOpen={isSyllabusOpen}
+        onClose={() => setIsSyllabusOpen(false)}
+        source="Comprehensive Data Science & AI - Projects Section - Download Project List"
+        courseName={courseName}
+      />
     </section>
   );
 }

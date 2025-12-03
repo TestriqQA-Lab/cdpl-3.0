@@ -1,5 +1,7 @@
+"use client";
+
 // src/components/ToolsSection.tsx
-import React, { JSX } from 'react';
+import React, { JSX, useState } from 'react';
 import { content } from "@/components/data-visualization-in-r-programming/data/content";
 import {
   Rss,
@@ -11,6 +13,7 @@ import {
   Terminal,
   Code2,
 } from 'lucide-react';
+import CareerSessionModal from "../CareerSessionModal";
 
 interface Tool {
   name: string;
@@ -89,6 +92,8 @@ const ToolCard: React.FC<{ tool: Tool; index: number }> = ({ tool, index }) => {
 
 export const ToolsSection: React.FC = () => {
   const { tools_section } = content;
+  const [isCareerOpen, setIsCareerOpen] = useState(false);
+  const courseName = "Machine Learning and Data Visualization using R Programming";
 
   // SEO-friendly technology categories (static, R-focused)
   const categories: Category[] = [
@@ -231,7 +236,24 @@ export const ToolsSection: React.FC = () => {
             <strong>data-driven business recommendations</strong> with confidence.
           </p>
         </div>
+
+        {/* Book a Free Demo Button */}
+        <div className="flex justify-center mt-12">
+          <button
+            onClick={() => setIsCareerOpen(true)}
+            className="inline-flex items-center justify-center cursor-pointer rounded-lg bg-orange-600 px-8 py-4 text-base font-bold text-white shadow-lg transition-all hover:bg-orange-700 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-200"
+          >
+            Book a Free Demo
+          </button>
+        </div>
       </div>
+
+      <CareerSessionModal
+        isOpen={isCareerOpen}
+        onClose={() => setIsCareerOpen(false)}
+        source="R Programming Course Page - Tools Section - Book Demo"
+        courseName={courseName}
+      />
     </section>
   );
 };

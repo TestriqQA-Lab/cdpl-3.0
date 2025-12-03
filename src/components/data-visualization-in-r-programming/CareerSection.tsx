@@ -1,10 +1,17 @@
+"use client";
+
 // src/components/CareerSection.tsx
-import React from "react";
+import React, { useState } from "react";
 import { content } from "@/components/data-visualization-in-r-programming/data/content";
-import { Briefcase, Zap, CheckCircle, TrendingUp, Users } from "lucide-react";
+import { Briefcase, Zap, CheckCircle, TrendingUp, Users, CloudDownload } from "lucide-react";
+import EnrollModal from "../EnrollModal";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
 
 export const CareerSection: React.FC = () => {
   const { career_section } = content;
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+  const courseName = "Machine Learning and Data Visualization using R Programming";
 
   // Helper: derive simple SEO-friendly description + salary band per role
   const getRoleMeta = (role: string) => {
@@ -178,6 +185,21 @@ export const CareerSection: React.FC = () => {
                 *Salary ranges are indicative and vary based on skills, experience, location, and
                 company.
               </p>
+              <div className="mt-6 flex flex-col sm:flex-row gap-4">
+                <button
+                  onClick={() => setIsEnrollOpen(true)}
+                  className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition-colors cursor-pointer"
+                >
+                  Apply for Placement Assistance
+                </button>
+                <button
+                  onClick={() => setIsSyllabusOpen(true)}
+                  className="px-6 py-3 bg-transparent border border-white hover:bg-white/10 text-white font-semibold rounded-lg transition-colors cursor-pointer flex items-center justify-center"
+                >
+                  <CloudDownload className="w-5 h-5 mr-2" />
+                  Download Syllabus
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -209,6 +231,19 @@ export const CareerSection: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="R Programming Course Page - Career Section - Placement Assistance"
+        courseName={courseName}
+      />
+      <SyllabusDownloadModal
+        isOpen={isSyllabusOpen}
+        onClose={() => setIsSyllabusOpen(false)}
+        source="R Programming Course Page - Career Section - Download Syllabus"
+        courseName={courseName}
+      />
     </section>
   );
 };

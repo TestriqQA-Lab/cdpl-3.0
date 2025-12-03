@@ -1,7 +1,9 @@
-// components/sections/ProjectsSection.tsx
-// Server component — clean, modern, responsive projects with subtle futuristic accents (DS & ML edition).
+"use client";
+import { useState } from "react";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
 
 type Project = {
+  // ... (keep Project type)
   title: string;
   desc: string;
   outcomes: string[];
@@ -15,6 +17,7 @@ type Project = {
   };
 };
 
+// ... (keep PROJECTS array)
 const PROJECTS: Project[] = [
   {
     title: "Predictive Maintenance System",
@@ -67,9 +70,11 @@ const PROJECTS: Project[] = [
 ];
 
 export default function ProjectsSection() {
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+  const courseName = "Advanced Data Science and Machine Learning Masterclass";
+
   const seoKeywords =
     "data science projects, machine learning portfolio, predictive maintenance, nlp sentiment analysis, stock price forecasting, churn prediction uplift, image classification transfer learning, recommendation system tutorial";
-
 
   return (
     <section
@@ -77,13 +82,10 @@ export default function ProjectsSection() {
       aria-labelledby="projects-heading"
       className="relative py-12 md:py-20 bg-white"
     >
-      {/* Subtle futuristic backdrop (fine grid + soft violet glow; no heavy gradients) */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(2,6,23,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(2,6,23,0.035)_1px,transparent_1px)] bg-[size:28px_28px]" />
-        <div className="absolute inset-x-0 top-0 h-[120px] bg-[radial-gradient(700px_140px_at_50%_0%,rgba(168,85,247,0.10),transparent_60%)]" />
-      </div>
+      {/* ... (keep background) */}
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* ... (keep header and cards) */}
         <header className="mx-auto max-w-3xl text-center">
           <h2
             id="projects-heading"
@@ -178,15 +180,29 @@ export default function ProjectsSection() {
         </div>
 
         {/* Trust strip */}
-        <div className="mx-auto mt-10 max-w-4xl rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
-          <p className="text-sm text-slate-700">
-            These <strong>industry-aligned projects</strong> emphasize reproducible pipelines, evaluation, and clear communication-ideal for{" "}
-            <strong>Data Scientist</strong>, <strong>ML Engineer</strong>, and <strong>Analytics</strong> roles.
-          </p>
-          <p className="mt-2 text-[11px] text-slate-500">*Scope may vary by dataset, domain, and pace.</p>
+        <div className="mx-auto mt-10 max-w-4xl rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
+          <div className="text-left">
+            <p className="text-sm text-slate-700">
+              These <strong>industry-aligned projects</strong> emphasize reproducible pipelines, evaluation, and clear communication-ideal for{" "}
+              <strong>Data Scientist</strong>, <strong>ML Engineer</strong>, and <strong>Analytics</strong> roles.
+            </p>
+            <p className="mt-2 text-[11px] text-slate-500">*Scope may vary by dataset, domain, and pace.</p>
+          </div>
+          <button
+            onClick={() => setIsSyllabusOpen(true)}
+            className="inline-flex items-center justify-center cursor-pointer px-6 py-2.5 text-sm font-semibold rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 transition-all shadow-sm hover:shadow-indigo-200 whitespace-nowrap"
+          >
+            Download Full Project List
+          </button>
         </div>
       </div>
 
+      <SyllabusDownloadModal
+        isOpen={isSyllabusOpen}
+        onClose={() => setIsSyllabusOpen(false)}
+        source="Data Science Course Page - Projects Section - Download Project List"
+        courseName={courseName}
+      />
     </section>
   );
 }

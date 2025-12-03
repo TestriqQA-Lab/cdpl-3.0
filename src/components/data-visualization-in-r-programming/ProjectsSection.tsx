@@ -1,5 +1,7 @@
+"use client";
+
 // src/components/ProjectsSection.tsx
-import React from "react";
+import React, { useState } from "react";
 import { content } from "@/components/data-visualization-in-r-programming/data/content";
 import {
   Briefcase,
@@ -10,7 +12,9 @@ import {
   Zap,
   Users,
   BarChart3,
+  CloudDownload,
 } from "lucide-react";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
 
 interface Project {
   title: string;
@@ -28,6 +32,8 @@ const domainIconMap: { [key: string]: React.FC<{ className: string }> } = {
 
 export const ProjectsSection: React.FC = () => {
   const { projects_section } = content;
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+  const courseName = "Machine Learning and Data Visualization using R Programming";
 
   const projectCards = projects_section.project_examples as Project[];
 
@@ -104,7 +110,7 @@ export const ProjectsSection: React.FC = () => {
         </div>
 
         {/* Featured Projects – layout inspired by the reference section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           {projectCards.map((project, idx) => {
             const style = cardStyles[idx % cardStyles.length];
 
@@ -169,6 +175,17 @@ export const ProjectsSection: React.FC = () => {
               </div>
             );
           })}
+        </div>
+
+        {/* Download Project List Button */}
+        <div className="flex justify-center mb-16">
+          <button
+            onClick={() => setIsSyllabusOpen(true)}
+            className="inline-flex items-center justify-center cursor-pointer rounded-lg border-2 border-slate-300 bg-white px-8 py-4 text-base font-bold text-slate-700 shadow-sm transition-all hover:border-orange-400 hover:text-orange-600 hover:shadow-md focus:outline-none focus:ring-4 focus:ring-orange-100"
+          >
+            <CloudDownload className="mr-2 h-5 w-5" />
+            Download Full Project List
+          </button>
         </div>
 
         {/* Domain Knowledge Section – adapted from reference layout, using projects_section.domains */}
@@ -238,6 +255,13 @@ export const ProjectsSection: React.FC = () => {
           ))}
         </div>
       </div>
+
+      <SyllabusDownloadModal
+        isOpen={isSyllabusOpen}
+        onClose={() => setIsSyllabusOpen(false)}
+        source="R Programming Course Page - Projects Section - Download Project List"
+        courseName={courseName}
+      />
     </section>
   );
 };

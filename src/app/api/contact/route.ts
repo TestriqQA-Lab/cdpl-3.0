@@ -22,6 +22,7 @@ const SYLLABUS_LINKS: Record<string, string> = {
   'Advanced Data Analytics Hero Program': 'https://www.cinutedigital.com/downloads/advanced-data-analytics-hero-program.pdf',
   'Advanced Data Analytics with Python': 'https://www.cinutedigital.com/downloads/advanced-data-analytics-with-python-libraries.pdf',
   'Advanced Data Science and ML': 'https://www.cinutedigital.com/downloads/advanced-data-science-and-machine-learning-masterclass.pdf',
+  'Advanced Data Science and Machine Learning Masterclass': 'https://www.cinutedigital.com/downloads/advanced-data-science-and-machine-learning-masterclass.pdf',
   'Advanced Excel for Data Analytics & Visualization': 'https://www.cinutedigital.com/downloads/advanced-excel-for-Data-analytics-&-visualization.pdf',
   'Advanced Manual and Automation Testing Master Program': 'https://www.cinutedigital.com/downloads/advanced-manual-and-automation-testing-master-program.pdf',
   'Advanced Software Testing': 'https://www.cinutedigital.com/downloads/advanced-software-testing.pdf',
@@ -31,6 +32,8 @@ const SYLLABUS_LINKS: Record<string, string> = {
   'Tableau Data Analytics': 'https://www.cinutedigital.com/downloads/data-analytics-&-visualization-with-tableau.pdf',
   'Data Analytics with BI and Big Data': 'https://www.cinutedigital.com/downloads/data-analytics-with-bi-and-big-data-engineering-master-program.pdf',
   'Deep Learning NLP and GenAI': 'https://www.cinutedigital.com/downloads/deep-learning-nlp-and-generativeai.pdf',
+  'Master Program in Deep Learning, NLP & Generative AI': 'https://www.cinutedigital.com/downloads/deep-learning-nlp-and-generativeai.pdf',
+  'Machine Learning and Data Science with Python': 'https://www.cinutedigital.com/downloads/machine-learning-and-data-science-with-python-hero-program.pdf',
   'Digital Marketing and AI for Business': 'https://www.cinutedigital.com/downloads/digital-marketing-and-ai-for-business-owners-digital-marketing-and-ai-for-business-owners. Digital Marketing and AI (For Business Owners)',
   'Digital Marketing with AI Bootcamp': 'https://www.cinutedigital.com/downloads/digital-marketing-with-ai-bootcamp-digital-marketing-with-ai-bootcamp. Digital Marketing With AI Bootcamp',
   'ETL Testing': 'https://www.cinutedigital.com/downloads/etl-testing-&-development.pdf',
@@ -40,6 +43,9 @@ const SYLLABUS_LINKS: Record<string, string> = {
   'ML and Data Visualization using R': 'https://www.cinutedigital.com/downloads/machine-learning-and-data-visualization-using-r-programming.pdf',
   'Prompt Engineering with Gen AI': 'https://www.cinutedigital.com/downloads/prompt-engineering-with-gen-ai.pdf',
   'Python Programming': 'https://www.cinutedigital.com/downloads/python-programming.pdf',
+  'Comprehensive Data Science and AI - Master Program': 'https://www.cinutedigital.com/downloads/comprehensive-data-science-and-ai-master-program.pdf',
+  'Machine Learning Algorithms using python Programming': 'https://www.cinutedigital.com/downloads/machine-learning-algorithms-using-python-programming.pdf',
+  'Machine Learning and Data Visualization using R Programming': 'https://www.cinutedigital.com/downloads/machine-learning-and-data-visualization-using-r-programming.pdf',
 };
 
 // --- Nodemailer Transporter ---

@@ -1,5 +1,8 @@
-// components/sections/WhoShouldEnroll.tsx
-// Server component — modern audience grid with subtle futuristic accents + SEO (DS & AI edition).
+"use client";
+import { useState } from "react";
+import { Download } from "lucide-react";
+import EnrollModal from "../EnrollModal";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
 
 type Persona = {
   title: string;
@@ -46,10 +49,12 @@ const PERSONAS: Persona[] = [
 ];
 
 export default function WhoShouldEnroll() {
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+  const courseName = "Comprehensive Data Science and AI - Master Program";
+
   const seoKeywords =
     "who should enroll data science course, ai ml audience, career switch to data science, working professional upskilling, data analyst to data scientist, mlops deployment skills";
-
-
 
   return (
     <section
@@ -144,8 +149,37 @@ export default function WhoShouldEnroll() {
             <strong>Data Scientist</strong>, <strong>ML Engineer</strong>, and <strong>Applied AI</strong>.
           </p>
         </div>
+
+        {/* CTA Buttons */}
+        <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+          <button
+            onClick={() => setIsEnrollOpen(true)}
+            className="inline-flex items-center justify-center cursor-pointer rounded-xl border border-blue-600 bg-blue-600 px-8 py-4 text-base font-bold text-white shadow-lg transition-all hover:bg-blue-700 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-200"
+          >
+            Check Eligibility & Apply
+          </button>
+          <button
+            onClick={() => setIsSyllabusOpen(true)}
+            className="inline-flex items-center justify-center cursor-pointer rounded-xl border border-slate-300 bg-white px-8 py-4 text-base font-bold text-slate-900 shadow-sm transition-all hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200"
+          >
+            <Download className="mr-2 h-5 w-5" />
+            Download Detailed Syllabus
+          </button>
+        </div>
       </div>
 
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="Data Science & AI - Who Should Enroll - Check Eligibility"
+        courseName={courseName}
+      />
+      <SyllabusDownloadModal
+        isOpen={isSyllabusOpen}
+        onClose={() => setIsSyllabusOpen(false)}
+        source="Data Science & AI - Who Should Enroll - Download Syllabus"
+        courseName={courseName}
+      />
     </section>
   );
 }

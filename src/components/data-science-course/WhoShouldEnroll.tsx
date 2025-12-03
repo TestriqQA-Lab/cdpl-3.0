@@ -98,13 +98,13 @@ export default function WhoShouldEnroll() {
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <button
               onClick={() => setIsEnrollOpen(true)}
-              className="inline-flex items-center justify-center px-8 py-3 text-base font-semibold rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 transition-all shadow-lg hover:shadow-indigo-200"
+              className="inline-flex items-center justify-center cursor-pointer px-8 py-3 text-base font-semibold rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 transition-all shadow-lg hover:shadow-indigo-200"
             >
               Enroll Now
             </button>
             <button
               onClick={() => setIsSyllabusOpen(true)}
-              className="inline-flex items-center justify-center px-8 py-3 text-base font-semibold rounded-xl text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 transition-all"
+              className="inline-flex items-center justify-center cursor-pointer px-8 py-3 text-base font-semibold rounded-xl text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 transition-all"
             >
               Download Syllabus
             </button>
