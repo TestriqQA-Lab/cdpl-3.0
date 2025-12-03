@@ -191,7 +191,7 @@ export default function CareerSection() {
               <button
                 onClick={() => handleApplyClick(r.title)}
                 className={[
-                  "ml-auto hidden rounded-md bg-white px-2 py-1 text-[10px] text-slate-900 font-semibold ring-1 ring-black/5 sm:inline-flex hover:bg-gray-50",
+                  "cursor-pointer ml-auto hidden rounded-md bg-white px-2 py-1 text-[10px] text-slate-900 font-semibold ring-1 ring-black/5 sm:inline-flex hover:bg-gray-50",
                   r.text.replace("text-", ""),
                 ].join(" ")}
                 aria-label={`Apply for ${r.title}`}
@@ -219,7 +219,7 @@ export default function CareerSection() {
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 text-center sm:flex-row sm:gap-4">
           <button
             onClick={() => setIsCareerModalOpen(true)}
-            className="inline-flex items-center justify-center rounded-xl border border-gray-200 bg-gray-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-gray-200 bg-gray-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
           >
             Browse Open Roles
             <ChevronRight className="ml-1 h-4 w-4" />
@@ -229,7 +229,7 @@ export default function CareerSection() {
               setEnrollSource("Java Course Page - Career Section - Download Resume Template");
               setIsEnrollModalOpen(true);
             }}
-            className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-50"
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-50"
           >
             Download Resume Template
           </button>

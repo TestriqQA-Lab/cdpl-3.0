@@ -10,9 +10,18 @@ interface CareerSessionModalProps {
     onClose: () => void;
     source?: string;
     courseName?: string;
+    title?: string;
+    subtitle?: string;
 }
 
-export default function CareerSessionModal({ isOpen, onClose, source, courseName = "QA" }: CareerSessionModalProps) {
+export default function CareerSessionModal({
+    isOpen,
+    onClose,
+    source,
+    courseName = "QA",
+    title = "Get a Free Career Session",
+    subtitle
+}: CareerSessionModalProps) {
     // Close on escape key
     useEffect(() => {
         const handleEscape = (e: KeyboardEvent) => {
@@ -67,8 +76,8 @@ export default function CareerSessionModal({ isOpen, onClose, source, courseName
                             <LeadForm
                                 variant="default"
                                 className="shadow-2xl border-0"
-                                title="Get a Free Career Session"
-                                subtitle={`Speak with our career counselors to plan your ${courseName} journey.`}
+                                title={title}
+                                subtitle={subtitle || `Speak with our career counselors to plan your ${courseName} journey.`}
                                 source={source}
                             />
                         </motion.div>
