@@ -3,7 +3,7 @@
 // Client component — clean, modern CTA with subtle futuristic accents + SEO.
 
 import { useState } from "react";
-import { Phone, Mail, FileText, MessageCircle, CheckCircle } from "lucide-react";
+import { Phone, FileText, MessageCircle, CheckCircle } from "lucide-react";
 import Link from "next/link";
 import SyllabusDownloadModal from "../SyllabusDownloadModal";
 import EnrollModal from "../EnrollModal";

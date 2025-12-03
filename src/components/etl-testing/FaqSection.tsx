@@ -1,7 +1,6 @@
 'use client';
 import { useState } from 'react';
 import { ChevronDown, HelpCircle, ShieldCheck, Clock, Award } from 'lucide-react';
-import Link from 'next/link';
 import { ETL_TESTING_FAQS } from '@/data/etlTestingData';
 
 // Distinct, non-repeating light accents (no heavy gradients)

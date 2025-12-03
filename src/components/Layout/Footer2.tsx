@@ -70,10 +70,10 @@ const Footer: React.FC = () => {
                   <Phone className="h-5 w-5 text-orange-500 mt-0.5" aria-hidden="true" />
                   <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2">
                     <Link
-                      href="tel:+9178883383788"
+                      href="tel:+917888383788"
                       className="hover:text-orange-600 transition-colors"
                     >
-                      +91 788-833-838-788
+                      +91 78883 83788
                     </Link>
                     <span className="hidden sm:inline text-slate-300">|</span>
                     <Link

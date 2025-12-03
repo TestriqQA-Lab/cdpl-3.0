@@ -12,7 +12,6 @@ import {
   CloudCog,     // AWS SageMaker
   Rocket,
 } from "lucide-react";
-import Link from "next/link";
 import { useState } from "react";
 import EnrollModal from "../EnrollModal";
 import CareerSessionModal from "../CareerSessionModal";

@@ -1,17 +1,11 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
 import CareerSessionModal from "../CareerSessionModal";
 
-// ... (keep Step type and STEPS array)
 
 export default function CareerRoadmapSection() {
   const [isCareerModalOpen, setIsCareerModalOpen] = useState(false);
   const courseName = "Advanced Data Science and Machine Learning Masterclass";
-
-  const subtitle =
-    "Follow these four proven steps to go from learner to job-ready Data Science professional with a portfolio recruiters trust.";
-
   return (
     <section
       id="career-roadmap"
@@ -51,13 +45,3 @@ export default function CareerRoadmapSection() {
   );
 }
 
-/* ---------- Subcomponent ---------- */
-function KPI({ label, value, note }: { label: string; value: string; note: string }) {
-  return (
-    <div className="rounded-xl border border-slate-200 bg-white/80 p-4 shadow-[0_1px_0_0_rgba(15,23,42,0.04)] backdrop-blur">
-      <div className="text-[11px] font-semibold text-slate-600">{label}</div>
-      <div className="mt-1 text-2xl font-bold tracking-tight text-slate-900">{value}</div>
-      <div className="mt-0.5 text-xs text-slate-500">{note}</div>
-    </div>
-  );
-}

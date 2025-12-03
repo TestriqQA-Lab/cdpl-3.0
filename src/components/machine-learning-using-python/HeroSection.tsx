@@ -23,11 +23,6 @@ export default function HeroSection() {
     const [isCareerOpen, setIsCareerOpen] = useState(false);
     const courseName = "Machine Learning Algorithms using python Programming";
 
-    const scrollToForm = () => {
-        const formSection = document.getElementById("enrollment-form");
-        formSection?.scrollIntoView({ behavior: "smooth" });
-    };
-
     const breadcrumbs = [
         { label: "Home", href: "/" },
         { label: "Courses", href: "/courses" },

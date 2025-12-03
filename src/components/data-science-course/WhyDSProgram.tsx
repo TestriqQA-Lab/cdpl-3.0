@@ -2,12 +2,7 @@
 "use client";
 
 import {
-    Brain,
-    Layers,
-    LineChart,
-    Cpu,
-    Gauge,
-    ShieldCheck,
+
     FlaskConical,
     Cloud,
     BarChart3,
@@ -23,71 +18,6 @@ export default function WhyDSProgram() {
     const [isEnrollOpen, setIsEnrollOpen] = useState(false);
     const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
     const courseName = "Advanced Data Science and Machine Learning Masterclass";
-
-    const featureChips = [
-        { label: "200 Hours", color: "bg-indigo-600 text-white" },
-        { label: "Hands-On Projects", color: "bg-emerald-600 text-white" },
-        { label: "Expert Faculty", color: "bg-amber-500 text-gray-900" },
-        { label: "Prior Exp Helpful", color: "bg-sky-600 text-white" },
-        { label: "100% Job-Ready", color: "bg-rose-600 text-white" },
-    ];
-
-    const outcomes = [
-        {
-            icon: Layers,
-            iconColor: "text-violet-700",
-            iconBg: "bg-violet-50",
-            border: "border-violet-200",
-            title: "Data Wrangling & Feature Engineering",
-            text:
-                "Build reliable pipelines with pandas, Polars & SQL. Encode, scale, and select features with reproducible notebooks.",
-        },
-        {
-            icon: LineChart,
-            iconColor: "text-emerald-700",
-            iconBg: "bg-emerald-50",
-            border: "border-emerald-200",
-            title: "Classical ML Done Right",
-            text:
-                "Model selection with scikit-learn, cross-validation, hyper-parameter tuning, and leakage-free evaluation.",
-        },
-        {
-            icon: Brain,
-            iconColor: "text-indigo-700",
-            iconBg: "bg-indigo-50",
-            border: "border-indigo-200",
-            title: "Deep Learning Foundations",
-            text:
-                "Neural networks, CNNs/RNNs, transfer learning and modern tooling with TensorFlow/Keras & PyTorch basics.",
-        },
-        {
-            icon: Cpu,
-            iconColor: "text-amber-700",
-            iconBg: "bg-amber-50",
-            border: "border-amber-200",
-            title: "MLOps & Deployment",
-            text:
-                "Package models with FastAPI, containerize with Docker, add CI/CD, and deploy to cloud with monitoring.",
-        },
-        {
-            icon: Gauge,
-            iconColor: "text-cyan-700",
-            iconBg: "bg-cyan-50",
-            border: "border-cyan-200",
-            title: "Model Monitoring & Drift",
-            text:
-                "Track performance, data drift and cost; add alerts and retraining triggers for production reliability.",
-        },
-        {
-            icon: ShieldCheck,
-            iconColor: "text-lime-700",
-            iconBg: "bg-lime-50",
-            border: "border-lime-200",
-            title: "Responsible & Secure AI",
-            text:
-                "Bias checks, documentation, and governance so models are ethical, explainable, and audit-ready.",
-        },
-    ];
 
     const bullets = [
         {

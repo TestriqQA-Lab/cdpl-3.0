@@ -2,8 +2,6 @@
 // Server component — modern, accessible FAQ with subtle futuristic accents + SEO (DS & AI edition).
 
 "use client";
-
-import Link from "next/link";
 import { useState } from "react";
 import EnrollModal from "../EnrollModal";
 import SyllabusDownloadModal from "../SyllabusDownloadModal";

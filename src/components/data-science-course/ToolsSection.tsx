@@ -2,20 +2,10 @@
 import type React from "react";
 import { useState } from "react";
 import CareerSessionModal from "../CareerSessionModal";
-import {
-  Code2,
-  // ... (keep other imports)
-  Rocket,
-} from "lucide-react";
-
-// ... (keep types and TOOLS array)
 
 export default function ToolsSection() {
   const [isCareerModalOpen, setIsCareerModalOpen] = useState(false);
   const courseName = "Advanced Data Science and Machine Learning Masterclass";
-
-  const seoKeywords =
-    "data science tools with icons, machine learning stack icons, python numpy pandas scikit-learn icons, pytorch tensorflow icons, spark airflow sql, aws cloud mlops, data visualization matplotlib seaborn";
 
   return (
     <section id="tools" aria-labelledby="tools-heading" className="relative py-6 md:py-10 bg-white">

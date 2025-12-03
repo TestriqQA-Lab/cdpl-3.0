@@ -1,9 +1,5 @@
 "use client";
-// components/sections/WhyPythonProgram.tsx
-// Server component — sleek, SEO-optimized, slightly futuristic, fully responsive.
-// Unique accent colors per chip (no repeats), minimal/non-distracting visuals.
 
-import Link from "next/link";
 import { useState } from "react";
 import EnrollModal from "../EnrollModal";
 import SyllabusDownloadModal from "../SyllabusDownloadModal";

@@ -2,7 +2,6 @@
 
 // src/components/FaqSection.tsx
 import React, { useState } from "react";
-import Link from "next/link";
 import { content } from "@/components/data-visualization-in-r-programming/data/content";
 import { ChevronDown, HelpCircle, CloudDownload } from "lucide-react";
 import EnrollModal from "../EnrollModal";
