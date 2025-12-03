@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { faqs } from '@/components/software-testing-course/data/data';
 
@@ -15,35 +15,43 @@ export default function FAQSection() {
                     Frequently Asked Questions
                 </h2>
 
-                <div className="max-w-4xl mx-auto space-y-4">
-                    {faqs.map((faq, i) => (
-                        <motion.div
+                <div className="max-w-4xl mx-auto space-y-6">
+                    {faqs?.map((faq, i) => (
+                        <div
                             key={i}
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                            className="bg-white rounded-xl shadow-md overflow-hidden"
+                            className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden"
                         >
                             <button
                                 onClick={() => setActiveFAQ(activeFAQ === i ? null : i)}
-                                className="w-full text-left p-6 flex justify-between items-center hover:bg-orange-50 transition"
+                                className="w-full text-left p-6 flex justify-between items-center hover:bg-orange-50 transition-colors"
                             >
                                 <span className="font-semibold text-lg">{faq.q}</span>
                                 <ChevronDown
-                                    className={`w-6 h-6 transition-transform ${activeFAQ === i ? 'rotate-180' : ''}`}
+                                    className={`w-6 h-6 transition-transform duration-300 ${activeFAQ === i ? 'rotate-180' : ''
+                                        }`}
                                 />
                             </button>
-                            {activeFAQ === i && (
-                                <motion.div
-                                    initial={{ height: 0 }}
-                                    animate={{ height: 'auto' }}
-                                    exit={{ height: 0 }}
-                                    className="px-6 pb-6 text-gray-600"
-                                >
-                                    {faq.a}
-                                </motion.div>
-                            )}
-                        </motion.div>
+
+                            {/* AnimatePresence + layout for smooth height animation */}
+                            <AnimatePresence initial={false}>
+                                {activeFAQ === i && (
+                                    <motion.div
+                                        key="content"
+                                        layout
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ opacity: { duration: 0.24, ease: 'easeInOut' }, layout: { duration: 0.32, ease: 'easeInOut' } }}
+                                        className="overflow-hidden"
+                                    >
+                                        {/* inner element also uses layout so Framer can compute the size smoothly */}
+                                        <motion.div layout className="px-6 pb-6 text-gray-600 leading-relaxed">
+                                            {faq.a}
+                                        </motion.div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
                     ))}
                 </div>
             </div>
