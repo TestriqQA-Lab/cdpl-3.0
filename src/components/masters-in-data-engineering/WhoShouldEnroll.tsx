@@ -1,9 +1,9 @@
-// src/components/data-analytics-bi-bigdata/WhoShouldEnroll.tsx
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { WhoShouldEnrollItem } from "./types";
-import { User, GraduationCap, RefreshCw, Briefcase, CheckCircle } from "lucide-react";
+import { User, GraduationCap, RefreshCw, Briefcase, CheckCircle, ArrowRight } from "lucide-react";
+import EnrollModal from "../EnrollModal";
 
 const enrollmentCriteria: WhoShouldEnrollItem[] = [
   {
@@ -122,6 +122,9 @@ const successFactors = [
 ];
 
 const WhoShouldEnroll: React.FC = () => {
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const courseName = "Data Analytics with BI & Big Data Engineering Master Program";
+
   return (
     <section className="py-16 md:py-20 bg-gradient-to-b from-white to-slate-50">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -221,7 +224,7 @@ const WhoShouldEnroll: React.FC = () => {
             Ideal for learners aiming for{" "}
             <strong>Business Intelligence, Data Analytics, and Big Data Engineering</strong>{" "}
             careers with technologies like <em>SQL, Python, Power BI, Tableau,
-            Hadoop, Spark, Databricks, and cloud platforms</em>.
+              Hadoop, Spark, Databricks, and cloud platforms</em>.
           </p>
         </div>
 
@@ -252,7 +255,25 @@ const WhoShouldEnroll: React.FC = () => {
             changers entering the data field.
           </p>
         </div>
+
+        {/* CTA */}
+        <div className="mt-16 text-center">
+          <button
+            onClick={() => setIsEnrollOpen(true)}
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-teal-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all hover:bg-teal-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-teal-300 cursor-pointer"
+          >
+            Check Your Eligibility
+            <ArrowRight className="h-5 w-5" />
+          </button>
+        </div>
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="Data Engineering Course Page - Who Should Enroll - Check Eligibility"
+        courseName={courseName}
+      />
     </section>
   );
 };

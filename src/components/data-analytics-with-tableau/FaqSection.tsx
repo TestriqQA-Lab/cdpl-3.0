@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 
 import {
     Accordion,
@@ -7,6 +8,7 @@ import {
     AccordionTrigger,
 } from "@/components/data-analytics-with-tableau/ui/accordion";
 import Link from "next/link";
+import EnrollModal from "../EnrollModal";
 
 const faqData = [
     {
@@ -84,6 +86,9 @@ const faqData = [
 ];
 
 export default function FaqSection() {
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const courseName = "Data Analytics & Visualization with Tableau";
+
     return (
         <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
             <div className="max-w-4xl mx-auto">
@@ -181,11 +186,21 @@ export default function FaqSection() {
                     <p className="text-gray-600 text-lg mb-6">
                         Ready to start your Tableau learning journey? Enroll now and get started!
                     </p>
-                    <Link href="contact-us" className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block">
+                    <button
+                        onClick={() => setIsEnrollOpen(true)}
+                        className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block cursor-pointer"
+                    >
                         Enroll Now & Get Free Consultation →
-                    </Link>
+                    </button>
                 </div>
             </div>
+
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="Tableau Course Page - Faq Section - Enroll Now"
+                courseName={courseName}
+            />
         </section>
     );
 }

@@ -1,7 +1,7 @@
-// components/powerbi/ToolsSection.tsx
 "use client";
-
-import React from "react";
+// components/powerbi/ToolsSection.tsx
+import React, { useState } from "react";
+import EnrollModal from "../EnrollModal";
 
 type ColorVariant = "blue" | "orange" | "green" | "purple" | "pink" | "indigo";
 
@@ -55,6 +55,9 @@ const ToolCard: React.FC<ToolCardProps> = ({ title, description, emoji, color })
 };
 
 const ToolsSection: React.FC = () => {
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const courseName = "Data Analytics & Visualization with Power BI";
+
   const tools: ToolCardProps[] = [
     {
       title: "Power BI Desktop",
@@ -120,7 +123,24 @@ const ToolsSection: React.FC = () => {
             <ToolCard key={tool.title} {...tool} />
           ))}
         </div>
+
+        {/* CTA */}
+        <div className="mt-16 text-center">
+          <button
+            onClick={() => setIsEnrollOpen(true)}
+            className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block cursor-pointer"
+          >
+            Master These Tools
+          </button>
+        </div>
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="Power BI Course Page - Tools Section - Master Tools"
+        courseName={courseName}
+      />
     </section>
   );
 };

@@ -1,5 +1,6 @@
+"use client";
 // components/powerbi/StatsSection.tsx
-import React from "react";
+import React, { useState } from "react";
 import {
   DollarSign,
   Briefcase,
@@ -7,6 +8,7 @@ import {
   Zap,
   type LucideIcon,
 } from "lucide-react";
+import CareerSessionModal from "../CareerSessionModal";
 
 interface StatCardProps {
   value: string;
@@ -42,6 +44,9 @@ const StatCard: React.FC<StatCardProps> = ({ value, label, icon: Icon, color }) 
 };
 
 const StatsSection: React.FC = () => {
+  const [isCareerSessionOpen, setIsCareerSessionOpen] = useState(false);
+  const courseName = "Data Analytics & Visualization with Power BI";
+
   const statsData: StatCardProps[] = [
     {
       value: "101,000+",
@@ -90,7 +95,24 @@ const StatsSection: React.FC = () => {
             <StatCard key={index} {...stat} />
           ))}
         </div>
+
+        {/* CTA */}
+        <div className="mt-16 text-center">
+          <button
+            onClick={() => setIsCareerSessionOpen(true)}
+            className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block cursor-pointer"
+          >
+            Book a Free Career Session
+          </button>
+        </div>
       </div>
+
+      <CareerSessionModal
+        isOpen={isCareerSessionOpen}
+        onClose={() => setIsCareerSessionOpen(false)}
+        source="Power BI Course Page - Stats Section - Career Session"
+        courseName={courseName}
+      />
     </section>
   );
 };

@@ -1,5 +1,6 @@
-import Link from "next/link";
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import EnrollModal from "../EnrollModal";
 
 const targetAudience = [
     {
@@ -39,6 +40,9 @@ const targetAudience = [
 
 
 export default function WhoShouldEnroll() {
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const courseName = "Data Analytics & Visualization with Tableau";
+
     return (
         <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white via-blue-50 to-white">
             <div className="max-w-7xl mx-auto">
@@ -250,11 +254,21 @@ export default function WhoShouldEnroll() {
                     <p className="text-gray-600 text-lg mb-6">
                         If you match any of the above profiles, this course is perfect for you!
                     </p>
-                    <Link href="contact-us" className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block">
+                    <button
+                        onClick={() => setIsEnrollOpen(true)}
+                        className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block cursor-pointer"
+                    >
                         Check Your Eligibility and Enroll
-                    </Link>
+                    </button>
                 </div>
             </div>
+
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="Tableau Course Page - Who Should Enroll Section - Enroll Now"
+                courseName={courseName}
+            />
         </section>
     );
 }

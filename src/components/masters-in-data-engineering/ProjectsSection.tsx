@@ -1,7 +1,6 @@
-// src/components/data-analytics-bi-bigdata/ProjectsSection.tsx
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { ProjectItem } from "./types";
 import {
   Database,
@@ -10,7 +9,9 @@ import {
   BarChart3,
   Zap,
   Users,
+  Download,
 } from "lucide-react";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
 
 const projectsData: ProjectItem[] = [
   {
@@ -90,6 +91,9 @@ const domains = [
 ];
 
 const ProjectsSection: React.FC = () => {
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+  const courseName = "Data Analytics with BI & Big Data Engineering Master Program";
+
   return (
     <section className="py-16 md:py-20 bg-white">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -248,7 +252,25 @@ const ProjectsSection: React.FC = () => {
             Engineering</strong> careers with <strong>job-oriented, real-time
               projects</strong>.
         </p>
+
+        {/* CTA */}
+        <div className="mt-16 text-center">
+          <button
+            onClick={() => setIsSyllabusOpen(true)}
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-orange-600 px-6 py-3 text-base font-semibold text-white shadow-lg transition-all hover:bg-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300 cursor-pointer"
+          >
+            <Download className="h-5 w-5" />
+            Download Project Syllabus
+          </button>
+        </div>
       </div>
+
+      <SyllabusDownloadModal
+        isOpen={isSyllabusOpen}
+        onClose={() => setIsSyllabusOpen(false)}
+        source="Data Engineering Course Page - Projects Section - Download Syllabus"
+        courseName={courseName}
+      />
     </section>
   );
 };

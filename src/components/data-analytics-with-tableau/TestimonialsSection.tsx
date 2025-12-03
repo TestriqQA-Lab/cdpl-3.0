@@ -1,11 +1,11 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import ReviewsMarquee from "../sections/ReviewMarque";
-import Link from "next/link";
-
-
-
+import EnrollModal from "../EnrollModal";
 
 export default function TestimonialsSection() {
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const courseName = "Data Analytics & Visualization with Tableau";
 
     return (
         <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-white">
@@ -63,11 +63,21 @@ export default function TestimonialsSection() {
                     <p className="text-gray-600 text-lg mb-6">
                         Join hundreds of successful students who have transformed their careers with our Tableau training
                     </p>
-                    <Link href="contact-us" className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block">
+                    <button
+                        onClick={() => setIsEnrollOpen(true)}
+                        className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block cursor-pointer"
+                    >
                         Start Your Success Story →
-                    </Link>
+                    </button>
                 </div>
             </div>
+
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="Tableau Course Page - Testimonials Section - Enroll Now"
+                courseName={courseName}
+            />
         </section>
     );
 }
