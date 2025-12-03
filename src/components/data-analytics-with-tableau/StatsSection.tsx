@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import CareerSessionModal from "../CareerSessionModal";
 
 
 const statsData = [
@@ -47,6 +49,9 @@ const statsData = [
 
 
 export default function StatsSection() {
+    const [isCareerSessionOpen, setIsCareerSessionOpen] = useState(false);
+    const courseName = "Data Analytics & Visualization with Tableau";
+
     return (
         <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-gray-50 to-white">
             <div className="max-w-7xl mx-auto">
@@ -95,13 +100,28 @@ export default function StatsSection() {
                     <p className="text-gray-600 text-lg mb-6">
                         These statistics show the incredible demand for Tableau professionals in today&apos;s job market.
                     </p>
-                    <div className="inline-block bg-orange-50 border-2 border-orange-200 rounded-lg p-6">
+                    <div className="inline-block bg-orange-50 border-2 border-orange-200 rounded-lg p-6 mb-6">
                         <p className="text-gray-700">
                             <span className="font-bold text-orange-600">Join 500+ successful graduates</span> who have built rewarding careers in data analytics
                         </p>
                     </div>
+                    <div>
+                        <button
+                            onClick={() => setIsCareerSessionOpen(true)}
+                            className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block cursor-pointer"
+                        >
+                            Book a Free Career Session
+                        </button>
+                    </div>
                 </div>
             </div>
+
+            <CareerSessionModal
+                isOpen={isCareerSessionOpen}
+                onClose={() => setIsCareerSessionOpen(false)}
+                source="Tableau Course Page - Stats Section - Career Session"
+                courseName={courseName}
+            />
         </section>
     );
 }

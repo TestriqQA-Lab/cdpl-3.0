@@ -1,3 +1,4 @@
+"use client";
 import {
     BarChart3,
     Briefcase,
@@ -8,8 +9,8 @@ import {
     Target,
     Handshake,
 } from "lucide-react";
-import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import EnrollModal from "../EnrollModal";
 
 const iconMap = {
     BarChart3,
@@ -77,8 +78,8 @@ export const advantages = [
 ];
 
 export default function WhyVisualizationProgram() {
-    // --- SEO: FAQPage structured data for rich results (non-visual, no functionality change) ---
-
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const courseName = "Advanced Excel for Data Analytics & Visualization";
 
     return (
         <section className="relative py-20 bg-gradient-to-b from-slate-50 to-white overflow-hidden">
@@ -230,8 +231,8 @@ export default function WhyVisualizationProgram() {
                         <strong>MIS Executive</strong>, and <strong>Business Analyst</strong> roles.
                     </p>
 
-                    <Link
-                        href="contact-us"
+                    <button
+                        onClick={() => setIsEnrollOpen(true)}
                         className="inline-flex items-center justify-center w-full sm:w-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-3.5 lg:py-4 text-sm sm:text-base lg:text-lg
     text-center font-semibold
     bg-gradient-to-r from-blue-500 to-indigo-600
@@ -241,14 +242,21 @@ export default function WhyVisualizationProgram() {
     shadow-lg hover:shadow-xl
     transition-all duration-300
     focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-indigo-500
+    cursor-pointer
   "
                     >
                         Start Your Journey Today
-                    </Link>
+                    </button>
 
                 </div>
-
             </div>
+
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="Data Analytics & Visualization Course Page - Why Section - Start Journey"
+                courseName={courseName}
+            />
         </section>
     );
 }

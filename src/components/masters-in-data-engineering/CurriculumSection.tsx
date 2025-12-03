@@ -1,7 +1,9 @@
+"use client";
 // src/components/data-analytics-bi-bigdata/CurriculumSection.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import { CurriculumModule } from './types';
-import { BarChart, Database, Code, Server, Zap, Layers } from 'lucide-react';
+import { BarChart, Database, Code, Server, Zap, Layers, Download } from 'lucide-react';
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
 
 const curriculumData: CurriculumModule[] = [
   {
@@ -58,6 +60,9 @@ const iconMap: { [key: string]: React.ElementType } = {
 };
 
 const CurriculumSection: React.FC = () => {
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+  const courseName = "Data Analytics with BI & Big Data Engineering Master Program";
+
   return (
     <section id="curriculum" className="bg-gray-50 py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -107,7 +112,25 @@ const CurriculumSection: React.FC = () => {
             })}
           </ul>
         </div>
+
+        {/* CTA */}
+        <div className="mt-16 text-center">
+          <button
+            onClick={() => setIsSyllabusOpen(true)}
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-orange-600 px-6 py-3 text-base font-semibold text-white shadow-lg transition-all hover:bg-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300 cursor-pointer"
+          >
+            <Download className="h-5 w-5" />
+            Download Full Syllabus
+          </button>
+        </div>
       </div>
+
+      <SyllabusDownloadModal
+        isOpen={isSyllabusOpen}
+        onClose={() => setIsSyllabusOpen(false)}
+        source="Data Engineering Course Page - Curriculum Section - Download Syllabus"
+        courseName={courseName}
+      />
     </section>
   );
 };

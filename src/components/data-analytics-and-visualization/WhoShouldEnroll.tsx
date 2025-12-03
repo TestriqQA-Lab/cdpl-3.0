@@ -207,14 +207,14 @@ export default function WhoShouldEnroll() {
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <button
                             onClick={() => setIsEnrollOpen(true)}
-                            className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all hover:bg-blue-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-300"
+                            className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all hover:bg-blue-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-300 cursor-pointer"
                         >
                             Enroll Now
                             <ArrowRight className="h-5 w-5" />
                         </button>
                         <button
                             onClick={() => setIsSyllabusOpen(true)}
-                            className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-slate-200 bg-white px-8 py-4 text-lg font-semibold text-slate-700 shadow-sm transition-all hover:border-blue-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-200"
+                            className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-slate-200 bg-white px-8 py-4 text-lg font-semibold text-slate-700 shadow-sm transition-all hover:border-blue-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-200 cursor-pointer"
                         >
                             <Download className="h-5 w-5" />
                             Download Syllabus

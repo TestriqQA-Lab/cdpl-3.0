@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { FaqItem } from "./types";
 import { ChevronDown } from "lucide-react";
+import EnrollModal from "../EnrollModal";
 
 const faqData: FaqItem[] = [
   {
@@ -54,6 +55,8 @@ const categories = Array.from(
 
 const FaqSection: React.FC = () => {
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const courseName = "Data Analytics with BI & Big Data Engineering Master Program";
 
   return (
     <section className="py-16 md:py-20 bg-gradient-to-b from-white to-slate-50">
@@ -143,6 +146,12 @@ const FaqSection: React.FC = () => {
             <strong>career paths, placements, and curriculum details</strong>.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <button
+              onClick={() => setIsEnrollOpen(true)}
+              className="px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-colors cursor-pointer"
+            >
+              Enroll Now
+            </button>
             <Link
               href="tel:+917888383788"
               className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition-colors"
@@ -164,6 +173,13 @@ const FaqSection: React.FC = () => {
           </p>
         </div>
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="Data Engineering Course Page - FAQ Section - Enroll Now"
+        courseName={courseName}
+      />
     </section>
   );
 };

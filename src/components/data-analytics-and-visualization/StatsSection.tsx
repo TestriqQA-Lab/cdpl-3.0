@@ -1,5 +1,7 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { BarChart3, TrendingUp, Users, Award, Zap, Target } from "lucide-react";
+import CareerSessionModal from "../CareerSessionModal";
 
 /**
  * Enhanced, accessible, and fully responsive StatsSection.
@@ -52,7 +54,8 @@ export const stats = [
 ];
 
 export default function StatsSection() {
-
+    const [isCareerSessionOpen, setIsCareerSessionOpen] = useState(false);
+    const courseName = "Advanced Excel for Data Analytics & Visualization";
 
     const icons = [BarChart3, TrendingUp, Users, Award, Zap, Target];
 
@@ -239,7 +242,23 @@ export default function StatsSection() {
                     </div>
                 </div>
 
+                {/* CTA */}
+                <div className="mt-16 text-center">
+                    <button
+                        onClick={() => setIsCareerSessionOpen(true)}
+                        className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block cursor-pointer"
+                    >
+                        Book a Free Career Session
+                    </button>
+                </div>
             </div>
+
+            <CareerSessionModal
+                isOpen={isCareerSessionOpen}
+                onClose={() => setIsCareerSessionOpen(false)}
+                source="Data Analytics & Visualization Course Page - Stats Section - Career Session"
+                courseName={courseName}
+            />
         </section>
     );
 }

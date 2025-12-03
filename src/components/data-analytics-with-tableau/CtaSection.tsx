@@ -1,6 +1,14 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import EnrollModal from "../EnrollModal";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
 
 export default function CtaSection() {
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+
+    const courseName = "Data Analytics & Visualization with Tableau";
+
     return (
         <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-slate-800 to-slate-900">
             <div className="max-w-4xl mx-auto text-center">
@@ -43,10 +51,16 @@ export default function CtaSection() {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-                    <button className="bg-white cursor-pointer text-orange-600 font-bold py-4 px-8 rounded-lg hover:bg-gray-100 transition-all text-lg">
+                    <button
+                        onClick={() => setIsEnrollOpen(true)}
+                        className="bg-white cursor-pointer text-orange-600 font-bold py-4 px-8 rounded-lg hover:bg-gray-100 transition-all text-lg"
+                    >
                         Enroll Now & Get Started →
                     </button>
-                    <button className="border-2 border-white cursor-pointer text-white font-bold py-4 px-8 rounded-lg hover:bg-white hover:text-slate-900 hover:bg-opacity-10 transition-all text-lg">
+                    <button
+                        onClick={() => setIsSyllabusOpen(true)}
+                        className="border-2 border-white cursor-pointer text-white font-bold py-4 px-8 rounded-lg hover:bg-white hover:text-slate-900 hover:bg-opacity-10 transition-all text-lg"
+                    >
                         Download Free Syllabus
                     </button>
                 </div>
@@ -81,6 +95,19 @@ export default function CtaSection() {
                     </div>
                 </div>
             </div>
+
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="Tableau Course Page - CTA Section - Enroll Now"
+                courseName={courseName}
+            />
+            <SyllabusDownloadModal
+                isOpen={isSyllabusOpen}
+                onClose={() => setIsSyllabusOpen(false)}
+                source="Tableau Course Page - CTA Section - Download Syllabus"
+                courseName={courseName}
+            />
         </section>
     );
 }

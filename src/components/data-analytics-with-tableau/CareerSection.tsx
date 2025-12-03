@@ -1,5 +1,7 @@
-import Link from "next/link";
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import EnrollModal from "../EnrollModal";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
 
 const careerRoles = [
     {
@@ -81,6 +83,11 @@ const hiringCompanies = [
 
 
 export default function CareerSection() {
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+
+    const courseName = "Data Analytics & Visualization with Tableau";
+
     return (
         <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
             <div className="max-w-7xl mx-auto">
@@ -261,11 +268,35 @@ export default function CareerSection() {
                     <p className="text-gray-600 text-lg mb-6">
                         Ready to launch your career as a Tableau professional? Start your journey today!
                     </p>
-                    <Link href="contact-us" className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block">
-                        Enroll Now & Secure Your Future →
-                    </Link>
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <button
+                            onClick={() => setIsEnrollOpen(true)}
+                            className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block cursor-pointer"
+                        >
+                            Enroll Now & Secure Your Future →
+                        </button>
+                        <button
+                            onClick={() => setIsSyllabusOpen(true)}
+                            className="bg-white border-2 border-orange-600 text-orange-600 hover:bg-orange-50 font-bold py-3 px-8 rounded-lg transition-all inline-block cursor-pointer"
+                        >
+                            Download Syllabus
+                        </button>
+                    </div>
                 </div>
             </div>
+
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="Tableau Course Page - Career Section - Enroll Now"
+                courseName={courseName}
+            />
+            <SyllabusDownloadModal
+                isOpen={isSyllabusOpen}
+                onClose={() => setIsSyllabusOpen(false)}
+                source="Tableau Course Page - Career Section - Download Syllabus"
+                courseName={courseName}
+            />
         </section>
     );
 }

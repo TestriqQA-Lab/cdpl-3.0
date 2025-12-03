@@ -1,5 +1,7 @@
+"use client";
+import { useState } from "react";
 import { CheckCircle, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import EnrollModal from "../EnrollModal";
 
 const learningPath = [
     {
@@ -36,6 +38,9 @@ const learningPath = [
 
 
 export default function CareerRoadmapSection() {
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const courseName = "Advanced Excel for Data Analytics & Visualization";
+
     return (
         <section className="relative py-20 bg-gradient-to-b from-white to-slate-50 overflow-hidden">
             {/* Decorative background */}
@@ -244,8 +249,8 @@ export default function CareerRoadmapSection() {
                     <p className="text-lg text-slate-700 mb-6">
                         Ready to start your transformation journey?
                     </p>
-                    <Link
-                        href="/contact-us"
+                    <button
+                        onClick={() => setIsEnrollOpen(true)}
                         className="
     inline-flex items-center justify-center
     w-full sm:w-auto
@@ -258,13 +263,21 @@ export default function CareerRoadmapSection() {
     text-center
     shadow-lg hover:shadow-xl
     transition-all duration-300
+    cursor-pointer
   "
                     >
                         Begin Your Learning Path Now
-                    </Link>
+                    </button>
 
                 </div>
             </div>
+
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="Data Analytics & Visualization Course Page - Career Roadmap Section - Enroll Now"
+                courseName={courseName}
+            />
         </section>
     );
 }

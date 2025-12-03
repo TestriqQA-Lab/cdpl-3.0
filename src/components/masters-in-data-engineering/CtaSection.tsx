@@ -1,11 +1,16 @@
 "use client";
 
-// src/components/data-analytics-bi-bigdata/CtaSection.tsx
-import React from "react";
+import React, { useState } from "react";
 import { ArrowRight, Download, Phone, CheckCircle } from "lucide-react";
 import Link from "next/link";
+import EnrollModal from "../EnrollModal";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
 
 const CtaSection: React.FC = () => {
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+  const courseName = "Data Analytics with BI & Big Data Engineering Master Program";
+
   return (
     <section
       id="cta"
@@ -75,18 +80,27 @@ const CtaSection: React.FC = () => {
 
           {/* CTA Buttons (labels/content preserved, layout upgraded) */}
           <div className="flex flex-col md:flex-row gap-4 justify-center mb-10">
-            <button className="flex items-center justify-center cursor-pointer bg-teal-500 hover:bg-teal-600 text-white font-semibold px-8 py-6 text-base rounded-lg shadow-lg hover:shadow-xl transition-all">
+            <button
+              onClick={() => setIsEnrollOpen(true)}
+              className="flex items-center justify-center cursor-pointer bg-teal-500 hover:bg-teal-600 text-white font-semibold px-8 py-6 text-base rounded-lg shadow-lg hover:shadow-xl transition-all"
+            >
               Enroll Now
               <ArrowRight className="w-5 h-5 ml-2" />
             </button>
-            <button className="flex items-center justify-center cursor-pointer border-2 border-white text-white hover:bg-white/10 font-semibold px-8 py-6 text-base rounded-lg transition-all">
+            <button
+              onClick={() => setIsSyllabusOpen(true)}
+              className="flex items-center justify-center cursor-pointer border-2 border-white text-white hover:bg-white/10 font-semibold px-8 py-6 text-base rounded-lg transition-all"
+            >
               <Download className="w-5 h-5 mr-2" />
               Download Brochure
             </button>
-            <Link href="tel:+91 788-83-83-788" className="flex items-center justify-center border-2 border-teal-300 text-teal-100 hover:bg-white/10 font-semibold px-8 py-6 text-base rounded-lg transition-all">
+            <button
+              onClick={() => setIsEnrollOpen(true)}
+              className="flex items-center justify-center border-2 border-teal-300 text-teal-100 hover:bg-white/10 font-semibold px-8 py-6 text-base rounded-lg transition-all cursor-pointer"
+            >
               <Phone className="w-5 h-5 mr-2" />
               Talk to an Advisor
-            </Link>
+            </button>
           </div>
 
           {/* Limited Time Offer (SEO-friendly urgency) */}
@@ -159,6 +173,19 @@ const CtaSection: React.FC = () => {
           </p>
         </div>
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="Data Engineering Course Page - CTA Section - Enroll/Advisor"
+        courseName={courseName}
+      />
+      <SyllabusDownloadModal
+        isOpen={isSyllabusOpen}
+        onClose={() => setIsSyllabusOpen(false)}
+        source="Data Engineering Course Page - CTA Section - Download Brochure"
+        courseName={courseName}
+      />
     </section>
   );
 };

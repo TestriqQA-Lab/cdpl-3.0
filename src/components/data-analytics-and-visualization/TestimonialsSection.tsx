@@ -1,6 +1,12 @@
+"use client";
+import { useState } from "react";
 import ReviewsMarquee from "../sections/ReviewMarque";
+import EnrollModal from "../EnrollModal";
 
 export default function TestimonialsSection() {
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const courseName = "Advanced Excel for Data Analytics & Visualization";
+
     return (
         <section className="relative py-20 bg-white overflow-hidden">
             {/* Decorative background */}
@@ -40,7 +46,24 @@ export default function TestimonialsSection() {
                         <p className="text-sm text-slate-600">Within 3 months</p>
                     </div>
                 </div>
+
+                {/* CTA */}
+                <div className="mt-16 text-center">
+                    <button
+                        onClick={() => setIsEnrollOpen(true)}
+                        className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block cursor-pointer"
+                    >
+                        Join Our Success Story
+                    </button>
+                </div>
             </div>
+
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="Data Analytics & Visualization Course Page - Testimonials Section - Join Success Story"
+                courseName={courseName}
+            />
         </section>
     );
 }

@@ -1,11 +1,13 @@
+"use client";
 // components/powerbi/TestimonialsSection.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import ReviewsMarquee from '../sections/ReviewMarque';
-
+import EnrollModal from "../EnrollModal";
 
 
 const TestimonialsSection: React.FC = () => {
-
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const courseName = "Data Analytics & Visualization with Power BI";
 
   return (
     <section className="py-16 md:py-24 bg-white">
@@ -23,7 +25,24 @@ const TestimonialsSection: React.FC = () => {
         </div>
 
         <ReviewsMarquee />
+
+        {/* CTA */}
+        <div className="mt-16 text-center">
+          <button
+            onClick={() => setIsEnrollOpen(true)}
+            className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block cursor-pointer"
+          >
+            Join Our Success Story
+          </button>
+        </div>
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="Power BI Course Page - Testimonials Section - Join Success Story"
+        courseName={courseName}
+      />
     </section>
   );
 };

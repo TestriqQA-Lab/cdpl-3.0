@@ -1,8 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { StatItem } from "./types";
 import { Clock, DollarSign, TrendingUp, Award } from "lucide-react";
+import CareerSessionModal from "../CareerSessionModal";
 
 const statsData: StatItem[] = [
   { id: 1, value: "5.5", label: "Months Duration", icon: "Clock" },
@@ -90,6 +91,9 @@ const enrichedStats: EnrichedStat[] = statsData.map((stat) => {
 
 
 const StatsSection: React.FC = () => {
+  const [isCareerSessionOpen, setIsCareerSessionOpen] = useState(false);
+  const courseName = "Data Analytics with BI & Big Data Engineering Master Program";
+
   return (
     <section
       className="py-16 md:py-20 bg-gradient-to-b from-white to-slate-50"
@@ -271,7 +275,24 @@ const StatsSection: React.FC = () => {
             </div>
           </div>
         </div>
+
+        {/* CTA */}
+        <div className="mt-16 text-center">
+          <button
+            onClick={() => setIsCareerSessionOpen(true)}
+            className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block cursor-pointer"
+          >
+            Book a Free Career Session
+          </button>
+        </div>
       </div>
+
+      <CareerSessionModal
+        isOpen={isCareerSessionOpen}
+        onClose={() => setIsCareerSessionOpen(false)}
+        source="Data Engineering Course Page - Stats Section - Career Session"
+        courseName={courseName}
+      />
     </section>
   );
 };

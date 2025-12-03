@@ -1,7 +1,8 @@
 "use client";
 // components/powerbi/CurriculumSection.tsx
 import React, { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Download } from 'lucide-react';
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
 
 type ColorVariant =
   | 'blue' | 'orange' | 'green' | 'purple' | 'pink'
@@ -147,6 +148,8 @@ const modules: Module[] = [
 
 const CurriculumSection: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+  const courseName = "Data Analytics & Visualization with Power BI";
 
   const toggleModule = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -207,7 +210,25 @@ const CurriculumSection: React.FC = () => {
             );
           })}
         </div>
+
+        {/* CTA */}
+        <div className="mt-16 text-center">
+          <button
+            onClick={() => setIsSyllabusOpen(true)}
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-orange-600 px-6 py-3 text-base font-semibold text-white shadow-lg transition-all hover:bg-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300 cursor-pointer"
+          >
+            <Download className="h-5 w-5" />
+            Download Full Syllabus
+          </button>
+        </div>
       </div>
+
+      <SyllabusDownloadModal
+        isOpen={isSyllabusOpen}
+        onClose={() => setIsSyllabusOpen(false)}
+        source="Power BI Course Page - Curriculum Section - Download Syllabus"
+        courseName={courseName}
+      />
     </section>
   );
 };

@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 
 import {
     Accordion,
@@ -6,7 +7,9 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/data-analytics-with-tableau/ui/accordion";
-import Link from "next/link";
+import EnrollModal from "../EnrollModal";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
+import CareerSessionModal from "../CareerSessionModal";
 
 
 const curriculumModules = [
@@ -192,6 +195,12 @@ const curriculumModules = [
 
 
 export default function CurriculumSection() {
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+    const [isCareerSessionOpen, setIsCareerSessionOpen] = useState(false);
+
+    const courseName = "Data Analytics & Visualization with Tableau";
+
     return (
         <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 via-white to-purple-50">
             <div className="max-w-5xl mx-auto">
@@ -333,15 +342,46 @@ export default function CurriculumSection() {
                 </div>
 
                 {/* CTA */}
-                <div className="mt-12 text-center">
-                    <p className="text-gray-600 mb-6">
-                        Ready to master Tableau? Enroll now and get started with our comprehensive curriculum.
-                    </p>
-                    <Link href="contact-us" className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block">
+                <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
+                    <button
+                        onClick={() => setIsSyllabusOpen(true)}
+                        className="inline-flex items-center justify-center rounded-xl border-2 border-orange-600 bg-white px-6 py-3 text-base font-semibold text-orange-700 shadow-sm transition hover:bg-orange-50 focus:outline-none focus:ring-4 focus:ring-orange-200 cursor-pointer"
+                    >
+                        Download Detailed Syllabus (PDF)
+                    </button>
+                    <button
+                        onClick={() => setIsCareerSessionOpen(true)}
+                        className="inline-flex items-center justify-center rounded-xl border-2 border-purple-600 bg-white px-6 py-3 text-base font-semibold text-purple-700 shadow-sm transition hover:bg-purple-50 focus:outline-none focus:ring-4 focus:ring-purple-200 cursor-pointer"
+                    >
+                        Book a Career Session
+                    </button>
+                    <button
+                        onClick={() => setIsEnrollOpen(true)}
+                        className="inline-flex items-center justify-center rounded-xl bg-orange-600 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-orange-200 cursor-pointer"
+                    >
                         Enroll Now & Start Learning →
-                    </Link>
+                    </button>
                 </div>
             </div>
+
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="Tableau Course Page - Curriculum Section - Enroll Now"
+                courseName={courseName}
+            />
+            <SyllabusDownloadModal
+                isOpen={isSyllabusOpen}
+                onClose={() => setIsSyllabusOpen(false)}
+                source="Tableau Course Page - Curriculum Section - Download Syllabus"
+                courseName={courseName}
+            />
+            <CareerSessionModal
+                isOpen={isCareerSessionOpen}
+                onClose={() => setIsCareerSessionOpen(false)}
+                source="Tableau Course Page - Curriculum Section - Career Session"
+                courseName={courseName}
+            />
         </section>
     );
 }

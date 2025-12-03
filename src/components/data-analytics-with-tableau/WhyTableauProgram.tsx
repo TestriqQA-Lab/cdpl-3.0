@@ -1,5 +1,6 @@
-import React from "react";
-
+"use client";
+import React, { useState } from "react";
+import EnrollModal from "../EnrollModal";
 
 const whyProgramData = [
     {
@@ -49,6 +50,9 @@ const whyProgramData = [
 
 
 export default function WhyTableauProgram() {
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const courseName = "Data Analytics & Visualization with Tableau";
+
     return (
         <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
             <div className="max-w-7xl mx-auto">
@@ -152,7 +156,24 @@ export default function WhyTableauProgram() {
                         </p>
                     </div>
                 </div>
+
+                {/* CTA */}
+                <div className="mt-16 text-center">
+                    <button
+                        onClick={() => setIsEnrollOpen(true)}
+                        className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block cursor-pointer"
+                    >
+                        Enroll Now
+                    </button>
+                </div>
             </div>
+
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="Tableau Course Page - Why Program Section - Enroll Now"
+                courseName={courseName}
+            />
         </section>
     );
 }

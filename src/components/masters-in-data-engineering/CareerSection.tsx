@@ -1,9 +1,9 @@
-// src/components/data-analytics-bi-bigdata/CareerSection.tsx
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { CareerRole, HiringCompany } from "./types";
 import { Briefcase, DollarSign, Target, TrendingUp, Users } from "lucide-react";
+import CareerSessionModal from "../CareerSessionModal";
 
 const careerRoles: CareerRole[] = [
   {
@@ -38,6 +38,9 @@ const hiringCompanies: HiringCompany[] = [
 ];
 
 const CareerSection: React.FC = () => {
+  const [isCareerSessionOpen, setIsCareerSessionOpen] = useState(false);
+  const courseName = "Data Analytics with BI & Big Data Engineering Master Program";
+
   return (
     <section className="py-16 md:py-20 bg-white">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -179,7 +182,24 @@ const CareerSection: React.FC = () => {
               solutions</strong>.
           </p>
         </div>
+
+        {/* CTA */}
+        <div className="mt-16 text-center">
+          <button
+            onClick={() => setIsCareerSessionOpen(true)}
+            className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block cursor-pointer"
+          >
+            Book a Free Career Session
+          </button>
+        </div>
       </div>
+
+      <CareerSessionModal
+        isOpen={isCareerSessionOpen}
+        onClose={() => setIsCareerSessionOpen(false)}
+        source="Data Engineering Course Page - Career Section - Career Session"
+        courseName={courseName}
+      />
     </section>
   );
 };

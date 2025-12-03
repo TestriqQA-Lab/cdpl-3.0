@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { ChevronDown, HelpCircle } from "lucide-react";
 import Link from "next/link";
+import EnrollModal from "../EnrollModal";
 
 
 const faqs = [
@@ -42,6 +43,8 @@ const faqs = [
 
 export default function FaqSection() {
     const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const courseName = "Advanced Excel for Data Analytics & Visualization";
 
     return (
         <section className="relative py-10 md:py-20 bg-white overflow-hidden">
@@ -107,15 +110,25 @@ export default function FaqSection() {
                         Our team is here to help! Reach out to us and we&apos;ll provide personalized guidance for your learning journey.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Link href="contact-us" className="bg-white text-blue-600 font-semibold py-3 px-8 rounded-lg hover:bg-blue-50 transition-all duration-300">
+                        <button
+                            onClick={() => setIsEnrollOpen(true)}
+                            className="bg-white text-blue-600 font-semibold py-3 px-8 rounded-lg hover:bg-blue-50 transition-all duration-300 cursor-pointer"
+                        >
                             Contact Us
-                        </Link>
+                        </button>
                         <Link href="https://calendar.app.google/tvh9dsXZsX9BujRR8" className="border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white/10 transition-all duration-300">
                             Schedule a Call
                         </Link>
                     </div>
                 </div>
             </div>
+
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="Data Analytics & Visualization Course Page - Faq Section - Contact Us"
+                courseName={courseName}
+            />
         </section>
     );
 }
