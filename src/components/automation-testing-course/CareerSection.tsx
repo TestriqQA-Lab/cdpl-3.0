@@ -153,7 +153,7 @@ export default function CareerSection() {
         >
           <button
             onClick={() => setIsCareerModalOpen(true)}
-            className="inline-flex items-center gap-2 rounded-xl border border-indigo-600 bg-indigo-600 px-7 py-3 text-sm sm:text-base font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200"
+            className="cursor-pointer inline-flex items-center gap-2 rounded-xl border border-indigo-600 bg-indigo-600 px-7 py-3 text-sm sm:text-base font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200"
             aria-label="Talk to a mentor and join the program"
           >
             <Sparkles className="h-5 w-5" />

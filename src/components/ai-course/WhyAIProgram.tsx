@@ -14,10 +14,16 @@ import {
   GitBranch,
   Rocket,
   Sparkles,
+  Download,
 } from "lucide-react";
-import Link from "next/link";
+import { useState } from "react";
+import EnrollModal from "../EnrollModal";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
 
 export default function WhyAIProgram() {
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+  const courseName = "Comprehensive Data Science and AI - Master Program";
 
 
   const featureChips = [
@@ -229,23 +235,45 @@ export default function WhyAIProgram() {
               </div>
             </dl>
 
-            <div className="mt-6 border-t border-gray-200 pt-6">
-              <Link
-                href="contact-us"
+            <div className="mt-6 border-t border-gray-200 pt-6 flex flex-col gap-3">
+              <button
+                onClick={() => setIsEnrollOpen(true)}
                 className="inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold shadow-sm
-                           bg-slate-900 text-white hover:translate-y-[-1px] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
+                           bg-slate-900 text-white hover:translate-y-[-1px] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300 cursor-pointer"
                 aria-label="Apply now for the Comprehensive Data Science & AI Master Program"
               >
                 Apply Now
                 <Rocket className="w-4 h-4" />
-              </Link>
-              <p className="mt-3 text-xs text-gray-600">
+              </button>
+              <button
+                onClick={() => setIsSyllabusOpen(true)}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold shadow-sm
+                           border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200 cursor-pointer"
+                aria-label="Download detailed syllabus"
+              >
+                Download Syllabus (PDF)
+                <Download className="w-4 h-4" />
+              </button>
+              <p className="mt-1 text-xs text-center text-gray-600">
                 Get the full syllabus and a readiness checklist to personalize your learning path.
               </p>
             </div>
           </aside>
         </div>
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="Comprehensive Data Science & AI - Why Program - Apply Now"
+        courseName={courseName}
+      />
+      <SyllabusDownloadModal
+        isOpen={isSyllabusOpen}
+        onClose={() => setIsSyllabusOpen(false)}
+        source="Comprehensive Data Science & AI - Why Program - Download Syllabus"
+        courseName={courseName}
+      />
     </section>
   );
 }

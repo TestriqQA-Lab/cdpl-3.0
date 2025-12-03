@@ -2,7 +2,6 @@
 import { useState, type KeyboardEvent } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
 import { ADVANCED_TESTING_FAQS } from '@/data/advancedTestingData';
 
 const accents = [

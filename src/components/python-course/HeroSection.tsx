@@ -15,12 +15,16 @@ import {
     Cpu,
     Home,
     ChevronRight,
+    CloudDownload,
+    ArrowDownNarrowWide,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import IconCard from "@/components/ui/IconCard";
 import LeadForm from "../forms/ApiCourseLeadForm";
 import Link from "next/link";
 import { useState } from "react";
 import EnrollModal from "@/components/EnrollModal";
+import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
 
 
 const features = [
@@ -60,6 +64,7 @@ const features = [
 
 export default function HeroSection() {
     const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+    const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
 
 
     const breadcrumbs = [
@@ -107,7 +112,12 @@ export default function HeroSection() {
 
                 <div className="grid items-start gap-10 md:grid-cols-12">
                     {/* Left column: copy (mirrors your API-Testing hero layout) */}
-                    <div className="md:col-span-7 lg:col-span-8">
+                    <motion.div
+                        initial={{ opacity: 0, y: 18 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, ease: 'easeOut' }}
+                        className="md:col-span-7 lg:col-span-8"
+                    >
                         {/* Top identity strip + micro-badges */}
                         <div className="mb-5 hidden lg:flex flex-wrap items-center gap-2">
                             <span className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-3 py-1.5 text-xs font-semibold text-amber-900">
@@ -153,21 +163,32 @@ export default function HeroSection() {
                         <div className="mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
                             <button
                                 onClick={() => setIsEnrollModalOpen(true)}
-                                className="group inline-flex items-center justify-center rounded-xl border border-teal-600 bg-teal-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-teal-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-teal-200"
+                                className="cursor-pointer group inline-flex items-center justify-center rounded-xl border border-teal-600 bg-teal-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-teal-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-teal-200"
                                 aria-label="Enroll now in Python program"
                             >
                                 Enroll Now
                                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                             </button>
+
+                            <button
+                                onClick={() => setIsSyllabusModalOpen(true)}
+                                className="cursor-pointer group inline-flex items-center justify-center rounded-xl border border-teal-600 bg-teal-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-teal-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-teal-200"
+                                aria-label="Download Python Syllabus"
+                            >
+                                Download Syllabus
+                                <CloudDownload className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
+                            </button>
+
                             <button
                                 onClick={(e) => {
                                     e.preventDefault();
                                     document.getElementById('curriculum')?.scrollIntoView({ behavior: 'smooth' });
                                 }}
-                                className="inline-flex items-center justify-center rounded-xl border border-sky-300 bg-white px-6 py-3 text-base font-semibold text-sky-700 shadow-sm transition hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-200"
+                                className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-sky-300 bg-white px-6 py-3 text-base font-semibold text-sky-700 shadow-sm transition hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-200"
                                 aria-label="View full Python curriculum"
                             >
                                 View Curriculum
+                                <ArrowDownNarrowWide className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
                             </button>
                         </div>
 
@@ -201,14 +222,17 @@ export default function HeroSection() {
                                 />
                             ))}
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Right column: Desktop form (sticky) */}
-                    <aside className="hidden md:col-span-5 lg:col-span-4 md:block">
-                        <div className="sticky top-20">
-                            <LeadForm variant="elevated" source="Python Course Page - Hero Section" />
-                        </div>
-                    </aside>
+                    <motion.aside
+                        initial={{ opacity: 0, y: 18 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.12, ease: 'easeOut' }}
+                        className="hidden md:col-span-5 lg:col-span-4 md:block"
+                    >
+                        <LeadForm variant="elevated" source="Python Course Page - Hero Section" />
+                    </motion.aside>
                 </div>
 
                 {/* Social proof strip (matches your pattern) */}
@@ -227,6 +251,13 @@ export default function HeroSection() {
                 onClose={() => setIsEnrollModalOpen(false)}
                 courseName="Python Programming"
                 source="Python Course Page - Hero Section - Enroll Now"
+            />
+
+            <SyllabusDownloadModal
+                isOpen={isSyllabusModalOpen}
+                onClose={() => setIsSyllabusModalOpen(false)}
+                courseName="Python Programming"
+                source="Python Course Page - Hero Section - Syllabus Download"
             />
 
         </section>

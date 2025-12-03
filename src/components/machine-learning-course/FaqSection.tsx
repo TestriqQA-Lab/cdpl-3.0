@@ -1,6 +1,4 @@
 "use client";
-
-import Link from "next/link";
 import { useState } from "react";
 import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
 import EnrollModal from "@/components/EnrollModal";

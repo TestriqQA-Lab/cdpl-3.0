@@ -11,7 +11,6 @@ import {
   Cpu,
   LineChart,
 } from "lucide-react";
-import Link from "next/link";
 import { useState } from "react";
 import EnrollModal from "@/components/EnrollModal";
 import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";

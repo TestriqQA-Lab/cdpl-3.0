@@ -1,6 +1,8 @@
 "use client";
-import { ChevronDown, HelpCircle } from "lucide-react";
+import { ChevronDown, HelpCircle, Download } from "lucide-react";
 import { useState } from "react";
+import EnrollModal from "../EnrollModal";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
 
 const faqs = [
   {
@@ -70,6 +72,9 @@ const categories = ["All", ...Array.from(new Set(faqs.map(faq => faq.category)))
 export default function FaqSection() {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(0);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+  const courseName = "Machine Learning Algorithms using python Programming";
 
   const filteredFaqs = selectedCategory === "All"
     ? faqs
@@ -94,11 +99,10 @@ export default function FaqSection() {
             <button
               key={index}
               onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 ${
-                selectedCategory === category
+              className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 ${selectedCategory === category
                   ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg"
                   : "bg-white border border-slate-200 text-slate-700 hover:border-slate-300"
-              }`}
+                }`}
             >
               {category}
             </button>
@@ -124,9 +128,8 @@ export default function FaqSection() {
                   </h3>
                 </div>
                 <ChevronDown
-                  className={`w-5 h-5 text-slate-600 transition-transform duration-300 flex-shrink-0 ${
-                    expandedFaq === index ? "rotate-180" : ""
-                  }`}
+                  className={`w-5 h-5 text-slate-600 transition-transform duration-300 flex-shrink-0 ${expandedFaq === index ? "rotate-180" : ""
+                    }`}
                 />
               </button>
 
@@ -152,21 +155,35 @@ export default function FaqSection() {
             Our team is here to help! Reach out to us through any of the following channels and we&apos;ll be happy to assist you.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="tel:+917888383788"
-              className="px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-colors"
+            <button
+              onClick={() => setIsEnrollOpen(true)}
+              className="px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-colors cursor-pointer"
             >
-              📞 Call Us: +91 788-83-83-788
-            </a>
-            <a
-              href="mailto:contact@cinutedigital.com"
-              className="px-6 py-3 bg-white/20 text-white font-semibold rounded-lg hover:bg-white/30 transition-colors border border-white/30"
+              Talk to an Advisor
+            </button>
+            <button
+              onClick={() => setIsSyllabusOpen(true)}
+              className="px-6 py-3 bg-white/20 text-white font-semibold rounded-lg hover:bg-white/30 transition-colors border border-white/30 cursor-pointer flex items-center justify-center gap-2"
             >
-              ✉️ Email Us
-            </a>
+              <Download className="w-4 h-4" />
+              Download Syllabus
+            </button>
           </div>
         </div>
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="Machine Learning with Python - FAQ Section - Talk to Advisor"
+        courseName={courseName}
+      />
+      <SyllabusDownloadModal
+        isOpen={isSyllabusOpen}
+        onClose={() => setIsSyllabusOpen(false)}
+        source="Machine Learning with Python - FAQ Section - Download Syllabus"
+        courseName={courseName}
+      />
     </section>
   );
 }

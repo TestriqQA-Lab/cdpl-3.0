@@ -1,131 +1,20 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { content } from "@/components/data-visualization-in-r-programming/data/content";
-import { ArrowRight, ChevronRight, Clock, Home } from "lucide-react";
-
-/** --- Reusable Form (same style as reference) --- */
-function LeadForm({ className = "" }: { className?: string }) {
-    const countries = [
-        { code: "IN", dial: "+91", label: "India", flag: "🇮🇳" },
-        { code: "US", dial: "+1", label: "United States", flag: "🇺🇸" },
-        { code: "GB", dial: "+44", label: "United Kingdom", flag: "🇬🇧" },
-        { code: "AE", dial: "+971", label: "United Arab Emirates", flag: "🇦🇪" },
-        { code: "SG", dial: "+65", label: "Singapore", flag: "🇸🇬" },
-        { code: "AU", dial: "+61", label: "Australia", flag: "🇦🇺" },
-    ];
-
-    return (
-        <form
-            className={[
-                "w-full rounded-2xl border border-slate-200 bg-white/90 backdrop-blur-sm shadow-lg",
-                "p-5 sm:p-6",
-                className,
-            ].join(" ")}
-            onSubmit={(e) => {
-                e.preventDefault();
-                // submit handling here
-            }}
-            aria-label="Request syllabus for Data Visualization & Machine Learning with R"
-        >
-            <h2 className="text-xl font-semibold text-slate-900">
-                Request Syllabus & Free Consultation
-            </h2>
-            <p className="mt-1 text-sm text-slate-600">
-                Get the detailed curriculum, career guidance, and upcoming batch info.
-            </p>
-
-            <div className="mt-4 grid grid-cols-1 gap-4">
-                {/* Name */}
-                <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-slate-700">
-                        Full Name
-                    </label>
-                    <input
-                        id="name"
-                        name="name"
-                        required
-                        autoComplete="name"
-                        placeholder="Your full name"
-                        className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-300"
-                    />
-                </div>
-
-                {/* Email */}
-                <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-slate-700">
-                        Email
-                    </label>
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        required
-                        autoComplete="email"
-                        placeholder="you@example.com"
-                        className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-300"
-                    />
-                </div>
-
-                {/* Phone with country code + flag */}
-                <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-slate-700">
-                        Mobile Number
-                    </label>
-                    <div className="mt-1 flex items-stretch gap-2">
-                        <div className="flex min-w-[7.5rem] items-center rounded-lg border border-slate-300 bg-white px-2">
-                            <select
-                                name="country"
-                                aria-label="Country code"
-                                defaultValue="IN"
-                                className="w-full bg-transparent py-2 text-slate-900 focus:outline-none"
-                            >
-                                {countries.map((c) => (
-                                    <option key={c.code} value={c.code}>
-                                        {c.flag} {c.label} ({c.dial})
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <input
-                            id="phone"
-                            name="phone"
-                            type="tel"
-                            inputMode="tel"
-                            required
-                            placeholder="98765 43210"
-                            pattern="^[0-9\\s\\-()+]{7,20}$"
-                            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-300"
-                        />
-                    </div>
-                    <p className="mt-1 text-xs text-slate-500">
-                        We’ll never share your number. Standard rates may apply.
-                    </p>
-                </div>
-
-                <button
-                    type="submit"
-                    className="group inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 px-5 py-3 font-semibold text-white shadow-lg transition-all hover:from-orange-600 hover:to-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300"
-                >
-                    Get Syllabus & Pricing
-                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
-                </button>
-
-                <p className="text-xs text-slate-500">
-                    By submitting, you agree to our{" "}
-                    <Link href="/privacy-policy" className="underline hover:text-slate-700">
-                        Privacy Policy
-                    </Link>
-                    .
-                </p>
-            </div>
-        </form>
-    );
-}
+import { ArrowRight, ChevronRight, Clock, Home, CloudDownload, ArrowDownNarrowWide } from "lucide-react";
+import EnrollModal from "../EnrollModal";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
+import CareerSessionModal from "../CareerSessionModal";
+import MachineLearningCourseLeadForm from "../forms/MachineLearningCourseLeadForm";
 
 export const HeroSection: React.FC = () => {
     const { hero_section, course_title } = content;
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+    const [isCareerOpen, setIsCareerOpen] = useState(false);
+    const courseName = "Machine Learning and Data Visualization using R Programming";
 
     const breadcrumbs = [
         { label: "Home", href: "/" },
@@ -134,6 +23,14 @@ export const HeroSection: React.FC = () => {
             label: course_title || "Advanced Data Analytics with R",
         },
     ];
+
+    const scrollToCurriculum = (e: React.MouseEvent) => {
+        e.preventDefault();
+        const element = document.getElementById('curriculum');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
 
     return (
         <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50">
@@ -198,7 +95,9 @@ export const HeroSection: React.FC = () => {
                         </h1>
 
                         {/* Mobile form under H1 */}
-                        <LeadForm className="mt-3 md:hidden" />
+                        <div className="mt-3 md:hidden">
+                            <MachineLearningCourseLeadForm source="R Programming Course Page - Hero Section (Mobile)" />
+                        </div>
 
                         {/* Subheading (uses hero_section.description) */}
                         <p className="mt-4 max-w-3xl text-center text-base leading-relaxed text-slate-600 md:text-left md:text-lg">
@@ -232,13 +131,28 @@ export const HeroSection: React.FC = () => {
 
                         {/* CTAs (same style as reference) */}
                         <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row md:justify-start">
-                            <button className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:from-orange-600 hover:to-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300">
+                            <button
+                                onClick={() => setIsEnrollOpen(true)}
+                                className="inline-flex items-center justify-center cursor-pointer rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:from-orange-600 hover:to-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300"
+                            >
                                 Enroll Now
                                 <ArrowRight className="ml-2 h-5 w-5" />
                             </button>
-                            <button className="rounded-lg border-2 border-slate-300 px-8 py-4 text-base font-semibold text-slate-700 transition-all hover:border-orange-400 hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-300">
+                            <button
+                                onClick={() => setIsSyllabusOpen(true)}
+                                className="inline-flex items-center justify-center cursor-pointer rounded-lg border-2 border-slate-300 px-8 py-4 text-base font-semibold text-slate-700 transition-all hover:border-orange-400 hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-300"
+                            >
+                                <CloudDownload className="mr-2 h-5 w-5" />
                                 Download Syllabus
                             </button>
+                            <a
+                                href="#curriculum"
+                                onClick={scrollToCurriculum}
+                                className="inline-flex items-center justify-center cursor-pointer rounded-lg border-2 border-slate-300 px-8 py-4 text-base font-semibold text-slate-700 transition-all hover:border-orange-400 hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-300"
+                            >
+                                <ArrowDownNarrowWide className="mr-2 h-5 w-5" />
+                                View Curriculum
+                            </a>
                         </div>
 
                         {/* Trust indicators (optional but keep layout parity) */}
@@ -276,10 +190,30 @@ export const HeroSection: React.FC = () => {
 
                     {/* Right: Desktop form (top-aligned) */}
                     <div className="hidden md:block md:col-span-5 lg:col-span-4 md:top-8">
-                        <LeadForm />
+                        <MachineLearningCourseLeadForm source="R Programming Course Page - Hero Section (Desktop)" />
                     </div>
                 </div>
             </div>
+
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="R Programming Course Page - Hero Section - Enroll Now"
+                courseName={courseName}
+            />
+            <SyllabusDownloadModal
+                isOpen={isSyllabusOpen}
+                onClose={() => setIsSyllabusOpen(false)}
+                source="R Programming Course Page - Hero Section - Download Syllabus"
+                courseName={courseName}
+            />
+            <CareerSessionModal
+                isOpen={isCareerOpen}
+                onClose={() => setIsCareerOpen(false)}
+                source="R Programming Course Page - Hero Section - Career Session"
+                courseName={courseName}
+            />
         </section>
     );
 };
+

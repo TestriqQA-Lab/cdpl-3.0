@@ -1,7 +1,11 @@
 // components/sections/FaqSection.tsx
 // Server component — modern, accessible FAQ with subtle futuristic accents + SEO (DS & AI edition).
 
-import Link from "next/link";
+"use client";
+import { useState } from "react";
+import EnrollModal from "../EnrollModal";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
+import { Download } from "lucide-react";
 
 type Faq = {
   q: string;
@@ -44,6 +48,10 @@ const FAQS: Faq[] = [
 ];
 
 export default function FaqSection() {
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+  const courseName = "Comprehensive Data Science and AI - Master Program";
+
   const seoKeywords =
     "data science faq, ai course questions, machine learning program india, job assistance data science, ds ai certification, ml projects tools duration";
 
@@ -130,17 +138,38 @@ export default function FaqSection() {
         <div className="mx-auto mt-8 max-w-4xl rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
           <p className="text-sm text-slate-700">
             Still have questions?{" "}
-            <Link
-              href="contact-us"
-              className="font-semibold text-sky-700 underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-sky-300 rounded"
+            <button
+              onClick={() => setIsEnrollOpen(true)}
+              className="font-semibold text-sky-700 underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-sky-300 rounded cursor-pointer"
             >
               Talk to an advisor
-            </Link>{" "}
+            </button>{" "}
             for a personalized walkthrough of outcomes and placement support.
           </p>
+          <div className="mt-4 flex justify-center">
+            <button
+              onClick={() => setIsSyllabusOpen(true)}
+              className="inline-flex items-center justify-center cursor-pointer rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition-all hover:bg-slate-50 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+            >
+              <Download className="mr-2 h-4 w-4" />
+              Download Syllabus (PDF)
+            </button>
+          </div>
         </div>
       </div>
 
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="Comprehensive Data Science & AI - FAQ Section - Talk to Advisor"
+        courseName={courseName}
+      />
+      <SyllabusDownloadModal
+        isOpen={isSyllabusOpen}
+        onClose={() => setIsSyllabusOpen(false)}
+        source="Comprehensive Data Science & AI - FAQ Section - Download Syllabus"
+        courseName={courseName}
+      />
     </section>
   );
 }

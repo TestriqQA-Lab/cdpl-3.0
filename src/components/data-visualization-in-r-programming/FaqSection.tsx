@@ -2,9 +2,10 @@
 
 // src/components/FaqSection.tsx
 import React, { useState } from "react";
-import Link from "next/link";
 import { content } from "@/components/data-visualization-in-r-programming/data/content";
-import { ChevronDown, HelpCircle } from "lucide-react";
+import { ChevronDown, HelpCircle, CloudDownload } from "lucide-react";
+import EnrollModal from "../EnrollModal";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
 
 interface Faq {
   q: string;
@@ -17,6 +18,9 @@ export const FaqSection: React.FC = () => {
   const faqs: Faq[] = faq_section.questions;
 
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+  const courseName = "Machine Learning and Data Visualization using R Programming";
 
   // If your FAQs include category, we'll group by it.
   // If not, everything will appear under one SEO-friendly heading.
@@ -128,18 +132,19 @@ export const FaqSection: React.FC = () => {
             pricing, live online classes, and placement support.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link
-              href="tel:+917888383788"
-              className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition-colors"
+            <button
+              onClick={() => setIsEnrollOpen(true)}
+              className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition-colors cursor-pointer"
             >
               📞 Talk to a Career Expert
-            </Link>
-            <Link
-              href="mailto:contact@cinutedigital.com"
-              className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
+            </button>
+            <button
+              onClick={() => setIsSyllabusOpen(true)}
+              className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors cursor-pointer flex items-center"
             >
-              ✉️ Get Full R Course Details on Email
-            </Link>
+              <CloudDownload className="w-5 h-5 mr-2" />
+              Get Full R Course Details on Email
+            </button>
           </div>
           <p className="mt-6 text-sm text-slate-500 max-w-3xl mx-auto">
             Popular searches: <strong>R programming course with placement</strong>,{" "}
@@ -149,6 +154,19 @@ export const FaqSection: React.FC = () => {
           </p>
         </div>
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="R Programming Course Page - FAQ Section - Talk to Expert"
+        courseName={courseName}
+      />
+      <SyllabusDownloadModal
+        isOpen={isSyllabusOpen}
+        onClose={() => setIsSyllabusOpen(false)}
+        source="R Programming Course Page - FAQ Section - Get Details"
+        courseName={courseName}
+      />
     </section>
   );
 };

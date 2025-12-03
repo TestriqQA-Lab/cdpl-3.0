@@ -9,7 +9,7 @@ import ApiCourseLeadForm from "../forms/ApiCourseLeadForm";
 import EnrollModal from "../EnrollModal";
 import SyllabusDownloadModal from "../SyllabusDownloadModal";
 import CareerSessionModal from "../CareerSessionModal";
-import { ChevronRight, Home } from "lucide-react";
+import { ChevronRight, Home, ArrowRight, CloudDownload, ArrowDownNarrowWide } from "lucide-react";
 import { useState } from "react";
 
 export default function HeroSection() {
@@ -98,14 +98,22 @@ export default function HeroSection() {
             <div className="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
               <button
                 onClick={() => setIsEnrollOpen(true)}
-                className="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-purple-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-purple-200"
+                className="inline-flex items-center justify-center cursor-pointer rounded-xl bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
                 aria-label="Enroll now in Advanced Data Science & Machine Learning course"
               >
                 Enroll Now
-                <svg className="ml-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
-                  <path d="M12.293 4.293a1 1 0 011.414 0l4 4a1 1 0 01.083 1.32l-.083.094-4 4a1 1 0 01-1.497-1.32l.083-.094L14.585 10H3a1 1 0 01-.117-1.993L3 8h11.585l-2.292-2.293a1 1 0 010-1.414z" />
-                </svg>
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </button>
+
+              <button
+                onClick={() => setIsSyllabusOpen(true)}
+                className="inline-flex items-center justify-center cursor-pointer rounded-xl bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
+                aria-label="Download Data Science Syllabus"
+              >
+                Download Syllabus
+                <CloudDownload className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
+              </button>
+
               <a
                 href="#curriculum"
                 onClick={handleScrollToCurriculum}
@@ -113,14 +121,8 @@ export default function HeroSection() {
                 aria-label="View full Data Science & Machine Learning curriculum"
               >
                 View Curriculum
+                <ArrowDownNarrowWide className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
               </a>
-              <button
-                onClick={() => setIsCareerSessionOpen(true)}
-                className="inline-flex items-center justify-center rounded-xl border border-emerald-300 bg-white px-6 py-3 text-base font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-4 focus:ring-emerald-200"
-                aria-label="Book a free demo for Data Science & ML"
-              >
-                Free Demo
-              </button>
             </div>
 
             {/* Quick highlights (distinct accent bullets; no repeats) */}
