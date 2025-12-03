@@ -122,7 +122,7 @@ export async function POST(request: Request) {
     const isLiveJobsRequest = formSource.includes('Live Jobs Page - Hero Section');
     const isPlacementRequest = formSource.includes('Placements Page');
     const isMentorsPageRequest = formSource.includes('Mentors Page');
-    const isSessionEnquiry = formSource.includes('Session Enquiry') || formSource.includes('Other Courses Section') || formSource.includes('Book Free Demo') || formSource.includes('Start Your QA Journey') || formSource.includes('Get Placement Support') || formSource.includes('Become SDET in 30 Days') || formSource.includes('Start Your QA Career') || formSource.includes('Talk to Advisor') || formSource.includes('Browse Open Roles');
+    const isSessionEnquiry = formSource.includes('Session Enquiry') || formSource.includes('Other Courses Section') || formSource.includes('Book Free Demo') || formSource.includes('Start Your QA Journey') || formSource.includes('Get Placement Support') || formSource.includes('Become SDET') || formSource.includes('Start Your QA Career') || formSource.includes('Talk to Advisor') || formSource.includes('Browse Open Roles');
 
     // Subject Prefix Logic
     let subjectPrefix = '[ENQUIRY]';
@@ -256,7 +256,7 @@ export async function POST(request: Request) {
       adminSubject = `[PLACEMENT ENQUIRY] New Lead from ${fullName} - ETL Testing Page (Career Section)`;
     } else if (formSource === 'Advanced Software Testing Course Page - Curriculum Section - Book Free Demo') {
       adminSubject = `[SESSION ENQUIRY] New Lead from ${fullName} - Advanced Software Testing Page`;
-    } else if (formSource === 'Advanced Software Testing Course Page - Career Section - Become SDET in 30 Days') {
+    } else if (formSource === 'Advanced Software Testing Course Page - Career Section - Become SDET') {
       adminSubject = `[PLACEMENT ENQUIRY] New Lead from ${fullName} - Advanced Software Testing Page (Career Section)`;
     } else if (formSource === 'Master Program Course Page - Curriculum Section - Book Free Demo') {
       adminSubject = `[SESSION ENQUIRY] New Lead from ${fullName} - Master Program Page`;

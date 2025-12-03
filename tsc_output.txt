@@ -1,0 +1,15 @@
+﻿src/components/advance-manual-automation-testing/HeroSection.tsx(90,14): error TS17008: JSX element 'div' has no corresponding closing tag.
+src/components/ai-in-digital-marketing/HeroSection.tsx(381,11): error TS17002: Expected corresponding JSX closing tag for 'button'.
+src/components/ai-in-digital-marketing/HeroSection.tsx(383,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/components/ai-in-digital-marketing/HeroSection.tsx(386,5): error TS1109: Expression expected.
+src/components/ai-in-digital-marketing/HeroSection.tsx(389,16): error TS1005: '}' expected.
+src/components/ai-in-digital-marketing/HeroSection.tsx(389,36): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/components/ai-in-digital-marketing/HeroSection.tsx(390,16): error TS1005: '}' expected.
+src/components/ai-in-digital-marketing/HeroSection.tsx(390,46): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/components/ai-in-digital-marketing/HeroSection.tsx(391,16): error TS1005: '}' expected.
+src/components/ai-in-digital-marketing/HeroSection.tsx(391,44): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/components/ai-in-digital-marketing/HeroSection.tsx(395,10): error TS17008: JSX element 'section' has no corresponding closing tag.
+src/components/ai-in-digital-marketing/HeroSection.tsx(610,11): error TS17002: Expected corresponding JSX closing tag for 'form'.
+src/components/ai-in-digital-marketing/HeroSection.tsx(611,7): error TS1005: ')' expected.
+src/components/ai-in-digital-marketing/HeroSection.tsx(612,5): error TS1109: Expression expected.
+src/components/ai-in-digital-marketing/HeroSection.tsx(613,3): error TS1109: Expression expected.

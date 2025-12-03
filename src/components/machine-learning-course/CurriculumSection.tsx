@@ -1,9 +1,10 @@
-// components/sections/CurriculumSection.tsx
-// Server component — sleek, SEO-optimized, slightly futuristic, fully responsive.
-// Unique accent colors per module (no repeats), minimal/non-distracting visuals.
+"use client";
 
 import Link from "next/link";
 import { CheckCircle } from 'lucide-react';
+import { useState } from "react";
+import EnrollModal from "@/components/EnrollModal";
+import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
 
 type Module = {
   num: string;
@@ -97,24 +98,12 @@ const MODULES: Module[] = [
       "Regression (linear/poly, ridge/lasso); classification (logistic, KNN, trees, RF, SVM); CV, metrics (MSE, R², AUC, F1).",
     accent: { bg: "bg-stone-50", text: "text-stone-900", border: "border-stone-200", ring: "focus:ring-stone-300" },
   },
-  // (Optional) Uncomment to expose unsupervised & capstone as separate blocks:
-  // {
-  //   num: "13",
-  //   title: "Unsupervised Learning",
-  //   outcome:
-  //     "K-Means & hierarchical clustering, PCA for dimensionality reduction, density-based clustering; EDA integration.",
-  //   accent: { bg: "bg-yellow-50", text: "text-yellow-900", border: "border-yellow-200", ring: "focus:ring-yellow-300" },
-  // },
-  // {
-  //   num: "14",
-  //   title: "Capstone: End-to-End ML Project",
-  //   outcome:
-  //     "Problem framing → data prep → EDA → modeling → tuning → dashboards/visuals → evaluation → lightweight deploy.",
-  //   accent: { bg: "bg-purple-50", text: "text-purple-900", border: "border-purple-200", ring: "focus:ring-purple-300" },
-  // },
 ];
 
 export default function CurriculumSection() {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
+
   const subtitle =
     "Industry-aligned syllabus spanning Python, NumPy/pandas, Matplotlib/Seaborn, Statistics, and Machine Learning with rigorous EDA and validation.";
   const keywords =
@@ -204,18 +193,33 @@ export default function CurriculumSection() {
         {/* CTAs */}
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <button
+            onClick={() => setIsSyllabusModalOpen(true)}
             className="inline-flex items-center justify-center cursor-pointer rounded-xl border-2 border-green-700 bg-white px-4 py-2 text-sm font-semibold text-green-800 shadow-sm transition hover:bg-green-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-emerald-200"
           >
             Download Detailed Syllabus (PDF)
           </button>
-          <Link
-            href="contact-us"
-            className="inline-flex items-center justify-center rounded-xl bg-indigo-700 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-200"
+          <button
+            onClick={() => setIsPopupOpen(true)}
+            className="inline-flex items-center justify-center cursor-pointer rounded-xl bg-[#7E22CE] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[#6b21a8] focus:outline-none focus:ring-4 focus:ring-purple-200"
           >
             Apply Now
-          </Link>
+          </button>
         </div>
       </div>
+
+      <EnrollModal
+        isOpen={isPopupOpen}
+        onClose={() => setIsPopupOpen(false)}
+        courseName="Machine Learning and Data Science with Python"
+        source="Machine Learning Course Page - Curriculum Section - Apply Now"
+      />
+
+      <SyllabusDownloadModal
+        isOpen={isSyllabusModalOpen}
+        onClose={() => setIsSyllabusModalOpen(false)}
+        courseName="Machine Learning and Data Science with Python"
+        source="Machine Learning Course Page - Curriculum Section - Download Syllabus"
+      />
 
     </section>
   );
