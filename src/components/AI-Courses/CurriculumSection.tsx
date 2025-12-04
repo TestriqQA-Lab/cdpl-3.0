@@ -3,21 +3,8 @@
 import React, { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BookOpen, CheckCircle2, Clock, Award, TrendingUp, Sparkles } from "lucide-react";
-import { curriculumContent } from '@/components/software-testing-course/data/data'; // kept your original data path
+import { curriculumContent } from "@/components/AI-Courses/data/data";
 
-/** ---- Types ---- */
-interface Track {
-    id?: number | string;
-    title: string;
-    weeks: Week[];
-}
-
-interface Week {
-    number?: string | number;
-    title: string;
-    description: string;
-    deliverables?: string[];
-}
 
 /** ---- Gradient Themes ---- */
 const gradientThemes = [
@@ -57,7 +44,7 @@ const gradientThemes = [
 
 export default function CurriculumSection() {
     const data = curriculumContent;
-    const tracks = useMemo(() => data?.tracks ?? [], [data?.tracks]) as Track[];
+    const tracks = useMemo(() => data?.tracks ?? [], [data?.tracks]);
     const [activeTrack, setActiveTrack] = useState<number>(0);
     const current = tracks[activeTrack];
     const currentTheme = gradientThemes[activeTrack % gradientThemes.length];
@@ -92,10 +79,10 @@ export default function CurriculumSection() {
                     </motion.div>
 
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                        {data?.title}
+                        {data.title}
                     </h2>
 
-                    {data?.subtitle && (
+                    {data.subtitle && (
                         <p className="mx-auto max-w-3xl text-lg text-gray-600 leading-relaxed">
                             {data.subtitle}
                         </p>
@@ -125,12 +112,6 @@ export default function CurriculumSection() {
                                         ? `bg-gradient-to-r ${theme.gradient} text-white shadow-lg ${theme.glowColor}`
                                         : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-gray-300'
                                         }`}
-
-                                    role="tab"
-                                    aria-selected={isActive}
-                                    aria-controls={`track-panel-${track.id ?? index}`}
-                                    id={`track-tab-${track.id ?? index}`}
-                                    title={track.title}
                                 >
                                     {track.title}
                                     {isActive && (
@@ -149,7 +130,7 @@ export default function CurriculumSection() {
                     <div className="flex flex-wrap justify-center gap-6 text-sm">
                         <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg border border-gray-200 shadow-sm">
                             <BookOpen className="w-4 h-4 text-blue-600" />
-                            <span className="font-semibold text-gray-700">{totalWeeks} {totalWeeks === 1 ? 'Module' : 'Modules'}</span>
+                            <span className="font-semibold text-gray-700">{totalWeeks} Modules</span>
                         </div>
                         <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg border border-gray-200 shadow-sm">
                             <Clock className="w-4 h-4 text-purple-600" />
@@ -172,9 +153,6 @@ export default function CurriculumSection() {
                             exit={{ opacity: 0, y: -30 }}
                             transition={{ duration: 0.4 }}
                             className="space-y-6"
-                            role="tabpanel"
-                            id={`track-panel-${current.id ?? activeTrack}`}
-                            aria-labelledby={`track-tab-${current.id ?? activeTrack}`}
                         >
                             {current.weeks.map((week, index) => (
                                 <motion.div
@@ -203,7 +181,7 @@ export default function CurriculumSection() {
                                                             className={`flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br ${currentTheme.gradient} flex items-center justify-center shadow-lg ${currentTheme.glowColor}`}
                                                         >
                                                             <span className="text-white font-bold text-md">
-                                                                {week.number ?? String(index + 1).padStart(2, '0')}
+                                                                {week.number || String(index + 1).padStart(2, '0')}
                                                             </span>
                                                         </motion.div>
 
@@ -262,12 +240,12 @@ export default function CurriculumSection() {
                                                         <div className="mt-5 pt-4 border-t border-gray-300">
                                                             <div className="flex items-center justify-between text-xs font-semibold text-gray-600 mb-2">
                                                                 <span>Module Progress</span>
-                                                                <span>{Math.round(((index + 1) / (current.weeks.length || 1)) * 100)}%</span>
+                                                                <span>{Math.round(((index + 1) / current.weeks.length) * 100)}%</span>
                                                             </div>
                                                             <div className="h-2 bg-white/60 rounded-full overflow-hidden">
                                                                 <motion.div
                                                                     initial={{ width: 0 }}
-                                                                    animate={{ width: `${((index + 1) / (current.weeks.length || 1)) * 100}%` }}
+                                                                    animate={{ width: `${((index + 1) / current.weeks.length) * 100}%` }}
                                                                     transition={{ duration: 0.8, delay: 0.2 }}
                                                                     className={`h-full bg-gradient-to-r ${currentTheme.gradient} rounded-full`}
                                                                 />
@@ -295,7 +273,7 @@ export default function CurriculumSection() {
                     <div className={`inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r ${currentTheme.lightGradient} ${currentTheme.borderColor} border-2 rounded-xl`}>
                         <TrendingUp className={`w-5 h-5 ${currentTheme.textColor}`} />
                         <span className="font-semibold text-gray-700">
-                            Complete all tracks to earn your Professional Certificate
+                            Complete all tracks to earn your BI Professional Certificate
                         </span>
                     </div>
                 </motion.div>

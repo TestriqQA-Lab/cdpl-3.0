@@ -1,8 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Star, Quote, Briefcase, TrendingUp, Award, CheckCircle, Sparkles, LucideIcon } from 'lucide-react';
-import ReviewsMarquee from '@/components/sections/ReviewMarque';
+import { Briefcase, TrendingUp, Award, CheckCircle, Sparkles, LucideIcon } from 'lucide-react';
+import ReviewsMarquee from '../sections/ReviewMarque';
+
+
 
 const StatCard = ({ icon: Icon, value, label, delay }: { icon: LucideIcon; value: string; label: string; delay: number }) => (
     <motion.div
@@ -52,30 +54,26 @@ export default function TestimonialsSection() {
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
                         Real Results From{" "}
                         <span className="text-brand">
-                            Software Testing Professionals
+                            Real BI Professionals
                         </span>
                     </h2>
 
                     <p className="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed">
-                        Join thousands of QA engineers and testers who accelerated their careers with our comprehensive
-                        Software Testing training — mastering manual & automated testing, test design, and modern QA tools.
+                        Join 2,500+ successful graduates who transformed their careers with our industry-leading
+                        Business Intelligence training. See how our students landed roles at top companies with
+                        significant salary increases.
                     </p>
                 </motion.div>
 
                 {/* Stats */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-                    <StatCard icon={CheckCircle} value="2,000+" label="QA Graduates" delay={0.1} />
+                    <StatCard icon={CheckCircle} value="2,500+" label="Successful Graduates" delay={0.1} />
                     <StatCard icon={TrendingUp} value="40%" label="Avg. Salary Increase" delay={0.2} />
-                    <StatCard icon={Briefcase} value="92%" label="Placement Rate" delay={0.3} />
-                    <StatCard icon={Award} value="400+" label="Hiring Partners" delay={0.4} />
+                    <StatCard icon={Briefcase} value="95%" label="Placement Rate" delay={0.3} />
+                    <StatCard icon={Award} value="500+" label="Hiring Partners" delay={0.4} />
                 </div>
 
-                {/* Reviews / Marquee */}
-                <div className="mb-12">
-                    <div className="bg-gradient-to-br from-orange-50 to-white p-2 lg:p-8 rounded-2xl shadow-xl border border-orange-100">
-                        <ReviewsMarquee />
-                    </div>
-                </div>
+                <ReviewsMarquee />
 
                 {/* Bottom CTA */}
                 <motion.div
@@ -91,8 +89,8 @@ export default function TestimonialsSection() {
                                 <Sparkles className="w-6 h-6 text-white" />
                             </div>
                             <div className="text-left">
-                                <div className="font-bold text-gray-900 text-lg">Start Your QA Career</div>
-                                <div className="text-sm text-gray-600">Join our next Software Testing cohort and become job-ready</div>
+                                <div className="font-bold text-gray-900 text-lg">Start Your Success Story</div>
+                                <div className="text-sm text-gray-600">Join our next BI cohort starting soon</div>
                             </div>
                         </div>
                         <motion.button
@@ -102,6 +100,24 @@ export default function TestimonialsSection() {
                         >
                             Enroll Now
                         </motion.button>
+                    </div>
+                </motion.div>
+
+                {/* Trust indicators */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.6 }}
+                    className="mt-12 text-center"
+                >
+                    <p className="text-sm text-gray-500 mb-4">Trusted by students from</p>
+                    <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
+                        <span className="text-2xl font-bold text-gray-400">IIT</span>
+                        <span className="text-2xl font-bold text-gray-400">NIT</span>
+                        <span className="text-2xl font-bold text-gray-400">BITS</span>
+                        <span className="text-2xl font-bold text-gray-400">VIT</span>
+                        <span className="text-2xl font-bold text-gray-400">IIIT</span>
                     </div>
                 </motion.div>
             </div>

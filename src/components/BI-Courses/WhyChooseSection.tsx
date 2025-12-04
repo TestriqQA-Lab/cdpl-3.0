@@ -1,58 +1,58 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { BarChart3, TrendingUp, Database, Brain, Users, Award, Zap, Target, LineChart, Briefcase, Shield, Sparkles } from 'lucide-react';
+import { BarChart3, TrendingUp, Database, Brain, Users, Award, Zap, Target, Briefcase, Shield, Sparkles } from 'lucide-react';
 
-// 🎯 Software Testing / QA-focused features with SEO-optimized content
-const testingFeatures = [
+// 🎯 BI-focused features with SEO-optimized content
+const biFeatures = [
     {
         icon: BarChart3,
-        title: "Test Reporting & Metrics",
-        desc: "Learn to design meaningful test reports, dashboards and QA metrics (pass rate, defect density, MTTR) that demonstrate product quality and guide release decisions — perfect for stakeholder buy-in and SEO-rich content around QA reporting."
+        title: "Advanced Data Visualization",
+        desc: "Master Power BI, Tableau, and modern visualization tools to transform complex data into compelling business insights and interactive dashboards."
     },
     {
         icon: Database,
-        title: "Test Data Management & Environment Setup",
-        desc: "Master strategies for creating, masking, and managing test data, provisioning test environments, and using containers/VMs for reproducible QA — essential skills for reliable integration and system testing."
+        title: "ETL & Data Warehousing",
+        desc: "Learn enterprise-grade ETL processes, data modeling, and warehousing techniques using SQL, Azure, and AWS to build scalable BI solutions."
     },
     {
         icon: Brain,
-        title: "Test Strategy & Test Design",
-        desc: "Understand black-box & white-box techniques, risk-based testing, BDD/TDD approaches, and how to craft scalable test cases and test suites that reduce defects and speed up delivery."
+        title: "Business Analytics & KPIs",
+        desc: "Develop expertise in defining metrics, creating KPI frameworks, and delivering actionable insights that drive strategic business decisions."
     },
     {
         icon: TrendingUp,
-        title: "Performance & Load Testing",
-        desc: "Integrate performance testing into the CI pipeline using industry tools and approaches to detect bottlenecks, optimize throughput and ensure SLAs — covering load, stress and endurance testing best practices."
+        title: "Predictive Analytics",
+        desc: "Integrate forecasting models and predictive analytics into BI workflows to help organizations anticipate trends and optimize performance."
     },
     {
         icon: Users,
-        title: "Stakeholder Communication for QA",
-        desc: "Learn to translate technical test results into business-impact narratives for PMs and execs, enabling better risk decisions and faster go/no-go calls — an underrated but high-value QA skill."
+        title: "Stakeholder Communication",
+        desc: "Master the art of presenting data stories to executives and stakeholders, translating technical insights into business value."
     },
     {
         icon: Briefcase,
-        title: "Real-World QA Projects",
-        desc: "Work on production-like projects: web & mobile testing, API automation, end-to-end pipelines and regression suites — build a portfolio that hiring managers actually look for in QA roles."
+        title: "Real-World BI Projects",
+        desc: "Work on industry-standard projects including sales analytics, financial reporting, and customer segmentation with actual business scenarios."
     },
     {
         icon: Zap,
-        title: "Test Automation & Frameworks",
-        desc: "Hands-on automation with Selenium, Playwright, Cypress and API automation (Postman / REST-assured) plus designing maintainable test frameworks, page objects, and CI/CD test pipelines."
+        title: "Fast-Track Career Support",
+        desc: "Get personalized resume reviews, mock interviews, and direct connections to hiring managers at top companies seeking BI professionals."
     },
     {
         icon: Award,
-        title: "Certification & Interview Prep",
-        desc: "Prepare for ISTQB and job interviews with curated practice problems, mock interviews, and role-specific interview kits focused on automation engineers and SDET positions."
+        title: "Industry Certification Prep",
+        desc: "Prepare for Microsoft Power BI, Tableau Desktop Specialist, and other leading BI certifications with guided study materials and practice exams."
     },
     {
         icon: Shield,
-        title: "Security & QA Best Practices",
-        desc: "Cover security testing fundamentals, common vulnerabilities, and QA-oriented secure coding checks to help teams ship safer software while meeting compliance and governance needs."
+        title: "Data Governance & Security",
+        desc: "Understand data privacy regulations, security best practices, and governance frameworks essential for enterprise BI implementations."
     }
 ];
 
-// 🎨 Reuse modern gradient themes (kept for consistent UI)
+// 🎨 Modern gradient themes with depth
 const gradientThemes = [
     {
         bg: "bg-gradient-to-br from-blue-500/10 via-cyan-500/10 to-blue-600/10",
@@ -171,7 +171,7 @@ const FeatureCard = ({ icon: Icon, title, desc, theme, index }: FeatureCardProps
     );
 };
 
-export default function TestingFeaturesSection() {
+export default function BIFeaturesSection() {
     return (
         <section className="relative py-10 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden">
             {/* Subtle background pattern */}
@@ -193,23 +193,24 @@ export default function TestingFeaturesSection() {
                         className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-200/50 rounded-full mb-6"
                     >
                         <Sparkles className="w-4 h-4 text-blue-600" />
-                        <span className="text-sm font-semibold text-blue-700">Software Testing & Quality Assurance</span>
+                        <span className="text-sm font-semibold text-blue-700">Business Intelligence Excellence</span>
                     </motion.div>
 
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight">
-                        Build Reliable Software with{" "}
+                        Transform Data Into{" "}
                         <span className="text-brand">
-                            Expert QA & Test Automation
+                            Strategic Decisions
                         </span>
                     </h2>
                     <p className="text-lg text-gray-600 leading-relaxed">
-                        Learn manual testing, automation (Selenium, Playwright, Cypress), API & performance testing, and QA best practices. Become a job-ready SDET or QA engineer with hands-on projects, interview prep, and industry certification guidance.
+                        Master enterprise Business Intelligence tools and techniques. Build production-ready dashboards,
+                        analytics solutions, and become a certified BI professional with hands-on industry projects.
                     </p>
                 </motion.div>
 
                 {/* Features grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {testingFeatures.map((feature, index) => (
+                    {biFeatures.map((feature, index) => (
                         <FeatureCard
                             key={index}
                             icon={feature.icon}
@@ -230,7 +231,7 @@ export default function TestingFeaturesSection() {
                     className="text-center mt-16"
                 >
                     <p className="text-gray-600 mb-6">
-                        Ready to launch your QA career or level up as an SDET?
+                        Ready to start your BI career journey?
                     </p>
                     <motion.button
                         whileHover={{ scale: 1.05 }}
@@ -238,7 +239,7 @@ export default function TestingFeaturesSection() {
                         className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                     >
                         <Target className="w-5 h-5" />
-                        Explore Software Testing Courses
+                        Explore BI Courses
                     </motion.button>
                 </motion.div>
             </div>

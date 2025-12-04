@@ -3,7 +3,6 @@ import FeaturesSection from '@/components/software-testing-course/FeaturesSectio
 import CurriculumSection from '@/components/software-testing-course/CurriculumSection';
 import TestimonialsSection from '@/components/software-testing-course/TestimonialsSection';
 import CoursesSection from '@/components/software-testing-course/CoursesSection';
-import BatchesSection from '@/components/software-testing-course/BatchesSection';
 import FAQSection from '@/components/software-testing-course/FAQSection';
 import FinalCTASection from '@/components/software-testing-course/FinalCTASection';
 import ProjectsSection from '@/components/software-testing-course/ProjectsSection';
@@ -17,7 +16,6 @@ export default function Home() {
       <CoursesSection />
       <CurriculumSection />
       <TestimonialsSection />
-      <BatchesSection />
       <ProjectsSection />
       <CareerPathSection />
       <FAQSection />

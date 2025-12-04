@@ -682,31 +682,92 @@ export const careerPathContent = {
     subtitle: "Launch your career in Data Science and Analytics.",
     paths: [
         {
+            id: 1,
             role: "Data Scientist",
             trending: true,
+            demandLevel: "Very High",
+            experience: "1-3+ Years",
             description:
                 "Design and implement machine learning models to solve complex business problems.",
             salaryRange: "₹8L - ₹25L+",
             skills: ["ML", "Python", "Statistics", "AI"],
-            opportunities: ["Top Tech Companies in Panvel", "Global Consulting Firms"]
+            responsibilities: [
+                "Build predictive models",
+                "Analyze complex datasets",
+                "Collaborate with stakeholders"
+            ],
+            opportunities: ["Top Tech Companies", "Global Consulting Firms"],
+            hiringCompanies: ["Google", "Amazon", "Microsoft", "Deloitte"]
         },
         {
+            id: 2,
             role: "Data Analyst",
             trending: false,
+            demandLevel: "High",
+            experience: "0-2 Years",
             description:
                 "Analyze large datasets to extract actionable insights and create reports.",
             salaryRange: "₹5L - ₹12L+",
             skills: ["SQL", "Excel", "Visualization", "Business Intelligence"],
-            opportunities: ["E-commerce", "Finance", "Healthcare"]
+            responsibilities: [
+                "Create dashboards",
+                "Clean and transform data",
+                "Generate business reports"
+            ],
+            opportunities: ["E-commerce", "Finance", "Healthcare"],
+            hiringCompanies: ["Flipkart", "Myntra", "HDFC Bank", "Accenture"]
         },
         {
+            id: 3,
             role: "Machine Learning Engineer",
             trending: true,
+            demandLevel: "Very High",
+            experience: "2-4+ Years",
             description:
                 "Build and deploy scalable machine learning systems in production.",
             salaryRange: "₹10L - ₹30L+",
             skills: ["MLOps", "Cloud", "Deployment", "Software Engineering"],
-            opportunities: ["Product Companies", "FinTech", "AI Startups"]
+            responsibilities: [
+                "Deploy ML models",
+                "Optimize model performance",
+                "Build ML pipelines"
+            ],
+            opportunities: ["Product Companies", "FinTech", "AI Startups"],
+            hiringCompanies: ["Uber", "Swiggy", "Zomato", "Cred"]
+        }
+    ]
+};
+
+
+export const projectsContent = {
+    title: "Hands-On Projects",
+    description: "Build real-world projects to strengthen your portfolio.",
+    subtitle: "Apply your learning through practical, industry-relevant projects.",
+
+    projects: [
+        {
+            name: "Predictive Maintenance",
+            description: "Predict equipment failure using time-series data and deep learning.",
+            skills: ["Time Series", "Deep Learning", "TensorFlow", "Python"],
+            difficulty: "Advanced"
+        },
+        {
+            name: "Customer Churn Analysis",
+            description: "Identify and predict customers likely to leave a telecom company.",
+            skills: ["Classification", "Pandas", "Scikit-learn", "Statistics"],
+            difficulty: "Intermediate"
+        },
+        {
+            name: "Image Recognition System",
+            description: "Develop a deep learning model for image classification.",
+            skills: ["Deep Learning", "CNN", "Keras/PyTorch", "Computer Vision"],
+            difficulty: "Advanced"
+        },
+        {
+            name: "Stock Price Forecasting",
+            description: "Use time-series models to predict future stock prices.",
+            skills: ["Time Series", "ARIMA", "LSTM", "Financial Data"],
+            difficulty: "Intermediate"
         }
     ]
 };

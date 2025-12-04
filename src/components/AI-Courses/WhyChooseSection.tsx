@@ -1,58 +1,58 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { BarChart3, TrendingUp, Database, Brain, Users, Award, Zap, Target, LineChart, Briefcase, Shield, Sparkles } from 'lucide-react';
+import { Cpu, Brain, Binary, LineChart, Users, Award, Zap, Target, Sparkles, Network, BarChart3 } from 'lucide-react';
 
-// 🎯 Software Testing / QA-focused features with SEO-optimized content
-const testingFeatures = [
-    {
-        icon: BarChart3,
-        title: "Test Reporting & Metrics",
-        desc: "Learn to design meaningful test reports, dashboards and QA metrics (pass rate, defect density, MTTR) that demonstrate product quality and guide release decisions — perfect for stakeholder buy-in and SEO-rich content around QA reporting."
-    },
-    {
-        icon: Database,
-        title: "Test Data Management & Environment Setup",
-        desc: "Master strategies for creating, masking, and managing test data, provisioning test environments, and using containers/VMs for reproducible QA — essential skills for reliable integration and system testing."
-    },
+// 🤖 AI-focused features with SEO-optimized content
+const biFeatures = [
     {
         icon: Brain,
-        title: "Test Strategy & Test Design",
-        desc: "Understand black-box & white-box techniques, risk-based testing, BDD/TDD approaches, and how to craft scalable test cases and test suites that reduce defects and speed up delivery."
+        title: "Deep Learning & Neural Networks",
+        desc: "Master artificial neural networks, CNNs, RNNs, LSTMs, GANs, Transformers, and state-of-the-art deep learning architectures using TensorFlow and PyTorch."
     },
     {
-        icon: TrendingUp,
-        title: "Performance & Load Testing",
-        desc: "Integrate performance testing into the CI pipeline using industry tools and approaches to detect bottlenecks, optimize throughput and ensure SLAs — covering load, stress and endurance testing best practices."
+        icon: Binary,
+        title: "Machine Learning Algorithms",
+        desc: "Gain hands-on expertise in supervised & unsupervised learning, model evaluation, feature engineering, and hyperparameter tuning using real-world AI datasets."
+    },
+    {
+        icon: Cpu,
+        title: "Applied Artificial Intelligence",
+        desc: "Learn to build production-grade AI solutions for NLP, computer vision, recommendation systems, sentiment analysis, and intelligent automation workflows."
+    },
+    {
+        icon: LineChart,
+        title: "Predictive & Generative AI",
+        desc: "Work on forecasting models, generative AI systems, and advanced statistical modeling techniques used in enterprise AI decision-making."
     },
     {
         icon: Users,
-        title: "Stakeholder Communication for QA",
-        desc: "Learn to translate technical test results into business-impact narratives for PMs and execs, enabling better risk decisions and faster go/no-go calls — an underrated but high-value QA skill."
+        title: "AI for Business & Strategy",
+        desc: "Understand AI adoption frameworks, ROI-driven use cases, data-driven decision-making, and how companies implement AI to scale business growth."
     },
     {
-        icon: Briefcase,
-        title: "Real-World QA Projects",
-        desc: "Work on production-like projects: web & mobile testing, API automation, end-to-end pipelines and regression suites — build a portfolio that hiring managers actually look for in QA roles."
+        icon: Network,
+        title: "Real-World AI Projects",
+        desc: "Build end-to-end AI projects such as chatbots, image classifiers, fraud detection models, and customer analytics using industry datasets."
     },
     {
         icon: Zap,
-        title: "Test Automation & Frameworks",
-        desc: "Hands-on automation with Selenium, Playwright, Cypress and API automation (Postman / REST-assured) plus designing maintainable test frameworks, page objects, and CI/CD test pipelines."
+        title: "Career Support & Mentorship",
+        desc: "Get personalized career support, resume polishing, mock interviews, and referrals for AI Engineer, ML Engineer, and Data Scientist roles."
     },
     {
         icon: Award,
-        title: "Certification & Interview Prep",
-        desc: "Prepare for ISTQB and job interviews with curated practice problems, mock interviews, and role-specific interview kits focused on automation engineers and SDET positions."
+        title: "AI Certification Preparation",
+        desc: "Prepare for globally recognized certifications including TensorFlow Developer, Microsoft AI Engineer, and AWS Machine Learning Specialty."
     },
     {
-        icon: Shield,
-        title: "Security & QA Best Practices",
-        desc: "Cover security testing fundamentals, common vulnerabilities, and QA-oriented secure coding checks to help teams ship safer software while meeting compliance and governance needs."
+        icon: BarChart3,
+        title: "MLOps & Model Deployment",
+        desc: "Learn MLOps fundamentals, Docker, CI/CD, model monitoring, API deployment with FastAPI, and automated ML pipelines for real-time applications."
     }
 ];
 
-// 🎨 Reuse modern gradient themes (kept for consistent UI)
+// 🎨 Modern gradient themes remain exactly the same
 const gradientThemes = [
     {
         bg: "bg-gradient-to-br from-blue-500/10 via-cyan-500/10 to-blue-600/10",
@@ -137,11 +137,10 @@ const FeatureCard = ({ icon: Icon, title, desc, theme, index }: FeatureCardProps
             whileHover={{ y: -6, transition: { duration: 0.2 } }}
             className="group relative h-full"
         >
-            {/* Animated gradient border effect */}
             <div className={`absolute inset-0 ${theme.bg} rounded-2xl opacity-0 group-hover:opacity-100 blur-xl transition-all duration-500 ${theme.glow}`} />
 
             <div className={`relative h-full ${theme.bg} ${theme.border} border-2 rounded-2xl p-6 backdrop-blur-sm transition-all duration-300 shadow-lg ${theme.glow} group-hover:shadow-2xl`}>
-                {/* Floating icon */}
+
                 <motion.div
                     whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.1 }}
                     transition={{ duration: 0.5 }}
@@ -150,7 +149,6 @@ const FeatureCard = ({ icon: Icon, title, desc, theme, index }: FeatureCardProps
                     <Icon className="w-8 h-8 text-white" strokeWidth={2} />
                 </motion.div>
 
-                {/* Content */}
                 <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-gray-800 transition-colors">
                     {title}
                 </h3>
@@ -158,7 +156,6 @@ const FeatureCard = ({ icon: Icon, title, desc, theme, index }: FeatureCardProps
                     {desc}
                 </p>
 
-                {/* Bottom accent line */}
                 <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: "100%" }}
@@ -171,14 +168,14 @@ const FeatureCard = ({ icon: Icon, title, desc, theme, index }: FeatureCardProps
     );
 };
 
-export default function TestingFeaturesSection() {
+export default function AIFeaturesSection() {
     return (
         <section className="relative py-10 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden">
-            {/* Subtle background pattern */}
+
             <div className="absolute inset-0 bg-grid-gray-100/50 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
 
             <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-                {/* Header */}
+
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -193,23 +190,24 @@ export default function TestingFeaturesSection() {
                         className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-200/50 rounded-full mb-6"
                     >
                         <Sparkles className="w-4 h-4 text-blue-600" />
-                        <span className="text-sm font-semibold text-blue-700">Software Testing & Quality Assurance</span>
+                        <span className="text-sm font-semibold text-blue-700">Artificial Intelligence Excellence</span>
                     </motion.div>
 
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight">
-                        Build Reliable Software with{" "}
+                        Build Intelligent Systems with{" "}
                         <span className="text-brand">
-                            Expert QA & Test Automation
+                            Real-World AI Skills
                         </span>
                     </h2>
+
                     <p className="text-lg text-gray-600 leading-relaxed">
-                        Learn manual testing, automation (Selenium, Playwright, Cypress), API & performance testing, and QA best practices. Become a job-ready SDET or QA engineer with hands-on projects, interview prep, and industry certification guidance.
+                        Become a highly skilled AI professional by mastering deep learning, machine learning, NLP,
+                        computer vision, and MLOps. Work on real-world AI projects and prepare for top AI & ML job roles.
                     </p>
                 </motion.div>
 
-                {/* Features grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {testingFeatures.map((feature, index) => (
+                    {biFeatures.map((feature, index) => (
                         <FeatureCard
                             key={index}
                             icon={feature.icon}
@@ -221,7 +219,6 @@ export default function TestingFeaturesSection() {
                     ))}
                 </div>
 
-                {/* Bottom CTA */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -230,7 +227,7 @@ export default function TestingFeaturesSection() {
                     className="text-center mt-16"
                 >
                     <p className="text-gray-600 mb-6">
-                        Ready to launch your QA career or level up as an SDET?
+                        Ready to build your career in Artificial Intelligence?
                     </p>
                     <motion.button
                         whileHover={{ scale: 1.05 }}
@@ -238,7 +235,7 @@ export default function TestingFeaturesSection() {
                         className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                     >
                         <Target className="w-5 h-5" />
-                        Explore Software Testing Courses
+                        Explore AI Courses
                     </motion.button>
                 </motion.div>
             </div>

@@ -73,16 +73,6 @@ export default function HeroSection() {
                             ))}
                         </div>
 
-                        {/* Feature Pills */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-6">
-                            {['100% Live Interactive Classes', '90+ Real-World Projects', 'ISTQB & Industry Certifications', '100% Job Support with Interview Guarantee', 'Flexible Weekend & Weekday Batches', 'Lifetime Access to Course Materials'].map((feature, i) => (
-                                <div key={i} className="flex items-center gap-2 text-sm sm:text-base">
-                                    <span className="text-green-500">✓</span>
-                                    <span className="text-gray-700 break-words">{feature}</span>
-                                </div>
-                            ))}
-                        </div>
-
                         {/* CTA Buttons */}
                         <div className="flex flex-wrap gap-3 sm:gap-4 pt-8">
                             <button className="flex items-center gap-2 sm:gap-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 sm:px-6 py-3 rounded-xl text-sm sm:text-lg transition shadow-lg w-full sm:w-auto justify-center">
@@ -98,6 +88,18 @@ export default function HeroSection() {
                                 Watch CDPL
                             </button>
                         </div>
+
+                        {/* Feature Pills */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-6">
+                            {['100% Live Interactive Classes', '90+ Real-World Projects', 'ISTQB & Industry Certifications', '100% Job Support with Interview Guarantee', 'Flexible Weekend & Weekday Batches', 'Lifetime Access to Course Materials'].map((feature, i) => (
+                                <div key={i} className="flex items-center gap-2 text-sm sm:text-base">
+                                    <span className="text-green-500">✓</span>
+                                    <span className="text-gray-700 break-words">{feature}</span>
+                                </div>
+                            ))}
+                        </div>
+
+
                     </motion.div>
 
                     {/* RIGHT SECTION */}

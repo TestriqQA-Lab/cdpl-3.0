@@ -1,15 +1,16 @@
 'use client';
 
 import { motion, Variants } from 'framer-motion';
-import { Zap, TrendingUp, Star, Clock, Users, CheckCircle, ArrowRight, Download } from 'lucide-react';
-import { COURSES, Course } from '@/components/DS&ML-Courses/data/data';
+import { Zap, Star, Clock, Users, CheckCircle, ArrowRight, Download, BarChart3 } from 'lucide-react';
+
+import { COURSES, Course } from '@/components/BI-Courses/data/data';
 import { DownloadFormButton } from '@/components/DownloadForm';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 
 export const iconMap = {
-    TrendingUp: <TrendingUp className="w-10 h-10" />,
+    BarChart3: <BarChart3 className="w-10 h-10" />,
 }
 
 // --- Card Styling Constants from CourseOverviewSection.tsx ---
@@ -254,7 +255,7 @@ export default function CoursesSection() {
                     <span className="inline-block px-4 py-2 bg-orange-100 text-orange-600 rounded-full text-sm font-semibold mb-4">
                         Popular Courses
                     </span>
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
                         Explore Our <span className="text-brand">Industry-Ready</span> Courses
                     </h2>
                     <p className="text-lg text-gray-600 max-w-3xl mx-auto">

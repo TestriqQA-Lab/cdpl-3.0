@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Star, Quote, Briefcase, TrendingUp, Award, CheckCircle, Sparkles, LucideIcon } from 'lucide-react';
+import { Briefcase, TrendingUp, Award, CheckCircle, Sparkles, LucideIcon } from 'lucide-react';
 import ReviewsMarquee from '@/components/sections/ReviewMarque';
 
 const StatCard = ({ icon: Icon, value, label, delay }: { icon: LucideIcon; value: string; label: string; delay: number }) => (
@@ -12,7 +12,7 @@ const StatCard = ({ icon: Icon, value, label, delay }: { icon: LucideIcon; value
         transition={{ duration: 0.5, delay }}
         className="flex flex-col items-center p-6 bg-white rounded-xl border-2 border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
     >
-        <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mb-3">
+        <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-cyan-600 rounded-lg flex items-center justify-center mb-3">
             <Icon className="w-6 h-6 text-white" />
         </div>
         <div className="text-3xl font-bold text-gray-900 mb-1">{value}</div>
@@ -43,39 +43,33 @@ export default function TestimonialsSection() {
                         initial={{ scale: 0.9, opacity: 0 }}
                         whileInView={{ scale: 1, opacity: 1 }}
                         viewport={{ once: true }}
-                        className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-200/50 rounded-full mb-6"
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-500/10 to-cyan-500/10 border border-indigo-200/50 rounded-full mb-6"
                     >
-                        <Award className="w-4 h-4 text-blue-600" />
-                        <span className="text-sm font-semibold text-blue-700">Student Success Stories</span>
+                        <Award className="w-4 h-4 text-indigo-600" />
+                        <span className="text-sm font-semibold text-indigo-700">Student Success Stories</span>
                     </motion.div>
 
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
                         Real Results From{" "}
                         <span className="text-brand">
-                            Software Testing Professionals
+                            Data Science & ML Graduates
                         </span>
                     </h2>
 
                     <p className="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed">
-                        Join thousands of QA engineers and testers who accelerated their careers with our comprehensive
-                        Software Testing training — mastering manual & automated testing, test design, and modern QA tools.
+                        Join thousands of learners who advanced their careers through hands-on Data Science & Machine Learning training. See how alumni moved into data roles, shipped models to production, and boosted their earnings.
                     </p>
                 </motion.div>
 
                 {/* Stats */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-                    <StatCard icon={CheckCircle} value="2,000+" label="QA Graduates" delay={0.1} />
-                    <StatCard icon={TrendingUp} value="40%" label="Avg. Salary Increase" delay={0.2} />
+                    <StatCard icon={CheckCircle} value="3,200+" label="Graduates Trained" delay={0.1} />
+                    <StatCard icon={TrendingUp} value="45%" label="Avg. Salary Increase" delay={0.2} />
                     <StatCard icon={Briefcase} value="92%" label="Placement Rate" delay={0.3} />
-                    <StatCard icon={Award} value="400+" label="Hiring Partners" delay={0.4} />
+                    <StatCard icon={Award} value="600+" label="Hiring Partners" delay={0.4} />
                 </div>
 
-                {/* Reviews / Marquee */}
-                <div className="mb-12">
-                    <div className="bg-gradient-to-br from-orange-50 to-white p-2 lg:p-8 rounded-2xl shadow-xl border border-orange-100">
-                        <ReviewsMarquee />
-                    </div>
-                </div>
+                <ReviewsMarquee />
 
                 {/* Bottom CTA */}
                 <motion.div
@@ -85,20 +79,20 @@ export default function TestimonialsSection() {
                     transition={{ delay: 0.5 }}
                     className="text-center mt-10"
                 >
-                    <div className="inline-flex flex-col sm:flex-row items-center gap-4 p-6 bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 border-2 border-blue-200 rounded-2xl shadow-lg">
+                    <div className="inline-flex flex-col sm:flex-row items-center gap-4 p-6 bg-gradient-to-r from-indigo-50 via-cyan-50 to-pink-50 border-2 border-indigo-200 rounded-2xl shadow-lg">
                         <div className="flex items-center gap-3">
-                            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                            <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-cyan-600 rounded-xl flex items-center justify-center">
                                 <Sparkles className="w-6 h-6 text-white" />
                             </div>
                             <div className="text-left">
-                                <div className="font-bold text-gray-900 text-lg">Start Your QA Career</div>
-                                <div className="text-sm text-gray-600">Join our next Software Testing cohort and become job-ready</div>
+                                <div className="font-bold text-gray-900 text-lg">Start Your DS & ML Story</div>
+                                <div className="text-sm text-gray-600">Join our next Data Science & ML cohort — hands-on projects, mentorship, and career support.</div>
                             </div>
                         </div>
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                            className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-cyan-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                         >
                             Enroll Now
                         </motion.button>

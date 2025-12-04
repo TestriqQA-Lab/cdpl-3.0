@@ -2,82 +2,34 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Code2, Briefcase, Award, Zap, ArrowRight, TrendingUp, BarChart3, Sparkles, CheckCircle, Eye } from "lucide-react";
-
-const projectsContent = {
-    title: "Hands-On Projects",
-    description: "Build real-world projects to strengthen your portfolio.",
-    subtitle: "Apply your learning through practical, industry-relevant projects.",
-    projects: [
-        {
-            name: "E-Commerce Platform Testing",
-            description:
-                "Complete testing of an e-commerce application including manual and automation testing.",
-            skills: ["Manual Testing", "Selenium", "Test Case Design", "Bug Reporting"],
-            difficulty: "Intermediate",
-        },
-        {
-            name: "Banking Application QA",
-            description: "Security and performance testing of a banking application.",
-            skills: [
-                "Security Testing",
-                "Performance Testing",
-                "API Testing",
-                "Database Testing",
-            ],
-            difficulty: "Advanced",
-        },
-        {
-            name: "Mobile App Testing Suite",
-            description:
-                "Comprehensive testing of a mobile application across multiple devices.",
-            skills: [
-                "Mobile Testing",
-                "Appium",
-                "Cross-Platform Testing",
-                "Device Testing",
-            ],
-            difficulty: "Intermediate",
-        },
-        {
-            name: "CI/CD Pipeline Implementation",
-            description: "Set up automated testing in a CI/CD pipeline with Jenkins.",
-            skills: [
-                "Automation Testing",
-                "Jenkins",
-                "Git Integration",
-                "Test Reporting",
-            ],
-            difficulty: "Advanced",
-        },
-    ],
-};
+import { Code2, Briefcase, Award, Zap, ArrowRight, TrendingUp, BarChart3, Sparkles, Eye } from "lucide-react";
+import { ProjectContent } from "@/components/AI-Courses/data/data";
 
 const benefits = [
     {
         icon: Briefcase,
         title: "Portfolio-Ready Projects",
-        description: "Build professional-grade QA artifacts and test suites that demonstrate your hands-on expertise.",
+        description: "Build professional-grade BI solutions that demonstrate your expertise to potential employers and clients.",
         color: "from-blue-500 to-cyan-600",
         bgColor: "from-blue-50 to-cyan-50"
     },
     {
         icon: Award,
         title: "Industry Recognition",
-        description: "Work on projects that mirror real enterprise QA scenarios across fintech, e-commerce, and mobile.",
+        description: "Work on projects based on real business scenarios from Fortune 500 companies across multiple industries.",
         color: "from-purple-500 to-fuchsia-600",
         bgColor: "from-purple-50 to-fuchsia-50"
     },
     {
         icon: Zap,
         title: "Interview Confidence",
-        description: "Discuss real test strategies, automation frameworks and CI/CD integration during interviews.",
+        description: "Discuss actual implementations in interviews with hands-on experience in ETL, dashboards, and analytics.",
         color: "from-orange-500 to-red-600",
         bgColor: "from-orange-50 to-red-50"
     }
 ];
 
-const ProjectCard = ({ project, index }: { project: typeof projectsContent.projects[0]; index: number }) => {
+const ProjectCard = ({ project, index }: { project: typeof ProjectContent.projects[0]; index: number }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     const gradients = [
@@ -140,7 +92,7 @@ const ProjectCard = ({ project, index }: { project: typeof projectsContent.proje
             viewport={{ once: true, margin: "-50px" }}
             transition={{
                 duration: 0.6,
-                delay: index * 0.08,
+                delay: index * 0.1,
                 ease: [0.21, 0.47, 0.32, 0.98]
             }}
             whileHover={{ y: -8, transition: { duration: 0.3 } }}
@@ -156,7 +108,7 @@ const ProjectCard = ({ project, index }: { project: typeof projectsContent.proje
                 <div className={`h-2 bg-gradient-to-r ${theme.accent}`} />
 
                 <div className="p-8 flex flex-col flex-grow">
-                    {/* Header with icon */}
+                    {/* Header with icon and badges */}
                     <div className="flex items-start justify-between mb-6">
                         <motion.div
                             animate={{ rotate: isHovered ? [0, -10, 10, -10, 0] : 0 }}
@@ -186,7 +138,7 @@ const ProjectCard = ({ project, index }: { project: typeof projectsContent.proje
                                     key={i}
                                     initial={{ opacity: 0, scale: 0.8 }}
                                     whileInView={{ opacity: 1, scale: 1 }}
-                                    transition={{ delay: index * 0.08 + i * 0.04 }}
+                                    transition={{ delay: index * 0.1 + i * 0.05 }}
                                     className="text-xs font-semibold px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg border border-gray-200 hover:border-gray-300 transition-colors"
                                 >
                                     {skill}
@@ -203,7 +155,6 @@ const ProjectCard = ({ project, index }: { project: typeof projectsContent.proje
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         className={`w-full bg-gradient-to-r ${theme.accent} text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 group/btn`}
-                        aria-label={`View details for ${project.name}`}
                     >
                         <Eye className="w-5 h-5" />
                         View Project Details
@@ -223,7 +174,7 @@ const BenefitCard = ({ benefit, index }: { benefit: typeof benefits[0]; index: n
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: index * 0.12 }}
+        transition={{ duration: 0.6, delay: index * 0.15 }}
         whileHover={{ y: -6, transition: { duration: 0.2 } }}
         className="group relative"
     >
@@ -277,22 +228,22 @@ const ProjectsSection = () => {
                         <span className="text-sm font-semibold text-blue-700">Capstone Projects</span>
                     </motion.div>
 
-                    <h2 className="mt-5 text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                        {projectsContent.title}
+                    <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                        {ProjectContent.title}
                     </h2>
 
                     <p className="text-xl font-semibold text-gray-700 mb-4">
-                        {projectsContent.subtitle}
+                        {ProjectContent.subtitle}
                     </p>
 
                     <p className="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed">
-                        {projectsContent.description}
+                        {ProjectContent.description}
                     </p>
                 </motion.div>
 
                 {/* Projects Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-                    {projectsContent.projects.map((project, index) => (
+                    {ProjectContent.projects.map((project, index) => (
                         <ProjectCard key={project.name} project={project} index={index} />
                     ))}
                 </div>
@@ -318,7 +269,7 @@ const ProjectsSection = () => {
                         Why Build These Projects?
                     </h3>
                     <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                        Transform from a learner to a job-ready QA professional with hands-on testing and automation experience.
+                        Transform from a learner to a job-ready BI professional with hands-on experience.
                     </p>
                 </motion.div>
 
@@ -344,10 +295,10 @@ const ProjectsSection = () => {
                             </div>
                             <div className="text-left">
                                 <h3 className="text-2xl font-bold text-gray-900 mb-1">
-                                    Ready to Build Your QA Portfolio?
+                                    Ready to Build Your Portfolio?
                                 </h3>
                                 <p className="text-gray-600">
-                                    Start creating industry-standard testing projects today
+                                    Start creating industry-standard BI projects today
                                 </p>
                             </div>
                         </div>
@@ -356,7 +307,7 @@ const ProjectsSection = () => {
                             whileTap={{ scale: 0.95 }}
                             className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
                         >
-                            Enroll in Software Testing Course
+                            Enroll in AI Course
                             <ArrowRight className="w-5 h-5" />
                         </motion.button>
                     </div>

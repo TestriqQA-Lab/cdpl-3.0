@@ -17,7 +17,7 @@ import {
   Send,
   ChevronRight,
 } from "lucide-react";
-import Link from "next/link";
+
 import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
 import CareerSessionModal from "@/components/CareerSessionModal";
 

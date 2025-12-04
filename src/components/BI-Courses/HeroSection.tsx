@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Play, FileText } from 'lucide-react';
-import LeadForm from '@/components/DS&ML-Courses/LeadForm';
+import LeadForm from '@/components/BI-Courses/LeadForm';
 
 export default function HeroSection() {
     return (
@@ -18,12 +18,12 @@ export default function HeroSection() {
                     >
                         {/* Badge */}
                         <div className="w-fit bg-blue-50 text-blue-700 px-3 py-2 rounded-full text-xs sm:text-sm font-medium">
-                            India's #1 Data Science & ML Training Institute
+                            India's #1 BI & Analytics Training Institute
                         </div>
 
                         {/* Main Heading */}
                         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-snug sm:leading-tight mt-4 sm:mt-6 break-words">
-                            Master <span className="text-orange-500">Data Science & ML Courses</span> <br className="md:hidden" />with <br className="md:hidden" />100% Placement Support
+                            Master <span className="text-orange-500">Business Intelligence & Analytics</span> <br className="md:hidden" /> Courses with <br className="md:hidden" />100% Placement Support
                         </h1>
 
                         <motion.div
@@ -42,7 +42,7 @@ export default function HeroSection() {
 
                         {/* Subheading */}
                         <p className="text-base sm:text-lg lg:text-xl text-gray-700 max-w-4xl mt-4">
-                            Fast-track your career in Data Science and Machine Learning. Hands-on projects, real datasets, model deployment, and industry-aligned certifications (Python, scikit-learn, TensorFlow, PyTorch). Build a job-ready portfolio and get guaranteed interview opportunities.
+                            Fast-track your career in Business Intelligence and Analytics. Hands-on dashboards, ETL pipelines, data modelling, DAX & SQL, and industry-aligned certifications (Power BI, Tableau, SQL). Build interactive reports, present data stories and get guaranteed interview opportunities.
                         </p>
 
                         {/* CTA Buttons */}
@@ -53,7 +53,7 @@ export default function HeroSection() {
                             </button>
                             <button className="flex items-center gap-2 sm:gap-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 sm:px-6 py-3 rounded-xl text-sm sm:text-lg transition shadow-lg w-full sm:w-auto justify-center">
                                 <Play className="w-4 h-4 sm:w-5 sm:h-5" />
-                                View Placement Stories
+                                View Case Studies
                             </button>
                             <button className="flex items-center gap-2 sm:gap-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold px-5 sm:px-8 py-3 rounded-xl text-sm sm:text-lg transition shadow-lg w-full sm:w-auto justify-center">
                                 <Play className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -74,8 +74,8 @@ export default function HeroSection() {
                                 label: 'Student Rating'
                             }, {
                                 emoji: '🏆',
-                                value: '15+ Years',
-                                label: 'Industry Experience'
+                                value: '10+ Years',
+                                label: 'BI Industry Experience'
                             }].map((item, i) => (
                                 <div key={i} className="flex items-center gap-3 bg-white px-3 py-3 md:mt-3  rounded-xl shadow-lg flex-1 min-w-[150px]">
                                     <div className="bg-orange-100 p-3 rounded-full text-lg">
@@ -92,12 +92,12 @@ export default function HeroSection() {
                         {/* Feature Pills */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-6">
                             {[
-                                '100% Live Interactive Classes (Python & ML workflows)',
-                                '90+ Real-World Datasets & Projects (NLP, CV, Time Series)',
-                                'Industry Certifications: TensorFlow, AWS ML & ISTQB-equivalent for QA/ML',
+                                '100% Live Interactive Classes (Power BI & Tableau workflows)',
+                                '50+ Real Business Dashboards & Projects (Sales, Finance, Ops)',
+                                'Industry Certifications: Microsoft Power BI & Tableau Desktop',
                                 '100% Job Support with Interview Guarantee & Portfolio Reviews',
-                                'Model Deployment & MLOps — Docker, Flask, AWS/GCP',
-                                'Lifetime Access to Notebooks, Recordings & Course Materials'
+                                'Data Modelling & DAX — Star Schemas, Measures & Time Intelligence',
+                                'Lifetime Access to Reports, Templates & Course Materials'
                             ].map((feature, i) => (
                                 <div key={i} className="flex items-center gap-2 text-sm sm:text-base">
                                     <span className="text-green-500">✓</span>
