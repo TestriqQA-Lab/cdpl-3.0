@@ -1,5 +1,6 @@
-import Link from "next/link";
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import EnrollModal from "../EnrollModal";
 
 const toolsData = [
     {
@@ -62,6 +63,9 @@ const toolsData = [
 
 
 export default function ToolsSection() {
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const courseName = "Data Analytics & Visualization with Tableau";
+
     return (
         <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-white">
             <div className="max-w-7xl mx-auto">
@@ -144,19 +148,19 @@ export default function ToolsSection() {
                                 <li className="flex items-start gap-3">
                                     <span className="text-blue-600 font-bold flex-shrink-0">•</span>
                                     <span className="text-gray-700">
-                                        <span className="font-semibold\">Calculated Fields:</span> Custom calculations and expressions
+                                        <span className="font-semibold">Calculated Fields:</span> Custom calculations and expressions
                                     </span>
                                 </li>
                                 <li className="flex items-start gap-3">
                                     <span className="text-blue-600 font-bold flex-shrink-0">•</span>
                                     <span className="text-gray-700">
-                                        <span className="font-semibold\">Data Blending:</span> Combine multiple data sources
+                                        <span className="font-semibold">Data Blending:</span> Combine multiple data sources
                                     </span>
                                 </li>
                                 <li className="flex items-start gap-3">
                                     <span className="text-blue-600 font-bold flex-shrink-0">•</span>
                                     <span className="text-gray-700">
-                                        <span className="font-semibold\">Advanced Analytics:</span> Statistical analysis and forecasting
+                                        <span className="font-semibold">Advanced Analytics:</span> Statistical analysis and forecasting
                                     </span>
                                 </li>
                             </ul>
@@ -216,11 +220,21 @@ export default function ToolsSection() {
                     <p className="text-gray-600 text-lg mb-6">
                         Ready to master these powerful tools? Start your journey today!
                     </p>
-                    <Link href="contact-us" className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block">
+                    <button
+                        onClick={() => setIsEnrollOpen(true)}
+                        className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block cursor-pointer"
+                    >
                         Enroll Now and Start Learning →
-                    </Link>
+                    </button>
                 </div>
             </div>
+
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="Tableau Course Page - Tools Section - Enroll Now"
+                courseName={courseName}
+            />
         </section>
     );
 }

@@ -4,7 +4,7 @@
 
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Code2,
   Sparkles,
@@ -18,6 +18,8 @@ import {
   ChevronRight,
 } from "lucide-react";
 import Link from "next/link";
+import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
+import CareerSessionModal from "@/components/CareerSessionModal";
 
 type Tool = {
   name: string;
@@ -114,6 +116,9 @@ const TOOLS: Tool[] = [
 ];
 
 export default function ToolsSection() {
+  const [isSyllabusModalOpen, setIsSyllabusModalOpen] = useState(false);
+  const [isCareerModalOpen, setIsCareerModalOpen] = useState(false);
+
   const title = "Tools You’ll Master";
   const subtitle =
     "Engineer with an industry-standard Java toolchain: build, test, containerize and deploy cloud-ready applications using Spring Boot, Hibernate, Docker, AWS, Git and more.";
@@ -215,20 +220,36 @@ export default function ToolsSection() {
         {/* Actions */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 text-center sm:flex-row sm:gap-4">
           <button
-            className="inline-flex items-center justify-center rounded-xl border border-gray-200 bg-gray-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
+            onClick={() => setIsSyllabusModalOpen(true)}
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-gray-200 bg-gray-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
           >
             Download Setup Guide
             <ChevronRight className="ml-1 h-4 w-4" />
           </button>
-          <Link
-            href="contact-us"
-            className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-50"
+          <button
+            onClick={() => setIsCareerModalOpen(true)}
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-50"
           >
             Explore Tool Labs
-          </Link>
+          </button>
         </div>
       </div>
 
+      <SyllabusDownloadModal
+        isOpen={isSyllabusModalOpen}
+        onClose={() => setIsSyllabusModalOpen(false)}
+        courseName="Java Programming"
+        source="Java Course Page - Tools Section - Download Setup Guide"
+      />
+
+      <CareerSessionModal
+        isOpen={isCareerModalOpen}
+        onClose={() => setIsCareerModalOpen(false)}
+        courseName="Java Programming"
+        source="Java Course Page - Tools Section - Explore Tool Labs"
+        title="Explore Tool Labs"
+        subtitle="Get hands-on access to our Java development environment."
+      />
 
       {/* Accessible helpers for crawlers & screen readers */}
       <h1 className="sr-only">{title}</h1>

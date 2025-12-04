@@ -1,7 +1,7 @@
-// components/powerbi/WhoShouldEnroll.tsx
 "use client";
-
-import React from "react";
+// components/powerbi/WhoShouldEnroll.tsx
+import React, { useState } from "react";
+import EnrollModal from "../EnrollModal";
 
 type ColorVariant = "blue" | "orange" | "green" | "purple";
 
@@ -53,6 +53,9 @@ const AudienceCard: React.FC<AudienceCardProps> = ({ title, description, emoji, 
 };
 
 const WhoShouldEnroll: React.FC = () => {
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const courseName = "Data Analytics & Visualization with Power BI";
+
   const audience: AudienceCardProps[] = [
     {
       title: "Beginners & Career Changers",
@@ -104,7 +107,24 @@ const WhoShouldEnroll: React.FC = () => {
             <AudienceCard key={item.title} {...item} />
           ))}
         </div>
+
+        {/* CTA */}
+        <div className="mt-16 text-center">
+          <button
+            onClick={() => setIsEnrollOpen(true)}
+            className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block cursor-pointer"
+          >
+            Enroll Now
+          </button>
+        </div>
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="Power BI Course Page - Who Should Enroll - Enroll Now"
+        courseName={courseName}
+      />
     </section>
   );
 };

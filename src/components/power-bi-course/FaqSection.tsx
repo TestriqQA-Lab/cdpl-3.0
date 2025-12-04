@@ -1,8 +1,8 @@
 "use client";
-
 // components/powerbi/FaqSection.tsx
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import EnrollModal from "../EnrollModal";
 
 type ColorVariant = "blue" | "orange" | "green" | "purple" | "pink";
 
@@ -143,6 +143,8 @@ function FaqRow({
 
 const FaqSection: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const courseName = "Data Analytics & Visualization with Power BI";
 
   const toggleFaq = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -165,7 +167,24 @@ const FaqSection: React.FC = () => {
             <FaqRow key={item.question} item={item} isOpen={activeIndex === index} toggle={() => toggleFaq(index)} idx={index} />
           ))}
         </div>
+
+        {/* CTA */}
+        <div className="mt-16 text-center">
+          <button
+            onClick={() => setIsEnrollOpen(true)}
+            className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block cursor-pointer"
+          >
+            Still have questions? Contact Us
+          </button>
+        </div>
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="Power BI Course Page - FAQ Section - Contact Us"
+        courseName={courseName}
+      />
     </section>
   );
 };

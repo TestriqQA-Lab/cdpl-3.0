@@ -1,4 +1,7 @@
+"use client";
+import { useState } from "react";
 import { TrendingUp, PieChart, Users } from "lucide-react";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
 
 
 const projects = [
@@ -26,6 +29,9 @@ const projects = [
 ];
 
 export default function ProjectsSection() {
+    const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+    const courseName = "Advanced Excel for Data Analytics & Visualization";
+
     return (
         <section className="relative py-20 bg-gradient-to-b from-slate-50 to-white overflow-hidden">
             {/* Decorative background */}
@@ -158,7 +164,24 @@ export default function ProjectsSection() {
                         ))}
                     </div>
                 </div>
+
+                {/* CTA */}
+                <div className="mt-16 text-center">
+                    <button
+                        onClick={() => setIsSyllabusOpen(true)}
+                        className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block cursor-pointer"
+                    >
+                        Download Project Guide
+                    </button>
+                </div>
             </div>
+
+            <SyllabusDownloadModal
+                isOpen={isSyllabusOpen}
+                onClose={() => setIsSyllabusOpen(false)}
+                source="Data Analytics & Visualization Course Page - Projects Section - Download Guide"
+                courseName={courseName}
+            />
         </section>
     );
 }

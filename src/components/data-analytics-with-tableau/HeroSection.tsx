@@ -2,7 +2,11 @@
 import { ArrowRight, ChevronRight, Home } from "lucide-react";
 import Link from "next/link";
 import Head from "next/head";
-import React from "react";
+import React, { useState } from "react";
+import ApiCourseLeadForm from "../forms/ApiCourseLeadForm";
+import EnrollModal from "../EnrollModal";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
+import CareerSessionModal from "../CareerSessionModal";
 
 const heroData = {
     title: "Master Data Analytics & Visualization with Tableau",
@@ -26,126 +30,6 @@ const heroData = {
     },
 };
 
-/** --- Reusable Form --- */
-function LeadForm({ className = "" }: { className?: string }) {
-    const countries = [
-        { code: "IN", dial: "+91", label: "India", flag: "🇮🇳" },
-        { code: "US", dial: "+1", label: "United States", flag: "🇺🇸" },
-        { code: "GB", dial: "+44", label: "United Kingdom", flag: "🇬🇧" },
-        { code: "AE", dial: "+971", label: "United Arab Emirates", flag: "🇦🇪" },
-        { code: "SG", dial: "+65", label: "Singapore", flag: "🇸🇬" },
-        { code: "AU", dial: "+61", label: "Australia", flag: "🇦🇺" },
-    ];
-
-    return (
-        <form
-            className={[
-                "w-full rounded-2xl border border-slate-200 bg-white/90 backdrop-blur-sm shadow-lg",
-                "p-5 sm:p-6",
-                className,
-            ].join(" ")}
-            onSubmit={(e) => {
-                e.preventDefault();
-                // submit handling here
-            }}
-            aria-label="Enroll for Tableau Data Analytics & Visualization"
-        >
-            <h2 className="text-xl font-semibold text-slate-900">
-                Request Syllabus & Free Consultation
-            </h2>
-            <p className="mt-1 text-sm text-slate-600">
-                Get the detailed curriculum, career guidance, and upcoming batch info.
-            </p>
-
-            <div className="mt-4 grid grid-cols-1 gap-4">
-                {/* Name */}
-                <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-slate-700">
-                        Full Name
-                    </label>
-                    <input
-                        id="name"
-                        name="name"
-                        required
-                        autoComplete="name"
-                        placeholder="Your full name"
-                        className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-300"
-                    />
-                </div>
-
-                {/* Email */}
-                <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-slate-700">
-                        Email
-                    </label>
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        required
-                        autoComplete="email"
-                        placeholder="you@example.com"
-                        className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-300"
-                    />
-                </div>
-
-                {/* Phone with country code + flag */}
-                <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-slate-700">
-                        Mobile Number
-                    </label>
-                    <div className="mt-1 flex items-stretch gap-2">
-                        <div className="flex min-w-[7.5rem] items-center rounded-lg border border-slate-300 bg-white px-2">
-                            <select
-                                name="country"
-                                aria-label="Country code"
-                                defaultValue="IN"
-                                className="w-full bg-transparent py-2 text-slate-900 focus:outline-none"
-                            >
-                                {countries.map((c) => (
-                                    <option key={c.code} value={c.code}>
-                                        {c.flag} {c.label} ({c.dial})
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <input
-                            id="phone"
-                            name="phone"
-                            type="tel"
-                            inputMode="tel"
-                            required
-                            placeholder="98765 43210"
-                            pattern="^[0-9\s\-()+]{7,20}$"
-                            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-300"
-                        />
-                    </div>
-                    <p className="mt-1 text-xs text-slate-500">
-                        We’ll never share your number. Standard rates may apply.
-                    </p>
-                </div>
-
-                <button
-                    type="submit"
-                    className="group inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 px-5 py-3 font-semibold text-white shadow-lg transition-all hover:from-orange-600 hover:to-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300"
-                >
-                    Get Syllabus & Pricing
-                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
-                </button>
-
-                <p className="text-xs text-slate-500">
-                    By submitting, you agree to our{" "}
-                    <Link href="/privacy-policy" className="underline hover:text-slate-700">
-                        Privacy Policy
-                    </Link>
-                    .
-                </p>
-            </div>
-        </form>
-    );
-}
-
-/** ---- Optional: visible breadcrumb for internal linking ---- */
 /** ---- Optional: visible breadcrumb for internal linking ---- */
 const breadcrumbs = [
     { label: "Home", href: "/" },
@@ -154,7 +38,11 @@ const breadcrumbs = [
 ];
 
 export default function HeroSection() {
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+    const [isCareerSessionOpen, setIsCareerSessionOpen] = useState(false);
 
+    const courseName = "Data Analytics & Visualization with Tableau";
 
     return (
         <section className="relative min-h-screen bg-gradient-to-br from-white via-blue-50 to-white pt-8 md:pt-12 pb-16 overflow-hidden">
@@ -226,7 +114,9 @@ export default function HeroSection() {
                             </h1>
 
                             {/* Mobile form (under H1) */}
-                            <LeadForm className="mt-3 md:hidden" />
+                            <div className="mt-3 md:hidden">
+                                <ApiCourseLeadForm source="Tableau Course Page - Hero Section (Mobile)" courseName={courseName} />
+                            </div>
 
                             <p className="text-lg text-gray-700 leading-relaxed max-w-2xl">
                                 {heroData.subtitle}
@@ -250,10 +140,16 @@ export default function HeroSection() {
 
                         {/* CTA Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                            <button className="bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-lg px-8 py-3 transition-all">
+                            <button
+                                onClick={() => setIsEnrollOpen(true)}
+                                className="bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-lg px-8 py-3 transition-all cursor-pointer"
+                            >
                                 {heroData.cta.primary} →
                             </button>
-                            <button className="border-2 border-gray-300 hover:border-orange-600 text-gray-700 font-semibold rounded-lg px-8 py-3 transition-all">
+                            <button
+                                onClick={() => setIsSyllabusOpen(true)}
+                                className="border-2 border-gray-300 hover:border-orange-600 text-gray-700 font-semibold rounded-lg px-8 py-3 transition-all cursor-pointer"
+                            >
                                 {heroData.cta.secondary}
                             </button>
                         </div>
@@ -300,10 +196,29 @@ export default function HeroSection() {
 
                     {/* Right spacer to balance grid (form moved to top) */}
                     <div className="md:col-span-5 lg:col-span-4 hidden md:block">
-                        <LeadForm />
+                        <ApiCourseLeadForm source="Tableau Course Page - Hero Section (Desktop)" courseName={courseName} />
                     </div>
                 </div>
             </div>
+
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="Tableau Course Page - Hero Section - Enroll Now"
+                courseName={courseName}
+            />
+            <SyllabusDownloadModal
+                isOpen={isSyllabusOpen}
+                onClose={() => setIsSyllabusOpen(false)}
+                source="Tableau Course Page - Hero Section - Download Syllabus"
+                courseName={courseName}
+            />
+            <CareerSessionModal
+                isOpen={isCareerSessionOpen}
+                onClose={() => setIsCareerSessionOpen(false)}
+                source="Tableau Course Page - Hero Section - Career Session"
+                courseName={courseName}
+            />
         </section>
     );
 }

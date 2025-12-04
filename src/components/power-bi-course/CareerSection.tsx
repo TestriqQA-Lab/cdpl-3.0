@@ -1,7 +1,7 @@
-// components/powerbi/CareerSection.tsx
 "use client";
-
-import React from "react";
+// components/powerbi/CareerSection.tsx
+import React, { useState } from "react";
+import CareerSessionModal from "../CareerSessionModal";
 
 type ColorVariant =
   | "blue"
@@ -66,6 +66,9 @@ const RoleCard: React.FC<RoleCardProps> = ({ title, emoji, color }) => {
 };
 
 const CareerSection: React.FC = () => {
+  const [isCareerSessionOpen, setIsCareerSessionOpen] = useState(false);
+  const courseName = "Data Analytics & Visualization with Power BI";
+
   const jobRoles: RoleCardProps[] = [
     { title: "Power BI Analyst", emoji: "📊", color: "blue" },
     { title: "Business Intelligence Analyst", emoji: "📈", color: "orange" },
@@ -97,7 +100,24 @@ const CareerSection: React.FC = () => {
             <RoleCard key={role.title} {...role} />
           ))}
         </div>
+
+        {/* CTA */}
+        <div className="mt-16 text-center">
+          <button
+            onClick={() => setIsCareerSessionOpen(true)}
+            className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block cursor-pointer"
+          >
+            Book a Free Career Session
+          </button>
+        </div>
       </div>
+
+      <CareerSessionModal
+        isOpen={isCareerSessionOpen}
+        onClose={() => setIsCareerSessionOpen(false)}
+        source="Power BI Course Page - Career Section - Career Session"
+        courseName={courseName}
+      />
     </section>
   );
 };

@@ -1,5 +1,6 @@
+"use client";
 // components/powerbi/WhyBIProgram.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Target,
   UserCheck,
@@ -9,6 +10,7 @@ import {
   Zap,
   type LucideIcon,
 } from 'lucide-react';
+import EnrollModal from "../EnrollModal";
 
 type ColorVariant = 'blue' | 'orange' | 'green' | 'purple' | 'pink' | 'indigo';
 
@@ -93,6 +95,9 @@ const AdvantageCard: React.FC<AdvantageCardProps> = ({ Icon, title, description,
 };
 
 const WhyBIProgram: React.FC = () => {
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const courseName = "Data Analytics & Visualization with Power BI";
+
   // Assign DISTINCT colors per card (no repeats)
   const advantages: AdvantageCardProps[] = [
     {
@@ -159,7 +164,24 @@ const WhyBIProgram: React.FC = () => {
             <AdvantageCard key={adv.title} {...adv} />
           ))}
         </div>
+
+        {/* CTA */}
+        <div className="mt-16 text-center">
+          <button
+            onClick={() => setIsEnrollOpen(true)}
+            className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-lg transition-all inline-block cursor-pointer"
+          >
+            Start Your Journey Today
+          </button>
+        </div>
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="Power BI Course Page - Why BI Program - Start Journey"
+        courseName={courseName}
+      />
     </section>
   );
 };

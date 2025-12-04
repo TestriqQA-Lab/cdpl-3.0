@@ -1,5 +1,6 @@
+"use client";
 // components/powerbi/CareerRoadmapSection.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import {
   UserPlus,
   BookOpen,
@@ -8,7 +9,9 @@ import {
   Briefcase,
   TrendingUp,
   type LucideIcon,
+  ArrowRight,
 } from 'lucide-react';
+import EnrollModal from "../EnrollModal";
 
 type ColorVariant = 'blue' | 'orange' | 'green' | 'purple' | 'pink' | 'indigo';
 
@@ -87,6 +90,9 @@ const roadmapSteps: Step[] = [
 ];
 
 const CareerRoadmapSection: React.FC = () => {
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const courseName = "Data Analytics & Visualization with Power BI";
+
   return (
     <section className="py-16 md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -173,7 +179,25 @@ const CareerRoadmapSection: React.FC = () => {
             );
           })}
         </div>
+
+        {/* CTA */}
+        <div className="mt-16 text-center">
+          <button
+            onClick={() => setIsEnrollOpen(true)}
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-orange-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all hover:bg-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300 cursor-pointer"
+          >
+            Start Your Roadmap
+            <ArrowRight className="h-5 w-5" />
+          </button>
+        </div>
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="Power BI Course Page - Career Roadmap - Start Roadmap"
+        courseName={courseName}
+      />
     </section>
   );
 };

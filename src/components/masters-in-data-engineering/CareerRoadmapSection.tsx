@@ -1,9 +1,9 @@
-// src/components/data-analytics-bi-bigdata/CareerRoadmapSection.tsx
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { CareerPathStep } from "./types";
-import { TrendingUp, User, Server, Zap, Globe } from "lucide-react";
+import { TrendingUp, User, Server, Zap, Globe, ArrowRight } from "lucide-react";
+import EnrollModal from "../EnrollModal";
 
 const roadmapData: CareerPathStep[] = [
   {
@@ -86,6 +86,9 @@ const colorConfigs = [
 ];
 
 const CareerRoadmapSection: React.FC = () => {
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const courseName = "Data Analytics with BI & Big Data Engineering Master Program";
+
   return (
     <section className="bg-white py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -173,7 +176,25 @@ const CareerRoadmapSection: React.FC = () => {
           journey toward <strong>high-paying Big Data Engineer and Data Architect roles</strong> in
           India and global markets.
         </div>
+
+        {/* CTA */}
+        <div className="mt-16 text-center">
+          <button
+            onClick={() => setIsEnrollOpen(true)}
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-orange-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all hover:bg-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300 cursor-pointer"
+          >
+            Start Your Roadmap
+            <ArrowRight className="h-5 w-5" />
+          </button>
+        </div>
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="Data Engineering Course Page - Career Roadmap - Start Roadmap"
+        courseName={courseName}
+      />
     </section>
   );
 };

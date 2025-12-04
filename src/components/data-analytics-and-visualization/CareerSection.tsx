@@ -235,14 +235,14 @@ export default function CareerSection() {
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
                     <button
                         onClick={() => setIsSessionOpen(true)}
-                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-base font-semibold text-white shadow-lg transition-all hover:bg-blue-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-300"
+                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-base font-semibold text-white shadow-lg transition-all hover:bg-blue-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-300 cursor-pointer"
                     >
                         <Phone className="h-5 w-5" />
                         Get Placement Assistance
                     </button>
                     <button
                         onClick={() => setIsSyllabusOpen(true)}
-                        className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-blue-200 bg-white px-6 py-3 text-base font-semibold text-blue-700 shadow-sm transition-all hover:border-blue-300 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                        className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-blue-200 bg-white px-6 py-3 text-base font-semibold text-blue-700 shadow-sm transition-all hover:border-blue-300 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-200 cursor-pointer"
                     >
                         <Download className="h-5 w-5" />
                         Download Career Report
