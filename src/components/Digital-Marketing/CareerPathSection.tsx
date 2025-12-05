@@ -17,7 +17,7 @@ import {
     CheckCircle,
     X,
 } from "lucide-react";
-import { careerPathContent } from "@/components/DS&ML-Courses/data/data";
+import { careerPathContent } from "@/components/Digital-Marketing/data/data";
 
 import { EnrollPopup } from '@/components/EnrollForms';
 import BrochureDownloadModal from '@/components/home/BrochureDownloadModal';
@@ -383,7 +383,7 @@ export default function CareerPathSection() {
                             </div>
                             <div className="text-left">
                                 <h3 className="text-2xl font-bold text-gray-900 mb-1">
-                                    Ready to Launch Your Data Science Career?
+                                    Ready to Launch Your Digital Marketing Career?
                                 </h3>
                                 <p className="text-gray-600">
                                     Get personalized career guidance and placement support

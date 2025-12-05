@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { BarChart3, TrendingUp, Database, Brain, Users, Award, Zap, Target, LineChart, Briefcase, Shield, Sparkles } from 'lucide-react';
+import { BarChart3, TrendingUp, Database, Brain, Users, Award, Zap, Target, Briefcase, Shield, Sparkles } from 'lucide-react';
 
 // 🎯 Software Testing / QA-focused features with SEO-optimized content
 const testingFeatures = [

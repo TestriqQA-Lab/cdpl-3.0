@@ -33,16 +33,13 @@ const fadeUp = {
 /**
  * Redesigned desktop left content: sleek layered cards, micro-illustration,
  * testimonial, feature chips, and refined CTA layout. Preserves the handlers.
- *
- * Content updated for Business Intelligence Courses (SEO-optimized). Everything
- * else in the component is intentionally left unchanged.
  */
 const DesktopHeroContent: React.FC<{ onOpenBrochure: () => void; onOpenVideo: () => void; onOpenEnroll: () => void }> = ({ onOpenBrochure, onOpenVideo }) => {
 
     const breadcrumbs = [
         { label: 'Home', href: '/' },
-        { label: 'Business Intelligence Courses', href: '/bi-courses' },
-        { label: 'Business Intelligence' },
+        { label: 'Digital Marketing Courses', href: '/digital-marketing-courses' },
+        { label: 'Digital Marketing' },
     ];
 
     return (
@@ -82,35 +79,36 @@ const DesktopHeroContent: React.FC<{ onOpenBrochure: () => void; onOpenVideo: ()
             {/* Small badge */}
             <motion.div {...fadeUp} className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-slate-100 rounded-full px-3 py-1 text-sm font-medium text-slate-700 shadow-sm">
                 <Sparkles className="h-4 w-4 text-amber-500" />
-                <span>India's #1 Business Intelligence Training Institute</span>
+                <span>India's #1 Digital Marketing Training Institute</span>
             </motion.div>
 
             {/* Headline + micro graphic */}
             <div className="mt-6 flex gap-8 items-start">
                 <div className="max-w-5xl">
                     <motion.h1 {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.06 }} className="text-4xl lg:text-5xl font-extrabold leading-tight text-slate-900">
-                        Master <span className="text-orange-500">Business Intelligence</span> & Data Analytics - Turn data into actionable insights
+                        Master <span className="text-orange-500">Digital Marketing</span>{" "}
+                        & Analytics - Build measurable impact
                     </motion.h1>
 
                     <motion.p {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.12 }} className="mt-4 text-base text-slate-600">
-                        Industry-focused training in Business Intelligence with hands-on projects using SQL, Power BI, Tableau, Python (Pandas), and ETL workflows. Learn data modeling, KPI design, dashboarding, storytelling with data, and best practices for data governance. Build a BI portfolio and get placement support for BI Analyst, Data Analyst, and Analytics Engineer roles.
+                        Hands-on live projects, real growth stacks and mentor-led coaching to help you transition into high-growth marketing roles. Portfolio-ready work and recruiter introductions included.
                     </motion.p>
 
                     {/* Feature chips (clean minimal icons) */}
                     <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.18 }} className="mt-6 flex flex-wrap gap-3">
                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-50 border border-slate-100 rounded-full text-sm text-slate-700 shadow-sm">
                             <BarChart3 className="w-4 h-4 text-indigo-500" />
-                            <span className="font-medium">Hands-on BI Projects</span>
+                            <span className="font-medium">Data-driven Projects</span>
                         </div>
 
                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-50 border border-slate-100 rounded-full text-sm text-slate-700 shadow-sm">
                             <Cpu className="w-4 h-4 text-amber-500" />
-                            <span className="font-medium">Power BI, Tableau & SQL</span>
+                            <span className="font-medium">GA4 & Looker</span>
                         </div>
 
                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-50 border border-slate-100 rounded-full text-sm text-slate-700 shadow-sm">
                             <PieChart className="w-4 h-4 text-emerald-500" />
-                            <span className="font-medium">Data Visualization & Dashboards</span>
+                            <span className="font-medium">Portfolio-ready Case Studies</span>
                         </div>
                     </motion.div>
 
@@ -175,7 +173,7 @@ const DesktopHeroContent: React.FC<{ onOpenBrochure: () => void; onOpenVideo: ()
 
                     {/* microcopy for SEO and trust */}
                     <p className="mt-3 text-sm text-slate-600 max-w-2xl">
-                        CDPL’s Business Intelligence program covers Data Integration (ETL), SQL for analytics, Data Modeling, Dashboarding with Power BI and Tableau, Advanced Excel, Python for data manipulation, KPI design, storytelling with data, and governance best practices. The curriculum is tailored for beginners and working professionals aiming for BI Analyst, Data Analyst, and Analytics Engineer roles.
+                        CDPL’s program covers SEO, Google Ads, Meta Ads, content marketing, email campaigns, analytics (GA4), and conversion optimization — tailored for working professionals and freshers looking for measurable growth.
                     </p>
                 </div>
             </div>
@@ -204,11 +202,11 @@ const MobileFeatureList: React.FC<{ onOpenBrochure: () => void; onOpenVideo: () 
             </div>
             <div className="flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 text-green-600 flex-shrink-0" />
-                <span className="font-semibold">90+ Real-World BI Projects</span>
+                <span className="font-semibold">90+ Real-World Projects</span>
             </div>
             <div className="flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 text-green-600 flex-shrink-0" />
-                <span className="font-semibold">Industry Certifications (Power BI, Tableau, SQL)</span>
+                <span className="font-semibold">ISTQB & Industry Certifications</span>
             </div>
             <div className="flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 text-green-600 flex-shrink-0" />
@@ -266,15 +264,15 @@ export default function HeroSection(): React.JSX.Element {
                 <div className="lg:hidden">
                     <motion.div {...fadeUp} className="inline-flex items-center gap-2 bg-white border border-slate-100 rounded-full px-3 py-1 text-sm font-medium text-slate-700 shadow-sm mb-4">
                         <Sparkles className="h-4 w-4 text-amber-500" />
-                        <span>India's #1 Business Intelligence Training Institute</span>
+                        <span>India's #1 Digital Marketing Training Institute</span>
                     </motion.div>
 
                     <motion.h1 {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.06 }} className="text-3xl font-extrabold text-slate-900 leading-tight">
-                        Master <span className="text-orange-500">Business Intelligence</span> & Data Analytics
+                        Master <span className="text-orange-500">Digital Marketing</span> & Analytics
                     </motion.h1>
 
                     <motion.p {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.12 }} className="mt-3 text-base text-slate-600">
-                        Become a certified Business Intelligence professional. Learn SQL, Power BI, Tableau, data modeling, dashboard design, and storytelling with data — build a portfolio of real BI projects with placement-ready skills.
+                        Become a certified Digital Marketing expert. Learn SEO, SEM, Social Media, Content Marketing, and Analytics with live projects and 100% placement support.
                     </motion.p>
 
                     {/* Form below heading on mobile */}

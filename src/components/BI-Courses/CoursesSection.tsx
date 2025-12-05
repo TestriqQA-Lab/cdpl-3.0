@@ -5,6 +5,7 @@ import { Zap, Star, Clock, Users, CheckCircle, ArrowRight, Download, BarChart3 }
 
 import { COURSES, Course } from '@/components/BI-Courses/data/data';
 import { DownloadFormButton } from '@/components/DownloadForm';
+import { EnrollPopup } from '@/components/EnrollForms';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
@@ -76,6 +77,8 @@ const CourseCard: React.FC<{ course: Course; index: number; nowMs: number }> = (
     const seconds = pad(totalSeconds % 60);
     const isOver = diff <= 0;
 
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+
     return (
         <motion.article
             variants={itemVariants}
@@ -86,6 +89,7 @@ const CourseCard: React.FC<{ course: Course; index: number; nowMs: number }> = (
             whileHover={{ y: -10 }}
             className={`relative group bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-white/20 ${variant.hoverBorder} transform hover:-translate-y-2 flex flex-col h-full`}
         >
+            <EnrollPopup isOpen={isEnrollOpen} onClose={() => setIsEnrollOpen(false)} onSubmit={(data) => console.log(data)} />
             <div className={`${variant.header} p-6 relative overflow-hidden`}>
                 {/* Background Pattern (simplified) */}
                 <div className="absolute inset-0 opacity-10">
@@ -209,13 +213,13 @@ const CourseCard: React.FC<{ course: Course; index: number; nowMs: number }> = (
                 </div>
 
                 <div className="pt-4 space-y-3 mt-auto">
-                    <Link
-                        href={course.link}
-                        className={`flex items-center justify-center gap-2 w-full ${variant.button} text-white font-semibold py-3 rounded-xl hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300`}
+                    <button
+                        onClick={() => setIsEnrollOpen(true)}
+                        className={`w-full flex items-center justify-center gap-2 ${variant.button} text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300`}
                     >
-                        <span>View Course Details</span>
+                        <span>Enroll Now</span>
                         <ArrowRight className="w-4 h-4" />
-                    </Link>
+                    </button>
 
                     <DownloadFormButton
                         courseTitle={course.title}

@@ -1,0 +1,8 @@
+﻿
+> edtech-website@0.1.0 build
+> cross-env NODE_OPTIONS='--max-old-space-size=4096' next build
+
+   Ôû▓ Next.js 15.5.4
+   - Environments: .env.local
+
+   Creating an optimized production build ...

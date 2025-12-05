@@ -6,6 +6,7 @@ import { motion, type Variants } from "framer-motion";
 import { ArrowRight, Phone, Mail, MapPin, Check, Star, Zap } from "lucide-react";
 import Link from "next/link";
 import { EnrollFormData, EnrollPopup } from "../EnrollForms";
+import BrochureDownloadModal from '@/components/home/BrochureDownloadModal';
 
 /**
  * Integrated CTA content (from your data)
@@ -58,6 +59,7 @@ const FinalCTASection: React.FC<CTASectionProps> = () => {
     const content = ctaContent;
 
     const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [isBrochureOpen, setIsBrochureOpen] = useState(false);
 
     const handleEnrollSubmit = (enroll: EnrollFormData) => {
         // Replace with real submit logic as needed
@@ -156,13 +158,14 @@ const FinalCTASection: React.FC<CTASectionProps> = () => {
 
                             {/* Popup (reusable) */}
                             <EnrollPopup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} onSubmit={handleEnrollSubmit} />
+                            <BrochureDownloadModal isOpen={isBrochureOpen} onClose={() => setIsBrochureOpen(false)} />
 
-                            <Link
-                                href="contact-us"
+                            <button
+                                onClick={() => setIsBrochureOpen(true)}
                                 className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-8 py-3.5 font-semibold text-slate-800 shadow-sm transition hover:border-slate-400 hover:shadow-md"
                             >
-                                Get Free Demo
-                            </Link>
+                                Download Brochure
+                            </button>
                         </motion.div>
 
                         {/* Contact Info Cards */}
@@ -231,7 +234,7 @@ const FinalCTASection: React.FC<CTASectionProps> = () => {
                                         required
                                         value={form.name}
                                         onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-                                        className="block w-full rounded-lg border border-white/20 bg-white px-4 py-3 text-black placeholder-indigo-200 shadow-sm backdrop-blur-sm outline-none transition focus:border-white/40 focus:ring-2 focus:ring-white/30"
+                                        className="block w-full rounded-lg border border-white/20 bg-white px-4 py-3 text-black placeholder-indigo-200 shadow-sm backdrop-blur-sm outline-none transition focus:border-orange-500 focus:ring-2 focus:ring-orange-500"
                                         placeholder="Enter your name"
                                     />
                                 </div>
@@ -247,7 +250,7 @@ const FinalCTASection: React.FC<CTASectionProps> = () => {
                                         required
                                         value={form.email}
                                         onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-                                        className="block w-full rounded-lg border border-white/20 bg-white px-4 py-3 text-black placeholder-indigo-200 shadow-sm backdrop-blur-sm outline-none transition focus:border-white/40 focus:ring-2 focus:ring-white/30"
+                                        className="block w-full rounded-lg border border-white/20 bg-white px-4 py-3 text-black placeholder-indigo-200 shadow-sm backdrop-blur-sm outline-none transition focus:border-orange-500 focus:ring-2 focus:ring-orange-500"
                                         placeholder="you@example.com"
                                     />
                                 </div>
@@ -264,7 +267,7 @@ const FinalCTASection: React.FC<CTASectionProps> = () => {
                                         pattern="^[0-9+\\-\\s()]{7,15}$"
                                         value={form.phone}
                                         onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
-                                        className="block w-full rounded-lg border border-white/20 bg-white px-4 py-3 text-black placeholder-indigo-200 shadow-sm backdrop-blur-sm outline-none transition focus:border-white/40 focus:ring-2 focus:ring-white/30"
+                                        className="block w-full rounded-lg border border-white/20 bg-white px-4 py-3 text-black placeholder-indigo-200 shadow-sm backdrop-blur-sm outline-none transition focus:border-orange-500 focus:ring-2 focus:ring-orange-500"
                                         placeholder="+91 98765 43210"
                                     />
                                 </div>

@@ -1,9 +1,8 @@
 'use client';
 
 import { motion, Variants } from 'framer-motion';
-import { BookOpen, Zap, Gauge, Shield, Smartphone, Cpu, BarChart3, Code, TrendingUp, Cog, Trophy, Brain, Database, Star, Clock, Users, CheckCircle, ArrowRight, Download } from 'lucide-react';
-import { COURSES, Course } from '@/components/software-testing-course/data/data';
-import { FaChartBar } from 'react-icons/fa6';
+import { Zap, Star, Clock, Users, CheckCircle, ArrowRight, Download, Smartphone } from 'lucide-react';
+import { COURSES, Course } from '@/components/Digital-Marketing/data/data';
 import { DownloadFormButton } from '@/components/DownloadForm';
 import { EnrollPopup } from '@/components/EnrollForms';
 import React, { useEffect, useState } from 'react';
@@ -11,22 +10,8 @@ import Link from 'next/link';
 
 
 export const iconMap = {
-    BookOpen: <BookOpen className="w-10 h-10" />,
-    Zap: <Zap className="w-10 h-10" />,
-    Gauge: <Gauge className="w-10 h-10" />,
-    Shield: <Shield className="w-10 h-10" />,
     Smartphone: <Smartphone className="w-10 h-10" />,
-    Cpu: <Cpu className="w-10 h-10" />,
-    BarChart3: <BarChart3 className="w-10 h-10" />,
-    Code: <Code className="w-10 h-10" />,
-    TrendingUp: <TrendingUp className="w-10 h-10" />,
-    ChartBar: <FaChartBar className="w-10 h-10" />,
-    Cog: <Cog className="w-10 h-10" />,
-    Trophy: <Trophy className="w-10 h-10" />,
-    Brain: <Brain className="w-10 h-10" />,
-    Database: <Database className="w-10 h-10" />,
-
-};
+}
 
 // --- Card Styling Constants from CourseOverviewSection.tsx ---
 type Variant = {
@@ -257,7 +242,6 @@ const CourseCard: React.FC<{ course: Course; index: number; nowMs: number }> = (
         </motion.article>
     );
 };
-
 export default function CoursesSection() {
 
     // Ticking clock passed to each card (matches ModuleCard pattern)

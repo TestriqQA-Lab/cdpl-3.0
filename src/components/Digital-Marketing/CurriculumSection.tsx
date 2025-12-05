@@ -3,10 +3,14 @@
 import React, { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BookOpen, CheckCircle2, Clock, Award, TrendingUp, Sparkles } from "lucide-react";
-import { curriculumContent } from "@/components/BI-Courses/data/data";
-
+import { curriculumContent } from '@/components/Digital-Marketing/data/data';
 
 /** ---- Types ---- */
+interface Track {
+    id?: number | string;
+    title: string;
+    weeks: Week[];
+}
 
 interface Week {
     number?: string | number;
@@ -53,7 +57,7 @@ const gradientThemes = [
 
 export default function CurriculumSection() {
     const data = curriculumContent;
-    const tracks = useMemo(() => data?.tracks ?? [], [data?.tracks]);
+    const tracks = useMemo(() => data?.tracks ?? [], [data?.tracks]) as Track[];
     const [activeTrack, setActiveTrack] = useState<number>(0);
     const current = tracks[activeTrack];
     const currentTheme = gradientThemes[activeTrack % gradientThemes.length];
@@ -282,28 +286,28 @@ export default function CurriculumSection() {
                     <div className={`inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r ${currentTheme.lightGradient} ${currentTheme.borderColor} border-2 rounded-xl`}>
                         <TrendingUp className={`w-5 h-5 ${currentTheme.textColor}`} />
                         <span className="font-semibold text-gray-700">
-                            Complete all tracks to earn your BI Professional Certificate
+                            Complete all tracks to earn your DS & ML Professional Certificate
                         </span>
                     </div>
                 </motion.div>
             </div>
 
             <style jsx>{`
-                @keyframes blob {
-                    0%, 100% { transform: translate(0, 0) scale(1); }
-                    33% { transform: translate(30px, -50px) scale(1.1); }
-                    66% { transform: translate(-20px, 20px) scale(0.9); }
-                }
-                .animate-blob {
-                    animation: blob 7s infinite;
-                }
-                .animation-delay-2000 {
-                    animation-delay: 2s;
-                }
-                .animation-delay-4000 {
-                    animation-delay: 4s;
-                }
-            `}</style>
+        @keyframes blob {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+      `}</style>
         </section>
     );
 }

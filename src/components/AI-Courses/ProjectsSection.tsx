@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Code2, Briefcase, Award, Zap, ArrowRight, TrendingUp, BarChart3, Sparkles, Eye } from "lucide-react";
 import { ProjectContent } from "@/components/AI-Courses/data/data";
+import { EnrollFormData, EnrollPopup } from "../EnrollForms";
 
 const benefits = [
     {
@@ -29,7 +30,8 @@ const benefits = [
     }
 ];
 
-const ProjectCard = ({ project, index }: { project: typeof ProjectContent.projects[0]; index: number }) => {
+const ProjectCard = ({ project, index, onEnroll }: { project: typeof ProjectContent.projects[0]; index: number, onEnroll: () => void }) => {
+
     const [isHovered, setIsHovered] = useState(false);
 
     const gradients = [
@@ -154,11 +156,12 @@ const ProjectCard = ({ project, index }: { project: typeof ProjectContent.projec
                     <motion.button
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
+                        onClick={onEnroll}
                         className={`w-full bg-gradient-to-r ${theme.accent} text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 group/btn`}
                     >
-                        <Eye className="w-5 h-5" />
+                        <Eye className="w-5 h-5 hidden md:block" />
                         View Project Details
-                        <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
+                        <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform hidden md:block" />
                     </motion.button>
                 </div>
 
@@ -166,6 +169,7 @@ const ProjectCard = ({ project, index }: { project: typeof ProjectContent.projec
                 <div className={`absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl ${theme.card} rounded-tl-full opacity-50`} />
             </div>
         </motion.div>
+
     );
 };
 
@@ -200,6 +204,16 @@ const BenefitCard = ({ benefit, index }: { benefit: typeof benefits[0]; index: n
 );
 
 const ProjectsSection = () => {
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+    const handleEnrollSubmit = (enroll: EnrollFormData) => {
+        // Replace with real submit logic as needed
+        alert(
+            `Enroll Now Submitted:\nName: ${enroll.name}\nEmail: ${enroll.email}\nPhone: ${enroll.phone}`
+        );
+        setIsPopupOpen(false);
+    };
+
     return (
         <section className="relative py-10 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden">
             {/* Animated background */}
@@ -244,7 +258,7 @@ const ProjectsSection = () => {
                 {/* Projects Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
                     {ProjectContent.projects.map((project, index) => (
-                        <ProjectCard key={project.name} project={project} index={index} />
+                        <ProjectCard key={project.name} project={project} index={index} onEnroll={() => setIsPopupOpen(true)} />
                     ))}
                 </div>
 
@@ -305,6 +319,7 @@ const ProjectsSection = () => {
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
+                            onClick={() => setIsPopupOpen(true)}
                             className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
                         >
                             Enroll in AI Course
@@ -312,6 +327,7 @@ const ProjectsSection = () => {
                         </motion.button>
                     </div>
                 </motion.div>
+                <EnrollPopup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} onSubmit={handleEnrollSubmit} />
             </div>
 
             <style jsx>{`

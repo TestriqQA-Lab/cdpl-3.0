@@ -110,12 +110,9 @@ export default function LeadForm({
                         className="w-full px-4 py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 bg-white overflow-hidden"
                     >
                         <option value="">Select Course</option>
-                        <option>Advanced Data Analytics - Hero Program</option>
-                        <option>Advanced Data Analytics with Python Libraries</option>
-                        <option>Advanced Excel for Data Analytics & Visualization</option>
-                        <option>Data Analytics & Visualization with Tableau</option>
-                        <option>Data Analytics & Visualization with Power BI</option>
-                        <option>Data Analytics With BI And Big Data Engineering Master Program</option>
+                        <option>AI-Driven Digital Marketing & Analytics</option>
+                        <option>Digital Marketing and AI (For Business Owners)</option>
+                        <option>Digital Marketing With AI Bootcamp</option>
                     </select>
                 )}
 

@@ -1,8 +1,8 @@
 "use client";
 
-import { ArrowRight, ChevronDown, ChevronRight, Clock, Home, Check } from "lucide-react";
+import { ArrowRight, ChevronRight, Clock, Home } from "lucide-react";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import ApiCourseLeadForm from "../forms/ApiCourseLeadForm";
 import EnrollModal from "../EnrollModal";
 import SyllabusDownloadModal from "../SyllabusDownloadModal";

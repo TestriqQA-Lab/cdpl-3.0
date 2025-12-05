@@ -1,5 +1,5 @@
 "use client";
-import { ArrowRight, ChevronRight, Home } from "lucide-react";
+import { ChevronRight, Home } from "lucide-react";
 import Link from "next/link";
 import Head from "next/head";
 import React, { useState } from "react";

@@ -678,7 +678,7 @@ export const curriculumContent = {
 
 export const careerPathContent = {
     title: "Career Opportunities",
-    description: "Explore diverse career paths after completing the course in Panvel.",
+    description: "Explore diverse career paths after completing the course.",
     subtitle: "Launch your career in Data Science and Analytics.",
     paths: [
         {

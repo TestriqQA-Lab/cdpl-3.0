@@ -12,16 +12,16 @@ import BrochureDownloadModal from '@/components/home/BrochureDownloadModal';
  * Integrated CTA content (from your data)
  */
 const ctaContent = {
-    title: "Ready to Start Your Testing Career?",
-    description: "Join 500+ students who have successfully launched their QA careers.",
-    subtitle: "Enroll now and get 20% discount for limited time.",
+    title: "Ready to Launch Your Digital Marketing Career?",
+    description: "Join 500+ students who launched careers in SEO, PPC, Social Media & Growth Marketing.",
+    subtitle: "Enroll now and get 20% off — limited seats available.",
     benefits: [
-        "Industry-recognized certificate",
-        "Lifetime access to course materials",
-        "24/7 mentor support",
-        "Job placement assistance",
-        "Real-world projects",
-        "Interview preparation",
+        "Comprehensive SEO & Technical SEO training",
+        "Google Ads (PPC) & Meta Ads mastery",
+        "GA4, Tag Manager & Marketing Analytics",
+        "Content Marketing & Social Media Growth",
+        "Email Automation & Marketing Funnels",
+        "Ecommerce & Performance Marketing Projects",
     ],
     contactInfo: {
         phone: "+91 84-889-889-84",

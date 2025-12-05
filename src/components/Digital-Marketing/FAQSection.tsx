@@ -12,55 +12,55 @@ type FAQ = {
     a: string;
 };
 
-// SEO-optimized FAQ data for BI courses
+// SEO-optimized FAQ data for Digital Marketing courses
 const faqs: FAQ[] = [
     {
         id: 1,
         icon: HelpCircle,
-        q: "What is Business Intelligence and why should I learn it?",
-        a: "Business Intelligence (BI) is the process of transforming raw data into actionable insights for better decision-making. Learning BI opens doors to high-paying careers as organizations increasingly rely on data-driven strategies. With average salaries of ₹6-15 LPA and 95% placement rates, BI professionals are among the most sought-after in today's job market."
+        q: "What is Digital Marketing and why should I learn it?",
+        a: "Digital marketing is the practice of promoting products and brands through online channels — SEO, SEM (Google Ads), social media, email, content and analytics. Learning digital marketing equips you with in-demand skills to drive website traffic, generate leads, and grow revenue. With businesses prioritizing online customer acquisition, skilled marketers see strong career growth and freelance opportunities."
     },
     {
         id: 2,
         icon: BookOpen,
-        q: "Do I need coding experience to learn Business Intelligence?",
-        a: "No prior coding experience is required! Our BI course starts from the basics and gradually builds your skills. You'll learn SQL for data querying, basic Python for analytics, and powerful visualization tools like Power BI and Tableau through hands-on projects. We focus on practical skills that directly apply to real-world business scenarios."
+        q: "Do I need technical or coding experience to learn Digital Marketing?",
+        a: "No — most digital marketing roles don't require deep coding. Our course teaches practical tools and workflows: keyword research, Google Ads setup, Meta Ads, GA4 tracking, marketing automation and content strategy. Basic comfort with spreadsheets and analytics is helpful; we cover any technical gaps with step-by-step labs."
     },
     {
         id: 3,
         icon: Clock,
-        q: "How long does it take to complete the BI course?",
-        a: "Our comprehensive BI program takes 16 weeks (4 months) with flexible weekend and weekday batches. Fast-track options are available for 10 weeks. Each week includes 8-10 hours of live sessions, assignments, and project work. You'll gain job-ready skills and complete 6+ industry projects by the end of the program."
+        q: "How long does the Digital Marketing course take to complete?",
+        a: "Our flagship program runs 12–16 weeks with flexible weekend and weekday batches. Expect 6–10 hours/week of live classes, hands-on projects and campaign work. We also offer accelerated bootcamps (4–6 weeks) and self-paced options for working professionals."
     },
     {
         id: 4,
         icon: Award,
-        q: "What certifications will I receive after completing the course?",
-        a: "Upon completion, you'll receive an industry-recognized Business Intelligence Professional Certificate. We also prepare you for Microsoft Power BI Data Analyst (PL-300) and Tableau Desktop Specialist certifications. Our course includes exam prep materials, practice tests, and guidance to help you ace these certifications and stand out to employers."
+        q: "Which certifications will I get or be prepared for?",
+        a: "You will receive an industry-recognized Digital Marketing Certificate and get guided prep for Google Ads Certification, Google Analytics 4 (GA4) Certification, Meta Blueprint, and email/automation certificates. Our curriculum includes exam simulators, practical labs and portfolio-ready projects to showcase skills to employers."
     },
     {
         id: 5,
         icon: DollarSign,
-        q: "What is the average salary for BI professionals in India?",
-        a: "Entry-level BI Analysts earn ₹6-12 LPA, BI Developers earn ₹8-15 LPA, and Analytics Managers can earn ₹15-25 LPA. Our graduates report an average 40% salary increase after completing the program. Top performers at companies like TCS, Infosys, Accenture, and Deloitte earn even higher, with experienced professionals reaching ₹30+ LPA."
+        q: "What salary or career outcomes can I expect after this course?",
+        a: "Entry-level digital marketers in India typically start at ₹3-6 LPA; specialists in PPC, SEO or growth marketing can earn ₹5-12 LPA and senior/performance roles command higher packages. Many grads also secure freelance or contract work, increasing total earnings. Results depend on experience, location and demonstrated campaign outcomes."
     },
     {
         id: 6,
         icon: Briefcase,
-        q: "What kind of job support do you provide after course completion?",
-        a: "We offer comprehensive career support including resume building, portfolio creation, mock interviews with industry experts, and direct referrals to 500+ hiring partners. Our dedicated placement team works with you until you land your dream BI role. We've achieved 95% placement success with companies actively hiring our graduates."
+        q: "What job support and placement assistance do you offer?",
+        a: "We provide end-to-end career support: resume & LinkedIn optimization, interview coaching, live portfolio reviews, and direct referrals to hiring partners and marketing agencies. Graduates get access to our job board, freelance gig opportunities, and ongoing mentorship until they land roles in performance marketing, agencies, or in-house growth teams."
     },
     {
         id: 7,
         icon: Users,
         q: "What is the batch size and learning format?",
-        a: "We maintain small batch sizes of maximum 15 students to ensure personalized attention. All sessions are live and interactive with experienced instructors who have 10+ years in the BI industry. You'll get lifetime access to recorded sessions, course materials, and our alumni community for continuous learning and networking."
+        a: "We keep small cohort sizes (max 20) for personalised feedback. Classes are live and interactive with industry practitioners; every student works on real campaign projects. You also get lifetime access to recordings, templates, and our alumni community for networking and continuous learning."
     },
     {
         id: 8,
         icon: CheckCircle,
-        q: "What tools and technologies will I master in this course?",
-        a: "You'll gain hands-on expertise in Power BI, Tableau, SQL (MySQL, PostgreSQL, SQL Server), Excel for analytics, Python (Pandas, NumPy), ETL tools (SSIS, Azure Data Factory), data warehousing concepts, and cloud platforms (Azure, AWS). All tools are industry-standard and highly demanded by employers in 2025."
+        q: "Which tools and platforms will I learn in this course?",
+        a: "Hands-on experience includes Google Ads, Google Analytics 4 (GA4), Search Console, Meta Ads Manager, SEMrush/Ahrefs for keyword research, Mailchimp/Klaviyo for email automation, Google Tag Manager, Shopify/Shopify Ads basics and analytics dashboards. We focus on tools recruiters demand for performance marketing and eCommerce growth."
     }
 ];
 
@@ -273,8 +273,8 @@ export default function FAQSection() {
                     </h2>
 
                     <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        Everything you need to know about our Business Intelligence course, career opportunities,
-                        certifications, and how we help you succeed in the BI industry.
+                        Everything you need to know about our Digital Marketing course, campaign skills,
+                        certifications, and how we help you launch or scale your marketing career.
                     </p>
                 </motion.div>
 
@@ -309,7 +309,7 @@ export default function FAQSection() {
                                     Still Have Questions?
                                 </h3>
                                 <p className="text-gray-600">
-                                    Our team is here to help you make the right decision
+                                    Our team is here to help you choose the right Digital Marketing path
                                 </p>
                             </div>
                         </div>

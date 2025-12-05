@@ -50,6 +50,9 @@ export default function LeadForm({
 
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-5 w-full overflow-hidden">
                 <div className="w-full overflow-hidden">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Full Name *
+                    </label>
                     <input
                         {...form.register('name')}
                         placeholder="Full Name"
@@ -63,6 +66,9 @@ export default function LeadForm({
                 </div>
 
                 <div className="w-full overflow-hidden">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Email Address *
+                    </label>
                     <input
                         {...form.register('email')}
                         type="email"
@@ -76,15 +82,19 @@ export default function LeadForm({
                     )}
                 </div>
 
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Phone Number *
+                </label>
                 <div className="phone-input-wrapper w-full px-3 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-orange-500 bg-white overflow-hidden">
+
                     <PhoneInput
                         defaultCountry="IN"
                         international
                         countryCallingCodeEditable={false}
                         value={form.watch('phone')}
                         onChange={(v) => form.setValue('phone', v || '')}
-                        className="w-full [&>input]:w-full overflow-hidden"
-                        inputClass="!w-full !pl-14 !text-base"
+                        className="w-full [&>input]:w-full [&>input]:border-none [&>input]:outline-none [&>input]:bg-transparent overflow-hidden"
+                        inputClass="!w-full !pl-14 !text-base !border-none !outline-none !ring-0"
                         containerClass="w-full"
                     />
                     {form.formState.errors.phone && (
@@ -100,9 +110,13 @@ export default function LeadForm({
                         className="w-full px-4 py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 bg-white overflow-hidden"
                     >
                         <option value="">Select Course</option>
-                        <option>Full Stack Testing</option>
-                        <option>Automation Testing</option>
-                        <option>Manual + API Testing</option>
+                        <option>Machine Learning and Data Science with Python - Hero Program</option>
+                        <option>Deep Learning, NLP and Generative AI</option>
+                        <option>Advanced Data Science and Machine Learning Masterclass</option>
+                        <option>Comprehensive Data Science and AI - Master Program</option>
+                        <option>Machine Learning Algorithms using python Programming</option>
+                        <option>Machine Learning and Data Visualization using R Programming</option>
+                        <option>Python Programming</option>
                     </select>
                 )}
 
