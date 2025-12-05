@@ -102,10 +102,12 @@ const gradients = [
     },
 ];
 
+import { EnrollFormData, EnrollPopup } from "@/components/EnrollForms";
+
 /* --------------------------
    ProjectCard (DS/ML content)
    -------------------------- */
-const ProjectCard = ({ project, index }: { project: typeof projectsContent.projects[0]; index: number }) => {
+const ProjectCard = ({ project, index, onEnroll }: { project: typeof projectsContent.projects[0]; index: number, onEnroll: () => void }) => {
     const [isHovered, setIsHovered] = useState(false);
     const theme = gradients[index % gradients.length];
 
@@ -171,6 +173,7 @@ const ProjectCard = ({ project, index }: { project: typeof projectsContent.proje
                         <motion.button
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
+                            onClick={onEnroll}
                             className={`flex-1 bg-gradient-to-r ${theme.accent} text-white font-bold px-3 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2`}
                         >
                             <Eye className="w-5 h-5" />
@@ -217,6 +220,14 @@ const BenefitCard = ({ benefit, index }: { benefit: typeof benefits[0]; index: n
    ProjectsSection (export)
    -------------------------- */
 const ProjectsSection = () => {
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+    const handleEnrollSubmit = (enroll: EnrollFormData) => {
+        // Replace with real submit logic as needed
+        console.log("Projects Enroll:", enroll);
+        setIsPopupOpen(false);
+    };
+
     return (
         <section className="relative py-10 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden">
             {/* animated background */}
@@ -242,7 +253,7 @@ const ProjectsSection = () => {
                 {/* projects grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
                     {projectsContent.projects.map((project, idx) => (
-                        <ProjectCard key={project.name} project={project} index={idx} />
+                        <ProjectCard key={project.name} project={project} index={idx} onEnroll={() => setIsPopupOpen(true)} />
                     ))}
                 </div>
 
@@ -278,7 +289,7 @@ const ProjectsSection = () => {
                         </div>
 
                         <div className="flex flex-wrap gap-4 justify-center">
-                            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2">
+                            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setIsPopupOpen(true)} className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2">
                                 Enroll in DS & ML Course
                                 <ArrowRight className="w-5 h-5" />
                             </motion.button>
@@ -289,6 +300,7 @@ const ProjectsSection = () => {
                         </div>
                     </div>
                 </motion.div>
+                <EnrollPopup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} onSubmit={handleEnrollSubmit} />
             </div>
 
             <style jsx>{`

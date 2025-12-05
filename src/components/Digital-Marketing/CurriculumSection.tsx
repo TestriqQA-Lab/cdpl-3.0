@@ -286,7 +286,7 @@ export default function CurriculumSection() {
                     <div className={`inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r ${currentTheme.lightGradient} ${currentTheme.borderColor} border-2 rounded-xl`}>
                         <TrendingUp className={`w-5 h-5 ${currentTheme.textColor}`} />
                         <span className="font-semibold text-gray-700">
-                            Complete all tracks to earn your DS & ML Professional Certificate
+                            Complete all tracks to earn your Digital Marketing Professional Certificate
                         </span>
                     </div>
                 </motion.div>
