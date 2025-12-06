@@ -14,7 +14,7 @@ import {
   ShieldCheck,
   ChevronDown,
 } from "lucide-react";
-import Link from "next/link";
+
 import CareerSessionModal from "@/components/CareerSessionModal";
 import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
 

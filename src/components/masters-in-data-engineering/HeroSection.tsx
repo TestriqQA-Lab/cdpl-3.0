@@ -1,8 +1,8 @@
 "use client";
 
-import { ArrowRight, ChevronDown, ChevronRight, Clock, Home, Check } from "lucide-react";
+import { ArrowRight, ChevronRight, Clock, Home, CloudDownload, ArrowDownNarrowWide } from "lucide-react";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import ApiCourseLeadForm from "../forms/ApiCourseLeadForm";
 import EnrollModal from "../EnrollModal";
 import SyllabusDownloadModal from "../SyllabusDownloadModal";
@@ -104,20 +104,30 @@ export default function HeroSection() {
             </p>
 
             {/* CTAs */}
-            <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row md:justify-start">
+            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row md:justify-start items-center">
               <button
                 onClick={() => setIsEnrollOpen(true)}
-                className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-teal-500 to-teal-600 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:from-teal-600 hover:to-teal-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-teal-300 cursor-pointer"
+                className="cursor-pointer group inline-flex items-center justify-center rounded-xl border border-orange-600 bg-orange-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-orange-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-orange-200"
               >
                 Enroll Now
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </button>
+
               <button
                 onClick={() => setIsSyllabusOpen(true)}
-                className="rounded-lg border-2 border-slate-300 px-8 py-4 text-base font-semibold text-slate-700 transition-all hover:border-teal-400 hover:text-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-300 cursor-pointer"
+                className="cursor-pointer group inline-flex items-center justify-center rounded-xl border border-orange-600 bg-orange-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-orange-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-orange-200"
+              >
+                Download Syllabus
+                <CloudDownload className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
+              </button>
+
+              <Link
+                href="#curriculum"
+                className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-base font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200"
               >
                 View Curriculum
-              </button>
+                <ArrowDownNarrowWide className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
+              </Link>
             </div>
 
             {/* Highlights (using your program stats) */}
@@ -169,8 +179,8 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right: Desktop form (top-aligned) */}
-          <div className="hidden md:block md:col-span-5 lg:col-span-4 md:top-8">
+          {/* Right: Desktop form (top-aligned & sticky) */}
+          <div className="hidden md:block md:col-span-5 lg:col-span-4 md:top-8 sticky">
             <ApiCourseLeadForm source="Data Engineering Course Page - Hero Section (Desktop)" />
           </div>
         </div>

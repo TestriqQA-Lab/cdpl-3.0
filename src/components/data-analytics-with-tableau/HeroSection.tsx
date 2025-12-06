@@ -1,5 +1,5 @@
 "use client";
-import { ArrowRight, ChevronRight, Home } from "lucide-react";
+import { ArrowRight, ChevronRight, Home, CloudDownload, ArrowDownNarrowWide } from "lucide-react";
 import Link from "next/link";
 import Head from "next/head";
 import React, { useState } from "react";
@@ -123,6 +123,37 @@ export default function HeroSection() {
                             </p>
                         </div>
 
+
+
+                        {/* CTA Buttons */}
+                        <div className="flex flex-col sm:flex-row gap-3 pt-4">
+                            <button
+                                onClick={() => setIsEnrollOpen(true)}
+                                className="cursor-pointer group inline-flex items-center justify-center rounded-xl border border-orange-600 bg-orange-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-orange-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-orange-200"
+                                aria-label="Enroll now in Tableau program"
+                            >
+                                Enroll Now
+                                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                            </button>
+
+                            <button
+                                onClick={() => setIsSyllabusOpen(true)}
+                                className="cursor-pointer group inline-flex items-center justify-center rounded-xl border border-orange-600 bg-orange-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-orange-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-orange-200"
+                                aria-label="Download Syllabus"
+                            >
+                                Download Syllabus
+                                <CloudDownload className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
+                            </button>
+
+                            <Link
+                                href="#curriculum"
+                                className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-base font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200"
+                                aria-label="View Curriculum"
+                            >
+                                View Curriculum
+                                <ArrowDownNarrowWide className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
+                            </Link>
+                        </div>
                         {/* Highlights */}
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                             {heroData.highlights.map((highlight, index) => (
@@ -137,23 +168,6 @@ export default function HeroSection() {
                                 </div>
                             ))}
                         </div>
-
-                        {/* CTA Buttons */}
-                        <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                            <button
-                                onClick={() => setIsEnrollOpen(true)}
-                                className="bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-lg px-8 py-3 transition-all cursor-pointer"
-                            >
-                                {heroData.cta.primary} →
-                            </button>
-                            <button
-                                onClick={() => setIsSyllabusOpen(true)}
-                                className="border-2 border-gray-300 hover:border-orange-600 text-gray-700 font-semibold rounded-lg px-8 py-3 transition-all cursor-pointer"
-                            >
-                                {heroData.cta.secondary}
-                            </button>
-                        </div>
-
                         {/* SEO-rich supporting copy */}
                         <div className="text-sm text-slate-700 max-w-2xl">
                             <p>

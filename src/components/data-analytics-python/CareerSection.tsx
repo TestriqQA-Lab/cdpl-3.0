@@ -183,14 +183,14 @@ export default function CareerSection() {
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                     <button
                         onClick={() => setIsSessionOpen(true)}
-                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-orange-600 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:bg-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300"
+                        className="cursor-pointer inline-flex items-center justify-center gap-2 rounded-xl bg-orange-600 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:bg-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300"
                     >
                         Get Placement Assistance
                         <ArrowRight className="h-5 w-5" />
                     </button>
                     <button
                         onClick={() => setIsSyllabusOpen(true)}
-                        className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-orange-200 bg-white px-8 py-4 text-base font-semibold text-orange-700 shadow-sm transition-all hover:border-orange-300 hover:bg-orange-50 focus:outline-none focus:ring-2 focus:ring-orange-200"
+                        className="cursor-pointer inline-flex items-center justify-center gap-2 rounded-xl border-2 border-orange-200 bg-white px-8 py-4 text-base font-semibold text-orange-700 shadow-sm transition-all hover:border-orange-300 hover:bg-orange-50 focus:outline-none focus:ring-2 focus:ring-orange-200"
                     >
                         <Download className="h-5 w-5" />
                         Download Placement Report

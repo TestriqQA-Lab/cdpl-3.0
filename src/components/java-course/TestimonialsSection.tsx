@@ -3,7 +3,7 @@
 
 'use client';
 
-import Link from "next/link";
+
 import ReviewsMarquee from "../sections/ReviewMarque";
 import { useState } from "react";
 import EnrollModal from "@/components/EnrollModal";

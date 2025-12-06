@@ -109,7 +109,7 @@ export async function POST(request: Request) {
     const isMasterProgramHeroForm = formSource === 'Master Program Course Page - Hero Section';
     const isPythonHeroForm = formSource === 'Python Course Page - Hero Section';
     const isJavaHeroForm = formSource === 'Java Course Page - Hero Section';
-    const isDataAnalyticsPythonHeroForm = formSource === 'Data Analytics with Python Course Page - Hero Section';
+    const isDataAnalyticsPythonHeroForm = formSource === 'Data Analytics with Python Course Page - Hero Section' || formSource.includes('Data Analytics Python Course Page');
     const isDataAnalyticsVizHeroForm = formSource === 'Data Analytics & Visualization Course Page - Hero Section';
     const isPowerBiHeroForm = formSource === 'Power BI Course Page - Hero Section';
     const isDataAnalyticsHeroForm = formSource === 'Data Analytics Course Page - Hero Section' || formSource === 'Data Analytics Course Page - Hero Section - Enroll Now' || formSource === 'Data Analytics Course Page - Hero Section - Syllabus Download' || formSource === 'Data Analytics Course Page - Why Analytics Section - Apply Now' || formSource === 'Data Analytics Course Page - Curriculum Section - Apply Now' || formSource === 'Data Analytics Course Page - Career Section - Placement Assistance' || formSource === 'Data Analytics Course Page - Who Should Enroll Section - Enroll Now' || formSource === 'Data Analytics Course Page - Tools Section - Learn with Projects' || formSource === 'Data Analytics Course Page - Roadmap Section - Get Roadmap' || formSource === 'Data Analytics Course Page - FAQ Section - Talk to Advisor' || formSource === 'Data Analytics Course Page - Curriculum Section - Career Session';
@@ -226,6 +226,8 @@ export async function POST(request: Request) {
         adminSubject = `${subjectPrefix} New Lead from ${fullName} - Advanced Excel Page (Syllabus)`;
       } else if (formSource === 'Data Science Course Page - Hero Section - Syllabus Download' || formSource === 'Data Science Course Page - Curriculum Section - Syllabus Download' || formSource === 'Data Science Course Page - Career Section - Download Portfolio Guide' || formSource === 'Data Science Course Page - Who Should Enroll - Download Syllabus') {
         adminSubject = `${subjectPrefix} New Lead from ${fullName} - Data Science Page (Syllabus)`;
+      } else if (formSource.includes('Data Analytics Python Course Page') && (formSource.includes('Syllabus') || formSource.includes('Report'))) {
+        adminSubject = `${subjectPrefix} New Lead from ${fullName} - Data Analytics with Python Page (Syllabus)`;
       } else if (formSource === 'Machine Learning with Python Course Page - Hero Section - Syllabus Download' || formSource === 'Machine Learning with Python Course Page - Stats Section - Download Syllabus' || formSource === 'Machine Learning with Python Course Page - Curriculum Section - Download Syllabus') {
         adminSubject = `${subjectPrefix} New Lead from ${fullName} - Machine Learning with Python Page (Syllabus)`;
       } else if (formSource === 'R Programming Course Page - Hero Section - Syllabus Download') {

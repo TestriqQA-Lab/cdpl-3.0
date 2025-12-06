@@ -154,13 +154,13 @@ export default function FaqSection() {
                     <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                         <Link
                             href="tel:+917888383788"
-                            className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition-colors"
+                            className="cursor-pointer px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition-colors"
                         >
                             📞 Call Us
                         </Link>
                         <Link
                             href="mailto:contact@cinutedigital.com"
-                            className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
+                            className="cursor-pointer px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
                         >
                             ✉️ Email Us
                         </Link>

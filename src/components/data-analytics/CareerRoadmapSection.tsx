@@ -3,7 +3,7 @@
 // Server component — sleek, SEO-optimized, slightly futuristic, fully responsive.
 // Distinct accent colors per step (no repeats). Accessible timeline + JSON-LD (HowTo).
 
-import Link from "next/link";
+
 import { useState } from "react";
 import CareerSessionModal from "../CareerSessionModal";
 
