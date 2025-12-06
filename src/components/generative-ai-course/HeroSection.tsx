@@ -146,14 +146,9 @@ export default function HeroSection() {
                     </div>
 
                     {/* Right column: Desktop form */}
-                    <aside className="md:col-span-5 lg:col-span-4 hidden md:block">
-                        <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg">
-
-                            <div className="p-4 sm:p-5">
-                                <GenerativeAICourseLeadForm variant="elevated" />
-                            </div>
-                        </div>
-                    </aside>
+                    <div className="relative lg:col-span-4 hidden md:block">
+                        <GenerativeAICourseLeadForm variant="elevated" className="hidden lg:block" source="Generative AI Course Page - Hero Section" />
+                    </div>
                 </div>
             </div>
 

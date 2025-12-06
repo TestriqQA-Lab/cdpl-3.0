@@ -5,9 +5,11 @@ import { useState } from "react";
 export default function LeadForm({
   className = '',
   variant = 'elevated',
+  source = 'Course Page',
 }: {
   className?: string;
   variant?: 'default' | 'elevated';
+  source?: string;
 }) {
   const [submitting, setSubmitting] = useState(false);
 
@@ -17,9 +19,17 @@ export default function LeadForm({
     const formData = new FormData(form);
     setSubmitting(true);
     try {
-      // TODO: plug your endpoint here
       // await fetch('/api/lead', { method: 'POST', body: formData });
-      console.log('Lead:', Object.fromEntries(formData.entries()));
+      // const payload = { ...Object.fromEntries(formData.entries()), source };
+      // console.log('Lead:', payload); 
+      // TODO: Actual implementation
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...Object.fromEntries(formData.entries()), source }),
+      });
+      if (!response.ok) throw new Error('Submission failed');
+
       form.reset();
       alert('Thanks! We will contact you shortly.');
     } catch (error) {

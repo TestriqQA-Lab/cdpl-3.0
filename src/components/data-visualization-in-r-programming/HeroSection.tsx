@@ -109,50 +109,39 @@ export const HeroSection: React.FC = () => {
                             Learn R for data visualization, statistics, predictive modeling, dashboards, and real-world analytics projects tailored for business decision-making.
                         </p>
 
-                        {/* Highlights – same layout style as reference */}
-                        <div className="mt-8 grid w-full max-w-2xl grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
-                            {[
-                                { icon: "📊", label: "Real Projects" },
-                                { icon: "👨‍🏫", label: "Expert Trainers" },
-                                { icon: "🎓", label: "Certification" },
-                                { icon: "💼", label: "Job Ready" },
-                            ].map((item, idx) => (
-                                <div
-                                    key={idx}
-                                    className="flex flex-col items-center gap-2 rounded-lg border border-slate-200 bg-white/60 p-4 backdrop-blur-sm transition-colors hover:border-orange-300"
-                                >
-                                    <span className="text-2xl">{item.icon}</span>
-                                    <span className="text-center text-xs font-semibold text-slate-700 md:text-sm">
-                                        {item.label}
-                                    </span>
-                                </div>
-                            ))}
-                        </div>
+
 
                         {/* CTAs (same style as reference) */}
-                        <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row md:justify-start">
+                        <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
                             <button
                                 onClick={() => setIsEnrollOpen(true)}
-                                className="inline-flex items-center justify-center cursor-pointer rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:from-orange-600 hover:to-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300"
+                                className="inline-flex items-center justify-center cursor-pointer rounded-xl bg-orange-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-orange-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-orange-200"
+                                aria-label="Enroll now in R Programming Course"
                             >
                                 Enroll Now
-                                <ArrowRight className="ml-2 h-5 w-5" />
+                                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                             </button>
+
                             <button
                                 onClick={() => setIsSyllabusOpen(true)}
-                                className="inline-flex items-center justify-center cursor-pointer rounded-lg border-2 border-slate-300 px-8 py-4 text-base font-semibold text-slate-700 transition-all hover:border-orange-400 hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-300"
+                                className="inline-flex items-center justify-center cursor-pointer rounded-xl bg-orange-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-orange-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-orange-200"
+                                aria-label="Download R Programming Syllabus"
                             >
-                                <CloudDownload className="mr-2 h-5 w-5" />
                                 Download Syllabus
+                                <CloudDownload className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
                             </button>
-                            <a
-                                href="#curriculum"
-                                onClick={scrollToCurriculum}
-                                className="inline-flex items-center justify-center cursor-pointer rounded-lg border-2 border-slate-300 px-8 py-4 text-base font-semibold text-slate-700 transition-all hover:border-orange-400 hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-300"
+
+                            <button
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    document.getElementById('curriculum')?.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                                className="inline-flex items-center justify-center rounded-xl border border-sky-300 bg-white px-6 py-3 text-base font-semibold text-sky-700 shadow-sm transition hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-200"
+                                aria-label="View full R Programming curriculum"
                             >
-                                <ArrowDownNarrowWide className="mr-2 h-5 w-5" />
                                 View Curriculum
-                            </a>
+                                <ArrowDownNarrowWide className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
+                            </button>
                         </div>
 
                         {/* Trust indicators (optional but keep layout parity) */}
@@ -177,6 +166,26 @@ export const HeroSection: React.FC = () => {
                                     <strong className="text-slate-900">5+ Years</strong> Industry Experience
                                 </span>
                             </div>
+                        </div>
+
+                        {/* Highlights – same layout style as reference */}
+                        <div className="mt-8 grid w-full max-w-2xl grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
+                            {[
+                                { icon: "📊", label: "Real Projects" },
+                                { icon: "👨‍🏫", label: "Expert Trainers" },
+                                { icon: "🎓", label: "Certification" },
+                                { icon: "💼", label: "Job Ready" },
+                            ].map((item, idx) => (
+                                <div
+                                    key={idx}
+                                    className="flex flex-col items-center gap-2 rounded-lg border border-slate-200 bg-white/60 p-4 backdrop-blur-sm transition-colors hover:border-orange-300"
+                                >
+                                    <span className="text-2xl">{item.icon}</span>
+                                    <span className="text-center text-xs font-semibold text-slate-700 md:text-sm">
+                                        {item.label}
+                                    </span>
+                                </div>
+                            ))}
                         </div>
 
                         {/* Extra copy for SEO / depth */}
