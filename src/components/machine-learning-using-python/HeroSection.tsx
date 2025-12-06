@@ -9,6 +9,8 @@ import {
     Award,
     Users,
     Zap,
+    CloudDownload,
+    ArrowDownNarrowWide,
 } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -122,60 +124,38 @@ export default function HeroSection() {
                             deployment.
                         </p>
 
-                        {/* Key Features (your original cards, adapted to this layout) */}
-                        <div className="mt-8 grid w-full max-w-2xl grid-cols-2 gap-3 sm:gap-4">
-                            <div className="flex items-start gap-3 rounded-lg border border-slate-200 bg-white/70 p-4 backdrop-blur-sm transition-colors hover:border-orange-300">
-                                <BookOpen className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1" />
-                                <div>
-                                    <p className="font-semibold text-slate-900 text-sm">
-                                        80:20 Practical
-                                    </p>
-                                    <p className="text-xs text-slate-600">Hands-on learning</p>
-                                </div>
-                            </div>
-                            <div className="flex items-start gap-3 rounded-lg border border-slate-200 bg-white/70 p-4 backdrop-blur-sm transition-colors hover:border-orange-300">
-                                <Award className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-1" />
-                                <div>
-                                    <p className="font-semibold text-slate-900 text-sm">
-                                        Global Certification
-                                    </p>
-                                    <p className="text-xs text-slate-600">AAA Certified</p>
-                                </div>
-                            </div>
-                            <div className="flex items-start gap-3 rounded-lg border border-slate-200 bg-white/70 p-4 backdrop-blur-sm transition-colors hover:border-orange-300">
-                                <Users className="w-5 h-5 text-purple-600 flex-shrink-0 mt-1" />
-                                <div>
-                                    <p className="font-semibold text-slate-900 text-sm">
-                                        Expert Mentors
-                                    </p>
-                                    <p className="text-xs text-slate-600">14+ years experience</p>
-                                </div>
-                            </div>
-                            <div className="flex items-start gap-3 rounded-lg border border-slate-200 bg-white/70 p-4 backdrop-blur-sm transition-colors hover:border-orange-300">
-                                <Zap className="w-5 h-5 text-pink-600 flex-shrink-0 mt-1" />
-                                <div>
-                                    <p className="font-semibold text-slate-900 text-sm">
-                                        Job-Ready Skills
-                                    </p>
-                                    <p className="text-xs text-slate-600">100% support</p>
-                                </div>
-                            </div>
-                        </div>
 
                         {/* CTAs */}
-                        <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row md:justify-start">
+                        {/* CTAs */}
+                        <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
                             <button
                                 onClick={() => setIsEnrollOpen(true)}
-                                className="inline-flex items-center justify-center cursor-pointer rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:from-orange-600 hover:to-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300"
+                                className="inline-flex items-center justify-center cursor-pointer rounded-xl bg-orange-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-orange-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-orange-200"
+                                aria-label="Enroll now in Machine Learning with Python"
                             >
                                 Enroll Now
-                                <ArrowRight className="ml-2 h-5 w-5" />
+                                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                             </button>
+
                             <button
                                 onClick={() => setIsSyllabusOpen(true)}
-                                className="inline-flex items-center justify-center cursor-pointer rounded-lg border-2 border-slate-300 px-8 py-4 text-base font-semibold text-slate-700 transition-all hover:border-orange-400 hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-300"
+                                className="inline-flex items-center justify-center cursor-pointer rounded-xl bg-orange-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-orange-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-orange-200"
+                                aria-label="Download Machine Learning Syllabus"
                             >
                                 Download Syllabus
+                                <CloudDownload className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
+                            </button>
+
+                            <button
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    document.getElementById('curriculum')?.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                                className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-sky-300 bg-white px-6 py-3 text-base font-semibold text-sky-700 shadow-sm transition hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-200"
+                                aria-label="View full Machine Learning curriculum"
+                            >
+                                View Curriculum
+                                <ArrowDownNarrowWide className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
                             </button>
                         </div>
 
@@ -226,13 +206,13 @@ export default function HeroSection() {
             <EnrollModal
                 isOpen={isEnrollOpen}
                 onClose={() => setIsEnrollOpen(false)}
-                source="Machine Learning with Python - Hero Section - Enroll Now"
+                source="Machine Learning with Python Course Page - Hero Section - Enroll Now"
                 courseName={courseName}
             />
             <SyllabusDownloadModal
                 isOpen={isSyllabusOpen}
                 onClose={() => setIsSyllabusOpen(false)}
-                source="Machine Learning with Python - Hero Section - Download Syllabus"
+                source="Machine Learning with Python Course Page - Hero Section - Syllabus Download"
                 courseName={courseName}
             />
             <CareerSessionModal
