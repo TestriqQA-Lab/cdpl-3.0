@@ -1,7 +1,9 @@
-// components/sections/ProjectsSection.tsx
-// Server component – no client JS required
+"use client";
 
 import Link from "next/link";
+import { useState } from "react";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
+import EnrollModal from "../EnrollModal";
 
 type Project = { title: string; blurb?: string };
 
@@ -35,6 +37,9 @@ const ACCENTS = [
 ];
 
 export default function ProjectsSection() {
+    const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const courseName = "Digital Marketing & Analytics Master Program";
     return (
         <section id="projects" aria-labelledby="projects-heading" className="relative py-8 md:py-10 bg-white">
             {/* subtle futuristic scaffold */}
@@ -118,18 +123,32 @@ export default function ProjectsSection() {
                 {/* CTA row */}
                 <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3">
                     <button
-                        className="rounded-xl border border-orange-500 bg-orange-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-orange-600 focus:outline-none focus:ring-4 focus:ring-orange-200"
+                        onClick={() => setIsSyllabusOpen(true)}
+                        className="cursor-pointer rounded-xl border border-orange-500 bg-orange-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-orange-600 focus:outline-none focus:ring-4 focus:ring-orange-200"
                     >
                         See Sample Portfolios
                     </button>
-                    <Link
-                        href="contact-us"
-                        className="rounded-xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200"
+                    <button
+                        onClick={() => setIsEnrollOpen(true)}
+                        className="cursor-pointer rounded-xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200"
                     >
                         Book a Free Demo
-                    </Link>
+                    </button>
                 </div>
             </div>
+
+            <SyllabusDownloadModal
+                isOpen={isSyllabusOpen}
+                onClose={() => setIsSyllabusOpen(false)}
+                source="Digital Marketing Course Page - Projects Section - Sample Portfolios"
+                courseName={courseName}
+            />
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="Digital Marketing Course Page - Projects Section - Book Demo"
+                courseName={courseName}
+            />
 
         </section>
     );

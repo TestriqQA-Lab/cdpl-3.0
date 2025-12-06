@@ -2,8 +2,12 @@
 
 import { Briefcase, TrendingUp, Users } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
+import CareerSessionModal from "@/components/CareerSessionModal";
 
 export default function CareerSection() {
+  const [isCareerOpen, setIsCareerOpen] = useState(false);
+  const courseName = "AI in Digital Marketing Course";
   const careerPaths = [
     {
       title: "Digital Marketing Manager",
@@ -270,8 +274,8 @@ export default function CareerSection() {
             <p className="text-lg text-gray-900 font-semibold mb-4">
               Ready to launch your digital marketing career?
             </p>
-            <Link
-              href="/contact-us"
+            <button
+              onClick={() => setIsCareerOpen(true)}
               className="
     inline-flex items-center justify-center
     w-full sm:w-auto
@@ -283,15 +287,22 @@ export default function CareerSection() {
     text-center
     shadow-lg hover:shadow-xl
     transition-all duration-300
+    cursor-pointer
     break-words
   "
             >
               Start Your Career Transformation
-            </Link>
+            </button>
 
           </div>
         </div>
       </div>
+      <CareerSessionModal
+        isOpen={isCareerOpen}
+        onClose={() => setIsCareerOpen(false)}
+        source="AI Digital Marketing - Career Section - Start Transformation"
+        courseName={courseName}
+      />
     </section>
   );
 }

@@ -4,10 +4,15 @@ import { useState } from "react";
 import { courseData } from "@/components/ai-in-digital-marketing/courseData";
 import { ChevronDown, BookOpen } from "lucide-react";
 import Link from "next/link";
+import EnrollModal from "@/components/EnrollModal";
+import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
 
 export default function CurriculumSection() {
   const { curriculum } = courseData;
   const [expandedModule, setExpandedModule] = useState<number | null>(null);
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+  const courseName = "AI in Digital Marketing Course";
 
   // Reusable gradient colors for modules (cycled through)
   const colorClasses = [
@@ -233,9 +238,28 @@ export default function CurriculumSection() {
                 implementation-focused mentoring</strong> to become an
               in-demand digital marketing professional.
             </p>
-            <Link
-              href="/contact-us"
-              className="
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <button
+                onClick={() => setIsSyllabusOpen(true)}
+                className="
+    inline-flex items-center justify-center
+    w-full sm:w-auto
+    px-4 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-3
+    text-sm sm:text-base md:text-lg
+    bg-white hover:bg-slate-50
+    text-orange-600 font-bold
+    rounded-xl border-2 border-orange-600
+    text-center
+    shadow-lg hover:shadow-xl
+    transition-all duration-300
+    cursor-pointer
+  "
+              >
+                Get Full Syllabus PDF
+              </button>
+              <button
+                onClick={() => setIsEnrollOpen(true)}
+                className="
     inline-flex items-center justify-center
     w-full sm:w-auto
     px-4 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-3
@@ -246,15 +270,29 @@ export default function CurriculumSection() {
     text-center
     shadow-lg hover:shadow-xl
     transition-all duration-300
-    break-words
+    cursor-pointer
   "
-            >
-              Enroll in the Program
-            </Link>
+              >
+                Enroll in the Program
+              </button>
+            </div>
 
           </div>
         </div>
       </div>
+
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="AI Digital Marketing - Curriculum Section - Enroll"
+        courseName={courseName}
+      />
+      <SyllabusDownloadModal
+        isOpen={isSyllabusOpen}
+        onClose={() => setIsSyllabusOpen(false)}
+        source="AI Digital Marketing - Curriculum Section - Syllabus"
+        courseName={courseName}
+      />
     </section>
   );
 }

@@ -3,8 +3,12 @@
 import { CheckCircle } from "lucide-react";
 import { courseData } from "@/components/ai-in-digital-marketing/courseData";
 import Link from "next/link";
+import { useState } from "react";
+import EnrollModal from "@/components/EnrollModal";
 
 export default function WhoShouldEnroll() {
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const courseName = "AI in Digital Marketing Course";
   const { targetAudience, industryApplications } = courseData;
 
   return (
@@ -176,12 +180,21 @@ export default function WhoShouldEnroll() {
             <p className="text-lg text-gray-900 font-semibold mb-4">
               No matter your industry, this program can help you grow!
             </p>
-            <Link href="contact-us" className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-xl transition-all shadow-lg hover:shadow-xl">
+            <button
+              onClick={() => setIsEnrollOpen(true)}
+              className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-xl transition-all shadow-lg hover:shadow-xl cursor-pointer"
+            >
               Check Your Fit
-            </Link>
+            </button>
           </div>
         </div>
       </div>
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="AI Digital Marketing - Who Should Enroll - Check Fit"
+        courseName={courseName}
+      />
     </section>
   );
 }

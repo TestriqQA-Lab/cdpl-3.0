@@ -1,7 +1,8 @@
-// components/sections/CareerSection.tsx
-// Server component (no client JS). Sleek, slightly futuristic, fully responsive.
+"use client";
 
 import Link from "next/link";
+import { useState } from "react";
+import CareerSessionModal from "../CareerSessionModal";
 
 type Job = string;
 
@@ -37,7 +38,9 @@ const ACCENTS = [
 ];
 
 export default function CareerSection() {
- 
+  const [isCareerOpen, setIsCareerOpen] = useState(false);
+  const courseName = "Digital Marketing & Analytics Master Program";
+
 
   return (
     <section id="careers" aria-labelledby="careers-heading" className="relative py-12 sm:py-16 md:py-20 bg-white">
@@ -55,7 +58,7 @@ export default function CareerSection() {
             <span className="text-green-700">Digital Marketing & Analytics Professional</span>
           </h2>
 
-        {/* KPI band */}
+          {/* KPI band */}
           <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
             <Stat badge="Global Openings" value="141,000+" note="LinkedIn & job boards worldwide" />
             <Stat badge="Avg Salary (IN)" value="₹6–18 LPA" note="Role & location dependent" />
@@ -116,21 +119,28 @@ export default function CareerSection() {
 
         {/* CTA */}
         <div className="mt-12 text-center">
-          <Link
-            href="contact-us"
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-base font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:translate-y-[-1px] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
+          <button
+            onClick={() => setIsCareerOpen(true)}
+            className="cursor-pointer inline-flex items-center gap-2 rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-base font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:translate-y-[-1px] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
             aria-label="Talk to a program advisor"
           >
             Talk to a Program Advisor
             <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
               <path d="M12.293 4.293a1 1 0 011.414 0l4 4a1 1 0 01.083 1.32l-.083.094-4 4a1 1 0 01-1.497-1.32l.083-.094L14.585 10H3a1 1 0 01-.117-1.993L3 8h11.585l-2.292-2.293a1 1 0 010-1.414z" />
             </svg>
-          </Link>
+          </button>
           <p className="mt-3 text-xs sm:text-sm text-slate-600">
             Learn from anywhere. <span className="font-semibold text-slate-800">If you want to be the best, CDPL is your place.</span>
           </p>
         </div>
       </div>
+
+      <CareerSessionModal
+        isOpen={isCareerOpen}
+        onClose={() => setIsCareerOpen(false)}
+        source="Digital Marketing Course Page - Career Section - Talk to Advisor"
+        courseName={courseName}
+      />
 
     </section>
   );

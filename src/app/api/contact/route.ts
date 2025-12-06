@@ -27,6 +27,7 @@ const SYLLABUS_LINKS: Record<string, string> = {
   'Advanced Manual and Automation Testing Master Program': 'https://www.cinutedigital.com/downloads/advanced-manual-and-automation-testing-master-program.pdf',
   'Advanced Software Testing': 'https://www.cinutedigital.com/downloads/advanced-software-testing.pdf',
   'AI Driven Digital Marketing': 'https://www.cinutedigital.com/downloads/ai-driven-digital-marketing-&-analytics.pdf',
+  'AI in Digital Marketing Course': 'https://www.cinutedigital.com/downloads/ai-driven-digital-marketing-&-analytics.pdf',
   'Comprehensive Data Science and AI': 'https://www.cinutedigital.com/downloads/comprehensive-data-science-and-ai-master-program.pdf',
   'Power BI Data Analytics': 'https://www.cinutedigital.com/downloads/data-analytics-&-visualization-with-power-bi.pdf',
   'Tableau Data Analytics': 'https://www.cinutedigital.com/downloads/data-analytics-&-visualization-with-tableau.pdf',
@@ -121,9 +122,9 @@ export async function POST(request: Request) {
     const isDataEngineeringHeroForm = formSource === 'Data Engineering Course Page - Hero Section';
     const isGenAiHeroForm = formSource === 'Generative AI Course Page - Hero Section';
     const isPromptEngHeroForm = formSource === 'Prompt Engineering Course Page - Hero Section';
-    const isAiMarketingHeroForm = formSource === 'AI in Digital Marketing Course Page - Hero Section';
-    const isAiBootcampHeroForm = formSource === 'AI Bootcamp Course Page - Hero Section';
     const isCompDsAiHeroForm = formSource === 'Comprehensive Data Science & AI - Hero Section' || formSource === 'Comprehensive Data Science & AI - Hero Section (Mobile)';
+    const isAiBootcampHeroForm = formSource === 'AI Bootcamp Course Page - Hero Section';
+    const isAiMarketingHeroForm = formSource === 'AI in Digital Marketing Course Page - Hero Section' || formSource.includes('AI Digital Marketing');
 
     const isMentorRequest = formSource.includes('Team Page - Mentor Section');
     const isLiveJobsRequest = formSource.includes('Live Jobs Page - Hero Section');

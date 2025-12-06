@@ -4,6 +4,7 @@ import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { courseData } from "@/components/ai-in-digital-marketing/courseData";
+import CareerSessionModal from "@/components/CareerSessionModal";
 
 interface FAQItem {
   id: number;
@@ -17,6 +18,8 @@ export default function FaqSection() {
   const faqList = (faqs || []) as FAQItem[];
 
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
+  const [isCareerOpen, setIsCareerOpen] = useState(false);
+  const courseName = "AI in Digital Marketing Course";
 
   // Group by category if available, else everything under "General"
   const categories = Array.from(
@@ -112,9 +115,12 @@ export default function FaqSection() {
             <Link href="https://calendar.app.google/tvh9dsXZsX9BujRR8" className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-xl transition-all shadow-lg hover:shadow-xl">
               Schedule a Free Consultation
             </Link>
-            <Link href="contact-us" className="border-2 border-orange-600 text-orange-600 hover:bg-orange-50 font-bold py-3 px-8 rounded-xl transition-all">
+            <button
+              onClick={() => setIsCareerOpen(true)}
+              className="border-2 border-orange-600 text-orange-600 hover:bg-orange-50 font-bold py-3 px-8 rounded-xl transition-all cursor-pointer"
+            >
               Contact Us
-            </Link>
+            </button>
           </div>
 
           {/* Direct contact links like reference */}
@@ -146,6 +152,12 @@ export default function FaqSection() {
           </p>
         </div>
       </div>
+      <CareerSessionModal
+        isOpen={isCareerOpen}
+        onClose={() => setIsCareerOpen(false)}
+        source="AI Digital Marketing - Faq Section - Contact Us"
+        courseName={courseName}
+      />
     </section>
   );
 }
