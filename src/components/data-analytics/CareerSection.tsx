@@ -81,7 +81,6 @@ export default function CareerSection() {
   const keywords =
     "data analytics jobs India, business intelligence hiring companies, data analyst roles, SQL Python Power BI recruitment, analytics careers Mumbai";
 
-
   return (
     <section id="careers" aria-labelledby="careers-heading" className="relative overflow-hidden py-8 md:py-12 bg-white">
       {/* Subtle futuristic grid */}
@@ -121,7 +120,7 @@ export default function CareerSection() {
               <button
                 aria-label={c.name}
                 className={[
-                  "group block w-full rounded-2xl border p-4 shadow-sm transition-all duration-200 backdrop-blur",
+                  "cursor-pointer group block w-full rounded-2xl border p-4 shadow-sm transition-all duration-200 backdrop-blur",
                   "hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:-translate-y-0.5",
                   c.accent.bg,
                   c.accent.border,
@@ -147,14 +146,14 @@ export default function CareerSection() {
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 sm:flex-row">
           <button
             onClick={() => setIsSessionOpen(true)}
-            className="inline-flex items-center justify-center rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
             aria-label="Apply for placement assistance in analytics roles"
           >
             Apply for Placement Assistance
           </button>
           <button
             onClick={() => setIsSyllabusOpen(true)}
-            className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-orange-200"
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-orange-200"
             aria-label="Download the job-ready analytics syllabus"
           >
             Download Job-Ready Syllabus (PDF)
@@ -179,6 +178,6 @@ export default function CareerSection() {
         source="Data Analytics Course Page - Career Section - Syllabus Download"
         courseName="Advanced Data Analytics Hero Program"
       />
-    </section>
+    </section >
   );
 }

@@ -1,4 +1,3 @@
-// components/sections/WhyAnalyticsProgram.tsx
 "use client";
 
 import {
@@ -14,9 +13,11 @@ import {
     ClipboardList,
 } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
+import EnrollModal from "../EnrollModal";
 
 export default function WhyAnalyticsProgram() {
-
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
 
     const featureChips = [
         { label: "110 Hours", color: "bg-indigo-600 text-white" },
@@ -221,15 +222,15 @@ export default function WhyAnalyticsProgram() {
                         </dl>
 
                         <div className="mt-6 border-t border-gray-200 pt-6">
-                            <Link
-                                href="contact-us"
-                                className="inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold shadow-sm
+                            <button
+                                onClick={() => setIsEnrollOpen(true)}
+                                className="cursor-pointer inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold shadow-sm
                            bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                 aria-label="Apply now for Advanced Data Analytics Hero Program"
                             >
                                 Apply Now
                                 <BadgeCheck className="w-4 h-4" />
-                            </Link>
+                            </button>
                             <p className="mt-3 text-xs text-gray-600">
                                 Get the full syllabus and a skill-gap checklist to personalize your learning path.
                             </p>
@@ -237,7 +238,12 @@ export default function WhyAnalyticsProgram() {
                     </aside>
                 </div>
 
-
+                <EnrollModal
+                    isOpen={isEnrollOpen}
+                    onClose={() => setIsEnrollOpen(false)}
+                    source="Data Analytics Course Page - Why Analytics Section - Apply Now"
+                    courseName="Advanced Data Analytics Hero Program"
+                />
             </div>
 
         </section>

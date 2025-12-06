@@ -1,6 +1,3 @@
-// components/sections/WhoShouldEnroll.tsx
-// Server component — clean, modern audience section with subtle futuristic accents + SEO.
-
 "use client";
 
 import { useState } from "react";
@@ -186,13 +183,13 @@ export default function WhoShouldEnroll() {
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <button
             onClick={() => setIsEnrollOpen(true)}
-            className="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-8 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200"
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl bg-indigo-600 px-8 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200"
           >
             Enroll Now
           </button>
           <button
             onClick={() => setIsSyllabusOpen(true)}
-            className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-8 py-3 text-base font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200"
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-8 py-3 text-base font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200"
           >
             Download Syllabus
           </button>
