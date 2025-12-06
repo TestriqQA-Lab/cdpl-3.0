@@ -4,13 +4,19 @@ import { useState } from "react";
 import { Calendar, Clock, ArrowRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { getLatestPosts, getCategoryById, getAuthorById } from "@/data/BlogPostData";
+import { getLatestPosts, getCategoryById, getAuthorById, BlogPost } from "@/data/BlogPostData";
 
-const BlogArticleList = () => {
+
+interface BlogArticleListProps {
+  posts?: BlogPost[];
+}
+
+const BlogArticleList: React.FC<BlogArticleListProps> = ({ posts }) => {
   const [visibleArticles, setVisibleArticles] = useState(6);
 
-  // Get latest posts excluding the featured one
-  const latestPosts = getLatestPosts(20); // Get more than we need for load more
+  // Use passed posts or get latest posts
+  const displayPosts = posts || getLatestPosts(20);
+
 
   const loadMoreArticles = () => {
     setVisibleArticles((prev) => prev + 3);
@@ -50,7 +56,7 @@ const BlogArticleList = () => {
 
             {/* Article Cards */}
             <div className="space-y-6">
-              {latestPosts.slice(0, visibleArticles).map((post) => {
+              {displayPosts.slice(0, visibleArticles).map((post: BlogPost) => {
                 const category = getCategoryById(post.categoryId);
                 const author = getAuthorById(post.authorId);
 
@@ -139,7 +145,7 @@ const BlogArticleList = () => {
             </div>
 
             {/* Load More Button */}
-            {visibleArticles < latestPosts.length && (
+            {visibleArticles < displayPosts.length && (
               <div className="flex justify-center mt-10">
                 <button
                   onClick={loadMoreArticles}

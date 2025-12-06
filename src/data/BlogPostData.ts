@@ -1413,3 +1413,14 @@ export const POPULAR_POSTS: PopularPost[] = [
 //   },
 // ];
 
+
+
+// ============================================================================
+// NEW HELPER FUNCTIONS
+// ============================================================================
+
+export const getPostsByAuthorId = (authorId: string): BlogPost[] => {
+  return BLOG_POSTS.filter((post) => post.authorId === authorId).sort(
+    (a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
+  );
+};

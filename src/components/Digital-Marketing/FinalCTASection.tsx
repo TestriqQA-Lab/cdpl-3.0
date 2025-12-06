@@ -7,6 +7,8 @@ import { ArrowRight, Phone, Mail, MapPin, Check, Star, Zap } from "lucide-react"
 import Link from "next/link";
 import { EnrollFormData, EnrollPopup } from "../EnrollForms";
 import BrochureDownloadModal from '@/components/home/BrochureDownloadModal';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 
 /**
  * Integrated CTA content (from your data)
@@ -157,8 +159,7 @@ const FinalCTASection: React.FC<CTASectionProps> = () => {
                             </button>
 
                             {/* Popup (reusable) */}
-                            <EnrollPopup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} onSubmit={handleEnrollSubmit} />
-                            <BrochureDownloadModal isOpen={isBrochureOpen} onClose={() => setIsBrochureOpen(false)} />
+
 
                             <button
                                 onClick={() => setIsBrochureOpen(true)}
@@ -259,16 +260,15 @@ const FinalCTASection: React.FC<CTASectionProps> = () => {
                                     <label htmlFor="cta-phone" className="mb-1.5 block text-sm font-medium text-gray-600">
                                         Your Phone
                                     </label>
-                                    <input
-                                        id="cta-phone"
-                                        name="phone"
-                                        type="tel"
-                                        required
-                                        pattern="^[0-9+\\-\\s()]{7,15}$"
+                                    <PhoneInput
+                                        defaultCountry="IN"
+                                        international
+                                        countryCallingCodeEditable={false}
                                         value={form.phone}
-                                        onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
-                                        className="block w-full rounded-lg border border-white/20 bg-white px-4 py-3 text-black placeholder-indigo-200 shadow-sm backdrop-blur-sm outline-none transition focus:border-orange-500 focus:ring-2 focus:ring-orange-500"
-                                        placeholder="+91 98765 43210"
+                                        onChange={(e) => setForm((f) => ({ ...f, phone: e || '' }))}
+                                        className="w-full [&>input]:w-full [&>input]:border-none [&>input]:outline-none [&>input]:py-3 [&>input]:px-3 [&>input]:rounded-lg [&>input]:bg-white backdrop-blur-sm overflow-hidden"
+                                        inputClass="!w-full !pl-14 !text-base !border-none !outline-none !ring-0"
+                                        containerClass="w-full"
                                     />
                                 </div>
 
@@ -288,6 +288,8 @@ const FinalCTASection: React.FC<CTASectionProps> = () => {
                     </motion.div>
                 </motion.div>
             </div>
+            <EnrollPopup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} onSubmit={handleEnrollSubmit} />
+            <BrochureDownloadModal isOpen={isBrochureOpen} onClose={() => setIsBrochureOpen(false)} />
         </section>
     );
 };

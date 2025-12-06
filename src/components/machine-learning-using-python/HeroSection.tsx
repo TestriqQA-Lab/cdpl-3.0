@@ -5,10 +5,6 @@ import {
     ChevronRight,
     Clock,
     Home,
-    BookOpen,
-    Award,
-    Users,
-    Zap,
     CloudDownload,
     ArrowDownNarrowWide,
 } from "lucide-react";

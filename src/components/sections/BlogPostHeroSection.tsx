@@ -1,6 +1,7 @@
 "use client";
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { getPostBySlug, getAuthorById } from '@/data/BlogPostData';
 import { notFound } from 'next/navigation';
 
@@ -10,7 +11,7 @@ interface BlogPostHeroSectionProps {
 
 export const BlogPostHeroSection: React.FC<BlogPostHeroSectionProps> = ({ slug }) => {
     const post = getPostBySlug(slug);
-    
+
     if (!post) {
         notFound();
     }
@@ -49,7 +50,7 @@ export const BlogPostHeroSection: React.FC<BlogPostHeroSectionProps> = ({ slug }
 
             {/* Author Bio */}
             <div className="flex flex-col sm:flex-row items-center mb-6 sm:mb-8 space-y-4 sm:space-y-0 sm:space-x-4">
-                <div className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 flex-shrink-0">
+                <Link href={`/blog/author/${post.authorId}`} className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 flex-shrink-0 cursor-pointer transition-transform hover:scale-105 active:scale-95">
                     <Image
                         src={author.avatar || "/images/user1.jpg"}
                         alt={author.name}
@@ -57,9 +58,11 @@ export const BlogPostHeroSection: React.FC<BlogPostHeroSectionProps> = ({ slug }
                         className="rounded-full border-2 border-blue-600 object-cover"
                         sizes="(max-width: 640px) 64px, (max-width: 768px) 80px, (max-width: 1024px) 96px, 112px"
                     />
-                </div>
+                </Link>
                 <div className="text-center sm:text-left">
-                    <p className="font-semibold text-base sm:text-lg text-gray-600">{author.name}</p>
+                    <Link href={`/blog/author/${post.authorId}`} className="font-semibold text-base sm:text-lg text-gray-600 hover:text-blue-600 transition-colors">
+                        {author.name}
+                    </Link>
                     <p className="text-xs sm:text-sm text-gray-700">
                         {author.bio}
                     </p>

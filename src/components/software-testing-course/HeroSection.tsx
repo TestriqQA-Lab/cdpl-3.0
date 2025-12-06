@@ -41,7 +41,6 @@ const DesktopHeroContent: React.FC<{ onOpenBrochure: () => void; onOpenVideo: ()
 
     const breadcrumbs = [
         { label: 'Home', href: '/' },
-        { label: 'Software Testing Courses', href: '/software-testing-course' },
         { label: 'Software Testing' },
     ];
 
@@ -255,6 +254,11 @@ export default function HeroSection(): React.JSX.Element {
     const openVideo = useCallback(() => setIsVideoOpen(true), []);
     const openEnrollPopup = useCallback(() => setIsEnrollOpen(true), []);
 
+    const breadcrumbs = [
+        { label: 'Home', href: '/' },
+        { label: 'Software Testing' },
+    ];
+
     return (
         <section className="relative bg-white py-10 overflow-hidden">
             <EnrollPopup isOpen={isEnrollOpen} onClose={() => setIsEnrollOpen(false)} onSubmit={() => { }} />
@@ -264,21 +268,31 @@ export default function HeroSection(): React.JSX.Element {
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
                 {/* Mobile / tablet: show up to md */}
                 <div className="md:hidden">
-                    {/* Breadcrumbs (visible on mobile/tablet) */}
-                    <nav aria-label="Breadcrumb" className="mb-4">
+                    {/* Breadcrumbs */}
+                    <nav aria-label="Breadcrumb" className="mb-8">
                         <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
-                            <li className="flex items-center gap-2">
-                                <Home className="h-4 w-4" />
-                                <Link href="/" className="hover:text-indigo-700">Home</Link>
-                            </li>
-                            <li className="flex items-center gap-2">
-                                <ChevronRight className="h-4 w-4" />
-                                <Link href="/software-testing-course" className="hover:text-indigo-700">Software Testing Courses</Link>
-                            </li>
-                            <li className="flex items-center gap-2">
-                                <ChevronRight className="h-4 w-4" />
-                                <span className="font-semibold text-slate-900">Software Testing</span>
-                            </li>
+                            {breadcrumbs.map((c, i) => {
+                                const isLast = i === breadcrumbs.length - 1;
+                                return (
+                                    <li key={i} className="flex items-center gap-2">
+                                        {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                                        {c.href ? (
+                                            <Link
+                                                href={c.href}
+                                                className={`hover:text-indigo-700 ${isLast ? 'font-semibold text-slate-900' : ''}`}
+                                            >
+                                                {c.label}
+                                            </Link>
+                                        ) : (
+                                            <span
+                                                className={`hover:text-indigo-700 ${isLast ? 'font-semibold text-slate-900' : ''}`}
+                                            >
+                                                {c.label}
+                                            </span>
+                                        )}
+                                    </li>
+                                );
+                            })}
                         </ol>
                     </nav>
 
