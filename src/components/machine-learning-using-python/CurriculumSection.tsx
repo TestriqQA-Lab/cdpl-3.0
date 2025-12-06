@@ -93,7 +93,7 @@ export default function CurriculumSection() {
   const courseName = "Machine Learning Algorithms using python Programming";
 
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section id="curriculum" className="py-16 md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -201,13 +201,13 @@ export default function CurriculumSection() {
       <EnrollModal
         isOpen={isEnrollOpen}
         onClose={() => setIsEnrollOpen(false)}
-        source="Machine Learning with Python - Curriculum Section - Apply Now"
+        source="Machine Learning with Python Course Page - Curriculum Section - Apply Now"
         courseName={courseName}
       />
       <SyllabusDownloadModal
         isOpen={isSyllabusOpen}
         onClose={() => setIsSyllabusOpen(false)}
-        source="Machine Learning with Python - Curriculum Section - Download Syllabus"
+        source="Machine Learning with Python Course Page - Curriculum Section - Download Syllabus"
         courseName={courseName}
       />
     </section>

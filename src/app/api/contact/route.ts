@@ -116,13 +116,14 @@ export async function POST(request: Request) {
     const isTableauHeroForm = formSource === 'Tableau Course Page - Hero Section';
     const isDataScienceHeroForm = formSource === 'Data Science Course Page - Hero Section';
     const isMlHeroForm = formSource === 'Machine Learning Course Page - Hero Section';
-    const isMlPythonHeroForm = formSource === 'Machine Learning with Python Course Page - Hero Section';
-    const isRProgrammingHeroForm = formSource === 'R Programming Course Page - Hero Section';
+    const isMlPythonHeroForm = formSource === 'Machine Learning with Python Course Page - Hero Section' || formSource === 'Machine Learning with Python Course Page - Hero Section - Enroll Now' || formSource === 'Machine Learning with Python Course Page - Hero Section - Syllabus Download' || formSource === 'Machine Learning with Python Course Page - Stats Section - Download Syllabus' || formSource === 'Machine Learning with Python Course Page - Curriculum Section - Apply Now' || formSource === 'Machine Learning with Python Course Page - Curriculum Section - Download Syllabus';
+    const isRProgrammingHeroForm = formSource === 'R Programming Course Page - Hero Section' || formSource === 'R Programming Course Page - Hero Section - Enroll Now' || formSource === 'R Programming Course Page - Hero Section - Syllabus Download';
     const isDataEngineeringHeroForm = formSource === 'Data Engineering Course Page - Hero Section';
     const isGenAiHeroForm = formSource === 'Generative AI Course Page - Hero Section';
     const isPromptEngHeroForm = formSource === 'Prompt Engineering Course Page - Hero Section';
     const isAiMarketingHeroForm = formSource === 'AI in Digital Marketing Course Page - Hero Section';
     const isAiBootcampHeroForm = formSource === 'AI Bootcamp Course Page - Hero Section';
+    const isCompDsAiHeroForm = formSource === 'Comprehensive Data Science & AI - Hero Section' || formSource === 'Comprehensive Data Science & AI - Hero Section (Mobile)';
 
     const isMentorRequest = formSource.includes('Team Page - Mentor Section');
     const isLiveJobsRequest = formSource.includes('Live Jobs Page - Hero Section');
@@ -144,7 +145,7 @@ export async function POST(request: Request) {
       subjectPrefix = '[GET STARTED REQUEST]';
     } else if (isFreeDemoRequest) {
       subjectPrefix = '[FREE DEMO REQUEST]';
-    } else if (isManualTestingHeroForm || isApiTestingHeroForm || isDbmsHeroForm || isEtlHeroForm || isAdvancedSoftwareTestingHeroForm || isMasterProgramHeroForm || isPythonHeroForm || isJavaHeroForm || isDataAnalyticsHeroForm || isDataAnalyticsPythonHeroForm || isDataAnalyticsVizHeroForm || isPowerBiHeroForm || isTableauHeroForm || isDataScienceHeroForm || isMlHeroForm || isMlPythonHeroForm || isRProgrammingHeroForm || isDataEngineeringHeroForm || isGenAiHeroForm || isPromptEngHeroForm || isAiMarketingHeroForm || isAiBootcampHeroForm) {
+    } else if (isManualTestingHeroForm || isApiTestingHeroForm || isDbmsHeroForm || isEtlHeroForm || isAdvancedSoftwareTestingHeroForm || isMasterProgramHeroForm || isPythonHeroForm || isJavaHeroForm || isDataAnalyticsHeroForm || isDataAnalyticsPythonHeroForm || isDataAnalyticsVizHeroForm || isPowerBiHeroForm || isTableauHeroForm || isDataScienceHeroForm || isMlHeroForm || isMlPythonHeroForm || isRProgrammingHeroForm || isDataEngineeringHeroForm || isGenAiHeroForm || isPromptEngHeroForm || isAiMarketingHeroForm || isAiBootcampHeroForm || isCompDsAiHeroForm) {
       subjectPrefix = '[ENQUIRY]';
     } else if (isMentorRequest) {
       subjectPrefix = '[MENTOR REQUEST]';
@@ -186,7 +187,7 @@ export async function POST(request: Request) {
       fullName,
       email,
       phone,
-      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isEnrollmentRequest ? 'Enroll Now Inquiry' : (isGetStartedForm ? 'Get Started Request' : (isFreeDemoRequest ? 'Free Demo Request' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : (isSessionEnquiry ? 'Session Enquiry' : (isManualTestingHeroForm || isApiTestingHeroForm || isDbmsHeroForm || isEtlHeroForm || isAdvancedSoftwareTestingHeroForm || isMasterProgramHeroForm || isPythonHeroForm || isJavaHeroForm || isDataAnalyticsHeroForm || isDataAnalyticsPythonHeroForm || isDataAnalyticsVizHeroForm || isPowerBiHeroForm || isTableauHeroForm || isDataScienceHeroForm || isMlHeroForm || isMlPythonHeroForm || isRProgrammingHeroForm || isDataEngineeringHeroForm || isGenAiHeroForm || isPromptEngHeroForm || isAiMarketingHeroForm || isAiBootcampHeroForm ? 'Course Page Enquiry' : 'General Inquiry'))))))))),
+      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isEnrollmentRequest ? 'Enroll Now Inquiry' : (isGetStartedForm ? 'Get Started Request' : (isFreeDemoRequest ? 'Free Demo Request' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : (isSessionEnquiry ? 'Session Enquiry' : (isManualTestingHeroForm || isApiTestingHeroForm || isDbmsHeroForm || isEtlHeroForm || isAdvancedSoftwareTestingHeroForm || isMasterProgramHeroForm || isPythonHeroForm || isJavaHeroForm || isDataAnalyticsHeroForm || isDataAnalyticsPythonHeroForm || isDataAnalyticsVizHeroForm || isPowerBiHeroForm || isTableauHeroForm || isDataScienceHeroForm || isMlHeroForm || isMlPythonHeroForm || isRProgrammingHeroForm || isDataEngineeringHeroForm || isGenAiHeroForm || isPromptEngHeroForm || isAiMarketingHeroForm || isAiBootcampHeroForm || isCompDsAiHeroForm || formSource.includes('Python Course Page - Testimonials Section') ? 'Course Page Enquiry' : 'General Inquiry'))))))))),
       source: formSource,
       downloadLink: isBrochureRequest ? BROCHURE_DOWNLOAD_LINK : (isSyllabusRequest ? (syllabusLink || 'N/A') : 'N/A'),
       year: currentYear,
@@ -217,7 +218,7 @@ export async function POST(request: Request) {
         adminSubject = `${subjectPrefix} New Lead from ${fullName} - Advanced Software Testing Page (Syllabus)`;
       } else if (formSource === 'Master Program Course Page - Curriculum Section - Syllabus Download') {
         adminSubject = `${subjectPrefix} New Lead from ${fullName} - Master Program Page (Syllabus)`;
-      } else if (formSource === 'Python Course Page - Curriculum Section - Syllabus Download') {
+      } else if (formSource === 'Python Course Page - Curriculum Section - Syllabus Download' || formSource === 'Python Course Page - Testimonials Section - Syllabus Download') {
         adminSubject = `${subjectPrefix} New Lead from ${fullName} - Python Page (Syllabus)`;
       } else if (formSource === 'Java Course Page - Curriculum Section - Syllabus Download' || formSource === 'Java Course Page - Who Should Enroll Section - Syllabus Download') {
         adminSubject = `${subjectPrefix} New Lead from ${fullName} - Java Page (Syllabus)`;
@@ -225,6 +226,10 @@ export async function POST(request: Request) {
         adminSubject = `${subjectPrefix} New Lead from ${fullName} - Advanced Excel Page (Syllabus)`;
       } else if (formSource === 'Data Science Course Page - Hero Section - Syllabus Download' || formSource === 'Data Science Course Page - Curriculum Section - Syllabus Download' || formSource === 'Data Science Course Page - Career Section - Download Portfolio Guide' || formSource === 'Data Science Course Page - Who Should Enroll - Download Syllabus') {
         adminSubject = `${subjectPrefix} New Lead from ${fullName} - Data Science Page (Syllabus)`;
+      } else if (formSource === 'Machine Learning with Python Course Page - Hero Section - Syllabus Download' || formSource === 'Machine Learning with Python Course Page - Stats Section - Download Syllabus' || formSource === 'Machine Learning with Python Course Page - Curriculum Section - Download Syllabus') {
+        adminSubject = `${subjectPrefix} New Lead from ${fullName} - Machine Learning with Python Page (Syllabus)`;
+      } else if (formSource === 'R Programming Course Page - Hero Section - Syllabus Download') {
+        adminSubject = `${subjectPrefix} New Lead from ${fullName} - R Programming Page (Syllabus)`;
       } else {
         adminSubject = `${subjectPrefix} New Lead for ${courseName} - ${fullName}`;
       }
@@ -238,6 +243,8 @@ export async function POST(request: Request) {
       adminSubject = `${subjectPrefix} New Lead from ${fullName} - ETL Testing Course Page`;
     } else if (isAdvancedSoftwareTestingHeroForm) {
       adminSubject = `${subjectPrefix} New Lead from ${fullName} - Advanced Software Testing Course Page`;
+    } else if (isCompDsAiHeroForm) {
+      adminSubject = `${subjectPrefix} New Lead from ${fullName} - Comprehensive Data Science & AI Course Page`;
     } else if (isMentorsPageRequest) {
       adminSubject = `${subjectPrefix} New Mentorship Enquiry from ${fullName}`;
     } else if (isEnrollmentRequest) {
@@ -377,7 +384,7 @@ export async function POST(request: Request) {
       email,
       phone,
       source: formSource,
-      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isEnrollmentRequest ? 'Enroll Now Inquiry' : (isGetStartedForm ? 'Get Started Request' : (isFreeDemoRequest ? 'Free Demo Request' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : (isSessionEnquiry ? 'Session Enquiry' : (isManualTestingHeroForm || isApiTestingHeroForm || isDbmsHeroForm || isEtlHeroForm || isAdvancedSoftwareTestingHeroForm || isMasterProgramHeroForm || isPythonHeroForm || isJavaHeroForm || isDataAnalyticsHeroForm || isDataAnalyticsPythonHeroForm || isDataAnalyticsVizHeroForm || isPowerBiHeroForm || isTableauHeroForm || isDataScienceHeroForm || isMlHeroForm || isMlPythonHeroForm || isRProgrammingHeroForm || isDataEngineeringHeroForm || isGenAiHeroForm || isPromptEngHeroForm || isAiMarketingHeroForm || isAiBootcampHeroForm ? 'Course Page Enquiry' : 'General Inquiry'))))))))),
+      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isEnrollmentRequest ? 'Enroll Now Inquiry' : (isGetStartedForm ? 'Get Started Request' : (isFreeDemoRequest ? 'Free Demo Request' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : (isSessionEnquiry ? 'Session Enquiry' : (isManualTestingHeroForm || isApiTestingHeroForm || isDbmsHeroForm || isEtlHeroForm || isAdvancedSoftwareTestingHeroForm || isMasterProgramHeroForm || isPythonHeroForm || isJavaHeroForm || isDataAnalyticsHeroForm || isDataAnalyticsPythonHeroForm || isDataAnalyticsVizHeroForm || isPowerBiHeroForm || isTableauHeroForm || isDataScienceHeroForm || isMlHeroForm || isMlPythonHeroForm || isRProgrammingHeroForm || isDataEngineeringHeroForm || isGenAiHeroForm || isPromptEngHeroForm || isAiMarketingHeroForm || isAiBootcampHeroForm || isCompDsAiHeroForm || formSource.includes('Python Course Page - Testimonials Section') ? 'Course Page Enquiry' : 'General Inquiry'))))))))),
 
       interest: interest || '',
       message: message || '',

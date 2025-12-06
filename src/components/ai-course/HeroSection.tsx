@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import LeadForm from "../CourseLeadForm";
+import AiCourseLeadForm from "../forms/AiCourseLeadForm";
 import { ChevronRight, Home, ArrowRight, CloudDownload, ArrowDownNarrowWide } from "lucide-react";
 import EnrollModal from "../EnrollModal";
 import SyllabusDownloadModal from "../SyllabusDownloadModal";
@@ -78,7 +78,7 @@ export default function HeroSection() {
 
                         {/* Mobile form directly under headline (FORM 1) */}
                         <div className="mt-5 block md:hidden">
-                            <LeadForm variant="elevated" />
+                            <AiCourseLeadForm variant="elevated" source="Comprehensive Data Science & AI - Hero Section (Mobile)" />
                         </div>
 
                         <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-700 sm:text-lg">
@@ -149,15 +149,10 @@ export default function HeroSection() {
                         </div>
                     </div>
 
-                    {/* Right column: Desktop form & visual (FORM 2) */}
-                    <aside className="md:col-span-5 lg:col-span-4 hidden md:block">
-                        <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg">
-
-                            <div className="p-4 sm:p-5">
-                                <LeadForm variant="elevated" />
-                            </div>
-                        </div>
-                    </aside>
+                    {/* Right column: Desktop form */}
+                    <div className="relative lg:col-span-4 hidden md:block">
+                        <AiCourseLeadForm variant="elevated" className="hidden lg:block" source="Comprehensive Data Science & AI - Hero Section" />
+                    </div>
                 </div>
             </div>
 

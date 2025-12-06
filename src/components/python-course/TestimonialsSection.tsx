@@ -1,8 +1,9 @@
-// components/sections/PythonTestimonialsSection.tsx
-// Server component (no client-side JS) – sleek, simple, and unique
+"use client";
 
-import Link from "next/link";
+import { useState } from "react";
 import ReviewsMarquee from "../sections/ReviewMarque";
+import EnrollModal from "@/components/EnrollModal";
+import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
 
 // ---------- Types ----------
 type Testimonial = {
@@ -33,7 +34,8 @@ export default function TestimonialsSection({
   id = "testimonials",
   title = DEFAULT_TITLE,
 }: Props) {
-
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
 
   return (
     <section id={id} aria-labelledby={`${id}-heading`} className="relative py-12 sm:py-16 md:py-20">
@@ -66,22 +68,34 @@ export default function TestimonialsSection({
 
         {/* CTAs */}
         <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3">
-          <Link
-            href="contact-us"
-            className="rounded-xl bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-slate-200"
+          <button
+            onClick={() => setIsEnrollOpen(true)}
+            className="cursor-pointer rounded-xl bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-slate-200"
           >
             Enroll now
-          </Link>
+          </button>
 
           <button
+            onClick={() => setIsSyllabusOpen(true)}
             className="rounded-xl bg-white cursor-pointer border-2 border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-emerald-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-emerald-200"
           >
             Download syllabus
           </button>
-
         </div>
       </div>
 
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        courseName="Python Programming"
+        source="Python Course Page - Testimonials Section - Enroll Now"
+      />
+      <SyllabusDownloadModal
+        isOpen={isSyllabusOpen}
+        onClose={() => setIsSyllabusOpen(false)}
+        courseName="Python Programming"
+        source="Python Course Page - Testimonials Section - Syllabus Download"
+      />
     </section>
   );
 }
