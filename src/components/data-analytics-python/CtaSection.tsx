@@ -1,7 +1,15 @@
+"use client";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
+import EnrollModal from "../EnrollModal";
+import CareerSessionModal from "../CareerSessionModal";
 
 export default function CtaSection() {
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const [isSessionOpen, setIsSessionOpen] = useState(false);
+    const courseName = "Advanced Data Analytics with Python";
+
     return (
         <section className="py-16 md:py-20 bg-gradient-to-r from-slate-900 via-orange-900 to-slate-900 relative overflow-hidden">
             {/* Background decoration */}
@@ -55,13 +63,15 @@ export default function CtaSection() {
                     {/* CTA Buttons */}
                     <div className="flex flex-col md:flex-row gap-4 justify-center mb-10">
                         <button
-                            className="flex items-center bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-6 text-base rounded-lg shadow-lg hover:shadow-xl transition-all"
+                            onClick={() => setIsEnrollOpen(true)}
+                            className="cursor-pointer flex items-center bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-6 text-base rounded-lg shadow-lg hover:shadow-xl transition-all"
                         >
                             Enroll Now
                             <ArrowRight className="w-5 h-5 ml-2" />
                         </button>
                         <button
-                            className="border-2 border-white text-white hover:bg-white/10 font-semibold px-8 py-6 text-base rounded-lg transition-all"
+                            onClick={() => setIsSessionOpen(true)}
+                            className="cursor-pointer border-2 border-white text-white hover:bg-white/10 font-semibold px-8 py-6 text-base rounded-lg transition-all"
                         >
                             Schedule Free Demo
                         </button>
@@ -109,16 +119,30 @@ export default function CtaSection() {
                 <div className="mt-16 text-center border-t border-white/10 pt-8">
                     <p className="text-slate-300 mb-4">Have questions? Get in touch with us!</p>
                     <div className="flex flex-col sm:flex-row gap-6 justify-center items-center text-white">
-                        <Link href="tel:+917888383788" className="flex items-center gap-2 hover:text-orange-400 transition-colors">
+                        <Link href="tel:+917888383788" className="cursor-pointer flex items-center gap-2 hover:text-orange-400 transition-colors">
                             <span>📞</span> +91 788-83-83-788
                         </Link>
                         <div className="hidden sm:block w-px h-6 bg-white/20"></div>
-                        <Link href="mailto:contact@cinutedigital.com" className="flex items-center gap-2 hover:text-orange-400 transition-colors">
+                        <Link href="mailto:contact@cinutedigital.com" className="cursor-pointer flex items-center gap-2 hover:text-orange-400 transition-colors">
                             <span>✉️</span> contact@cinutedigital.com
                         </Link>
                     </div>
                 </div>
             </div>
+
+            {/* Modals */}
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="Data Analytics Python Course Page - CTA Section - Enroll Now"
+                courseName={courseName}
+            />
+            <CareerSessionModal
+                isOpen={isSessionOpen}
+                onClose={() => setIsSessionOpen(false)}
+                source="Data Analytics Python Course Page - CTA Section - Free Demo"
+                courseName={courseName}
+            />
         </section>
     );
 }
