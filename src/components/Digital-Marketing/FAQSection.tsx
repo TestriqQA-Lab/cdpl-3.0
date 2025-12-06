@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, HelpCircle, Sparkles, CheckCircle, Clock, Award, Users, DollarSign, BookOpen, Briefcase } from 'lucide-react';
+import Link from 'next/link';
 
 // --- types ---
 type FAQ = {
@@ -314,16 +315,18 @@ export default function FAQSection() {
                             </div>
                         </div>
                         <div className="flex flex-wrap gap-4 justify-center">
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
+                            <Link
+                                href="/contact-us"
                                 className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                             >
                                 Talk to Our Experts
-                            </motion.button>
-                            <button className="px-8 py-4 bg-white text-gray-700 font-bold rounded-xl border-2 border-gray-300 hover:border-gray-400 transition-all duration-300">
+                            </Link>
+                            <Link
+                                href="https://calendar.app.google/tvh9dsXZsX9BujRR8"
+                                className="px-8 py-4 bg-white text-gray-700 font-bold rounded-xl border-2 border-gray-300 hover:border-gray-400 transition-all duration-300"
+                            >
                                 Schedule a Demo
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </motion.div>

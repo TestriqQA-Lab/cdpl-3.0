@@ -172,6 +172,18 @@ const FeatureCard = ({ icon: Icon, title, desc, theme, index }: FeatureCardProps
 };
 
 export default function TestingFeaturesSection() {
+    // Smooth scroll to #courses on same page
+    const scrollToCourses = () => {
+        if (typeof window === 'undefined') return;
+        const el = document.getElementById('courses');
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            // Fallback: try scrolling to an anchor named courses
+            const anchor = document.querySelector('a[name="courses"]') as HTMLElement | null;
+            if (anchor) anchor.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
     return (
         <section className="relative py-10 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden">
             {/* Subtle background pattern */}
@@ -235,6 +247,7 @@ export default function TestingFeaturesSection() {
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
+                        onClick={scrollToCourses}
                         className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                     >
                         <Target className="w-5 h-5" />

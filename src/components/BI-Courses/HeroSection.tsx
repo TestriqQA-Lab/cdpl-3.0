@@ -140,33 +140,33 @@ const DesktopHeroContent: React.FC<{ onOpenBrochure: () => void; onOpenVideo: ()
                         className="mt-7 grid grid-cols-1 sm:grid-cols-3 gap-4"
                     >
                         {/* Card 1 - Students Placed */}
-                        <div className="flex items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                        <div className="flex flex-col lg:flex-row items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
                             <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
                                 <Users className="h-5 w-5 text-white" />
                             </div>
-                            <div>
+                            <div className="text-center lg:text-left">
                                 <div className="text-xl font-bold text-slate-900">5,000+</div>
                                 <div className="text-xs text-slate-600">Students Placed</div>
                             </div>
                         </div>
 
                         {/* Card 2 - Rating */}
-                        <div className="flex items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                        <div className="flex flex-col lg:flex-row items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
                             <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg flex items-center justify-center">
                                 <Star className="h-5 w-5 text-white fill-white" />
                             </div>
-                            <div>
+                            <div className="text-center lg:text-left">
                                 <div className="text-xl font-bold text-slate-900">4.9/5</div>
                                 <div className="text-xs text-slate-600">Student Rating</div>
                             </div>
                         </div>
 
                         {/* Card 3 - Experience */}
-                        <div className="flex items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                        <div className="flex flex-col lg:flex-row items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
                             <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
                                 <Award className="h-5 w-5 text-white" />
                             </div>
-                            <div>
+                            <div className="text-center lg:text-left">
                                 <div className="text-xl font-bold text-slate-900">15+ Years</div>
                                 <div className="text-xs text-slate-600">Industry Experience</div>
                             </div>
@@ -255,6 +255,13 @@ export default function HeroSection(): React.JSX.Element {
     const openVideo = useCallback(() => setIsVideoOpen(true), []);
     const openEnrollPopup = useCallback(() => setIsEnrollOpen(true), []);
 
+    // Mobile breadcrumbs (kept in sync with DesktopHeroContent)
+    const breadcrumbs = [
+        { label: 'Home', href: '/' },
+        { label: 'Business Intelligence Courses', href: '/bi-courses' },
+        { label: 'Business Intelligence' },
+    ];
+
     return (
         <section className="relative bg-white py-10 overflow-hidden">
             <EnrollPopup isOpen={isEnrollOpen} onClose={() => setIsEnrollOpen(false)} onSubmit={() => { }} />
@@ -263,7 +270,35 @@ export default function HeroSection(): React.JSX.Element {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
                 {/* Mobile */}
-                <div className="lg:hidden">
+                <div className="md:hidden">
+                    {/* Breadcrumbs visible on mobile */}
+                    <nav aria-label="Breadcrumb" className="mb-8 md:hidden">
+                        <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+                            {breadcrumbs.map((c, i) => {
+                                const isLast = i === breadcrumbs.length - 1;
+                                return (
+                                    <li key={i} className="flex items-center gap-2">
+                                        {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                                        {c.href ? (
+                                            <Link
+                                                href={c.href}
+                                                className={`hover:text-indigo-700 ${isLast ? 'font-semibold text-slate-900' : ''}`}
+                                            >
+                                                {c.label}
+                                            </Link>
+                                        ) : (
+                                            <span
+                                                className={`hover:text-indigo-700 ${isLast ? 'font-semibold text-slate-900' : ''}`}
+                                            >
+                                                {c.label}
+                                            </span>
+                                        )}
+                                    </li>
+                                );
+                            })}
+                        </ol>
+                    </nav>
+
                     <motion.div {...fadeUp} className="inline-flex items-center gap-2 bg-white border border-slate-100 rounded-full px-3 py-1 text-sm font-medium text-slate-700 shadow-sm mb-4">
                         <Sparkles className="h-4 w-4 text-amber-500" />
                         <span>India's #1 Business Intelligence Training Institute</span>
@@ -292,7 +327,7 @@ export default function HeroSection(): React.JSX.Element {
                 </div>
 
                 {/* Desktop */}
-                <div className="hidden lg:block">
+                <div className="hidden md:block">
                     <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-12">
                         {/* Left content - 7 columns */}
                         <div className="md:col-span-7 lg:col-span-8 relative">

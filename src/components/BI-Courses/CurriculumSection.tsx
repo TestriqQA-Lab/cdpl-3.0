@@ -6,15 +6,6 @@ import { BookOpen, CheckCircle2, Clock, Award, TrendingUp, Sparkles } from "luci
 import { curriculumContent } from "@/components/BI-Courses/data/data";
 
 
-/** ---- Types ---- */
-
-interface Week {
-    number?: string | number;
-    title: string;
-    description: string;
-    deliverables?: string[];
-}
-
 /** ---- Gradient Themes ---- */
 const gradientThemes = [
     {

@@ -3,6 +3,8 @@
 import { motion } from 'framer-motion';
 import { Briefcase, TrendingUp, Award, CheckCircle, Sparkles, LucideIcon } from 'lucide-react';
 import ReviewsMarquee from '../sections/ReviewMarque';
+import { EnrollFormData, EnrollPopup } from "../EnrollForms";
+import { useState } from 'react';
 
 
 
@@ -23,6 +25,15 @@ const StatCard = ({ icon: Icon, value, label, delay }: { icon: LucideIcon; value
 );
 
 export default function TestimonialsSection() {
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+    const handleEnrollSubmit = (enroll: EnrollFormData) => {
+        // Replace with real submit logic as needed
+        alert(
+            `Enroll Now Submitted:\nName: ${enroll.name}\nEmail: ${enroll.email}\nPhone: ${enroll.phone}`
+        );
+        setIsPopupOpen(false);
+    };
     return (
         <section className="relative py-10 bg-gradient-to-b from-gray-50 via-white to-gray-50 overflow-hidden">
             {/* Background decorative elements */}
@@ -96,30 +107,18 @@ export default function TestimonialsSection() {
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
+                            onClick={() => setIsPopupOpen(true)}
                             className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                         >
                             Enroll Now
                         </motion.button>
                     </div>
                 </motion.div>
-
-                {/* Trust indicators */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.6 }}
-                    className="mt-12 text-center"
-                >
-                    <p className="text-sm text-gray-500 mb-4">Trusted by students from</p>
-                    <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
-                        <span className="text-2xl font-bold text-gray-400">IIT</span>
-                        <span className="text-2xl font-bold text-gray-400">NIT</span>
-                        <span className="text-2xl font-bold text-gray-400">BITS</span>
-                        <span className="text-2xl font-bold text-gray-400">VIT</span>
-                        <span className="text-2xl font-bold text-gray-400">IIIT</span>
-                    </div>
-                </motion.div>
+                <EnrollPopup
+                    isOpen={isPopupOpen}
+                    onClose={() => setIsPopupOpen(false)}
+                    onSubmit={handleEnrollSubmit}
+                />
             </div>
 
             <style jsx>{`

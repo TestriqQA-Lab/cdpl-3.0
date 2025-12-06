@@ -140,33 +140,33 @@ const DesktopHeroContent: React.FC<{ onOpenBrochure: () => void; onOpenVideo: ()
                         className="mt-7 grid grid-cols-1 sm:grid-cols-3 gap-4"
                     >
                         {/* Card 1 - Students Placed */}
-                        <div className="flex items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                        <div className="flex flex-col lg:flex-row items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
                             <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
                                 <Users className="h-5 w-5 text-white" />
                             </div>
-                            <div>
+                            <div className="text-center lg:text-left">
                                 <div className="text-xl font-bold text-slate-900">5,000+</div>
                                 <div className="text-xs text-slate-600">Students Placed</div>
                             </div>
                         </div>
 
                         {/* Card 2 - Rating */}
-                        <div className="flex items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                        <div className="flex flex-col lg:flex-row items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
                             <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg flex items-center justify-center">
                                 <Star className="h-5 w-5 text-white fill-white" />
                             </div>
-                            <div>
+                            <div className="text-center lg:text-left">
                                 <div className="text-xl font-bold text-slate-900">4.9/5</div>
                                 <div className="text-xs text-slate-600">Student Rating</div>
                             </div>
                         </div>
 
                         {/* Card 3 - Experience */}
-                        <div className="flex items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                        <div className="flex flex-col lg:flex-row items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
                             <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
                                 <Award className="h-5 w-5 text-white" />
                             </div>
-                            <div>
+                            <div className="text-center lg:text-left">
                                 <div className="text-xl font-bold text-slate-900">15+ Years</div>
                                 <div className="text-xs text-slate-600">Industry Experience</div>
                             </div>
@@ -262,8 +262,26 @@ export default function HeroSection(): React.JSX.Element {
             <YouTubeVideoModal isOpen={isVideoOpen} onClose={() => setIsVideoOpen(false)} videoUrl={videoUrl} />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
-                {/* Mobile */}
-                <div className="lg:hidden">
+                {/* Mobile / tablet: show up to md */}
+                <div className="md:hidden">
+                    {/* Breadcrumbs (visible on mobile/tablet) */}
+                    <nav aria-label="Breadcrumb" className="mb-4">
+                        <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+                            <li className="flex items-center gap-2">
+                                <Home className="h-4 w-4" />
+                                <Link href="/" className="hover:text-indigo-700">Home</Link>
+                            </li>
+                            <li className="flex items-center gap-2">
+                                <ChevronRight className="h-4 w-4" />
+                                <Link href="/software-testing-course" className="hover:text-indigo-700">Software Testing Courses</Link>
+                            </li>
+                            <li className="flex items-center gap-2">
+                                <ChevronRight className="h-4 w-4" />
+                                <span className="font-semibold text-slate-900">Software Testing</span>
+                            </li>
+                        </ol>
+                    </nav>
+
                     <motion.div {...fadeUp} className="inline-flex items-center gap-2 bg-white border border-slate-100 rounded-full px-3 py-1 text-sm font-medium text-slate-700 shadow-sm mb-4">
                         <Sparkles className="h-4 w-4 text-amber-500" />
                         <span>India's #1 Software Testing Training Institute</span>
@@ -291,8 +309,8 @@ export default function HeroSection(): React.JSX.Element {
                     <MobileFeatureList onOpenBrochure={openBrochure} onOpenVideo={openVideo} />
                 </div>
 
-                {/* Desktop */}
-                <div className="hidden lg:block">
+                {/* Desktop: show from md and up */}
+                <div className="hidden md:block">
                     <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-12">
                         {/* Left content - 7 columns */}
                         <div className="md:col-span-7 lg:col-span-8 relative">

@@ -3,6 +3,8 @@
 import { motion } from 'framer-motion';
 import { Briefcase, TrendingUp, Award, CheckCircle, Sparkles, LucideIcon } from 'lucide-react';
 import ReviewsMarquee from '@/components/sections/ReviewMarque';
+import { EnrollFormData, EnrollPopup } from "../EnrollForms";
+import { useState } from 'react';
 
 const StatCard = ({ icon: Icon, value, label, delay }: { icon: LucideIcon; value: string; label: string; delay: number }) => (
     <motion.div
@@ -21,6 +23,16 @@ const StatCard = ({ icon: Icon, value, label, delay }: { icon: LucideIcon; value
 );
 
 export default function TestimonialsSection() {
+
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+    const handleEnrollSubmit = (enroll: EnrollFormData) => {
+        // Replace with real submit logic as needed
+        alert(
+            `Enroll Now Submitted:\nName: ${enroll.name}\nEmail: ${enroll.email}\nPhone: ${enroll.phone}`
+        );
+        setIsPopupOpen(false);
+    };
     return (
         <section className="relative py-10 bg-gradient-to-b from-gray-50 via-white to-gray-50 overflow-hidden">
             {/* Background decorative elements */}
@@ -92,12 +104,18 @@ export default function TestimonialsSection() {
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
+                            onClick={() => setIsPopupOpen(true)}
                             className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-cyan-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                         >
                             Enroll Now
                         </motion.button>
                     </div>
                 </motion.div>
+                <EnrollPopup
+                    isOpen={isPopupOpen}
+                    onClose={() => setIsPopupOpen(false)}
+                    onSubmit={handleEnrollSubmit}
+                />
             </div>
 
             <style jsx>{`

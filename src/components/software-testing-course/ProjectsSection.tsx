@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Code2, Briefcase, Award, Zap, ArrowRight, TrendingUp, BarChart3, Sparkles, CheckCircle, Eye } from "lucide-react";
+import { Code2, Briefcase, Award, Zap, ArrowRight, TrendingUp, BarChart3, Sparkles, Eye } from "lucide-react";
 
 const projectsContent = {
     title: "Hands-On Projects",

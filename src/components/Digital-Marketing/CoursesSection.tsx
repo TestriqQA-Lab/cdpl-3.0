@@ -212,13 +212,13 @@ const CourseCard: React.FC<{ course: Course; index: number; nowMs: number }> = (
                 </div>
 
                 <div className="pt-4 space-y-3 mt-auto">
-                    <button
-                        onClick={() => setIsEnrollOpen(true)}
+                    <Link
+                        href={course.link}
                         className={`w-full flex items-center justify-center gap-2 ${variant.button} text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300`}
                     >
-                        <span>Enroll Now</span>
+                        <span>View Course</span>
                         <ArrowRight className="w-4 h-4" />
-                    </button>
+                    </Link>
 
                     <DownloadFormButton
                         courseTitle={course.title}

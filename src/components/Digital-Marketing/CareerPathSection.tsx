@@ -15,13 +15,12 @@ import {
     Building2,
     Rocket,
     CheckCircle,
-    X,
 } from "lucide-react";
 import { careerPathContent } from "@/components/Digital-Marketing/data/data";
 
 import { EnrollPopup } from '@/components/EnrollForms';
 import BrochureDownloadModal from '@/components/home/BrochureDownloadModal';
-import LeadForm from './LeadForm';
+import Link from "next/link";
 
 type DemandLevel = "Very High" | "High" | "Medium" | string;
 
@@ -40,11 +39,10 @@ interface CareerPath {
 }
 
 /* -------------------------
-   CareerCard (BI-styled)
+   CareerCard (DM-styled)
    ------------------------- */
-const CareerCard = ({ path, index }: { path: CareerPath; index: number }) => {
+const CareerCard = ({ path, index, onEnroll }: { path: CareerPath; index: number; onEnroll: () => void }) => {
     const [isHovered, setIsHovered] = useState(false);
-    const [showForm, setShowForm] = useState(false);
 
     const gradients = [
         {
@@ -122,166 +120,144 @@ const CareerCard = ({ path, index }: { path: CareerPath; index: number }) => {
                 <div className={`h-2 bg-gradient-to-r ${theme.accent}`} />
 
                 <div className="p-8 flex flex-col flex-grow">
-                    {showForm ? (
-                        <div className="flex flex-col h-full animate-in fade-in slide-in-from-bottom-4 duration-300">
-                            <button
-                                onClick={() => setShowForm(false)}
-                                className="self-end p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors mb-2"
-                                aria-label="Close form"
+                    <div className="flex items-start justify-between mb-6">
+                        <div className="flex items-center gap-3">
+                            <motion.div
+                                animate={{
+                                    rotate: isHovered ? [0, -10, 10, -10, 0] : 0,
+                                    scale: isHovered ? 1.05 : 1,
+                                }}
+                                transition={{ duration: 0.5 }}
+                                className={`w-14 h-14 ${theme.iconBg} rounded-2xl flex items-center justify-center border-2 ${theme.border} shadow-lg`}
                             >
-                                <X className="w-5 h-5" />
-                            </button>
-                            <div className="flex-grow overflow-y-auto custom-scrollbar">
-                                <LeadForm
-                                    title={`Apply for ${path.role}`}
-                                    subtitle="Get expert guidance for this career path"
-                                    buttonText="Submit Application"
-                                    showCourse={false}
+                                <Briefcase
+                                    className={`w-7 h-7 ${theme.iconColor}`}
+                                    strokeWidth={2.5}
                                 />
+                            </motion.div>
+
+                            <div className="ml-3">
+                                <h3 className="text-2xl font-bold text-gray-900 mb-1">
+                                    {path.role}
+                                </h3>
+                                <p className="text-sm text-gray-500">{path.experience} Experience</p>
                             </div>
                         </div>
-                    ) : (
-                        <>
-                            <div className="flex items-start justify-between mb-6">
-                                <div className="flex items-center gap-3">
-                                    <motion.div
-                                        animate={{
-                                            rotate: isHovered ? [0, -10, 10, -10, 0] : 0,
-                                            scale: isHovered ? 1.05 : 1,
-                                        }}
-                                        transition={{ duration: 0.5 }}
-                                        className={`w-14 h-14 ${theme.iconBg} rounded-2xl flex items-center justify-center border-2 ${theme.border} shadow-lg`}
-                                    >
-                                        <Briefcase
-                                            className={`w-7 h-7 ${theme.iconColor}`}
-                                            strokeWidth={2.5}
-                                        />
-                                    </motion.div>
 
-                                    <div className="ml-3">
-                                        <h3 className="text-2xl font-bold text-gray-900 mb-1">
-                                            {path.role}
-                                        </h3>
-                                        <p className="text-sm text-gray-500">{path.experience} Experience</p>
-                                    </div>
-                                </div>
-
-                                <div className="flex flex-col gap-2 items-end">
-                                    {path.trending && (
-                                        <motion.span
-                                            initial={{ scale: 0, rotate: -180 }}
-                                            whileInView={{ scale: 1, rotate: 0 }}
-                                            transition={{ delay: 0.15, type: "spring" }}
-                                            className="flex items-center gap-1 text-xs font-bold px-3 py-1 bg-orange-50 text-orange-700 border border-orange-200 rounded-full"
-                                        >
-                                            <TrendingUp className="w-3 h-3" />
-                                            Trending
-                                        </motion.span>
-                                    )}
-
-                                    <span className={`text-xs font-bold px-3 py-1 rounded-full border ${demandClass}`}>
-                                        {path.demandLevel} Demand
-                                    </span>
-                                </div>
-                            </div>
-
-                            <p className="text-gray-600 leading-relaxed mb-6">{path.description}</p>
-
-                            <div className="grid grid-cols-1 gap-4 mb-6">
-                                <div className={`p-4 bg-gradient-to-br ${theme.card} rounded-xl border ${theme.border}`}>
-                                    <div className="flex items-center gap-3">
-                                        <div className={`w-10 h-10 ${theme.iconBg} rounded-lg flex items-center justify-center`}>
-                                            <DollarSign className={`w-5 h-5 ${theme.iconColor}`} />
-                                        </div>
-                                        <div>
-                                            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Salary Range</p>
-                                            <p className="text-xl font-bold text-gray-900">{path.salaryRange}</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3 flex items-center gap-2">
-                                        <Target className="w-3.5 h-3.5" />
-                                        Essential Skills
-                                    </p>
-                                    <div className="flex flex-wrap gap-2">
-                                        {path.skills.slice(0, 5).map((skill, i) => (
-                                            <motion.span
-                                                key={i}
-                                                initial={{ opacity: 0, scale: 0.9 }}
-                                                whileInView={{ opacity: 1, scale: 1 }}
-                                                transition={{ delay: index * 0.06 + i * 0.03 }}
-                                                className="text-xs font-semibold px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg border border-gray-200"
-                                            >
-                                                {skill}
-                                            </motion.span>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="mb-6">
-                                <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3 flex items-center gap-2">
-                                    <CheckCircle className="w-3.5 h-3.5" />
-                                    Key Responsibilities
-                                </p>
-                                <ul className="space-y-2">
-                                    {path.responsibilities.map((resp, i) => (
-                                        <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
-                                            <div className={`mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-gradient-to-r ${theme.accent}`} />
-                                            <span>{resp}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-
-                            <div className="mb-6">
-                                <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3 flex items-center gap-2">
-                                    <Building2 className="w-3.5 h-3.5" />
-                                    Industry Opportunities
-                                </p>
-                                <div className="flex flex-wrap gap-2">
-                                    {path.opportunities.map((opp, i) => (
-                                        <span key={i} className="text-xs font-medium px-3 py-1 bg-white text-gray-700 rounded-lg border border-gray-200 shadow-sm">
-                                            {opp}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="mb-6 pb-6 border-b border-gray-200">
-                                <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3 flex items-center gap-2">
-                                    <Users className="w-3.5 h-3.5" />
-                                    Top Hiring Companies
-                                </p>
-                                <div className="flex flex-wrap gap-2">
-                                    {path.hiringCompanies.map((company, i) => (
-                                        <span key={i} className={`text-xs font-semibold px-3 py-1 ${theme.badge} rounded-full border`}>
-                                            {company}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="mt-auto space-y-3">
-                                <motion.button
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    onClick={() => setShowForm(true)}
-                                    className={`w-full bg-gradient-to-r ${theme.accent} text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2`}
+                        <div className="flex flex-col gap-2 items-end">
+                            {path.trending && (
+                                <motion.span
+                                    initial={{ scale: 0, rotate: -180 }}
+                                    whileInView={{ scale: 1, rotate: 0 }}
+                                    transition={{ delay: 0.15, type: "spring" }}
+                                    className="flex items-center gap-1 text-xs font-bold px-3 py-1 bg-orange-50 text-orange-700 border border-orange-200 rounded-full"
                                 >
-                                    <Rocket className="w-5 h-5" />
-                                    Start Career Path
-                                    <ArrowRight className="w-5 h-5" />
-                                </motion.button>
+                                    <TrendingUp className="w-3 h-3" />
+                                    Trending
+                                </motion.span>
+                            )}
 
-                                <button className="w-full text-gray-600 font-semibold py-3 rounded-xl border-2 border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all duration-300">
-                                    View Job Openings
-                                </button>
+                            <span className={`text-xs font-bold px-3 py-1 rounded-full border ${demandClass}`}>
+                                {path.demandLevel} Demand
+                            </span>
+                        </div>
+                    </div>
+
+                    <p className="text-gray-600 leading-relaxed mb-6">{path.description}</p>
+
+                    <div className="grid grid-cols-1 gap-4 mb-6">
+                        <div className={`p-4 bg-gradient-to-br ${theme.card} rounded-xl border ${theme.border}`}>
+                            <div className="flex items-center gap-3">
+                                <div className={`w-10 h-10 ${theme.iconBg} rounded-lg flex items-center justify-center`}>
+                                    <DollarSign className={`w-5 h-5 ${theme.iconColor}`} />
+                                </div>
+                                <div>
+                                    <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Salary Range</p>
+                                    <p className="text-xl font-bold text-gray-900">{path.salaryRange}</p>
+                                </div>
                             </div>
-                        </>
-                    )}
+                        </div>
+
+                        <div>
+                            <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3 flex items-center gap-2">
+                                <Target className="w-3.5 h-3.5" />
+                                Essential Skills
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                                {path.skills.slice(0, 5).map((skill, i) => (
+                                    <motion.span
+                                        key={i}
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        transition={{ delay: index * 0.06 + i * 0.03 }}
+                                        className="text-xs font-semibold px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg border border-gray-200"
+                                    >
+                                        {skill}
+                                    </motion.span>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="mb-6">
+                        <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3 flex items-center gap-2">
+                            <CheckCircle className="w-3.5 h-3.5" />
+                            Key Responsibilities
+                        </p>
+                        <ul className="space-y-2">
+                            {path.responsibilities.map((resp, i) => (
+                                <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
+                                    <div className={`mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-gradient-to-r ${theme.accent}`} />
+                                    <span>{resp}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <div className="mb-6">
+                        <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3 flex items-center gap-2">
+                            <Building2 className="w-3.5 h-3.5" />
+                            Industry Opportunities
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                            {path.opportunities.map((opp, i) => (
+                                <span key={i} className="text-xs font-medium px-3 py-1 bg-white text-gray-700 rounded-lg border border-gray-200 shadow-sm">
+                                    {opp}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="mb-6 pb-6 border-b border-gray-200">
+                        <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3 flex items-center gap-2">
+                            <Users className="w-3.5 h-3.5" />
+                            Top Hiring Companies
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                            {path.hiringCompanies.map((company, i) => (
+                                <span key={i} className={`text-xs font-semibold px-3 py-1 ${theme.badge} rounded-full border`}>
+                                    {company}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="mt-auto flex flex-col gap-3 text-center">
+                        <motion.button
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={onEnroll}
+                            className={`w-full bg-gradient-to-r ${theme.accent} text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2`}
+                        >
+                            <Rocket className="w-5 h-5" />
+                            Start Career Path
+                            <ArrowRight className="w-5 h-5" />
+                        </motion.button>
+
+                        <Link href="/jobs/live-jobs" className="w-full text-gray-600 font-semibold py-3 rounded-xl border-2 border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all duration-300">
+                            View Job Openings
+                        </Link>
+                    </div>
                 </div>
 
                 <div className={`absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl ${theme.card} rounded-tl-full opacity-50`} />
@@ -370,7 +346,7 @@ export default function CareerPathSection() {
                 {/* Career Cards Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
                     {careerPathContent.paths.map((path, index) => (
-                        <CareerCard key={path.role} path={path as CareerPath} index={index} />
+                        <CareerCard key={path.role} path={path as CareerPath} index={index} onEnroll={() => setIsEnrollOpen(true)} />
                     ))}
                 </div>
 

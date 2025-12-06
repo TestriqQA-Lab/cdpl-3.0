@@ -212,13 +212,13 @@ const CourseCard: React.FC<{ course: Course; index: number; nowMs: number }> = (
                 </div>
 
                 <div className="pt-4 space-y-3 mt-auto">
-                    <button
-                        onClick={() => setIsEnrollOpen(true)}
+                    <Link
+                        href={course.link}
                         className={`w-full flex items-center justify-center gap-2 ${variant.button} text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300`}
                     >
-                        <span>Enroll Now</span>
+                        <span>View Course</span>
                         <ArrowRight className="w-4 h-4" />
-                    </button>
+                    </Link>
 
                     <DownloadFormButton
                         courseTitle={course.title}
@@ -252,7 +252,7 @@ export default function CoursesSection() {
     }, []);
 
     return (
-        <section className="py-10 bg-gray-50">
+        <section className="py-10 bg-gray-50" id="courses">
             <div className="max-w-7xl mx-auto px-6">
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mb-16">
                     <span className="inline-block px-4 py-2 bg-orange-100 text-orange-600 rounded-full text-sm font-semibold mb-4">

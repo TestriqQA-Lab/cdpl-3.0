@@ -135,6 +135,7 @@ const gradientThemes = [
    Feature Card component (polished)
    ---------------------------- */
 const FeatureCard = ({ icon: Icon, title, desc, theme, index }: { icon: any; title: string; desc: string; theme: any; index: number }) => {
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
@@ -181,6 +182,19 @@ const FeatureCard = ({ icon: Icon, title, desc, theme, index }: { icon: any; tit
    Main Section
    ---------------------------- */
 export default function DSMLFeaturesSection() {
+
+    // Smooth scroll to #courses on same page
+    const scrollToCourses = () => {
+        if (typeof window === 'undefined') return;
+        const el = document.getElementById('courses');
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            // Fallback: try scrolling to an anchor named courses
+            const anchor = document.querySelector('a[name="courses"]') as HTMLElement | null;
+            if (anchor) anchor.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
     return (
         <section className="relative py-10 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden">
             {/* subtle patterned background (keeps spacing lightweight) */}
@@ -195,7 +209,7 @@ export default function DSMLFeaturesSection() {
                     </motion.div>
 
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight">
-                        Become a Data Scientist — <span className="text-brand">Build & Deploy Models</span>
+                        Become a Data Scientist - <span className="text-brand">Build & Deploy Models</span>
                     </h2>
 
                     <p className="text-lg text-gray-600 leading-relaxed">
@@ -220,7 +234,7 @@ export default function DSMLFeaturesSection() {
                 {/* CTA */}
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.5 }} className="text-center mt-16">
                     <p className="text-gray-600 mb-6">Ready to level up? Start building production-ready ML systems today.</p>
-                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                    <motion.button onClick={scrollToCourses} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
                         <Target className="w-5 h-5" />
                         Explore DS & ML Courses
                     </motion.button>
