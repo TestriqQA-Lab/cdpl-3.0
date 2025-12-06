@@ -1,7 +1,10 @@
 // components/sections/FaqSection.tsx
+"use client";
 // Server component — clean, modern, responsive FAQ with subtle futuristic accents + SEO.
 
 import Link from "next/link";
+import { useState } from "react";
+import CareerSessionModal from "../CareerSessionModal";
 
 type Faq = {
   q: string;
@@ -74,6 +77,7 @@ const FAQS: Faq[] = [
 ];
 
 export default function FaqSection() {
+  const [isSessionOpen, setIsSessionOpen] = useState(false);
   const seoKeywords =
     "advanced data analytics faq, data analytics course questions, job assistance analytics India, python sql bi course details, data science placement support, analytics projects portfolio";
 
@@ -174,17 +178,23 @@ export default function FaqSection() {
         <div className="mx-auto mt-8 max-w-4xl rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
           <p className="text-sm text-slate-700">
             Still have questions?{" "}
-            <Link
-              href="contact-us"
-              className="font-semibold text-sky-700 underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-sky-300 rounded"
+            <button
+              onClick={() => setIsSessionOpen(true)}
+              className="cursor-pointer font-semibold text-sky-700 underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-sky-300 rounded bg-transparent border-none p-0 inline"
             >
               Talk to an advisor
-            </Link>{" "}
+            </button>{" "}
             for a personalized walkthrough of the curriculum and outcomes.
           </p>
         </div>
       </div>
 
+      <CareerSessionModal
+        isOpen={isSessionOpen}
+        onClose={() => setIsSessionOpen(false)}
+        source="Data Analytics Course Page - FAQ Section - Talk to Advisor"
+        courseName="Advanced Data Analytics Hero Program"
+      />
     </section>
   );
 }

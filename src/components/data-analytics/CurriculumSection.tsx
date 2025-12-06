@@ -1,9 +1,4 @@
-// components/sections/CurriculumSection.tsx
-// Server component — sleek, SEO-optimized, slightly futuristic, fully responsive.
-// Unique accent colors per module (no repeats). Explicit top-bar classes (no dynamic Tailwind).
-
 "use client";
-
 
 import { CheckCircle } from 'lucide-react';
 import { useState } from "react";
@@ -180,19 +175,19 @@ export default function CurriculumSection() {
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <button
             onClick={() => setIsSyllabusOpen(true)}
-            className="inline-flex items-center justify-center rounded-xl border-2 border-green-700 bg-white px-4 py-2 text-sm font-semibold text-green-800 shadow-sm transition hover:bg-green-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-emerald-200"
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl border-2 border-green-700 bg-white px-4 py-2 text-sm font-semibold text-green-800 shadow-sm transition hover:bg-green-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-emerald-200"
           >
             Download Detailed Syllabus (PDF)
           </button>
           <button
             onClick={() => setIsCareerSessionOpen(true)}
-            className="inline-flex items-center justify-center rounded-xl border-2 border-purple-700 bg-white px-4 py-2 text-sm font-semibold text-purple-800 shadow-sm transition hover:bg-purple-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-purple-200"
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl border-2 border-purple-700 bg-white px-4 py-2 text-sm font-semibold text-purple-800 shadow-sm transition hover:bg-purple-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-purple-200"
           >
             Book a Career Session
           </button>
           <button
             onClick={() => setIsEnrollOpen(true)}
-            className="inline-flex items-center justify-center rounded-xl bg-indigo-700 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-200"
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl bg-indigo-700 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-200"
           >
             Apply Now
           </button>
