@@ -76,8 +76,10 @@ export async function POST(request: Request) {
   console.log('API Contact Route Hit');
   try {
     const body = await request.json();
-    const { fullName, email, phone, type, source, interest, message, courseName, syllabusLink } = body;
-    console.log('Received payload:', { fullName, email, phone, type, source, courseName });
+    const { fullName, email, phone, type, source, interest, message, courseName, syllabusLink, company, jobTitle, workshopType, participants, preferredDate, title } = body;
+    console.log('Received payload:', { fullName, email, phone, type, source, workshopType });
+
+    let extraFields: Record<string, any> = {};
 
     // 1. Basic Validation
     if (!fullName || !email || !phone) {
@@ -89,6 +91,7 @@ export async function POST(request: Request) {
     const isBrochureRequest = type === 'brochure';
     const isSyllabusRequest = type === 'syllabus';
     const isEnrollmentRequest = type === 'enrollment';
+    const isWorkshopRequest = type === 'workshop';
 
     // Determine Source
     let formSource = source;
@@ -141,6 +144,9 @@ export async function POST(request: Request) {
       subjectPrefix = '[SYLLABUS DOWNLOAD]';
     } else if (isEnrollmentRequest) {
       subjectPrefix = '[ENROLL NOW]';
+    } else if (isWorkshopRequest) {
+      const subjectTag = title ? `[${title.toUpperCase()}]` : '[WORKSHOP REQUEST]';
+      subjectPrefix = `${subjectTag}`;
     } else if (isHomeHeroForm) {
       subjectPrefix = '[Enquiry]';
     } else if (isGetStartedForm) {
@@ -180,6 +186,17 @@ export async function POST(request: Request) {
       adminTemplate = 'admin-notification-placement.html';
     } else if (isMentorsPageRequest) {
       adminTemplate = 'admin-notification-mentors.html';
+    } else if (isWorkshopRequest) {
+      const subjectTag = title ? `[${title.toUpperCase()}]` : '[WORKSHOP REQUEST]';
+      subjectPrefix = `${subjectTag} from ${company || 'Unknown Company'} (${fullName})`;
+
+      adminTemplate = 'admin-notification-workshop.html';
+    } else if (type === 'service_request') {
+      const { company, jobTitle, participants, preferredDate, message, serviceName } = body;
+
+
+      subjectPrefix = `[SERVICE REQUEST] ${serviceName} - Inquiry by ${company || fullName}`;
+      adminTemplate = 'admin-notification-service-request.html';
     }
 
     // 3. Prepare Admin Notification Email
@@ -195,6 +212,14 @@ export async function POST(request: Request) {
       year: currentYear,
       currentYear: currentYear, // Pass both for compatibility
     };
+
+    if (isWorkshopRequest) {
+      adminData.company = company || 'N/A';
+      adminData.jobTitle = jobTitle || 'N/A';
+      adminData.workshopType = workshopType || 'N/A';
+      adminData.participants = participants || 'N/A';
+      adminData.preferredDate = preferredDate || 'N/A';
+    }
 
     if (courseName) adminData.courseName = courseName;
 
@@ -237,6 +262,8 @@ export async function POST(request: Request) {
       } else {
         adminSubject = `${subjectPrefix} New Lead for ${courseName} - ${fullName}`;
       }
+    } else if (isWorkshopRequest) {
+      adminSubject = `${subjectPrefix} Corporate Training Inquiry from ${company} (${fullName})`;
     } else if (isManualTestingHeroForm) {
       adminSubject = `${subjectPrefix} New Lead from ${fullName} - Course Page`;
     } else if (isApiTestingHeroForm) {
@@ -344,6 +371,21 @@ export async function POST(request: Request) {
         from: SMTP_FROM_EMAIL,
         to: email,
         subject: 'Free Demo Request Received - CDPL',
+        html: userHtml,
+      };
+    } else if (isWorkshopRequest) {
+      const userHtml = await getTemplatedEmail('user-confirmation-workshop.html', {
+        fullName,
+        company: company || 'your organization',
+        workshopType: workshopType || 'workshop',
+        year: currentYear,
+        currentYear: currentYear,
+      });
+
+      userMailOptions = {
+        from: SMTP_FROM_EMAIL,
+        to: email,
+        subject: 'We have received your Workshop Request - CDPL',
         html: userHtml,
       };
     } else {
