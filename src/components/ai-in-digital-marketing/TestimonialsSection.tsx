@@ -1,7 +1,6 @@
 "use client";
 
 import ReviewsMarquee from "../sections/ReviewMarque";
-import Link from "next/link";
 import { useState } from "react";
 import EnrollModal from "@/components/EnrollModal";
 import CareerSessionModal from "@/components/CareerSessionModal";

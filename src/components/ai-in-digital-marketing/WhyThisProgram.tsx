@@ -1,7 +1,6 @@
 "use client";
 
 import { courseData } from "@/components/ai-in-digital-marketing/courseData";
-import Link from "next/link";
 import { useState } from "react";
 import EnrollModal from "@/components/EnrollModal";
 

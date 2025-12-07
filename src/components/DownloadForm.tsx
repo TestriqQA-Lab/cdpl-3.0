@@ -205,7 +205,7 @@ const DownloadFormContent: React.FC<DownloadFormContentProps> = ({ courseTitle, 
 
           {/* Full Name Input */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1 text-left">
               Full Name *
             </label>
             <div className="relative">
@@ -230,7 +230,7 @@ const DownloadFormContent: React.FC<DownloadFormContentProps> = ({ courseTitle, 
 
           {/* Email Input */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1 text-left">
               Email Address *
             </label>
             <div className="relative">
@@ -255,7 +255,7 @@ const DownloadFormContent: React.FC<DownloadFormContentProps> = ({ courseTitle, 
 
           {/* Phone Input - with react-phone-number-input */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1 text-left">
               Mobile Number *
             </label>
             <div className="relative">

@@ -1,8 +1,10 @@
 "use client";
 
-import { ChevronDown, BookOpen } from "lucide-react";
-import Link from "next/link";
+
+import { ChevronDown, BookOpen, CloudDownload, ArrowRight } from "lucide-react";
 import { useState } from "react";
+import EnrollModal from "@/components/EnrollModal";
+import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
 
 interface Module {
     id: number;
@@ -300,9 +302,12 @@ const modules: Module[] = [
 
 export default function CurriculumSection() {
     const [expandedModule, setExpandedModule] = useState<number | null>(null);
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+    const courseName = "AI Bootcamp Course";
 
     return (
-        <section className="py-16 md:py-20 bg-gradient-to-b from-slate-50 to-white">
+        <section id="curriculum" className="py-16 md:py-20 bg-gradient-to-b from-slate-50 to-white">
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <div className="text-center mb-16 md:mb-20">
@@ -431,15 +436,45 @@ export default function CurriculumSection() {
                     </p>
                 </div>
 
-                {/* Bottom CTA – your original message preserved */}
+                {/* Bottom CTA */}
                 <div className="mt-12 text-center">
                     <p className="text-gray-600 mb-6 text-lg">
                         Master all 20 modules and become job-ready in just 30 hours of intensive
                         training.
                     </p>
-                    <Link href="contact-us" className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:from-orange-600 hover:to-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300">Explore Full Curriculum</Link>
+
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <button
+                            onClick={() => setIsEnrollOpen(true)}
+                            className="cursor-pointer inline-flex items-center justify-center rounded-lg bg-orange-600 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:bg-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300"
+                        >
+                            Enroll in the Program
+                            <ArrowRight className="ml-2 h-5 w-5" />
+                        </button>
+                        <button
+                            onClick={() => setIsSyllabusOpen(true)}
+                            className="cursor-pointer inline-flex items-center justify-center rounded-lg border-2 border-orange-600 px-8 py-4 text-base font-semibold text-orange-600 hover:bg-orange-50 transition-colors"
+                        >
+                            Get Full Syllabus PDF
+                            <CloudDownload className="ml-2 h-5 w-5" />
+                        </button>
+                    </div>
                 </div>
             </div>
+
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="AI Bootcamp - Curriculum Section"
+                courseName={courseName}
+            />
+            <SyllabusDownloadModal
+                isOpen={isSyllabusOpen}
+                onClose={() => setIsSyllabusOpen(false)}
+                source="AI Bootcamp - Curriculum Section"
+                courseName={courseName}
+            />
         </section>
     );
 }
+

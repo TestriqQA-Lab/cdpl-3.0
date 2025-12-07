@@ -1,8 +1,11 @@
 // components/sections/CareerSection.tsx
 // Server component — sleek, SEO-optimized, slightly futuristic, fully responsive.
 // Distinct accent colors per logo card (no repeats). Accessible labels & JSON-LD.
+"use client";
 
-import Link from "next/link";
+import React, { useState } from "react";
+import EnrollModal from "@/components/EnrollModal";
+import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
 
 type Company = {
   name: string;
@@ -72,6 +75,11 @@ const COMPANIES: Company[] = [
 ];
 
 export default function CareerSection() {
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+  const courseName = "Prompt Engineering Course";
+  const source = "Prompt Engineering Course Page - Career Section";
+
   const subKpi = "50K+ Job Vacancies in India";
   const subtext =
     "High-growth careers across AI content, automation, copilots, RAG platforms, and LLM product engineering.";
@@ -117,14 +125,14 @@ export default function CareerSection() {
                 rel="noopener noreferrer"
                 aria-label={c.name}
                 className={[
-                  "group block w-full rounded-2xl border p-4 shadow-sm transition-all duration-200 backdrop-blur",
+                  "group block w-full rounded-2xl border p-4 shadow-sm transition-all duration-200 backdrop-blur cursor-pointer",
                   "hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:-translate-y-0.5",
                   c.accent.bg,
                   c.accent.border,
                   c.accent.ring,
                 ].join(" ")}
               >
-                
+
                 {/* <Image
                   src={c.logo}
                   alt={c.alt}
@@ -148,15 +156,16 @@ export default function CareerSection() {
 
         {/* CTA row */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 sm:flex-row">
-          <Link
-            href="contact-us"
-            className="inline-flex items-center justify-center rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
+          <button
+            onClick={() => setIsEnrollOpen(true)}
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
             aria-label="Apply for placement assistance in Prompt Engineering roles"
           >
             Apply for Placement Assistance
-          </Link>
+          </button>
           <button
-            className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-green-200"
+            onClick={() => setIsSyllabusOpen(true)}
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-green-200"
             aria-label="Download the Prompt Engineering portfolio guide"
           >
             Download Portfolio Guide (PDF)
@@ -167,6 +176,20 @@ export default function CareerSection() {
         <p className="mt-4 text-[11px] text-slate-500">
           *Logos are illustrative of hiring potential. Openings vary by location, skills, and experience.
         </p>
+
+        <EnrollModal
+          isOpen={isEnrollOpen}
+          onClose={() => setIsEnrollOpen(false)}
+          source={`${source} - Placement Assistance`}
+          courseName={courseName}
+        />
+
+        <SyllabusDownloadModal
+          isOpen={isSyllabusOpen}
+          onClose={() => setIsSyllabusOpen(false)}
+          source={`${source} - Download Portfolio Guide`}
+          courseName={courseName}
+        />
       </div>
 
     </section>

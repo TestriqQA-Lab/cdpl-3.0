@@ -10,7 +10,7 @@ import {
     Sparkles,
     LineChart,
 } from 'lucide-react';
-import Link from 'next/link';
+
 import { useState } from 'react';
 import EnrollModal from '../EnrollModal';
 

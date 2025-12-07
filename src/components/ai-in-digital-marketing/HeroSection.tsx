@@ -1,7 +1,7 @@
 "use client";
 
 import { courseData } from "@/components/ai-in-digital-marketing/courseData";
-import { ArrowRight, ChevronRight, Clock, Home, CloudDownload, ArrowDownNarrowWide, CheckCircle2, Star, Users, Globe2 } from "lucide-react";
+import { ArrowRight, ChevronRight, Clock, Home, CloudDownload, ArrowDownNarrowWide } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import ApiCourseLeadForm from "@/components/forms/ApiCourseLeadForm";
@@ -19,6 +19,20 @@ export default function HeroSection() {
     { label: "Courses", href: "/courses" },
     { label: "AI in Digital Marketing" },
   ];
+
+  const scrollToCurriculum = () => {
+    const element = document.getElementById("curriculum");
+    if (element) {
+      const offset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-orange-50 to-indigo-50 pt-10 md:pt-6">
@@ -133,13 +147,13 @@ export default function HeroSection() {
                 <CloudDownload className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
               </button>
 
-              <Link
-                href="#curriculum"
+              <button
+                onClick={scrollToCurriculum}
                 className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-base font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200"
               >
                 View Curriculum
                 <ArrowDownNarrowWide className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
-              </Link>
+              </button>
             </div>
 
             {/* Highlights (similar layout to reference) */}
