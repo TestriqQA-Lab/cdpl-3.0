@@ -79,6 +79,16 @@ export async function POST(request: Request) {
     const { fullName, email, phone, type, source, interest, message, courseName, syllabusLink, company, jobTitle, workshopType, participants, preferredDate, title } = body;
     console.log('Received payload:', { fullName, email, phone, type, source, workshopType });
 
+    const currentYear = new Date().getFullYear();
+    // Initialize adminData with common fields
+    const adminData: Record<string, any> = {
+      fullName,
+      email,
+      phone,
+      source: source || 'Unknown',
+      year: currentYear,
+    };
+
 
     // 1. Basic Validation
     if (!fullName || !email || !phone) {
@@ -188,29 +198,23 @@ export async function POST(request: Request) {
     } else if (isWorkshopRequest) {
       const subjectTag = title ? `[${title.toUpperCase()}]` : '[WORKSHOP REQUEST]';
       subjectPrefix = `${subjectTag} from ${company || 'Unknown Company'} (${fullName})`;
-
       adminTemplate = 'admin-notification-workshop.html';
     } else if (type === 'service_request') {
       const { company, serviceName } = body;
-
-
       subjectPrefix = `[SERVICE REQUEST] ${serviceName} - Inquiry by ${company || fullName}`;
       adminTemplate = 'admin-notification-service-request.html';
+    } else if (type === 'general_enquiry') {
+      const { company } = body;
+      subjectPrefix = `[GENERAL ENQUIRY] from ${company || fullName}`;
+      adminTemplate = 'admin-notification-general.html';
+    } else if (type === 'consultation') {
+      const { company } = body;
+      subjectPrefix = `[CONSULTATION REQUEST] from ${company || fullName}`;
+      adminTemplate = 'admin-notification-consultation.html';
+    } else if (type === 'event_contact') {
+      subjectPrefix = `[EVENT INQUIRY] from ${company || fullName}`;
+      adminTemplate = 'admin-notification-event-contact.html';
     }
-
-    // 3. Prepare Admin Notification Email
-    console.log('Preparing admin email...');
-    const currentYear = new Date().getFullYear().toString();
-    const adminData: Record<string, string> = {
-      fullName,
-      email,
-      phone,
-      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isEnrollmentRequest ? 'Enroll Now Inquiry' : (isGetStartedForm ? 'Get Started Request' : (isFreeDemoRequest ? 'Free Demo Request' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : (isSessionEnquiry ? 'Session Enquiry' : (isManualTestingHeroForm || isApiTestingHeroForm || isDbmsHeroForm || isEtlHeroForm || isAdvancedSoftwareTestingHeroForm || isMasterProgramHeroForm || isPythonHeroForm || isJavaHeroForm || isDataAnalyticsHeroForm || isDataAnalyticsPythonHeroForm || isDataAnalyticsVizHeroForm || isPowerBiHeroForm || isTableauHeroForm || isDataScienceHeroForm || isMlHeroForm || isMlPythonHeroForm || isRProgrammingHeroForm || isDataEngineeringHeroForm || isGenAiHeroForm || isPromptEngHeroForm || isAiMarketingHeroForm || isAiBootcampHeroForm || isCompDsAiHeroForm || formSource.includes('Python Course Page - Testimonials Section') ? 'Course Page Enquiry' : 'General Inquiry'))))))))),
-      source: formSource,
-      downloadLink: isBrochureRequest ? BROCHURE_DOWNLOAD_LINK : (isSyllabusRequest ? (syllabusLink || 'N/A') : 'N/A'),
-      year: currentYear,
-      currentYear: currentYear, // Pass both for compatibility
-    };
 
     if (isWorkshopRequest) {
       adminData.company = company || 'N/A';
@@ -327,8 +331,8 @@ export async function POST(request: Request) {
       const userHtml = await getTemplatedEmail('brochure-confirmation.html', {
         fullName,
         downloadLink: BROCHURE_DOWNLOAD_LINK,
-        year: currentYear,
-        currentYear: currentYear,
+        year: currentYear.toString(),
+        currentYear: currentYear.toString(),
       });
 
       userMailOptions = {
@@ -346,8 +350,8 @@ export async function POST(request: Request) {
         fullName,
         courseName: courseName || 'Course',
         downloadLink: finalDownloadLink,
-        year: currentYear,
-        currentYear: currentYear,
+        year: currentYear.toString(),
+        currentYear: currentYear.toString(),
       });
 
       userMailOptions = {
@@ -362,8 +366,8 @@ export async function POST(request: Request) {
         fullName,
         phone,
         email,
-        year: currentYear,
-        currentYear: currentYear,
+        year: currentYear.toString(),
+        currentYear: currentYear.toString(),
       });
 
       userMailOptions = {
@@ -377,8 +381,8 @@ export async function POST(request: Request) {
         fullName,
         company: company || 'your organization',
         workshopType: workshopType || 'workshop',
-        year: currentYear,
-        currentYear: currentYear,
+        year: currentYear.toString(),
+        currentYear: currentYear.toString(),
       });
 
       userMailOptions = {
@@ -387,14 +391,63 @@ export async function POST(request: Request) {
         subject: 'We have received your Workshop Request - CDPL',
         html: userHtml,
       };
+    } else if (type === 'service_request') {
+      const userHtml = await getTemplatedEmail('user-confirmation-service-request.html', {
+        fullName,
+        serviceName: body.serviceName,
+        year: currentYear.toString(),
+        currentYear: currentYear.toString(),
+      });
+      userMailOptions = {
+        from: SMTP_FROM_EMAIL,
+        to: email,
+        subject: `We have received your request for ${body.serviceName} - CDPL`,
+        html: userHtml,
+      };
+    } else if (type === 'general_enquiry') {
+      const userHtml = await getTemplatedEmail('user-confirmation-general.html', {
+        fullName,
+        year: currentYear.toString(),
+        currentYear: currentYear.toString(),
+      });
+      userMailOptions = {
+        from: SMTP_FROM_EMAIL,
+        to: email,
+        subject: `Thank you for contacting CDPL`,
+        html: userHtml,
+      };
+    } else if (type === 'consultation') {
+      const userHtml = await getTemplatedEmail('user-confirmation-consultation.html', {
+        fullName,
+        year: currentYear.toString(),
+        currentYear: currentYear.toString(),
+      });
+      userMailOptions = {
+        from: SMTP_FROM_EMAIL,
+        to: email,
+        subject: `Consultation Request Received - CDPL`,
+        html: userHtml,
+      };
+    } else if (type === 'event_contact') {
+      const userHtml = await getTemplatedEmail('user-confirmation-event-contact.html', {
+        fullName,
+        year: currentYear.toString(),
+        currentYear: currentYear.toString(),
+      });
+      userMailOptions = {
+        from: SMTP_FROM_EMAIL,
+        to: email,
+        subject: `Thank you for your interest in our Event - CDPL`,
+        html: userHtml,
+      };
     } else {
       // General Contact Confirmation (Includes Get Started)
       const userHtml = await getTemplatedEmail('user-confirmation.html', {
         fullName,
         phone,
         email,
-        year: currentYear,
-        currentYear: currentYear,
+        year: currentYear.toString(),
+        currentYear: currentYear.toString(),
       });
 
       userMailOptions = {

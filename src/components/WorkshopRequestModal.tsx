@@ -3,10 +3,17 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, User, Mail, CheckCircle2, Loader2, Building2, Briefcase, Calendar, Users, MessageSquare, BookOpen, ChevronDown } from 'lucide-react';
-import PhoneInput from 'react-phone-number-input';
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
-import { isValidPhoneNumber } from 'libphonenumber-js';
 import ReactDOM from 'react-dom';
+
+const WORKSHOP_TYPES = [
+    "Corporate Training",
+    "College Workshop",
+    "Faculty Development Program (FDP)",
+    "Seminar/Webinar",
+    "Other"
+];
 
 interface WorkshopRequestModalProps {
     isOpen: boolean;
@@ -14,27 +21,19 @@ interface WorkshopRequestModalProps {
     source?: string;
     title?: string;
     subtitle?: string;
-    serviceName?: string;
+    serviceName?: string; // Optional, for service requests specially
+    variant?: 'workshop' | 'service' | 'general' | 'consultation' | 'event_contact';
 }
 
-const WORKSHOP_TYPES = [
-    "Corporate Training (Technical)",
-    "Corporate Training (Soft Skills)",
-    "College Workshop / Seminar",
-    "Faculty Development Program (FDP)",
-    "Expert Talk / Guest Lecture",
-    "Industrial Visit Request",
-    "Other / Custom Requirement"
-];
-
-const WorkshopRequestModal: React.FC<WorkshopRequestModalProps> = ({
+const WorkshopRequestModal = ({
     isOpen,
     onClose,
-    source = "Services Page - Hero - Request Workshop",
-    title = "Request a Workshop",
-    subtitle = "Tailored corporate & academic programs",
-    serviceName
-}) => {
+    source = 'Website - Workshop Request',
+    title = 'Request a Workshop',
+    subtitle = 'Tell us about your requirements',
+    serviceName,
+    variant = 'workshop'
+}: WorkshopRequestModalProps) => {
     // Form state
     const [formData, setFormData] = useState({
         fullName: '',
@@ -47,9 +46,6 @@ const WorkshopRequestModal: React.FC<WorkshopRequestModalProps> = ({
         preferredDate: '',
         message: ''
     });
-    // ... (rest of the component)
-
-    // ...
 
     // Error states
     const [errors, setErrors] = useState<Record<string, string | null>>({
@@ -80,7 +76,7 @@ const WorkshopRequestModal: React.FC<WorkshopRequestModalProps> = ({
     const validatePhoneNumber = (phone: string | undefined) => {
         if (!phone || phone.trim() === '') return 'Mobile Number is required.';
         if (!isValidPhoneNumber(phone)) return 'Invalid phone number format.';
-        return null; // Simplified logic compared to EnrollModal for brevity, but still rigorous enough
+        return null;
     };
 
     // Handle input changes
@@ -102,6 +98,7 @@ const WorkshopRequestModal: React.FC<WorkshopRequestModalProps> = ({
     // Handle submission
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setIsSubmitting(true);
 
         const newErrors = {
             fullName: validateField('fullName', formData.fullName),
@@ -113,30 +110,37 @@ const WorkshopRequestModal: React.FC<WorkshopRequestModalProps> = ({
         setErrors(newErrors);
 
         if (!Object.values(newErrors).some(err => err !== null)) {
-            setIsSubmitting(true);
             try {
+                // Determine payload based on variant
+                const payload: any = {
+                    ...formData,
+                    source,
+                    type: variant === 'service' ? 'service_request' :
+                        variant === 'general' ? 'general_enquiry' :
+                            variant === 'consultation' ? 'consultation' :
+                                variant === 'event_contact' ? 'event_contact' : 'workshop',
+                    serviceName: serviceName || undefined,
+                    title
+                };
+
+                // Exclude unnecessary fields for non-workshop variants if desired, but keeping them safe
+                if (variant === 'workshop') {
+                    // payload includes workshopType, participants, preferredDate
+                } else if (variant === 'service') {
+                    // Ensure serviceName is there
+                    payload.serviceName = serviceName;
+                }
+
                 const response = await fetch('/api/contact', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        ...formData,
-                        phone: formData.phone || 'Not provided',
-                        type: serviceName ? 'service_request' : 'workshop', // Use distinct type if service request
-                        source,
-                        title, // Passing the modal title to the API for email subject customization
-                        serviceName
-                    }),
+                    body: JSON.stringify(payload)
                 });
 
                 if (response.ok) {
                     setIsSubmitted(true);
                     setTimeout(() => {
-                        setIsSubmitted(false);
-                        setFormData({
-                            fullName: '', email: '', phone: '', company: '', jobTitle: '',
-                            workshopType: WORKSHOP_TYPES[0], participants: '', preferredDate: '', message: ''
-                        });
-                        onClose();
+                        handleClose();
                     }, 4000);
                 } else {
                     alert('Submission failed. Please try again.');
@@ -147,6 +151,8 @@ const WorkshopRequestModal: React.FC<WorkshopRequestModalProps> = ({
             } finally {
                 setIsSubmitting(false);
             }
+        } else {
+            setIsSubmitting(false);
         }
     };
 
@@ -282,49 +288,46 @@ const WorkshopRequestModal: React.FC<WorkshopRequestModalProps> = ({
                                                 </div>
                                             </div>
 
-                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                                <div>
-                                                    <label className="block text-xs font-semibold text-gray-700 mb-1 uppercase tracking-wide">Job Title / Role</label>
-                                                    <div className="relative">
-                                                        <Briefcase className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
-                                                        <input type="text" name="jobTitle" value={formData.jobTitle} onChange={handleInputChange} placeholder="HR / Tech Lead" className="w-full pl-9 pr-3 py-2 border rounded-lg text-sm bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 border-gray-200 transition-all font-medium text-gray-900 placeholder:text-gray-400" disabled={isSubmitting} />
+                                            {/* Variant specific fields */}
+                                            {variant === 'workshop' && (
+                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                                    <div>
+                                                        <label className="block text-xs font-semibold text-gray-700 mb-1 uppercase tracking-wide">Workshop Type</label>
+                                                        <div className="relative">
+                                                            <BookOpen className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+                                                            <select name="workshopType" value={formData.workshopType} onChange={handleInputChange} className="w-full pl-9 pr-8 py-2 border rounded-lg text-sm bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 border-gray-200 transition-all font-medium text-gray-900 appearance-none disabled:opacity-50" disabled={isSubmitting}>
+                                                                {WORKSHOP_TYPES.map(type => (
+                                                                    <option key={type} value={type}>{type}</option>
+                                                                ))}
+                                                            </select>
+                                                            <ChevronDown className="absolute right-3 top-3 h-4 w-4 text-gray-400 pointer-events-none" />
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <label className="block text-xs font-semibold text-gray-700 mb-1 uppercase tracking-wide">Participants (Approx)</label>
+                                                        <div className="relative">
+                                                            <Users className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+                                                            <input type="number" name="participants" value={formData.participants} onChange={handleInputChange} placeholder="e.g. 20" className="w-full pl-9 pr-3 py-2 border rounded-lg text-sm bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 border-gray-200 transition-all font-medium text-gray-900 placeholder:text-gray-400" disabled={isSubmitting} />
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div>
-                                                    <label className="block text-xs font-semibold text-gray-700 mb-1 uppercase tracking-wide">Participants (Est.)</label>
-                                                    <div className="relative">
-                                                        <Users className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
-                                                        <input type="number" name="participants" value={formData.participants} onChange={handleInputChange} placeholder="e.g. 20" className="w-full pl-9 pr-3 py-2 border rounded-lg text-sm bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 border-gray-200 transition-all font-medium text-gray-900 placeholder:text-gray-400" disabled={isSubmitting} />
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            )}
 
-                                            {!serviceName && (
+                                            {variant === 'consultation' && (
                                                 <div>
-                                                    <label className="block text-xs font-semibold text-gray-700 mb-1 uppercase tracking-wide">Workshop Type</label>
+                                                    <label className="block text-xs font-semibold text-gray-700 mb-1 uppercase tracking-wide">Preferred Date</label>
                                                     <div className="relative">
-                                                        <BookOpen className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
-                                                        <select name="workshopType" value={formData.workshopType} onChange={handleInputChange} className="w-full pl-9 pr-3 py-2 border rounded-lg text-sm bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 border-gray-200 transition-all font-medium text-gray-900 cursor-pointer appearance-none" disabled={isSubmitting}>
-                                                            {WORKSHOP_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
-                                                        </select>
-                                                        <ChevronDown className="absolute right-3 top-3 h-4 w-4 text-gray-400 pointer-events-none" />
+                                                        <Calendar className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+                                                        <input type="date" name="preferredDate" value={formData.preferredDate} onChange={handleInputChange} className="w-full pl-9 pr-3 py-2 border rounded-lg text-sm bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 border-gray-200 transition-all font-medium text-gray-900" disabled={isSubmitting} />
                                                     </div>
                                                 </div>
                                             )}
 
                                             <div>
-                                                <label className="block text-xs font-semibold text-gray-700 mb-1 uppercase tracking-wide">Preferred Date</label>
-                                                <div className="relative">
-                                                    <Calendar className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
-                                                    <input type="date" name="preferredDate" value={formData.preferredDate} onChange={handleInputChange} className="w-full pl-9 pr-3 py-2 border rounded-lg text-sm bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 border-gray-200 transition-all font-medium text-gray-900 placeholder:text-gray-400" disabled={isSubmitting} />
-                                                </div>
-                                            </div>
-
-                                            <div>
-                                                <label className="block text-xs font-semibold text-gray-700 mb-1 uppercase tracking-wide">Training Goals / Requirements</label>
+                                                <label className="block text-xs font-semibold text-gray-700 mb-1 uppercase tracking-wide">Message / Requirements</label>
                                                 <div className="relative">
                                                     <MessageSquare className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                                                    <textarea name="message" value={formData.message} onChange={handleInputChange} rows={2} placeholder="Briefly describe your requirements..." className="w-full pl-9 pr-3 py-2 border rounded-lg text-sm bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 border-gray-200 transition-all font-medium text-gray-900 placeholder:text-gray-400 resize-none" disabled={isSubmitting} />
+                                                    <textarea name="message" value={formData.message} onChange={handleInputChange} rows={3} placeholder={variant === 'workshop' ? "Tell us about your training needs..." : "How can we help you?"} className="w-full pl-9 pr-3 py-2 border rounded-lg text-sm bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 border-gray-200 transition-all font-medium text-gray-900 placeholder:text-gray-400 resize-none" disabled={isSubmitting}></textarea>
                                                 </div>
                                             </div>
 

@@ -13,22 +13,38 @@ export default function EventHero({ event }: EventHeroProps) {
     return (
         <div className="relative w-full overflow-hidden rounded-3xl bg-white border border-slate-200 shadow-sm">
             {/* Hero Image Section - Top Banner */}
-            <div className="relative w-full h-[300px] md:h-[400px] bg-slate-100">
-                {event.heroImageUrl ? (
-                    <Image
-                        src={event.heroImageUrl}
-                        alt={event.title}
-                        className="absolute inset-0 w-full h-full"
-                        width={1000}
-                        height={1000}
-                    />
-                ) : (
-                    <div className="absolute inset-0 flex items-center justify-center text-slate-400">
-                        <span className="text-lg">No Image Available</span>
+            <div className="relative w-full h-[300px] md:h-[500px] bg-slate-900 overflow-hidden">
+                {/* 1. Blurred Background Layer */}
+                {event.heroImageUrl && (
+                    <div className="absolute inset-0 z-0">
+                        <Image
+                            src={event.heroImageUrl}
+                            alt=""
+                            fill
+                            priority
+                            className="object-cover opacity-60 blur-2xl scale-110"
+                            aria-hidden="true"
+                        />
+                        <div className="absolute inset-0 bg-black/10" />
                     </div>
                 )}
 
-
+                {/* 2. Foreground Image Layer */}
+                <div className="relative z-10 w-full h-full p-4 md:p-6 flex items-center justify-center">
+                    {event.heroImageUrl ? (
+                        <Image
+                            src={event.heroImageUrl}
+                            alt={event.title}
+                            fill
+                            priority
+                            className="object-contain drop-shadow-2xl"
+                        />
+                    ) : (
+                        <div className="flex h-full w-full items-center justify-center text-slate-400">
+                            <span className="text-lg">No Image Available</span>
+                        </div>
+                    )}
+                </div>
             </div>
 
             {/* Content Section - Bottom Block */}
@@ -46,7 +62,7 @@ export default function EventHero({ event }: EventHeroProps) {
                 </div>
 
                 {/* Event Title */}
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-tight max-w-4xl">
+                <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-4 leading-tight max-w-full">
                     {event.title}
                 </h1>
 

@@ -1,13 +1,17 @@
+"use client";
 import React from "react";
 import { PastEvent } from "@/data/eventsData";
 import { Calendar, MapPin, Tag, Share2 } from "lucide-react";
-import Link from "next/link";
+import { useState } from "react";
+import WorkshopRequestModal from "../WorkshopRequestModal";
 
 interface EventSidebarProps {
   event: PastEvent;
 }
 
 export default function EventSidebar({ event }: EventSidebarProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="space-y-5 sticky top-24">
       {/* Registration Status */}
@@ -143,15 +147,24 @@ export default function EventSidebar({ event }: EventSidebarProps) {
 
       {/* Call to Action */}
       <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl p-6 shadow-lg text-center">
-        <h4 className="text-white font-bold text-lg mb-2">Interested in Similar Events?</h4>
-        <p className="text-blue-100 text-sm mb-4">Stay updated with our upcoming workshops and training programs</p>
-        <Link
-          href="/contact-us"
-          className="inline-block bg-white text-blue-600 px-6 py-2.5 rounded-lg font-bold hover:bg-blue-50 transition-colors shadow-md"
+        <h4 className="text-white font-bold text-lg mb-2">Bring This to Your Campus!</h4>
+        <p className="text-blue-100 text-sm mb-4">Interested in organizing a similar workshop or training program? Let's connect and make it happen.</p>
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="inline-block bg-white text-blue-600 px-6 py-2.5 rounded-lg font-bold hover:bg-blue-50 transition-colors shadow-md cursor-pointer"
         >
-          Contact Us
-        </Link>
+          Partner with Us
+        </button>
       </div>
+
+      <WorkshopRequestModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        source={`Event Sidebar - ${event.title}`}
+        title="Partnership Inquiry"
+        subtitle="Fill out the details below to organize an event with us."
+        variant="event_contact"
+      />
     </div>
   );
 }
