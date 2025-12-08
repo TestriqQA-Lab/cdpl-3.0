@@ -79,7 +79,6 @@ export async function POST(request: Request) {
     const { fullName, email, phone, type, source, interest, message, courseName, syllabusLink, company, jobTitle, workshopType, participants, preferredDate, title } = body;
     console.log('Received payload:', { fullName, email, phone, type, source, workshopType });
 
-    let extraFields: Record<string, any> = {};
 
     // 1. Basic Validation
     if (!fullName || !email || !phone) {
@@ -192,7 +191,7 @@ export async function POST(request: Request) {
 
       adminTemplate = 'admin-notification-workshop.html';
     } else if (type === 'service_request') {
-      const { company, jobTitle, participants, preferredDate, message, serviceName } = body;
+      const { company, serviceName } = body;
 
 
       subjectPrefix = `[SERVICE REQUEST] ${serviceName} - Inquiry by ${company || fullName}`;
