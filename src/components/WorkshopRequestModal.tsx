@@ -22,7 +22,7 @@ interface WorkshopRequestModalProps {
     title?: string;
     subtitle?: string;
     serviceName?: string; // Optional, for service requests specially
-    variant?: 'workshop' | 'service' | 'general' | 'consultation' | 'event_contact';
+    variant?: 'workshop' | 'service' | 'general' | 'consultation' | 'event_contact' | 'affiliate';
 }
 
 const WorkshopRequestModal = ({
@@ -118,7 +118,8 @@ const WorkshopRequestModal = ({
                     type: variant === 'service' ? 'service_request' :
                         variant === 'general' ? 'general_enquiry' :
                             variant === 'consultation' ? 'consultation' :
-                                variant === 'event_contact' ? 'event_contact' : 'workshop',
+                                variant === 'event_contact' ? 'event_contact' :
+                                    variant === 'affiliate' ? 'affiliate' : 'workshop',
                     serviceName: serviceName || undefined,
                     title
                 };
@@ -254,14 +255,26 @@ const WorkshopRequestModal = ({
                                                     </div>
                                                     {errors.fullName && <p className="text-xs text-red-600 mt-1">{errors.fullName}</p>}
                                                 </div>
-                                                <div>
-                                                    <label className="block text-xs font-semibold text-gray-700 mb-1 uppercase tracking-wide">Company / Org <span className="text-red-500">*</span></label>
-                                                    <div className="relative">
-                                                        <Building2 className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
-                                                        <input type="text" name="company" value={formData.company} onChange={handleInputChange} placeholder="Acme Corp" className="w-full pl-9 pr-3 py-2 border rounded-lg text-sm bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 border-gray-200 transition-all font-medium text-gray-900 placeholder:text-gray-400" disabled={isSubmitting} />
+
+                                                {variant === 'affiliate' ? (
+                                                    <div>
+                                                        <label className="block text-xs font-semibold text-gray-700 mb-1 uppercase tracking-wide">Website / Social Profile <span className="text-red-500">*</span></label>
+                                                        <div className="relative">
+                                                            <Briefcase className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+                                                            <input type="text" name="company" value={formData.company} onChange={handleInputChange} placeholder="https://yourwebsite.com" className="w-full pl-9 pr-3 py-2 border rounded-lg text-sm bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 border-gray-200 transition-all font-medium text-gray-900 placeholder:text-gray-400" disabled={isSubmitting} />
+                                                        </div>
+                                                        {errors.company && <p className="text-xs text-red-600 mt-1">{errors.company}</p>}
                                                     </div>
-                                                    {errors.company && <p className="text-xs text-red-600 mt-1">{errors.company}</p>}
-                                                </div>
+                                                ) : (
+                                                    <div>
+                                                        <label className="block text-xs font-semibold text-gray-700 mb-1 uppercase tracking-wide">Company / Org <span className="text-red-500">*</span></label>
+                                                        <div className="relative">
+                                                            <Building2 className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+                                                            <input type="text" name="company" value={formData.company} onChange={handleInputChange} placeholder="Acme Corp" className="w-full pl-9 pr-3 py-2 border rounded-lg text-sm bg-gray-50 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 border-gray-200 transition-all font-medium text-gray-900 placeholder:text-gray-400" disabled={isSubmitting} />
+                                                        </div>
+                                                        {errors.company && <p className="text-xs text-red-600 mt-1">{errors.company}</p>}
+                                                    </div>
+                                                )}
                                             </div>
 
                                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

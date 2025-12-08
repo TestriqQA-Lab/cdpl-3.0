@@ -18,6 +18,8 @@ import {
   BarChart3,
   Crown,
 } from "lucide-react";
+import { useState } from "react";
+import WorkshopRequestModal from "../WorkshopRequestModal";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const BRAND_COLOR = "var(--color-brand, #ff8c00)";
@@ -65,6 +67,8 @@ function FloatingIcon({
 }
 
 export default function AffiliateHeroSection() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <section
       className="
@@ -204,17 +208,17 @@ export default function AffiliateHeroSection() {
               transition={{ duration: 0.7, delay: 0.2, ease }}
               className="mt-6 flex items-center gap-3"
             >
-              <Link
-                href="#apply"
-                className="group inline-flex items-center gap-2 rounded-xl px-5 py-3 font-semibold text-white shadow-sm ring-1 ring-black/5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-500 active:translate-y-[1px]"
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="group inline-flex items-center gap-2 rounded-xl px-5 py-3 font-semibold text-white shadow-sm ring-1 ring-black/5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-500 active:translate-y-[1px] cursor-pointer"
                 style={{ backgroundColor: BRAND_COLOR }}
               >
                 Apply Now
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
-              </Link>
+              </button>
               <Link
                 href="#how-it-works"
-                className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-slate-700 hover:bg-slate-50"
+                className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-slate-700 hover:bg-slate-50 cursor-pointer"
               >
                 How it works
               </Link>
@@ -245,6 +249,14 @@ export default function AffiliateHeroSection() {
           </div>
         </div>
       </div>
+      <WorkshopRequestModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        variant="affiliate"
+        title="Apply for Affiliate Program"
+        subtitle="Join our partner ecosystem today"
+        source="Website - Affiliate Hero"
+      />
     </section>
   );
 }
