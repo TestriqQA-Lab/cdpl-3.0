@@ -11,13 +11,27 @@ import FaqSection from '@/components/advance-manual-automation-testing/FaqSectio
 import CtaSection from '@/components/advance-manual-automation-testing/CtaSection';
 import StickyNav from '@/components/StickyNav2/StickyNav2';
 import JsonLd from "@/components/JsonLd";
-import { generateCourseSchema, generateFAQSchema } from "@/lib/schema-generators";
+import { generateMetadata } from "@/lib/metadata-generator";
+import { generateCourseSchema, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/schema-generators";
+import { ADVANCE_MANUAL_AUTOMATION_FAQS, ADVANCE_MANUAL_AUTOMATION_REVIEW_DATA } from "@/data/advanceManualAutomationData";
 
-export const metadata = {
+export const metadata = generateMetadata({
   title: "Advanced Manual & Automation Testing Master Program | 100% Placement",
   description: "Master ISTQB Manual Testing + Selenium, Cypress, API, Mobile. Get dual certified and placed in top QA roles.",
-  keywords: "manual testing course, automation testing, ISTQB certification, Selenium training, QA jobs India, SDET course",
-};
+  keywords: [
+    "manual testing course",
+    "automation testing",
+    "ISTQB certification",
+    "Selenium training",
+    "QA jobs India",
+    "SDET course",
+    "software testing master program",
+    "learn software testing",
+    "software testing certification"
+  ],
+  url: "/advance-manual-automation-testing",
+  image: "/og-images/advance-manual-automation-testing.jpg",
+});
 
 export default function Home() {
   const courseSchema = generateCourseSchema({
@@ -25,34 +39,29 @@ export default function Home() {
     description: "Master ISTQB Manual Testing + Selenium, Cypress, API, Mobile. Get dual certified and placed in top QA roles.",
     url: "/advance-manual-automation-testing",
     slug: "advance-manual-automation-testing",
-    price: 25000, // Assuming a price, please update this with the actual price
+    price: 25000,
     currency: "INR",
-    duration: "P4M", // Assuming 4 months duration, please update
-    level: "Advanced",
+    duration: "P4M",
     instructor: "Expert QA Mentors",
-    // Add other relevant fields like rating, reviewCount, image if available
+    rating: ADVANCE_MANUAL_AUTOMATION_REVIEW_DATA.ratingValue,
+    reviewCount: ADVANCE_MANUAL_AUTOMATION_REVIEW_DATA.reviewCount,
+    image: "/og-images/advance-manual-automation-testing.jpg",
   });
 
-  const faqs = [
-    {
-      question: 'What is the duration of the Advanced Manual & Automation Testing Master Program?',
-      answer: 'The program typically runs for 4 months, including both theoretical and practical hands-on project work.',
-    },
-    {
-      question: 'Does this course include placement assistance?',
-      answer: 'Yes, the course includes 100% placement support, including resume building, mock interviews, and guaranteed interview opportunities.',
-    },
-    {
-      question: 'What tools are covered in the automation testing module?',
-      answer: 'The automation module covers industry-leading tools such as Selenium, Cypress, Postman for API testing, and Appium for mobile testing.',
-    },
-  ];
-  const faqSchema = generateFAQSchema(faqs);
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Courses", url: "/courses" },
+    { name: "Manual & Automation Testing", url: "/advance-manual-automation-testing" },
+  ]);
+
+  const faqSchema = generateFAQSchema(ADVANCE_MANUAL_AUTOMATION_FAQS);
 
   return (
     <>
       <JsonLd id="course-schema" schema={courseSchema} />
+      <JsonLd id="breadcrumb-schema" schema={breadcrumbSchema} />
       <JsonLd id="faq-schema" schema={faqSchema} />
+
       <HeroSection />
 
       {/* Sticky nav must appear right after hero */}
