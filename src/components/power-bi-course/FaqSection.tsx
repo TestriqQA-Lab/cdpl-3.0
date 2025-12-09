@@ -4,14 +4,18 @@ import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import EnrollModal from "../EnrollModal";
 
+import { POWER_BI_FAQS } from "@/data/powerBiData";
+
 type ColorVariant = "blue" | "orange" | "green" | "purple" | "pink";
 
+// Define the interface locally to match the data structure and usage in FaqRow
 interface FaqItem {
   question: string;
   answer: string;
-  details?: string[];       // optional enhancement bullets
-  emoji: string;            // exact, relevant emoji
-  color: ColorVariant;      // distinct badge color
+  details?: string[];
+  emoji: string;
+  color: ColorVariant;
+  category?: string;
 }
 
 const palette: Record<ColorVariant, { bg: string; text: string; ring: string; grad: string }> = {
@@ -21,49 +25,6 @@ const palette: Record<ColorVariant, { bg: string; text: string; ring: string; gr
   purple: { bg: "bg-purple-100", text: "text-purple-700", ring: "ring-purple-200", grad: "from-purple-500/20 to-fuchsia-500/20" },
   pink: { bg: "bg-pink-100", text: "text-pink-700", ring: "ring-pink-200", grad: "from-pink-500/20 to-rose-500/20" },
 };
-
-const faqData: FaqItem[] = [
-  {
-    question: "What is the duration of the Power BI course?",
-    answer:
-      "The program is a 20-Hour Master Program, structured to provide comprehensive, hands-on training in a condensed, efficient format.",
-    details: ["Weekend & weekday batches available", "Includes projects + recorded sessions"],
-    emoji: "⏱️",
-    color: "blue",
-  },
-  {
-    question: "Do I need prior programming experience to enroll?",
-    answer:
-      "No, the course is designed for both technical and non-technical learners. We start with foundational concepts, making it accessible for beginners.",
-    details: ["No coding prerequisites", "Excel familiarity helps but isn’t mandatory"],
-    emoji: "🧭",
-    color: "orange",
-  },
-  {
-    question: "What kind of certification will I receive?",
-    answer:
-      "You will receive a globally recognized certificate from our training partner, which is validated with a unique QR code for authenticity.",
-    details: ["Shareable on LinkedIn", "Verifiable by employers via QR code"],
-    emoji: "🎓",
-    color: "green",
-  },
-  {
-    question: "Is job placement assistance provided?",
-    answer:
-      "Yes, we offer 100% dedicated job assistance, including resume building, profile optimization on job portals (LinkedIn, Naukri), and tailored interview preparation.",
-    details: ["Mock interviews & feedback", "Portfolio review & guidance"],
-    emoji: "💼",
-    color: "purple",
-  },
-  {
-    question: "What is the learning format (online/offline)?",
-    answer:
-      "We offer a Hybrid (CLASSROOM + ONLINE) model. You can attend live sessions in the classroom or stream them online, with access to all recorded lectures.",
-    details: ["Miss a session? Watch the recording", "Access materials on web & mobile"],
-    emoji: "🎥",
-    color: "pink",
-  },
-];
 
 function FaqRow({
   item,
@@ -129,7 +90,7 @@ function FaqRow({
             <p>{item.answer}</p>
             {item.details && item.details.length > 0 && (
               <ul className="mt-3 list-disc pl-5 space-y-1 text-gray-600">
-                {item.details.map((d, i) => (
+                {item.details.map((d: string, i: number) => (
                   <li key={i}>{d}</li>
                 ))}
               </ul>
@@ -163,7 +124,7 @@ const FaqSection: React.FC = () => {
         </div>
 
         <div className="max-w-3xl mx-auto space-y-2.5">
-          {faqData.map((item, index) => (
+          {(POWER_BI_FAQS as unknown as FaqItem[]).map((item, index) => (
             <FaqRow key={item.question} item={item} isOpen={activeIndex === index} toggle={() => toggleFaq(index)} idx={index} />
           ))}
         </div>

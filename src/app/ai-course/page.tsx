@@ -1,6 +1,4 @@
 // pages/comprehensive-data-science-ai.tsx
-import type { NextPage } from "next";
-import Head from "next/head";
 import HeroSection from "@/components/ai-course/HeroSection";
 import StatsSection from "@/components/ai-course/StatsSection";
 import WhyAIProgram from "@/components/ai-course/WhyAIProgram";
@@ -14,15 +12,54 @@ import FaqSection from "@/components/ai-course/FaqSection";
 import CtaSection from "@/components/ai-course/CtaSection";
 import CareerRoadmapSection from "@/components/ai-course/CareerRoadmapSection";
 import StickyNav3 from "@/components/StickyNav2/StickyNav3";
+import JsonLd from "@/components/JsonLd";
+import { generateMetadata } from "@/lib/metadata-generator";
+import { generateCourseSchema, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/schema-generators";
+import { AI_FAQS, AI_REVIEW_DATA } from "@/data/aiData";
 
-const ComprehensiveDSAI: NextPage = () => {
+export const metadata = generateMetadata({
+  title: "Comprehensive Data Science & AI Master Program in Mumbai | 255-Hour Training | CDPL",
+  description: "255-Hour Master Program in Comprehensive Data Science and AI. Hands-on projects, 100% job assistance, global certificates.",
+  keywords: [
+    "comprehensive data science course mumbai",
+    "ai master program",
+    "data science and ai training",
+    "data scientist jobs mumbai",
+    "machine learning course",
+    "artificial intelligence training"
+  ],
+  url: "/ai-course",
+  image: "/og-images/ai-course.jpg",
+});
+
+export default function ComprehensiveDSAI() {
+  const courseSchema = generateCourseSchema({
+    name: "Comprehensive Data Science & AI Master Program",
+    description: "255-Hour Master Program in Comprehensive Data Science and AI. Hands-on projects, 100% job assistance, global certificates.",
+    url: "/ai-course",
+    slug: "ai-course",
+    price: 60000,
+    currency: "INR",
+    duration: "P5M", // ~20-24 weeks
+    instructor: "Expert AI & Data Science Mentors",
+    rating: AI_REVIEW_DATA.ratingValue,
+    reviewCount: AI_REVIEW_DATA.reviewCount,
+    image: "/og-images/ai-course.jpg",
+  });
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Courses", url: "/courses" },
+    { name: "AI Master Program", url: "/ai-course" },
+  ]);
+
+  const faqSchema = generateFAQSchema(AI_FAQS);
+
   return (
     <>
-      <Head>
-        <title>Comprehensive Data Science & AI Master Program in Mumbai | 255-Hour Training | CDPL</title>
-        <meta name="description" content="255-Hour Master Program in Comprehensive Data Science and AI. Hands-on projects, 100% job assistance, global certificates." />
-        <meta name="keywords" content="comprehensive data science course mumbai, ai master program, data science and ai training, data scientist jobs mumbai" />
-      </Head>
+      <JsonLd id="course-schema" schema={courseSchema} />
+      <JsonLd id="breadcrumb-schema" schema={breadcrumbSchema} />
+      <JsonLd id="faq-schema" schema={faqSchema} />
 
       <HeroSection />
 
@@ -45,5 +82,3 @@ const ComprehensiveDSAI: NextPage = () => {
     </>
   );
 };
-
-export default ComprehensiveDSAI;

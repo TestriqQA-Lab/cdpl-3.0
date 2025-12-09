@@ -1,6 +1,3 @@
-// pages/prompt-engineering-genai.tsx
-import type { NextPage } from "next";
-import Head from "next/head";
 import HeroSection from "@/components/prompt-engineering-course/HeroSection";
 import StatsSection from "@/components/prompt-engineering-course/StatsSection";
 import WhyPromptGenProgram from "@/components/prompt-engineering-course/WhyPromptGenProgram";
@@ -14,15 +11,53 @@ import FaqSection from "@/components/prompt-engineering-course/FaqSection";
 import CtaSection from "@/components/prompt-engineering-course/CtaSection";
 import CareerRoadmapSection from "@/components/prompt-engineering-course/CareerRoadmapSection";
 import StickyNav3 from "@/components/StickyNav2/StickyNav3";
+import JsonLd from "@/components/JsonLd";
+import { generateMetadata } from "@/lib/metadata-generator";
+import { generateCourseSchema, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/schema-generators";
+import { PROMPT_ENGINEERING_FAQS, PROMPT_ENGINEERING_REVIEW_DATA } from "@/data/promptEngineeringData";
 
-const PromptGenPage: NextPage = () => {
+export const metadata = generateMetadata({
+  title: "Prompt Engineering with Generative AI Course in Mumbai | 20-Hour Hero Program | CDPL",
+  description: "20-Hour Hero Program in Prompt Engineering with Gen AI. Hands-on projects, 100% job assistance, AAA global certificates.",
+  keywords: [
+    "prompt engineering course mumbai",
+    "generative ai training",
+    "python gen ai",
+    "prompt hero program",
+    "ai prompt jobs mumbai"
+  ],
+  url: "/prompt-engineering-course",
+  image: "/og-images/prompt-engineering-course.jpg",
+});
+
+export default function PromptGenPage() {
+  const courseSchema = generateCourseSchema({
+    name: "Prompt Engineering with Generative AI Course",
+    description: "20-Hour Hero Program in Prompt Engineering with Gen AI. Hands-on projects, 100% job assistance, AAA global certificates.",
+    url: "/prompt-engineering-course",
+    slug: "prompt-engineering-course",
+    price: 25000, // Estimated price, adjust if needed
+    currency: "INR",
+    duration: "P1M", // ~4 weeks
+    instructor: "Expert AI Engineers",
+    rating: PROMPT_ENGINEERING_REVIEW_DATA.ratingValue,
+    reviewCount: PROMPT_ENGINEERING_REVIEW_DATA.reviewCount,
+    image: "/og-images/prompt-engineering-course.jpg",
+  });
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Courses", url: "/courses" },
+    { name: "Prompt Engineering", url: "/prompt-engineering-course" },
+  ]);
+
+  const faqSchema = generateFAQSchema(PROMPT_ENGINEERING_FAQS);
+
   return (
-    <>
-      <Head>
-        <title>Prompt Engineering with Generative AI Course in Mumbai | 20-Hour Hero Program | CDPL</title>
-        <meta name="description" content="20-Hour Hero Program in Prompt Engineering with Gen AI. Hands-on projects, 100% job assistance, AAA global certificates." />
-        <meta name="keywords" content="prompt engineering course mumbai, generative ai training, python gen ai, prompt hero program, ai prompt jobs mumbai" />
-      </Head>
+    <div className="min-h-screen bg-white">
+      <JsonLd id="course-schema" schema={courseSchema} />
+      <JsonLd id="breadcrumb-schema" schema={breadcrumbSchema} />
+      <JsonLd id="faq-schema" schema={faqSchema} />
 
       <HeroSection />
 
@@ -42,8 +77,6 @@ const PromptGenPage: NextPage = () => {
       <section id='who-should-enroll'><WhoShouldEnroll /></section>
       <section id='faqs'><FaqSection /></section>
       <section id='contact'><CtaSection /></section>
-    </>
+    </div>
   );
-};
-
-export default PromptGenPage;
+}

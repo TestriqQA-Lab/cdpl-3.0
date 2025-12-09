@@ -4,35 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import CareerSessionModal from "../CareerSessionModal";
 
-type Faq = { q: string; a: string; accent: { ring: string; border: string; chip: string } };
-
-const FAQS: Faq[] = [
-  {
-    q: 'Is prior experience required?',
-    a: 'No. The program starts from fundamentals and scales to advanced, portfolio-ready work. If you have experience, you’ll move faster through labs and capstones.',
-    accent: { ring: 'focus:ring-sky-300', border: 'border-sky-200', chip: 'bg-sky-100 text-sky-800' },
-  },
-  {
-    q: 'Do you provide placement support?',
-    a: 'Yes — end-to-end job assistance: resume & LinkedIn review, mock interviews, take-home assignment prep, and curated job alerts with referrals where available.',
-    accent: { ring: 'focus:ring-emerald-300', border: 'border-emerald-200', chip: 'bg-emerald-100 text-emerald-800' },
-  },
-  {
-    q: 'Are certificates globally recognized?',
-    a: 'Certificates are QR-verified and accepted by top employers. We also help you showcase project outcomes and metrics on your portfolio for higher credibility.',
-    accent: { ring: 'focus:ring-amber-300', border: 'border-amber-200', chip: 'bg-amber-100 text-amber-900' },
-  },
-  {
-    q: 'What is the learning format & schedule?',
-    a: 'Live cohort sessions with lifetime recording access. Batches are weekend-friendly. Doubt-clearing, code reviews, and project feedback are included.',
-    accent: { ring: 'focus:ring-violet-300', border: 'border-violet-200', chip: 'bg-violet-100 text-violet-900' },
-  },
-  {
-    q: 'Will I work on real projects?',
-    a: 'Absolutely. You’ll complete production-style assignments, audits, dashboards, and campaign builds that translate directly to interview talking points.',
-    accent: { ring: 'focus:ring-rose-300', border: 'border-rose-200', chip: 'bg-rose-100 text-rose-900' },
-  },
-];
+import { DIGITAL_MARKETING_FAQS } from "@/data/digitalMarketingData";
 
 export default function FaqSection() {
   const [isCareerOpen, setIsCareerOpen] = useState(false);
@@ -60,8 +32,8 @@ export default function FaqSection() {
 
         {/* FAQ list */}
         <ul className="mt-10 space-y-4">
-          {FAQS.map((item) => (
-            <li key={item.q}>
+          {DIGITAL_MARKETING_FAQS.map((item) => (
+            <li key={item.question}>
               <details
                 className={[
                   'group relative rounded-2xl border bg-white p-5 shadow-[0_1px_0_0_rgba(15,23,42,0.05)] transition',
@@ -77,7 +49,7 @@ export default function FaqSection() {
                 />
                 <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-left">
                   <span className="text-base sm:text-lg font-semibold text-slate-900">
-                    {item.q}
+                    {item.question}
                   </span>
                   {/* plus/minus icon built with CSS */}
                   <span
@@ -90,7 +62,7 @@ export default function FaqSection() {
                 </summary>
 
                 <div className="mt-3 text-sm sm:text-[15px] leading-relaxed text-slate-700">
-                  {item.a}
+                  {item.answer}
                 </div>
 
                 {/* meta chips */}

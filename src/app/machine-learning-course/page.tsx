@@ -1,6 +1,4 @@
 // pages/machine-learning-data-science.tsx
-import type { NextPage } from "next";
-import Head from "next/head";
 import HeroSection from "@/components/machine-learning-course/HeroSection";
 import StatsSection from "@/components/machine-learning-course/StatsSection";
 import CurriculumSection from "@/components/machine-learning-course/CurriculumSection";
@@ -14,15 +12,55 @@ import CtaSection from "@/components/machine-learning-course/CtaSection";
 import CareerRoadmapSection from "@/components/machine-learning-course/CareerRoadmapSection";
 import WhyMLProgram from "@/components/machine-learning-course/WhyMLProgram";
 import StickyNav3 from "@/components/StickyNav2/StickyNav3";
+import JsonLd from "@/components/JsonLd";
+import { generateMetadata } from "@/lib/metadata-generator";
+import { generateCourseSchema, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/schema-generators";
+import { MACHINE_LEARNING_FAQS, MACHINE_LEARNING_REVIEW_DATA } from "@/data/machineLearningData";
 
-const MachineLearningPage: NextPage = () => {
+export const metadata = generateMetadata({
+  title: "Machine Learning & Data Science with Python Hero Program | Mumbai | CDPL",
+  description: "95-Hour Hero Program in Machine Learning and Data Science with Python. Hands-on projects, 100% job assistance, global certificates.",
+  keywords: [
+    "machine learning course mumbai",
+    "data science with python",
+    "python data science training",
+    "ml hero program",
+    "data scientist jobs mumbai",
+    "artificial intelligence course",
+    "deep learning training"
+  ],
+  url: "/machine-learning-course",
+  image: "/og-images/machine-learning-course.jpg",
+});
+
+export default function MachineLearningPage() {
+  const courseSchema = generateCourseSchema({
+    name: "Machine Learning & Data Science with Python Hero Program",
+    description: "95-Hour Hero Program in Machine Learning and Data Science with Python. Hands-on projects, 100% job assistance, global certificates.",
+    url: "/machine-learning-course",
+    slug: "machine-learning-course",
+    price: 35000,
+    currency: "INR",
+    duration: "P2M1W", // ~9-10 weeks
+    instructor: "Expert ML & Data Science Mentors",
+    rating: MACHINE_LEARNING_REVIEW_DATA.ratingValue,
+    reviewCount: MACHINE_LEARNING_REVIEW_DATA.reviewCount,
+    image: "/og-images/machine-learning-course.jpg",
+  });
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Courses", url: "/courses" },
+    { name: "Machine Learning & Data Science", url: "/machine-learning-course" },
+  ]);
+
+  const faqSchema = generateFAQSchema(MACHINE_LEARNING_FAQS);
+
   return (
     <>
-      <Head>
-        <title>Machine Learning & Data Science with Python Hero Program | Mumbai | CDPL</title>
-        <meta name="description" content="95-Hour Hero Program in Machine Learning and Data Science with Python. Hands-on projects, 100% job assistance, global certificates." />
-        <meta name="keywords" content="machine learning course mumbai, data science with python, python data science training, ml hero program, data scientist jobs mumbai" />
-      </Head>
+      <JsonLd id="course-schema" schema={courseSchema} />
+      <JsonLd id="breadcrumb-schema" schema={breadcrumbSchema} />
+      <JsonLd id="faq-schema" schema={faqSchema} />
 
       <HeroSection />
 
@@ -45,5 +83,3 @@ const MachineLearningPage: NextPage = () => {
     </>
   );
 };
-
-export default MachineLearningPage;

@@ -1,6 +1,4 @@
 // pages/advanced-data-science-ml.tsx
-import type { NextPage } from "next";
-import Head from "next/head";
 import HeroSection from "@/components/data-science-course/HeroSection";
 import StatsSection from "@/components/data-science-course/StatsSection";
 import WhyDSProgram from "@/components/data-science-course/WhyDSProgram";
@@ -14,15 +12,54 @@ import FaqSection from "@/components/data-science-course/FaqSection";
 import CtaSection from "@/components/data-science-course/CtaSection";
 import CareerRoadmapSection from "@/components/data-science-course/CareerRoadmapSection";
 import StickyNav3 from "@/components/StickyNav2/StickyNav3";
+import JsonLd from "@/components/JsonLd";
+import { generateMetadata } from "@/lib/metadata-generator";
+import { generateCourseSchema, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/schema-generators";
+import { DATA_SCIENCE_FAQS, DATA_SCIENCE_REVIEW_DATA } from "@/data/dataScienceData";
 
-const AdvancedDSMLPage: NextPage = () => {
+export const metadata = generateMetadata({
+  title: "Advanced Data Science & Machine Learning Masterclass in Mumbai | 200-Hour Program | CDPL",
+  description: "200-Hour Masterclass in Advanced Data Science and Machine Learning. Hands-on projects, 100% job assistance, global certificates.",
+  keywords: [
+    "advanced data science course mumbai",
+    "machine learning masterclass",
+    "data science training mumbai",
+    "ml jobs mumbai",
+    "deep learning course",
+    "ai masterclass"
+  ],
+  url: "/data-science-course",
+  image: "/og-images/data-science-course.jpg",
+});
+
+export default function AdvancedDSMLPage() {
+  const courseSchema = generateCourseSchema({
+    name: "Advanced Data Science & Machine Learning Masterclass",
+    description: "200-Hour Masterclass in Advanced Data Science and Machine Learning. Hands-on projects, 100% job assistance, global certificates.",
+    url: "/data-science-course",
+    slug: "data-science-course",
+    price: 50000,
+    currency: "INR",
+    duration: "P4M", // ~16-20 weeks
+    instructor: "Expert Data Science & AI Mentors",
+    rating: DATA_SCIENCE_REVIEW_DATA.ratingValue,
+    reviewCount: DATA_SCIENCE_REVIEW_DATA.reviewCount,
+    image: "/og-images/data-science-course.jpg",
+  });
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Courses", url: "/courses" },
+    { name: "Data Science & ML Masterclass", url: "/data-science-course" },
+  ]);
+
+  const faqSchema = generateFAQSchema(DATA_SCIENCE_FAQS);
+
   return (
     <>
-      <Head>
-        <title>Advanced Data Science & Machine Learning Masterclass in Mumbai | 200-Hour Program | CDPL</title>
-        <meta name="description" content="200-Hour Masterclass in Advanced Data Science and Machine Learning. Hands-on projects, 100% job assistance, global certificates." />
-        <meta name="keywords" content="advanced data science course mumbai, machine learning masterclass, data science training mumbai, ml jobs mumbai" />
-      </Head>
+      <JsonLd id="course-schema" schema={courseSchema} />
+      <JsonLd id="breadcrumb-schema" schema={breadcrumbSchema} />
+      <JsonLd id="faq-schema" schema={faqSchema} />
 
       <HeroSection />
 
@@ -45,5 +82,3 @@ const AdvancedDSMLPage: NextPage = () => {
     </>
   );
 };
-
-export default AdvancedDSMLPage;

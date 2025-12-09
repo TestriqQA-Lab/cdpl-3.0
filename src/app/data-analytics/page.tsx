@@ -1,6 +1,4 @@
 // pages/advanced-data-analytics.tsx
-import type { NextPage } from "next";
-import Head from "next/head";
 import HeroSection from "@/components/data-analytics/HeroSection";
 import StatsSection from "@/components/data-analytics/StatsSection";
 import WhyAnalyticsProgram from "@/components/data-analytics/WhyAnalyticsProgram";
@@ -14,16 +12,57 @@ import FaqSection from "@/components/data-analytics/FaqSection";
 import CtaSection from "@/components/data-analytics/CtaSection";
 import CareerRoadmapSection from "@/components/data-analytics/CareerRoadmapSection";
 import StickyNav3 from "@/components/StickyNav2/StickyNav3";
+import JsonLd from "@/components/JsonLd";
+import { generateMetadata } from "@/lib/metadata-generator";
+import { generateCourseSchema, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/schema-generators";
+import { DATA_ANALYTICS_FAQS, DATA_ANALYTICS_REVIEW_DATA } from "@/data/dataAnalyticsData";
+
+export const metadata = generateMetadata({
+  title: "Advanced Data Analytics Hero Program | 110-Hour Training | Mumbai | CDPL",
+  description: "110-Hour Hero Program in Advanced Data Analytics. Hands-on projects in Power BI, Tableau, Python, SQL. 100% job assistance, global certificates.",
+  keywords: [
+    "advanced data analytics course mumbai",
+    "data analytics hero program",
+    "power bi training",
+    "tableau course",
+    "data analyst jobs mumbai",
+    "python for data analytics",
+    "sql training",
+    "business intelligence course"
+  ],
+  url: "/data-analytics",
+  image: "/og-images/data-analytics.jpg",
+});
+
+export default function AdvancedDataAnalyticsPage() {
+  const courseSchema = generateCourseSchema({
+    name: "Advanced Data Analytics Hero Program",
+    description: "110-Hour Hero Program in Advanced Data Analytics. Hands-on projects in Power BI, Tableau, Python, SQL. 100% job assistance, global certificates.",
+    url: "/data-analytics",
+    slug: "data-analytics",
+    price: 45000,
+    currency: "INR",
+    duration: "P3M", // ~12 weeks
+    instructor: "Expert Data Analysts",
+    rating: DATA_ANALYTICS_REVIEW_DATA.ratingValue,
+    reviewCount: DATA_ANALYTICS_REVIEW_DATA.reviewCount,
+    image: "/og-images/data-analytics.jpg",
+  });
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Courses", url: "/courses" },
+    { name: "Advanced Data Analytics", url: "/data-analytics" },
+  ]);
+
+  const faqSchema = generateFAQSchema(DATA_ANALYTICS_FAQS);
 
 
-const AdvancedDataAnalyticsPage: NextPage = () => {
   return (
     <>
-      <Head>
-        <title>Advanced Data Analytics Hero Program | 110-Hour Training | Mumbai | CDPL</title>
-        <meta name="description" content="110-Hour Hero Program in Advanced Data Analytics. Hands-on projects in Power BI, Tableau, Python, SQL. 100% job assistance, global certificates." />
-        <meta name="keywords" content="advanced data analytics course mumbai, data analytics hero program, power bi training, tableau course, data analyst jobs mumbai" />
-      </Head>
+      <JsonLd id="course-schema" schema={courseSchema} />
+      <JsonLd id="breadcrumb-schema" schema={breadcrumbSchema} />
+      <JsonLd id="faq-schema" schema={faqSchema} />
 
       <HeroSection />
 
@@ -45,6 +84,4 @@ const AdvancedDataAnalyticsPage: NextPage = () => {
       <section id='contact'><CtaSection /></section>
     </>
   );
-};
-
-export default AdvancedDataAnalyticsPage;
+}
