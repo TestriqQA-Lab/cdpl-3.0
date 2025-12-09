@@ -9,7 +9,6 @@ export type LeadFormData = {
     name: string;
     email: string;
     phone: string;
-    track?: string;
 };
 
 export type EnrollFormData = {
@@ -20,17 +19,15 @@ export type EnrollFormData = {
 
 interface LeadFormProps {
     variants?: any;
-    tracks?: string[];
     onSubmit: (data: LeadFormData) => void;
     className?: string;
 }
 
-export const LeadForm: React.FC<LeadFormProps> = ({ variants, tracks, onSubmit, className }) => {
+export const LeadForm: React.FC<LeadFormProps> = ({ variants, onSubmit, className }) => {
     const [form, setForm] = useState<LeadFormData>({
         name: "",
         email: "",
         phone: "",
-        track: tracks && tracks.length > 0 ? tracks[0] : "",
     });
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -87,25 +84,6 @@ export const LeadForm: React.FC<LeadFormProps> = ({ variants, tracks, onSubmit, 
                         placeholder="+91 98765 43210"
                     />
                 </div>
-                {tracks && tracks.length > 0 && (
-                    <div>
-                        <label htmlFor="track" className="mb-1 block text-sm font-medium text-slate-700">
-                            Interested Track
-                        </label>
-                        <select
-                            id="track"
-                            value={form.track}
-                            onChange={(e) => setForm({ ...form, track: e.target.value })}
-                            className="block w-full rounded-lg border border-slate-300 text-slate-900 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        >
-                            {tracks.map((track) => (
-                                <option key={track} value={track}>
-                                    {track}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                )}
                 <button
                     type="submit"
                     className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-indigo-600 px-4 py-2.5 font-semibold text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"

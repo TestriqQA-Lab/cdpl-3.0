@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Home, ChevronRight, Sparkles, ArrowRight } from "lucide-react";
 import { useState } from "react";
-import TrainingEnquiryModal from "@/components/TrainingEnquiryModal";
+import WorkshopRequestModal from "@/components/WorkshopRequestModal";
 
 export default function EventsPastEventsHeroSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -135,7 +135,7 @@ export default function EventsPastEventsHeroSection() {
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <button
                 onClick={handleEnquireClick}
-                className="inline-flex w-full items-center justify-center rounded-2xl bg-[#FF8C00] px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-slate-900/10 transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 sm:w-auto"
+                className="cursor-pointer inline-flex w-full items-center justify-center rounded-2xl bg-[#FF8C00] px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-slate-900/10 transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 sm:w-auto"
               >
                 Enquire for Training <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
               </button>
@@ -177,7 +177,14 @@ export default function EventsPastEventsHeroSection() {
         .animate-float-slower { animation: floatY 9s ease-in-out infinite; }
       `}</style>
 
-      <TrainingEnquiryModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <WorkshopRequestModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        source="Events Past Events Hero Section"
+        title="Corporate Training Enquiry"
+        subtitle="Enquire about our corporate training programs and workshops."
+        variant="workshop"
+      />
     </section>
   );
 }
