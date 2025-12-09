@@ -1,6 +1,7 @@
 "use client";
 
-import { LeadForm, EnrollPopup, type LeadFormData, type EnrollFormData } from "@/components/EnrollForms";
+import EnrollModal from "@/components/EnrollModal";
+import CityCourseLeadForm from "@/components/city-courses/CityCourseLeadForm";
 import React, { useMemo, useState } from "react";
 import { motion, type Variants } from "framer-motion";
 import { ArrowRight, Star, MapPin, Home, ChevronRight } from "lucide-react";
@@ -43,20 +44,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
         ];
     }, [data.breadcrumbs, data.courseName, data.slug, location]);
 
-    // Handlers now receive the data object from the reusable components
-    const handleLeadSubmit = (lead: LeadFormData) => {
-        alert(
-            `Submitted:\nName: ${lead.name}\nEmail: ${lead.email}\nPhone: ${lead.phone}\nTrack: ${lead.track ?? "(none)"}`
-        );
-    };
-
-    const handleEnrollSubmit = (enroll: EnrollFormData) => {
-        alert(
-            `Enroll Now Submitted:\nName: ${enroll.name}\nEmail: ${enroll.email}\nPhone: ${enroll.phone}`
-        );
-        setIsPopupOpen(false);
-    };
-
     return (
         <section className="relative overflow-hidden bg-gradient-to-br from-white via-slate-50 to-indigo-50">
             {/* soft shapes */}
@@ -65,7 +52,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
                 <div className="absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-violet-200/30 blur-3xl" />
             </div>
 
-            <div className="relative z-10 mx-auto max-w-7xl px-4 pb-14 pt-8 sm:px-6 lg:px-8 lg:pb-20 lg:pt-10">
+            <div className="relative z-10 mx-auto max-w-7xl px-4 md:pb-14 pb-8 md:pt-8 pt-4 sm:px-6 lg:px-8 lg:pb-20 lg:pt-10">
                 {/* Breadcrumbs */}
                 <nav aria-label="Breadcrumb" className="mb-6">
                     <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
@@ -120,12 +107,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
                             {heroContent.title}
                         </motion.h1>
 
-                        {/* Mobile form uses reusable LeadForm */}
+                        {/* Mobile form uses reusable CityCourseLeadForm */}
                         <div className="md:hidden mt-6">
-                            <LeadForm
+                            <CityCourseLeadForm
                                 variants={itemVariants}
-                                tracks={data.specializations && data.specializations.length ? data.specializations : undefined}
-                                onSubmit={handleLeadSubmit}
+                                tracks={data.specializations}
                             />
                         </div>
 
@@ -187,21 +173,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
                                 Enroll Now
                                 <ArrowRight className="ml-2 h-5 w-5 transition group-hover:translate-x-0.5" />
                             </button>
-                            <Link
-                                href="/contact-us"
-                                className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-6 py-3 font-semibold text-slate-800 shadow-sm transition hover:border-slate-400 hover:shadow-md"
-                            >
-                                Learn More
-                            </Link>
                         </motion.div>
                     </div>
 
                     {/* RIGHT column form (desktop only) now reusable */}
                     <div className="hidden md:block md:col-span-5 lg:col-span-4 md:-mt-2 lg:-mt-10">
-                        <LeadForm
+                        <CityCourseLeadForm
                             variants={itemVariants}
-                            tracks={data.specializations && data.specializations.length ? data.specializations : undefined}
-                            onSubmit={handleLeadSubmit}
+                            tracks={data.specializations}
                             className="mt-6"
                         />
                     </div>
@@ -226,11 +205,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
                 ) : null}
             </div>
 
-            {/* Popup now uses reusable EnrollPopup */}
-            <EnrollPopup
+            {/* Popup now uses generic EnrollModal */}
+            <EnrollModal
                 isOpen={isPopupOpen}
                 onClose={() => setIsPopupOpen(false)}
-                onSubmit={handleEnrollSubmit}
+                courseName={data.courseName}
+                location={location}
+                source="City Course Page - Hero Section"
             />
         </section>
     );

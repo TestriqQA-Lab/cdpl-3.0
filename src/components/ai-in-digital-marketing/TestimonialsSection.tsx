@@ -1,9 +1,14 @@
 "use client";
 
 import ReviewsMarquee from "../sections/ReviewMarque";
-import Link from "next/link";
+import { useState } from "react";
+import EnrollModal from "@/components/EnrollModal";
+import CareerSessionModal from "@/components/CareerSessionModal";
 
 export default function TestimonialsSection() {
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const [isCareerOpen, setIsCareerOpen] = useState(false);
+  const courseName = "AI in Digital Marketing Course";
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
@@ -26,9 +31,10 @@ export default function TestimonialsSection() {
             <p className="text-lg text-gray-900 font-semibold mb-4">
               Ready to become our next success story?
             </p>
-            <Link
-              href="/contact-us"
-              className="
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <button
+                onClick={() => setIsEnrollOpen(true)}
+                className="
     inline-flex items-center justify-center
     w-full sm:w-auto
     px-4 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-3
@@ -39,15 +45,46 @@ export default function TestimonialsSection() {
     text-center
     shadow-lg hover:shadow-xl
     transition-all duration-300
-    break-words
+    cursor-pointer
   "
-            >
-              Start Your Success Journey
-            </Link>
+              >
+                Start Your Success Journey
+              </button>
+              <button
+                onClick={() => setIsCareerOpen(true)}
+                className="
+    inline-flex items-center justify-center
+    w-full sm:w-auto
+    px-4 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-3
+    text-sm sm:text-base md:text-lg
+    bg-white hover:bg-slate-50
+    text-slate-900 font-bold
+    rounded-xl border-2 border-slate-300
+    text-center
+    shadow-lg hover:shadow-xl
+    transition-all duration-300
+    cursor-pointer
+  "
+              >
+                Book Free Demo
+              </button>
+            </div>
 
           </div>
         </div>
       </div>
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="AI Digital Marketing - Testimonials Section - Start Journey"
+        courseName={courseName}
+      />
+      <CareerSessionModal
+        isOpen={isCareerOpen}
+        onClose={() => setIsCareerOpen(false)}
+        source="AI Digital Marketing - Testimonials Section - Book Demo"
+        courseName={courseName}
+      />
     </section>
   );
 }

@@ -27,6 +27,7 @@ const SYLLABUS_LINKS: Record<string, string> = {
   'Advanced Manual and Automation Testing Master Program': 'https://www.cinutedigital.com/downloads/advanced-manual-and-automation-testing-master-program.pdf',
   'Advanced Software Testing': 'https://www.cinutedigital.com/downloads/advanced-software-testing.pdf',
   'AI Driven Digital Marketing': 'https://www.cinutedigital.com/downloads/ai-driven-digital-marketing-&-analytics.pdf',
+  'AI in Digital Marketing Course': 'https://www.cinutedigital.com/downloads/ai-driven-digital-marketing-&-analytics.pdf',
   'Comprehensive Data Science and AI': 'https://www.cinutedigital.com/downloads/comprehensive-data-science-and-ai-master-program.pdf',
   'Power BI Data Analytics': 'https://www.cinutedigital.com/downloads/data-analytics-&-visualization-with-power-bi.pdf',
   'Tableau Data Analytics': 'https://www.cinutedigital.com/downloads/data-analytics-&-visualization-with-tableau.pdf',
@@ -75,8 +76,19 @@ export async function POST(request: Request) {
   console.log('API Contact Route Hit');
   try {
     const body = await request.json();
-    const { fullName, email, phone, type, source, interest, message, courseName, syllabusLink } = body;
-    console.log('Received payload:', { fullName, email, phone, type, source, courseName });
+    const { fullName, email, phone, type, source, interest, message, courseName, syllabusLink, company, jobTitle, workshopType, participants, preferredDate, title, interestedTrack, location } = body;
+    console.log('Received payload:', { fullName, email, phone, type, source, workshopType, interestedTrack });
+
+    const currentYear = new Date().getFullYear();
+    // Initialize adminData with common fields
+    const adminData: Record<string, any> = {
+      fullName,
+      email,
+      phone,
+      source: source || 'Unknown',
+      year: currentYear,
+    };
+
 
     // 1. Basic Validation
     if (!fullName || !email || !phone) {
@@ -88,6 +100,12 @@ export async function POST(request: Request) {
     const isBrochureRequest = type === 'brochure';
     const isSyllabusRequest = type === 'syllabus';
     const isEnrollmentRequest = type === 'enrollment';
+    const isWorkshopRequest = type === 'workshop';
+
+    // Auto-detect type if not explicit, for city course
+    if (source === 'City Course Page - Hero Section') {
+      // We can treat this as a specific type to route to specific logic
+    }
 
     // Determine Source
     let formSource = source;
@@ -95,7 +113,14 @@ export async function POST(request: Request) {
       if (isBrochureRequest) formSource = 'Home Page - Brochure Download Modal';
       else if (isSyllabusRequest) formSource = `Home Page - ${courseName || 'Unknown Course'} - Download Syllabus Modal Form`;
       else if (isEnrollmentRequest) formSource = `${courseName || 'Course'} Page - Enroll Now`;
+      else if (formSource === 'City Course Page - Hero Section') formSource = 'City Course Page - Hero Section';
       else formSource = 'Contact Form';
+    }
+
+    if (source === 'City Course Page - Hero Section') {
+      // Force type for city course
+      // The frontend might not send 'type', but we can infer it or rely on the frontend sending type='city_course_inquiry' 
+      // In the component we didn't explicitly set 'type'. Let's check the detection logic below.
     }
 
     const isHomeHeroForm = formSource.includes('Home Hero') || formSource.includes('Enquiry Form - Home Hero Section') || formSource.includes('Enquiry Form - Home Enquire Now Button') || formSource.includes('About Us - Hero Section Modal') || formSource.includes('About Us - CTA Section') || formSource.includes('About Us - FAQ Section');
@@ -109,7 +134,7 @@ export async function POST(request: Request) {
     const isMasterProgramHeroForm = formSource === 'Master Program Course Page - Hero Section';
     const isPythonHeroForm = formSource === 'Python Course Page - Hero Section';
     const isJavaHeroForm = formSource === 'Java Course Page - Hero Section';
-    const isDataAnalyticsPythonHeroForm = formSource === 'Data Analytics with Python Course Page - Hero Section';
+    const isDataAnalyticsPythonHeroForm = formSource === 'Data Analytics with Python Course Page - Hero Section' || formSource.includes('Data Analytics Python Course Page');
     const isDataAnalyticsVizHeroForm = formSource === 'Data Analytics & Visualization Course Page - Hero Section';
     const isPowerBiHeroForm = formSource === 'Power BI Course Page - Hero Section';
     const isDataAnalyticsHeroForm = formSource === 'Data Analytics Course Page - Hero Section' || formSource === 'Data Analytics Course Page - Hero Section - Enroll Now' || formSource === 'Data Analytics Course Page - Hero Section - Syllabus Download' || formSource === 'Data Analytics Course Page - Why Analytics Section - Apply Now' || formSource === 'Data Analytics Course Page - Curriculum Section - Apply Now' || formSource === 'Data Analytics Course Page - Career Section - Placement Assistance' || formSource === 'Data Analytics Course Page - Who Should Enroll Section - Enroll Now' || formSource === 'Data Analytics Course Page - Tools Section - Learn with Projects' || formSource === 'Data Analytics Course Page - Roadmap Section - Get Roadmap' || formSource === 'Data Analytics Course Page - FAQ Section - Talk to Advisor' || formSource === 'Data Analytics Course Page - Curriculum Section - Career Session';
@@ -120,10 +145,16 @@ export async function POST(request: Request) {
     const isRProgrammingHeroForm = formSource === 'R Programming Course Page - Hero Section' || formSource === 'R Programming Course Page - Hero Section - Enroll Now' || formSource === 'R Programming Course Page - Hero Section - Syllabus Download';
     const isDataEngineeringHeroForm = formSource === 'Data Engineering Course Page - Hero Section';
     const isGenAiHeroForm = formSource === 'Generative AI Course Page - Hero Section';
-    const isPromptEngHeroForm = formSource === 'Prompt Engineering Course Page - Hero Section';
-    const isAiMarketingHeroForm = formSource === 'AI in Digital Marketing Course Page - Hero Section';
-    const isAiBootcampHeroForm = formSource === 'AI Bootcamp Course Page - Hero Section';
+
+    const isPromptEngHeroForm = formSource === 'Prompt Engineering Course Page - Hero Section' || formSource === 'Prompt Engineering Course Page - Hero Section - Enroll Now' || formSource === 'Prompt Engineering Course Page - Hero Section - Syllabus Download' || formSource === 'Prompt Engineering Course Page - Curriculum Section - Apply Now' || formSource === 'Prompt Engineering Course Page - Career Section - Placement Assistance' || formSource === 'Prompt Engineering Course Page - Who Should Enroll Section - Enroll Now' || formSource === 'Prompt Engineering Course Page - Tools Section - Learn with Projects' || formSource === 'Prompt Engineering Course Page - Roadmap Section - Get Roadmap' || formSource === 'Prompt Engineering Course Page - FAQ Section - Talk to Advisor' || formSource === 'Prompt Engineering Course Page - Stats Section - Enroll Now' || formSource === 'Prompt Engineering Course Page - Career Roadmap Section - Get Roadmap' || formSource === 'Prompt Engineering Course Page - Why Section - Apply Now' || formSource === 'Prompt Engineering Course Page - Cta Section - Enroll Now' || formSource === 'Prompt Engineering Course Page - Cta Section - Download Syllabus';
     const isCompDsAiHeroForm = formSource === 'Comprehensive Data Science & AI - Hero Section' || formSource === 'Comprehensive Data Science & AI - Hero Section (Mobile)';
+    const isAiBootcampHeroForm = formSource === 'AI Bootcamp Course Page - Hero Section';
+    const isAiMarketingHeroForm = formSource === 'AI in Digital Marketing Course Page - Hero Section' || formSource.includes('AI Digital Marketing');
+
+    const isCityCourseCareerExplore = formSource === 'City Course - Career Path - Explore';
+    const isCityCourseCareerEnroll = formSource === 'City Course - Career Path - Enroll';
+    const isCityCourseCTAEnroll = formSource === 'City Course - CTA Section - Enroll Now';
+    const isCityCourseCTADemo = formSource === 'City Course - CTA Section - Get Free Demo';
 
     const isMentorRequest = formSource.includes('Team Page - Mentor Section');
     const isLiveJobsRequest = formSource.includes('Live Jobs Page - Hero Section');
@@ -139,11 +170,14 @@ export async function POST(request: Request) {
       subjectPrefix = '[SYLLABUS DOWNLOAD]';
     } else if (isEnrollmentRequest) {
       subjectPrefix = '[ENROLL NOW]';
+    } else if (isWorkshopRequest) {
+      const subjectTag = title ? `[${title.toUpperCase()}]` : '[WORKSHOP REQUEST]';
+      subjectPrefix = `${subjectTag}`;
     } else if (isHomeHeroForm) {
       subjectPrefix = '[Enquiry]';
     } else if (isGetStartedForm) {
       subjectPrefix = '[GET STARTED REQUEST]';
-    } else if (isFreeDemoRequest) {
+    } else if (isFreeDemoRequest || isCityCourseCTADemo) {
       subjectPrefix = '[FREE DEMO REQUEST]';
     } else if (isManualTestingHeroForm || isApiTestingHeroForm || isDbmsHeroForm || isEtlHeroForm || isAdvancedSoftwareTestingHeroForm || isMasterProgramHeroForm || isPythonHeroForm || isJavaHeroForm || isDataAnalyticsHeroForm || isDataAnalyticsPythonHeroForm || isDataAnalyticsVizHeroForm || isPowerBiHeroForm || isTableauHeroForm || isDataScienceHeroForm || isMlHeroForm || isMlPythonHeroForm || isRProgrammingHeroForm || isDataEngineeringHeroForm || isGenAiHeroForm || isPromptEngHeroForm || isAiMarketingHeroForm || isAiBootcampHeroForm || isCompDsAiHeroForm) {
       subjectPrefix = '[ENQUIRY]';
@@ -178,21 +212,43 @@ export async function POST(request: Request) {
       adminTemplate = 'admin-notification-placement.html';
     } else if (isMentorsPageRequest) {
       adminTemplate = 'admin-notification-mentors.html';
+    } else if (isWorkshopRequest) {
+      const subjectTag = title ? `[${title.toUpperCase()}]` : '[WORKSHOP REQUEST]';
+      subjectPrefix = `${subjectTag} from ${company || 'Unknown Company'} (${fullName})`;
+      adminTemplate = 'admin-notification-workshop.html';
+    } else if (type === 'service_request') {
+      const { company, serviceName } = body;
+      subjectPrefix = `[SERVICE REQUEST] ${serviceName} - Inquiry by ${company || fullName}`;
+      adminTemplate = 'admin-notification-service-request.html';
+    } else if (type === 'general_enquiry') {
+      const { company } = body;
+      subjectPrefix = `[GENERAL ENQUIRY] from ${company || fullName}`;
+      adminTemplate = 'admin-notification-general.html';
+    } else if (type === 'consultation') {
+      const { company } = body;
+      subjectPrefix = `[CONSULTATION REQUEST] from ${company || fullName}`;
+      adminTemplate = 'admin-notification-consultation.html';
+    } else if (type === 'event_contact') {
+      subjectPrefix = `[EVENT INQUIRY] from ${company || fullName}`;
+      adminTemplate = 'admin-notification-event-contact.html';
+    } else if (type === 'affiliate') {
+      subjectPrefix = `[AFFILIATE APPLICATION] from ${company || fullName}`;
+      adminTemplate = 'admin-notification-affiliate.html';
+    } else if (source === 'City Course Page - Hero Section' || isCityCourseCareerExplore || isCityCourseCareerEnroll || isCityCourseCTAEnroll || isCityCourseCTADemo) { // Detect by source if type isn't set
+      subjectPrefix = `[CITY COURSE ENQUIRY] from ${location || 'Unknown City'}`;
+      adminTemplate = 'admin-notification-city-course.html';
+      // Fill specific data
+      adminData.interestedTrack = interestedTrack || 'Not specified';
+      adminData.location = location || 'Not specified';
     }
 
-    // 3. Prepare Admin Notification Email
-    console.log('Preparing admin email...');
-    const currentYear = new Date().getFullYear().toString();
-    const adminData: Record<string, string> = {
-      fullName,
-      email,
-      phone,
-      type: isBrochureRequest ? 'Brochure Download' : (isSyllabusRequest ? 'Syllabus Download' : (isEnrollmentRequest ? 'Enroll Now Inquiry' : (isGetStartedForm ? 'Get Started Request' : (isFreeDemoRequest ? 'Free Demo Request' : (isMentorRequest ? 'Mentor Request' : (isLiveJobsRequest ? 'Live Jobs Enquiry' : (isPlacementRequest ? 'Placement Enquiry' : (isSessionEnquiry ? 'Session Enquiry' : (isManualTestingHeroForm || isApiTestingHeroForm || isDbmsHeroForm || isEtlHeroForm || isAdvancedSoftwareTestingHeroForm || isMasterProgramHeroForm || isPythonHeroForm || isJavaHeroForm || isDataAnalyticsHeroForm || isDataAnalyticsPythonHeroForm || isDataAnalyticsVizHeroForm || isPowerBiHeroForm || isTableauHeroForm || isDataScienceHeroForm || isMlHeroForm || isMlPythonHeroForm || isRProgrammingHeroForm || isDataEngineeringHeroForm || isGenAiHeroForm || isPromptEngHeroForm || isAiMarketingHeroForm || isAiBootcampHeroForm || isCompDsAiHeroForm || formSource.includes('Python Course Page - Testimonials Section') ? 'Course Page Enquiry' : 'General Inquiry'))))))))),
-      source: formSource,
-      downloadLink: isBrochureRequest ? BROCHURE_DOWNLOAD_LINK : (isSyllabusRequest ? (syllabusLink || 'N/A') : 'N/A'),
-      year: currentYear,
-      currentYear: currentYear, // Pass both for compatibility
-    };
+    if (isWorkshopRequest) {
+      adminData.company = company || 'N/A';
+      adminData.jobTitle = jobTitle || 'N/A';
+      adminData.workshopType = workshopType || 'N/A';
+      adminData.participants = participants || 'N/A';
+      adminData.preferredDate = preferredDate || 'N/A';
+    }
 
     if (courseName) adminData.courseName = courseName;
 
@@ -226,6 +282,8 @@ export async function POST(request: Request) {
         adminSubject = `${subjectPrefix} New Lead from ${fullName} - Advanced Excel Page (Syllabus)`;
       } else if (formSource === 'Data Science Course Page - Hero Section - Syllabus Download' || formSource === 'Data Science Course Page - Curriculum Section - Syllabus Download' || formSource === 'Data Science Course Page - Career Section - Download Portfolio Guide' || formSource === 'Data Science Course Page - Who Should Enroll - Download Syllabus') {
         adminSubject = `${subjectPrefix} New Lead from ${fullName} - Data Science Page (Syllabus)`;
+      } else if (formSource.includes('Data Analytics Python Course Page') && (formSource.includes('Syllabus') || formSource.includes('Report'))) {
+        adminSubject = `${subjectPrefix} New Lead from ${fullName} - Data Analytics with Python Page (Syllabus)`;
       } else if (formSource === 'Machine Learning with Python Course Page - Hero Section - Syllabus Download' || formSource === 'Machine Learning with Python Course Page - Stats Section - Download Syllabus' || formSource === 'Machine Learning with Python Course Page - Curriculum Section - Download Syllabus') {
         adminSubject = `${subjectPrefix} New Lead from ${fullName} - Machine Learning with Python Page (Syllabus)`;
       } else if (formSource === 'R Programming Course Page - Hero Section - Syllabus Download') {
@@ -233,6 +291,8 @@ export async function POST(request: Request) {
       } else {
         adminSubject = `${subjectPrefix} New Lead for ${courseName} - ${fullName}`;
       }
+    } else if (isWorkshopRequest) {
+      adminSubject = `${subjectPrefix} Corporate Training Inquiry from ${company} (${fullName})`;
     } else if (isManualTestingHeroForm) {
       adminSubject = `${subjectPrefix} New Lead from ${fullName} - Course Page`;
     } else if (isApiTestingHeroForm) {
@@ -279,6 +339,12 @@ export async function POST(request: Request) {
       adminSubject = `[SESSION ENQUIRY] New Lead from ${fullName} - Python Page (Career Section)`;
     } else if (formSource === 'Java Course Page - Career Section - Browse Open Roles') {
       adminSubject = `[SESSION ENQUIRY] New Lead from ${fullName} - Java Page (Career Section)`;
+    } else if (isCityCourseCareerExplore) {
+      adminSubject = `${subjectPrefix} Career Path Inquiry from ${fullName}`;
+    } else if (isCityCourseCareerEnroll || isCityCourseCTAEnroll) {
+      adminSubject = `${subjectPrefix} Enrollment Inquiry from ${fullName}`;
+    } else if (isCityCourseCTADemo) {
+      adminSubject = `${subjectPrefix} Free Demo Request from ${fullName}`;
     }
 
     const adminMailOptions: nodemailer.SendMailOptions = {
@@ -297,8 +363,8 @@ export async function POST(request: Request) {
       const userHtml = await getTemplatedEmail('brochure-confirmation.html', {
         fullName,
         downloadLink: BROCHURE_DOWNLOAD_LINK,
-        year: currentYear,
-        currentYear: currentYear,
+        year: currentYear.toString(),
+        currentYear: currentYear.toString(),
       });
 
       userMailOptions = {
@@ -316,8 +382,8 @@ export async function POST(request: Request) {
         fullName,
         courseName: courseName || 'Course',
         downloadLink: finalDownloadLink,
-        year: currentYear,
-        currentYear: currentYear,
+        year: currentYear.toString(),
+        currentYear: currentYear.toString(),
       });
 
       userMailOptions = {
@@ -332,8 +398,8 @@ export async function POST(request: Request) {
         fullName,
         phone,
         email,
-        year: currentYear,
-        currentYear: currentYear,
+        year: currentYear.toString(),
+        currentYear: currentYear.toString(),
       });
 
       userMailOptions = {
@@ -342,14 +408,104 @@ export async function POST(request: Request) {
         subject: 'Free Demo Request Received - CDPL',
         html: userHtml,
       };
+    } else if (isWorkshopRequest) {
+      const userHtml = await getTemplatedEmail('user-confirmation-workshop.html', {
+        fullName,
+        company: company || 'your organization',
+        workshopType: workshopType || 'workshop',
+        year: currentYear.toString(),
+        currentYear: currentYear.toString(),
+      });
+
+      userMailOptions = {
+        from: SMTP_FROM_EMAIL,
+        to: email,
+        subject: 'We have received your Workshop Request - CDPL',
+        html: userHtml,
+      };
+    } else if (type === 'service_request') {
+      const userHtml = await getTemplatedEmail('user-confirmation-service-request.html', {
+        fullName,
+        serviceName: body.serviceName,
+        year: currentYear.toString(),
+        currentYear: currentYear.toString(),
+      });
+      userMailOptions = {
+        from: SMTP_FROM_EMAIL,
+        to: email,
+        subject: `We have received your request for ${body.serviceName} - CDPL`,
+        html: userHtml,
+      };
+    } else if (type === 'general_enquiry') {
+      const userHtml = await getTemplatedEmail('user-confirmation-general.html', {
+        fullName,
+        year: currentYear.toString(),
+        currentYear: currentYear.toString(),
+      });
+      userMailOptions = {
+        from: SMTP_FROM_EMAIL,
+        to: email,
+        subject: `Thank you for contacting CDPL`,
+        html: userHtml,
+      };
+    } else if (type === 'consultation') {
+      const userHtml = await getTemplatedEmail('user-confirmation-consultation.html', {
+        fullName,
+        year: currentYear.toString(),
+        currentYear: currentYear.toString(),
+      });
+      userMailOptions = {
+        from: SMTP_FROM_EMAIL,
+        to: email,
+        subject: `Consultation Request Received - CDPL`,
+        html: userHtml,
+      };
+    } else if (type === 'event_contact') {
+      const userHtml = await getTemplatedEmail('user-confirmation-event-contact.html', {
+        fullName,
+        year: currentYear.toString(),
+        currentYear: currentYear.toString(),
+      });
+      userMailOptions = {
+        from: SMTP_FROM_EMAIL,
+        to: email,
+        subject: `Thank you for your interest in our Event - CDPL`,
+        html: userHtml,
+      };
+    } else if (type === 'affiliate') {
+      const userHtml = await getTemplatedEmail('user-confirmation-affiliate.html', {
+        fullName,
+        year: currentYear.toString(),
+        currentYear: currentYear.toString(),
+      });
+      userMailOptions = {
+        from: SMTP_FROM_EMAIL,
+        to: email,
+        subject: `Application Received - CDPL Affiliate Program`,
+        html: userHtml,
+      };
+    } else if (source === 'City Course Page - Hero Section') {
+      const userHtml = await getTemplatedEmail('user-confirmation-city-course.html', {
+        fullName,
+        location: location || 'your city',
+        courseName: interestedTrack || 'Software Testing',
+        year: currentYear.toString(),
+        currentYear: currentYear.toString(),
+      });
+      userMailOptions = {
+        from: SMTP_FROM_EMAIL,
+        to: email,
+        subject: `Thank you for your interest in our ${interestedTrack || ''} Course - CDPL`,
+        html: userHtml,
+      };
     } else {
       // General Contact Confirmation (Includes Get Started)
       const userHtml = await getTemplatedEmail('user-confirmation.html', {
         fullName,
         phone,
         email,
-        year: currentYear,
-        currentYear: currentYear,
+        year: currentYear.toString(),
+        currentYear: currentYear.toString(),
       });
 
       userMailOptions = {

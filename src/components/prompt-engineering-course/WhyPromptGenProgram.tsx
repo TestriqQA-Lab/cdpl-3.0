@@ -13,9 +13,13 @@ import {
     Rocket,
     Keyboard,
 } from "lucide-react";
-import Link from "next/link";
+import React, { useState } from "react";
+import EnrollModal from "@/components/EnrollModal";
 
 export default function WhyPromptGenProgram() {
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const courseName = "Prompt Engineering Course";
+    const source = "Prompt Engineering Course Page - Why Section";
 
 
     const featureChips = [
@@ -212,21 +216,28 @@ export default function WhyPromptGenProgram() {
                         </dl>
 
                         <div className="mt-6 border-t border-gray-200 pt-6">
-                            <Link
-                                href="contact-us"
-                                className="inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold shadow-sm
+                            <button
+                                onClick={() => setIsEnrollOpen(true)}
+                                className="cursor-pointer inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold shadow-sm
                            bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                 aria-label="Apply now for Prompt Engineering with Gen AI"
                             >
                                 Apply Now
                                 <Rocket className="w-4 h-4" />
-                            </Link>
+                            </button>
                             <p className="mt-3 text-xs text-gray-600">
                                 You’ll receive the full syllabus and a readiness checklist to personalize your path.
                             </p>
                         </div>
                     </aside>
                 </div>
+
+                <EnrollModal
+                    isOpen={isEnrollOpen}
+                    onClose={() => setIsEnrollOpen(false)}
+                    source={`${source} - Apply Now`}
+                    courseName={courseName}
+                />
             </div>
 
         </section>

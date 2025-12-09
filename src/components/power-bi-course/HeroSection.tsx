@@ -1,7 +1,7 @@
 "use client";
 // components/powerbi/HeroSection.tsx
 import React, { useState } from 'react';
-import { Clock, CheckCircle, Award, Briefcase, ArrowRight, Download, Star, Users, TrendingUp, Home, ChevronRight } from 'lucide-react';
+import { Clock, CheckCircle, Award, Briefcase, ArrowRight, CloudDownload, ArrowDownNarrowWide, Star, Users, TrendingUp, Home, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import ApiCourseLeadForm from "../forms/ApiCourseLeadForm";
 import EnrollModal from "../EnrollModal";
@@ -100,24 +100,28 @@ const HeroSection: React.FC = () => {
                             Transform raw data into powerful, actionable insights. Learn from industry experts to master Microsoft Power BI, DAX, and Data Modeling for creating stunning, interactive dashboards.
                         </p>
 
-                        <p className="text-base text-gray-500 mb-10">
-                            **Key Skills:** Power BI Desktop, Power BI Service, DAX Calculations, Power Query (M), Data Modeling, Advanced Visualization, Report Publishing, and Collaboration.
-                        </p>
+
 
                         {/* CTA Buttons */}
-                        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 mb-12">
+                        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-12">
                             <button
                                 onClick={() => setIsEnrollOpen(true)}
-                                className="flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-orange-600 rounded-xl shadow-lg hover:bg-orange-700 transition-all duration-300 transform hover:scale-[1.02] cursor-pointer"
+                                className="flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-orange-600 rounded-xl shadow-lg hover:bg-orange-700 transition-all duration-300 transform hover:scale-[1.02] cursor-pointer"
                             >
-                                Enroll Now <ArrowRight size={20} className="ml-3" />
+                                Enroll Now <ArrowRight size={20} className="ml-2" />
                             </button>
                             <button
                                 onClick={() => setIsSyllabusOpen(true)}
-                                className="flex items-center justify-center px-8 py-4 text-lg font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-xl shadow-md hover:bg-gray-100 transition-all duration-300 cursor-pointer"
+                                className="flex items-center justify-center px-6 py-3 text-base font-semibold text-white bg-orange-600 rounded-xl shadow-lg hover:bg-orange-700 transition-all duration-300 transform hover:scale-[1.02] cursor-pointer"
                             >
-                                Download Syllabus <Download size={20} className="ml-3" />
+                                Download Syllabus <CloudDownload size={20} className="ml-2" />
                             </button>
+                            <Link
+                                href="#curriculum"
+                                className="flex items-center justify-center px-6 py-3 text-base font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-xl shadow-md hover:bg-gray-100 transition-all duration-300 cursor-pointer"
+                            >
+                                View Curriculum <ArrowDownNarrowWide size={20} className="ml-2" />
+                            </Link>
                         </div>
 
                         {/* Feature Cards */}
@@ -136,10 +140,14 @@ const HeroSection: React.FC = () => {
                                 </div>
                             ))}
                         </div>
+                        <br />
+                        <p className="text-base text-gray-500 mb-10">
+                            **Key Skills:** Power BI Desktop, Power BI Service, DAX Calculations, Power Query (M), Data Modeling, Advanced Visualization, Report Publishing, and Collaboration.
+                        </p>
                     </div>
 
                     {/* Right Column: Lead Form */}
-                    <div className="hidden md:block md:col-span-5 lg:col-span-4">
+                    <div className="hidden md:block md:col-span-5 lg:col-span-4 md:top-8 sticky">
                         <ApiCourseLeadForm source="Power BI Course Page - Hero Section (Desktop)" />
                     </div>
 

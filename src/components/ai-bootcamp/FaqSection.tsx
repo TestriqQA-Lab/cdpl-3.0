@@ -1,8 +1,8 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
-import Link from "next/link";
 import { useState } from "react";
+import CareerSessionModal from "@/components/CareerSessionModal";
 
 interface FAQ {
     question: string;
@@ -46,6 +46,8 @@ const faqs: FAQ[] = [
 
 export default function FaqSection() {
     const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+    const [isCareerSessionOpen, setIsCareerSessionOpen] = useState(false);
+    const courseName = "AI Bootcamp Course";
 
     return (
         <section className="py-16 md:py-20 bg-gradient-to-b from-white to-slate-50">
@@ -126,11 +128,21 @@ export default function FaqSection() {
                         eligibility, fees, batch timings, placement support, and how this{" "}
                         <strong>job-oriented digital marketing bootcamp</strong> can transform your profile.
                     </p>
-                    <Link href="contact-us" className="btn-cta inline-flex items-center justify-center px-8 py-3 rounded-xl bg-orange-600 text-white font-semibold shadow-md hover:bg-orange-700 transition-colors">
+                    <button
+                        onClick={() => setIsCareerSessionOpen(true)}
+                        className="btn-cta cursor-pointer inline-flex items-center justify-center px-8 py-3 rounded-xl bg-orange-600 text-white font-semibold shadow-md hover:bg-orange-700 transition-colors"
+                    >
                         Speak to a Career Counselor
-                    </Link>
+                    </button>
                 </div>
             </div>
+
+            <CareerSessionModal
+                isOpen={isCareerSessionOpen}
+                onClose={() => setIsCareerSessionOpen(false)}
+                source="AI Bootcamp - FAQ Section"
+                courseName={courseName}
+            />
         </section>
     );
 }

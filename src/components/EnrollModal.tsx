@@ -12,13 +12,17 @@ interface EnrollModalProps {
     onClose: () => void;
     courseName?: string;
     source?: string;
+    location?: string;
+    interestedTrack?: string;
 }
 
 const EnrollModal: React.FC<EnrollModalProps> = ({
     isOpen,
     onClose,
     courseName = "Course",
-    source
+    source,
+    location,
+    interestedTrack
 }) => {
     // Form state
     const [formData, setFormData] = useState({
@@ -156,7 +160,9 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
                         phone: formData.phone || 'Not provided',
                         type: 'enrollment',
                         source: source || `${courseName} Course Page - Enroll Now`,
-                        courseName
+                        courseName,
+                        location,
+                        interestedTrack
                     }),
                 });
 
@@ -292,7 +298,7 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
                                     <form onSubmit={handleSubmit} className="space-y-5">
                                         {/* Full Name Field */}
                                         <div>
-                                            <label htmlFor="enroll-fullName" className="block text-sm font-semibold text-gray-700 mb-2">
+                                            <label htmlFor="enroll-fullName" className="block text-sm font-semibold text-gray-700 mb-2 text-left">
                                                 Full Name <span className="text-red-500">*</span>
                                             </label>
                                             <div className="relative">
@@ -318,7 +324,7 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
 
                                         {/* Email Field */}
                                         <div>
-                                            <label htmlFor="enroll-email" className="block text-sm font-semibold text-gray-700 mb-2">
+                                            <label htmlFor="enroll-email" className="block text-sm font-semibold text-gray-700 mb-2 text-left">
                                                 Email Address <span className="text-red-500">*</span>
                                             </label>
                                             <div className="relative">
@@ -344,7 +350,7 @@ const EnrollModal: React.FC<EnrollModalProps> = ({
 
                                         {/* Phone Field (Mandatory) */}
                                         <div>
-                                            <label htmlFor="enroll-phone" className="block text-sm font-semibold text-gray-700 mb-2">
+                                            <label htmlFor="enroll-phone" className="block text-sm font-semibold text-gray-700 mb-2 text-left">
                                                 Mobile Number <span className="text-red-500">*</span>
                                             </label>
                                             <div className="relative">

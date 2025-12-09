@@ -1,9 +1,13 @@
 "use client";
 
 import { courseData } from "@/components/ai-in-digital-marketing/courseData";
-import Link from "next/link";
+
+import { useState } from "react";
+import EnrollModal from "@/components/EnrollModal";
 
 export default function CareerRoadmapSection() {
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const courseName = "AI in Digital Marketing Course";
   const { learningPath } = courseData;
 
   return (
@@ -37,8 +41,8 @@ export default function CareerRoadmapSection() {
                 <div className="flex-1">
                   <div
                     className={`p-8 rounded-2xl border-2 transition-all hover:shadow-xl ${idx % 2 === 0
-                        ? "bg-orange-50 border-orange-200 hover:border-orange-400"
-                        : "bg-indigo-50 border-indigo-200 hover:border-indigo-400"
+                      ? "bg-orange-50 border-orange-200 hover:border-orange-400"
+                      : "bg-indigo-50 border-indigo-200 hover:border-indigo-400"
                       }`}
                   >
                     <h3 className="text-2xl font-bold text-gray-900 mb-3">
@@ -54,8 +58,8 @@ export default function CareerRoadmapSection() {
                 <div className="flex-shrink-0 z-10">
                   <div
                     className={`w-20 h-20 rounded-full flex items-center justify-center text-3xl font-bold text-white border-4 border-white shadow-lg ${idx % 2 === 0
-                        ? "bg-orange-600"
-                        : "bg-indigo-700"
+                      ? "bg-orange-600"
+                      : "bg-indigo-700"
                       }`}
                   >
                     {step.step}
@@ -137,8 +141,8 @@ export default function CareerRoadmapSection() {
             <p className="text-lg text-gray-900 font-semibold mb-4">
               Ready to start your 8-step transformation journey?
             </p>
-            <Link
-              href="/contact-us"
+            <button
+              onClick={() => setIsEnrollOpen(true)}
               className="
     inline-flex items-center justify-center
     w-full sm:w-auto
@@ -150,15 +154,23 @@ export default function CareerRoadmapSection() {
     text-center
     shadow-lg hover:shadow-xl
     transition-all duration-300
+    cursor-pointer
     break-words
   "
             >
               Begin Your Journey Now
-            </Link>
+            </button>
 
           </div>
         </div>
       </div>
-    </section>
+
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="AI Digital Marketing - Career Roadmap - Begin Journey"
+        courseName={courseName}
+      />
+    </section >
   );
 }

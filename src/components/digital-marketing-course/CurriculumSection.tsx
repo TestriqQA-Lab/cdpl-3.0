@@ -1,7 +1,7 @@
-// components/sections/CurriculumSection.tsx
-// Server component – no client JS needed
-
-import Link from "next/link";
+"use client";
+import { useState } from "react";
+import SyllabusDownloadModal from "../SyllabusDownloadModal";
+import EnrollModal from "../EnrollModal";
 
 type Module = {
   num: string;
@@ -116,6 +116,9 @@ const ACCENTS = [
 ];
 
 export default function CurriculumSection() {
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const courseName = "Digital Marketing & Analytics Master Program";
 
 
   return (
@@ -203,17 +206,33 @@ export default function CurriculumSection() {
 
         {/* Footer CTA */}
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-          <button className="rounded-xl border border-orange-500 bg-orange-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-orange-600 focus:outline-none focus:ring-4 focus:ring-orange-200">
+          <button
+            onClick={() => setIsSyllabusOpen(true)}
+            className="cursor-pointer rounded-xl border border-orange-500 bg-orange-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-orange-600 focus:outline-none focus:ring-4 focus:ring-orange-200"
+          >
             Get Full Syllabus PDF
           </button>
-          <Link
-            href="contact-us"
-            className="rounded-xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200"
+          <button
+            onClick={() => setIsEnrollOpen(true)}
+            className="cursor-pointer rounded-xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200"
           >
             Book a Free Demo
-          </Link>
+          </button>
         </div>
       </div>
+
+      <SyllabusDownloadModal
+        isOpen={isSyllabusOpen}
+        onClose={() => setIsSyllabusOpen(false)}
+        source="Digital Marketing Course Page - Curriculum Section - Download Syllabus"
+        courseName={courseName}
+      />
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="Digital Marketing Course Page - Curriculum Section - Book Demo"
+        courseName={courseName}
+      />
 
     </section>
   );

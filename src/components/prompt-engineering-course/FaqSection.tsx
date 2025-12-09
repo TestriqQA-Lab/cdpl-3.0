@@ -1,7 +1,10 @@
 // components/sections/FaqSection.tsx
 // Server component — clean, modern, responsive FAQ with subtle futuristic accents + SEO (Prompt Engineering edition).
+"use client";
 
-import Link from "next/link";
+
+import React, { useState } from "react";
+import CareerSessionModal from "@/components/CareerSessionModal";
 
 type Faq = {
   q: string;
@@ -44,6 +47,10 @@ const FAQS: Faq[] = [
 ];
 
 export default function FaqSection() {
+  const [isSessionOpen, setIsSessionOpen] = useState(false);
+  const courseName = "Prompt Engineering Course";
+  const source = "Prompt Engineering Course Page - FAQ Section";
+
   const seoKeywords =
     "prompt engineering faq, generative ai course questions, llm prompting certification, job assistance ai india, structured outputs json, guardrails evaluation, rag citations";
 
@@ -118,14 +125,25 @@ export default function FaqSection() {
         <div className="mx-auto mt-8 max-w-4xl rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
           <p className="text-sm text-slate-700">
             Still have questions?{" "}
-            <Link href="contact-us" className="font-semibold text-sky-700 underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-sky-300 rounded">
+            <button
+              onClick={() => setIsSessionOpen(true)}
+              className="font-semibold text-sky-700 underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-sky-300 rounded bg-transparent border-none cursor-pointer"
+            >
               Talk to an advisor
-            </Link>{" "}
+            </button>{" "}
             for a personalized walkthrough of the curriculum and outcomes.
           </p>
         </div>
+
+        <CareerSessionModal
+          isOpen={isSessionOpen}
+          onClose={() => setIsSessionOpen(false)}
+          source={`${source} - Talk to Advisor`}
+          courseName={courseName}
+        />
       </div>
 
     </section>
   );
 }
+

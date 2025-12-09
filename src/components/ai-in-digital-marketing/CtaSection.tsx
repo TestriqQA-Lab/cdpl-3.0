@@ -2,8 +2,12 @@
 
 import { ArrowRight, CheckCircle } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
+import EnrollModal from "@/components/EnrollModal";
 
 export default function CtaSection() {
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const courseName = "AI in Digital Marketing Course";
   return (
     <section className="py-16 md:py-20 bg-gradient-to-r from-slate-900 via-orange-900 to-slate-900 relative overflow-hidden">
       {/* Background decoration */}
@@ -58,11 +62,14 @@ export default function CtaSection() {
 
           {/* CTA Buttons – same text as yours, layout from reference */}
           <div className="flex flex-col md:flex-row gap-4 justify-center mb-10">
-            <button className="flex items-center justify-center bg-white text-orange-600 hover:bg-orange-50 font-bold px-8 py-6 text-base rounded-lg shadow-lg hover:shadow-xl transition-all">
+            <button
+              onClick={() => setIsEnrollOpen(true)}
+              className="group flex items-center justify-center bg-white text-orange-600 hover:bg-orange-50 font-bold px-8 py-6 text-base rounded-lg shadow-lg hover:shadow-xl transition-all cursor-pointer"
+            >
               Enroll Now &amp; Get 20% OFF
-              <ArrowRight className="w-5 h-5 ml-2" />
+              <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
             </button>
-            <Link href="https://calendar.app.google/tvh9dsXZsX9BujRR8" className="border-2 border-white text-white hover:bg-white/10 font-semibold px-8 py-6 text-base rounded-lg transition-all">
+            <Link href="https://calendar.app.google/tvh9dsXZsX9BujRR8" className="border-2 border-white text-white hover:bg-white/10 font-semibold px-8 py-6 text-base rounded-lg transition-all flex items-center justify-center">
               Schedule Free Consultation
             </Link>
           </div>
@@ -142,6 +149,12 @@ export default function CtaSection() {
           </p>
         </div>
       </div>
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="AI Digital Marketing - CTA Section - Enroll"
+        courseName={courseName}
+      />
     </section>
   );
 }

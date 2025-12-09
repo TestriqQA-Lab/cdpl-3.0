@@ -298,7 +298,7 @@ const SyllabusDownloadModal: React.FC<SyllabusDownloadModalProps> = ({
                   <form onSubmit={handleSubmit} className="space-y-5">
                     {/* Full Name Field */}
                     <div>
-                      <label htmlFor="syllabus-fullName" className="block text-sm font-semibold text-gray-700 mb-2">
+                      <label htmlFor="syllabus-fullName" className="block text-sm font-semibold text-gray-700 mb-2 text-left">
                         Full Name <span className="text-red-500">*</span>
                       </label>
                       <div className="relative">
@@ -324,7 +324,7 @@ const SyllabusDownloadModal: React.FC<SyllabusDownloadModalProps> = ({
 
                     {/* Email Field */}
                     <div>
-                      <label htmlFor="syllabus-email" className="block text-sm font-semibold text-gray-700 mb-2">
+                      <label htmlFor="syllabus-email" className="block text-sm font-semibold text-gray-700 mb-2 text-left">
                         Email Address <span className="text-red-500">*</span>
                       </label>
                       <div className="relative">
@@ -350,7 +350,7 @@ const SyllabusDownloadModal: React.FC<SyllabusDownloadModalProps> = ({
 
                     {/* Phone Field (Mandatory) */}
                     <div>
-                      <label htmlFor="syllabus-phone" className="block text-sm font-semibold text-gray-700 mb-2">
+                      <label htmlFor="syllabus-phone" className="block text-sm font-semibold text-gray-700 mb-2 text-left">
                         Mobile Number <span className="text-red-500">*</span>
                       </label>
                       <div className="relative">

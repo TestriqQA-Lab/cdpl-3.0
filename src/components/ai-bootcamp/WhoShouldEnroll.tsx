@@ -1,6 +1,8 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { Users, Briefcase, Lightbulb, Zap, CheckCircle } from "lucide-react";
-import Link from "next/link";
+import EnrollModal from "@/components/EnrollModal";
 
 type IconType = React.ComponentType<React.SVGProps<SVGSVGElement>>;
 
@@ -101,6 +103,9 @@ const prerequisites = [
 ];
 
 export default function WhoShouldEnroll() {
+    const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+    const courseName = "AI Bootcamp Course";
+
     return (
         <section className="py-8 md:py-10 bg-gradient-to-b from-white to-slate-50">
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -262,12 +267,22 @@ export default function WhoShouldEnroll() {
                             </strong>{" "}
                             with in-demand, job-ready skills.
                         </p>
-                        <Link href="contact-us" className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:from-orange-600 hover:to-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300">
+                        <button
+                            onClick={() => setIsEnrollOpen(true)}
+                            className="cursor-pointer inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:from-orange-600 hover:to-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300"
+                        >
                             Check Your Eligibility
-                        </Link>
+                        </button>
                     </div>
                 </div>
             </div>
+
+            <EnrollModal
+                isOpen={isEnrollOpen}
+                onClose={() => setIsEnrollOpen(false)}
+                source="AI Bootcamp - Who Should Enroll"
+                courseName={courseName}
+            />
         </section>
     );
 }

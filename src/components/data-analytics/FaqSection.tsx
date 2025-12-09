@@ -2,7 +2,7 @@
 "use client";
 // Server component — clean, modern, responsive FAQ with subtle futuristic accents + SEO.
 
-import Link from "next/link";
+
 import { useState } from "react";
 import CareerSessionModal from "../CareerSessionModal";
 

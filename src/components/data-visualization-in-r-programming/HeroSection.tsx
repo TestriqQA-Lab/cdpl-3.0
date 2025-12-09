@@ -24,13 +24,7 @@ export const HeroSection: React.FC = () => {
         },
     ];
 
-    const scrollToCurriculum = (e: React.MouseEvent) => {
-        e.preventDefault();
-        const element = document.getElementById('curriculum');
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
+
 
     return (
         <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-orange-50">

@@ -1,6 +1,13 @@
 "use client";
 
-import { ArrowRight, ChevronRight, Clock, Home } from "lucide-react";
+import {
+    ArrowRight,
+    ChevronRight,
+    Clock,
+    Home,
+    CloudDownload,
+    ArrowDownNarrowWide
+} from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import ApiCourseLeadForm from "../forms/ApiCourseLeadForm";
@@ -94,41 +101,34 @@ export default function HeroSection() {
                             intelligence, KPI tracking, reporting automation.
                         </p>
 
-                        {/* Highlights */}
-                        <div className="mt-8 grid w-full max-w-2xl grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
-                            {[
-                                { icon: "📊", label: "Real Projects" },
-                                { icon: "👨‍🏫", label: "Expert Trainers" },
-                                { icon: "🎓", label: "Certification" },
-                                { icon: "💼", label: "Job Ready" },
-                            ].map((item, idx) => (
-                                <div
-                                    key={idx}
-                                    className="flex flex-col items-center gap-2 rounded-lg border border-slate-200 bg-white/60 p-4 backdrop-blur-sm transition-colors hover:border-orange-300"
-                                >
-                                    <span className="text-2xl">{item.icon}</span>
-                                    <span className="text-center text-xs font-semibold text-slate-700 md:text-sm">
-                                        {item.label}
-                                    </span>
-                                </div>
-                            ))}
-                        </div>
-
                         {/* CTAs */}
-                        <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row md:justify-start">
+                        <div className="mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
                             <button
                                 onClick={() => setIsEnrollOpen(true)}
-                                className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all hover:from-orange-600 hover:to-orange-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-orange-300"
+                                className="cursor-pointer group inline-flex items-center justify-center rounded-xl border border-orange-600 bg-orange-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-orange-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-orange-200"
+                                aria-label="Enroll now in Data Analytics program"
                             >
                                 Enroll Now
-                                <ArrowRight className="ml-2 h-5 w-5" />
+                                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                             </button>
+
                             <button
                                 onClick={() => setIsSyllabusOpen(true)}
-                                className="rounded-lg border-2 border-slate-300 px-8 py-4 text-base font-semibold text-slate-700 transition-all hover:border-orange-400 hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-300"
+                                className="cursor-pointer group inline-flex items-center justify-center rounded-xl border border-orange-600 bg-orange-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-orange-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-orange-200"
+                                aria-label="Download Syllabus"
                             >
                                 Download Syllabus
+                                <CloudDownload className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
                             </button>
+
+                            <Link
+                                href="#curriculum"
+                                className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-base font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200"
+                                aria-label="View Curriculum"
+                            >
+                                View Curriculum
+                                <ArrowDownNarrowWide className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
+                            </Link>
                         </div>
 
                         {/* Trust Indicators */}
@@ -153,6 +153,26 @@ export default function HeroSection() {
                                     <strong className="text-slate-900">15+ Years</strong> Industry Experience
                                 </span>
                             </div>
+                        </div>
+
+                        {/* Highlights */}
+                        <div className="mt-8 grid w-full max-w-2xl grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
+                            {[
+                                { icon: "📊", label: "Real Projects" },
+                                { icon: "👨‍🏫", label: "Expert Trainers" },
+                                { icon: "🎓", label: "Certification" },
+                                { icon: "💼", label: "Job Ready" },
+                            ].map((item, idx) => (
+                                <div
+                                    key={idx}
+                                    className="flex flex-col items-center gap-2 rounded-lg border border-slate-200 bg-white/60 p-4 backdrop-blur-sm transition-colors hover:border-orange-300"
+                                >
+                                    <span className="text-2xl">{item.icon}</span>
+                                    <span className="text-center text-xs font-semibold text-slate-700 md:text-sm">
+                                        {item.label}
+                                    </span>
+                                </div>
+                            ))}
                         </div>
 
                         {/* Extra SEO copy */}

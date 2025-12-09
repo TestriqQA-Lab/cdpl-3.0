@@ -1,8 +1,11 @@
 // components/sections/CurriculumSection.tsx
 // Server component — sleek, SEO-optimized, slightly futuristic, fully responsive.
 // Unique accent colors per module (no repeats). Explicit top-bar classes (kept by Tailwind).
+"use client";
 
-import Link from "next/link";
+import React, { useState } from "react";
+import EnrollModal from "@/components/EnrollModal";
+import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
 
 type Module = {
   num: string;
@@ -85,6 +88,11 @@ const MODULES: Module[] = [
 ];
 
 export default function CurriculumSection() {
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
+  const courseName = "Prompt Engineering Course";
+  const source = "Prompt Engineering Course Page - Curriculum Section";
+
   const subtitle =
     "A 10-module, industry-aligned pathway from AI/ML foundations to Generative AI, LLMs, Vision & Speech, Prompt Engineering, Responsible AI, and a hands-on capstone.";
   const keywords =
@@ -187,24 +195,39 @@ export default function CurriculumSection() {
         {/* CTA row */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 text-center sm:flex-row">
           <button
-            className="inline-flex items-center justify-center rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
+            onClick={() => setIsSyllabusOpen(true)}
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
             aria-label="Download the detailed Generative AI syllabus"
           >
             Download Detailed Syllabus (PDF)
           </button>
-          <Link
-            href="contact-us"
-            className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-green-200"
+          <button
+            onClick={() => setIsEnrollOpen(true)}
+            className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-green-200"
             aria-label="Apply for the Generative AI program"
           >
             Apply Now
-          </Link>
+          </button>
         </div>
 
         {/* Footnote */}
         <p className="mx-auto mt-3 max-w-3xl text-center text-[11px] text-slate-500">
           *Module order may vary based on cohort needs and instructor discretion.
         </p>
+
+        <EnrollModal
+          isOpen={isEnrollOpen}
+          onClose={() => setIsEnrollOpen(false)}
+          source={`${source} - Apply Now`}
+          courseName={courseName}
+        />
+
+        <SyllabusDownloadModal
+          isOpen={isSyllabusOpen}
+          onClose={() => setIsSyllabusOpen(false)}
+          source={`${source} - Syllabus Download`}
+          courseName={courseName}
+        />
       </div>
 
     </section>

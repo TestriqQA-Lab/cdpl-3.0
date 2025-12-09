@@ -240,7 +240,7 @@ export default function LeadForm({
         <div className="space-y-4">
           {/* Full Name Input - Same as home page */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1 text-left">
               Full Name *
             </label>
             <div className="relative">
@@ -265,7 +265,7 @@ export default function LeadForm({
 
           {/* Email Input - Same as home page */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1 text-left">
               Email Address *
             </label>
             <div className="relative">
@@ -290,7 +290,7 @@ export default function LeadForm({
 
           {/* Phone Input - Same as home page with react-phone-number-input */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1 text-left">
               Mobile Number *
             </label>
             <div className="relative">

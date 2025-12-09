@@ -47,7 +47,7 @@ export default function AffiliateHowItWorksSection({
 }: {
     imageSrc?: string;
     imageAlt?: string;
-     imagetitle?: string;
+    imagetitle?: string;
 }) {
     // Subtle parallax tilt for the illustration (blended, no card)
     const rx = useMotionValue(0);
@@ -185,7 +185,7 @@ export default function AffiliateHowItWorksSection({
                                                     <div className="mt-2">
                                                         <Link
                                                             href="#apply"
-                                                            className="inline-flex items-center rounded-lg bg-white/95 px-3 py-1.5 text-sm text-slate-700 hover:bg-white"
+                                                            className="inline-flex items-center rounded-lg bg-white/95 px-3 py-1.5 text-sm text-slate-700 hover:bg-white cursor-pointer"
                                                             style={{ boxShadow: "0 10px 24px -18px rgba(2,6,23,0.30)" }}
                                                         >
                                                             Start application

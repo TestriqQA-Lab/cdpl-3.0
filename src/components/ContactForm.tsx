@@ -226,7 +226,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
     <form onSubmit={handleSubmit} className="space-y-4">
       {/* Full Name Input */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-gray-700 mb-1 text-left">
           Full Name *
         </label>
         <div className="relative">
@@ -238,9 +238,8 @@ const ContactForm: React.FC<ContactFormProps> = ({
             onChange={handleInputChange}
             onBlur={() => validateFullName(formData.fullName)}
             required
-            className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${
-              fullNameError ? 'border-red-500' : 'border-gray-300'
-            }`}
+            className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${fullNameError ? 'border-red-500' : 'border-gray-300'
+              }`}
             placeholder="Enter your full name"
             style={{ color: '#1e293b' }}
           />
@@ -252,7 +251,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
       {/* Email Input */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-gray-700 mb-1 text-left">
           Email Address *
         </label>
         <div className="relative">
@@ -264,9 +263,8 @@ const ContactForm: React.FC<ContactFormProps> = ({
             onChange={handleInputChange}
             onBlur={() => validateEmail(formData.email)}
             required
-            className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${
-              emailError ? 'border-red-500' : 'border-gray-300'
-            }`}
+            className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${emailError ? 'border-red-500' : 'border-gray-300'
+              }`}
             placeholder="Enter your email address"
             style={{ color: '#1e293b' }}
           />
@@ -278,7 +276,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
       {/* Phone Input */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-gray-700 mb-1 text-left">
           Mobile Number *
         </label>
         <div className="relative">
@@ -288,9 +286,8 @@ const ContactForm: React.FC<ContactFormProps> = ({
             value={formData.phone}
             onChange={handlePhoneChange}
             onBlur={() => validatePhoneNumber(formData.phone)}
-            className={`phone-input-container ${
-              phoneError ? 'border-red-500' : ''
-            }`}
+            className={`phone-input-container ${phoneError ? 'border-red-500' : ''
+              }`}
             placeholder="Enter phone number"
           />
         </div>

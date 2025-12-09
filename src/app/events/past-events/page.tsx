@@ -183,23 +183,7 @@ export default function PastEventsPage() {
       heroImageUrl: e.heroImageUrl,
     }));
 
-  // Create a sanitized list of recent events (all of them) for the CTA section
-  // We use pastEvents directly to ensure we always show something, regardless of 'featured' status
-  const recentEvents: AllEventsProps["events"] = pastEvents
-    .map((e) => ({
-      id: e.id,
-      slug: e.slug,
-      title: e.title,
-      subtitle: e.subtitle,
-      date: e.date,
-      location: e.location,
-      attendees: e.attendees,
-      organization: e.organization,
-      purpose: e.purpose,
-      highlights: e.highlights,
-      category: e.category,
-      heroImageUrl: e.heroImageUrl,
-    }));
+
 
   // Breadcrumb Schema
   const breadcrumbSchema = generateBreadcrumbSchema([
@@ -295,7 +279,7 @@ export default function PastEventsPage() {
         </section>
 
         {/* CTA (separate component) */}
-        <EventsPastEventsCTASection events={recentEvents} />
+        <EventsPastEventsCTASection />
       </div>
     </>
   );

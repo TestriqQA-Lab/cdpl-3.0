@@ -1,5 +1,8 @@
+"use client";
+
 import { courseData } from "@/components/ai-in-digital-marketing/courseData";
-import Link from "next/link";
+import { useState } from "react";
+import EnrollModal from "@/components/EnrollModal";
 
 interface Advantage {
   id: number | string;
@@ -12,6 +15,8 @@ interface Advantage {
 }
 
 export default function WhyThisProgram() {
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const courseName = "AI in Digital Marketing Course";
   const { advantages } = courseData as { advantages: Advantage[] };
 
   return (
@@ -123,8 +128,8 @@ export default function WhyThisProgram() {
               <p className="text-lg text-slate-100 mb-4">
                 Ready to transform your business with digital marketing and AI?
               </p>
-              <Link
-                href="/contact-us"
+              <button
+                onClick={() => setIsEnrollOpen(true)}
                 className="
     inline-flex items-center justify-center
     w-full sm:w-auto
@@ -136,11 +141,12 @@ export default function WhyThisProgram() {
     text-center
     shadow-lg hover:shadow-xl
     transition-all duration-300
+    cursor-pointer
     break-words
   "
               >
                 Start Your Journey Today
-              </Link>
+              </button>
 
             </div>
 
@@ -153,6 +159,12 @@ export default function WhyThisProgram() {
           </div>
         </div>
       </div>
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="AI Digital Marketing - Why This Program - Start Journey"
+        courseName={courseName}
+      />
     </section>
   );
 }

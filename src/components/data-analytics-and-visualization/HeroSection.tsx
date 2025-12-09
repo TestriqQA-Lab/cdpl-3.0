@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, ChevronRight, Home, Download } from "lucide-react";
+import { ArrowRight, ChevronRight, Home, CloudDownload, ArrowDownNarrowWide } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import ApiCourseLeadForm from "../forms/ApiCourseLeadForm";
@@ -94,10 +94,35 @@ export default function HeroSection() {
                                 <strong>Mumbai, Maharashtra (India)</strong> seeking a career upgrade in analytics, MIS, or reporting.
                             </p>
 
-                            {/* Byline */}
-                            <p className="text-sm text-slate-500">
-                                {courseInfo.institute} • {courseInfo.duration}
-                            </p>
+                            {/* CTAs */}
+                            <div className="mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+                                <button
+                                    onClick={() => setIsEnrollOpen(true)}
+                                    className="cursor-pointer group inline-flex items-center justify-center rounded-xl border border-orange-600 bg-orange-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-orange-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-orange-200"
+                                    aria-label="Enroll now in Data Analytics program"
+                                >
+                                    Enroll Now
+                                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                                </button>
+
+                                <button
+                                    onClick={() => setIsSyllabusOpen(true)}
+                                    className="cursor-pointer group inline-flex items-center justify-center rounded-xl border border-orange-600 bg-orange-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-orange-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-orange-200"
+                                    aria-label="Download Syllabus"
+                                >
+                                    Download Syllabus
+                                    <CloudDownload className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
+                                </button>
+
+                                <Link
+                                    href="#curriculum"
+                                    className="cursor-pointer inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-base font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200"
+                                    aria-label="View Curriculum"
+                                >
+                                    View Curriculum
+                                    <ArrowDownNarrowWide className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-1" />
+                                </Link>
+                            </div>
 
                             {/* Topics/keywords (scan-friendly) */}
                             <div className="mt-2 grid w-full max-w-3xl grid-cols-2 gap-2 sm:grid-cols-3">
@@ -130,23 +155,7 @@ export default function HeroSection() {
                             </p>
                         </div>
 
-                        {/* CTAs */}
-                        <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                            <button
-                                onClick={() => setIsEnrollOpen(true)}
-                                className="inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-                            >
-                                Enroll Now
-                                <ArrowRight className="w-5 h-5" />
-                            </button>
-                            <button
-                                onClick={() => setIsSyllabusOpen(true)}
-                                className="inline-flex items-center gap-2 px-5 py-3 border-2 border-slate-300 hover:border-blue-600 text-slate-900 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-300"
-                            >
-                                <Download className="w-5 h-5" />
-                                Download Syllabus
-                            </button>
-                        </div>
+
 
                         {/* Trust indicators */}
                         <div className="flex items-center gap-6 pt-2">
@@ -177,42 +186,9 @@ export default function HeroSection() {
                         </div>
                     </div>
 
-                    {/* Right section: form + floating cards kept */}
-                    <div className="relative hidden md:block md:col-span-5 lg:col-span-4 mt-5">
-                        <div className="relative w-full">
-                            <div className="absolute inset-0 rounded-3xl" />
-                            {/* Form card */}
-                            <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100">
-                                <div className="w-full bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
-                                    <ApiCourseLeadForm source="Data Analytics & Visualization Course Page - Hero Section (Desktop)" courseName={courseName} />
-                                </div>
-                            </div>
-
-                            {/* Floating cards (KEPT as requested) */}
-                            <div className="absolute hidden xl:block -bottom-18 -left-30 bg-white rounded-2xl shadow-xl p-4 border border-slate-100 max-w-xs animate-[bounce_5s_ease-in-out_infinite] motion-reduce:animate-none">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-white font-bold">
-                                        ✓
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-slate-900 text-sm">100% Job Assistance</p>
-                                        <p className="text-xs text-slate-600">Career support included</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="absolute hidden xl:block -top-15 -right-20 bg-white rounded-2xl shadow-xl p-4 border border-slate-100 max-w-xs animate-[bounce_5s_ease-in-out_infinite] motion-reduce:animate-none">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-400 to-pink-600 flex items-center justify-center text-white font-bold">
-                                        ★
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-slate-900 text-sm">Global Certification</p>
-                                        <p className="text-xs text-slate-600">Internationally recognized</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    {/* Right: Desktop form (top-aligned & sticky) */}
+                    <div className="hidden md:block md:col-span-5 lg:col-span-4 md:top-8 sticky">
+                        <ApiCourseLeadForm source="Data Analytics & Visualization Course Page - Hero Section (Desktop)" courseName={courseName} />
                     </div>
                     {/* /Right section */}
                 </div>

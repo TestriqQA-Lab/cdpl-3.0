@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { courseData } from '@/types/courseData';
 import { pastEvents } from '@/data/eventsData';
 import { trainingServices } from '@/data/servicesData';
-import { BLOG_POSTS } from '@/data/BlogPostData';
+import { BLOG_POSTS, CATEGORIES, AUTHORS } from '@/data/BlogPostData';
 
 /**
  * Dynamic XML Sitemap for CDPL
@@ -226,6 +226,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // Digital Marketing
     'digital-marketing-course',
+
+    // Category & Certification Pages
+    'aaa-certification',
+    'actd-certification',
+    'artificial-intelligence-courses',
+    'bi-courses',
+    'digital-marketing-courses',
+    'ds-ml-courses',
+    'software-testing-course',
+    'trainers',
   ].map((slug) => ({
     url: `${siteUrl}/${slug}`,
     lastModified: currentDate,
@@ -290,6 +300,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
+  // 5. Blog Category Pages (e.g., /blog/category/data-science)
+  const blogCategoryPages: MetadataRoute.Sitemap = Object.values(CATEGORIES).map((category) => ({
+    url: `${siteUrl}/blog/category/${category.slug}`,
+    lastModified: currentDate,
+    changeFrequency: 'weekly',
+    priority: 0.6,
+  }));
+
+  // 6. Blog Author Pages (e.g., /blog/author/shoeb-shaikh)
+  const blogAuthorPages: MetadataRoute.Sitemap = Object.values(AUTHORS).map((author) => ({
+    url: `${siteUrl}/blog/author/${author.id}`,
+    lastModified: currentDate,
+    changeFrequency: 'monthly',
+    priority: 0.5,
+  }));
+
 
   // ========================================
   // COMBINE ALL PAGES
@@ -301,5 +327,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...eventPages,
     ...servicePages,
     ...blogPostPages,
+    ...blogCategoryPages,
+    ...blogAuthorPages,
   ];
 }

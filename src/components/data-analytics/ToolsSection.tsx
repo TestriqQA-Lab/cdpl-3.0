@@ -13,7 +13,7 @@ import {
   Cpu,
   Rocket,
 } from "lucide-react"; // note: Python isn't in lucide; we’ll reuse icons meaningfully
-import Link from "next/link";
+
 import { useState } from "react";
 import EnrollModal from "../EnrollModal";
 

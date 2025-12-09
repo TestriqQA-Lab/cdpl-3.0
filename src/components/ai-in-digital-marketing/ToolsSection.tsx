@@ -2,7 +2,8 @@
 
 import { Code2, Database, BarChart3 } from "lucide-react";
 import { courseData } from "@/components/ai-in-digital-marketing/courseData";
-import Link from "next/link";
+import { useState } from "react";
+import EnrollModal from "@/components/EnrollModal";
 
 interface ToolItem {
   name: string;
@@ -15,6 +16,8 @@ interface ToolCategory {
 }
 
 export default function ToolsSection() {
+  const [isEnrollOpen, setIsEnrollOpen] = useState(false);
+  const courseName = "AI in Digital Marketing Course";
   const { tools } = courseData as { tools: ToolCategory[] };
 
   // Flatten tools
@@ -229,8 +232,8 @@ export default function ToolsSection() {
             <p className="text-lg text-gray-900 font-semibold mb-4">
               Master all these tools and become a digital marketing expert
             </p>
-            <Link
-              href="/contact-us"
+            <button
+              onClick={() => setIsEnrollOpen(true)}
               className="
     inline-flex items-center justify-center
     w-full sm:w-auto
@@ -242,11 +245,12 @@ export default function ToolsSection() {
     text-center
     shadow-lg hover:shadow-xl
     transition-all duration-300
+    cursor-pointer
     break-words
   "
             >
               Start Learning Today
-            </Link>
+            </button>
 
             <p className="mt-5 text-xs sm:text-sm text-slate-600 max-w-3xl mx-auto">
               Perfect for anyone looking for a{" "}
@@ -258,6 +262,12 @@ export default function ToolsSection() {
           </div>
         </div>
       </div>
+      <EnrollModal
+        isOpen={isEnrollOpen}
+        onClose={() => setIsEnrollOpen(false)}
+        source="AI Digital Marketing - Tools Section - Start Learning"
+        courseName={courseName}
+      />
     </section>
   );
 }
