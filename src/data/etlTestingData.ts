@@ -1,4 +1,4 @@
-import { QA } from "@/components/manual-testing-course/FaqSection";
+import { type QA } from "@/types/faq";
 
 export const ETL_TESTING_FAQS: QA[] = [
     {
