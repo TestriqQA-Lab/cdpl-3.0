@@ -18,102 +18,17 @@ import {
 import CareerSessionModal from "@/components/CareerSessionModal";
 import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
 
-type QA = {
-  q: string;
-  a: React.ReactNode;
-  icon: React.ComponentType<{ className?: string }>;
-  bg: string;   // unique background
-  text: string; // matching text color
-  ring: string; // matching ring color
-};
 
-const FAQS: QA[] = [
-  {
-    q: "Do I need coding experience?",
-    a: (
-      <>
-        No-this Java course is beginner-friendly. We start with programming
-        fundamentals, Core Java, and hands-on exercises before moving to Spring Boot
-        and Microservices. You’ll get guided labs and mentor feedback to accelerate
-        learning.
-      </>
-    ),
-    icon: GraduationCap,
-    bg: "bg-sky-50",
-    text: "text-sky-900",
-    ring: "ring-sky-200",
-  },
-  {
-    q: "Will I get placement support?",
-    a: (
-      <>
-        Yes. We provide{" "}
-        <strong>100% job assistance</strong>-resume building, mock interviews,
-        profile optimization, and referrals where applicable. You’ll graduate with
-        portfolio projects that showcase production-style Java, REST APIs, and Cloud.
-      </>
-    ),
-    icon: Briefcase,
-    bg: "bg-emerald-50",
-    text: "text-emerald-900",
-    ring: "ring-emerald-200",
-  },
-  {
-    q: "What is the weekly time commitment?",
-    a: (
-      <>
-        The typical plan is <strong>6–8 hours per week</strong> (live sessions +
-        guided self-study). Flexible tracks are available if you need a lighter or
-        faster pace.
-      </>
-    ),
-    icon: CalendarClock,
-    bg: "bg-amber-50",
-    text: "text-amber-900",
-    ring: "ring-amber-200",
-  },
-  {
-    q: "Do I get a certificate?",
-    a: (
-      <>
-        Yes. You’ll earn a shareable{" "}
-        <strong>Certificate of Completion</strong> with verifiable details. It’s
-        designed to help with employer screening and LinkedIn visibility.
-      </>
-    ),
-    icon: Award,
-    bg: "bg-rose-50",
-    text: "text-rose-900",
-    ring: "ring-rose-200",
-  },
-  {
-    q: "Which tools and technologies are covered?",
-    a: (
-      <>
-        You’ll work with <strong>Java, IntelliJ IDEA, Spring Boot, JPA/Hibernate,
-          Maven, Git/GitHub, Docker</strong> and <strong>AWS</strong>. We also use
-        Postman for API testing and basic CI/CD flows.
-      </>
-    ),
-    icon: Wrench,
-    bg: "bg-violet-50",
-    text: "text-violet-900",
-    ring: "ring-violet-200",
-  },
-  {
-    q: "Is the program industry-relevant and secure by design?",
-    a: (
-      <>
-        Yes. The curriculum emphasizes <strong>clean architecture, security best
-          practices,</strong> environment configs, and <strong>observability</strong>{" "}
-        so your apps are ready for real-world deployments.
-      </>
-    ),
-    icon: ShieldCheck,
-    bg: "bg-cyan-50",
-    text: "text-cyan-900",
-    ring: "ring-cyan-200",
-  },
+
+import { JAVA_FAQS } from "@/data/javaData";
+
+const FAQ_METADATA = [
+  { icon: GraduationCap, bg: "bg-sky-50", text: "text-sky-900", ring: "ring-sky-200" },
+  { icon: Briefcase, bg: "bg-emerald-50", text: "text-emerald-900", ring: "ring-emerald-200" },
+  { icon: CalendarClock, bg: "bg-amber-50", text: "text-amber-900", ring: "ring-amber-200" },
+  { icon: Award, bg: "bg-rose-50", text: "text-rose-900", ring: "ring-rose-200" },
+  { icon: Wrench, bg: "bg-violet-50", text: "text-violet-900", ring: "ring-violet-200" },
+  { icon: ShieldCheck, bg: "bg-cyan-50", text: "text-cyan-900", ring: "ring-cyan-200" },
 ];
 
 export default function FaqSection() {
@@ -155,45 +70,50 @@ export default function FaqSection() {
 
         {/* FAQ list */}
         <div className="mx-auto mt-10 space-y-6">
-          {FAQS.map((item, i) => (
-            <details
-              key={item.q}
-              className={[
-                "group rounded-2xl p-5 shadow-sm transition-all duration-200",
-                "border border-white/70 backdrop-blur-sm ring-1",
-                "open:shadow-md",
-                item.bg,
-                item.ring,
-              ].join(" ")}
-            >
-              <summary
-                className="flex cursor-pointer list-none items-center justify-between gap-4"
-                aria-label={item.q}
+          {JAVA_FAQS.map((item, i) => {
+            const metadata = FAQ_METADATA[i % FAQ_METADATA.length];
+            const Icon = metadata.icon; // Get icon component
+
+            return (
+              <details
+                key={item.question}
+                className={[
+                  "group rounded-2xl p-5 shadow-sm transition-all duration-200",
+                  "border border-white/70 backdrop-blur-sm ring-1",
+                  "open:shadow-md",
+                  metadata.bg,
+                  metadata.ring,
+                ].join(" ")}
               >
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white ring-1 ring-black/5 shadow-sm">
-                    <item.icon className="h-5 w-5 text-gray-900" />
+                <summary
+                  className="flex cursor-pointer list-none items-center justify-between gap-4"
+                  aria-label={item.question}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white ring-1 ring-black/5 shadow-sm">
+                      <Icon className="h-5 w-5 text-gray-900" />
+                    </div>
+                    <h3 className="text-base md:text-lg font-bold text-gray-900">
+                      {item.question}
+                    </h3>
                   </div>
-                  <h3 className="text-base md:text-lg font-bold text-gray-900">
-                    {item.q}
-                  </h3>
+                  <ChevronDown className="mt-1 h-5 w-5 shrink-0 text-gray-800 transition-transform group-open:rotate-180" />
+                </summary>
+
+                <div className="mt-3 pl-13 text-sm leading-relaxed text-gray-700 md:text-base">
+                  {item.answer}
                 </div>
-                <ChevronDown className="mt-1 h-5 w-5 shrink-0 text-gray-800 transition-transform group-open:rotate-180" />
-              </summary>
 
-              <div className="mt-3 pl-13 text-sm leading-relaxed text-gray-700 md:text-base">
-                {item.a}
-              </div>
-
-              {/* subtle accent bar (non-gradient) */}
-              <div className="mt-4 h-1 w-full rounded-full bg-white/70" aria-hidden="true">
-                <div
-                  className={["h-1 rounded-full", item.text.replace("text-", "bg-")].join(" ")}
-                  style={{ width: ["82%", "74%", "76%", "70%", "78%", "72%"][i] }}
-                />
-              </div>
-            </details>
-          ))}
+                {/* subtle accent bar (non-gradient) */}
+                <div className="mt-4 h-1 w-full rounded-full bg-white/70" aria-hidden="true">
+                  <div
+                    className={["h-1 rounded-full", metadata.text.replace("text-", "bg-")].join(" ")}
+                    style={{ width: ["82%", "74%", "76%", "70%", "78%", "72%"][i % 6] }}
+                  />
+                </div>
+              </details>
+            );
+          })}
         </div>
 
         {/* Contact/help row */}

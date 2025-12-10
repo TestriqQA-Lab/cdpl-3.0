@@ -4,80 +4,14 @@ import { useState } from "react";
 import EnrollModal from "@/components/EnrollModal";
 import SyllabusDownloadModal from "@/components/SyllabusDownloadModal";
 
-type FAQ = {
-  q: string;
-  a: string;
-  accent: {
-    bg: string;
-    text: string;
-    border: string;
-    ring: string;
-    dot: string;   // small indicator
-    bar: string;   // top bar color
-  };
-};
+import { GENERATIVE_AI_FAQS } from "@/data/generativeAiData";
 
-const FAQS: FAQ[] = [
-  {
-    q: "Is prior experience required?",
-    a: "Recommended. This is an advanced program designed for learners with prior programming and basic ML knowledge. If you’re new, we provide a short prep kit to get you comfortable with Python, NumPy and basic model concepts.",
-    accent: {
-      bg: "bg-sky-50",
-      text: "text-sky-900",
-      border: "border-sky-200",
-      ring: "focus:ring-sky-300",
-      dot: "bg-sky-500",
-      bar: "bg-sky-600",
-    },
-  },
-  {
-    q: "What is the duration of the program?",
-    a: "The program includes ~55 guided hours delivered via live sessions, hands-on labs, code reviews, and a capstone aligned to Deep Learning, NLP and Generative AI.",
-    accent: {
-      bg: "bg-emerald-50",
-      text: "text-emerald-900",
-      border: "border-emerald-200",
-      ring: "focus:ring-emerald-300",
-      dot: "bg-emerald-500",
-      bar: "bg-emerald-600",
-    },
-  },
-  {
-    q: "Will I get job assistance?",
-    a: "Yes. You’ll receive resume & LinkedIn optimization, portfolio review, mock interviews, and curated referrals for relevant AI/ML roles.",
-    accent: {
-      bg: "bg-amber-50",
-      text: "text-amber-900",
-      border: "border-amber-200",
-      ring: "focus:ring-amber-300",
-      dot: "bg-amber-500",
-      bar: "bg-amber-600",
-    },
-  },
-  {
-    q: "Which tools and frameworks are covered?",
-    a: "PyTorch, Hugging Face Transformers, tokenizers, vector databases, experiment tracking basics, and lightweight MLOps for safe deployments.",
-    accent: {
-      bg: "bg-rose-50",
-      text: "text-rose-900",
-      border: "border-rose-200",
-      ring: "focus:ring-rose-300",
-      dot: "bg-rose-500",
-      bar: "bg-rose-600",
-    },
-  },
-  {
-    q: "Do I get a certificate?",
-    a: "Yes. You’ll receive a QR-verified certificate from Cinute Digital Pvt. Ltd. after completing assessments and the capstone project.",
-    accent: {
-      bg: "bg-indigo-50",
-      text: "text-indigo-900",
-      border: "border-indigo-200",
-      ring: "focus:ring-indigo-300",
-      dot: "bg-indigo-500",
-      bar: "bg-indigo-600",
-    },
-  },
+const ACCENT_STYLES = [
+  { bg: "bg-sky-50", text: "text-sky-900", border: "border-sky-200", ring: "focus:ring-sky-300", dot: "bg-sky-500", bar: "bg-sky-600" },
+  { bg: "bg-emerald-50", text: "text-emerald-900", border: "border-emerald-200", ring: "focus:ring-emerald-300", dot: "bg-emerald-500", bar: "bg-emerald-600" },
+  { bg: "bg-amber-50", text: "text-amber-900", border: "border-amber-200", ring: "focus:ring-amber-300", dot: "bg-amber-500", bar: "bg-amber-600" },
+  { bg: "bg-rose-50", text: "text-rose-900", border: "border-rose-200", ring: "focus:ring-rose-300", dot: "bg-rose-500", bar: "bg-rose-600" },
+  { bg: "bg-indigo-50", text: "text-indigo-900", border: "border-indigo-200", ring: "focus:ring-indigo-300", dot: "bg-indigo-500", bar: "bg-indigo-600" },
 ];
 
 export default function FaqSection() {
@@ -111,38 +45,41 @@ export default function FaqSection() {
 
         {/* Accordion list */}
         <ul role="list" aria-label="Program FAQs" className="mx-auto mt-10 grid max-w-4xl grid-cols-1 gap-3">
-          {FAQS.map((f) => (
-            <li key={f.q} className="min-w-0">
-              <details
-                className={[
-                  "group relative rounded-2xl border p-4 sm:p-5 shadow-sm transition-all duration-200 backdrop-blur",
-                  "open:shadow-md hover:-translate-y-0.5 focus-within:-translate-y-0.5",
-                  f.accent.bg,
-                  f.accent.border,
-                  f.accent.ring,
-                ].join(" ")}
-              >
-                {/* Top accent bar (explicit color to avoid Tailwind purge issues) */}
-                <div className={["absolute left-0 top-0 h-1.5 w-full", f.accent.bar].join(" ")} aria-hidden />
+          {GENERATIVE_AI_FAQS.map((f, i) => {
+            const accent = ACCENT_STYLES[i % ACCENT_STYLES.length];
+            return (
+              <li key={f.question} className="min-w-0">
+                <details
+                  className={[
+                    "group relative rounded-2xl border p-4 sm:p-5 shadow-sm transition-all duration-200 backdrop-blur",
+                    "open:shadow-md hover:-translate-y-0.5 focus-within:-translate-y-0.5",
+                    accent.bg,
+                    accent.border,
+                    accent.ring,
+                  ].join(" ")}
+                >
+                  {/* Top accent bar (explicit color to avoid Tailwind purge issues) */}
+                  <div className={["absolute left-0 top-0 h-1.5 w-full", accent.bar].join(" ")} aria-hidden />
 
-                <summary className={["flex cursor-pointer list-none items-center gap-3 text-left select-none", f.accent.text].join(" ")}>
-                  <span className={["inline-block h-2.5 w-2.5 rounded-full", f.accent.dot].join(" ")} aria-hidden />
-                  <span className="flex-1 text-sm sm:text-base font-bold">{f.q}</span>
-                  {/* caret icon (pure CSS rotate) */}
-                  <span aria-hidden className="ml-2 inline-block h-5 w-5 rotate-0 transition-transform duration-200 group-open:rotate-90 text-slate-700">
-                    ▸
-                  </span>
-                </summary>
+                  <summary className={["flex cursor-pointer list-none items-center gap-3 text-left select-none", accent.text].join(" ")}>
+                    <span className={["inline-block h-2.5 w-2.5 rounded-full", accent.dot].join(" ")} aria-hidden />
+                    <span className="flex-1 text-sm sm:text-base font-bold">{f.question}</span>
+                    {/* caret icon (pure CSS rotate) */}
+                    <span aria-hidden className="ml-2 inline-block h-5 w-5 rotate-0 transition-transform duration-200 group-open:rotate-90 text-slate-700">
+                      ▸
+                    </span>
+                  </summary>
 
-                <div className="mt-3 pl-6 sm:pl-7 text-sm sm:text-base leading-relaxed text-slate-700">{f.a}</div>
+                  <div className="mt-3 pl-6 sm:pl-7 text-sm sm:text-base leading-relaxed text-slate-700">{f.answer}</div>
 
-                {/* subtle bottom progress hint */}
-                <div className="mt-4 h-1 w-full rounded-full bg-white/80" aria-hidden>
-                  <div className={["h-1 w-0 rounded-full transition-[width] duration-500 ease-out group-open:w-4/5", f.accent.bar].join(" ")} />
-                </div>
-              </details>
-            </li>
-          ))}
+                  {/* subtle bottom progress hint */}
+                  <div className="mt-4 h-1 w-full rounded-full bg-white/80" aria-hidden>
+                    <div className={["h-1 w-0 rounded-full transition-[width] duration-500 ease-out group-open:w-4/5", accent.bar].join(" ")} />
+                  </div>
+                </details>
+              </li>
+            );
+          })}
         </ul>
 
         {/* CTA below FAQs */}

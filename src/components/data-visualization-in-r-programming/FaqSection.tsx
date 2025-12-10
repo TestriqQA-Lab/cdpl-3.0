@@ -2,21 +2,12 @@
 
 // src/components/FaqSection.tsx
 import React, { useState } from "react";
-import { content } from "@/components/data-visualization-in-r-programming/data/content";
 import { ChevronDown, HelpCircle, CloudDownload } from "lucide-react";
 import EnrollModal from "../EnrollModal";
 import SyllabusDownloadModal from "../SyllabusDownloadModal";
-
-interface Faq {
-  q: string;
-  a: string;
-  category?: string; // optional – in case you add categories later in content
-}
+import { R_DATA_VIS_FAQS } from "@/data/rDataVisData";
 
 export const FaqSection: React.FC = () => {
-  const { faq_section } = content;
-  const faqs: Faq[] = faq_section.questions;
-
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
   const [isEnrollOpen, setIsEnrollOpen] = useState(false);
   const [isSyllabusOpen, setIsSyllabusOpen] = useState(false);
@@ -26,7 +17,7 @@ export const FaqSection: React.FC = () => {
   // If not, everything will appear under one SEO-friendly heading.
   const categories = Array.from(
     new Set(
-      faqs
+      R_DATA_VIS_FAQS
         .map((faq) => faq.category)
         .filter((cat): cat is string => Boolean(cat)
         )
@@ -68,12 +59,12 @@ export const FaqSection: React.FC = () => {
 
             {/* FAQs List */}
             <div className="space-y-4">
-              {faqs
+              {R_DATA_VIS_FAQS
                 .filter((faq) =>
                   hasCategories ? faq.category === categoryLabel : true
                 )
                 .map((faq) => {
-                  const globalIdx = faqs.indexOf(faq);
+                  const globalIdx = R_DATA_VIS_FAQS.indexOf(faq);
 
                   return (
                     <div
@@ -94,7 +85,7 @@ export const FaqSection: React.FC = () => {
                             <HelpCircle className="w-4 h-4" />
                           </span>
                           <h4 className="text-lg font-semibold text-slate-900">
-                            {faq.q}
+                            {faq.question}
                           </h4>
                         </div>
                         <ChevronDown
@@ -107,7 +98,7 @@ export const FaqSection: React.FC = () => {
                       {expandedFAQ === globalIdx && (
                         <div className="px-6 pb-5 border-t border-slate-200 bg-slate-50">
                           <p className="text-slate-600 leading-relaxed">
-                            {faq.a}
+                            {faq.answer}
                           </p>
                         </div>
                       )}

@@ -3,54 +3,13 @@
 // src/components/data-analytics-bi-bigdata/FaqSection.tsx
 import React, { useState } from "react";
 import Link from "next/link";
-import { FaqItem } from "./types";
 import { ChevronDown } from "lucide-react";
 import EnrollModal from "../EnrollModal";
+import { DATA_ENGINEERING_MASTERS_FAQS } from "@/data/dataEngineeringMastersData";
 
-const faqData: FaqItem[] = [
-  {
-    id: 1,
-    question: "What is the eligibility for this program?",
-    answer:
-      "A bachelor's degree in any discipline is generally required. Basic knowledge of programming or databases is beneficial but not mandatory, as the program starts with foundational concepts.",
-  },
-  {
-    id: 2,
-    question: "Is this program suitable for beginners?",
-    answer:
-      "Yes, the curriculum is structured to take beginners through foundational concepts in SQL and Python before moving to advanced topics like Big Data Engineering and BI tools.",
-  },
-  {
-    id: 3,
-    question: "What is the difference between a Data Analyst and a Data Engineer?",
-    answer:
-      "A Data Analyst focuses on analyzing data to extract insights and create reports (using BI tools). A Data Engineer focuses on building and maintaining the robust infrastructure (pipelines, databases) that makes the data available for the analyst.",
-  },
-  {
-    id: 4,
-    question: "What kind of job assistance is provided?",
-    answer:
-      "We provide comprehensive job assistance including resume building, mock interviews, portfolio review, and connections to our network of hiring partners. We are committed to helping you secure a role.",
-  },
-  {
-    id: 5,
-    question: "Are the certifications globally recognized?",
-    answer:
-      "Yes, the program includes preparation for and certification in industry-standard tools and technologies like Tableau, Power BI, and Big Data concepts, which are globally recognized.",
-  },
-];
-
-// Map each FAQ to a category for grouped layout (no change in Q/A content)
-const faqCategoryMap: Record<number, string> = {
-  1: "Eligibility & Basics",
-  2: "Learning Format & Suitability",
-  3: "Roles & Career Clarity",
-  4: "Placement & Job Assistance",
-  5: "Certification & Recognition",
-};
-
+// Categories are already in the data
 const categories = Array.from(
-  new Set(faqData.map((item) => faqCategoryMap[item.id]))
+  new Set(DATA_ENGINEERING_MASTERS_FAQS.map((item) => item.category || "General"))
 );
 
 const FaqSection: React.FC = () => {
@@ -93,18 +52,18 @@ const FaqSection: React.FC = () => {
 
             {/* FAQs List */}
             <div className="space-y-4">
-              {faqData
-                .filter((item) => faqCategoryMap[item.id] === category)
-                .map((item) => (
+              {DATA_ENGINEERING_MASTERS_FAQS
+                .filter((item) => (item.category || "General") === category)
+                .map((item, index) => (
                   <div
-                    key={item.id}
+                    key={index}
                     className="bg-white rounded-xl border-2 border-slate-200 hover:border-teal-300 transition-all duration-300 overflow-hidden"
                   >
                     {/* Question */}
                     <button
                       onClick={() =>
                         setExpandedFAQ(
-                          expandedFAQ === item.id ? null : item.id
+                          expandedFAQ === index ? null : index
                         )
                       }
                       className="w-full px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors text-left"
@@ -113,13 +72,13 @@ const FaqSection: React.FC = () => {
                         {item.question}
                       </h4>
                       <ChevronDown
-                        className={`w-6 h-6 text-teal-600 transition-transform duration-300 flex-shrink-0 ${expandedFAQ === item.id ? "rotate-180" : ""
+                        className={`w-6 h-6 text-teal-600 transition-transform duration-300 flex-shrink-0 ${expandedFAQ === index ? "rotate-180" : ""
                           }`}
                       />
                     </button>
 
                     {/* Answer */}
-                    {expandedFAQ === item.id && (
+                    {expandedFAQ === index && (
                       <div className="px-6 pb-5 border-t border-slate-200 bg-slate-50">
                         <p className="text-slate-600 leading-relaxed">
                           {item.answer}

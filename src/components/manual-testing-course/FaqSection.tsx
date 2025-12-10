@@ -12,11 +12,12 @@ import { MANUAL_TESTING_FAQS as FAQS } from "@/data/manualTestingData";
 /* =========================
    Types
 ========================= */
-export type QA = {
-  question: string;
-  answer: string;
-  category: "Admissions" | "Curriculum" | "Certification" | "Career" | "Payments" | "General";
-};
+
+
+/* =========================
+   Types
+========================= */
+type Category = "Admissions" | "Curriculum" | "Certification" | "Career" | "Payments" | "General";
 
 /* =========================
    Unique Dark Colors for FAQ Icons (No Repeat)
@@ -36,7 +37,7 @@ const DARK_COLORS = [
 /* =========================
    Light Tab Colors (Restored – Original Design)
 ========================= */
-const categoryMeta: Record<QA["category"], {
+const categoryMeta: Record<Category, {
   lightBg: string;
   text: string;
   ring: string;
@@ -87,7 +88,7 @@ const categoryMeta: Record<QA["category"], {
   },
 };
 
-const categoryOrder: QA["category"][] = ["General", "Admissions", "Curriculum", "Certification", "Career", "Payments"];
+const categoryOrder: Category[] = ["General", "Admissions", "Curriculum", "Certification", "Career", "Payments"];
 
 function Chip({
   label,
@@ -98,7 +99,7 @@ function Chip({
   label: string;
   active: boolean;
   onClick: () => void;
-  meta: typeof categoryMeta[QA["category"]];
+  meta: typeof categoryMeta[Category];
 }) {
   return (
     <button
@@ -128,7 +129,7 @@ function FAQItem({
 }: {
   question: string;
   answer: string;
-  category: QA["category"];
+  category: Category;
 }) {
   const [open, setOpen] = useState<boolean>(false);
   const colorIndex = categoryOrder.indexOf(category);
@@ -165,10 +166,10 @@ function FAQItem({
 export default function FaqSection() {
   const [query, setQuery] = useState("");
   void setQuery;
-  const [activeCat, setActiveCat] = useState<QA["category"] | "All">("All");
+  const [activeCat, setActiveCat] = useState<Category | "All">("All");
   const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
 
-  const categories: (QA["category"] | "All")[] = ["All", ...categoryOrder];
+  const categories: (Category | "All")[] = ["All", ...categoryOrder];
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -239,15 +240,18 @@ export default function FaqSection() {
 
         {/* FAQ List */}
         <div className="space-y-4">
-          {filtered.map((item, idx) => (
-            <div key={idx} className="group">
-              <div className="mb-3 ml-1 inline-flex items-center gap-2 rounded-full px-2 py-1 shadow-sm text-[12px] font-medium bg-white text-gray-700 ring-2 ring-blue-200">
-                {categoryMeta[item.category].icon}
-                <span>{item.category}</span>
+          {filtered.map((item, idx) => {
+            const cat = item.category as Category; // Cast safely as we control the data
+            return (
+              <div key={idx} className="group">
+                <div className="mb-3 ml-1 inline-flex items-center gap-2 rounded-full px-2 py-1 shadow-sm text-[12px] font-medium bg-white text-gray-700 ring-2 ring-blue-200">
+                  {categoryMeta[cat].icon}
+                  <span>{cat}</span>
+                </div>
+                <FAQItem question={item.question} answer={item.answer} category={cat} />
               </div>
-              <FAQItem question={item.question} answer={item.answer} category={item.category} />
-            </div>
-          ))}
+            );
+          })}
 
           {filtered.length === 0 && (
             <div className="rounded-xl border border-dashed border-gray-300 bg-gray-50 p-10 text-center">
