@@ -5,40 +5,7 @@ import Link from "next/link";
 import EnrollModal from "../EnrollModal";
 
 
-const faqs = [
-    {
-        question: "What are the prerequisites for this course?",
-        answer: "Basic Excel knowledge (simple formulas, basic charts) is recommended but not mandatory. The course is designed for both beginners and those with some Excel experience.",
-    },
-    {
-        question: "What is the course duration?",
-        answer: "The course is 20 hours long, combining both theoretical knowledge and practical hands-on experience.",
-    },
-    {
-        question: "What is the learning mode?",
-        answer: "Cinute Digital offers a hybrid (Classroom + Online) training pattern. You can attend sessions in the classroom or online, with live streaming and recorded sessions available.",
-    },
-    {
-        question: "Will I get a certificate?",
-        answer: "Yes, you will receive an internationally recognized certificate from Cinute Digital with a unique QR code for validation after completing all assessments and mock interviews.",
-    },
-    {
-        question: "What job roles can I apply for after this course?",
-        answer: "You can apply for roles like Data Analyst, Business Intelligence Analyst, Financial Analyst, Marketing Analyst, Operations Analyst, Sales Analyst, and more.",
-    },
-    {
-        question: "Is job assistance provided?",
-        answer: "Yes, Cinute Digital provides 100% job assistance including resume building, interview preparation, and placement support.",
-    },
-    {
-        question: "What tools will I learn?",
-        answer: "You'll master Microsoft Excel, Power Query, Power Pivot, Pivot Tables, Excel Charts, Data Analysis ToolPak, and various visualization techniques.",
-    },
-    {
-        question: "Are there real-world projects?",
-        answer: "Yes, the course includes hands-on projects like Sales Performance Analysis, Budget Variance Analysis, and Customer Insights Dashboard.",
-    },
-];
+import { DATA_ANALYTICS_VIS_FAQS } from "@/data/dataAnalyticsVisData";
 
 
 export default function FaqSection() {
@@ -67,7 +34,7 @@ export default function FaqSection() {
 
                 {/* FAQ items */}
                 <div className="max-w-3xl mx-auto space-y-4">
-                    {faqs.map((faq, index) => (
+                    {DATA_ANALYTICS_VIS_FAQS.map((faq, index) => (
                         <div
                             key={index}
                             className="border border-slate-200 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 bg-white"

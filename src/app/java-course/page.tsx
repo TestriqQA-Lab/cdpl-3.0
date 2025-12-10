@@ -1,6 +1,4 @@
 // pages/java-programming.tsx
-import type { NextPage } from "next";
-import Head from "next/head";
 import HeroSection from "@/components/java-course/HeroSection";
 import StatsSection from "@/components/java-course/StatsSection";
 import WhyJavaProgram from "@/components/java-course/WhyJavaProgram";
@@ -14,17 +12,55 @@ import CareerRoadmapSection from "@/components/java-course/CareerRoadmapSection"
 import FaqSection from "@/components/java-course/FaqSection";
 import CtaSection from "@/components/java-course/CtaSection";
 import StickyNav3 from "@/components/StickyNav2/StickyNav3";
+import JsonLd from "@/components/JsonLd";
+import { generateMetadata } from "@/lib/metadata-generator";
+import { generateCourseSchema, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/schema-generators";
+import { JAVA_FAQS, JAVA_REVIEW_DATA } from "@/data/javaData";
 
+export const metadata = generateMetadata({
+  title: "Java Programming Course in Mumbai | 80-Hour Job-Ready Training | CDPL",
+  description: "Best Java course in Mumbai with Core Java, Spring Boot, Microservices, AWS. 100% placement. Live projects, global certificate.",
+  keywords: [
+    "java course mumbai",
+    "core java training",
+    "spring boot course",
+    "java full stack",
+    "java developer course",
+    "java certification mumbai",
+    "java microservices training"
+  ],
+  url: "/java-course",
+  image: "/og-images/java-course.jpg",
+});
 
+export default function JavaPage() {
+  const courseSchema = generateCourseSchema({
+    name: "Java Programming Master Course",
+    description: "Best Java course in Mumbai with Core Java, Spring Boot, Microservices, AWS. 100% placement. Live projects, global certificate.",
+    url: "/java-course",
+    slug: "java-course",
+    price: 20000,
+    currency: "INR",
+    duration: "P2M2W", // ~10 weeks
+    instructor: "Expert Java Mentors",
+    rating: JAVA_REVIEW_DATA.ratingValue,
+    reviewCount: JAVA_REVIEW_DATA.reviewCount,
+    image: "/og-images/java-course.jpg",
+  });
 
-const JavaPage: NextPage = () => {
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Courses", url: "/courses" },
+    { name: "Java Programming", url: "/java-course" },
+  ]);
+
+  const faqSchema = generateFAQSchema(JAVA_FAQS);
+
   return (
     <>
-      <Head>
-        <title>Java Programming Course in Mumbai | 80-Hour Job-Ready Training | CDPL</title>
-        <meta name="description" content="Best Java course in Mumbai with Core Java, Spring Boot, Microservices, AWS. 100% placement. Live projects, global certificate." />
-        <meta name="keywords" content="java course mumbai, core java training, spring boot course, java full stack, java developer course, java certification mumbai" />
-      </Head>
+      <JsonLd id="course-schema" schema={courseSchema} />
+      <JsonLd id="breadcrumb-schema" schema={breadcrumbSchema} />
+      <JsonLd id="faq-schema" schema={faqSchema} />
 
       <HeroSection />
 
@@ -47,5 +83,3 @@ const JavaPage: NextPage = () => {
     </>
   );
 };
-
-export default JavaPage;

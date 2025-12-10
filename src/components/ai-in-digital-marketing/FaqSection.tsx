@@ -3,19 +3,11 @@
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { courseData } from "@/components/ai-in-digital-marketing/courseData";
 import CareerSessionModal from "@/components/CareerSessionModal";
-
-interface FAQItem {
-  id: number;
-  question: string;
-  answer: string;
-  category?: string; // optional so it won't break existing data
-}
+import { AI_IN_DIGITAL_MARKETING_FAQS } from "@/data/aiInDigitalMarketingData";
 
 export default function FaqSection() {
-  const { faqs } = courseData;
-  const faqList = (faqs || []) as FAQItem[];
+  const faqList = AI_IN_DIGITAL_MARKETING_FAQS;
 
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
   const [isCareerOpen, setIsCareerOpen] = useState(false);
@@ -59,10 +51,10 @@ export default function FaqSection() {
               {faqList
                 .filter((faq) => (faq.category || "General") === category)
                 .map((faq) => {
-                  const globalIdx = faqList.findIndex((f) => f.id === faq.id);
+                  const globalIdx = faqList.indexOf(faq);
                   return (
                     <div
-                      key={faq.id}
+                      key={faq.question}
                       className="bg-white rounded-xl border-2 border-slate-200 hover:border-orange-300 transition-all duration-300 overflow-hidden"
                     >
                       {/* Question */}

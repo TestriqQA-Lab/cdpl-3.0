@@ -1,6 +1,3 @@
-// pages/digital-marketing.tsx
-import type { NextPage } from "next";
-import Head from "next/head";
 import HeroSection from "@/components/digital-marketing-course/HeroSection";
 import StatsSection from "@/components/digital-marketing-course/StatsSection";
 import WhyMasterProgram from "@/components/digital-marketing-course/WhyMasterProgram";
@@ -13,35 +10,72 @@ import ToolsSection from "@/components/digital-marketing-course/ToolsSection";
 import FaqSection from "@/components/digital-marketing-course/FaqSection";
 import CtaSection from "@/components/digital-marketing-course/CtaSection";
 import StickyNav from "@/components/StickyNav2/StickyNav2";
+import JsonLd from "@/components/JsonLd";
+import { generateMetadata } from "@/lib/metadata-generator";
+import { generateCourseSchema, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/schema-generators";
+import { DIGITAL_MARKETING_FAQS, DIGITAL_MARKETING_REVIEW_DATA } from "@/data/digitalMarketingData";
 
-const DigitalMarketingPage: NextPage = () => {
+export const metadata = generateMetadata({
+  title: "AI-Driven Digital Marketing & Analytics Master Program | CDPL Mumbai",
+  description: "80-Hour Job-Ready Digital Marketing Course in Mumbai with AI, SEO, PPC, Google Ads, Social Media & Analytics. 100% Placement Assistance.",
+  keywords: [
+    "digital marketing course Mumbai",
+    "AI digital marketing training",
+    "SEO course",
+    "Google Ads certification",
+    "social media marketing",
+    "digital analytics"
+  ],
+  url: "/digital-marketing-course",
+  image: "/og-images/digital-marketing-course.jpg",
+});
+
+export default function DigitalMarketingPage() {
+  const courseSchema = generateCourseSchema({
+    name: "AI-Driven Digital Marketing & Analytics Master Program",
+    description: "80-Hour Job-Ready Digital Marketing Course in Mumbai with AI, SEO, PPC, Google Ads, Social Media & Analytics. 100% Placement Assistance.",
+    url: "/digital-marketing-course",
+    slug: "digital-marketing-course",
+    price: 35000,
+    currency: "INR",
+    duration: "P3M", // ~3 months
+    instructor: "Expert Digital Marketers",
+    rating: DIGITAL_MARKETING_REVIEW_DATA.ratingValue,
+    reviewCount: DIGITAL_MARKETING_REVIEW_DATA.reviewCount,
+    image: "/og-images/digital-marketing-course.jpg",
+  });
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Courses", url: "/courses" },
+    { name: "Digital Marketing", url: "/digital-marketing-course" },
+  ]);
+
+  const faqSchema = generateFAQSchema(DIGITAL_MARKETING_FAQS);
+
   return (
-    <>
-      <Head>
-        <title>AI-Driven Digital Marketing & Analytics Master Program | CDPL Mumbai</title>
-        <meta name="description" content="80-Hour Job-Ready Digital Marketing Course in Mumbai with AI, SEO, PPC, Google Ads, Social Media & Analytics. 100% Placement Assistance." />
-        <meta name="keywords" content="digital marketing course Mumbai, AI digital marketing training, SEO course, Google Ads certification, social media marketing, digital analytics" />
-      </Head>
+    <div className="min-h-screen bg-white">
+      <JsonLd id="course-schema" schema={courseSchema} />
+      <JsonLd id="breadcrumb-schema" schema={breadcrumbSchema} />
+      <JsonLd id="faq-schema" schema={faqSchema} />
 
       <HeroSection />
-      
-            {/* Sticky nav must appear right after hero */}
-            <div className="hidden md:block sticky top-0 z-20">
-              <StickyNav />
-            </div>
-      
-            <section id='program-stats'><StatsSection /></section>
-            <section id='why-master-program'><WhyMasterProgram /></section>
-            <section id='curriculum'><CurriculumSection /></section>
-            <section id='tools'><ToolsSection /></section>
-            <section id='projects'><ProjectsSection /></section>
-            <section id='testimonials'><TestimonialsSection /></section>
-            <section id='career'><CareerSection /></section>
-            <section id='who-should-enroll'><WhoShouldEnroll /></section>
-            <section id='faqs'><FaqSection /></section>
-            <section id='contact'><CtaSection /></section>
-    </>
-  );
-};
 
-export default DigitalMarketingPage;
+      {/* Sticky nav must appear right after hero */}
+      <div className="hidden md:block sticky top-0 z-20">
+        <StickyNav />
+      </div>
+
+      <section id='program-stats'><StatsSection /></section>
+      <section id='why-master-program'><WhyMasterProgram /></section>
+      <section id='curriculum'><CurriculumSection /></section>
+      <section id='tools'><ToolsSection /></section>
+      <section id='projects'><ProjectsSection /></section>
+      <section id='testimonials'><TestimonialsSection /></section>
+      <section id='career'><CareerSection /></section>
+      <section id='who-should-enroll'><WhoShouldEnroll /></section>
+      <section id='faqs'><FaqSection /></section>
+      <section id='contact'><CtaSection /></section>
+    </div>
+  );
+}

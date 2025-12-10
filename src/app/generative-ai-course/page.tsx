@@ -1,6 +1,4 @@
-// pages/deep-learning-nlp-genai.tsx
-import type { NextPage } from "next";
-import Head from "next/head";
+// pages/generative-ai-course.tsx
 import HeroSection from "@/components/generative-ai-course/HeroSection";
 import StatsSection from "@/components/generative-ai-course/StatsSection";
 import WhyGenAIProgram from "@/components/generative-ai-course/WhyGenAIProgram";
@@ -14,15 +12,55 @@ import FaqSection from "@/components/generative-ai-course/FaqSection";
 import CtaSection from "@/components/generative-ai-course/CtaSection";
 import CareerRoadmapSection from "@/components/generative-ai-course/CareerRoadmapSection";
 import StickyNav3 from "@/components/StickyNav2/StickyNav3";
+import JsonLd from "@/components/JsonLd";
+import { generateMetadata } from "@/lib/metadata-generator";
+import { generateCourseSchema, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/schema-generators";
+import { GENERATIVE_AI_FAQS, GENERATIVE_AI_REVIEW_DATA } from "@/data/generativeAiData";
 
-const DeepLearningPage: NextPage = () => {
+export const metadata = generateMetadata({
+  title: "Deep Learning, NLP & Generative AI Course in Mumbai | 55-Hour Hero Program | CDPL",
+  description: "55-Hour Hero Program in Deep Learning, NLP, and Generative AI with Python. Hands-on projects, 100% job assistance, global certificates from AAA.",
+  keywords: [
+    "deep learning course mumbai",
+    "nlp training",
+    "generative ai with python",
+    "ai hero program",
+    "ai jobs mumbai",
+    "large language models course",
+    "prompt engineering training"
+  ],
+  url: "/generative-ai-course",
+  image: "/og-images/generative-ai-course.jpg",
+});
+
+export default function GenerativeAiPage() {
+  const courseSchema = generateCourseSchema({
+    name: "Master Program in Deep Learning, NLP & Generative AI",
+    description: "55-Hour Hero Program in Deep Learning, NLP, and Generative AI with Python. Hands-on projects, 100% job assistance, global certificates from AAA.",
+    url: "/generative-ai-course",
+    slug: "generative-ai-course",
+    price: 45000,
+    currency: "INR",
+    duration: "P1M2W", // ~6 weeks
+    instructor: "Expert AI & Generative AI Mentors",
+    rating: GENERATIVE_AI_REVIEW_DATA.ratingValue,
+    reviewCount: GENERATIVE_AI_REVIEW_DATA.reviewCount,
+    image: "/og-images/generative-ai-course.jpg",
+  });
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Courses", url: "/courses" },
+    { name: "Generative AI Course", url: "/generative-ai-course" },
+  ]);
+
+  const faqSchema = generateFAQSchema(GENERATIVE_AI_FAQS);
+
   return (
     <>
-      <Head>
-        <title>Deep Learning, NLP & Generative AI Course in Mumbai | 55-Hour Hero Program | CDPL</title>
-        <meta name="description" content="55-Hour Hero Program in Deep Learning, NLP, and Generative AI with Python. Hands-on projects, 100% job assistance, global certificates from AAA." />
-        <meta name="keywords" content="deep learning course mumbai, nlp training, generative ai with python, ai hero program, ai jobs mumbai" />
-      </Head>
+      <JsonLd id="course-schema" schema={courseSchema} />
+      <JsonLd id="breadcrumb-schema" schema={breadcrumbSchema} />
+      <JsonLd id="faq-schema" schema={faqSchema} />
 
       <HeroSection />
 
@@ -45,5 +83,3 @@ const DeepLearningPage: NextPage = () => {
     </>
   );
 };
-
-export default DeepLearningPage;
