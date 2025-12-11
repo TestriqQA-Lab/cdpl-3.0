@@ -61,7 +61,7 @@ export const metadata: Metadata = generateStaticPageMetadata({
     "DevOps automation",
     "continuous testing certification",
   ],
-  url: "/aaa-certification-course",
+  url: "/aaa-certification",
   image: "/og-image-aaa-certification.jpg",
 });
 

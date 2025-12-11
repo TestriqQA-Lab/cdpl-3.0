@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import { generateMetadata as generateCentralMetadata } from "@/lib/metadata-generator";
 import { getAuthorById, getPostsByAuthorId, AUTHORS } from "@/data/BlogPostData";
 import { AuthorPageContent } from "@/components/blog/AuthorPageContent";
 
@@ -11,6 +12,7 @@ export async function generateStaticParams() {
 }
 
 // SEO: Generate metadata
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;
     const author = getAuthorById(slug);
@@ -21,22 +23,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         };
     }
 
-    return {
+    return generateCentralMetadata({
         title: `${author.name} - Author at CDPL`,
         description: `Read articles and tutorials by ${author.name}, ${author.role} at CDPL. ${author.bio.slice(0, 150)}...`,
-        openGraph: {
-            title: `${author.name} - Author at CDPL`,
-            description: author.bio,
-            images: [
-                {
-                    url: author.avatar,
-                    width: 400,
-                    height: 400,
-                    alt: author.name,
-                },
-            ],
-        },
-    };
+        url: `/blog/author/${slug}`,
+        image: author.avatar,
+        type: 'article', // Using article/website type, best fit
+        author: author.name,
+    });
 }
 
 // Page Component

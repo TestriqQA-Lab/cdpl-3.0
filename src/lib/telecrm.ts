@@ -27,7 +27,7 @@ export async function pushLeadToTeleCRM(leadData: {
         return;
     }
 
-    const url = `https://022os10kr2.execute-api.ap-south-1.amazonaws.com/enterprise/${enterpriseId}/autoupdatelead`;
+    const url = `${process.env.TELECRM_API_URL}/enterprise/${enterpriseId}/autoupdatelead`;
 
     const payload: TeleCRMPayload = {
         fields: {

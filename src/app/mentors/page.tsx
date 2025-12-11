@@ -7,6 +7,16 @@ import {
 import { MENTORS } from "@/lib/mentorShared";
 import JsonLd from "@/components/JsonLd";
 
+import { generateStaticPageMetadata } from "@/lib/metadata-generator";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = generateStaticPageMetadata({
+  title: "Our Mentors | Industry Experts from Top Tech Companies",
+  description: "Meet our mentors and industry experts who guide you through your learning journey. Learn from professionals working at top tech companies.",
+  url: "/mentors",
+  keywords: ["mentors", "industry experts", "tech mentors", "career guidance", "placement support"],
+});
+
 // ... (metadata export remains same)
 
 // ---------- Small, reusable loading UI ----------
