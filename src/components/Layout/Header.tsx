@@ -19,6 +19,7 @@ type Category = {
   id: string;
   name: string;
   description: string;
+  slug?: string;
   rightColumnImages?: LogoItem[];
   courses: Course[];
 };
@@ -28,6 +29,7 @@ const courseCategories: Category[] = [
   {
     id: "software-testing-courses",
     name: "Software Testing Courses",
+    slug: "software-testing-course",
     description:
       "Master Agile methodologies and Scrum frameworks to enhance team collaboration and project delivery.",
     rightColumnImages: [
@@ -121,6 +123,7 @@ const courseCategories: Category[] = [
   {
     id: "data-science",
     name: "Data Science",
+    slug: "ds-ml-courses",
     description: "Prepare for job interviews with practical skills and confidence.",
     rightColumnImages: [
       { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
@@ -195,6 +198,7 @@ const courseCategories: Category[] = [
   {
     id: "business-intelligence",
     name: "Business Intelligence (BI)",
+    slug: "bi-courses",
     description: "Develop skills to manage projects efficiently and effectively.",
     rightColumnImages: [
       { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
@@ -269,6 +273,7 @@ const courseCategories: Category[] = [
   {
     id: "artificial-intelligence",
     name: "Artificial Intelligence (AI)",
+    slug: "artificial-intelligence-courses",
     description: "Develop skills to manage projects efficiently and effectively.",
     rightColumnImages: [
       { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
@@ -288,6 +293,7 @@ const courseCategories: Category[] = [
   {
     id: "digital-marketing",
     name: "Digital Marketing",
+    slug: "digital-marketing-courses",
     description: "Develop skills to manage projects efficiently and effectively.",
     rightColumnImages: [
       { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
@@ -580,26 +586,49 @@ const Header = () => {
                         <div className="col-span-12 sm:col-span-4 lg:col-span-3 border-r border-gray-200 pr-4">
                           <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 sm:mb-4">Categories</h3>
                           <div className="space-y-1 max-h-[420px] overflow-y-auto pr-2">
-                            {courseCategories.map((category) => (
-                              <button
-                                key={category.id}
-                                onMouseEnter={() => {
-                                  setSelectedCategory(category.id);
-                                  setHoveredCategory(category.id);
-                                  setHoveredCourse(null);
-                                }}
-                                onClick={() => setSelectedCategory(category.id)}
-                                className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-between group text-sm ${selectedCategory === category.id ? "bg-orange-50 text-brand font-medium" : "text-gray-700 hover:bg-gray-50"
-                                  }`}
-                                aria-current={selectedCategory === category.id ? "true" : "false"}
-                              >
-                                <span>{category.name}</span>
-                                <ChevronRight
-                                  className={`h-4 w-4 transition-transform ${selectedCategory === category.id ? "text-brand" : "text-gray-400"
+                            {courseCategories.map((category) => {
+                              const href = category.slug ? `/${category.slug}` : undefined;
+                              return href ? (
+                                <Link
+                                  href={href}
+                                  key={category.id}
+                                  onMouseEnter={() => {
+                                    setSelectedCategory(category.id);
+                                    setHoveredCategory(category.id);
+                                    setHoveredCourse(null);
+                                  }}
+                                  onClick={() => setSelectedCategory(category.id)}
+                                  className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-between group text-sm ${selectedCategory === category.id ? "bg-orange-50 text-brand font-medium" : "text-gray-700 hover:bg-gray-50"
                                     }`}
-                                />
-                              </button>
-                            ))}
+                                  aria-current={selectedCategory === category.id ? "true" : "false"}
+                                >
+                                  <span>{category.name}</span>
+                                  <ChevronRight
+                                    className={`h-4 w-4 transition-transform ${selectedCategory === category.id ? "text-brand" : "text-gray-400"
+                                      }`}
+                                  />
+                                </Link>
+                              ) : (
+                                <div
+                                  key={category.id}
+                                  onMouseEnter={() => {
+                                    setSelectedCategory(category.id);
+                                    setHoveredCategory(category.id);
+                                    setHoveredCourse(null);
+                                  }}
+                                  onClick={() => setSelectedCategory(category.id)}
+                                  className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-between group text-sm ${selectedCategory === category.id ? "bg-orange-50 text-brand font-medium" : "text-gray-700 hover:bg-gray-50"
+                                    }`}
+                                  aria-current={selectedCategory === category.id ? "true" : "false"}
+                                >
+                                  <span>{category.name}</span>
+                                  <ChevronRight
+                                    className={`h-4 w-4 transition-transform ${selectedCategory === category.id ? "text-brand" : "text-gray-400"
+                                      }`}
+                                  />
+                                </div>
+                              )
+                            })}
                           </div>
                           <Link href="/courses" className="mt-4 flex items-center text-brand hover:text-brand font-medium text-sm group" onClick={closeMega}>
                             View All Courses
