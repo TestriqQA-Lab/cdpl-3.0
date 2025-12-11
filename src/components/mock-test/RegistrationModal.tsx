@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { X, User, Mail, Phone, Briefcase } from "lucide-react";
+import 'react-phone-number-input/style.css';
 
 interface RegistrationModalProps {
     isOpen: boolean;
@@ -118,8 +119,8 @@ const RegistrationModal = ({ isOpen, onClose, onRegister, courseName }: Registra
                                     type="button"
                                     onClick={() => setFormData({ ...formData, occupation: "student" })}
                                     className={`py-2.5 rounded-lg text-sm font-semibold transition-all shadow-sm ${formData.occupation === "student"
-                                            ? "bg-white text-brand shadow-md transform scale-100"
-                                            : "text-gray-500 hover:text-gray-700 bg-transparent"
+                                        ? "bg-white text-brand shadow-md transform scale-100"
+                                        : "text-gray-500 hover:text-gray-700 bg-transparent"
                                         }`}
                                 >
                                     Student
@@ -128,8 +129,8 @@ const RegistrationModal = ({ isOpen, onClose, onRegister, courseName }: Registra
                                     type="button"
                                     onClick={() => setFormData({ ...formData, occupation: "professional" })}
                                     className={`py-2.5 rounded-lg text-sm font-semibold transition-all shadow-sm ${formData.occupation === "professional"
-                                            ? "bg-white text-brand shadow-md transform scale-100"
-                                            : "text-gray-500 hover:text-gray-700 bg-transparent"
+                                        ? "bg-white text-brand shadow-md transform scale-100"
+                                        : "text-gray-500 hover:text-gray-700 bg-transparent"
                                         }`}
                                 >
                                     Professional

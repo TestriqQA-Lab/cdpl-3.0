@@ -7,6 +7,8 @@ import { MockCourse } from "@/data/mockTestData";
 import TestInterface from "@/components/mock-test/TestInterface";
 import ResultView from "@/components/mock-test/ResultView";
 import { RegistrationData } from "@/components/mock-test/RegistrationModal";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 interface PageProps {
     params: Promise<{ courseSlug: string }>;
@@ -14,13 +16,7 @@ interface PageProps {
 
 export default function MockTestPage({ params }: PageProps) {
     const router = useRouter();
-    // Unwrap params using React.use - wait no, params is a Promise in Next.js 15
-    // Actually in client components for Next.js 15, we need to await params if it's passed as prop, 
-    // but standard usage in client component often unwraps automatically or we use the `use` hook.
-    // Let's use `use` to be safe as per latest Next.js patterns or just await in useEffect if standard props.
-    // However, simpler to standard `use` if it's available or just standard props.
     // In Next.js 15 app router, params are async.
-
     const { courseSlug } = use(params);
 
     const [course, setCourse] = useState<MockCourse | null>(null);
@@ -92,18 +88,20 @@ export default function MockTestPage({ params }: PageProps) {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
             <div className="max-w-5xl mx-auto">
                 {!testCompleted ? (
-                    <div>
-                        <div className="mb-8">
-                            <h1 className="text-3xl font-bold text-gray-900">{course.name} Mock Test</h1>
-                            <p className="text-gray-600 mt-2">
-                                Questions: {course.questions.length} | Duration: 30 Minutes
-                            </p>
-                        </div>
+                    <div className="md:flex">
+                        {/* Heading removed here, now handled inside TestInterface */}
+                        <aside className="w-fit h-fit mb-2 md:mb-0 top-0 text-gray-700 mt-2 hover:text-brand transition-all duration-200">
+                            <Link href="/mock-test" className="flex items-center gap-1">
+                                <ArrowLeft className="w-4 h-4" />
+                                <span className="text-md">Back</span>
+                            </Link>
+                        </aside>
                         <TestInterface
                             questions={course.questions}
+                            courseName={course.name}
                             onSubmit={handleSubmit}
                             isSubmitting={isSubmitting}
                         />
