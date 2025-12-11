@@ -7,6 +7,15 @@ import FAQSection from '@/components/Digital-Marketing/FAQSection';
 import FinalCTASection from '@/components/Digital-Marketing/FinalCTASection';
 import ProjectsSection from '@/components/Digital-Marketing/ProjectsSection';
 import CareerPathSection from '@/components/Digital-Marketing/CareerPathSection';
+import { generateStaticPageMetadata } from '@/lib/metadata-generator';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = generateStaticPageMetadata({
+    title: 'Digital Marketing Courses | SEO, SEM, SMM & More',
+    description: 'Become a certified digital marketer with our industry-focused courses. Learn SEO, PPC, social media marketing, and content strategy.',
+    url: '/digital-marketing-courses',
+    keywords: ['digital marketing course', 'SEO training', 'social media marketing', 'PPC course', 'digital marketing certification'],
+});
 
 export default function Home() {
     return (

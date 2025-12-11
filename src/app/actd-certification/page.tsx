@@ -56,7 +56,7 @@ export const metadata: Metadata = generateStaticPageMetadata({
     "scrum testing certification",
     "agile test automation",
   ],
-  url: "/actd-certification-training",
+  url: "/actd-certification",
   image: "/og-image-actd-certification.jpg",
 });
 

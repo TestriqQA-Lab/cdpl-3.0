@@ -1,10 +1,11 @@
-// /app/cookies-policy/page.tsx
+import { generateStaticPageMetadata } from "@/lib/metadata-generator";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generateStaticPageMetadata({
   title: "Cookies Policy",
-  robots: { index: true, follow: true },
-};
+  description: "Read the Cookies Policy of Cinute Digital (CDPL). Understand how we use cookies to improve your browsing experience.",
+  url: "/cookies-policy",
+});
 
 export default function CookiesPolicyPage() {
   const H1 = "text-3xl font-bold tracking-tight text-slate-900";
