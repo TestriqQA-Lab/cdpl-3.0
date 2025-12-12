@@ -60,7 +60,7 @@ export default function PrivacyPolicyPage() {
                   consumers’ personal information, that does business in the State of California.
                 </li>
                 <li>
-                  <strong>Company</strong> (referred to as either “the Company”, “We”, “Us” or “Our” in this Agreement) refers to Cinute Digital Pvt. Ltd.  Office # 1, 2nd Floor, Ashley Towers, Beverly Park, Miraroad East, Thane 401107<br/>
+                  <strong>Company</strong> (referred to as either “the Company”, “We”, “Us” or “Our” in this Agreement) refers to Cinute Digital Pvt. Ltd.  Office # 1, 2nd Floor, Ashley Towers, Beverly Park, Miraroad East, Thane 401107<br />
                   For the purpose of the GDPR, the Company is the Data Controller.
                 </li>
                 <li>
@@ -127,7 +127,7 @@ export default function PrivacyPolicyPage() {
                 </li>
                 <li>
                   <strong>You</strong> means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such
-                  individual is accessing or using the Service, as applicable.<br/>
+                  individual is accessing or using the Service, as applicable.<br />
                   Under GDPR (General Data Protection Regulation), You can be referred to as the Data Subject or as the User as you are the individual using
                   the Service.
                 </li>
@@ -245,31 +245,31 @@ export default function PrivacyPolicyPage() {
               <p className={P}>We use both Session and Persistent Cookies for the purposes set out below:</p>
               <ul className={UL}>
                 <li>
-                  <strong>Necessary / Essential Cookies</strong><br/>
-                  Type: Session Cookies<br/>
-                  Administered by: Us<br/>
+                  <strong>Necessary / Essential Cookies</strong><br />
+                  Type: Session Cookies<br />
+                  Administered by: Us<br />
                   Purpose: These Cookies are essential to provide You with services available through the Website and to enable You to use some of its
                   features. They help to authenticate users and prevent fraudulent use of user accounts. Without these Cookies, the services that You have
                   asked for cannot be provided, and We only use these Cookies to provide You with those services.
                 </li>
                 <li>
-                  <strong>Cookies Policy / Notice Acceptance Cookies</strong><br/>
-                  Type: Persistent Cookies<br/>
-                  Administered by: Us<br/>
+                  <strong>Cookies Policy / Notice Acceptance Cookies</strong><br />
+                  Type: Persistent Cookies<br />
+                  Administered by: Us<br />
                   Purpose: These Cookies identify if users have accepted the use of cookies on the Website.
                 </li>
                 <li>
-                  <strong>Functionality Cookies</strong><br/>
-                  Type: Persistent Cookies<br/>
-                  Administered by: Us<br/>
+                  <strong>Functionality Cookies</strong><br />
+                  Type: Persistent Cookies<br />
+                  Administered by: Us<br />
                   Purpose: These Cookies allow us to remember choices You make when You use the Website, such as remembering your login details or language
                   preference. The purpose of these Cookies is to provide You with a more personal experience and to avoid You having to re-enter your
                   preferences every time You use the Website.
                 </li>
                 <li>
-                  <strong>Tracking and Performance Cookies</strong><br/>
-                  Type: Persistent Cookies<br/>
-                  Administered by: Third-Parties<br/>
+                  <strong>Tracking and Performance Cookies</strong><br />
+                  Type: Persistent Cookies<br />
+                  Administered by: Third-Parties<br />
                   Purpose: These Cookies are used to track information about traffic to the Website and how users use the Website. The information gathered via
                   these Cookies may directly or indirectly identify you as an individual visitor. This is because the information collected is typically linked
                   to a pseudonymous identifier associated with the device you use to access the Website. We may also use these Cookies to test new pages,
@@ -442,24 +442,24 @@ export default function PrivacyPolicyPage() {
             <p className={P}>We may use Email Marketing Service Providers to manage and send emails to You.</p>
             <ul className={UL}>
               <li>
-                <strong>Mailchimp</strong><br/>
-                Mailchimp is an email marketing sending service provided by The Rocket Science Group LLC.<br/>
+                <strong>Mailchimp</strong><br />
+                Mailchimp is an email marketing sending service provided by The Rocket Science Group LLC.<br />
                 For more information on the privacy practices of Mailchimp, please visit their Privacy policy:{" "}
                 <a className="underline" href="https://mailchimp.com/legal/privacy/" target="_blank" rel="noopener noreferrer">
                   https://mailchimp.com/legal/privacy/
                 </a>
               </li>
               <li>
-                <strong>AWeber</strong><br/>
-                AWeber is an email marketing sending service provided by AWeber Communications.<br/>
+                <strong>AWeber</strong><br />
+                AWeber is an email marketing sending service provided by AWeber Communications.<br />
                 For more information on the privacy practices of AWeber, please visit their Privacy policy:{" "}
-                <a className="underline" href="https://www.aweber.com/privacy.html" target="_blank" rel="noopener noreferrer">
-                  https://www.aweber.com/privacy.html
+                <a className="underline" href="https://www.aweber.com/privacy.htm" target="_blank" rel="noopener noreferrer">
+                  https://www.aweber.com/privacy.htm
                 </a>
               </li>
               <li>
-                <strong>GetResponse</strong><br/>
-                GetResponse is an email marketing sending service provided by GetResponse.<br/>
+                <strong>GetResponse</strong><br />
+                GetResponse is an email marketing sending service provided by GetResponse.<br />
                 For more information on the privacy practices of GetResponse, please visit their Privacy policy:{" "}
                 <a className="underline" href="https://www.getresponse.com/legal/privacy" target="_blank" rel="noopener noreferrer">
                   https://www.getresponse.com/legal/privacy
@@ -583,17 +583,17 @@ export default function PrivacyPolicyPage() {
                 would only be collected if You provided such personal information directly to Us.
               </p>
               <ul className={UL}>
-                <li><strong>Category A: Identifiers.</strong><br/>Examples: A real name, alias, postal address, unique personal identifier, online identifier, Internet Protocol address, email address, account name, driver’s license number, passport number, or other similar identifiers.<br/>Collected: Yes.</li>
-                <li><strong>Category B: Personal information categories listed in the California Customer Records statute (Cal. Civ. Code § 1798.80(e)).</strong><br/>Examples: A name, signature, Social Security number, physical characteristics or description, address, telephone number, passport number, driver’s license or state identification card number, insurance policy number, education, employment, employment history, bank account number, credit card number, debit card number, or any other financial information, medical information, or health insurance information. Some personal information included in this category may overlap with other categories.<br/>Collected: Yes.</li>
-                <li><strong>Category C: Protected classification characteristics under California or federal law.</strong><br/>Examples: Age (40 years or older), race, color, ancestry, national origin, citizenship, religion or creed, marital status, medical condition, physical or mental disability, sex (including gender, gender identity, gender expression, pregnancy or childbirth and related medical conditions), sexual orientation, veteran or military status, genetic information (including familial genetic information).<br/>Collected: No.</li>
-                <li><strong>Category D: Commercial information.</strong><br/>Examples: Records and history of products or services purchased or considered.<br/>Collected: Yes.</li>
-                <li><strong>Category E: Biometric information.</strong><br/>Examples: Genetic, physiological, behavioral, and biological characteristics, or activity patterns used to extract a template or other identifier or identifying information, such as, fingerprints, faceprints, and voiceprints, iris or retina scans, keystroke, gait, or other physical patterns, and sleep, health, or exercise data.<br/>Collected: No.</li>
-                <li><strong>Category F: Internet or other similar network activity.</strong><br/>Examples: Interaction with our Service or advertisement.<br/>Collected: Yes.</li>
-                <li><strong>Category G: Geolocation data.</strong><br/>Examples: Approximate physical location.<br/>Collected: No.</li>
-                <li><strong>Category H: Sensory data.</strong><br/>Examples: Audio, electronic, visual, thermal, olfactory, or similar information.<br/>Collected: No.</li>
-                <li><strong>Category I: Professional or employment-related information.</strong><br/>Examples: Current or past job history or performance evaluations.<br/>Collected: No.</li>
-                <li><strong>Category J: Non-public education information (per the Family Educational Rights and Privacy Act (20 U.S.C. Section 1232g, 34 C.F.R. Part 99)).</strong><br/>Examples: Education records directly related to a student maintained by an educational institution or party acting on its behalf, such as grades, transcripts, class lists, student schedules, student identification codes, student financial information, or student disciplinary records.<br/>Collected: No.</li>
-                <li><strong>Category K: Inferences drawn from other personal information.</strong><br/>Examples: Profile reflecting a person’s preferences, characteristics, psychological trends, predispositions, behavior, attitudes, intelligence, abilities, and aptitudes.<br/>Collected: No.</li>
+                <li><strong>Category A: Identifiers.</strong><br />Examples: A real name, alias, postal address, unique personal identifier, online identifier, Internet Protocol address, email address, account name, driver’s license number, passport number, or other similar identifiers.<br />Collected: Yes.</li>
+                <li><strong>Category B: Personal information categories listed in the California Customer Records statute (Cal. Civ. Code § 1798.80(e)).</strong><br />Examples: A name, signature, Social Security number, physical characteristics or description, address, telephone number, passport number, driver’s license or state identification card number, insurance policy number, education, employment, employment history, bank account number, credit card number, debit card number, or any other financial information, medical information, or health insurance information. Some personal information included in this category may overlap with other categories.<br />Collected: Yes.</li>
+                <li><strong>Category C: Protected classification characteristics under California or federal law.</strong><br />Examples: Age (40 years or older), race, color, ancestry, national origin, citizenship, religion or creed, marital status, medical condition, physical or mental disability, sex (including gender, gender identity, gender expression, pregnancy or childbirth and related medical conditions), sexual orientation, veteran or military status, genetic information (including familial genetic information).<br />Collected: No.</li>
+                <li><strong>Category D: Commercial information.</strong><br />Examples: Records and history of products or services purchased or considered.<br />Collected: Yes.</li>
+                <li><strong>Category E: Biometric information.</strong><br />Examples: Genetic, physiological, behavioral, and biological characteristics, or activity patterns used to extract a template or other identifier or identifying information, such as, fingerprints, faceprints, and voiceprints, iris or retina scans, keystroke, gait, or other physical patterns, and sleep, health, or exercise data.<br />Collected: No.</li>
+                <li><strong>Category F: Internet or other similar network activity.</strong><br />Examples: Interaction with our Service or advertisement.<br />Collected: Yes.</li>
+                <li><strong>Category G: Geolocation data.</strong><br />Examples: Approximate physical location.<br />Collected: No.</li>
+                <li><strong>Category H: Sensory data.</strong><br />Examples: Audio, electronic, visual, thermal, olfactory, or similar information.<br />Collected: No.</li>
+                <li><strong>Category I: Professional or employment-related information.</strong><br />Examples: Current or past job history or performance evaluations.<br />Collected: No.</li>
+                <li><strong>Category J: Non-public education information (per the Family Educational Rights and Privacy Act (20 U.S.C. Section 1232g, 34 C.F.R. Part 99)).</strong><br />Examples: Education records directly related to a student maintained by an educational institution or party acting on its behalf, such as grades, transcripts, class lists, student schedules, student identification codes, student financial information, or student disciplinary records.<br />Collected: No.</li>
+                <li><strong>Category K: Inferences drawn from other personal information.</strong><br />Examples: Profile reflecting a person’s preferences, characteristics, psychological trends, predispositions, behavior, attitudes, intelligence, abilities, and aptitudes.<br />Collected: No.</li>
               </ul>
 
               <p className={P}><strong>Under CCPA, personal information does not include:</strong></p>

@@ -117,9 +117,6 @@ export function generateMetadata(input: MetadataGeneratorInput): Metadata {
       languages: {
         'x-default': fullUrl,
         'en': fullUrl,
-        'en-IN': fullUrl,
-        'en-US': fullUrl,
-        'en-GB': fullUrl,
       },
     },
 
