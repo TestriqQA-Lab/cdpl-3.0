@@ -38,7 +38,7 @@ const HomeFinalCTASection = dynamic(() => import('@/components/home/HomeFinalCTA
 // ============================================================================
 
 export const metadata: Metadata = generateMetadata({
-  title: "Best Software Testing & Data Science Course in Mumbai | 100% Placement - CDPL",
+  title: "Software Testing & Data Science Course Mumbai | CDPL",
   description: "Launch your tech career with CDPL's industry-leading courses in Software Testing, Data Science, and AI/ML. 100% Placement Support, Live Projects & Expert Mentors. Book a Free Demo!",
   keywords: [
     "software testing course",

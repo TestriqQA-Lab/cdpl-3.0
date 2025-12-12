@@ -22,6 +22,50 @@ import {
   getImageUrl,
 } from './seo-config';
 
+// Helper to abbreviate titles to max 60 chars smartly
+function abbreviateTitle(title: string): string {
+  const MAX_LENGTH = 60;
+  if (title.length <= MAX_LENGTH) return title;
+
+  // 1. Try removing "Best " prefix
+  let newTitle = title.replace(/^Best /, '');
+  if (newTitle.length <= MAX_LENGTH) return newTitle;
+
+  // 2. Try removing " | CDPL - Cinute Digital" suffix if present and replacing with " | CDPL"
+  newTitle = newTitle.replace(/ \| CDPL - Cinute Digital$/, ' | CDPL');
+  // Also handle " | CDPL Blog" -> " | CDPL" if that helps, or just allow it to be truncated properly.
+  // Ideally, we want to KEEP " | CDPL" or " | CDPL Blog" but shorten the rest.
+
+  // Normalization: If it ends with " | CDPL Blog", treat that as the suffix to preserve (or shorten to | CDPL)
+  let suffix = ' | CDPL';
+  if (newTitle.endsWith(' | CDPL Blog')) {
+    suffix = ' | CDPL Blog';
+  } else if (newTitle.endsWith(' - CDPL')) {
+    suffix = ' - CDPL';
+  }
+
+  if (newTitle.length <= MAX_LENGTH) return newTitle;
+
+  // 3. Try removing suffix, shortening content, then re-adding
+  const targetLength = MAX_LENGTH - suffix.length;
+
+  // Split into words and reconstruct
+  const words = newTitle.replace(suffix, '').split(' ');
+  let reduced = '';
+  for (const word of words) {
+    if ((reduced + (reduced ? ' ' : '') + word).length <= targetLength) {
+      reduced += (reduced ? ' ' : '') + word;
+    } else {
+      break;
+    }
+  }
+
+  // If we couldn't even fit one word + suffix (rare), just return truncated title
+  if (reduced.length === 0) return newTitle.substring(0, MAX_LENGTH - 3) + '...';
+
+  return reduced + suffix;
+}
+
 export interface MetadataGeneratorInput {
   // Basic SEO
   title: string | TemplateString;
@@ -84,9 +128,15 @@ export function generateMetadata(input: MetadataGeneratorInput): Metadata {
   const ogImage = image ? getImageUrl(image) : getImageUrl(SITE_CONFIG.defaultOgImage);
 
   // Helper to get string title for OG/Twitter
-  const titleString = typeof title === 'string'
+  let titleString = typeof title === 'string'
     ? title
     : (title as { absolute: string }).absolute || (title as { default: string }).default || '';
+
+  // Enforce 60 char limit
+  titleString = abbreviateTitle(titleString);
+
+  // Update the title object if it's a string, or just use the optimized string
+  const finalTitle = typeof title === 'string' ? titleString : title;
 
   const ogImageAlt = imageAlt || titleString;
 
@@ -95,7 +145,7 @@ export function generateMetadata(input: MetadataGeneratorInput): Metadata {
 
   return {
     // Basic Metadata
-    title,
+    title: finalTitle,
     description,
     keywords: allKeywords,
 
@@ -112,12 +162,9 @@ export function generateMetadata(input: MetadataGeneratorInput): Metadata {
     category: 'education',
 
     // Canonical URL & Hreflang
+    // Removed explicit hreflang to avoid conflicts. Canonical is sufficient for single-language site.
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        'x-default': fullUrl,
-        'en': fullUrl,
-      },
     },
 
     // Open Graph
@@ -217,7 +264,7 @@ export function generateCategoryMetadata(input: {
   slug: string;
   itemCount?: number;
 }): Metadata {
-  const title = `${input.categoryName} Courses - ${input.itemCount ? `${input.itemCount}+ ` : ''}Training Programs | CDPL`;
+  const title = `${input.categoryName} Courses - ${input.itemCount ? `${input.itemCount}+ ` : ''}Programs | CDPL`;
 
   const keywords = [
     `${input.categoryName.toLowerCase()} courses`,
@@ -246,7 +293,7 @@ export function generateEventMetadata(input: {
   image?: string;
   keywords?: string[];
 }): Metadata {
-  const title = `${input.title} - ${input.category} Event | CDPL`;
+  const title = `${input.title} - ${input.category} | CDPL`;
 
   const keywords = [
     ...(input.keywords || []),
@@ -263,7 +310,7 @@ export function generateEventMetadata(input: {
   ];
 
   return generateMetadata({
-    title,
+    title: `${input.title} - ${input.category} | CDPL`,
     description: input.description,
     keywords: keywords.filter(Boolean),
     url: `/events/${input.slug}`,
