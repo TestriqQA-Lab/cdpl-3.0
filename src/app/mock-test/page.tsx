@@ -18,11 +18,40 @@ export default function MockTestLandingPage() {
         setIsModalOpen(true);
     };
 
-    const handleRegister = (data: RegistrationData) => {
-        if (typeof window !== "undefined") {
-            sessionStorage.setItem("mockTestUser", JSON.stringify(data));
-        }
-        if (selectedCourse) {
+    const handleRegister = async (data: RegistrationData) => {
+        if (!selectedCourse) return;
+
+        try {
+            // Save to session (keep existing behavior)
+            if (typeof window !== "undefined") {
+                sessionStorage.setItem("mockTestUser", JSON.stringify(data));
+            }
+
+            // Send to Admin API
+            console.log("MockTest: Sending registration data...");
+            const res = await fetch("/api/mock-test/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    ...data,
+                    courseName: selectedCourse.name,
+                }),
+            });
+            console.log("MockTest: API Response status:", res.status);
+
+            if (!res.ok) {
+                console.error("MockTest: API failed");
+                // Optional: Early return or show error
+            }
+
+            // Redirect
+            console.log("MockTest: Redirecting to", `/mock-test/${selectedCourse.slug}`);
+            setIsModalOpen(false);
+            router.push(`/mock-test/${selectedCourse.slug}`);
+
+        } catch (error) {
+            console.error("Registration failed", error);
+            // Proceed anyway to not block user
             setIsModalOpen(false);
             router.push(`/mock-test/${selectedCourse.slug}`);
         }

@@ -27,6 +27,8 @@ export default function MockTestPage({ params }: PageProps) {
     const [relatedCourses, setRelatedCourses] = useState<MockCourse[]>([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
+    const [showExitConfirm, setShowExitConfirm] = useState(false);
+
     useEffect(() => {
         // Check registration
         const storedUser = sessionStorage.getItem("mockTestUser");
@@ -79,6 +81,10 @@ export default function MockTestPage({ params }: PageProps) {
         }
     };
 
+    const handleExitConfirm = () => {
+        router.push("/mock-test");
+    };
+
     if (loading || !course) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -88,16 +94,46 @@ export default function MockTestPage({ params }: PageProps) {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-gray-50 py-4 px-4 sm:px-6 lg:px-8 relative">
+
+            {/* Exit Confirmation Modal */}
+            {showExitConfirm && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
+                    <div className="bg-white rounded-2xl shadow-2xl p-6 max-w-sm w-full mx-4 border border-gray-100 transform transition-all scale-100">
+                        <h3 className="text-lg font-bold text-gray-900 mb-2">Leave Mock Test?</h3>
+                        <p className="text-gray-600 mb-6 font-medium">
+                            Are you sure you want to go back? Your progress will be lost.
+                        </p>
+                        <div className="flex gap-3 justify-end">
+                            <button
+                                onClick={() => setShowExitConfirm(false)}
+                                className="px-4 py-2 rounded-lg font-semibold text-gray-600 hover:bg-gray-100 transition-colors"
+                            >
+                                No, Stay
+                            </button>
+                            <button
+                                onClick={handleExitConfirm}
+                                className="px-4 py-2 rounded-lg font-semibold bg-red-500 text-white hover:bg-red-600 transition-colors shadow-lg shadow-red-500/20"
+                            >
+                                Yes, Leave
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <div className="max-w-5xl mx-auto">
                 {!testCompleted ? (
                     <div className="md:flex">
                         {/* Heading removed here, now handled inside TestInterface */}
-                        <aside className="w-fit h-fit mb-2 md:mb-0 top-0 text-gray-700 mt-2 hover:text-brand transition-all duration-200">
-                            <Link href="/mock-test" className="flex items-center gap-1">
-                                <ArrowLeft className="w-4 h-4" />
-                                <span className="text-md">Back</span>
-                            </Link>
+                        <aside className="w-fit h-fit mb-2 md:mb-0 top-0 text-gray-700 mt-2 hover:text-brand transition-all duration-200 cursor-pointer">
+                            <button
+                                onClick={() => setShowExitConfirm(true)}
+                                className="flex items-center gap-1 group"
+                            >
+                                <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                                <span className="text-md font-medium">Back</span>
+                            </button>
                         </aside>
                         <TestInterface
                             questions={course.questions}
