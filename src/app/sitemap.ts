@@ -88,12 +88,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
 
     // Events Pages
-    {
-      url: `${siteUrl}/events`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
+
     {
       url: `${siteUrl}/events/past-events`,
       lastModified: currentDate,
@@ -235,7 +230,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'digital-marketing-courses',
     'ds-ml-courses',
     'software-testing-course',
-    'trainers',
+
   ].map((slug) => ({
     url: `${siteUrl}/${slug}`,
     lastModified: currentDate,
