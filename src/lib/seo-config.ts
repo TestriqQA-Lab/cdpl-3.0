@@ -21,15 +21,15 @@ export const SITE_CONFIG = {
   legalName: 'Cinute Digital Private Limited',
   shortName: 'CDPL',
   tagline: 'Transform Your Career with Industry-Ready Skills',
-  
+
   // URLs
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.cinutedigital.com',
   domain: 'cinutedigital.com',
-  
+
   // Brand Colors
   brandColor: '#ff8c00', // Orange
   themeColor: '#ff8c00',
-  
+
   // Default Images
   logo: '/logo.png',
   logoWidth: 200,
@@ -51,7 +51,7 @@ export const BUSINESS_INFO = {
   email: 'contact@cinutedigital.com',
   supportEmail: 'contact@cinutedigital.com',
   admissionsEmail: 'contact@cinutedigital.com',
-  
+
   // Physical Address
   address: {
     streetAddress: 'Office Number 2 & 3, 2nd Floor, Ashley Towers, Kanakia Rd, Vagad Nagar, Beverly Park, Mira Road East',
@@ -60,13 +60,13 @@ export const BUSINESS_INFO = {
     postalCode: '401107',
     addressCountry: 'IN',
   },
-  
+
   // Geo Coordinates (for LocalBusiness schema)
   geo: {
     latitude: 19.29403967980817,
     longitude: 72.87115175396495,
   },
-  
+
   // Business Hours
   openingHours: [
     'Monday 09:00-18:00',
@@ -76,13 +76,13 @@ export const BUSINESS_INFO = {
     'Friday 09:00-18:00',
     'Saturday 09:00-15:00',
   ],
-  
+
   // Price Range
   priceRange: '₹₹',
-  
+
   // Founded Year
   foundedYear: '2020',
-  
+
   // Number of Employees
   numberOfEmployees: '200',
 } as const;
@@ -124,10 +124,10 @@ export const SEO_DEFAULTS = {
   // Default Title Template
   titleTemplate: '%s | CDPL - Cinute Digital',
   defaultTitle: 'CDPL - Best Software Testing, Data Science & AI/ML Training Institute in India',
-  
+
   // Default Description
   defaultDescription: 'Leading EdTech company providing industry-focused training in Software Testing, Data Science, AI/ML, and Digital Marketing with 100% placement support. Transform your career with expert-led courses.',
-  
+
   // Default Keywords
   defaultKeywords: [
     'software testing course',
@@ -148,11 +148,11 @@ export const SEO_DEFAULTS = {
     'ISTQB certification',
     'job guarantee program',
   ] as string[],
-  
+
   // Locale
   locale: 'en_IN',
   alternateLocales: ['en_US', 'en_GB'] as string[],
-  
+
   // Robots
   robots: {
     index: true,
@@ -335,6 +335,9 @@ export const AI_OPTIMIZATION = {
  * Get full URL for a path
  */
 export function getFullUrl(path: string = ''): string {
+  if (path === '/' || path === '') {
+    return SITE_CONFIG.url;
+  }
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
   return `${SITE_CONFIG.url}${cleanPath}`;
 }

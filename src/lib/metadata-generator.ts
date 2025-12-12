@@ -22,6 +22,36 @@ import {
   getImageUrl,
 } from './seo-config';
 
+// Helper to abbreviate titles to max 60 chars smartly
+function abbreviateTitle(title: string): string {
+  const MAX_LENGTH = 60;
+  if (title.length <= MAX_LENGTH) return title;
+
+  // 1. Try removing "Best " prefix
+  let newTitle = title.replace(/^Best /, '');
+  if (newTitle.length <= MAX_LENGTH) return newTitle;
+
+  // 2. Try removing " | CDPL - Cinute Digital" suffix if present and replacing with " | CDPL"
+  newTitle = newTitle.replace(/ \| CDPL - Cinute Digital$/, ' | CDPL');
+  if (newTitle.length <= MAX_LENGTH) return newTitle;
+
+  // 3. Try removing " | CDPL" suffix, shortening content, then re-adding
+  const suffix = ' | CDPL';
+  const targetLength = MAX_LENGTH - suffix.length;
+
+  // Split into words and reconstruct
+  const words = newTitle.replace(suffix, '').split(' ');
+  let reduced = '';
+  for (const word of words) {
+    if ((reduced + word).length < targetLength) {
+      reduced += (reduced ? ' ' : '') + word;
+    } else {
+      break;
+    }
+  }
+  return reduced + suffix;
+}
+
 export interface MetadataGeneratorInput {
   // Basic SEO
   title: string | TemplateString;
@@ -84,9 +114,15 @@ export function generateMetadata(input: MetadataGeneratorInput): Metadata {
   const ogImage = image ? getImageUrl(image) : getImageUrl(SITE_CONFIG.defaultOgImage);
 
   // Helper to get string title for OG/Twitter
-  const titleString = typeof title === 'string'
+  let titleString = typeof title === 'string'
     ? title
     : (title as { absolute: string }).absolute || (title as { default: string }).default || '';
+
+  // Enforce 60 char limit
+  titleString = abbreviateTitle(titleString);
+
+  // Update the title object if it's a string, or just use the optimized string
+  const finalTitle = typeof title === 'string' ? titleString : title;
 
   const ogImageAlt = imageAlt || titleString;
 
@@ -217,7 +253,7 @@ export function generateCategoryMetadata(input: {
   slug: string;
   itemCount?: number;
 }): Metadata {
-  const title = `${input.categoryName} Courses - ${input.itemCount ? `${input.itemCount}+ ` : ''}Training Programs | CDPL`;
+  const title = `${input.categoryName} Courses - ${input.itemCount ? `${input.itemCount}+ ` : ''}Programs | CDPL`;
 
   const keywords = [
     `${input.categoryName.toLowerCase()} courses`,
@@ -246,7 +282,7 @@ export function generateEventMetadata(input: {
   image?: string;
   keywords?: string[];
 }): Metadata {
-  const title = `${input.title} - ${input.category} Event | CDPL`;
+  const title = `${input.title} - ${input.category} | CDPL`;
 
   const keywords = [
     ...(input.keywords || []),
@@ -263,7 +299,7 @@ export function generateEventMetadata(input: {
   ];
 
   return generateMetadata({
-    title,
+    title: `${input.title} - ${input.category} | CDPL`,
     description: input.description,
     keywords: keywords.filter(Boolean),
     url: `/events/${input.slug}`,
