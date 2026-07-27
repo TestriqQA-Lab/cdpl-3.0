@@ -67,7 +67,7 @@ Cinute Digital Pvt. Ltd. (CDPL) is an EdTech institute that bridges the gap betw
 
 ## Contact & Location (NAP)
 - **Legal name**: Cinute Digital Private Limited
-- **Address**: Office #1, 2nd Floor, Ashley Tower, Kanakia Road, Vagad Nagar, Beverly Park, Mira Road, Mira Bhayandar, Mumbai 401107, Maharashtra, India
+- **Address**: Office 203 & 204, B-Wing, 1st Floor, Shanti Shopping Centre, Opposite Mira Road Station (E), Mumbai, Maharashtra, 401107, India
 - **Phone**: +91 8488988984
 - **Email**: contact@cinutedigital.com
 - **Founded**: 2020
