@@ -28,6 +28,9 @@ import GoogleAnalytics from '@/components/GoogleAnalytics';
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 import SpecialOfferBanner from "@/components/SpecialOfferBanner";
+// Suppresses the marketing chrome on the /cms Studio route — see the component
+// for why (the header + footer around <NextStudio/> caused CLS 0.922 there).
+import SiteChrome from "@/components/Layout/SiteChrome";
 // BLG-139: VisualEditing establishes the connection between a previewed
 // page and the Sanity Presentation tool. It is only rendered when Next.js
 // draft mode is on, so it never ships to normal visitors.
@@ -112,18 +115,34 @@ export default async function RootLayout({
             first image fetch. */}
         <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://cdn.sanity.io" />
+
+        {/* No preconnect for purecatamphetamine.github.io: the country-flag
+            icon is requested by the phone input only after hydration, far too
+            late for a preconnect to help. Lighthouse confirmed it as an
+            "Unused preconnect", and unused hints crowd out the budget the
+            audit recommends keeping to ~4 origins.
+            Also none for connect.facebook.net or googletagmanager.com — those
+            are deliberately deferred to post-load idle in MetaPixel and
+            GoogleAnalytics, so preconnecting would pull the cost back into the
+            window we just moved it out of. */}
       </head>
 
       <body className={`${inter.variable} font-sans antialiased`}>
-        <MetaPixel />
+        <SiteChrome>
+          <MetaPixel />
 
-        <div className="sticky top-0 z-[100] w-full">
-          <SpecialOfferBanner />
-          <Header />
-        </div>
+          <div className="sticky top-0 z-[100] w-full">
+            <SpecialOfferBanner />
+            <Header />
+          </div>
+        </SiteChrome>
+
         <main>{children}</main>
-        <Footer />
-        <GoogleAnalytics />
+
+        <SiteChrome>
+          <Footer />
+          <GoogleAnalytics />
+        </SiteChrome>
 
         {/* BLG-139: only mounted inside the Sanity Presentation tool —
             connects the previewed page to the Studio. */}

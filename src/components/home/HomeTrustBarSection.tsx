@@ -1,7 +1,8 @@
-"use client";
-
+// Server Component. framer-motion was the only reason this needed "use client";
+// the two motion.div wrappers were decorative scroll fades with no state, no
+// handlers and no browser APIs. Rendering this on the server ships zero client
+// JS for the section.
 import React from 'react';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 /**
@@ -35,28 +36,21 @@ export default function HomeTrustBarSection() {
     <section className="mt-4 py-4 bg-gray-50 border-y border-gray-200" aria-label="Our Partners">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-4"
-        >
+        <div className="text-center mb-4">
           <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-2">
             Trusted by Learners & Teams From
           </p>
-        </motion.div>
+        </div>
 
         {/* Partner Logos Grid */}
         <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-10 gap-4 mb-4 items-center justify-center">
           {partners.map((partner, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center justify-center h-16 p-2" // Reduced padding and height
+              // hover:scale-105 replaces framer-motion's whileHover — same
+              // effect, pure CSS, and it inherits the prefers-reduced-motion
+              // block in globals.css for free.
+              className="flex items-center justify-center h-16 p-2 transition-transform duration-300 hover:scale-105"
             >
               <Image
                 src={getLogoPath(partner)}
@@ -65,11 +59,13 @@ export default function HomeTrustBarSection() {
                 width={100}
                 height={40}
                 className="object-contain w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
-                sizes="(max-width: 768px) 100px, 100px"
-                priority={index < 2}
+                sizes="100px"
+                // No priority: this strip sits below the hero, so preloading
+                // these competed with the LCP text for early bandwidth.
+                loading="lazy"
                 quality={60}
               />
-            </motion.div>
+            </div>
           ))}
         </div>
 

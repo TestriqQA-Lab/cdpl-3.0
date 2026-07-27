@@ -1,12 +1,12 @@
 'use client';
 
-import { motion, Variants } from 'framer-motion';
 import { Zap, Star, Clock, Users, CheckCircle, ArrowRight, Download, BarChart3 } from 'lucide-react';
 
 import { COURSES, Course } from '@/components/BI-Courses/data/data';
 import { DownloadFormButton } from '@/components/DownloadForm';
 import { EnrollPopup } from '@/components/EnrollForms';
-import React, { useEffect, useState } from 'react';
+import OfferCountdown from '@/components/courses/OfferCountdown';
+import React, { useState } from 'react';
 import Link from 'next/link';
 
 
@@ -53,41 +53,15 @@ const pickVariant = (i: number): Variant => {
 
 
 
-// --- Helpers for timer like in ModuleCard ---
-const pad = (n: number) => n.toString().padStart(2, '0');
-
 // --- Course Card Component (extracted layout/design/features from ModuleCard) ---
-const CourseCard: React.FC<{ course: Course; index: number; nowMs: number }> = ({ course, index, nowMs }) => {
+const CourseCard: React.FC<{ course: Course; index: number }> = ({ course, index }) => {
     const variant = pickVariant(index);
-    const itemVariants: Variants = {
-        hidden: { opacity: 0, y: 18 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-    };
-
-    // 48h fallback window from first mount (matches ModuleCard behavior)
-    const fallbackDeadlineRef = React.useRef<Date | null>(null);
-    if (!course.offerEndsAt && !fallbackDeadlineRef.current) {
-        fallbackDeadlineRef.current = new Date(Date.now() + 48 * 3600 * 1000);
-    }
-    const target: Date = course.offerEndsAt ? new Date(course.offerEndsAt) : (fallbackDeadlineRef.current as Date);
-    const diff = Math.max(0, target.getTime() - nowMs);
-    const totalSeconds = Math.floor(diff / 1000);
-    const hours = pad(Math.floor(totalSeconds / 3600));
-    const minutes = pad(Math.floor((totalSeconds % 3600) / 60));
-    const seconds = pad(totalSeconds % 60);
-    const isOver = diff <= 0;
 
     const [isEnrollOpen, setIsEnrollOpen] = useState(false);
 
     return (
-        <motion.article
-            variants={itemVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
-            whileHover={{ y: -10 }}
-            className={`relative group bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-white/20 ${variant.hoverBorder} transform hover:-translate-y-2 flex flex-col h-full`}
+        <article
+            className={`relative group bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-white/20 ${variant.hoverBorder} transform hover:-translate-y-2 flex flex-col h-full hover:-translate-y-2.5`}
         >
             <EnrollPopup isOpen={isEnrollOpen} onClose={() => setIsEnrollOpen(false)} onSubmit={(data) => console.log(data)} source={`Business Intelligence Course Category Page - Courses Section - ${course.title} - Enroll Now`} />
             <div className={`${variant.header} p-6 relative overflow-hidden`}>
@@ -167,50 +141,8 @@ const CourseCard: React.FC<{ course: Course; index: number; nowMs: number }> = (
                     ))}
                 </ul>
 
-                {/* Extracted timer block from ModuleCard (boxed H/M/S grid) */}
-                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                    <p className="text-xs font-semibold text-slate-600 mb-2">
-                        Limited-time offer ends in
-                    </p>
-
-                    <div
-                        className="grid grid-cols-3 gap-3 text-center"
-                        role="timer"
-                        aria-live="polite"
-                        aria-atomic="true"
-                    >
-                        <div className="rounded-lg bg-white shadow-sm p-3">
-                            <div className="text-xl font-bold text-slate-900 tabular-nums">
-                                {hours}
-                            </div>
-                            <div className="text-[10px] text-slate-500 tracking-wide uppercase">
-                                Hours
-                            </div>
-                        </div>
-                        <div className="rounded-lg bg-white shadow-sm p-3">
-                            <div className="text-xl font-bold text-slate-900 tabular-nums">
-                                {minutes}
-                            </div>
-                            <div className="text-[10px] text-slate-500 tracking-wide uppercase">
-                                Minutes
-                            </div>
-                        </div>
-                        <div className="rounded-lg bg-white shadow-sm p-3">
-                            <div className="text-xl font-bold text-slate-900 tabular-nums">
-                                {seconds}
-                            </div>
-                            <div className="text-[10px] text-slate-500 tracking-wide uppercase">
-                                Seconds
-                            </div>
-                        </div>
-                    </div>
-
-                    {isOver && (
-                        <p className="mt-2 text-xs text-red-600 font-semibold">
-                            Offer has ended.
-                        </p>
-                    )}
-                </div>
+                {/* Self-ticking countdown leaf (isolates the 1s interval per card) */}
+                <OfferCountdown offerEndsAt={course.offerEndsAt} />
 
                 <div className="pt-4 space-y-3 mt-auto">
                     <Link
@@ -242,22 +174,15 @@ const CourseCard: React.FC<{ course: Course; index: number; nowMs: number }> = (
 
             {/* Subtle overlay like ModuleCard */}
             <div className="absolute inset-0 bg-gradient-to-br from-black/0 to-black/0 group-hover:from-black/0 group-hover:to-black/0 transition-all duration-500 pointer-events-none" />
-        </motion.article>
+        </article>
     );
 };
 export default function CoursesSection() {
 
-    // Ticking clock passed to each card (matches ModuleCard pattern)
-    const [nowMs, setNowMs] = useState<number>(() => Date.now());
-    useEffect(() => {
-        const id = setInterval(() => setNowMs(Date.now()), 1000);
-        return () => clearInterval(id);
-    }, []);
-
     return (
         <section className="py-10 bg-gray-50" id='courses'>
             <div className="max-w-7xl mx-auto px-6">
-                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mb-16">
+                <div className="text-center mb-16">
                     <span className="inline-block px-4 py-2 bg-orange-100 text-brand rounded-full text-sm font-semibold mb-4">
                         Popular Courses
                     </span>
@@ -267,22 +192,17 @@ export default function CoursesSection() {
                     <p className="text-lg text-gray-600 max-w-3xl mx-auto">
                         Choose from our comprehensive range of courses designed to make you job-ready with hands-on projects and expert mentorship.
                     </p>
-                </motion.div>
+                </div>
 
                 {/* Course Cards Grid */}
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {COURSES.map((course, index) => (
-                        <CourseCard key={course.id} course={course} index={index} nowMs={nowMs} />
+                        <CourseCard key={course.id} course={course} index={index} />
                     ))}
                 </div>
 
                 {/* View All CTA */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mt-12"
-                >
+                <div className="text-center mt-12">
                     <Link
                         href="/courses"
                         title="Explore All Professional Courses"
@@ -291,7 +211,7 @@ export default function CoursesSection() {
                         <span>View All Courses</span>
                         <ArrowRight className="w-5 h-5" />
                     </Link>
-                </motion.div>
+                </div>
             </div>
         </section>
     );

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import { motion, Variants } from 'framer-motion';
 import { Clock, Users, ArrowRight, Star, Zap, Download, BookOpen, Gauge, Shield, Smartphone, CheckCircle, Cpu, BarChart3, Code, TrendingUp, Cog, Trophy, Brain, Database, Megaphone, Briefcase, Rocket, PieChart, FileSpreadsheet, LayoutGrid } from 'lucide-react';
 import { DownloadFormButton } from '@/components/DownloadForm';
 import Link from 'next/link';
@@ -82,46 +81,77 @@ const iconMap = {
 
 };
 
-// --- Isolated Countdown Component ---
-const CountdownTimer: React.FC<{ targetDate: Date }> = ({ targetDate }) => {
-  const [timeLeft, setTimeLeft] = useState<{ hours: string; minutes: string; seconds: string; isOver: boolean }>({
-    hours: '00', minutes: '00', seconds: '00', isOver: false
-  });
+/**
+ * One 1 Hz clock shared by every countdown on the page.
+ *
+ * Each card previously owned its own setInterval, so 26 cards meant 26
+ * independent timer callbacks every second — 26 separate macrotasks, each
+ * with its own React render and commit, none of them batched together. This
+ * is a single interval driving a single batched update instead.
+ *
+ * `nowMs` stays 0 until the first client tick so the server render and the
+ * first client render agree on the 00/00/00 placeholder.
+ */
+const tickListeners = new Set<() => void>();
+let tickHandle: ReturnType<typeof setInterval> | null = null;
+let nowMs = 0;
 
-  useEffect(() => {
-    const calculateTime = () => {
-      const now = Date.now();
-      const diff = Math.max(0, targetDate.getTime() - now);
-      const totalSeconds = Math.floor(diff / 1000);
-
-      if (diff <= 0) {
-        return { hours: '00', minutes: '00', seconds: '00', isOver: true };
-      }
-
-      return {
-        hours: pad(Math.floor(totalSeconds / 3600)),
-        minutes: pad(Math.floor((totalSeconds % 3600) / 60)),
-        seconds: pad(totalSeconds % 60),
-        isOver: false
-      };
-    };
-
-    // Initial cal
-    setTimeLeft(calculateTime());
-
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTime());
+const subscribeTick = (onStoreChange: () => void) => {
+  tickListeners.add(onStoreChange);
+  if (tickHandle === null) {
+    nowMs = Date.now();
+    tickHandle = setInterval(() => {
+      nowMs = Date.now();
+      tickListeners.forEach((listener) => listener());
     }, 1000);
+  }
+  return () => {
+    tickListeners.delete(onStoreChange);
+    if (tickListeners.size === 0 && tickHandle !== null) {
+      clearInterval(tickHandle);
+      tickHandle = null;
+    }
+  };
+};
 
-    return () => clearInterval(timer);
-  }, [targetDate]);
+const getTickSnapshot = () => nowMs;
+const getTickServerSnapshot = () => 0;
+
+const PLACEHOLDER_TIME = { hours: '00', minutes: '00', seconds: '00', isOver: false };
+
+/** Single sessionStorage key for the shared 48h offer deadline. */
+const OFFER_DEADLINE_KEY = 'cdpl-offer-deadline';
+
+// --- Isolated Countdown Component ---
+const CountdownTimer: React.FC<{ targetDate: Date | null }> = ({ targetDate }) => {
+  const now = React.useSyncExternalStore(subscribeTick, getTickSnapshot, getTickServerSnapshot);
+
+  const timeLeft = React.useMemo(() => {
+    // `now` is 0 until the first client tick and `targetDate` is resolved on
+    // the client, so both the server and the first client render produce the
+    // placeholder. It occupies exactly the same box as the live timer, so
+    // nothing shifts when the real value arrives.
+    if (!targetDate || now === 0) return PLACEHOLDER_TIME;
+
+    const diff = Math.max(0, targetDate.getTime() - now);
+    if (diff <= 0) return { hours: '00', minutes: '00', seconds: '00', isOver: true };
+
+    const totalSeconds = Math.floor(diff / 1000);
+    return {
+      hours: pad(Math.floor(totalSeconds / 3600)),
+      minutes: pad(Math.floor((totalSeconds % 3600) / 60)),
+      seconds: pad(totalSeconds % 60),
+      isOver: false,
+    };
+  }, [targetDate, now]);
 
   return (
     <>
       <div
         className="grid grid-cols-3 gap-3 text-center"
+        // role="timer" implies aria-live="off". An explicit aria-live="polite"
+        // was making screen readers announce all 26 countdowns every second.
         role="timer"
-        aria-live="polite"
       >
         <div className="rounded-lg bg-white shadow-sm p-3">
           <div className="text-xl font-bold text-slate-900 tabular-nums">
@@ -580,45 +610,27 @@ const COURSES: Course[] = [
 const pad = (n: number) => n.toString().padStart(2, '0');
 
 // --- Course Card Component (extracted layout/design/features from ModuleCard) ---
-const CourseCard: React.FC<{ course: Course; index: number }> = ({ course, index }) => {
+const CourseCard: React.FC<{ course: Course; index: number; sessionDeadline: Date | null }> = ({ course, index, sessionDeadline }) => {
   const variant = pickVariant(index);
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 18 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
 
-
-  // Initialize ONLY ONCE on mount to ensure consistent hydration
-  const [target, setTarget] = React.useState<Date | null>(null);
-
-  useEffect(() => {
-    if (course.offerEndsAt) {
-      setTarget(new Date(course.offerEndsAt));
-    } else {
-      // Create a consistent deadline for this user session if not set
-      // We use sessionStorage to persist it across reloads if possible, or just memoize for this session
-      // For now, simple stable date:
-      const saved = sessionStorage.getItem(`deadline-${course.id}`);
-      if (saved) {
-        setTarget(new Date(saved));
-      } else {
-        const d = new Date(Date.now() + 48 * 3600 * 1000);
-        sessionStorage.setItem(`deadline-${course.id}`, d.toISOString());
-        setTarget(d);
-      }
-    }
-  }, [course.id, course.offerEndsAt]);
-
-  if (!target) return null; // Or a skeleton
+  // The generic 48h session deadline is resolved once by the parent — no course
+  // currently sets `offerEndsAt`, so all 26 cards previously computed the same
+  // value independently, costing 26 effects and 52 synchronous sessionStorage
+  // operations during hydration.
+  const target = React.useMemo(
+    () => (course.offerEndsAt ? new Date(course.offerEndsAt) : sessionDeadline),
+    [course.offerEndsAt, sessionDeadline]
+  );
 
   return (
-    <motion.article
-      variants={itemVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
-      whileHover={{ y: -10 }}
+    // Plain <article>, not motion.article. Each of the 26 cards otherwise
+    // carried a projection node, a MotionValue set, its own IntersectionObserver
+    // for whileInView and an animation-frame subscriber for whileHover — all
+    // instantiated during hydration. The hover lift is already pure CSS below
+    // (`transition-all` + `hover:-translate-y-2`), so whileHover was duplicating
+    // it. Dropping the entrance fade also means the cards are visible without
+    // JavaScript, instead of shipping at inline opacity:0.
+    <article
       className={`relative group bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-white/20 ${variant.hoverBorder} transform hover:-translate-y-2 flex flex-col h-full`}
     >
       <div className={`${variant.header} p-6 relative overflow-hidden`}>
@@ -736,7 +748,7 @@ const CourseCard: React.FC<{ course: Course; index: number }> = ({ course, index
 
       {/* Subtle overlay like ModuleCard */}
       <div className="absolute inset-0 bg-gradient-to-br from-black/0 to-black/0 group-hover:from-black/0 group-hover:to-black/0 transition-all duration-500 pointer-events-none" />
-    </motion.article>
+    </article>
   );
 };
 
@@ -752,12 +764,22 @@ export default function HomeFeaturedCoursesSection() {
   const ALL_CATEGORIES = ['All', 'Software Testing', 'Data Science', 'Business Intelligence', 'Artificial Intelligence', 'Digital Marketing'];
   const [activeCategory, setActiveCategory] = useState(ALL_CATEGORIES[0]);
 
-  // Ticking clock removed from parent to prevent full re-renders
-  // const [nowMs, setNowMs] = useState<number>(() => Date.now());
-  // useEffect(() => {
-  //   const id = setInterval(() => setNowMs(Date.now()), 1000);
-  //   return () => clearInterval(id);
-  // }, []);
+  // The generic "offer ends in 48h" deadline, resolved once for the whole grid.
+  // Each card used to resolve this itself against a per-course sessionStorage
+  // key, which meant 26 effects and 52 synchronous storage reads/writes during
+  // hydration for a value that was identical on every card.
+  const [sessionDeadline, setSessionDeadline] = useState<Date | null>(null);
+
+  useEffect(() => {
+    const saved = sessionStorage.getItem(OFFER_DEADLINE_KEY);
+    if (saved) {
+      setSessionDeadline(new Date(saved));
+      return;
+    }
+    const deadline = new Date(Date.now() + 48 * 3600 * 1000);
+    sessionStorage.setItem(OFFER_DEADLINE_KEY, deadline.toISOString());
+    setSessionDeadline(deadline);
+  }, []);
 
   const filteredCourses = activeCategory === 'All'
     ? COURSES
@@ -767,10 +789,7 @@ export default function HomeFeaturedCoursesSection() {
     <section className="py-6 lg:py-10 bg-gray-50" aria-labelledby="featured-courses-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+        <div
           className="text-center mb-12"
         >
           <span className="inline-block px-4 py-2 bg-orange-100 text-brand rounded-full text-sm font-semibold mb-4">
@@ -782,13 +801,10 @@ export default function HomeFeaturedCoursesSection() {
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Choose from our comprehensive range of courses designed to make you job-ready with hands-on projects and expert mentorship.
           </p>
-        </motion.div>
+        </div>
 
         {/* Category Filter (Tabs) */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+        <div
           className="flex flex-wrap justify-center gap-3 mb-12"
         >
           {ALL_CATEGORIES.map((category) => (
@@ -803,20 +819,17 @@ export default function HomeFeaturedCoursesSection() {
               {category}
             </button>
           ))}
-        </motion.div>
+        </div>
 
         {/* Course Cards Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredCourses.map((course, index) => (
-            <CourseCard key={course.id} course={course} index={index} />
+            <CourseCard key={course.id} course={course} index={index} sessionDeadline={sessionDeadline} />
           ))}
         </div>
 
         {/* View All CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+        <div
           className="text-center mt-12"
         >
           <Link
@@ -827,7 +840,7 @@ export default function HomeFeaturedCoursesSection() {
             <span>View All Courses</span>
             <ArrowRight className="w-5 h-5" />
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
