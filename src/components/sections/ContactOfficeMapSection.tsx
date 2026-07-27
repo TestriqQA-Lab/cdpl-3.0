@@ -32,9 +32,9 @@ const OFFICES: Office[] = [
     email: "mailto:contact@cinutedigital.com",
     hours: "Mon–Sat • 9:00 AM – 8:00 PM IST",
     mapSrc:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3765.745859738545!2d72.871122!3d19.293415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b1af2b2c5fed%3A0x7104f80b9fec8b9d!2sCinute%20Digital%20Pvt.%20Ltd.%20A%20Premier%20Software%20Training%20Institute%20(CDPL)!5e0!3m2!1sen!2sin!4v1759859933212!5m2!1sen!2sin",
+      "https://maps.google.com/maps?q=19.280306063589045,72.85717908291844&z=17&output=embed",
     directions:
-      "https://www.google.com/maps/place/Cinute+Digital+Pvt.+Ltd.+A+Premier+Software+Training+Institute+(CDPL)/@19.29342,72.8685471,17z/data=!3m1!4b1!4m6!3m5!1s0x3be7b1af2b2c5fed:0x7104f80b9fec8b9d!8m2!3d19.293415!4d72.871122!16s%2Fg%2F11t5q_mt87?entry=ttu&g_ep=EgoyMDI1MTAyMi4wIKXMDSoASAFQAw%3D%3D",
+      "https://www.google.com/maps/dir/?api=1&destination=19.280306063589045,72.85717908291844",
   },
 ];
 
@@ -91,7 +91,7 @@ export function ContactOfficeMapSection() {
                     <div className="font-bold text-lg text-slate-900">
                       Head Office (<span className="text-brand">CDPL</span>)
                     </div>
-                    <Link href="https://www.google.com/maps/place/Cinute+Digital+Pvt.+Ltd.+A+Premier+Software+Training+Institute+(CDPL)/@19.29342,72.8685471,17z/data=!3m1!4b1!4m6!3m5!1s0x3be7b1af2b2c5fed:0x7104f80b9fec8b9d!8m2!3d19.293415!4d72.871122!16s%2Fg%2F11t5q_mt87?entry=ttu&g_ep=EgoyMDI1MTAyMi4wIKXMDSoASAFQAw%3D%3D" title="View Head Office on Google Maps" className="text-base text-slate-800 hover:text-brand transition">{active.headOffice}</Link>
+                    <Link href="https://www.google.com/maps/search/?api=1&query=19.280306063589045,72.85717908291844" title="View Head Office on Google Maps" className="text-base text-slate-800 hover:text-brand transition">{active.headOffice}</Link>
                   </div>
 
                   <div className="mt-4">

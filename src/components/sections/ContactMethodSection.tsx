@@ -102,7 +102,7 @@ export function ContactMethodsSection() {
       title: "Visit Our Campus",
       desc: "Meet faculty at our Mumbai (MiraRoad) center. Experience classrooms, labs & learning environment.",
       cta: "Open in Maps",
-      href: "https://www.google.com/maps/place/Cinute+Digital+Pvt.+Ltd.+A+Premier+Software+Training+Institute+(CDPL)/@19.29342,72.8685471,17z/data=!3m1!4b1!4m6!3m5!1s0x3be7b1af2b2c5fed:0x7104f80b9fec8b9d!8m2!3d19.293415!4d72.871122!16s%2Fg%2F11t5q_mt87?entry=ttu&g_ep=EgoyMDI1MTAyMi4wIKXMDSoASAFQAw%3D%3D",
+      href: "https://www.google.com/maps/search/?api=1&query=19.280306063589045,72.85717908291844",
       target: "_blank",
       icon: <FaMapLocationDot className="h-10 w-10 text-rose-700" />,
       badges: ["Guided tour", "By appointment"],

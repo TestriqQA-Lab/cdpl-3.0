@@ -35,8 +35,8 @@
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": 19.29403967980817,
-      "longitude": 72.87115175396495
+      "latitude": 19.280306063589045,
+      "longitude": 72.85717908291844
     },
     "contactPoint": [
       {
@@ -196,8 +196,8 @@
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": 19.29403967980817,
-      "longitude": 72.87115175396495
+      "latitude": 19.280306063589045,
+      "longitude": 72.85717908291844
     },
     "openingHoursSpecification": [
       {

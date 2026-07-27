@@ -74,8 +74,8 @@ export const BUSINESS_INFO = {
 
   // Geo Coordinates (for LocalBusiness schema)
   geo: {
-    latitude: 19.29403967980817,
-    longitude: 72.87115175396495,
+    latitude: 19.280306063589045,
+    longitude: 72.85717908291844,
   },
 
   // Business Hours
