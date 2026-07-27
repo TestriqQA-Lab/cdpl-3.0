@@ -65,8 +65,8 @@ export const BUSINESS_INFO = {
 
   // Physical Address
   address: {
-    streetAddress: 'Office #1, 2nd Floor, Ashley Tower, Kanakia Road, Vagad Nagar, Beverly Park, Mira Road',
-    addressLocality: 'Mira Bhayandar, Mumbai',
+    streetAddress: 'Office 203 & 204, B-Wing, 1st Floor, Shanti Shopping Centre, Opposite Mira Road Station (E)',
+    addressLocality: 'Mumbai',
     addressRegion: 'Maharashtra',
     postalCode: '401107',
     addressCountry: 'IN',
@@ -74,8 +74,8 @@ export const BUSINESS_INFO = {
 
   // Geo Coordinates (for LocalBusiness schema)
   geo: {
-    latitude: 19.29403967980817,
-    longitude: 72.87115175396495,
+    latitude: 19.280306063589045,
+    longitude: 72.85717908291844,
   },
 
   // Business Hours
