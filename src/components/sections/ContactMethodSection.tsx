@@ -4,6 +4,7 @@ import { FaSquarePhone, FaGoogleScholar, FaMapLocationDot } from "react-icons/fa
 import { IoMdMailUnread } from "react-icons/io";
 import { RiPresentationLine } from "react-icons/ri";
 import { IoBookSharp } from "react-icons/io5";
+import { BUSINESS_INFO } from "@/lib/seo-config";
 
 type Card = {
   title: string;
@@ -102,7 +103,7 @@ export function ContactMethodsSection() {
       title: "Visit Our Campus",
       desc: "Meet faculty at our Mumbai (MiraRoad) center. Experience classrooms, labs & learning environment.",
       cta: "Open in Maps",
-      href: "https://www.google.com/maps/search/?api=1&query=19.280306063589045,72.85717908291844",
+      href: BUSINESS_INFO.maps.place,
       target: "_blank",
       icon: <FaMapLocationDot className="h-10 w-10 text-rose-700" />,
       badges: ["Guided tour", "By appointment"],
