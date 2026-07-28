@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Script from "next/script";
+import { BUSINESS_INFO } from "@/lib/seo-config";
 
 type Office = {
   id: "mumbai" | "pune" | "bengaluru";
@@ -31,13 +32,8 @@ const OFFICES: Office[] = [
     whatsapp: "https://wa.me/917888383788",
     email: "mailto:contact@cinutedigital.com",
     hours: "Mon–Sat • 9:00 AM – 8:00 PM IST",
-    // Official Google Maps embed for the Shanti Shopping Centre office. The
-    // `pb` payload is Google-generated (Maps → Share → Embed a map); it renders
-    // the CDPL business pin/card rather than a bare coordinate marker.
-    mapSrc:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235.37797206926018!2d72.85688135772946!3d19.28029815178905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b1af2b2c5fed%3A0x7104f80b9fec8b9d!2sCinute%20Digital%20Pvt.%20Ltd.%20A%20Premier%20Software%20Training%20Institute%20(CDPL)!5e0!3m2!1sen!2sin!4v1785152704558!5m2!1sen!2sin",
-    directions:
-      "https://www.google.com/maps/dir/?api=1&destination=19.280306063589045,72.85717908291844",
+    mapSrc: BUSINESS_INFO.maps.embed,
+    directions: BUSINESS_INFO.maps.directions,
   },
 ];
 
@@ -94,7 +90,7 @@ export function ContactOfficeMapSection() {
                     <div className="font-bold text-lg text-slate-900">
                       Head Office (<span className="text-brand">CDPL</span>)
                     </div>
-                    <Link href="https://www.google.com/maps/search/?api=1&query=19.280306063589045,72.85717908291844" title="View Head Office on Google Maps" className="text-base text-slate-800 hover:text-brand transition">{active.headOffice}</Link>
+                    <Link href={BUSINESS_INFO.maps.place} title="View Head Office on Google Maps" className="text-base text-slate-800 hover:text-brand transition">{active.headOffice}</Link>
                   </div>
 
                   <div className="mt-4">

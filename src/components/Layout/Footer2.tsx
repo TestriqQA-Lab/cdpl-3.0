@@ -5,6 +5,7 @@ import { MapPin, Mail, Phone, Facebook, Linkedin, Instagram, Youtube } from "luc
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { BUSINESS_INFO } from "@/lib/seo-config";
 
 /** Minimal X (formerly Twitter) logo */
 function XLogo(props: React.SVGProps<SVGSVGElement>) {
@@ -58,7 +59,7 @@ const Footer: React.FC = () => {
                   <p className="font-bold">Head Office (<span className="text-blue-700">CDPL</span>)</p>
                   <div className="flex items-start mt-1 gap-3">
                     <MapPin className="h-5 w-5 text-brand mt-0.5" aria-hidden="true" />
-                    <Link className="hover:text-blue-700 transition" title="View Head Office Location on Google Maps" href="https://www.google.com/maps/search/?api=1&query=19.280306063589045,72.85717908291844">
+                    <Link className="hover:text-blue-700 transition" title="View Head Office Location on Google Maps" href={BUSINESS_INFO.maps.place}>
                       Office 203 &amp; 204, B-Wing, 1st Floor, Shanti Shopping Centre, Opposite Mira Road Station (E), Mumbai, Maharashtra, 401107
                     </Link>
                   </div>
