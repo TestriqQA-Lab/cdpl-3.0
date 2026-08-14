@@ -141,8 +141,18 @@ const Footer: React.FC = () => {
                     src="/images/msme.png"
                     alt="MSME"
                     title="MSME Registered Company Badge"
-                    width={626}
-                    height={713}
+                    // The badge is only ever painted at h-16/md:h-20 (64/80 px
+                    // tall, ~70 px wide). Declaring the file's full intrinsic
+                    // 626x713 made next/image resolve the w=640 variant — 54 KiB
+                    // to fill 70x80. These values are the 2x-DPR size for the
+                    // largest breakpoint, so the optimizer picks a ~256 w source
+                    // instead. The ratio is held at 0.875 vs the true 0.878, a
+                    // 0.24 px difference in the reserved box, so the placeholder
+                    // geometry that the Skill India note below is guarding is
+                    // unaffected. object-contain means the badge itself still
+                    // renders at its own aspect ratio.
+                    width={140}
+                    height={160}
                     className="h-16 md:h-20 w-auto object-contain"
                   />
                 </div>
