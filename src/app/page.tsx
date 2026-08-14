@@ -111,13 +111,6 @@ export default async function HomePage(): Promise<React.ReactElement> {
 
   return (
     <>
-      {/* ========================================
-          JSON-LD SCHEMA INJECTION
-          ======================================== */}
-      {homePageSchemas.map((schema, index) => (
-        <JsonLd key={index} id={`home-schema-${index}`} schema={schema} />
-      ))}
-
       {/* `defer-offscreen-sections` (globals.css) opts the sections below into
           `content-visibility: auto`. The site-wide rule keys off `main > section`,
           which this wrapper div blocks, so without the class none of the home
@@ -145,6 +138,21 @@ export default async function HomePage(): Promise<React.ReactElement> {
         <HomeFAQSection />
         <HomeFinalCTASection />
       </div>
+
+      {/* ========================================
+          JSON-LD SCHEMA INJECTION
+          ========================================
+          Emitted AFTER the page content, not before it. These seven blocks are
+          38,465 bytes; sitting at the top of <body> they pushed the hero
+          markup — which holds the LCP text — from roughly byte 16,600 to byte
+          55,062 of the document, so the browser could not begin laying out the
+          hero until it had streamed past all of them.
+
+          This is SEO-neutral: consumers parse ld+json from anywhere in the
+          document, and position carries no weight. */}
+      {homePageSchemas.map((schema, index) => (
+        <JsonLd key={index} id={`home-schema-${index}`} schema={schema} />
+      ))}
     </>
   );
 }

@@ -41,7 +41,25 @@ const inter = localFont({
   src: './fonts/inter-variable.woff2',
   display: 'swap',
   variable: '--font-inter',
-  preload: true,
+  // preload:false — this lives in the ROOT layout, so preload:true emitted a
+  // High-priority `<link rel="preload" as="font">` for 37,924 bytes on every
+  // page, including the ones that never render Inter.
+  //
+  // Only `.font-sans` consumes it (it compiles to
+  // `font-family: var(--font-inter), system-ui, sans-serif`), and globals.css
+  // sets an *unlayered* `body { font-family: Arial, ... }` which outranks
+  // Tailwind's layered utility on <body> itself. So on the home page nothing
+  // renders Inter and the preload was pure waste on the LCP critical path.
+  // Pages that put `font-sans` on a wrapper div — /mock-test,
+  // /istqb-registration, the jobs pages, the blog TOC — do render it, because
+  // a directly-applied class beats the inherited Arial.
+  //
+  // With preload:false the font is fetched only when an element actually needs
+  // it: never on home, on demand elsewhere. The typeface is unchanged
+  // everywhere. The swap on those pages lands slightly later, which the
+  // metric-matched `inter Fallback` face (ascent-override/size-adjust below)
+  // and display:'swap' are already there to absorb.
+  preload: false,
   fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Arial', 'sans-serif'],
   weight: '100 900',
 });
