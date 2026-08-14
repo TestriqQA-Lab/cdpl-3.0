@@ -145,8 +145,21 @@ input::placeholder {
   opacity: 1 !important;
 }
 
-/* Optimization: Defer rendering of off-screen sections */
-main > section:not(:first-child) {
+/* Optimization: Defer rendering of off-screen sections.
+
+   `main > section` is a direct-child selector, so it silently stops matching
+   the moment a route wraps its sections in a layout div. The home page does
+   exactly that (`<div className="relative bg-white">` in src/app/page.tsx),
+   which left all 11 of its sections computing `content-visibility: visible` —
+   the whole ~4,000-element DOM was being laid out and painted eagerly.
+
+   `.defer-offscreen-sections` is the explicit opt-in for those routes. It is a
+   class rather than a broader `main > div > section` selector so that adding
+   the behaviour to a page stays a deliberate, reviewable act instead of a
+   side effect of the markup someone happens to nest. The first section is
+   always excluded: it holds the LCP element and must render eagerly. */
+main > section:not(:first-child),
+.defer-offscreen-sections > section:not(:first-child) {
   content-visibility: auto;
   contain-intrinsic-size: auto 500px;
 }

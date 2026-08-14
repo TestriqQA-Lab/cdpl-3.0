@@ -118,7 +118,12 @@ export default async function HomePage(): Promise<React.ReactElement> {
         <JsonLd key={index} id={`home-schema-${index}`} schema={schema} />
       ))}
 
-      <div className="relative bg-white">
+      {/* `defer-offscreen-sections` (globals.css) opts the sections below into
+          `content-visibility: auto`. The site-wide rule keys off `main > section`,
+          which this wrapper div blocks, so without the class none of the home
+          page's off-screen sections were being deferred. The hero is the first
+          child and is therefore excluded — it carries the LCP heading. */}
+      <div className="relative bg-white defer-offscreen-sections">
         {/* ========================================
             PAGE CONTENT
             ======================================== */}
