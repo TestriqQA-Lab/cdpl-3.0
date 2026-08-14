@@ -134,13 +134,15 @@ export default async function RootLayout({
         <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://cdn.sanity.io" />
 
-        {/* No preconnect for purecatamphetamine.github.io: the country-flag
-            icon is requested by the phone input only after hydration, far too
-            late for a preconnect to help. Lighthouse confirmed it as an
-            "Unused preconnect", and unused hints crowd out the budget the
-            audit recommends keeping to ~4 origins.
-            Also none for connect.facebook.net or googletagmanager.com — those
-            are deliberately deferred to post-load idle in MetaPixel and
+        {/* purecatamphetamine.github.io no longer needs a hint of any kind:
+            the country flags are served from our own origin out of
+            public/flags/ (see src/components/ui/CustomFlag.tsx). A later
+            Lighthouse run had promoted that origin to a "Preconnect
+            candidate" worth ~380 ms of LCP, which superseded the earlier
+            "Unused preconnect" reading — vendoring the SVGs removes the
+            cross-origin handshake outright rather than warming it.
+            Still none for connect.facebook.net or googletagmanager.com —
+            those are deliberately deferred to post-load idle in MetaPixel and
             GoogleAnalytics, so preconnecting would pull the cost back into the
             window we just moved it out of. */}
       </head>
