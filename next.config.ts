@@ -15,8 +15,12 @@ const nextConfig: NextConfig = {
   transpilePackages: ['next-sanity', 'sanity', '@sanity/vision', '@sanity/code-input'],
   // Performance optimizations
   experimental: {
+    // 'framer-motion' dropped: no first-party module imports it any more (it
+    // was replaced by CSS animations — see the comments in globals.css and the
+    // home sections). It remains in node_modules as a transitive dependency of
+    // Sanity Studio via `motion`, but Studio imports `motion`, not
+    // `framer-motion`, so this entry optimised nothing.
     optimizePackageImports: [
-      'framer-motion',
       'react-icons',
       '@headlessui/react',
       'lucide-react',
