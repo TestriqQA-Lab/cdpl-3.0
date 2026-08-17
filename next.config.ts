@@ -494,6 +494,26 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // Country flags for the phone input (see src/components/ui/CustomFlag.tsx).
+      // These are vendored copies of a pinned package's SVGs — a given country's
+      // flag file never changes — so they can be cached indefinitely. Files under
+      // /public are otherwise served `max-age=0, must-revalidate`, which would
+      // spend a conditional request per visit on an asset that cannot go stale.
+      // noindex matches the treatment of the other static assets above: they are
+      // UI chrome, not content, and should not consume crawl budget.
+      {
+        source: '/flags/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex, nofollow',
+          },
+        ],
+      },
       // Defense-in-depth: noindex the CMS admin route.
       // Already disallowed in robots.txt, but this header ensures
       // it's not indexed even if discovered through internal links.
