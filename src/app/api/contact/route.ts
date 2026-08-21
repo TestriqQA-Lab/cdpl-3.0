@@ -338,9 +338,14 @@ export async function POST(request: Request) {
 
     if (courseName) adminData.courseName = courseName;
 
-    // Only include interest and message if they exist (for detailed template)
+    // Only include interest and message if they exist (for detailed template).
+    // `interest` gets an explicit fallback rather than being left unset:
+    // `admin-notification.html` gives it its own table row, and an empty cell
+    // there reads as a broken email rather than "the visitor picked nothing".
+    // `message` stays unset when absent so the `{{#if message}}` block in
+    // admin-notification-event-contact.html can still drop its whole section.
     if (interest || message) {
-      if (interest) adminData.interest = interest;
+      adminData.interest = interest || 'Not specified';
       if (message) adminData.message = message;
     }
 

@@ -380,6 +380,7 @@ export function ContactHeroForm({ idPrefix = "", onSuccess }: ContactHeroFormPro
                         <option value="Data Science">Data Science</option>
                         <option value="Digital Marketing">Digital Marketing</option>
                         <option value="Full Stack Development">Full Stack Development</option>
+                        <option value="Scholarship">Scholarship</option>
                         <option value="Software Testing">Software Testing</option>
                         <option value="Training & Event Services">Training & Event Services</option>
                         <option value="Others">Others</option>
