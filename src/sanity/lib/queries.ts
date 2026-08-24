@@ -379,4 +379,7 @@ export const LIVE_JOB_BY_SLUG_QUERY = groq`*[_type == "liveJob" && slug.current 
 }`
 
 // Slug list for `generateStaticParams` on /jobs/live-jobs/[jobId].
+// Currently unused — that route derives its params from getLiveJobs() instead.
+// ⚠️ If you do use it, pass `{ today: 'YYYY-MM-DD' }`: LIVE_JOB_OPEN references
+// $today and Sanity errors on an undefined param.
 export const LIVE_JOB_SLUGS_QUERY = groq`*[_type == "liveJob" && ${LIVE_JOB_OPEN} && defined(slug.current)][].slug.current`

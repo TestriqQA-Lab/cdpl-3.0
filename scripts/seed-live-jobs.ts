@@ -17,9 +17,12 @@
  *        npx tsx scripts/seed-live-jobs.ts
  *      (auto-loads .env.local / .env via dotenv)
  *
- * Idempotent: uses createOrReplace with a deterministic _id (`liveJob.<id>`),
- * so re-running updates existing docs instead of creating duplicates. Review
- * the results in /cms before relying on them in production.
+ * Idempotent and non-clobbering: uses a deterministic _id (`liveJob.<id>`), so
+ * re-running updates existing docs instead of creating duplicates. Content
+ * fields are overwritten from this array, but `validThrough` and `isActive` are
+ * only set when MISSING — those two decide whether a posting is visible at all
+ * and are maintained by editors in Studio, so a re-run must never reset them.
+ * Review the results in /cms before relying on them in production.
  *
  * NOTE: undefined fields are stripped so Sanity does not persist empty keys.
  */
@@ -100,7 +103,30 @@ async function main() {
             if (doc[k] === undefined) delete doc[k];
         }
 
-        await client.createOrReplace(doc as never);
+        // NOT createOrReplace. `validThrough` and `isActive` now decide whether
+        // a posting is visible at all, and editors maintain them in Studio — a
+        // whole-document replace would silently reset an editor's apply-by date
+        // to whatever this static array implies (absent, for 90 of 98 rows),
+        // taking the posting dark. So: create the doc if it is missing, then
+        // patch only the content fields, and set the two visibility fields ONLY
+        // when they are not already present.
+        const { _id, _type, validThrough, isActive, ...contentFields } = doc as Record<string, unknown> & {
+            _id: string;
+            _type: string;
+        };
+
+        // One transaction so a mid-run network failure cannot leave a bare
+        // {_id, _type} document behind with no content.
+        await client
+            .transaction()
+            .createIfNotExists({ _id, _type } as never)
+            .patch(_id, (p) =>
+                p.set(contentFields).setIfMissing({
+                    ...(validThrough !== undefined ? { validThrough } : {}),
+                    isActive,
+                }),
+            )
+            .commit();
         ok += 1;
         console.log(`  ✓ ${j.id}`);
     }
