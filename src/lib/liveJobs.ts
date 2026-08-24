@@ -76,6 +76,37 @@ function sanityToJob(sj: SanityLiveJob): Job {
     };
 }
 
+/** Today as YYYY-MM-DD, comparable to the ISO date strings on `Job`. */
+function today(): string {
+    return new Date().toISOString().slice(0, 10);
+}
+
+/**
+ * The date after which a posting must no longer be presented as open.
+ *
+ * Explicit apply-by date first, then the walk-in / deadline date. There is
+ * deliberately NO fallback: a posting with neither date has no knowable expiry,
+ * and inventing one is what caused the Google-for-Jobs violation this function
+ * replaces (a hard-coded `"2026-12-31"` was asserted for ~90 of 98 postings,
+ * some of them 23 months old).
+ */
+export function getJobExpiry(job: Job): string | undefined {
+    return job.validThrough || job.eventDate || undefined;
+}
+
+/**
+ * Is this posting still open?
+ *
+ * A job with no expiry date is treated as CLOSED, not open. That is the safe
+ * direction: showing a stale vacancy as live misleads applicants and breaches
+ * Google's job-posting policy, whereas hiding one that is genuinely open only
+ * costs us a listing until an editor sets its "Valid Through" date in Sanity.
+ */
+export function isJobOpen(job: Job, asOf: string = today()): boolean {
+    const expiry = getJobExpiry(job);
+    return Boolean(expiry && expiry >= asOf);
+}
+
 /**
  * All active live jobs, sourced from Sanity.
  *
@@ -85,18 +116,23 @@ function sanityToJob(sj: SanityLiveJob): Job {
  * (all jobs removed) returns [] and is respected. The static `JOBS` array is
  * retained ONLY as an outage snapshot — used if the Sanity request THROWS — so
  * the listing never goes blank during a CMS hiccup (mirrors src/lib/services.ts).
+ *
+ * Expired postings are filtered out here as well as in the GROQ query: the
+ * query cannot cover the static outage snapshot, and `isActive` in Sanity is a
+ * manual boolean an editor has to remember to clear. Date-based expiry needs no
+ * one to remember anything.
  */
 export async function getLiveJobs(): Promise<Job[]> {
     try {
         const docs = await liveClient.fetch<SanityLiveJob[]>(
             LIVE_JOBS_QUERY,
-            {},
+            { today: today() },
             { next: { revalidate: LIVE_JOBS_REVALIDATE, tags: ['liveJob'] } },
         );
-        return Array.isArray(docs) ? docs.map(sanityToJob) : [];
+        return Array.isArray(docs) ? docs.map(sanityToJob).filter((j) => isJobOpen(j)) : [];
     } catch (err) {
         console.error('[getLiveJobs] Sanity fetch failed, using static JOBS snapshot:', err);
-        return JOBS;
+        return JOBS.filter((j) => isJobOpen(j));
     }
 }
 
@@ -110,13 +146,16 @@ export async function getLiveJobBySlug(slug: string): Promise<Job | undefined> {
     try {
         const doc = await liveClient.fetch<SanityLiveJob | null>(
             LIVE_JOB_BY_SLUG_QUERY,
-            { slug },
+            { slug, today: today() },
             { next: { revalidate: LIVE_JOBS_REVALIDATE, tags: ['liveJob', `liveJob:${slug}`] } },
         );
-        return doc ? sanityToJob(doc) : undefined;
+        if (!doc) return undefined;
+        const job = sanityToJob(doc);
+        // An expired posting 404s rather than rendering as an open vacancy.
+        return isJobOpen(job) ? job : undefined;
     } catch (err) {
         console.error('[getLiveJobBySlug] Sanity fetch failed, using static JOBS snapshot:', err);
-        return JOBS.find((j) => j.id === slug);
+        return JOBS.filter((j) => isJobOpen(j)).find((j) => j.id === slug);
     }
 }
 
@@ -135,38 +174,71 @@ export async function getLiveJobBySlug(slug: string): Promise<Job | undefined> {
  * shows a harmless "missing optional field" notice for them, which is the
  * correct and expected outcome.
  *
- * validThrough: explicit apply-by date first, then the walk-in/deadline date,
- * then the legacy far-future default (kept for output-compat with the seeded
- * jobs). Editors should keep it in the future while a job is open — once it
- * passes, Google treats the posting as expired.
+ * validThrough: explicit apply-by date first, then the walk-in/deadline date.
+ * There is NO fallback — see `getJobExpiry`. A posting with no expiry, or one
+ * whose expiry has passed, emits NO JobPosting markup at all: this function
+ * returns null and the caller renders nothing. Asserting a fabricated
+ * `validThrough` on a stale vacancy is precisely the policy breach that got
+ * these listings dropped from Google for Jobs.
+ *
+ * @returns the JobPosting JSON-LD, or `null` if the posting is not open.
  */
 export function buildLiveJobPostingSchema(job: Job) {
-    // Synthesize address details from the job's location string.
+    // Never emit job markup for a posting we cannot honestly present as open.
+    if (!isJobOpen(job)) return null;
+
+    // Resolve addressRegion/postalCode from the job's location string — but ONLY
+    // on a confident match. There is deliberately no default.
+    //
+    // The previous version defaulted every unrecognised location to
+    // Maharashtra / "400001" (Mumbai GPO), which stamped a Mumbai postcode onto
+    // Hyderabad, Kozhikode ("Govt Cyberpark", Kerala), "Panchkula, Haryana",
+    // "India (TBA)" and even "Midrand & Pretoria" (South Africa). Remote roles
+    // got the invalid postcode "000000". Publishing an address the employer
+    // never gave is the same class of fabrication as the invented validThrough,
+    // so an unresolved location now simply omits both fields — a JobPosting
+    // without addressRegion/postalCode is valid; one with a wrong address is not.
     const locationLower = job.location.toLowerCase();
-    let region = "Maharashtra";
-    let postal = "400001";
-    if (locationLower.includes("pune") || locationLower.includes("hinjewadi")) {
+    const has = (...needles: string[]) => needles.some((n) => locationLower.includes(n));
+
+    let region: string | undefined;
+    let postal: string | undefined;
+    if (has("mumbai", "thane", "airoli", "goregaon", "navi mumbai")) {
+        region = "Maharashtra";
+        postal = "400001";
+    } else if (has("pune", "hinjewadi")) {
         region = "Maharashtra";
         postal = "411001";
-    } else if (locationLower.includes("ahmedabad")) {
+    } else if (has("nagpur")) {
+        region = "Maharashtra";
+        postal = "440001";
+    } else if (has("ahmedabad")) {
         region = "Gujarat";
         postal = "380001";
-    } else if (locationLower.includes("bengaluru") || locationLower.includes("bangalore")) {
+    } else if (has("bengaluru", "bangalore")) {
         region = "Karnataka";
         postal = "560001";
-    } else if (locationLower.includes("chennai")) {
+    } else if (has("chennai")) {
         region = "Tamil Nadu";
         postal = "600001";
-    } else if (locationLower.includes("indore")) {
+    } else if (has("hyderabad")) {
+        region = "Telangana";
+        postal = "500001";
+    } else if (has("kozhikode")) {
+        region = "Kerala";
+        postal = "673001";
+    } else if (has("panchkula", "haryana")) {
+        region = "Haryana";
+        postal = "134109";
+    } else if (has("indore")) {
         region = "Madhya Pradesh";
         postal = "452001";
-    } else if (locationLower.includes("delhi") || locationLower.includes("noida") || locationLower.includes("gurgaon")) {
+    } else if (has("delhi", "noida", "gurgaon", "gurugram")) {
         region = "Delhi NCR";
         postal = "110001";
-    } else if (locationLower.includes("remote")) {
-        region = "India";
-        postal = "000000";
     }
+    // Anything else — "India (TBA)", "Remote", a foreign city — leaves both
+    // undefined and they are omitted from the markup below.
 
     // baseSalary: structured, editor-entered fields take priority…
     let baseSalary;
@@ -213,7 +285,7 @@ export function buildLiveJobPostingSchema(job: Job) {
         title: job.title,
         description: job.highlights?.join(". ") || `${job.title} at ${job.company}`,
         datePosted: job.postedOn,
-        validThrough: job.validThrough || job.eventDate || "2026-12-31",
+        validThrough: getJobExpiry(job),
         employmentType:
             job.type === "Full-time"
                 ? "FULL_TIME"
@@ -229,8 +301,9 @@ export function buildLiveJobPostingSchema(job: Job) {
         jobLocation: {
             addressLocality: job.location,
             streetAddress: job.venue || job.location,
-            addressRegion: region,
-            postalCode: postal,
+            // Omitted entirely when the location did not resolve — never guessed.
+            ...(region ? { addressRegion: region } : {}),
+            ...(postal ? { postalCode: postal } : {}),
             addressCountry: "IN",
         },
         baseSalary,

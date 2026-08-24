@@ -5231,7 +5231,7 @@ export function generateMentorsPageAllSchemas(
 // ============================================================================
 
 export function generateLiveJobsPageAllSchemas(
-  jobs: { title: string; company: string; location: string; type: string }[],
+  jobs: { id?: string; title: string; company: string; location: string; type: string }[],
 ): WithContext<Record<string, unknown>>[] {
   const webPageSchema = generateWebPageSchema({
     name: "Live Jobs & Placement Alerts | Verified Engineering & QA Jobs - CDPL",
@@ -5243,11 +5243,16 @@ export function generateLiveJobsPageAllSchemas(
   });
 
   // ItemList for Live Jobs
+  // Each item points at its OWN detail page. Previously every ListItem carried
+  // the identical url "/jobs/live-jobs", which gave the list no discovery value
+  // — it is now the listing page's primary job signal, since the per-job
+  // JobPosting blocks that used to live here were removed (they belong on the
+  // detail page that carries the full description).
   const itemListSchema = generateItemListSchema(
     jobs.map((job) => ({
       name: `${job.title} at ${job.company}`,
       description: `${job.type} role based in ${job.location}. Placement alert from CDPL.`,
-      url: "/jobs/live-jobs",
+      url: job.id ? `/jobs/live-jobs/${job.id}` : "/jobs/live-jobs",
     })),
     "Latest Live Jobs and Walk-in Drives Curated by CDPL",
   );

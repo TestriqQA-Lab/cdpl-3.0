@@ -17,9 +17,12 @@
  *        npx tsx scripts/seed-live-jobs.ts
  *      (auto-loads .env.local / .env via dotenv)
  *
- * Idempotent: uses createOrReplace with a deterministic _id (`liveJob.<id>`),
- * so re-running updates existing docs instead of creating duplicates. Review
- * the results in /cms before relying on them in production.
+ * Idempotent and non-clobbering: uses a deterministic _id (`liveJob.<id>`), so
+ * re-running updates existing docs instead of creating duplicates. Content
+ * fields are overwritten from this array, but `validThrough` and `isActive` are
+ * only set when MISSING — those two decide whether a posting is visible at all
+ * and are maintained by editors in Studio, so a re-run must never reset them.
+ * Review the results in /cms before relying on them in production.
  *
  * NOTE: undefined fields are stripped so Sanity does not persist empty keys.
  */
@@ -47,6 +50,11 @@ if (!projectId || !dataset || !token) {
 
 const client = createClient({ projectId, dataset, apiVersion, token, useCdn: false });
 
+/** A posting is only seeded as active if it has a real, still-future expiry. */
+function isStillOpen(expiry: string | undefined): boolean {
+    return Boolean(expiry && expiry >= new Date().toISOString().slice(0, 10));
+}
+
 async function main() {
     console.log(`Seeding ${JOBS.length} live jobs into Sanity (${projectId}/${dataset})…`);
     let ok = 0;
@@ -72,7 +80,7 @@ async function main() {
             salaryMax: j.salaryMax,
             salaryCurrency: j.salaryCurrency,
             salaryUnit: j.salaryUnit,
-            validThrough: j.validThrough,
+            validThrough: j.validThrough ?? j.eventDate,
             highlights: j.highlights,
             responsibilities: j.responsibilities,
             applyEmail: j.applyEmail,
@@ -81,7 +89,13 @@ async function main() {
             bannerImage: j.bannerImage,
             bannerImageAlt: j.bannerImageAlt,
             tags: j.tags,
-            isActive: true,
+            // A seeded job is active only if it has a real, still-future
+            // apply-by date. The Sanity schema's +30-day `initialValue` on
+            // validThrough is a Studio-form affordance and does NOT apply to
+            // createOrReplace API writes, so without this every seeded doc
+            // arrives with no expiry and `isActive: true` — which is how 98
+            // postings up to 23 months old ended up advertised as open.
+            isActive: isStillOpen(j.validThrough ?? j.eventDate),
         };
 
         // Strip undefined so Sanity doesn't store empty keys.
@@ -89,7 +103,30 @@ async function main() {
             if (doc[k] === undefined) delete doc[k];
         }
 
-        await client.createOrReplace(doc as never);
+        // NOT createOrReplace. `validThrough` and `isActive` now decide whether
+        // a posting is visible at all, and editors maintain them in Studio — a
+        // whole-document replace would silently reset an editor's apply-by date
+        // to whatever this static array implies (absent, for 90 of 98 rows),
+        // taking the posting dark. So: create the doc if it is missing, then
+        // patch only the content fields, and set the two visibility fields ONLY
+        // when they are not already present.
+        const { _id, _type, validThrough, isActive, ...contentFields } = doc as Record<string, unknown> & {
+            _id: string;
+            _type: string;
+        };
+
+        // One transaction so a mid-run network failure cannot leave a bare
+        // {_id, _type} document behind with no content.
+        await client
+            .transaction()
+            .createIfNotExists({ _id, _type } as never)
+            .patch(_id, (p) =>
+                p.set(contentFields).setIfMissing({
+                    ...(validThrough !== undefined ? { validThrough } : {}),
+                    isActive,
+                }),
+            )
+            .commit();
         ok += 1;
         console.log(`  ✓ ${j.id}`);
     }

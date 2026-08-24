@@ -358,13 +358,28 @@ const LIVE_JOB_PROJECTION = `
   isActive
 `
 
-export const LIVE_JOBS_QUERY = groq`*[_type == "liveJob" && isActive == true] | order(coalesce(eventDate, postedOn) desc) {
+// Expiry predicate shared by every live-job query.
+//
+// `isActive` is a manual boolean an editor has to remember to clear; this date
+// check needs nobody to remember anything. A posting is served only while its
+// apply-by date (or, failing that, its walk-in/deadline date) is still in the
+// future. A posting with NEITHER date is not served at all — there is no
+// far-future default, because asserting a fabricated expiry on a stale vacancy
+// is what breached Google's job-posting policy.
+//
+// $today is supplied by src/lib/liveJobs.ts as YYYY-MM-DD.
+const LIVE_JOB_OPEN = `isActive == true && coalesce(validThrough, eventDate, "") >= $today`
+
+export const LIVE_JOBS_QUERY = groq`*[_type == "liveJob" && ${LIVE_JOB_OPEN}] | order(coalesce(eventDate, postedOn) desc) {
   ${LIVE_JOB_PROJECTION}
 }`
 
-export const LIVE_JOB_BY_SLUG_QUERY = groq`*[_type == "liveJob" && slug.current == $slug && isActive == true][0] {
+export const LIVE_JOB_BY_SLUG_QUERY = groq`*[_type == "liveJob" && slug.current == $slug && ${LIVE_JOB_OPEN}][0] {
   ${LIVE_JOB_PROJECTION}
 }`
 
 // Slug list for `generateStaticParams` on /jobs/live-jobs/[jobId].
-export const LIVE_JOB_SLUGS_QUERY = groq`*[_type == "liveJob" && isActive == true && defined(slug.current)][].slug.current`
+// Currently unused — that route derives its params from getLiveJobs() instead.
+// ⚠️ If you do use it, pass `{ today: 'YYYY-MM-DD' }`: LIVE_JOB_OPEN references
+// $today and Sanity errors on an undefined param.
+export const LIVE_JOB_SLUGS_QUERY = groq`*[_type == "liveJob" && ${LIVE_JOB_OPEN} && defined(slug.current)][].slug.current`
