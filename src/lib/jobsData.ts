@@ -24,7 +24,9 @@ export type Job = {
   salaryUnit?: "HOUR" | "DAY" | "WEEK" | "MONTH" | "YEAR"; // defaults to "YEAR"
 
   // Explicit application deadline → JobPosting.validThrough.
-  // Falls back to eventDate, then a far-future default.
+  // Falls back to eventDate. If BOTH are absent the posting is treated as
+  // closed: it is filtered out of the listing and emits no JobPosting markup.
+  // There is no far-future default — see isJobOpen() in src/lib/liveJobs.ts.
   validThrough?: string;   // ISO: YYYY-MM-DD
 
   highlights?: string[];

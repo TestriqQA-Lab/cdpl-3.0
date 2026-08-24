@@ -187,32 +187,58 @@ export function buildLiveJobPostingSchema(job: Job) {
     // Never emit job markup for a posting we cannot honestly present as open.
     if (!isJobOpen(job)) return null;
 
-    // Synthesize address details from the job's location string.
+    // Resolve addressRegion/postalCode from the job's location string — but ONLY
+    // on a confident match. There is deliberately no default.
+    //
+    // The previous version defaulted every unrecognised location to
+    // Maharashtra / "400001" (Mumbai GPO), which stamped a Mumbai postcode onto
+    // Hyderabad, Kozhikode ("Govt Cyberpark", Kerala), "Panchkula, Haryana",
+    // "India (TBA)" and even "Midrand & Pretoria" (South Africa). Remote roles
+    // got the invalid postcode "000000". Publishing an address the employer
+    // never gave is the same class of fabrication as the invented validThrough,
+    // so an unresolved location now simply omits both fields — a JobPosting
+    // without addressRegion/postalCode is valid; one with a wrong address is not.
     const locationLower = job.location.toLowerCase();
-    let region = "Maharashtra";
-    let postal = "400001";
-    if (locationLower.includes("pune") || locationLower.includes("hinjewadi")) {
+    const has = (...needles: string[]) => needles.some((n) => locationLower.includes(n));
+
+    let region: string | undefined;
+    let postal: string | undefined;
+    if (has("mumbai", "thane", "airoli", "goregaon", "navi mumbai")) {
+        region = "Maharashtra";
+        postal = "400001";
+    } else if (has("pune", "hinjewadi")) {
         region = "Maharashtra";
         postal = "411001";
-    } else if (locationLower.includes("ahmedabad")) {
+    } else if (has("nagpur")) {
+        region = "Maharashtra";
+        postal = "440001";
+    } else if (has("ahmedabad")) {
         region = "Gujarat";
         postal = "380001";
-    } else if (locationLower.includes("bengaluru") || locationLower.includes("bangalore")) {
+    } else if (has("bengaluru", "bangalore")) {
         region = "Karnataka";
         postal = "560001";
-    } else if (locationLower.includes("chennai")) {
+    } else if (has("chennai")) {
         region = "Tamil Nadu";
         postal = "600001";
-    } else if (locationLower.includes("indore")) {
+    } else if (has("hyderabad")) {
+        region = "Telangana";
+        postal = "500001";
+    } else if (has("kozhikode")) {
+        region = "Kerala";
+        postal = "673001";
+    } else if (has("panchkula", "haryana")) {
+        region = "Haryana";
+        postal = "134109";
+    } else if (has("indore")) {
         region = "Madhya Pradesh";
         postal = "452001";
-    } else if (locationLower.includes("delhi") || locationLower.includes("noida") || locationLower.includes("gurgaon")) {
+    } else if (has("delhi", "noida", "gurgaon", "gurugram")) {
         region = "Delhi NCR";
         postal = "110001";
-    } else if (locationLower.includes("remote")) {
-        region = "India";
-        postal = "000000";
     }
+    // Anything else — "India (TBA)", "Remote", a foreign city — leaves both
+    // undefined and they are omitted from the markup below.
 
     // baseSalary: structured, editor-entered fields take priority…
     let baseSalary;
@@ -275,8 +301,9 @@ export function buildLiveJobPostingSchema(job: Job) {
         jobLocation: {
             addressLocality: job.location,
             streetAddress: job.venue || job.location,
-            addressRegion: region,
-            postalCode: postal,
+            // Omitted entirely when the location did not resolve — never guessed.
+            ...(region ? { addressRegion: region } : {}),
+            ...(postal ? { postalCode: postal } : {}),
             addressCountry: "IN",
         },
         baseSalary,

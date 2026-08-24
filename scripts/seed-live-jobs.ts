@@ -47,6 +47,11 @@ if (!projectId || !dataset || !token) {
 
 const client = createClient({ projectId, dataset, apiVersion, token, useCdn: false });
 
+/** A posting is only seeded as active if it has a real, still-future expiry. */
+function isStillOpen(expiry: string | undefined): boolean {
+    return Boolean(expiry && expiry >= new Date().toISOString().slice(0, 10));
+}
+
 async function main() {
     console.log(`Seeding ${JOBS.length} live jobs into Sanity (${projectId}/${dataset})…`);
     let ok = 0;
@@ -72,7 +77,7 @@ async function main() {
             salaryMax: j.salaryMax,
             salaryCurrency: j.salaryCurrency,
             salaryUnit: j.salaryUnit,
-            validThrough: j.validThrough,
+            validThrough: j.validThrough ?? j.eventDate,
             highlights: j.highlights,
             responsibilities: j.responsibilities,
             applyEmail: j.applyEmail,
@@ -81,7 +86,13 @@ async function main() {
             bannerImage: j.bannerImage,
             bannerImageAlt: j.bannerImageAlt,
             tags: j.tags,
-            isActive: true,
+            // A seeded job is active only if it has a real, still-future
+            // apply-by date. The Sanity schema's +30-day `initialValue` on
+            // validThrough is a Studio-form affordance and does NOT apply to
+            // createOrReplace API writes, so without this every seeded doc
+            // arrives with no expiry and `isActive: true` — which is how 98
+            // postings up to 23 months old ended up advertised as open.
+            isActive: isStillOpen(j.validThrough ?? j.eventDate),
         };
 
         // Strip undefined so Sanity doesn't store empty keys.

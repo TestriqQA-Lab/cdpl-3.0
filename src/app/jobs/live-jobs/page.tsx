@@ -1,7 +1,7 @@
 // SERVER COMPONENT — Live Jobs (CDPL)
 import type { Metadata } from "next";
 import type { Job } from "@/lib/jobsData";
-import { getLiveJobs, buildLiveJobPostingSchema } from "@/lib/liveJobs";
+import { getLiveJobs } from "@/lib/liveJobs";
 import { generateStaticPageMetadata } from "@/lib/metadata-generator";
 import { generateLiveJobsPageAllSchemas, generateBreadcrumbSchema } from "@/lib/schema-generators";
 import JsonLd from "@/components/JsonLd";
@@ -64,14 +64,17 @@ export default async function Page() {
   // Generate 8-point Schemas dynamically
   const schemas = generateLiveJobsPageAllSchemas(jobs);
 
-  // JobPosting JSON-LD via the shared builder in src/lib/liveJobs.ts — the
-  // same logic the detail route uses, so schema fixes apply to both.
-  // BLG-035: each JobPosting points to its own canonical detail URL.
-  // The builder returns null for any posting that is not open; `jobs` is
-  // already filtered to open postings, so this is belt-and-braces.
-  const jobSchemas = jobs
-    .map((job) => buildLiveJobPostingSchema(job))
-    .filter((schema): schema is NonNullable<typeof schema> => schema !== null);
+  // NO per-job JobPosting markup on this listing page — deliberate.
+  //
+  // This route previously emitted one complete JobPosting block per job (~98 of
+  // them in a single document), each with a `url` pointing at a different page.
+  // Google's guidance is that JobPosting belongs on the page carrying the full
+  // job description — here, /jobs/live-jobs/[jobId], which already emits the
+  // canonical posting. A listing page signals its jobs through ItemList links
+  // to those detail pages instead, which `generateLiveJobsPageAllSchemas` does.
+  //
+  // Duplicating every posting here also multiplied the blast radius of any bad
+  // field (the fabricated validThrough, the guessed postcodes) across two URLs.
 
   return (
     <div className="bg-white text-slate-900 relative">
@@ -79,10 +82,6 @@ export default async function Page() {
         <JsonLd key={`jobs-schema-${index}`} id={`jobs-schema-${index}`} schema={schema} />
       ))}
       <JsonLd id="live-jobs-breadcrumb" schema={breadcrumbSchema} />
-      {/* Render each JobPosting in its own script for better search engine discovery */}
-      {jobSchemas.map((jobSchema: any, index: number) => (
-        <JsonLd key={`job-posting-${index}`} id={`job-posting-${index}`} schema={jobSchema} />
-      ))}
 
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div

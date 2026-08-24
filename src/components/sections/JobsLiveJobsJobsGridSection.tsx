@@ -186,7 +186,9 @@ export function JobsLiveJobsJobsGridSection({
 
           {filtered.length === 0 && (
             <li className="text-sm text-slate-600">
-              No matching roles right now. Try clearing filters or broadening your search.
+              {jobs.length === 0
+                ? "No open roles are listed right now. Postings are removed automatically once their apply-by date passes — check back soon, or follow CDPL on LinkedIn for new drives."
+                : "No matching roles right now. Try clearing filters or broadening your search."}
             </li>
           )}
         </ul>
