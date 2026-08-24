@@ -76,6 +76,37 @@ function sanityToJob(sj: SanityLiveJob): Job {
     };
 }
 
+/** Today as YYYY-MM-DD, comparable to the ISO date strings on `Job`. */
+function today(): string {
+    return new Date().toISOString().slice(0, 10);
+}
+
+/**
+ * The date after which a posting must no longer be presented as open.
+ *
+ * Explicit apply-by date first, then the walk-in / deadline date. There is
+ * deliberately NO fallback: a posting with neither date has no knowable expiry,
+ * and inventing one is what caused the Google-for-Jobs violation this function
+ * replaces (a hard-coded `"2026-12-31"` was asserted for ~90 of 98 postings,
+ * some of them 23 months old).
+ */
+export function getJobExpiry(job: Job): string | undefined {
+    return job.validThrough || job.eventDate || undefined;
+}
+
+/**
+ * Is this posting still open?
+ *
+ * A job with no expiry date is treated as CLOSED, not open. That is the safe
+ * direction: showing a stale vacancy as live misleads applicants and breaches
+ * Google's job-posting policy, whereas hiding one that is genuinely open only
+ * costs us a listing until an editor sets its "Valid Through" date in Sanity.
+ */
+export function isJobOpen(job: Job, asOf: string = today()): boolean {
+    const expiry = getJobExpiry(job);
+    return Boolean(expiry && expiry >= asOf);
+}
+
 /**
  * All active live jobs, sourced from Sanity.
  *
@@ -85,18 +116,23 @@ function sanityToJob(sj: SanityLiveJob): Job {
  * (all jobs removed) returns [] and is respected. The static `JOBS` array is
  * retained ONLY as an outage snapshot — used if the Sanity request THROWS — so
  * the listing never goes blank during a CMS hiccup (mirrors src/lib/services.ts).
+ *
+ * Expired postings are filtered out here as well as in the GROQ query: the
+ * query cannot cover the static outage snapshot, and `isActive` in Sanity is a
+ * manual boolean an editor has to remember to clear. Date-based expiry needs no
+ * one to remember anything.
  */
 export async function getLiveJobs(): Promise<Job[]> {
     try {
         const docs = await liveClient.fetch<SanityLiveJob[]>(
             LIVE_JOBS_QUERY,
-            {},
+            { today: today() },
             { next: { revalidate: LIVE_JOBS_REVALIDATE, tags: ['liveJob'] } },
         );
-        return Array.isArray(docs) ? docs.map(sanityToJob) : [];
+        return Array.isArray(docs) ? docs.map(sanityToJob).filter((j) => isJobOpen(j)) : [];
     } catch (err) {
         console.error('[getLiveJobs] Sanity fetch failed, using static JOBS snapshot:', err);
-        return JOBS;
+        return JOBS.filter((j) => isJobOpen(j));
     }
 }
 
@@ -110,13 +146,16 @@ export async function getLiveJobBySlug(slug: string): Promise<Job | undefined> {
     try {
         const doc = await liveClient.fetch<SanityLiveJob | null>(
             LIVE_JOB_BY_SLUG_QUERY,
-            { slug },
+            { slug, today: today() },
             { next: { revalidate: LIVE_JOBS_REVALIDATE, tags: ['liveJob', `liveJob:${slug}`] } },
         );
-        return doc ? sanityToJob(doc) : undefined;
+        if (!doc) return undefined;
+        const job = sanityToJob(doc);
+        // An expired posting 404s rather than rendering as an open vacancy.
+        return isJobOpen(job) ? job : undefined;
     } catch (err) {
         console.error('[getLiveJobBySlug] Sanity fetch failed, using static JOBS snapshot:', err);
-        return JOBS.find((j) => j.id === slug);
+        return JOBS.filter((j) => isJobOpen(j)).find((j) => j.id === slug);
     }
 }
 
@@ -135,12 +174,19 @@ export async function getLiveJobBySlug(slug: string): Promise<Job | undefined> {
  * shows a harmless "missing optional field" notice for them, which is the
  * correct and expected outcome.
  *
- * validThrough: explicit apply-by date first, then the walk-in/deadline date,
- * then the legacy far-future default (kept for output-compat with the seeded
- * jobs). Editors should keep it in the future while a job is open — once it
- * passes, Google treats the posting as expired.
+ * validThrough: explicit apply-by date first, then the walk-in/deadline date.
+ * There is NO fallback — see `getJobExpiry`. A posting with no expiry, or one
+ * whose expiry has passed, emits NO JobPosting markup at all: this function
+ * returns null and the caller renders nothing. Asserting a fabricated
+ * `validThrough` on a stale vacancy is precisely the policy breach that got
+ * these listings dropped from Google for Jobs.
+ *
+ * @returns the JobPosting JSON-LD, or `null` if the posting is not open.
  */
 export function buildLiveJobPostingSchema(job: Job) {
+    // Never emit job markup for a posting we cannot honestly present as open.
+    if (!isJobOpen(job)) return null;
+
     // Synthesize address details from the job's location string.
     const locationLower = job.location.toLowerCase();
     let region = "Maharashtra";
@@ -213,7 +259,7 @@ export function buildLiveJobPostingSchema(job: Job) {
         title: job.title,
         description: job.highlights?.join(". ") || `${job.title} at ${job.company}`,
         datePosted: job.postedOn,
-        validThrough: job.validThrough || job.eventDate || "2026-12-31",
+        validThrough: getJobExpiry(job),
         employmentType:
             job.type === "Full-time"
                 ? "FULL_TIME"

@@ -4,7 +4,6 @@ import JobOpeningsJobBrowser from "@/components/sections/JobOpeningsJobBrowser";
 import { generateStaticPageMetadata } from "@/lib/metadata-generator";
 import {
   generateJobOpeningsPageAllSchemas,
-  generateJobPostingSchema,
   generateBreadcrumbSchema,
 } from "@/lib/schema-generators";
 import JsonLd from "@/components/JsonLd";
@@ -300,69 +299,20 @@ export default async function JobSharePage() {
   // Generate 8-point Schemas dynamically
   const schemas = generateJobOpeningsPageAllSchemas(jobs);
 
-  // 3. JobPosting Schemas
-  const jobSchemas = jobs.map((job) => {
-    // Attempt to synthesize missing address fields from location
-    const locationLower = (job.location || "").toLowerCase();
-    let region = "Maharashtra";
-    let postal = "400001";
-
-    if (locationLower.includes("pune")) {
-      region = "Maharashtra";
-      postal = "411001";
-    } else if (
-      locationLower.includes("bangalore") ||
-      locationLower.includes("bengaluru")
-    ) {
-      region = "Karnataka";
-      postal = "560001";
-    } else if (locationLower.includes("chennai")) {
-      region = "Tamil Nadu";
-      postal = "600001";
-    } else if (locationLower.includes("remote")) {
-      region = "India";
-      postal = "000000";
-    }
-
-    return generateJobPostingSchema({
-      title: job.job_title,
-      description: job.description || job.job_title,
-      datePosted: job.job_created_at || new Date().toISOString().split("T")[0],
-      validThrough: "2026-12-31", // Default validity for partner jobs
-      employmentType:
-        job.job_type === "Full Time"
-          ? "FULL_TIME"
-          : job.job_type === "Contract"
-            ? "CONTRACTOR"
-            : "OTHER",
-      hiringOrganization: {
-        name: "Hiring Partner",
-        sameAs: "https://optimhire.com",
-      },
-      jobLocation: {
-        addressLocality: job.location || "Mumbai",
-        addressRegion: region,
-        postalCode: postal,
-        addressCountry: "IN",
-        streetAddress:
-          job.location_type === "remote"
-            ? "Remote"
-            : job.location || "Mumbai Office",
-      },
-      baseSalary:
-        job.min_charge && job.max_charge
-          ? {
-              currency: job.currency || "INR",
-              value: {
-                minValue: Number(job.min_charge),
-                maxValue: Number(job.max_charge),
-                unitText: "YEAR",
-              },
-            }
-          : undefined,
-      url: `/jobs/job-openings?jobId=${job.job_id}`,
-    });
-  });
+  // NO JobPosting structured data on this route — deliberate.
+  //
+  // These are third-party vacancies pulled from the OptimHire partner API.
+  // Google requires JobPosting.hiringOrganization to name the ACTUAL hiring
+  // company, and the OptimHire payload carries no employer field at all (see
+  // the JobSummary / JobDetail types above) — so the previous markup asserted
+  // a placeholder `name: "Hiring Partner"` on every posting, alongside a
+  // hard-coded `validThrough: "2026-12-31"`. Both are policy breaches, and
+  // neither is fixable without employer data we do not receive.
+  //
+  // The listings still render for users and still link out to apply. We simply
+  // no longer tell Google these are CDPL job postings, which they are not.
+  // If OptimHire ever exposes the employer name, JobPosting markup can return
+  // — with a real hiringOrganization and a real validThrough, or not at all.
 
   return (
     <>
@@ -381,13 +331,6 @@ export default async function JobSharePage() {
         <JsonLd
           key={`job-openings-schema-${index}`}
           id={`job-openings-schema-${index}`}
-          schema={schema}
-        />
-      ))}
-      {jobSchemas.map((schema, index) => (
-        <JsonLd
-          key={`job-posting-schema-${index}`}
-          id={`job-posting-schema-${index}`}
           schema={schema}
         />
       ))}

@@ -67,7 +67,11 @@ export default async function Page() {
   // JobPosting JSON-LD via the shared builder in src/lib/liveJobs.ts — the
   // same logic the detail route uses, so schema fixes apply to both.
   // BLG-035: each JobPosting points to its own canonical detail URL.
-  const jobSchemas = jobs.map((job) => buildLiveJobPostingSchema(job));
+  // The builder returns null for any posting that is not open; `jobs` is
+  // already filtered to open postings, so this is belt-and-braces.
+  const jobSchemas = jobs
+    .map((job) => buildLiveJobPostingSchema(job))
+    .filter((schema): schema is NonNullable<typeof schema> => schema !== null);
 
   return (
     <div className="bg-white text-slate-900 relative">

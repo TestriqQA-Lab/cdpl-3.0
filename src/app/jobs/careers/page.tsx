@@ -45,6 +45,29 @@ export const metadata: Metadata = generateStaticPageMetadata({
 // ====== Revalidation (ISR) ======
 export const revalidate = 60;
 
+/** How long a CDPL career posting stays assertable as open, from its last edit. */
+const CAREER_OPEN_DAYS = 90;
+
+/**
+ * `JobPosting.validThrough` for a CDPL career posting.
+ *
+ * A fixed far-future date (the previous `"2026-12-31"`) tells Google a vacancy
+ * is open forever, which is the breach that got CDPL's postings dropped from
+ * Google for Jobs. Instead the window rolls forward from the document's last
+ * edit, so a posting expires by itself unless someone is still maintaining it.
+ */
+function careerValidThrough(job: { _updatedAt?: string; _createdAt?: string }): string {
+    const base = new Date(job._updatedAt || job._createdAt || Date.now());
+    return new Date(base.getTime() + CAREER_OPEN_DAYS * 86_400_000)
+        .toISOString()
+        .slice(0, 10);
+}
+
+/** Is this posting still inside its rolling window? */
+function isCareerOpen(job: { _updatedAt?: string; _createdAt?: string }): boolean {
+    return careerValidThrough(job) >= new Date().toISOString().slice(0, 10);
+}
+
 
 // ====== Page =====
 export default async function Page() {
@@ -66,8 +89,9 @@ export default async function Page() {
     // Generate 8-point Schemas dynamically
     const schemas = generateCareersPageAllSchemas(jobs);
 
-    // 3. JobPosting Schemas
-    const jobSchemas = jobs.map((job) => {
+    // 3. JobPosting Schemas — only for roles still inside their rolling window;
+    //    a posting nobody has touched in CAREER_OPEN_DAYS emits no job markup.
+    const jobSchemas = jobs.filter(isCareerOpen).map((job) => {
         // Synthesize address details from job.location. Default to the
         // CDPL HQ NAP (Mira Road) — these are CDPL's own careers, so
         // anything not explicitly tagged to another city resolves to
@@ -97,7 +121,12 @@ export default async function Page() {
             title: job.title,
             description: `${job.summary} \n\nResponsibilities:\n${job.responsibilities.join('\n')}\n\nRequirements:\n${job.requirements.join('\n')}`,
             datePosted: new Date(job._createdAt || Date.now()).toISOString().split('T')[0],
-            validThrough: "2026-12-31", // Careers are typically long-term
+            // Rolling 90-day window from the last edit, NOT a fixed far-future
+            // date. These are CDPL's own roles with no fixed deadline, but a
+            // posting must still expire on its own: editing the job in Studio
+            // refreshes _updatedAt and so extends the window, while a role
+            // nobody has touched in 90 days stops being asserted as open.
+            validThrough: careerValidThrough(job),
             employmentType:
                 job.type === "Full-time"
                     ? "FULL_TIME"

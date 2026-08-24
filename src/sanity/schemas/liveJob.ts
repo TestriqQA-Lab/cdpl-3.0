@@ -97,7 +97,7 @@ export default defineType({
             type: 'date',
             options: { dateFormat: 'YYYY-MM-DD' },
             description:
-                'Walk-in date or application deadline (optional). Also used as the posting expiry (validThrough) in Google markup when "Valid Through" below is empty — do NOT set this to the posting date itself.',
+                'Walk-in date or application deadline (optional). Used as the posting expiry (validThrough) in Google markup when "Valid Through" below is empty, and the job stops being published once it passes — do NOT set this to the posting date itself.',
         }),
         defineField({
             name: 'validThrough',
@@ -111,7 +111,7 @@ export default defineType({
                     .toISOString()
                     .slice(0, 10),
             description:
-                'Application deadline → JobPosting.validThrough in Google markup. After this date Google treats the posting as EXPIRED, so keep it in the future while the job is open. Pre-filled to 30 days from creation — adjust it to the real deadline. If empty, falls back to Event/Deadline Date, then 2026-12-31.',
+                'Application deadline → JobPosting.validThrough in Google markup. Once this date passes the job DISAPPEARS from the site and its Google markup stops — that is intended. Pre-filled to 30 days from creation; adjust it to the real deadline. If empty, Event/Deadline Date is used instead. If BOTH are empty the job is not published at all — there is no far-future default, because claiming a stale vacancy is still open breaches Google policy.',
             validation: (Rule) =>
                 Rule.custom((date) => {
                     if (

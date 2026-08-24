@@ -105,7 +105,10 @@ export default async function Page({ params }: Props) {
     return (
         <div className="bg-white text-slate-900 relative">
             <JsonLd id="live-job-detail-breadcrumb" schema={breadcrumbSchema} />
-            <JsonLd id="live-job-detail-posting" schema={jobPostingSchema} />
+            {/* Null for a posting that is not open — emit no job markup at all. */}
+            {jobPostingSchema && (
+                <JsonLd id="live-job-detail-posting" schema={jobPostingSchema} />
+            )}
 
             <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
                 <div
