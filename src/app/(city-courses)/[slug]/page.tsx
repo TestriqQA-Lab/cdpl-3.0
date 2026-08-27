@@ -9,6 +9,8 @@ import {
   generateCityCoursePageSchema,
 } from "@/lib/schema-generators";
 import JsonLd from "@/components/JsonLd";
+import { isTier1Slug, getCityFromSlug } from "@/lib/cityTiers";
+import { getCityLocalContent } from "@/data/cityLocalContent";
 // BLG-200: use permanentRedirect (308) instead of redirect (307 default).
 // The plural ↔ singular fallback below was emitting 307s, which Google
 // does not honour for SEO weight transfer; 308 triggers consolidation.
@@ -38,11 +40,28 @@ interface PageProps {
 }
 
 // Helper: fetch by the object's internal `slug`
+//
+// City-specific content is merged in here rather than written into
+// courseData.ts, so the 449k-line data file does not have to be edited for it.
+// `CourseData` has carried localJobMarketInsight / localizedFaqs since April
+// 2026 and the components already render them — but across all 765 records
+// they were filled in zero times, which is why every city page reads as the
+// same template with the name swapped. See src/data/cityLocalContent.ts.
 function getByInternalSlug(slug: string): CourseData | undefined {
   const key = slug.toLowerCase();
-  return Object.values(courseData).find(
+  const base = Object.values(courseData).find(
     (c) => c.slug.toLowerCase() === key
   );
+  if (!base) return undefined;
+
+  const local = getCityLocalContent(getCityFromSlug(base.slug));
+  if (!local) return base;
+
+  return {
+    ...base,
+    localJobMarketInsight: local.jobMarketInsight,
+    localizedFaqs: local.faqs,
+  };
 }
 
 // Helper: Parse price string to number (e.g., "₹29,999" -> 29999)
@@ -113,6 +132,13 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
 
   const allKeywords = [...baseKeywords, ...additionalKeywords];
 
+  // Only Tier 1 cities are indexable — see src/lib/cityTiers.ts. The other ~735
+  // city pages are near-identical location swaps of the same template and were
+  // splitting each other's ranking signals (96 URLs competed for "data science
+  // course in mumbai" alone, at 1,212 impressions and zero clicks). They stay
+  // reachable for anyone holding a direct link; they just leave the index.
+  const indexable = isTier1Slug(data.slug);
+
   // Enhanced metadata using generateSEO
   return generateSEOMetadata({
     title: data.metadata.title,
@@ -120,7 +146,8 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
     keywords: allKeywords,
     url: `/${slug}`,
     image: data.heroImage || "/og-images/og-image-courses.webp",
-    type: "website"
+    type: "website",
+    noindex: !indexable,
   });
 }
 

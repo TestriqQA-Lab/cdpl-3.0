@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { unstable_cache } from 'next/cache';
 import { courseData } from '@/types/courseData';
+import { isTier1Slug } from '@/lib/cityTiers';
 import { pastEvents } from '@/data/eventsData';
 import { getServices } from '@/lib/services';
 import { client } from '@/sanity/client';
@@ -361,18 +362,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return date;
   };
 
-  // 1. City-Course Pages (e.g., /software-testing-course-in-mumbai)
-  // Generate from actual courseData to ensure only real pages are in sitemap
-  // ⚠️  SEO FIX (April 2026): Boosted priority from 0.6 → 0.8 and frequency
-  // from monthly → weekly. These 765+ city-course pages are the primary
-  // money pages and need urgent indexing. Lower priority was causing Googlebot
-  // to deprioritize them in favor of less important pages.
-  const cityCoursePages: MetadataRoute.Sitemap = Object.values(courseData).map((course) => ({
-    url: `${siteUrl}/${course.slug.toLowerCase()}`,
-    lastModified: DATES.CITY_COURSE,
-    changeFrequency: 'weekly' as const,
-    priority: 0.8,
-  }));
+  // 1. City-Course Pages (e.g., /data-science-course-in-mumbai)
+  //
+  // ONLY Tier 1 cities are listed — see src/lib/cityTiers.ts. The other ~735
+  // city pages now render `noindex`, and a sitemap must never advertise a page
+  // that tells Google not to index it: the two directives contradict each other
+  // and the conflict costs trust in the whole sitemap.
+  //
+  // This drops the sitemap from 765 city URLs to ~30. That is the point — the
+  // 765 were splitting each other's ranking signals, not adding reach.
+  const cityCoursePages: MetadataRoute.Sitemap = Object.values(courseData)
+    .filter((course) => isTier1Slug(course.slug))
+    .map((course) => ({
+      url: `${siteUrl}/${course.slug.toLowerCase()}`,
+      lastModified: DATES.CITY_COURSE,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    }));
 
   // 2. Events Pages (e.g., /events/ai-conference-nagindas-khandwala)
   const eventPages: MetadataRoute.Sitemap = pastEvents.map((event) => ({
