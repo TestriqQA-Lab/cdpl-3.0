@@ -310,6 +310,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'courses/software-testing-course/dbms-course',
     'courses/software-testing-course/python-course',
     'courses/software-testing-course/java-course',
+    'courses/software-testing-course/sdet-course',
 
     // DS & ML Courses
     'courses/ds-ml-courses',
