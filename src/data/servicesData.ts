@@ -37,6 +37,14 @@ export interface TrainingService {
   methodology: string[];
   imageUrl?: string;
   ogImage?: string;
+  /**
+   * Extra search terms folded into the page's `keywords` metadata.
+   *
+   * Mirrors `ServiceClient.keywords` in src/types/service.ts, which the service
+   * detail route already reads (`service.keywords || []`) — the field simply
+   * did not exist on this local type, so no service could supply any.
+   */
+  keywords?: string[];
 }
 
 export const trainingServices: TrainingService[] = [
@@ -390,10 +398,21 @@ export const trainingServices: TrainingService[] = [
     id: "6",
     slug: "sttp",
     icon: BookOpen,
-    title: "STTP (Short Term Training Program)",
-    tagline: "Intensive short courses to deep dive into trending topics",
-    shortDescription: "1-5 day focused modules on niche skills (AI, data analytics, IoT etc.). Great for faculty, students, or professionals wanting rapid upskilling.",
-    fullDescription: "Short Term Training Programs (STTP) are intensive, focused learning experiences designed for rapid skill acquisition in trending technologies. Approved by AICTE and recognized by universities, these programs are perfect for faculty members, students, and working professionals who want to quickly upskill in specific domains. Our STTPs combine theory with extensive hands-on practice, ensuring participants gain practical, immediately applicable skills.",
+    title: "STTP (Short Term Training Programme)",
+    // ANSWER-FIRST. `tagline` renders directly under the H1 (ServiceDetailHero
+    // line 103) AND is the first half of the meta description (services/[slug]
+    // page.tsx). "sttp full form" alone draws 2,360 impressions and ZERO clicks
+    // over six months, and "sttp" another 1,977 for 4 clicks — people are asking
+    // what the acronym means and the page never said it in either place. The
+    // expansion now leads both.
+    tagline: "STTP stands for Short Term Training Programme — a 1 to 5 day intensive course on a single trending skill.",
+    // Second half of the meta description. Kept short and free of brackets: the
+    // old copy ended mid-parenthesis as "(AI, data analytics, IoT etc. )" once
+    // generateMetaDescription truncated it at 160 characters.
+    shortDescription: "AICTE-approved and university-recognised, for faculty, students and working professionals.",
+    // Both spellings appear deliberately. Searches split between "program" and
+    // "programme", and "Programme" previously appeared nowhere on the site.
+    fullDescription: "STTP stands for Short Term Training Programme. It is a 1 to 5 day intensive course that covers a single skill in depth rather than a broad syllabus — the format Indian universities and AICTE use for faculty development and rapid upskilling. CDPL runs STTPs on trending technologies including AI, data analytics, software testing and IoT. Each programme is approved by AICTE and recognised by universities, and combines theory with extensive hands-on lab practice so participants leave with skills they can apply immediately. Faculty members can use an STTP towards their professional development requirements; students and working professionals use them to add a specific, current skill without committing to a full course.",
     color: "from-indigo-500 to-purple-600",
     features: [
       "1-5 day intensive modules",
@@ -451,6 +470,21 @@ export const trainingServices: TrainingService[] = [
       "Project-based learning",
       "Expert guest sessions",
       "Assessment and certification"
+    ],
+    // Definitional queries carry this page's entire impression volume, so they
+    // are listed explicitly — including the "programme" spelling, which did not
+    // appear anywhere on the site before this change.
+    keywords: [
+      "STTP full form",
+      "STTP meaning",
+      "what is STTP",
+      "STTP full form in computer",
+      "Short Term Training Programme",
+      "Short Term Training Program",
+      "STTP certificate",
+      "STTP programme",
+      "AICTE STTP",
+      "faculty development programme",
     ],
     ogImage: "/og-images/services-sttp-og.webp",
   },
