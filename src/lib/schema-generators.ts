@@ -218,6 +218,33 @@ interface ItemListElement {
 }
 
 /**
+ * Trim text to `max` characters without cutting mid-word.
+ *
+ * Prefers the last complete sentence that fits; if the first sentence is
+ * already longer than the limit, falls back to the last whole word plus an
+ * ellipsis. Text shorter than the limit is returned unchanged.
+ *
+ * Used for structured-data answers, where a fragment ending mid-word ("…they
+ * can quickly ups") is both a poor rich result and visibly broken.
+ */
+export function truncateAtSentence(text: string, max: number): string {
+  if (!text || text.length <= max) return text;
+
+  const window = text.slice(0, max);
+  const lastSentenceEnd = Math.max(
+    window.lastIndexOf(". "),
+    window.lastIndexOf("! "),
+    window.lastIndexOf("? "),
+  );
+  // Only accept a sentence break if it leaves a substantial answer behind —
+  // otherwise a short opening line would swallow the whole thing.
+  if (lastSentenceEnd > max * 0.5) return window.slice(0, lastSentenceEnd + 1);
+
+  const lastSpace = window.lastIndexOf(" ");
+  return (lastSpace > 0 ? window.slice(0, lastSpace) : window).trimEnd() + "…";
+}
+
+/**
  * Generate ItemList schema for a list of items (e.g., courses, blog posts)
  * This addresses the "Carousel" issues by using the standard ItemList type
  * and ensuring 'item' or 'url' is present for each ListItem.
@@ -4547,10 +4574,16 @@ export function generateServiceDetailPageAllSchemas(service: {
   });
 
   // FAQPage — dynamically built from service data
+  //
+  // The first answer used to be a blind `fullDescription.slice(0, 300)`, which
+  // cut mid-word — on /services/sttp it ended at "quickly ups". A truncated
+  // fragment is a poor answer for a rich result and reads as broken to anyone
+  // who sees it. `truncateAtSentence` cuts at the last complete sentence inside
+  // the limit instead, falling back to the last whole word.
   const faqs: { question: string; answer: string }[] = [
     {
       question: `What is the ${service.title} program at CDPL?`,
-      answer: service.fullDescription.slice(0, 300),
+      answer: truncateAtSentence(service.fullDescription, 300),
     },
     {
       question: `What are the key features of the ${service.title}?`,
