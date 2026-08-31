@@ -75,15 +75,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     COURSES_AI:         '2026-03-20T00:00:00.000Z',
     COURSES_DM:         '2026-03-20T00:00:00.000Z',
     COURSE_DETAIL:      '2026-03-20T00:00:00.000Z',
-    CITY_COURSE:        '2026-03-25T00:00:00.000Z',
+    // 2026-08-27 — Tier 1 city pages rewritten with city-specific job-market
+    // content and localised FAQs; the other ~735 moved to noindex (PR #34).
+    CITY_COURSE:        '2026-08-27T00:00:00.000Z',
     // Services — last update
-    SERVICES:           '2026-03-01T00:00:00.000Z',
+    // 2026-08-27 — /services/sttp rewritten answer-first, and the FAQ answer
+    // truncation fixed across all 12 service detail pages (PR #35).
+    SERVICES:           '2026-08-27T00:00:00.000Z',
     // Events
     EVENTS:             '2026-04-10T00:00:00.000Z',
     // Jobs
-    JOBS_LIVE:          '2026-04-14T00:00:00.000Z',  // Changes frequently
-    JOBS_CAREERS:       '2026-03-01T00:00:00.000Z',
-    JOBS_OPENINGS:      '2026-04-14T00:00:00.000Z',
+    // 2026-08-24 — JobPosting markup corrected across all three job routes:
+    // real expiry dates, expired postings filtered out, fabricated postcodes
+    // removed, and the placeholder hiringOrganization dropped (PR #33).
+    JOBS_LIVE:          '2026-08-24T00:00:00.000Z',  // Changes frequently
+    JOBS_CAREERS:       '2026-08-24T00:00:00.000Z',
+    JOBS_OPENINGS:      '2026-08-24T00:00:00.000Z',
     JOBS_PLACEMENTS:    '2026-04-01T00:00:00.000Z',
     // Blog index
     BLOG_INDEX:         '2026-04-14T00:00:00.000Z',  // Changes with every new post
