@@ -73,7 +73,13 @@ export const CITY_LOCAL_CONTENT: Record<string, CityLocalContent> = {
         jobMarketInsight:
             'Mumbai is India\'s financial capital, and that shapes its tech hiring: banking, insurance and capital-markets firms account for a large share of QA, data and analytics roles here, alongside the media and e-commerce sector. ' +
             'The clusters worth knowing are Bandra Kurla Complex, Powai, SEEPZ and the MIDC belt in Andheri, Airoli and Vashi across the harbour in Navi Mumbai, and Wagle Estate in Thane. ' +
-            'Because so much of the work is regulated-industry software, employers here weight testing discipline, documentation and data accuracy more heavily than many other Indian markets.',
+            'Because so much of the work is regulated-industry software, employers here weight testing discipline, documentation and data accuracy more heavily than many other Indian markets. ' +
+            // Real placements from src/lib/placementShared.ts — 25 Mumbai students,
+            // every company name verifiable in that file. Deliberately a statement
+            // of fact, not a testimonial: no student is quoted, because we hold no
+            // quotes from them and inventing words for a named real person is not
+            // something a placement claim may do.
+            'CDPL learners from Mumbai have gone into QA roles at Tech Mahindra, Accenture, JM Financial, IDfy, Rendered Ideas, Tech Cryptors, Maxwell Energy Systems and QodeNext, among others.',
         faqs: [
             {
                 question: 'Where is CDPL\'s campus in Mumbai?',
