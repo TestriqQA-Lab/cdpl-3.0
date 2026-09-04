@@ -60,6 +60,23 @@ export type Tier1City = (typeof TIER_1_CITIES)[number];
 
 /** Course-family prefixes used by the city slugs, e.g. `data-science-course-in-pune`. */
 const SLUG_SUFFIX_RE = /-courses?-in-(.+)$/;
+const SLUG_FAMILY_RE = /^(.+?)-courses?-in-/;
+
+/**
+ * Course families that stay OUT of the index regardless of city.
+ *
+ * `web-development`: CDPL does not currently run this course. There is no page
+ * for it under /courses/, it is absent from the course menu, and across 260
+ * enquiries between December 2025 and September 2026 not one person asked about
+ * web development, full-stack, MERN or React — despite the Mumbai and Pune
+ * pages being indexed and reachable that whole time.
+ *
+ * Advertising a course that cannot be delivered is the problem here, not the
+ * SEO. A visitor who enquires and is told the course does not exist is a worse
+ * outcome than never ranking at all. If the course is genuinely launched later,
+ * remove it from this list and build a real page under /courses/ first.
+ */
+const EXCLUDED_FAMILIES = ['web-development'] as const;
 
 /**
  * The locality token from a city-page slug, or undefined if the slug is not a
@@ -70,9 +87,20 @@ export function getCityFromSlug(slug: string): string | undefined {
     return match?.[1] || undefined;
 }
 
+/** The course-family token from a city-page slug, e.g. `data-science`. */
+export function getFamilyFromSlug(slug: string): string | undefined {
+    const match = slug.toLowerCase().match(SLUG_FAMILY_RE);
+    return match?.[1] || undefined;
+}
+
 /** Is this city page allowed in Google's index? */
 export function isTier1Slug(slug: string): boolean {
     const city = getCityFromSlug(slug);
     if (!city) return false;
-    return (TIER_1_CITIES as readonly string[]).includes(city);
+    if (!(TIER_1_CITIES as readonly string[]).includes(city)) return false;
+
+    const family = getFamilyFromSlug(slug);
+    if (family && (EXCLUDED_FAMILIES as readonly string[]).includes(family)) return false;
+
+    return true;
 }
